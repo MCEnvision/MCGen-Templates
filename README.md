@@ -8,7 +8,9 @@ The repository is currently in its planning and bootstrap stage. No template bra
 
 The `main` branch is the lightweight control branch. Its initial commit contains only this README and the [active project plan](docs/general/plan.md).
 
-Future template branches will use the format `<platform>/<minecraft-version>`, such as `neoforge/1.21.1` or `fabric/1.21.1`. MCGen will resolve templates through a registry on `main`, pin every retrieval to an immutable commit, and verify the content digest before generation.
+Version-bound template branches will use the format `<platform>/<minecraft-version>`, such as `neoforge/1.21.1` or `fabric/1.21.1`. API-bound proxy and plugin families use their real API compatibility line instead of inventing a Minecraft patch mapping.
+
+The target is complete official coverage. Each branch represents one compatibility boundary and exposes every exact compatible loader, API, mappings, build-plugin, wrapper, and language-adapter version through the central catalog. Exact loader builds do not create thousands of duplicate branches. MCGen will pin the selected branch, template commit, profile, catalog snapshot, and exact component tuple before generation.
 
 ## Current Status
 

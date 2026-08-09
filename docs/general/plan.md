@@ -45,32 +45,22 @@ The core experience should allow a developer to:
 - Perform the same tasks from a CLI.
 - Perform the same tasks through an API.
 
-The canonical templates will live in the public `MCEnvision/MCGen-Templates` GitHub repository. Each platform and Minecraft-version combination uses its own Git branch.
+The canonical templates will live in the public `MCEnvision/MCGen-Templates` GitHub repository. Every officially discoverable platform and Minecraft-version combination must be represented. Version-bound platforms use one branch per Minecraft version. Platform API-bound proxies use one branch per API line. The compatibility catalog inside each template exposes every compatible loader, API, mappings, Gradle plugin, wrapper, language adapter, and toolchain version that MCGen can discover and classify.
 
 Example:
 
 ```text
 main
 
-bukkit/1.21.1
-paper/1.21.1
-spigot/1.21.1
-bungeecord/1.21.1
-
-forge/1.8.9
-forge/1.12.2
-forge/1.16.5
 forge/1.20.1
-
-fabric/1.20.1
+forge/1.20.3
 fabric/1.21.1
-fabric/26.1
-
-neoforge/1.21.1
 neoforge/26.1
-
+paper/1.21.1
 velocity/3.4
 ```
+
+The examples are illustrative, not a bounded matrix. For example, `forge/1.20.1` must offer every Forge artifact whose official coordinate targets Minecraft `1.20.1`, rather than pinning all users to one Forge build. A user may choose two different compatible Forge builds for two generated projects from the same branch.
 
 The `main` branch should remain intentionally simple and primarily contain project documentation and repository metadata.
 
@@ -216,58 +206,31 @@ Initial targets:
 
 # 6. Version Support Philosophy
 
-Each platform should support:
+Each platform must support:
 
-> **The earliest version that can be reasonably maintained through the latest stable supported version.**
+> **Every Minecraft release, prerelease, snapshot, platform API line, and exact component build that the platform's authoritative metadata identifies as compatible and that can be resolved into a valid development toolchain.**
 
-Example:
+Coverage is evidence-driven rather than manually curated around popular versions. If official Forge metadata contains Minecraft `1.20.3`, MCGen must catalog and support `forge/1.20.3`. If it contains several Forge builds for Minecraft `1.20.1`, all of those builds must be selectable inside `forge/1.20.1`. The same rule applies to loader versions, API versions, mappings, Gradle plugins, language adapters, and other versioned components when authoritative compatibility evidence exists.
 
-```text
-Forge
-  earliest practical Forge version
-  ...
-  1.8.9
-  1.12.2
-  1.16.5
-  1.18.2
-  1.19.2
-  1.20.1
-  latest Forge-supported release
-
-NeoForge
-  earliest NeoForge-supported release
-  ...
-  latest NeoForge release
-
-Fabric
-  earliest practical Fabric release
-  ...
-  latest Fabric release
-```
-
-Not every individual Minecraft patch version must exist immediately.
-
-Priority should be given to historically important development versions.
-
-Example priority list:
+Release channels are separate from coverage:
 
 ```text
-1.8.9
-1.12.2
-1.16.5
-1.18.2
-1.19.2
-1.19.4
-1.20.1
-1.20.4
-1.20.6
-1.21
-1.21.1
-later 1.21.x
-26.x
+stable and recommended
+  Shown in Simple mode and selected by policy.
+
+stable alternatives
+  Shown in Advanced mode and eligible for verified status.
+
+beta, release candidate, prerelease, and snapshot
+  Shown in Advanced mode with their upstream channel and support warning.
+
+manual value
+  Accepted in Advanced mode when syntactically valid, but marked custom-unverified unless it matches catalog evidence.
 ```
 
-The platform/version registry will determine exactly which combinations are offered.
+MCGen must not claim that every Minecraft version is supported by every platform. It supports every combination the selected platform actually publishes or declares. Missing upstream artifacts remain visible in coverage reports as unavailable evidence rather than being replaced with a guessed dependency.
+
+The exact set is dynamic. It is regenerated from version-source adapters, committed as a reproducible registry snapshot, and continuously reconciled when upstream metadata changes. The complete coverage contract and source adapters are defined in sections 140 through 145.
 
 ---
 
@@ -302,7 +265,7 @@ The `main` branch must never contain one active development template. Template c
 
 ## 7.3 Template Branches
 
-Branch format:
+Version-bound branch format:
 
 ```text
 <platform>/<minecraft-version>
@@ -311,64 +274,67 @@ Branch format:
 Examples:
 
 ```text
-forge/1.8.9
-forge/1.12.2
-forge/1.16.5
+forge/1.9
+forge/1.10.2
 forge/1.20.1
-
-neoforge/1.21.1
+forge/1.20.3
+neoforge/1.20.2
 neoforge/26.1
-
-fabric/1.20.1
+fabric/1.14.4
 fabric/1.21.1
-fabric/26.1
-
-bukkit/1.21.1
 paper/1.21.1
-spigot/1.21.1
-velocity/3.4
-bungeecord/1.21.1
+spigot/1.9.4
 ```
 
-Lowercase platform names are preferred.
-
-## 7.4 Canonical Branch Matrix Rollout
-
-The owner approved immediate creation and verification of every concrete template branch already named by this plan. This sequencing decision supersedes the earlier architecture-first restriction against creating the branch matrix before the generator core.
-
-The canonical bootstrap matrix is exactly:
+Platform API-bound branch examples:
 
 ```text
-bukkit/1.21.1
-paper/1.21.1
-spigot/1.21.1
-bungeecord/1.21.1
 velocity/3.4
-forge/1.8.9
-forge/1.12.2
-forge/1.16.5
-forge/1.20.1
-fabric/1.20.1
-fabric/1.21.1
-fabric/26.1
-neoforge/1.21.1
-neoforge/26.1
+bungeecord/1.21
+sponge/12
 ```
 
-Aliases such as `velocity/3.x` and `velocity/latest-supported` do not become branches. They resolve through registry metadata to the concrete `velocity/3.4` branch until a separately verified successor replaces it.
+Velocity, BungeeCord, and Sponge API versions are not always one-to-one aliases for a Minecraft release. Their branch identity uses the authoritative API line, while the registry records supported Minecraft or protocol ranges separately. MCGen must never invent a Minecraft-specific proxy branch merely to fit the mod-loader naming model.
 
-This immediate rollout does not waive template quality requirements. Every branch must contain a minimal compilable project, Gradle Wrapper, pinned dependency and plugin versions, correct Java toolchain declaration, loader or platform metadata, `.mcgen/template.json`, configuration schema, field mappings, branch documentation, and a deterministic verification record.
+Lowercase platform names are required. Minecraft and API identifiers preserve the canonical upstream spelling. A branch is a materialized template family for one compatibility boundary, not one branch per loader build. Exact component builds are selected through the compatibility catalog and recorded in the generated project's manifest.
+
+## 7.4 Complete Branch Catalog Rollout
+
+The earlier fixed fourteen-branch bootstrap matrix was superseded on August 9, 2026. It was too small and would have excluded valid Forge point releases, historic platform releases, and alternative compatible loader builds. It remains part of repository history but is no longer an approved product boundary.
+
+The branch set is now generated from the complete compatibility catalog. A version-bound platform receives one branch for every upstream Minecraft version with at least one resolvable platform artifact. An API-bound platform receives one branch for every independently maintained API line that requires a distinct template profile. New upstream versions add branches automatically after discovery and verification.
+
+Do not create thousands of branches for thousands of exact Forge or NeoForge builds. For example:
+
+```text
+forge/1.20.1
+  Forge 47.0.0
+  Forge 47.1.0
+  Forge 47.2.0
+  every other official 1.20.1 Forge artifact
+
+forge/1.20.3
+  every official Forge artifact targeting 1.20.3
+```
+
+The branch contains the version-family template and compatibility constraints. The registry contains the complete exact build list and the tested selection evidence. This keeps direct clone useful while allowing the website, CLI, API, and library to choose any exact compatible component version.
+
+Aliases such as `latest-supported`, `recommended`, or `3.x` do not become canonical branches. They are registry selectors that resolve to one concrete branch, commit, profile, and component tuple. Resolution is included in the generated manifest so the result remains reproducible after the alias moves.
+
+Every branch must contain a minimal compilable project, Gradle or Maven wrapper where applicable, correct toolchain declaration, platform metadata, `.mcgen/template.json`, configuration schema, field mappings, branch documentation, profile constraints, and deterministic verification records. A branch is published only after its recommended tuple passes the full branch gates. Every additional selectable tuple keeps its own evidence state and must not inherit `verified` merely because another loader build compiled.
 
 Before publication, each branch must pass:
 
-1. JSON and metadata syntax validation.
+1. Manifest, registry, configuration schema, and platform metadata validation.
 2. `git diff --check`.
-3. Gradle Wrapper validation and `./gradlew clean build --no-daemon` with the declared JDK.
+3. Wrapper integrity and a clean build with the declared JDK for the recommended tuple.
 4. JAR inspection for required metadata and compiled entrypoint classes.
-5. A clean-worktree and tracked-file audit excluding build output and caches.
-6. A signed commit and remote branch verification.
+5. Exact component-coordinate resolution and checksum capture.
+6. A clean-worktree and tracked-file audit excluding build output and caches.
+7. A signed commit and remote branch verification.
+8. Catalog completeness comparison against the current authoritative metadata snapshot.
 
-Modern branches become `verified` only after all gates pass. Forge `1.8.9`, `1.12.2`, and `1.16.5` become `legacy-verified` only after their pinned legacy toolchains build successfully. A branch that cannot pass remains local and unpublished until fixed; MCGen must not expose an empty or knowingly broken branch as canonical.
+Modern branches become `verified` only after these gates pass. Historic branches become `legacy-verified` only after their pinned legacy toolchains build successfully. A branch that cannot pass remains unpublished. A catalog tuple that has not passed its own build remains `discovered` or `experimental` and cannot be presented as verified. MCGen must never expose an empty branch or silently omit a known upstream version from its coverage report.
 
 ---
 
@@ -480,9 +446,17 @@ Example:
   "schemaVersion": 1,
   "platform": "neoforge",
   "minecraftVersion": "1.21.1",
+  "branchIdentity": "neoforge/1.21.1",
+  "templateFamily": "neoforge-modern",
+  "compatibilityProfile": "neoforge-1.21.1-java21",
   "type": "mod",
   "javaVersion": 21,
   "languages": ["java", "kotlin"],
+  "componentSelectors": {
+    "loader": "catalog:neoforge",
+    "buildPlugin": "catalog:moddevgradle",
+    "mappings": "catalog:minecraft-official"
+  },
   "features": {
     "mixins": true,
     "parchment": true,
@@ -534,6 +508,8 @@ whether a raw override may supersede it
 
 Unsupported fields must be absent or visibly unavailable. The UI must never offer a control that the selected template silently ignores.
 
+The manifest does not embed a hand-maintained loader dropdown. `componentSelectors` refer to catalog dimensions. The renderer receives one fully resolved compatibility tuple containing exact versions, source evidence, profile, stability channel, and verification status.
+
 ---
 
 # 11. Central Template Registry
@@ -550,20 +526,34 @@ Concept:
 
 ```json
 {
+  "schemaVersion": 1,
+  "sourceSnapshot": {
+    "generatedAt": "<timestamp>",
+    "digest": "sha256:<digest>"
+  },
   "neoforge": {
     "type": "mod",
     "versions": {
       "1.21.1": {
         "branch": "neoforge/1.21.1",
-        "java": 21,
+        "branchCommit": "<commit-sha>",
+        "templateFamily": "neoforge-modern",
+        "profiles": ["neoforge-1.21.1-java21"],
         "status": "verified",
         "templateRevision": 7,
-        "configurationSchemaVersion": 1,
-        "configurationSchemaDigest": "sha256:<digest>",
-        "features": {
-          "mixins": true,
-          "parchment": true,
-          "dataGen": true
+        "components": {
+          "neoforge": {
+            "recommended": "<recommended-exact-version>",
+            "versions": [
+              {
+                "version": "<exact-version>",
+                "channel": "stable",
+                "profile": "neoforge-1.21.1-java21",
+                "status": "verified",
+                "evidence": "maven.neoforged.net"
+              }
+            ]
+          }
         }
       }
     }
@@ -571,7 +561,9 @@ Concept:
 }
 ```
 
-The website, CLI, and API should all consume this registry.
+The example contains one component entry for readability. The real registry must retain every discoverable compatible exact component version, not only the recommended selection. Large catalogs may be split by platform and version behind a signed index so clients do not need to load thousands of Forge builds before a user selects Forge.
+
+The website, CLI, and API should all consume the same registry snapshot. The generator core must not make live upstream network calls. A source-ingestion job retrieves authoritative metadata, normalizes it, validates it, and publishes an immutable snapshot. Clients may use a cached last-known-good snapshot when an upstream service is unavailable.
 
 This prevents duplicated compatibility logic.
 
@@ -875,20 +867,24 @@ BungeeCord
 
 ## Step 3 — Minecraft Version
 
-Display only versions compatible with selected platform.
+Display every Minecraft version compatible with the selected platform according to the pinned catalog snapshot. Stable releases are visible by default. Advanced filters reveal prereleases, release candidates, snapshots, legacy releases, deprecated combinations, and upstream-discovered combinations still awaiting verification.
 
 Example:
 
 ```text
-1.8.9
-1.12.2
-1.16.5
-1.18.2
-1.19.2
+1.9
+1.9.4
+1.10
+1.10.2
+...
 1.20.1
-1.21.1
-26.1
+1.20.2
+1.20.3
+...
+latest upstream-supported release
 ```
+
+For API-bound proxies, this step is labeled `Platform API version`. Minecraft protocol compatibility is displayed as a separate constraint and filter.
 
 ---
 
@@ -903,7 +899,7 @@ Project
   project name, directory name, description, license, authors, contributors, credits, contact links
 
 Platform
-  project category, platform, Minecraft version, loader version, mappings, APIs, language, Java toolchain
+  project category, platform, Minecraft or API version, exact loader version, mappings, APIs, language adapters, build plugins, wrapper, language, Java toolchain
 
 Identifiers
   mod or plugin ID, display name, group ID, artifact ID, archives base name, package, main classes, namespaces
@@ -981,6 +977,8 @@ Expose all fields supported by Velocity and BungeeCord templates, including iden
 ## Visibility and Availability
 
 Simple mode displays only the essential fields supported by the selected template and automatically applies compatible recommended component versions. Advanced mode exposes every structured field, including uncommon or incompatible values with an explanation and confirmation. Its raw file workspace may override a complete file, but the project becomes `custom-unverified` when MCGen can no longer prove compatibility.
+
+Every version selector in Advanced mode must offer the complete matching catalog dimension. Selecting Forge `1.20.1`, for example, loads every official Forge artifact whose coordinate targets Minecraft `1.20.1`. Selecting one exact Forge build immediately recomputes compatible ForgeGradle, Gradle wrapper, Java, mappings, metadata format, run configuration, and template profile choices. A user may select a different exact Forge build in another project without requiring another template branch.
 
 Changing an upstream choice must not silently erase downstream edits. Preserve dormant values when a section becomes temporarily unavailable, show what is inactive, and require confirmation only when generation would permanently discard an override.
 
@@ -1747,18 +1745,23 @@ Create dedicated workflows.
 
 Responsibilities:
 
-- Check current platform releases.
-- Detect dependency updates.
-- Open maintenance PRs.
-- Validate Gradle.
-- Test template build.
-- Update registry status.
+- Retrieve every configured authoritative version source with cache validators and bounded retries.
+- Normalize exact Minecraft, loader, API, mappings, build-plugin, wrapper, Java, and language-adapter versions.
+- Compare the complete upstream set with the committed catalog and report additions, removals, mutations, and source failures.
+- Propose new branches when a new compatibility boundary appears.
+- Propose component additions inside existing branches when a new exact build targets an existing boundary.
+- Detect dependency and template-family updates.
+- Open deduplicated maintenance pull requests.
+- Validate wrappers and build profiles.
+- Test every newly discovered tuple before it can become verified.
+- Reuse evidence only when the template digest, profile digest, selected tuple, JDK distribution, and verification procedure are unchanged.
+- Update registry status and coverage reports without deleting previously observed versions silently.
 
 ---
 
 # 44. Template Build Verification
 
-Every template branch should be regularly tested.
+Every template branch and selectable compatibility tuple should be regularly tested.
 
 Example:
 
@@ -1768,7 +1771,8 @@ forge/1.8.9
   ./gradlew build
 
 forge/1.20.1
-  Java 17
+  every cataloged Forge build for Minecraft 1.20.1
+  profile-selected Java and Gradle toolchain
   ./gradlew build
 
 neoforge/1.21.1
@@ -1780,20 +1784,35 @@ neoforge/1.21.1
 
 # 45. Build Matrix
 
-Maintain a central matrix:
+Maintain a central, machine-generated matrix. It must be shardable and queryable rather than one hand-edited table.
 
 ```text
-Platform   Minecraft   Java   Status
+Platform   Minecraft   Component   Build plugin   Java   Profile   Status
 
-Forge      1.8.9       8      passing
-Forge      1.12.2      8      passing
-Forge      1.20.1      17     passing
-
-Fabric     1.21.1      21     passing
-
-NeoForge   1.21.1      21     passing
-NeoForge   26.1        TBD    passing
+Forge      1.20.1      <exact>     <exact>         <n>    <id>      verified
+Fabric     1.21.1      <exact>     <exact>         <n>    <id>      verified
+NeoForge   26.1        <exact>     <exact>         <n>    <id>      verified
 ```
+
+Literal versions in documentation examples are illustrative unless backed by the committed snapshot. The generated matrix stores exact values, evidence URLs, source timestamps, content digests, test timestamps, runner identity, and logs.
+
+Verification is incremental:
+
+```text
+every pull request
+  schema checks, catalog completeness, affected profiles, recommended tuples, and changed tuples
+
+new upstream component
+  exact new tuple resolution, generation, build, JAR inspection, and evidence publication
+
+template or profile change
+  every affected exact tuple, sharded and resumable
+
+scheduled audit
+  stale evidence, source drift, withdrawn artifacts, and full coverage reconciliation
+```
+
+No tuple receives `verified` through sampling. Boundary sampling is only a fast pull-request signal. Exact tuple evidence is required before the product labels that exact selection verified.
 
 ---
 
@@ -1841,13 +1860,17 @@ Long-term automation can watch:
 - Gradle plugins.
 - Parchment mappings.
 
-When a new compatible release appears:
+When a new compatible release or component build appears:
 
-1. Create update branch.
-2. Update template.
-3. Run build test.
-4. Open PR.
-5. Merge after validation.
+1. Capture and archive the authoritative metadata response digest.
+2. Normalize the candidate and prove its compatibility relation.
+3. Reuse an existing profile or create a reviewed profile change.
+4. Add a new template branch only when the compatibility boundary is new.
+5. Add an exact component tuple to an existing branch when only the component build is new.
+6. Generate the recommended and maximum-customization fixtures.
+7. Run the exact build and JAR inspection.
+8. Open a maintenance pull request with the coverage delta and evidence.
+9. Merge only after deterministic checks pass.
 
 ---
 
@@ -2556,15 +2579,16 @@ Example:
 
 ```text
 Forge
-  1.8.9   Legacy Verified
-  1.12.2  Legacy Verified
-  1.16.5  Verified
-  1.20.1  Verified
+  every official Minecraft version with Forge artifacts
+    recommended Forge build
+    all exact Forge builds
+    verified, experimental, or deprecated status per exact build
 
 NeoForge
-  1.20.4  Verified
-  1.21.1  Verified
-  26.1    Verified
+  every official Minecraft version derived from NeoForge artifacts
+
+Fabric
+  every game version exposed by Fabric Meta with a resolvable development tuple
 ```
 
 Clicking one shows:
@@ -2574,6 +2598,9 @@ Clicking one shows:
 - Loader/tool versions.
 - Supported features.
 - Branch.
+- Exact component choices and compatibility evidence.
+- Release channel filters.
+- Coverage gaps or upstream source failures.
 - clone command.
 
 ---
@@ -2591,6 +2618,8 @@ git clone \
 ```
 
 This bypasses the generator entirely.
+
+Direct clone uses the branch's recommended tuple because Git alone cannot ask which exact loader build the user wants. To clone and select a nonrecommended exact tuple reproducibly, use the CLI with `--template-branch` and explicit component selectors, or clone the branch and run its documented version-switch command. Every branch must keep that workflow buildable without the website.
 
 ---
 
@@ -3371,9 +3400,9 @@ Website should include:
 
 ---
 
-# 98. MVP Definition
+# 98. Engineering MVP Definition
 
-The MVP should prove the architecture before supporting every platform.
+The engineering MVP proves the architecture with representative reference profiles. It is an internal preview milestone, not permission to advertise complete platform support or release MCGen 1.0 before the complete coverage gate passes.
 
 Recommended MVP platforms:
 
@@ -3385,7 +3414,7 @@ Paper 1.21.1
 Velocity latest
 ```
 
-MVP features:
+Engineering MVP features:
 
 ```text
 Web generator
@@ -3409,6 +3438,8 @@ Dependabot
 template CI verification
 ```
 
+The version source adapters, compatibility catalog, exact component selectors, profile resolver, coverage report, and branch materializer are part of the engineering MVP. A representative template may prove the renderer, but every officially discoverable supported platform and version must pass phases 9 and 10 before the first stable public release.
+
 New GitHub repository creation remains an MVP target only after the GitHub App Administration permission decision in section 27 is approved. It must not delay the safer existing-repository workflow if that decision remains open.
 
 ---
@@ -3424,7 +3455,12 @@ Tasks:
 - Add contributing guide.
 - Add security policy.
 - Define template branch convention.
-- Create and verify the fourteen-branch canonical bootstrap matrix defined in section 7.4.
+- Inspect the installed Minecraft Development plugin as a behavioral reference and record its descriptor and version-resolver architecture without copying its licensed template content blindly.
+- Define authoritative source adapters for every supported platform and component.
+- Capture the first reproducible upstream metadata snapshot.
+- Define the complete compatibility catalog and coverage report schemas.
+- Define version-bound and API-bound branch identity rules.
+- Define template families and toolchain profiles before mass branch creation.
 - Define manifest schema.
 - Define registry schema.
 - Create monorepo structure.
@@ -3447,6 +3483,13 @@ Stable repository architecture
 
 Build:
 
+- authoritative version-source adapter contracts.
+- metadata snapshot normalizer and source-evidence store.
+- compatibility graph and exact component tuple resolver.
+- recommendation, release-channel, and manual-selection policies.
+- template family and toolchain profile resolver.
+- deterministic branch materializer.
+- coverage completeness and drift reporting.
 - template loader.
 - registry parser.
 - placeholder engine.
@@ -3482,19 +3525,24 @@ Deliverable:
 
 ---
 
-# 101. Phase 2 — Initial Templates
+# 101. Phase 2 — Reference Template Families
 
-Create and verify:
+Create and verify one reference compatibility boundary for each distinct family required by:
 
 ```text
-neoforge/1.21.1
-fabric/1.21.1
-forge/1.20.1
-paper/1.21.1
-velocity/3.4
+Forge legacy families
+Forge modern families
+NeoForge families
+Fabric families
+Architectury and configurable multiloaders
+Bukkit, Spigot, and Paper families
+Sponge families
+Velocity and BungeeCord families
 ```
 
-Each must:
+Do not duplicate a whole template for versions that differ only by cataloged values. Add conditional fragments or a new profile when metadata, source layout, mappings, Gradle plugin, Java, or lifecycle APIs change. Every family must prove at least one real boundary and all boundary cases identified by the compatibility graph before branch materialization scales out.
+
+Each reference must:
 
 ```bash
 ./gradlew build
@@ -3502,7 +3550,7 @@ Each must:
 
 successfully.
 
-Each initial template must also declare and test its complete customization schema, metadata mappings, build capabilities, icon slot, feature conditions, raw override behavior, and maximum structured-customization fixture.
+Each reference template must also declare and test its complete customization schema, metadata mappings, build capabilities, icon slot, feature conditions, raw override behavior, exact component selectors, profile constraints, and maximum structured-customization fixture.
 
 ---
 
@@ -3701,25 +3749,19 @@ Add:
 
 ---
 
-# 108. Phase 9 — Legacy Forge
+# 108. Phase 9 — Historic Toolchain Families
 
-Add:
+Materialize and verify every historic compatibility boundary discovered for Forge, Fabric, Bukkit, Spigot, Paper, Sponge, BungeeCord, and other supported families. This includes every intermediate release such as Forge `1.9`, `1.10`, and `1.11` when official artifacts exist, not only historically popular versions.
 
-```text
-forge/1.8.9
-forge/1.12.2
-forge/1.16.5
-```
+Add every required legacy JDK, Gradle, Maven, mappings, repository, TLS, and compatibility profile. Preserve old metadata formats such as `mcmod.info` where required. Pin recovery mirrors or repository workarounds only after supply-chain review and without changing the requested upstream coordinate.
 
-Add legacy Java/Gradle CI runners.
-
-This phase will require more maintenance than modern versions.
+This phase requires more maintenance than modern versions and remains a stable-release gate.
 
 ---
 
-# 109. Phase 10 — Broader Version Matrix
+# 109. Phase 10 — Complete Catalog Conformance
 
-Expand:
+Materialize and verify the complete current catalog for:
 
 ```text
 Forge
@@ -3734,7 +3776,15 @@ Velocity
 BungeeCord
 ```
 
-Prioritize high-use Minecraft versions.
+For every discovered compatibility boundary:
+
+1. Publish the canonical branch after its recommended tuple passes.
+2. Catalog every exact compatible loader, API, mappings, plugin, and language-adapter version.
+3. Generate and build every exact tuple that MCGen labels verified.
+4. Publish coverage evidence and disclose any upstream-discovered tuple that is not yet verified.
+5. Block the first stable release while an undisclosed or unexplained coverage gap remains.
+
+Parallel verification may prioritize high-use versions for turnaround, but priority never removes lower-use versions from required final coverage.
 
 ---
 
@@ -3773,66 +3823,71 @@ Nix flake
 Initial GitHub issues:
 
 ```text
-#1 Define versioned ProjectSpec schema and portable asset references
-#2 Define ProjectSpec migration and unknown-extension preservation rules
-#3 Define template manifest and capability schema
-#4 Define compatibility registry schema
-#5 Define field mappings, visibility conditions, defaults, bounds, and render targets
-#6 Implement immutable layered configuration resolution and provenance
-#7 Implement stable validation diagnostics and verification statuses
-#8 Implement structured JSON, TOML, YAML, properties, Gradle, Java, and Kotlin renderers
-#9 Implement deterministic virtual file tree and binary-safe output model
-#10 Implement raw file add, replace, rename, delete, reset, and diff operations
-#11 Implement PNG asset validation, transformation, digesting, and adapter pipeline
-#12 Implement project version composer and artifact naming resolver
-#13 Implement complete version-specific metadata domain models
-#14 Implement Gradle settings, properties, toolchain, task, run, packaging, and publishing models
-#15 Implement repository and dependency models with cross-linking to runtime metadata
-#16 Implement source sets, entrypoints, split sources, mixins, access files, and data generation models
-#17 Build generator-core package and adapter contracts
-#18 Add defaults, boundaries, invalid input, round-trip, migration, property, and snapshot tests
-#19 Create NeoForge 1.21.1 template and complete customization schema
-#20 Create Fabric 1.21.1 template and complete customization schema
-#21 Create Forge 1.20.1 template and complete customization schema
-#22 Create Paper 1.21.1 template and complete customization schema
-#23 Create Velocity template and complete customization schema
-#24 Add recommended and maximum structured-customization fixtures for every MVP template
-#25 Build CLI interactive wizard
-#26 Build CLI non-interactive mode
-#27 Implement local and ZIP adapters
-#28 Add CLI config, set, icon, bundle, raw override, migration, and preview support
-#29 Build web generator shell and section navigation
-#30 Implement schema-driven Simple and Advanced form engine with preserved overrides
-#31 Implement complete loader, plugin, and proxy metadata editors
-#32 Implement project version and artifact preview editor
-#33 Implement PNG icon upload, preview, transformation, replacement, and removal
-#34 Implement Gradle and build-system editor
-#35 Implement repositories and dependencies editors
-#36 Implement source layout, entrypoint, run profile, and feature editors
-#37 Implement publishing editor
-#38 Implement generated file tree and syntax-aware raw editor
-#39 Implement ProjectSpec import, export, bundle, migration, and local drafts
-#40 Add field search, provenance, linking, unlock, reset, undo, and redo
-#41 Add compatibility, validation, artifact, and affected-file summary panels
-#42 Add browser parity, performance, accessibility, upload, and no-execution tests
-#43 Build production Nginx configuration
-#44 Build private API service and health checks
-#45 Add atomic deployment and rollback
-#46 Create dedicated Cloudflare Tunnel and DNS route
-#47 Add hostname-scoped Cloudflare cache and security rules
-#48 Decide GitHub App Administration permission model
-#49 Register and configure GitHub App
-#50 Implement GitHub authorization, state, PKCE, sessions, webhook verification, and deduplication
-#51 Implement GitHub tree, commit, branch, and pull-request adapter
-#52 Implement new repository creation if approved
-#53 Implement porting, conflict detection, optimistic concurrency, preview, and idempotency
-#54 Add public API, multipart assets, resolved specs, validation reports, and OpenAPI docs
-#55 Add template CI matrix and maximum-customization build verification
-#56 Add legacy Forge 1.8.9 and 1.12.2 templates
-#57 Add automated template updater
-#58 Add production smoke tests and origin-isolation checks
-#59 Add customization security and public-service no-execution tests
-#60 Add disaster recovery and secret rotation runbooks
+#1 Support the complete official platform and Minecraft version catalog
+#2 Implement authoritative metadata snapshot ingestion and evidence digests
+#3 Implement Forge, NeoForge, Fabric, Paper, Spigot, Bukkit, Sponge, Velocity, BungeeCord, and Architectury source adapters
+#4 Define compatibility graph, exact component tuple, release channel, and coverage report schemas
+#5 Define template family, toolchain profile, and version-boundary rules
+#6 Implement deterministic branch materialization and registry selectors
+#7 Implement incremental exact-tuple verification and evidence reuse
+#8 Define versioned ProjectSpec schema and portable asset references
+#9 Define ProjectSpec migration and unknown-extension preservation rules
+#10 Define template manifest and capability schema
+#11 Define field mappings, visibility conditions, defaults, bounds, and render targets
+#12 Implement immutable layered configuration resolution and provenance
+#13 Implement stable validation diagnostics and verification statuses
+#14 Implement structured JSON, TOML, YAML, properties, Gradle, Java, and Kotlin renderers
+#15 Implement deterministic virtual file tree and binary-safe output model
+#16 Implement raw file add, replace, rename, delete, reset, and diff operations
+#17 Implement PNG asset validation, transformation, digesting, and adapter pipeline
+#18 Implement project version composer and artifact naming resolver
+#19 Implement complete version-specific metadata domain models
+#20 Implement Gradle settings, properties, toolchain, task, run, packaging, and publishing models
+#21 Implement repository and dependency models with cross-linking to runtime metadata
+#22 Implement source sets, entrypoints, split sources, mixins, access files, and data generation models
+#23 Build generator-core package and adapter contracts
+#24 Add defaults, boundaries, invalid input, round-trip, migration, property, and snapshot tests
+#25 Build and verify every required template family and profile boundary
+#26 Materialize every modern version-bound and API-bound branch
+#27 Materialize every historic version-bound and API-bound branch
+#28 Add recommended and maximum structured-customization fixtures for every template family
+#29 Complete exact component tuple verification and publish the coverage report
+#30 Build CLI interactive wizard
+#31 Build CLI non-interactive mode
+#32 Implement local and ZIP adapters
+#33 Add CLI config, set, icon, bundle, raw override, migration, component selection, and preview support
+#34 Build web generator shell and section navigation
+#35 Implement schema-driven Simple and Advanced form engine with preserved overrides
+#36 Implement complete loader, plugin, and proxy metadata editors
+#37 Implement complete component version selectors and compatibility explanations
+#38 Implement project version and artifact preview editor
+#39 Implement PNG icon upload, preview, transformation, replacement, and removal
+#40 Implement Gradle and build-system editor
+#41 Implement repositories and dependencies editors
+#42 Implement source layout, entrypoint, run profile, and feature editors
+#43 Implement publishing editor
+#44 Implement generated file tree and syntax-aware raw editor
+#45 Implement ProjectSpec import, export, bundle, migration, and local drafts
+#46 Add field search, provenance, linking, unlock, reset, undo, and redo
+#47 Add compatibility, validation, artifact, coverage, and affected-file summary panels
+#48 Add browser parity, performance, accessibility, upload, and no-execution tests
+#49 Build production Nginx configuration
+#50 Build private API service and health checks
+#51 Add atomic deployment and rollback
+#52 Create dedicated Cloudflare Tunnel and DNS route
+#53 Add hostname-scoped Cloudflare cache and security rules
+#54 Decide GitHub App Administration permission model
+#55 Register and configure GitHub App
+#56 Implement GitHub authorization, state, PKCE, sessions, webhook verification, and deduplication
+#57 Implement GitHub tree, commit, branch, and pull-request adapter
+#58 Implement new repository creation if approved
+#59 Implement porting, conflict detection, optimistic concurrency, preview, and idempotency
+#60 Add public API, multipart assets, resolved specs, validation reports, and OpenAPI docs
+#61 Add template CI sharding and maximum-customization build verification
+#62 Add automated source monitoring, catalog reconciliation, branch proposals, and tuple updates
+#63 Add production smoke tests and origin-isolation checks
+#64 Add customization security and public-service no-execution tests
+#65 Add disaster recovery and secret rotation runbooks
 ```
 
 ---
@@ -3844,6 +3899,11 @@ A template is complete only if:
 - branch exists.
 - manifest exists.
 - registry entry exists.
+- branch identity matches its version-bound or API-bound catalog key.
+- every authoritative exact component version for that key is present or has an explicit evidence-backed exclusion.
+- recommended, latest stable, alternative stable, prerelease, and snapshot channels are classified separately.
+- every exact tuple labeled Verified has tuple-specific resolution, generation, build, and JAR evidence.
+- every template and toolchain compatibility boundary maps to a reviewed family profile.
 - correct Java version documented.
 - generator can customize it.
 - every supported metadata and build field is declared in its configuration schema.
@@ -3858,6 +3918,8 @@ A template is complete only if:
 - no unnecessary example content exists.
 - documentation exists.
 - status is marked Verified or Legacy Verified.
+
+Catalog completeness is part of template completion. A working `forge/1.20.1` branch is not complete if its selector exposes only one Forge build while authoritative metadata contains more compatible `1.20.1` builds.
 
 ---
 
@@ -3915,6 +3977,8 @@ MVP is ready when a user can:
 8. Restore the prior known-good release in a documented recovery test.
 9. Verify logs contain operational metadata but no tokens, authorization codes, cookies, private keys, webhook secrets, or generated source contents.
 10. Verify Cloudflare, Nginx, API, and GitHub rate and concurrency controls with deterministic tests.
+
+The engineering MVP may use representative reference profiles for end-to-end interface testing. The first stable public release has an additional nonnegotiable gate: every platform and version in the current authoritative snapshot is either verified and selectable or shown in the public coverage report with a specific unresolved blocker. MCGen must not advertise complete support while a cataloged version is silently absent.
 
 ---
 
@@ -4068,27 +4132,28 @@ No interface should need to reimplement Minecraft template logic.
 
 # 117. First Development Priority
 
-The original priority was to build the architecture before creating Minecraft version branches. The owner superseded that sequence on August 9, 2026 by approving the concrete fourteen-branch bootstrap matrix in section 7.4.
+The bounded branch rollout was superseded on August 9, 2026 by the complete coverage requirement. The first priority is now the authoritative source and compatibility architecture needed to create all branches correctly and keep every exact component version selectable.
 
-Build and verify that bounded matrix first, then continue the architecture work. Do not expand beyond the approved matrix until the registry and generator core can enforce the same contracts automatically.
+Do not hand-create the full branch set from a guessed list. Capture the official catalogs, normalize their compatibility relations, define family profiles, then materialize and verify branches from that evidence. This avoids hundreds of inconsistent copies while still requiring complete final coverage.
 
 Recommended order:
 
 ```text
-1. Fourteen-branch canonical template bootstrap and real toolchain verification
-2. Versioned ProjectSpec schema, migrations, and configuration layers
-3. Template manifest, registry, field mappings, and capability schemas
-4. Generator core, structured renderers, file operations, validation, and asset pipeline
-5. Complete metadata, build, icon, fixture, and raw-override coverage for the bootstrap templates
-6. CLI parity for ProjectSpec, icons, overrides, validation, and previews
-7. Web Simple and Advanced customization workspace, including the Advanced raw file editor, with local ZIP generation
-8. Nginx and API production foundation
-9. Dedicated Cloudflare Tunnel and `mcgen.enviouse.com`
-10. GitHub App authorization and installation flow
-11. GitHub adapter with identical ProjectSpec and asset output
-12. Existing repo/branch workflow
-13. Public API
-14. Expand templates only after each template can satisfy the customization acceptance gate
+1. Authoritative version-source adapters and reproducible source snapshots
+2. Complete compatibility graph, release channels, exact component tuples, and coverage reporting
+3. Template families, toolchain profiles, branch identity rules, and deterministic materialization
+4. Versioned ProjectSpec schema, migrations, and configuration layers
+5. Template manifest, registry, field mappings, and capability schemas
+6. Generator core, structured renderers, file operations, validation, and asset pipeline
+7. Reference profiles for every distinct mod, plugin, proxy, and multiloader family
+8. Complete modern and historic branch materialization
+9. Exact tuple verification until the complete coverage gate passes
+10. CLI parity for ProjectSpec, component selection, icons, overrides, validation, and previews
+11. Web Simple and Advanced customization workspace, including complete version selectors and the Advanced raw file editor
+12. Nginx and API production foundation
+13. Dedicated Cloudflare Tunnel and `mcgen.enviouse.com`
+14. GitHub App authorization, installation flow, and GitHub adapter
+15. Existing repository workflow and public API
 ```
 
 The first template should prove that the same system can support:
@@ -4115,6 +4180,8 @@ MCGen succeeds if:
 - An experienced developer can scaffold a project with one CLI command.
 - An existing project can receive a new Minecraft version branch safely.
 - Templates are continuously build-tested.
+- Every officially discoverable platform and Minecraft or API version is represented by a branch or an explicit coverage blocker.
+- Every compatible exact loader and API build is selectable, with independent evidence and status.
 - Legacy versions remain reproducible.
 - No IDE is required.
 - Generated projects remain independent of MCGen after creation.
@@ -4798,3 +4865,647 @@ The customization system is complete only when all of these pass for every MVP t
 10. Simple mode remains compact enough for a beginner to generate a valid project, Advanced mode exposes every supported customization, and switching modes preserves all values and raw operations.
 11. The server proves through tests that custom build logic, dependencies, repositories, and binaries are never executed.
 12. Maximum structured-customization fixtures build successfully for the canonical tested matrix.
+
+---
+
+# 140. Complete Version Coverage Contract
+
+Complete support is a product contract, not a manually maintained marketing list.
+
+For a version-bound platform, MCGen must provide all of the following:
+
+```text
+every upstream Minecraft version with at least one official platform artifact
+every exact platform or loader artifact for that Minecraft version
+every exact API and mappings artifact whose compatibility can be proven
+every required build plugin and wrapper profile
+every required Java toolchain profile
+stable, recommended, beta, prerelease, release candidate, and snapshot classification
+one canonical branch for each Minecraft compatibility boundary
+tuple-specific verification status and evidence
+```
+
+For an API-bound platform such as Velocity, BungeeCord, or Sponge, replace the assumption of one Minecraft version with the platform's actual API compatibility model. Catalog every official API artifact. Record supported Minecraft versions or protocol ranges as separate data when upstream evidence provides them.
+
+The coverage unit is a compatibility tuple:
+
+```text
+platform
+project category
+Minecraft or API branch key
+exact loader or API artifact
+exact mappings selection
+exact platform API selection
+exact build plugin
+exact Gradle or Maven wrapper
+exact Java language and bytecode targets
+language adapter versions
+template family and profile
+stability channel
+source evidence
+verification status
+```
+
+One branch may support many tuples. One tuple must resolve to one deterministic template commit and exact component set.
+
+The following rules are mandatory:
+
+1. A popular-version shortlist may control work ordering, but never final scope.
+2. Patch releases such as `1.20.2` and `1.20.3` are independent catalog keys when upstream artifacts exist.
+3. Historic releases such as Forge `1.9`, `1.10`, and `1.11` are required when official Forge artifacts exist.
+4. Every exact loader build under a Minecraft key is selectable in Advanced mode.
+5. Simple mode selects one tested recommendation without hiding that alternatives exist.
+6. Prereleases and snapshots are included when upstream publishes them, but are not recommended by default.
+7. A syntactically valid manual value is permitted in Advanced mode and becomes `custom-unverified` unless it matches evidence.
+8. An upstream-discovered version may not disappear because a current template cannot build it. It remains in the coverage report with a blocker.
+9. A withdrawn or mutated artifact is quarantined. Existing evidence remains historical, but new generation is disabled until maintainers resolve the supply-chain change.
+10. MCGen may claim complete support only when the current snapshot has no silent omissions and every advertised verified tuple has exact evidence.
+
+The catalog distinguishes these concepts:
+
+```text
+discovered
+  Present in authoritative metadata but not yet normalized or tested.
+
+resolvable
+  All required coordinates and profile inputs resolve.
+
+verified
+  The exact tuple generated, built, and passed artifact inspection.
+
+legacy-verified
+  The exact tuple passed under a pinned historic toolchain.
+
+experimental
+  The tuple is generated and testable but uses an unstable upstream channel or has a documented limitation.
+
+blocked
+  Upstream evidence exists, but a reproducible development tuple is not currently possible.
+
+withdrawn
+  Previously observed upstream content is no longer safely available or changed unexpectedly.
+```
+
+`broken` remains available for a previously working MCGen tuple that now fails. `deprecated` describes an upstream or MCGen recommendation state, not absence from the catalog.
+
+---
+
+# 141. Template Provenance and Authoritative Version Sources
+
+## 141.1 Template Content Provenance
+
+Canonical template files come from `MCEnvision/MCGen-Templates`. They are authored and reviewed as MCGen template families using official platform documentation, official starter projects, official MDKs, and successful build evidence. The website, CLI, API, and library do not download arbitrary template ZIP files from loader websites at generation time.
+
+Official loader sites and Maven repositories provide version and compatibility metadata. They do not replace the canonical template repository. Every generated project pins:
+
+```text
+template branch
+template commit
+template family
+toolchain profile
+source snapshot digest
+exact component tuple
+final file digests
+```
+
+If an official starter or MDK is imported as a template-family seed, record its URL, version, license, digest, import date, and every MCGen modification. Do not redistribute files until their license permits it. Do not copy third-party generator resources merely because they are installed locally.
+
+## 141.2 Minecraft Development Plugin Findings
+
+The installed IntelliJ Minecraft Development plugin, version `2026.2-1.8.19`, was inspected as a behavioral reference. Its built-in resources use `.mcdev.template.json` descriptors, typed properties, conditional files, derived values, and version service classes. Forge, NeoForge, Fabric, Architectury, Paper, Bukkit-family, Sponge, Velocity, BungeeCord, and multiloader templates are separate families or descriptors.
+
+Useful architectural patterns:
+
+```text
+descriptor-driven fields and conditional files
+one platform template with a version model
+Forge artifacts grouped by their Minecraft coordinate prefix
+NeoForge artifacts mapped through its versioning convention
+Fabric game, loader, mappings, Loom, and Fabric API as separate selections
+Paper versions retrieved from the Paper downloads service
+Java derived from the selected platform or Minecraft version
+different source templates at API boundaries
+```
+
+Gaps MCGen must not inherit:
+
+```text
+hardcoded Spigot, Velocity, BungeeCord, and Sponge lists
+Forge's current built-in template filter beginning at Minecraft 1.16
+NeoForge's current built-in template filter beginning at Minecraft 1.20.5
+fixed wrapper values where older profiles need different Gradle releases
+version choices that do not expose the complete upstream history
+IDE-only finalizers and project import behavior
+```
+
+MCGen adopts the descriptor and resolver separation, not the plugin's current coverage limits. Plugin files remain a reference until a license review explicitly permits reuse.
+
+## 141.3 Source Adapter Priority
+
+Each adapter declares one primary source and optional corroborating sources. The primary source determines discovery. Corroborating sources may classify recommendations or prove compatibility but may not invent a version absent from the primary source without a reviewed exception.
+
+| Platform or component | Primary discovery source | Compatibility handling |
+| --- | --- | --- |
+| Minecraft releases | Mojang version manifest and platform-specific published artifacts | Platform artifacts decide whether that Minecraft version is supported by the platform. |
+| Forge | `net.minecraftforge:forge` Maven metadata | Parse the exact `<minecraft>-<forge>` coordinate. Use Forge promotions only to classify recommended and latest selections. |
+| ForgeGradle | Official Forge Maven and Gradle plugin metadata | Map Forge and Minecraft ranges to supported ForgeGradle, Gradle, Java, mappings, and metadata profiles. |
+| NeoForge | `net.neoforged:neoforge` Maven metadata and official versioning rules | Normalize both historic reduced Minecraft prefixes and current full Minecraft prefixes. |
+| NeoGradle and ModDevGradle | Official NeoForged Maven and Gradle plugin metadata | Profile compatibility is independent from the NeoForge loader artifact list. |
+| Fabric Minecraft, Loader, and Yarn | Fabric Meta API | Query game, loader, and mappings dimensions separately and retain Fabric's stable flags. |
+| Fabric Loom | Official Fabric Maven plugin metadata | Map Loom and Gradle compatibility through profiles. |
+| Fabric API | Official Fabric API publication metadata, with the official Modrinth project API as version-to-game evidence when needed | Match exact game-version declarations and never infer from a display name alone. |
+| Fabric Language Kotlin | Official Fabric Maven metadata | Preserve the loader and Kotlin version relationship encoded by the artifact. |
+| Paper | PaperMC Fill API and official Paper Maven metadata | Discover every published Minecraft version and build channel, then resolve the exact Paper API dependency. |
+| Spigot | Official Spigot Nexus `spigot-api` Maven metadata | Preserve every exact API coordinate and derive the Minecraft branch key from the coordinate. |
+| Bukkit | Official Bukkit or Spigot-hosted `bukkit` artifact metadata | Expose only versions where the Bukkit artifact exists. Do not disguise a Spigot or Paper artifact as Bukkit. |
+| BungeeCord | Official Spigot-hosted `bungeecord-api` metadata, with Maven Central as corroboration | Catalog historic snapshots and releases, not only Maven Central releases. |
+| Velocity | Official PaperMC Maven metadata and Velocity documentation | Branch by API line and record supported protocol or Minecraft ranges separately. |
+| Sponge | Official Sponge Maven metadata and Sponge version compatibility documentation | Map SpongeAPI lines to Minecraft and Java through official implementation or documentation evidence. |
+| Architectury | Official Architectury Maven, Gradle plugin metadata, documentation, and official generator output | Build a compatibility intersection across Minecraft, Architectury API, Loom or plugin, Fabric, and Forge or NeoForge. |
+| Gradle | Official Gradle release metadata and wrapper checksums | Profiles constrain wrappers to platform plugin support. |
+| Kotlin | Official Kotlin Maven metadata and platform language-adapter constraints | Do not treat the latest Kotlin release as universally compatible. |
+
+Current primary endpoints include:
+
+```text
+https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml
+https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml
+https://meta.fabricmc.net/v2/versions
+https://fill.papermc.io/v3/projects/paper
+https://hub.spigotmc.org/nexus/content/repositories/snapshots/org/spigotmc/spigot-api/maven-metadata.xml
+https://hub.spigotmc.org/nexus/content/repositories/snapshots/org/bukkit/bukkit/maven-metadata.xml
+https://hub.spigotmc.org/nexus/content/repositories/snapshots/net/md-5/bungeecord-api/maven-metadata.xml
+https://repo.papermc.io/repository/maven-public/com/velocitypowered/velocity-api/maven-metadata.xml
+https://repo.spongepowered.org/repository/maven-public/org/spongepowered/spongeapi/maven-metadata.xml
+https://maven.architectury.dev/
+```
+
+Endpoints are configuration, not assumptions embedded across the generator. Each adapter has schema fixtures and contract tests. Endpoint changes require one adapter update.
+
+## 141.4 Snapshot and Failure Rules
+
+Every fetch records:
+
+```text
+adapter ID and version
+request URL without credentials
+retrieval time
+HTTP cache validators when available
+response media type
+response byte digest
+parser schema version
+normalized entry count
+warnings and rejected entries
+```
+
+Store the normalized snapshot and its evidence, not transient access credentials. If a primary source is unavailable, retain the last-known-good snapshot, mark it stale, and stop destructive reconciliation. A timeout, empty response, parser failure, or sudden large removal must never delete branches or catalog entries automatically.
+
+Require maintainer review for:
+
+```text
+artifact mutation under an existing version
+unexpected version-format change
+more than a configured percentage of entries removed
+primary source hostname change
+new repository or unsigned binary source
+compatibility relation inferred only from a third-party source
+```
+
+---
+
+# 142. Compatibility Catalog and Resolver
+
+## 142.1 Normalized Graph
+
+The catalog is a graph rather than one flat version list.
+
+Node kinds include:
+
+```text
+minecraft
+platform
+loader
+api
+mappings
+build plugin
+gradle
+maven
+java
+kotlin
+language adapter
+template family
+toolchain profile
+branch
+verification evidence
+```
+
+Edge kinds include:
+
+```text
+targets
+requires
+supports
+conflicts with
+recommended with
+replaces
+deprecated by
+verified with
+derived from
+materialized by
+```
+
+Edges retain source evidence and confidence. `published` means the upstream metadata states or encodes the relation. `documented` means official documentation states it. `verified` means MCGen proved the generated tuple through a build. `inferred` is allowed only for Advanced experimental choices and must never drive a Simple recommendation by itself.
+
+## 142.2 Exact Tuple Resolution
+
+Resolution order:
+
+1. Select category and platform.
+2. Select the Minecraft or API branch key.
+3. Load every exact component candidate connected to that key.
+4. Apply release-channel filters.
+5. Apply explicit user selections.
+6. Intersect component constraints.
+7. Select or validate the template family and profile.
+8. Resolve Java, wrapper, build plugin, mappings, language adapters, and metadata format.
+9. Attach tuple evidence and verification state.
+10. Freeze exact values before generation.
+
+The resolver must explain why each candidate is available or unavailable. It must not silently replace an explicitly selected component with the recommendation.
+
+Example explanation:
+
+```text
+selected Minecraft
+  1.20.1
+
+selected Forge
+  exact official artifact chosen by the user
+
+resolved profile
+  ForgeGradle family compatible with that Forge and Minecraft line
+
+resolved Java
+  required by Minecraft and the selected build profile
+
+excluded component
+  incompatible because its plugin range does not include the selected Gradle wrapper
+```
+
+## 142.3 Recommendation Policy
+
+Recommendations are deterministic and versioned. A platform adapter may use an official recommended marker. Otherwise the policy selects the newest verified stable tuple, not merely the lexically largest version.
+
+Tie-break order:
+
+```text
+official recommended marker
+verified stable status
+nondeprecated source
+newest exact platform component
+newest compatible security-supported profile
+most recent successful evidence
+stable deterministic version comparison
+```
+
+Changing recommendation policy creates a registry revision and does not mutate existing generated projects.
+
+## 142.4 Registry Layout
+
+Use a small root index and content-addressed platform shards:
+
+```text
+registry/index.json
+registry/sources/<snapshot-digest>.json
+registry/platforms/forge/index.json
+registry/platforms/forge/1.20.1.json
+registry/platforms/fabric/1.21.1.json
+registry/profiles/<profile-id>.json
+registry/evidence/<tuple-digest>.json
+registry/coverage.json
+```
+
+The root index maps platform and branch keys to shard digests. Every client verifies the digest before parsing. Shards permit thousands of exact builds without making first page load proportional to the entire ecosystem history.
+
+## 142.5 User Selection Behavior
+
+Simple mode shows:
+
+```text
+Minecraft or platform API version
+recommended exact loader or API build
+resolved Java and build toolchain
+one expandable summary of alternative versions
+```
+
+Advanced mode shows:
+
+```text
+every exact compatible component version
+channel and publication state
+source and compatibility evidence
+verification status and last tested tuple
+profile changes caused by the selection
+manual value entry
+incompatible values behind an explicit filter
+```
+
+Partial searches such as `47.6` filter the exact Forge builds published under the selected Minecraft version. If no official exact coordinate matches, MCGen offers the literal as a manual `custom-unverified` value instead of pretending it is official.
+
+---
+
+# 143. Template Families and Toolchain Profiles
+
+## 143.1 Layered Rendering
+
+Branch content is materialized from reviewed layers:
+
+```text
+category base
+platform family
+Minecraft or API boundary fragments
+toolchain profile
+exact catalog tuple values
+ProjectSpec structured customization
+raw file operations
+```
+
+Only the first four layers are canonical template code. Exact component values are data. User customization remains outside canonical branch history.
+
+A new family or boundary fragment is required when generated structure or behavior changes, including:
+
+```text
+metadata format or location
+entrypoint annotation or lifecycle
+mappings system
+Gradle plugin generation model
+wrapper compatibility
+Java source or bytecode requirement
+client and server source separation
+run configuration model
+resource processing
+access transformer or access widener behavior
+data generation registration
+plugin bootstrap or loader model
+multiloader module topology
+```
+
+A new exact loader build alone does not justify copying an entire template.
+
+## 143.2 Profile Contract
+
+Each profile declares:
+
+```text
+profile ID and schema version
+platform and branch-key constraints
+component version ranges
+required JDK to run the build
+Java language and bytecode targets
+Gradle or Maven wrapper version and checksum
+build plugin and repository configuration
+mappings strategy
+metadata renderer
+source and resource layout
+supported languages and adapters
+supported optional features
+known incompatibilities
+verification commands
+artifact inspection rules
+fallback and migration profile
+```
+
+Profiles use explicit ranges and tests. They do not encode `latest` in generated build files.
+
+## 143.3 Platform Family Expectations
+
+### Forge
+
+Create as many families as actual Forge and ForgeGradle boundaries require. Historic Forge may use different metadata, mappings, repositories, Gradle DSL, run generation, reobfuscation, and JDK behavior. Each Minecraft branch groups every exact `net.minecraftforge:forge` artifact beginning with that Minecraft coordinate.
+
+### NeoForge
+
+Normalize NeoForge's version-to-Minecraft convention using the official rules. Keep NeoGradle and ModDevGradle as independent component dimensions. Select the build system through profiles instead of assuming one plugin works for all NeoForge history.
+
+### Fabric
+
+Treat Minecraft, loader, Yarn, official mappings, Fabric API, Loom, Fabric Language Kotlin, Java, and wrapper versions as separate dimensions. Use Fabric Meta relations where available. The branch key is the exact game version, including upstream snapshots when the snapshot channel is enabled.
+
+### Bukkit, Spigot, and Paper
+
+Share safe source and metadata fragments where formats overlap, but retain distinct platform identities and dependency provenance. Paper branches may support both `plugin.yml` and the Paper plugin model when the selected Minecraft version supports them. Bukkit never substitutes a Spigot or Paper coordinate silently.
+
+### Sponge
+
+Branch by SpongeAPI compatibility line when that is the real plugin-development boundary. Map Minecraft and Java compatibility from official Sponge implementation or documentation evidence. Preserve historic plugin metadata and location changes through profiles.
+
+### Velocity and BungeeCord
+
+Branch by API line. Do not create one branch per Minecraft patch. Record protocol compatibility separately. Gradle and Maven, Java and Kotlin, annotation processing, metadata file generation, and optional run plugins remain profile capabilities.
+
+### Architectury and Configurable Multiloaders
+
+These are compatibility intersections, not independent loaders. A branch exists for each Minecraft version with a verified common topology and at least one supported target set. The catalog separately selects Fabric, Forge, or NeoForge artifacts, mappings, APIs, Loom or other plugins, and target-specific metadata. Do not generate a Cartesian product of versions with no compatibility evidence.
+
+Users can choose target loaders independently where the catalog proves a valid intersection. Shared project values remain linked by default and target-specific component versions remain visible.
+
+## 143.4 Direct Clone Contract
+
+Every branch checks out as a buildable project using its recommended tuple. It also includes a version-switch mechanism driven by the branch catalog shard so a direct-clone user can select another exact compatible tuple without the web application.
+
+The switch command must:
+
+1. Validate the requested exact tuple.
+2. Update only generated component-value files.
+3. Preserve user source and raw edits.
+4. Show the profile change and affected files.
+5. Refuse an incompatible tuple unless the user explicitly chooses manual unverified mode.
+6. Record the final tuple in `.mcgen/project.json`.
+
+---
+
+# 144. Branch Materialization and Reconciliation
+
+## 144.1 Initial Materialization
+
+For each catalog branch key:
+
+1. Resolve the recommended exact tuple.
+2. Select the reviewed template family and profile.
+3. Render into an isolated worktree.
+4. Add branch-local manifest, schema, field mappings, catalog shard, version-switch support, and verification procedure.
+5. Run static validation.
+6. Run the exact build with the profile JDK.
+7. Inspect the final artifact and metadata.
+8. Commit with the owner signing identity.
+9. Push only after verification passes.
+10. Update the main registry through a phase pull request after branch publication evidence exists.
+
+Branch creation is idempotent. Re-running materialization with the same family, profile, tuple, and source snapshot must produce the same tree.
+
+## 144.2 New Upstream Versions
+
+When discovery finds a new Minecraft or API boundary:
+
+```text
+catalog delta
+  new branch key
+
+profile resolver
+  reuse an existing profile or report a missing boundary
+
+materializer
+  generate candidate branch
+
+verification
+  build recommended and exact initial tuples
+
+publication
+  push branch, then update registry through a pull request
+```
+
+When discovery finds only a new exact component build under an existing key, do not create another branch. Update the shard, verify the new tuple, and update the existing branch only if the recommended selection, profile data, or branch-local catalog must change.
+
+## 144.3 Existing Branch Updates
+
+Template family fixes propagate only to affected branches. The materializer computes a dry-run tree and refuses to overwrite branch-local changes outside declared generated paths. Each update includes:
+
+```text
+old and new template digests
+old and new profile digests
+source snapshot delta
+affected exact tuples
+changed generated files
+required evidence invalidation
+rollback commit
+```
+
+Historical branches remain available. Do not force-push. Correct them with signed commits and preserve prior evidence by tuple and template digest.
+
+## 144.4 Removals and Upstream Drift
+
+Automatic reconciliation is additive by default. It may add newly discovered versions and status changes, but it may not delete a branch, tuple, or evidence record automatically.
+
+Removal requires:
+
+1. Repeated confirmation from the primary source.
+2. Corroborating evidence when available.
+3. A supply-chain review when an existing artifact disappeared or changed.
+4. A migration or archived status for users with pinned projects.
+5. Explicit maintainer approval.
+
+Archived branches remain cloneable unless legal, security, or repository constraints require removal.
+
+---
+
+# 145. Complete Coverage Verification
+
+## 145.1 Verification Levels
+
+### Source verification
+
+Validate response schema, artifact coordinates, version normalization, duplicate handling, stable ordering, content digest, and source freshness.
+
+### Compatibility verification
+
+Prove that every tuple edge is published, documented, or explicitly inferred. Reject cycles, impossible ranges, conflicting Java requirements, unsupported wrappers, missing mappings, and missing metadata renderers.
+
+### Generation verification
+
+Generate both minimal recommended and maximum structured-customization fixtures. Confirm no unresolved placeholders, invalid paths, metadata loss, icon mapping errors, or nondeterministic files.
+
+### Build verification
+
+Run the profile command with the exact tuple. Resolve dependencies from declared repositories, compile, test, and package without changing generated files.
+
+### Artifact verification
+
+Inspect the JAR or plugin artifact for exact metadata location, entrypoint classes, manifest values, resource namespace, icon, mixin or access files, and version consistency.
+
+### Interface verification
+
+Generate the same tuple and ProjectSpec through library, CLI, web, API, ZIP, local filesystem, and GitHub tree adapters. Compare byte digests.
+
+## 145.2 Scalable Exact-Tuple CI
+
+Complete coverage may contain thousands of artifacts, so verification must be sharded, resumable, and content-addressed.
+
+Evidence cache key:
+
+```text
+source snapshot digest
+template commit and family digest
+profile digest
+exact compatibility tuple digest
+fixture digest
+JDK vendor, version, and architecture
+verification procedure version
+```
+
+An existing result may be reused only when every key component matches. A template or profile change invalidates every affected tuple. An unrelated documentation edit does not.
+
+Use these queues:
+
+```text
+fast pull request queue
+  changed adapters, schemas, profiles, recommended tuples, and boundary tuples
+
+new version queue
+  every newly discovered exact tuple
+
+invalidation queue
+  every tuple affected by a template, profile, JDK, wrapper, or source change
+
+scheduled audit queue
+  stale or randomly selected evidence plus complete catalog reconciliation
+
+recovery queue
+  transient network and repository failures with bounded retry state
+```
+
+The public repository may use GitHub-hosted runners within the approved budget policy. Large historic matrices should use reusable evidence and carefully sharded jobs. No untrusted public pull-request code runs on a private self-hosted runner.
+
+## 145.3 Failure Classification
+
+Classify failures before changing status:
+
+```text
+source unavailable
+artifact missing
+artifact mutated
+repository TLS or protocol failure
+unsupported host JDK
+profile mismatch
+template defect
+upstream component defect
+transient network failure
+test infrastructure failure
+```
+
+Transient infrastructure failures do not immediately mark a tuple broken. A deterministic template or compatibility failure does. Store the decisive command, exit code, sanitized error, affected tuple, and retry policy.
+
+## 145.4 Complete Support Acceptance Scenarios
+
+The complete coverage design is accepted only when all of these scenarios pass:
+
+1. Forge lists every Minecraft key present in official Forge Maven metadata, including intermediate historic releases and patch releases.
+2. Selecting `forge/1.20.1` exposes every exact official Forge artifact for `1.20.1`, not one hardcoded build.
+3. Two projects can use different exact Forge builds from `forge/1.20.1` and each resolves the correct profile and produces a reproducible build.
+4. A partial search such as `47.6` filters exact matching artifacts without converting the partial text into a fake coordinate.
+5. `forge/1.20.3` exists whenever official Forge metadata publishes at least one `1.20.3` artifact.
+6. NeoForge normalizes every official artifact to the correct Minecraft key across both versioning conventions.
+7. Fabric exposes every game version and matching loader, mappings, Loom, Fabric API, and language-adapter choice supported by the authoritative sources.
+8. Stable Fabric releases remain separate from snapshots, prereleases, and weekly snapshots.
+9. Paper exposes every Minecraft version returned by the Paper downloads service and every supported build channel.
+10. Spigot and Bukkit expose every exact API coordinate from their own authoritative artifacts without substituting one platform for another.
+11. Velocity, BungeeCord, and Sponge expose every API artifact and do not pretend their API lines are one-to-one Minecraft patch branches.
+12. Architectury and multiloader choices are the verified intersection of their target loaders, not an untested Cartesian product.
+13. Adding one new loader build under an existing Minecraft key updates the catalog without creating another branch.
+14. Adding one new Minecraft compatibility boundary creates and verifies a new branch before the registry recommends it.
+15. An upstream outage preserves the last-known-good snapshot and never deletes versions.
+16. An upstream artifact mutation quarantines the tuple and preserves the prior evidence record.
+17. Simple mode chooses a verified recommendation, while Advanced mode can select every cataloged alternative and a manual custom value.
+18. Every exact tuple labeled Verified has a matching build and artifact-inspection record keyed to the current template and profile.
+19. The public coverage report shows discovered, verified, experimental, blocked, withdrawn, deprecated, and broken entries without silent omissions.
+20. The first stable release is blocked until all current unexplained catalog gaps are resolved or explicitly classified.
