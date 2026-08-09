@@ -55,19 +55,21 @@ main
 bukkit/1.21.1
 paper/1.21.1
 spigot/1.21.1
+bungeecord/1.21.1
 
 forge/1.8.9
 forge/1.12.2
+forge/1.16.5
 forge/1.20.1
 
+fabric/1.20.1
 fabric/1.21.1
 fabric/26.1
 
 neoforge/1.21.1
 neoforge/26.1
 
-velocity/3.x
-bungeecord/1.21.1
+velocity/3.4
 ```
 
 The `main` branch should remain intentionally simple and primarily contain project documentation and repository metadata.
@@ -311,6 +313,7 @@ Examples:
 ```text
 forge/1.8.9
 forge/1.12.2
+forge/1.16.5
 forge/1.20.1
 
 neoforge/1.21.1
@@ -318,12 +321,54 @@ neoforge/26.1
 
 fabric/1.20.1
 fabric/1.21.1
+fabric/26.1
 
+bukkit/1.21.1
 paper/1.21.1
+spigot/1.21.1
 velocity/3.4
+bungeecord/1.21.1
 ```
 
 Lowercase platform names are preferred.
+
+## 7.4 Canonical Branch Matrix Rollout
+
+The owner approved immediate creation and verification of every concrete template branch already named by this plan. This sequencing decision supersedes the earlier architecture-first restriction against creating the branch matrix before the generator core.
+
+The canonical bootstrap matrix is exactly:
+
+```text
+bukkit/1.21.1
+paper/1.21.1
+spigot/1.21.1
+bungeecord/1.21.1
+velocity/3.4
+forge/1.8.9
+forge/1.12.2
+forge/1.16.5
+forge/1.20.1
+fabric/1.20.1
+fabric/1.21.1
+fabric/26.1
+neoforge/1.21.1
+neoforge/26.1
+```
+
+Aliases such as `velocity/3.x` and `velocity/latest-supported` do not become branches. They resolve through registry metadata to the concrete `velocity/3.4` branch until a separately verified successor replaces it.
+
+This immediate rollout does not waive template quality requirements. Every branch must contain a minimal compilable project, Gradle Wrapper, pinned dependency and plugin versions, correct Java toolchain declaration, loader or platform metadata, `.mcgen/template.json`, configuration schema, field mappings, branch documentation, and a deterministic verification record.
+
+Before publication, each branch must pass:
+
+1. JSON and metadata syntax validation.
+2. `git diff --check`.
+3. Gradle Wrapper validation and `./gradlew clean build --no-daemon` with the declared JDK.
+4. JAR inspection for required metadata and compiled entrypoint classes.
+5. A clean-worktree and tracked-file audit excluding build output and caches.
+6. A signed commit and remote branch verification.
+
+Modern branches become `verified` only after all gates pass. Forge `1.8.9`, `1.12.2`, and `1.16.5` become `legacy-verified` only after their pinned legacy toolchains build successfully. A branch that cannot pass remains local and unpublished until fixed; MCGen must not expose an empty or knowingly broken branch as canonical.
 
 ---
 
@@ -3379,6 +3424,7 @@ Tasks:
 - Add contributing guide.
 - Add security policy.
 - Define template branch convention.
+- Create and verify the fourteen-branch canonical bootstrap matrix defined in section 7.4.
 - Define manifest schema.
 - Define registry schema.
 - Create monorepo structure.
@@ -3445,7 +3491,7 @@ neoforge/1.21.1
 fabric/1.21.1
 forge/1.20.1
 paper/1.21.1
-velocity/latest-supported
+velocity/3.4
 ```
 
 Each must:
@@ -4022,26 +4068,27 @@ No interface should need to reimplement Minecraft template logic.
 
 # 117. First Development Priority
 
-Do **not** begin by creating dozens of Minecraft version branches.
+The original priority was to build the architecture before creating Minecraft version branches. The owner superseded that sequence on August 9, 2026 by approving the concrete fourteen-branch bootstrap matrix in section 7.4.
 
-Build the architecture first.
+Build and verify that bounded matrix first, then continue the architecture work. Do not expand beyond the approved matrix until the registry and generator core can enforce the same contracts automatically.
 
 Recommended order:
 
 ```text
-1. Versioned ProjectSpec schema, migrations, and configuration layers
-2. Template manifest, registry, field mappings, and capability schemas
-3. Generator core, structured renderers, file operations, validation, and asset pipeline
-4. One NeoForge template with complete metadata, build, icon, and raw-override coverage
-5. CLI parity for ProjectSpec, icons, overrides, validation, and previews
-6. Web Simple and Advanced customization workspace, including the Advanced raw file editor, with local ZIP generation
-7. Nginx and API production foundation
-8. Dedicated Cloudflare Tunnel and `mcgen.enviouse.com`
-9. GitHub App authorization and installation flow
-10. GitHub adapter with identical ProjectSpec and asset output
-11. Existing repo/branch workflow
-12. Public API
-13. Expand templates only after each template can satisfy the customization acceptance gate
+1. Fourteen-branch canonical template bootstrap and real toolchain verification
+2. Versioned ProjectSpec schema, migrations, and configuration layers
+3. Template manifest, registry, field mappings, and capability schemas
+4. Generator core, structured renderers, file operations, validation, and asset pipeline
+5. Complete metadata, build, icon, fixture, and raw-override coverage for the bootstrap templates
+6. CLI parity for ProjectSpec, icons, overrides, validation, and previews
+7. Web Simple and Advanced customization workspace, including the Advanced raw file editor, with local ZIP generation
+8. Nginx and API production foundation
+9. Dedicated Cloudflare Tunnel and `mcgen.enviouse.com`
+10. GitHub App authorization and installation flow
+11. GitHub adapter with identical ProjectSpec and asset output
+12. Existing repo/branch workflow
+13. Public API
+14. Expand templates only after each template can satisfy the customization acceptance gate
 ```
 
 The first template should prove that the same system can support:
