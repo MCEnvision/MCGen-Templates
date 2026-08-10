@@ -360,6 +360,7 @@ if (requireReleaseEvidence) {
     coverage.schemaVersion !== 1 ||
     coverage.packVersion !== manifest.packVersion ||
     coverage.sourceCommit !== manifest.sourceCommit ||
+    coverage.coverage?.catalogSnapshotId !== manifest.catalogSnapshot ||
     coverage.packCoveragePath !== "verification/phase5/coverage.json" ||
     coverage.packCoverageSha256 !==
       manifest.files.find(
