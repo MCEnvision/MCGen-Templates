@@ -6,7 +6,7 @@ The GitHub governance phase is complete. GitHub completion Phase 2 defines plann
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
-GitHub completion Phase 6 is in progress. The deterministic pack builder, source commit manifest, checksums, SPDX SBOM, archive readback, and draft only workflow evidence are implemented. No template pack release is published yet.
+GitHub completion Phase 6 implementation is merged and tagged as `phase-6-pack-publication`. The deterministic pack builder, source commit manifest, checksums, SPDX SBOM, archive readback, and draft only workflow evidence are implemented. The first immutable release, offline consumer verification, attestations, remote asset verification, and rollback testing remain owner gated. No template pack release is published yet.
 
 ## Repository Model
 
