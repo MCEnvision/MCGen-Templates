@@ -83,8 +83,16 @@ async function snapshotForge(args: readonly string[]): Promise<void> {
     throw new Error("forge source definition requires the mojang manifest url");
   }
   const [mojang, forge] = await Promise.all([
-    fetchResource(mojangUrl, definition.requestPolicy),
-    fetchResource(definition.primaryUrl, definition.requestPolicy),
+    fetchResource(
+      "mojang-version-manifest",
+      mojangUrl,
+      definition.requestPolicy,
+    ),
+    fetchResource(
+      "forge-maven-metadata",
+      definition.primaryUrl,
+      definition.requestPolicy,
+    ),
   ]);
   const snapshot = buildForgeSnapshot(mojang, forge, new Date().toISOString());
   const failures = documentFailures(

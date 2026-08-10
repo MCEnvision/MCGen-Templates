@@ -25,7 +25,7 @@ Use an unused repository-relative output path:
 npm run snapshot:forge -- --output sources/snapshots/forge/YYYY-MM-DD.json
 ```
 
-The command fetches both sources concurrently with a 30 second timeout and a 16 MiB response limit, rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
+The command fetches both sources concurrently with one 30 second timeout per source and a 16 MiB response limit. Each canonical source ID has a code-owned exact HTTPS URL policy and redirect limit. The fetcher validates the initial URL and every redirect target before requesting it, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, and redirect loops. It also rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
 
 ## Reconciliation Rules
 
