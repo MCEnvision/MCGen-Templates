@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:maintenance-plan:1",
+  "title": "MCGen deterministic maintenance reconciliation plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "planId",
+    "generatedAt",
+    "sourceFamily",
+    "event",
+    "baseline",
+    "candidate",
+    "action",
+    "requiresPullRequest",
+    "autoMerge",
+    "preserveLastKnownGood",
+    "affectedCoordinates",
+    "affectedTuples",
+    "invalidationScope",
+    "retry",
+    "recovery",
+    "reasons"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:maintenance-plan:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "maintenance-plan" },
+    "planId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sourceFamily": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "event": { "$ref": "#/$defs/event" },
+    "baseline": { "$ref": "#/$defs/snapshot" },
+    "candidate": {
+      "anyOf": [{ "$ref": "#/$defs/snapshot" }, { "type": "null" }]
+    },
+    "action": {
+      "enum": ["propose", "review", "retry", "quarantine", "preserve"]
+    },
+    "requiresPullRequest": { "type": "boolean" },
+    "autoMerge": { "const": false },
+    "preserveLastKnownGood": { "type": "boolean" },
+    "affectedCoordinates": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "affectedTuples": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "invalidationScope": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "source-snapshot",
+          "catalog",
+          "profiles",
+          "templates",
+          "fixtures",
+          "tuple-evidence",
+          "release"
+        ]
+      }
+    },
+    "retry": { "$ref": "#/$defs/retry" },
+    "recovery": { "$ref": "#/$defs/recovery" },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "attempt", "maxAttempts"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "source-success",
+            "compatibility-boundary",
+            "source-outage",
+            "empty-response",
+            "malformed-response",
+            "bulk-removal",
+            "artifact-mutation",
+            "template-failure",
+            "transient-failure"
+          ]
+        },
+        "attempt": { "type": "integer", "minimum": 0 },
+        "maxAttempts": { "type": "integer", "minimum": 0, "maximum": 10 }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "digest"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    },
+    "retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eligible", "attempt", "maxAttempts", "backoffSeconds"],
+      "properties": {
+        "eligible": { "type": "boolean" },
+        "attempt": { "type": "integer", "minimum": 0 },
+        "maxAttempts": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "backoffSeconds": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 300 }
+        }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "steps"],
+      "properties": {
+        "status": {
+          "enum": [
+            "not-needed",
+            "retry-scheduled",
+            "preserved",
+            "quarantined",
+            "review-required"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

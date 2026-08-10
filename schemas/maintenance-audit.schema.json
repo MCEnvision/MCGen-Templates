@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:maintenance-audit:1",
+  "title": "MCGen repository completion maintenance audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "generatedAt",
+    "status",
+    "requirements",
+    "blockers",
+    "digest"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:maintenance-audit:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "maintenance-audit" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["passed", "blocked"] },
+    "requirements": {
+      "type": "array",
+      "minItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "passed", "detail"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "passed": { "type": "boolean" },
+          "detail": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+  }
+}

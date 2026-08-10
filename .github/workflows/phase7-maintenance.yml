@@ -1,0 +1,111 @@
+name: phase 7 maintenance
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase7-maintenance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  maintenance:
+    name: monitor and audit maintenance contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: checkout main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: setup node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22.13.0"
+          cache: npm
+
+      - name: install
+        run: npm ci
+
+      - name: verify repository
+        run: npm run verify
+
+      - name: create bounded monitor fixtures
+        run: |
+          mkdir -p verification/phase7/ci
+          node --input-type=module <<'NODE'
+          import { writeFile } from "node:fs/promises";
+          const digest = (character) => character.repeat(64);
+          const base = {
+            sourceFamily: "forge",
+            adapterId: "forge-maven",
+            generatedAt: "2000-01-01T00:00:00.000Z",
+            baseline: { id: "forge.2026-08-09", digest: digest("a") },
+            candidate: { id: "forge.2026-08-10", digest: digest("b") },
+            outcome: "additions",
+            addedCoordinates: ["net.minecraftforge:forge:1.20.1-47.3.0"]
+          };
+          await writeFile("verification/phase7/ci/monitor-input.json", JSON.stringify(base));
+          await writeFile("verification/phase7/ci/failure-input.json", JSON.stringify({
+            ...base,
+            candidate: null,
+            outcome: "malformed-response",
+            addedCoordinates: [],
+            reasons: ["upstream response was malformed"]
+          }));
+          await writeFile("verification/phase7/ci/maintenance-input.json", JSON.stringify({
+            sourceFamily: "forge",
+            generatedAt: "2000-01-01T00:00:00.000Z",
+            baseline: base.baseline,
+            candidate: base.candidate,
+            reconciliation: { addedCoordinates: base.addedCoordinates, removedCoordinates: [], changedSources: [] },
+            event: { kind: "source-success", attempt: 0, maxAttempts: 3 },
+            affectedTuples: []
+          }));
+          const audit = Object.fromEntries([
+            "governance", "planning", "source-adapters", "catalog-coverage", "forge-toolchain",
+            "neoforge-fabric", "plugin-proxy-catalogs", "architectury-multiloader", "customization-contracts",
+            "asset-version-overrides", "tuple-evidence", "deterministic-pack", "immutable-release",
+            "maintenance-automation", "failure-recovery", "security-controls", "required-checks",
+            "tracked-file-hygiene", "documentation-wiki", "deferred-ownership"
+          ].map((id) => [id, { passed: id !== "tuple-evidence", detail: id !== "tuple-evidence" ? "verified by current repository gate" : "remaining exact tuple boundaries are explicitly blocked" }]));
+          await writeFile("verification/phase7/ci/audit-input.json", JSON.stringify(audit));
+          NODE
+
+      - name: build monitor and quarantine evidence
+        run: |
+          node dist/cli.js phase7 monitor --input verification/phase7/ci/monitor-input.json --output verification/phase7/ci/monitor-run.json
+          node dist/cli.js validate verification/phase7/ci/monitor-run.json
+          node dist/cli.js phase7 monitor --input verification/phase7/ci/failure-input.json --output verification/phase7/ci/failure-monitor-run.json
+          node dist/cli.js phase7 quarantine --input verification/phase7/ci/failure-monitor-run.json --output verification/phase7/ci/failure-quarantine-record.json
+          node dist/cli.js validate verification/phase7/ci/failure-quarantine-record.json
+
+      - name: build maintenance plan evidence
+        run: |
+          node dist/cli.js phase7 plan --input verification/phase7/ci/maintenance-input.json --output verification/phase7/ci/maintenance-plan.json
+          node dist/cli.js validate verification/phase7/ci/maintenance-plan.json
+
+      - name: run recovery simulations
+        run: |
+          for scenario in new-component new-boundary outage empty-response bulk-removal artifact-mutation transient-build template-failure historical-rebuild; do
+            node dist/cli.js phase7 recovery --scenario "$scenario" --output "verification/phase7/ci/recovery-$scenario.json"
+          done
+
+      - name: write repository audit
+        run: |
+          node dist/cli.js phase7 audit --input verification/phase7/ci/audit-input.json --generated-at 2000-01-01T00:00:00.000Z --output verification/phase7/ci/repository-audit.json
+          node --input-type=module -e 'import { readFile } from "node:fs/promises"; const a=JSON.parse(await readFile("verification/phase7/ci/repository-audit.json", "utf8")); if(a.status !== "blocked" || a.blockers.length === 0) process.exit(1);'
+
+      - name: upload maintenance evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase7-maintenance-${{ github.run_id }}
+          path: verification/phase7/ci
+          if-no-files-found: error
+          retention-days: 7

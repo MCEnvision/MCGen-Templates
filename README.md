@@ -8,6 +8,8 @@ MCGen will provide reusable Minecraft project generation for mods, plugins, prox
 
 GitHub completion Phase 6 is complete. The implementation is merged and tagged as `phase-6-pack-publication`, and the immutable prerelease [`v1.0.0-beta.1`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.1) is published from main commit `99c6f8d5772bde176ac6358214933efbf8286199`. The release includes deterministic archive construction, checksums, source provenance, SPDX SBOM, coverage, verification, rollback evidence, and supported attestations. See the [phase 6 release verification record](docs/verification/phase6-release.md).
 
+GitHub completion Phase 7 is in progress. It adds deterministic upstream monitoring, non destructive reconciliation, bounded retry and quarantine records, recovery simulations, and a twenty requirement repository completion audit. See the [phase 7 maintenance verification record](docs/verification/phase7-maintenance.md).
+
 ## Repository Model
 
 The `main` branch is the canonical release source. Its initial bootstrap commit contains only this README and the [active project plan](docs/general/plan.md).
@@ -95,6 +97,10 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 - [Phase 5 build and artifact contracts](docs/verification/phase5-build-contracts.md)
 - [Pack construction](docs/release/pack-construction.md)
 - [Phase 6 release verification](docs/verification/phase6-release.md)
+- [Phase 7 maintenance verification](docs/verification/phase7-maintenance.md)
+- [Upstream monitoring](docs/operations/upstream-monitoring.md)
+- [Failure recovery](docs/operations/failure-recovery.md)
+- [Repository completion audit](docs/operations/repository-audit.md)
 - [GitHub governance verification](docs/verification/github-foundation.md)
 - [GitHub planning verification](docs/verification/github-planning.md)
 - [Security policy](.github/SECURITY.md)
@@ -103,6 +109,6 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 
 ## Current Status
 
-The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contracts are merged and tagged. Phase 5 is complete with schema validated reviewed execution inputs, bounded batch execution, queue consumers, an explicit audit report, and two verified Spigot boundary tuples. Phase 6 is complete with the immutable prerelease `v1.0.0-beta.1`, deterministic pack evidence, remote asset verification, offline verification, attestations, and rollback evidence. The remaining twelve profile and descriptor boundaries retain explicit blockers, so no unverified catalog component is advertised as a build verified project tuple.
+The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contracts are merged and tagged. Phase 5 is complete with schema validated reviewed execution inputs, bounded batch execution, queue consumers, an explicit audit report, and two verified Spigot boundary tuples. Phase 6 is complete with the immutable prerelease `v1.0.0-beta.1`, deterministic pack evidence, remote asset verification, offline verification, attestations, and rollback evidence. Phase 7 is in progress with monitor, quarantine, maintenance plan, recovery, and repository audit contracts. The remaining twelve profile and descriptor boundaries retain explicit blockers, so no unverified catalog component is advertised as a build verified project tuple.
 
 The repository license is not selected yet. No third-party source or template content may be imported until its license and redistribution obligations are reviewed. Snapshot discovery does not claim that any generated Forge project or exact tuple is verified.

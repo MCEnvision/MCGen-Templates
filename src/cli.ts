@@ -47,6 +47,20 @@ import { validateEvidenceRecord } from "./evidence.js";
 import { buildQueuePlan, type QueueEvent } from "./phase5-queue.js";
 import { buildCoverageSummary } from "./coverage-summary.js";
 import { buildPhase5Audit } from "./phase5-audit.js";
+import {
+  buildMonitorRun,
+  buildQuarantineRecord,
+  type MonitorObservation,
+  type MonitorRun,
+} from "./phase7-monitor.js";
+import {
+  buildMaintenanceAudit,
+  buildMaintenancePlan,
+  repositoryAuditRequirementIds,
+  simulateRecovery,
+  type RecoveryScenario,
+  type RepositoryAuditRequirementId,
+} from "./phase7-maintenance.js";
 import { readZipEntries } from "./artifact-inspector.js";
 import {
   buildPack,
@@ -228,6 +242,76 @@ function requirePhase6OutputDirectory(path: string): {
   return { absolute, relative: repositoryRelative };
 }
 
+function requirePhase7DocumentPath(path: string): string {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("verification/phase7/") ||
+    !repositoryRelative.endsWith(".json")
+  ) {
+    throw new Error(
+      "phase 7 output must be a json file under verification/phase7",
+    );
+  }
+  return absolute;
+}
+
+async function requireSafePhase7InputPath(path: string): Promise<string> {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  let current = repositoryRoot;
+  const parts = repositoryRelative.split("/").filter(Boolean);
+  for (const [index, part] of parts.entries()) {
+    current = resolve(current, part);
+    const metadata = await lstat(current);
+    if (metadata.isSymbolicLink()) {
+      throw new Error(`phase 7 input cannot contain symlinks: ${path}`);
+    }
+    if (index < parts.length - 1 && !metadata.isDirectory()) {
+      throw new Error(`phase 7 input path is not a directory: ${path}`);
+    }
+    if (index === parts.length - 1 && !metadata.isFile()) {
+      throw new Error(`phase 7 input path is not a regular file: ${path}`);
+    }
+  }
+  return absolute;
+}
+
+async function requireSafePhase7OutputPath(path: string): Promise<string> {
+  const absolute = requirePhase7DocumentPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  let current = repositoryRoot;
+  const parts = repositoryRelative.split("/").filter(Boolean);
+  for (const [index, part] of parts.entries()) {
+    current = resolve(current, part);
+    try {
+      const metadata = await lstat(current);
+      if (metadata.isSymbolicLink()) {
+        throw new Error(`phase 7 output cannot contain symlinks: ${path}`);
+      }
+      if (index < parts.length - 1 && !metadata.isDirectory()) {
+        throw new Error(`phase 7 output path is not a directory: ${path}`);
+      }
+      if (index === parts.length - 1 && !metadata.isFile()) {
+        throw new Error(`phase 7 output path is not a regular file: ${path}`);
+      }
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as NodeJS.ErrnoException).code === "ENOENT"
+      ) {
+        if (index < parts.length - 1) {
+          await mkdir(current, { recursive: false });
+        }
+        continue;
+      }
+      throw error;
+    }
+  }
+  return absolute;
+}
+
 async function requireSafePhase6OutputParent(path: string): Promise<void> {
   const parent = dirname(path);
   const repositoryRelative = relative(repositoryRoot, parent);
@@ -399,6 +483,29 @@ async function writePhase5Document(
     throw new Error(
       `phase 5 document validation failed\n${failures.join("\n")}`,
     );
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, canonicalJson(document), {
+    encoding: "utf8",
+    flag: "wx",
+  });
+}
+
+async function writePhase7Document(
+  path: string,
+  document: unknown,
+): Promise<void> {
+  const outputPath = await requireSafePhase7OutputPath(path);
+  await requireUnusedPath(outputPath);
+  const failures = documentFailures(
+    await createSchemaRegistry(),
+    outputPath,
+    document,
+  );
+  if (failures.length) {
+    throw new Error(
+      `phase 7 document validation failed\n${failures.join("\n")}`,
+    );
+  }
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, canonicalJson(document), {
     encoding: "utf8",
@@ -720,6 +827,107 @@ async function phase5ExecuteReviewed(args: readonly string[]): Promise<void> {
     ]);
   }
   process.stdout.write(`executed ${inputs.length} reviewed phase 5 tuples\n`);
+}
+
+async function phase7Monitor(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 monitor requires --input and --output");
+  }
+  const run = buildMonitorRun(
+    JSON.parse(
+      await readFile(await requireSafePhase7InputPath(input), "utf8"),
+    ) as MonitorObservation,
+  );
+  await writePhase7Document(output, run);
+  process.stdout.write(`wrote phase 7 monitor run ${run.runId}\n`);
+}
+
+async function phase7Quarantine(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 quarantine requires --input and --output");
+  }
+  const run = JSON.parse(
+    await readFile(await requireSafePhase7InputPath(input), "utf8"),
+  ) as MonitorRun;
+  const validation = validateWithSchema(await createSchemaRegistry(), run);
+  if (!validation.valid) {
+    throw new Error(
+      `phase 7 monitor input is invalid\n${validation.errors
+        .map((error) => `${error.instancePath} ${error.message ?? "invalid"}`)
+        .join("\n")}`,
+    );
+  }
+  const record = buildQuarantineRecord(run);
+  await writePhase7Document(output, record);
+  process.stdout.write(
+    `wrote phase 7 quarantine record ${record.quarantineId}\n`,
+  );
+}
+
+async function phase7Plan(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 plan requires --input and --output");
+  }
+  const plan = buildMaintenancePlan(
+    requireRecord(
+      JSON.parse(
+        await readFile(await requireSafePhase7InputPath(input), "utf8"),
+      ),
+      "phase 7 plan input",
+    ) as unknown as Parameters<typeof buildMaintenancePlan>[0],
+  );
+  await writePhase7Document(output, plan);
+  process.stdout.write(`wrote phase 7 maintenance plan ${plan.planId}\n`);
+}
+
+async function phase7Audit(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 audit requires --input and --output");
+  }
+  const document = requireRecord(
+    JSON.parse(await readFile(await requireSafePhase7InputPath(input), "utf8")),
+    "phase 7 audit input",
+  );
+  const requirements = Object.fromEntries(
+    repositoryAuditRequirementIds.map((id) => {
+      const value = requireRecord(document[id], `phase 7 requirement ${id}`);
+      if (
+        typeof value["passed"] !== "boolean" ||
+        typeof value["detail"] !== "string"
+      ) {
+        throw new Error(`phase 7 requirement ${id} is incomplete`);
+      }
+      return [id, { passed: value["passed"], detail: value["detail"] }];
+    }),
+  ) as Record<
+    RepositoryAuditRequirementId,
+    { passed: boolean; detail: string }
+  >;
+  const audit = buildMaintenanceAudit({
+    generatedAt: option(args, "--generated-at") ?? new Date().toISOString(),
+    requirements,
+  });
+  await writePhase7Document(output, audit);
+  process.stdout.write(`wrote phase 7 repository audit ${audit.digest}\n`);
+}
+
+async function phase7Recovery(args: readonly string[]): Promise<void> {
+  const scenario = option(args, "--scenario") as RecoveryScenario | undefined;
+  const output = option(args, "--output");
+  if (!scenario || !output) {
+    throw new Error("phase7 recovery requires --scenario and --output");
+  }
+  const report = simulateRecovery(scenario);
+  await writePhase7Document(output, report);
+  process.stdout.write(`wrote phase 7 recovery report ${report.digest}\n`);
 }
 
 async function validate(args: readonly string[]): Promise<void> {
@@ -1226,8 +1434,28 @@ async function main(): Promise<void> {
     await phase5ExecuteReviewed(args);
     return;
   }
+  if (command === "phase7" && subject === "monitor") {
+    await phase7Monitor(args);
+    return;
+  }
+  if (command === "phase7" && subject === "quarantine") {
+    await phase7Quarantine(args);
+    return;
+  }
+  if (command === "phase7" && subject === "plan") {
+    await phase7Plan(args);
+    return;
+  }
+  if (command === "phase7" && subject === "audit") {
+    await phase7Audit(args);
+    return;
+  }
+  if (command === "phase7" && subject === "recovery") {
+    await phase7Recovery(args);
+    return;
+  }
   throw new Error(
-    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
+    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase7 monitor --input <path> --output <path>, or phase7 quarantine --input <monitor run> --output <path>, or phase7 plan --input <path> --output <path>, or phase7 audit --input <path> --output <path>, or phase7 recovery --scenario <scenario> --output <path>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
   );
 }
 

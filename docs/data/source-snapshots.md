@@ -55,3 +55,5 @@ The command uses at most eight concurrent requests with one 30 second timeout pe
 Snapshots are immutable evidence. A later capture is additive by default. It may not automatically delete an earlier entry or replace a prior digest. Unexpected removals, new rejected values, response mutations, parser failures, empty responses, and large count changes require review before catalog reconciliation.
 
 The committed snapshot currently proves source discovery only. ForgeGradle, Gradle, Java, mappings, recommendation policy, profile resolution, template generation, compilation, and artifact inspection remain separate evidence gates.
+
+Phase 7 monitoring consumes these immutable snapshots as the baseline. Outages, empty responses, malformed responses, unexpected removals, and source mutations produce maintenance review or quarantine evidence as appropriate and never overwrite the last known good capture.

@@ -4,6 +4,8 @@
 
 Phase 6 is complete. The implementation is merged and tagged as `phase-6-pack-publication`, and the first immutable semantic pack release [`v1.0.0-beta.1`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.1) is published as a prerelease from main commit `99c6f8d5772bde176ac6358214933efbf8286199`. The [phase 6 release verification record](../verification/phase6-release.md) contains the exact asset list, digests, coverage binding, offline verification, attestations, and rollback evidence.
 
+Phase 7 maintenance monitoring is in progress. Published releases remain immutable while monitor runs classify upstream additions, removals, mutations, and outages. The [phase 7 maintenance verification record](../verification/phase7-maintenance.md) defines the review and quarantine evidence required before a corrective release.
+
 ## Release Identity
 
 Each release records:
