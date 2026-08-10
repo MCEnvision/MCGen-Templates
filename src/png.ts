@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { inflateSync } from "node:zlib";
 
 export type PngLimits = {
   maxBytes: number;
@@ -75,6 +76,7 @@ export function validatePng(
   let height = 0;
   let bitDepth = 0;
   let colorType = 0;
+  const idat: Uint8Array[] = [];
   while (offset + 12 <= input.length) {
     const length = readUint32(input, offset);
     const end = offset + 12 + length;
@@ -117,12 +119,12 @@ export function validatePng(
       };
       if (!validDepths[colorType]?.includes(bitDepth))
         throw new Error("png bit depth is invalid");
-      if (![0, 1].includes(interlace))
-        throw new Error("png interlace method is invalid");
+      if (interlace !== 0) throw new Error("png interlace method is invalid");
       state = "header";
     } else if (type === "IDAT") {
       if (state !== "header" && state !== "data")
         throw new Error("png idat is out of order");
+      idat.push(data);
       state = "data";
     } else if (type === "IEND") {
       if (length !== 0 || state !== "data")
@@ -137,6 +139,22 @@ export function validatePng(
     if (state === "end") break;
   }
   if (state !== "end") throw new Error("png is incomplete");
+  if (idat.length === 0) throw new Error("png has no image data");
+  let decoded: Uint8Array;
+  try {
+    decoded = new Uint8Array(inflateSync(Buffer.concat(idat)));
+  } catch {
+    throw new Error("png image data is not decodable");
+  }
+  const channels = ({ 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 } as Record<number, number>)[
+    colorType
+  ];
+  if (channels === undefined) throw new Error("png color type is invalid");
+  const bitsPerPixel = channels * bitDepth;
+  const rowBytes = Math.ceil((width * bitsPerPixel) / 8);
+  const expectedBytes = (rowBytes + 1) * height;
+  if (decoded.byteLength !== expectedBytes)
+    throw new Error("png image data length is invalid");
   return {
     bytes: input.byteLength,
     width,

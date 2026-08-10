@@ -1053,6 +1053,23 @@ async function phase4IntegrityFailures(
         }
       }
       if (customization && catalogFieldIds.size > 0) {
+        const renderTargets = objects(item.document["renderTargets"]);
+        const mappedFieldIds = new Set(
+          renderTargets.flatMap((target) =>
+            objects(target["fieldMappings"])
+              .map((mapping) => mapping["fieldId"])
+              .filter((id): id is string => typeof id === "string"),
+          ),
+        );
+        const hasWildcard = mappedFieldIds.has("*");
+        const unmapped = hasWildcard
+          ? []
+          : [...catalogFieldIds].filter((id) => !mappedFieldIds.has(id));
+        if (unmapped.length) {
+          failures.push(
+            `${item.path} metadata render targets omit catalog fields ${unmapped.join(", ")}`,
+          );
+        }
         for (const mode of ["simple", "advanced"] as const) {
           const modeDocument = isObject(customization[mode])
             ? customization[mode]
@@ -1060,6 +1077,14 @@ async function phase4IntegrityFailures(
           const modeFields = new Set(
             modeDocument ? stringArray(modeDocument["fields"]) : [],
           );
+          const unknown = [...modeFields].filter(
+            (id) => !catalogFieldIds.has(id),
+          );
+          if (unknown.length) {
+            failures.push(
+              `${item.path} ${mode} customization references fields outside its catalogs ${unknown.join(", ")}`,
+            );
+          }
           const missing = [...catalogFieldIds].filter((id) => {
             const catalog = catalogPaths
               .map((catalogPath) =>

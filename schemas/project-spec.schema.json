@@ -92,6 +92,17 @@
           "maxLength": 128,
           "pattern": "^[0-9A-Za-z][0-9A-Za-z.+_-]*$"
         },
+        "groupId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "artifactId": {
+          "type": "string",
+          "$comment": "The published artifact identifier.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "archiveName": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "classifier": { "type": "string", "maxLength": 128 },
+        "appendix": { "type": "string", "maxLength": 128 },
+        "extension": { "type": "string", "minLength": 1, "maxLength": 32 },
         "description": { "type": "string", "maxLength": 4096 },
         "authors": {
           "type": "array",
@@ -112,6 +123,25 @@
       "properties": {
         "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
         "catalogKey": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "java": { "type": "integer", "minimum": 6, "maximum": 99 },
+        "javaLanguage": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 99
+        },
+        "loader": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "apiVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "bootstrapper": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "environment": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "mappings": { "type": "string", "minLength": 1, "maxLength": 256 },
         "components": {
           "type": "object",
           "minProperties": 1,
@@ -130,6 +160,11 @@
       "properties": {
         "system": { "enum": ["gradle", "maven"] },
         "dsl": { "enum": ["groovy", "kotlin", "xml"] },
+        "javaLanguage": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 99
+        },
         "wrapper": { "type": "string", "minLength": 1, "maxLength": 128 },
         "plugins": { "type": "array", "items": { "$ref": "#/$defs/plugin" } },
         "properties": {

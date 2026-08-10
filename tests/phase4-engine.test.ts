@@ -15,7 +15,7 @@ import {
   switchProjectMode,
   type ProjectSpec,
 } from "../src/project-spec.js";
-import { renderTemplate } from "../src/template-renderer.js";
+import { renderDescriptor, renderTemplate } from "../src/template-renderer.js";
 
 const png = new Uint8Array(
   Buffer.from(
@@ -226,6 +226,51 @@ describe("phase 4 engine contracts", () => {
       new TextDecoder().decode(result.files.get("gradle.properties")),
     ).toBe("version=1.0-beta.1\n");
     expect(result.files.get("icon.png")).toEqual(png);
+  });
+
+  it("loads a descriptor and renders metadata without raw interpolation", () => {
+    const result = renderDescriptor(
+      "templates/fabric/descriptor.json",
+      {
+        ...spec,
+        assets: [
+          {
+            $schema: "urn:mcgen:schema:asset-png:1",
+            schemaVersion: 1,
+            id: "icon",
+            mediaType: "image/png",
+            sha256: validatePng(png).sha256,
+            bytes: png.length,
+            width: 1,
+            height: 1,
+            path: "uploaded/icon.png",
+            alpha: true,
+          },
+        ],
+        project: {
+          ...spec.project,
+          description: 'quoted "description"',
+          authors: ["EnVy", "Second Author"],
+        },
+      },
+      undefined,
+      new Map([["icon", png]]),
+    );
+    const metadata = new TextDecoder().decode(
+      result.files.get("src/main/resources/fabric.mod.json"),
+    );
+    let parsed: unknown;
+    expect(() => {
+      parsed = JSON.parse(metadata) as unknown;
+    }).not.toThrow();
+    expect(parsed).toMatchObject({
+      id: "example-mod",
+      version: "1.0-beta.1",
+    });
+    const build = new TextDecoder().decode(result.files.get("build.gradle"));
+    expect(build).toContain("JavaLanguageVersion.of(21)");
+    expect(build).not.toContain("undefined");
+    expect(result.files.get("src/main/resources/assets/icon.png")).toEqual(png);
   });
 
   it("evaluates only the bounded condition language", () => {

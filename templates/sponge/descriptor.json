@@ -116,7 +116,7 @@
     },
     {
       "source": "templates/sponge/sponge-plugin.json.tmpl",
-      "destination": "src/main/resources/sponge-plugin.json",
+      "destination": "src/main/resources/sponge_plugins.json",
       "renderer": "json",
       "rawOverride": "advanced-only"
     }

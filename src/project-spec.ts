@@ -14,6 +14,12 @@ export type ProjectSpec = {
     package: string;
     mainClass: string;
     version: string;
+    groupId?: string;
+    artifactId?: string;
+    archiveName?: string;
+    classifier?: string;
+    appendix?: string;
+    extension?: string;
     description?: string;
     authors?: string[];
     website?: string;
@@ -23,6 +29,13 @@ export type ProjectSpec = {
     id: string;
     catalogKey: string;
     components: Record<string, string>;
+    java?: number;
+    javaLanguage?: number;
+    loader?: string;
+    apiVersion?: string;
+    bootstrapper?: string;
+    environment?: string;
+    mappings?: string;
   };
   metadata: Record<string, unknown>;
   build: Record<string, unknown>;
@@ -198,6 +211,13 @@ export function resolveProjectSpec(
   if (failures.length)
     throw new Error(`project spec validation failed\n${failures.join("\n")}`);
   const resolved = structuredClone(spec);
+  resolved.project.groupId ??= resolved.project.package;
+  resolved.project.artifactId ??= resolved.project.id;
+  resolved.project.archiveName ??= resolved.project.artifactId;
+  resolved.project.extension ??= "jar";
+  resolved.platform.java ??= resolved.platform.javaLanguage ?? 21;
+  resolved.platform.javaLanguage ??= resolved.platform.java;
+  resolved.build["javaLanguage"] ??= resolved.platform.javaLanguage;
   return {
     spec: resolved,
     digest: sha256(canonicalJson(resolved)),

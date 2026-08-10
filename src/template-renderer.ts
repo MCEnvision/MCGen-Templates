@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { isAbsolute, relative, resolve } from "node:path";
 import { TextEncoder } from "node:util";
 import { canonicalJson } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
@@ -8,6 +10,10 @@ import {
   type FileTree,
 } from "./file-operations.js";
 import type { ProjectSpec } from "./project-spec.js";
+import { resolveProjectSpec } from "./project-spec.js";
+import { validatePng } from "./png.js";
+import { repositoryRoot } from "./schema-registry.js";
+import { evaluateCondition } from "./conditions.js";
 
 export type TemplateFile = {
   path: string;
@@ -42,6 +48,40 @@ export type RenderResult = {
   files: Map<string, Uint8Array>;
   treeDigest: string;
   warnings: string[];
+};
+
+type DescriptorFile = {
+  source: string;
+  destination: string;
+  renderer: string;
+  includeWhen?: string;
+};
+
+type DescriptorMapping = {
+  fieldId: string;
+  path: string;
+  format: string;
+};
+
+type DescriptorTarget = {
+  id: string;
+  path: string;
+  format: MetadataTarget["format"];
+  fieldMappings: DescriptorMapping[];
+  required: boolean;
+};
+
+type TemplateDescriptor = {
+  id: string;
+  files: DescriptorFile[];
+  renderTargets: DescriptorTarget[];
+  assetSlots?: {
+    id: string;
+    maxBytes: number;
+    maxWidth: number;
+    maxHeight: number;
+    destinations: string[];
+  }[];
 };
 
 const encoder = new TextEncoder();
@@ -212,6 +252,209 @@ function interpolateValue(value: unknown, spec: ProjectSpec): unknown {
     );
   }
   return value;
+}
+
+function fieldValue(spec: ProjectSpec, fieldId: string): unknown {
+  const project = spec.project;
+  const platform = spec.platform;
+  const build = spec.build;
+  const components = spec.platform.components;
+  const common: Record<string, unknown> = {
+    "project-name": project.name,
+    "project-id": project.id,
+    "project-version": project.version,
+    "main-class": project.mainClass,
+    description: project.description ?? "",
+    authors: project.authors ?? [],
+    website: project.website ?? "",
+    license: project.license ?? "All Rights Reserved",
+    package: project.package,
+    "group-id": project.groupId ?? project.package,
+    "artifact-id": project.artifactId ?? project.id,
+    "archive-name": project.archiveName ?? project.id,
+    classifier: project.classifier ?? "",
+    appendix: project.appendix ?? "",
+    extension: project.extension ?? "jar",
+    "java-runtime":
+      platform.java ?? platform.javaLanguage ?? components["java"],
+    "java-language":
+      build["javaLanguage"] ??
+      platform.javaLanguage ??
+      platform.java ??
+      components["java"],
+    "build-dsl": build["dsl"] ?? "groovy",
+    "wrapper-version": build["wrapper"] ?? "",
+    "gradle-properties": build["properties"] ?? [],
+    "jvm-arguments": build["jvmArguments"] ?? [],
+    dependencies: spec.dependencies,
+    repositories: spec.repositories,
+    "source-sets": build["sourceSets"] ?? [],
+    tasks: build["tasks"] ?? [],
+    runs: build["runs"] ?? [],
+    publishing: build["publishing"] ?? spec.publishing,
+    icon: spec.assets[0] ?? null,
+    "metadata-extensions": spec.metadata,
+    "raw-file-operations": spec.fileOperations,
+    loader: platform.loader ?? components["loader"],
+    "loader-version":
+      components["loader"] ?? components["forge"] ?? components["neoforge"],
+    "api-version": platform.apiVersion ?? components["api"],
+    apiVersion: platform.apiVersion ?? components["api"],
+    bootstrapper: platform.bootstrapper ?? components["bootstrapper"],
+    environment: platform.environment ?? components["environment"] ?? "*",
+    mappings: platform.mappings ?? components["mappings"],
+  };
+  return common[fieldId] ?? spec.metadata[fieldId] ?? spec.extensions[fieldId];
+}
+
+function setPath(
+  target: Record<string, unknown>,
+  expression: string,
+  value: unknown,
+): void {
+  const segments = expression
+    .replace(/\[([0-9]+)\]/g, ".$1")
+    .split(".")
+    .filter(Boolean);
+  if (segments.length === 0) throw new Error("metadata mapping path is empty");
+  let current: Record<string, unknown> | unknown[] = target;
+  segments.forEach((segment, index) => {
+    const last = index === segments.length - 1;
+    if (Array.isArray(current)) {
+      const position = Number(segment);
+      if (!Number.isSafeInteger(position) || position < 0)
+        throw new Error("metadata mapping array index is invalid");
+      if (last) current[position] = value;
+      else {
+        const next: Record<string, unknown> = {};
+        current[position] = next;
+        current = next;
+      }
+      return;
+    }
+    if (last) {
+      current[segment] = value;
+      return;
+    }
+    const nextSegment = segments[index + 1] ?? "";
+    const next: Record<string, unknown> | unknown[] = /^\d+$/u.test(nextSegment)
+      ? []
+      : {};
+    current[segment] = next;
+    current = next;
+  });
+}
+
+function advancedFieldValues(spec: ProjectSpec): Record<string, unknown> {
+  return {
+    ...spec.metadata,
+    ...spec.extensions,
+    platform: spec.platform,
+    build: spec.build,
+    dependencies: spec.dependencies,
+    repositories: spec.repositories,
+    sourceLayout: spec.sourceLayout,
+    features: spec.features,
+    publishing: spec.publishing,
+    repository: spec.repository,
+    targetOverrides: spec.targetOverrides,
+  };
+}
+
+function descriptorMetadata(
+  target: DescriptorTarget,
+  spec: ProjectSpec,
+): unknown {
+  const output: Record<string, unknown> = {};
+  for (const mapping of target.fieldMappings) {
+    const value =
+      mapping.fieldId === "*"
+        ? advancedFieldValues(spec)
+        : fieldValue(spec, mapping.fieldId);
+    if (value !== undefined) setPath(output, mapping.path, value);
+  }
+  return output;
+}
+
+function includeDescriptorFile(
+  file: DescriptorFile,
+  spec: ProjectSpec,
+): boolean {
+  if (!file.includeWhen || file.includeWhen === "true") return true;
+  return evaluateCondition(file.includeWhen, {
+    fields: spec.platform.components,
+    features: new Set(spec.features),
+  });
+}
+
+function safeRepositoryPath(root: string, candidate: string): string {
+  if (isAbsolute(candidate))
+    throw new Error(`descriptor path must be relative ${candidate}`);
+  const resolved = resolve(root, candidate);
+  const outside = relative(root, resolved);
+  if (outside === ".." || outside.startsWith("../"))
+    throw new Error(`descriptor path escapes repository ${candidate}`);
+  return resolved;
+}
+
+function descriptorFileContent(root: string, source: string): Uint8Array {
+  return new Uint8Array(readFileSync(safeRepositoryPath(root, source)));
+}
+
+export function renderDescriptor(
+  descriptorPath: string,
+  spec: ProjectSpec,
+  root = repositoryRoot,
+  assetBytes: ReadonlyMap<string, Uint8Array> = new Map(),
+): RenderResult {
+  const descriptor = JSON.parse(
+    readFileSync(safeRepositoryPath(root, descriptorPath), "utf8"),
+  ) as TemplateDescriptor;
+  const resolved = resolveProjectSpec(spec).spec;
+  const targetPaths = new Set(
+    descriptor.renderTargets.map((target) => target.path),
+  );
+  const files: TemplateFile[] = descriptor.files
+    .filter((file) => includeDescriptorFile(file, resolved))
+    .filter((file) => !targetPaths.has(file.destination))
+    .map((file) => ({
+      path: file.destination,
+      content: new TextDecoder().decode(
+        descriptorFileContent(root, file.source),
+      ),
+    }));
+  const metadata = descriptor.renderTargets.map((target) => ({
+    path: target.path,
+    format: target.format,
+    value: descriptorMetadata(target, resolved),
+  }));
+  const assets: TemplateFile[] = [];
+  for (const asset of resolved.assets) {
+    const assetPath = typeof asset["path"] === "string" ? asset["path"] : "";
+    const supplied = assetBytes.get(String(asset["id"]));
+    if (!assetPath && !supplied) continue;
+    const bytes = supplied ?? descriptorFileContent(root, assetPath);
+    const slot = descriptor.assetSlots?.find(
+      (candidate) => candidate.id === asset["id"],
+    );
+    const info = slot
+      ? validatePng(bytes, {
+          maxBytes: slot.maxBytes,
+          maxWidth: slot.maxWidth,
+          maxHeight: slot.maxHeight,
+        })
+      : validatePng(bytes);
+    if (info.width !== info.height) throw new Error("png icon must be square");
+    for (const destination of slot?.destinations ?? [assetPath]) {
+      assets.push({ path: destination, content: bytes, binary: true });
+    }
+  }
+  return renderTemplate({
+    descriptorId: descriptor.id,
+    spec: resolved,
+    files: [...files, ...assets],
+    metadata,
+  });
 }
 
 function treeDigest(files: FileTree): string {
