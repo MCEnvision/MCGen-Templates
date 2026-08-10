@@ -186,6 +186,12 @@ async function readJson(path: string): Promise<unknown> {
   ) as unknown;
 }
 
+function requireRecord(value: unknown, label: string): Record<string, unknown> {
+  if (value === null || typeof value !== "object" || Array.isArray(value))
+    throw new Error(`${label} must be an object`);
+  return value as Record<string, unknown>;
+}
+
 async function writePhase5Document(
   path: string,
   document: unknown,
@@ -275,7 +281,7 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
   const output = option(args, "--output");
   if (!input || !output)
     throw new Error("phase5 execute requires --input and --output");
-  const document = (await readJson(input)) as Record<string, unknown>;
+  const document = requireRecord(await readJson(input), "phase5 execute input");
   const {
     tuple,
     fixture,
@@ -298,13 +304,13 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
       "phase5 execute input requires tuple, fixture, build, artifact, generatorDigest, and generatedAt",
     );
   const request = {
-    tuple,
+    tuple: requireRecord(tuple, "phase5 tuple"),
     fixture: {
-      ...(fixture as Record<string, unknown>),
+      ...requireRecord(fixture, "phase5 fixture"),
       repositoryRoot: repositoryRoot,
     },
-    build,
-    artifact,
+    build: requireRecord(build, "phase5 build"),
+    artifact: requireRecord(artifact, "phase5 artifact"),
     generatorDigest,
     parentDirectory: tmpdir(),
     generatedAt,

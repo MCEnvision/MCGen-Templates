@@ -127,6 +127,11 @@ describe("phase 5 build and artifact contracts", () => {
     expect(first.tuples[0]?.status).toBe("blocked");
     expect(first.shards).toHaveLength(3);
     expect(first.shards.flatMap((shard) => shard.tuples)).toHaveLength(1);
+    const scoped = buildMatrixPlan({
+      ...input,
+      fixtureIdsByProfile: { "fabric\u0000fabric": ["scoped-fixture"] },
+    });
+    expect(scoped.tuples[0]?.identity.fixtureId).toBe("scoped-fixture");
   });
 
   it("runs only bounded profile commands and rejects raw overrides", async () => {

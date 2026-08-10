@@ -49,6 +49,12 @@ export type MatrixPlanInput = {
     Record<string, Readonly<Record<string, readonly string[]>>>
   >;
   fixtureIds: readonly string[];
+  /**
+   * Optional fixture scope for each descriptor and profile pair. The legacy
+   * `fixtureIds` list remains the fallback for callers that plan one shared
+   * fixture matrix.
+   */
+  fixtureIdsByProfile?: Readonly<Record<string, readonly string[]>>;
   profiles: readonly MatrixProfile[];
   descriptors: readonly MatrixDescriptor[];
   compatibility?: readonly {
@@ -247,7 +253,11 @@ export function buildMatrixPlan(input: MatrixPlanInput): MatrixPlan {
               );
               if (!allowed) continue;
             }
-            for (const fixtureId of [...input.fixtureIds].sort()) {
+            const fixtureScope =
+              input.fixtureIdsByProfile?.[
+                `${descriptor.id}\u0000${profile.id}`
+              ] ?? input.fixtureIds;
+            for (const fixtureId of [...fixtureScope].sort()) {
               const tuple = tupleWithFixture(
                 descriptor,
                 profile,
