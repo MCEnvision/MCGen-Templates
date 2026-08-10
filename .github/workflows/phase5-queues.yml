@@ -81,8 +81,8 @@ jobs:
         run: npm run build
       - name: plan queue
         env:
-          QUEUE: ${{ inputs.queue || 'scheduled-audit' }}
-          SUBJECT: ${{ inputs.subject || github.ref_name }}
+          QUEUE: ${{ inputs.queue || (github.event_name == 'pull_request' && 'changed-boundaries') || (github.event_name == 'push' && 'invalidation') || 'scheduled-audit' }}
+          SUBJECT: ${{ inputs.subject || (github.event.pull_request.number && format('pr-{0}', github.event.pull_request.number)) || github.ref_name }}
           SHARD_COUNT: ${{ inputs.shard_count || '1' }}
           SHARD_INDEX: ${{ inputs.shard_index || '0' }}
         run: |
