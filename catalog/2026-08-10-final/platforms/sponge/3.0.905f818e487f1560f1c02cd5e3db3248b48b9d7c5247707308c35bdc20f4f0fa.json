@@ -1,0 +1,117 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.0.0",
+      "id": "component.sponge.2e423ad9894cd9b9d27da667",
+      "sourceEntries": [
+        {
+          "entryIndex": 32,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.0.0"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.0.1-SNAPSHOT",
+      "id": "component.sponge.21feb8e5eaf754facd6e4bbe",
+      "sourceEntries": [
+        {
+          "entryIndex": 33,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.0.1-SNAPSHOT"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.0.1-indev",
+      "id": "component.sponge.231540f702da142c060f3711",
+      "sourceEntries": [
+        {
+          "entryIndex": 34,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.0.1-indev"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.sponge.8883d4b5e1b1f28f2684c805",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 33,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.21feb8e5eaf754facd6e4bbe"
+    },
+    {
+      "confidence": "published",
+      "from": "target.sponge.8883d4b5e1b1f28f2684c805",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 34,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.231540f702da142c060f3711"
+    },
+    {
+      "confidence": "published",
+      "from": "target.sponge.8883d4b5e1b1f28f2684c805",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 32,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.2e423ad9894cd9b9d27da667"
+    }
+  ],
+  "id": "catalog.sponge.d6169444d45ed654cf1b0922",
+  "key": "3.0",
+  "keyKind": "api",
+  "platform": "sponge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "sponge.b6e6a7dfbfec686a0e244c90"
+  ]
+}

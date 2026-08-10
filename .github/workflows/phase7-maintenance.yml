@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p verification/phase7/live
           node dist/cli.js phase7 monitor \
-            --catalog catalog/2026-08-10-r4/index.json \
+            --catalog catalog/2026-08-10-final/index.json \
             --candidate-dir verification/phase7/live/candidates \
             --output verification/phase7/live/maintenance-run.json
           node dist/cli.js validate verification/phase7/live/maintenance-run.json
@@ -118,7 +118,7 @@ jobs:
             --monitor verification/phase7/ci/monitor-run.json \
             --profile forge-modern \
             --changed-path sources/snapshots/forge/forge-candidate.json \
-            --changed-path catalog/2026-08-10-r4/index.json \
+            --changed-path catalog/2026-08-10-final/index.json \
             --output verification/phase7/ci/maintenance-pull-request.json
           node dist/cli.js validate verification/phase7/ci/maintenance-pull-request.json
 

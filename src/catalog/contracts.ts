@@ -119,7 +119,30 @@ export type CatalogCoverageEntry = {
   entryIndex: number;
   disposition: "represented" | "blocked";
   shardId: string;
-  blockerId?: string;
+  componentId: string;
+  verificationStatus: "verified" | "legacy-verified" | "blocked";
+  resolution:
+    | {
+        kind: "exact-evidence";
+        evidence: CoverageEvidenceReference[];
+      }
+    | {
+        kind: "blocker";
+        blockerId: string;
+      };
+};
+
+export type CoverageEvidenceReference = {
+  tupleId: string;
+  evidencePath: string;
+  evidenceDigest: string;
+  status: "verified" | "legacy-verified";
+};
+
+export type CoverageEvidenceInput = CoverageEvidenceReference & {
+  family: string;
+  catalogKey: string;
+  components: Readonly<Record<string, string>>;
 };
 
 export type CoveragePlatform = {
@@ -137,6 +160,7 @@ export type CoverageReport = {
   $schema: "urn:mcgen:schema:coverage-report:1";
   schemaVersion: 1;
   rejectionAccountingVersion: 1;
+  coverageMappingVersion: 1;
   catalogId: string;
   sourceSnapshots: (SnapshotReference & {
     entries: number;
@@ -177,6 +201,7 @@ export type CatalogBuildInput = {
   snapshots: SnapshotInput[];
   categoryByPlatform: Readonly<Record<string, CatalogCategory>>;
   keyKindByPlatform: Readonly<Record<string, CatalogKeyKind>>;
+  coverageEvidence?: readonly CoverageEvidenceInput[];
   outputRoot?: string;
 };
 

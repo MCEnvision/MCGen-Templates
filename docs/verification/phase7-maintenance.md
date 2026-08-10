@@ -2,7 +2,7 @@
 
 ## Status
 
-Phase 7 is in progress on the maintenance branch and is tracked by [issue 25](https://github.com/MCEnvision/MCGen-Templates/issues/25). The first immutable beta release is already verified. This record describes the deterministic maintenance contracts that must pass before the final repository complete gate is claimed.
+Phase 7 is in progress on the maintenance branch and is tracked by [issue 25](https://github.com/MCEnvision/MCGen-Templates/issues/25). The first immutable beta release is already verified. The current branch adds the `2026-08-10-final` catalog, ten exact tuple evidence records, and explicit blockers for every nonverified catalog component. Four Forge, NeoForge, and Architectury profile and descriptor boundaries remain blocked. This record describes the deterministic maintenance contracts that must pass before the final repository complete gate is claimed.
 
 ## Contracts
 
@@ -38,6 +38,8 @@ node dist/cli.js phase7 recovery --scenario new-component --output verification/
 The `phase7:monitor`, `phase7:quarantine`, `phase7:plan`, `phase7:audit`, `phase7:audit-live`, `phase7:invalidation`, `phase7:proposal`, `phase7:pull-request`, and `phase7:recovery` npm scripts build the CLI before invoking the corresponding command. A scheduled run must pass an explicit `--generated-at` value for reproducible audit evidence.
 
 `phase7 audit-live` derives the repository from `origin`, performs only read-only `gh api` requests, and records the exact API paths and repository paths used as evidence. It computes capability states from observed responses and local files. It does not accept caller supplied pass or fail booleans, create or update GitHub objects, publish changes, or infer a missing capability as complete. A denied or unavailable API response remains an explicit `blocked` capability in the resulting `github-audit` document.
+
+The live repository audit also parses the indexed `profiles/index.json` and `templates/index.json` records, validates their status and blocker contracts, and checks the catalog platform shards named by each profile. It does not treat a populated directory as proof of compatibility. Phase 5 matrix tuples are reconciled to exact evidence keys, verified build and artifact states, and explicit blockers for every nonverified tuple. Current discovered catalog components or blocked loader profiles therefore remain visible as blockers even when representative Spigot evidence and the phase 5 summary are valid.
 
 `phase7 invalidation` matches changed source digests against the source digests recorded by phase 5 tuple evidence and creates bounded invalidation queue plans. `phase7 proposal` creates a content addressed, deduplicated maintenance proposal with exact deltas, verification commands, review requirements, and rollback references. `phase7 pull-request` consumes a maintenance plan, monitor run, optional invalidation plan, and a `coverage-change` document to create the richer repository local manifest required for a future pull request. It refuses unsafe changed paths, blocks incomplete proposals that lack a monitor run, preserves the baseline, requires deterministic and exact tuple verification, and always disables auto merge and remote writes. Neither command publishes or auto merges a change.
 

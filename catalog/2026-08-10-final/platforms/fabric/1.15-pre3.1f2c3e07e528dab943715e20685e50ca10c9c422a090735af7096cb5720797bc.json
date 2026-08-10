@@ -1,0 +1,282 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "mappings-intermediary",
+      "coordinate": "net.fabricmc:intermediary:1.15-pre3",
+      "id": "component.fabric.243107519b8d0dd72721d320",
+      "sourceEntries": [
+        {
+          "entryIndex": 272,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.15-pre3+build.1",
+      "id": "component.fabric.ca365bd886d6ac4b18208921",
+      "sourceEntries": [
+        {
+          "entryIndex": 273,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3+build.1"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.15-pre3+build.2",
+      "id": "component.fabric.7b7b09c1a4750a1fd1190f3b",
+      "sourceEntries": [
+        {
+          "entryIndex": 274,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3+build.2"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.15-pre3+build.3",
+      "id": "component.fabric.ed14e48ed06b6dc361c0f2f1",
+      "sourceEntries": [
+        {
+          "entryIndex": 275,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3+build.3"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.15-pre3+build.4",
+      "id": "component.fabric.8149a4906357d0e39285d834",
+      "sourceEntries": [
+        {
+          "entryIndex": 276,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3+build.4"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.15-pre3+build.5",
+      "id": "component.fabric.7b4a9a85d1eeb2131dad6de4",
+      "sourceEntries": [
+        {
+          "entryIndex": 277,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3+build.5"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.15-pre3+build.6",
+      "id": "component.fabric.beaeea6cd597e18505967ff1",
+      "sourceEntries": [
+        {
+          "entryIndex": 278,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3+build.6"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "minecraft",
+      "coordinate": "com.mojang:minecraft:1.15-pre3",
+      "id": "component.fabric.15ff5dd0e0b5c675b841ee03",
+      "sourceEntries": [
+        {
+          "entryIndex": 279,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15-pre3"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 279,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.fabric.15ff5dd0e0b5c675b841ee03"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 272,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.fabric.243107519b8d0dd72721d320"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 277,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.7b4a9a85d1eeb2131dad6de4"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 274,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.7b7b09c1a4750a1fd1190f3b"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 276,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.8149a4906357d0e39285d834"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 278,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.beaeea6cd597e18505967ff1"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 273,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.ca365bd886d6ac4b18208921"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.6f2ff1100770cf674682db4e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 275,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.ed14e48ed06b6dc361c0f2f1"
+    }
+  ],
+  "id": "catalog.fabric.5d8a392d7b193b305d143994",
+  "key": "1.15-pre3",
+  "keyKind": "minecraft",
+  "platform": "fabric",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "fabric.d5f0718a2c465a479a633101"
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "$schema": "urn:mcgen:schema:phase5-execution:1",
+  "artifact": {
+    "expectation": {
+      "entrypointClasses": [
+        "org.example.tuple.TupleProbe"
+      ],
+      "expectedExtension": ".jar",
+      "iconPaths": [],
+      "maxEntries": 128,
+      "metadataFields": {
+        "main": "org.example.tuple.TupleProbe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "metadataPaths": [
+        "plugin.yml"
+      ],
+      "patterns": [
+        "build/libs/tuple-probe-1.0.0.jar"
+      ],
+      "projectIdentity": {
+        "id": "Tuple Probe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "requiredEntries": [
+        "plugin.yml",
+        "org/example/tuple/TupleProbe.class"
+      ],
+      "resourceNamespaces": []
+    },
+    "path": "build/libs/tuple-probe-1.0.0.jar"
+  },
+  "build": {
+    "commands": [
+      {
+        "args": [
+          "build"
+        ],
+        "executable": "./gradlew",
+        "purpose": "build"
+      },
+      {
+        "args": [
+          "test"
+        ],
+        "executable": "./gradlew",
+        "purpose": "unit-tests"
+      }
+    ],
+    "java": {
+      "distribution": "temurin",
+      "runtime": 17
+    },
+    "limits": {
+      "artifactRetentionDays": 30,
+      "maxDiskBytes": 4294967296,
+      "maxOutputBytes": 67108864,
+      "retries": 1,
+      "timeoutMs": 900000
+    },
+    "rawOverridePolicy": "never-execute",
+    "workDirectoryPolicy": "isolated-clean",
+    "wrapper": {
+      "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+      "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+      "kind": "launcher-script",
+      "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+      "version": "8.8"
+    }
+  },
+  "fixture": {
+    "descriptorPath": "templates/paper/descriptor-traditional.json",
+    "fixture": {
+      "id": "paper-traditional.paper-traditional.minimal-java.java",
+      "kind": "minimal-java",
+      "language": "java",
+      "rawOverride": false,
+      "version": "1.0.0"
+    },
+    "spec": {
+      "$schema": "urn:mcgen:schema:project-spec:1",
+      "assets": [],
+      "build": {
+        "dsl": "groovy",
+        "javaLanguage": 17,
+        "system": "gradle"
+      },
+      "dependencies": [],
+      "extensions": {},
+      "features": [],
+      "fileOperations": [],
+      "metadata": {},
+      "mode": "simple",
+      "platform": {
+        "apiVersion": "1.20",
+        "catalogKey": "1.20.1",
+        "components": {
+          "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+        },
+        "id": "paper",
+        "java": 17,
+        "javaLanguage": 17
+      },
+      "project": {
+        "authors": [
+          "EnVy"
+        ],
+        "description": "tuple probe",
+        "id": "tuple-probe",
+        "license": "MIT",
+        "mainClass": "TupleProbe",
+        "name": "Tuple Probe",
+        "package": "org.example.tuple",
+        "version": "1.0.0"
+      },
+      "publishing": {},
+      "repositories": [],
+      "repository": {},
+      "schemaVersion": 1,
+      "sourceLayout": {},
+      "targetOverrides": [],
+      "template": "paper-traditional"
+    },
+    "tuple": {
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+        "descriptor": "1e38af219787b3bae6108832aac327803052415b90829c23fa6f18eaf3ca1650",
+        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+        "profile": "5c4ccd1e0db66eb26d701dc97d279b20de720c01dfefec342388a40540f69633",
+        "template": "4c0d6fa951b40ca6210f4f419c3675da8000ff4b99429d4c7086661ebcf02f45"
+      },
+      "descriptorId": "paper-traditional",
+      "descriptorRevision": 2,
+      "family": "paper",
+      "fixtureId": "paper-traditional.paper-traditional.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+      "profileId": "paper-traditional",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    }
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
+  "profilePath": "profiles/paper-traditional.json",
+  "tuple": {
+    "blockers": [],
+    "id": "a81434dc04794c9e68c78d38f839394bc9b88bf0e8e5b5e652e0061a2fa0bb56",
+    "identity": {
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+        "descriptor": "1e38af219787b3bae6108832aac327803052415b90829c23fa6f18eaf3ca1650",
+        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+        "profile": "5c4ccd1e0db66eb26d701dc97d279b20de720c01dfefec342388a40540f69633",
+        "template": "4c0d6fa951b40ca6210f4f419c3675da8000ff4b99429d4c7086661ebcf02f45"
+      },
+      "descriptorId": "paper-traditional",
+      "descriptorRevision": 2,
+      "family": "paper",
+      "fixtureId": "paper-traditional.paper-traditional.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+      "profileId": "paper-traditional",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    },
+    "status": "discovered"
+  },
+  "wrapperPath": "gradlew",
+  "wrapperSource": "templates/spigot/gradlew-modern.tmpl"
+}

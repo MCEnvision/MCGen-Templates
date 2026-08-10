@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "neoform-runtime",
+      "coordinate": "net.neoforged:neoform-runtime:1.0.19",
+      "id": "component.neoforge.9739b27923f04cfa1f75598f",
+      "sourceEntries": [
+        {
+          "entryIndex": 11,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            5
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.0.19"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.neoforge.2cfb664f6c6093b0fe7d9308",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 11,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            5
+          ]
+        }
+      ],
+      "to": "component.neoforge.9739b27923f04cfa1f75598f"
+    }
+  ],
+  "id": "catalog.neoforge.a872a0a776563eea48c800d7",
+  "key": "1.0.19",
+  "keyKind": "minecraft",
+  "platform": "neoforge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "neoforge.454d86de20b17a45eb60bd52"
+  ]
+}

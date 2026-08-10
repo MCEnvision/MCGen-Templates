@@ -37,25 +37,25 @@
           "./gradlew",
           "build"
         ],
-        "diskBytes": 125943,
-        "durationMs": 650,
+        "diskBytes": 125775,
+        "durationMs": 744,
         "exitCode": 0,
         "outputBytes": 314,
-        "outputDigest": "af776e876e772cb120dce1994208f736410bea1a447541091734a125ef1b90f9"
+        "outputDigest": "6c0fcf02f7738d15650aadb2f67ed7ec5683d72acea52c75065b7306e895c3f3"
       },
       {
         "command": [
           "./gradlew",
           "test"
         ],
-        "diskBytes": 125943,
-        "durationMs": 605,
+        "diskBytes": 125775,
+        "durationMs": 638,
         "exitCode": 0,
         "outputBytes": 281,
-        "outputDigest": "ddee84ac5266c1717afc69576e81e55bd0dc31bf54ea18fdba1f75e241e3c47a"
+        "outputDigest": "a94aef4dbd7a5c78485039e6260adc22d7ab4b66f20014262e608f44c599e90c"
       }
     ],
-    "finishedAt": "2026-08-10T11:46:06.296Z",
+    "finishedAt": "2026-08-10T18:40:18.177Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
@@ -63,10 +63,10 @@
   "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
   "invalidation": {
     "contentDigests": {
-      "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+      "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
       "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
       "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-      "profile": "0cffc1bd8444d4a459fbec0e19d69f91334245155503bd0964fcbca4ca6a3338",
+      "profile": "e9079c6b8b6375c5d1c66746337c914f992c5e93f949bdf0430a1b71feb36aeb",
       "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
     },
     "descriptorRevision": 1,
@@ -81,18 +81,18 @@
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "80265f380f7e2feb3c1ea14b9216f795ec9836db3da37422f44d5d260a9f20b4",
+    "digest": "93920883baeefed5a8f972a90d60cc07b112e14d1a9168b07a8bdde908693720",
     "identity": {
       "catalogKey": "1.21.1",
-      "catalogSnapshotId": "2026-08-10-r4",
+      "catalogSnapshotId": "2026-08-10-final",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+        "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
         "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "0cffc1bd8444d4a459fbec0e19d69f91334245155503bd0964fcbca4ca6a3338",
+        "profile": "e9079c6b8b6375c5d1c66746337c914f992c5e93f949bdf0430a1b71feb36aeb",
         "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
       },
       "descriptorId": "spigot-modern",

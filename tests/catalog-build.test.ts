@@ -123,7 +123,59 @@ describe("deterministic compatibility catalog", () => {
       "discovered",
     ]);
     expect(result.coverage.platforms[0]?.represented).toBe(2);
+    expect(result.coverage.coverageMappingVersion).toBe(1);
+    expect(result.coverage.platforms[0]?.statuses).toEqual({ blocked: 2 });
+    const blockedEntry = result.coverage.platforms[0]?.entries.find(
+      (entry) => entry.verificationStatus === "blocked",
+    );
+    expect(blockedEntry?.componentId).toMatch(/^component\.forge\./u);
+    expect(blockedEntry?.resolution.kind).toBe("blocker");
+    if (blockedEntry?.resolution.kind !== "blocker")
+      throw new Error("catalog fixture did not create a component blocker");
+    expect(
+      blockedEntry.resolution.blockerId.startsWith("blocker.component."),
+    ).toBe(true);
     expect(result.coverage.platforms[0]?.unexplainedGaps).toEqual([]);
+  });
+
+  it("maps exact evidence and leaves uncovered components explicitly blocked", () => {
+    const result = buildCatalog({
+      snapshots: [input(entries)],
+      categoryByPlatform: { forge: "mod" },
+      keyKindByPlatform: { forge: "minecraft" },
+      coverageEvidence: [
+        {
+          tupleId: "1".repeat(64),
+          evidencePath: "verification/phase5/evidence/forge.json",
+          evidenceDigest: "2".repeat(64),
+          status: "verified",
+          family: "forge",
+          catalogKey: "1.20.1",
+          components: { forge: entries[0]?.coordinate ?? "" },
+        },
+      ],
+    });
+    const platform = result.coverage.platforms[0];
+    expect(platform?.statuses).toEqual({ blocked: 1, verified: 1 });
+    const verifiedEntry = platform?.entries.find(
+      (entry) => entry.verificationStatus === "verified",
+    );
+    expect(verifiedEntry?.resolution.kind).toBe("exact-evidence");
+    if (verifiedEntry?.resolution.kind !== "exact-evidence")
+      throw new Error(
+        "catalog fixture did not create an exact evidence mapping",
+      );
+    const evidence = verifiedEntry.resolution.evidence[0];
+    expect(evidence?.tupleId).toBe("1".repeat(64));
+    expect(evidence?.evidencePath).toBe(
+      "verification/phase5/evidence/forge.json",
+    );
+    expect(evidence?.evidenceDigest).toBe("2".repeat(64));
+    expect(evidence?.status).toBe("verified");
+    const blockedEntry = platform?.entries.find(
+      (entry) => entry.verificationStatus === "blocked",
+    );
+    expect(blockedEntry?.resolution.kind).toBe("blocker");
   });
 
   it("is byte deterministic for identical source snapshots", () => {
@@ -308,7 +360,10 @@ describe("deterministic compatibility catalog", () => {
       rejected: 1,
       unexplainedGaps: [],
     });
-    expect(platform?.blockers).toEqual([
+    const rejectedBlocker = platform?.blockers.find(
+      (blocker) => blocker.rejectedEntries !== undefined,
+    );
+    expect(rejectedBlocker).toEqual(
       expect.objectContaining({
         reason: "version does not match the published coordinate",
         rejectedEntries: [
@@ -319,7 +374,12 @@ describe("deterministic compatibility catalog", () => {
           },
         ],
       }),
-    ]);
+    );
+    expect(
+      platform?.blockers.filter((blocker) =>
+        blocker.id.startsWith("blocker.component."),
+      ),
+    ).toHaveLength(2);
     expect(result).toEqual(
       buildCatalog({
         snapshots: [
@@ -386,7 +446,9 @@ describe("deterministic compatibility catalog", () => {
 
       const invalid = structuredClone(result.coverage);
       const sourceSnapshot = invalid.sourceSnapshots.at(0);
-      const blocker = invalid.platforms.at(0)?.blockers.at(0);
+      const blocker = invalid.platforms
+        .at(0)
+        ?.blockers.find((candidate) => candidate.rejectedEntries?.length === 1);
       if (!sourceSnapshot || !blocker) {
         throw new Error("catalog fixture did not create rejected coverage");
       }

@@ -1,6 +1,6 @@
 # Phase 5 Build and Artifact Contracts
 
-Phase 5 is complete on `main` and identified by the verified signed tag `phase-5-build-verification`. It proves exact generated project tuples. The implementation provides deterministic fixture and matrix planning, isolated bounded command execution, real zip artifact parsing, reproducibility comparison, exact evidence invalidation, public coverage summaries, and queue plans. The reviewed Spigot modern tuple for Minecraft 1.21.1 and the reviewed Spigot legacy tuple for Minecraft 1.8.8 each have current build, artifact, and reproducibility evidence. Other boundaries remain explicitly blocked until their own exact evidence exists.
+Phase 5 is complete on `main` and identified by the verified signed tag `phase-5-build-verification`. It proves exact generated project tuples. The implementation provides deterministic fixture and matrix planning, isolated bounded command execution, real zip artifact parsing, reproducibility comparison, exact evidence invalidation, public coverage summaries, and queue plans. Ten exact tuples across Bukkit, BungeeCord, Fabric, Paper, Spigot, Sponge, and Velocity have current build, artifact, and reproducibility evidence. Four profile boundaries and four descriptor boundaries remain explicitly blocked until their own exact evidence exists.
 
 ## Exact tuple identity
 
@@ -66,4 +66,4 @@ The test suite also runs a real generated Bukkit smoke project through `javac` a
 
 ## Committed reviewed evidence
 
-The reviewed modern boundary is [Spigot 1.21.1](../../profiles/spigot-modern.json) with [its descriptor](../../templates/spigot/descriptor-modern.json). The reviewed historical boundary is [Spigot 1.8.8](../../profiles/spigot-legacy.json) with [its descriptor](../../templates/spigot/descriptor-legacy.json). Their exact execution records are [modern evidence](../../verification/phase5/evidence/spigot-modern.json) and [legacy evidence](../../verification/phase5/evidence/spigot-legacy.json). The generated [coverage summary](../../verification/phase5/coverage.json) reports two verified tuples with no unresolved coverage, while the [audit report](../../verification/phase5/audit.json) records the remaining twelve profile and descriptor blockers explicitly.
+The reviewed boundaries are recorded in the ten exact evidence files under [verification/phase5/evidence](../../verification/phase5/evidence). The generated [coverage summary](../../verification/phase5/coverage.json) reports ten verified tuples with no unresolved evidence. The [audit report](../../verification/phase5/audit.json) records four blocked profiles and four blocked descriptors explicitly. The current catalog snapshot is `2026-08-10-final`, and every nonverified catalog component has an explicit coverage blocker.

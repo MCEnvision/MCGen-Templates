@@ -146,6 +146,11 @@ function flatten(
   prefix = "",
   output: Record<string, string> = {},
 ): Record<string, string> {
+  if (Array.isArray(value)) {
+    for (const [index, child] of value.entries())
+      flatten(child, `${prefix}[${index}]`, output);
+    return output;
+  }
   if (value !== null && typeof value === "object" && !Array.isArray(value)) {
     for (const [key, child] of Object.entries(value))
       flatten(child, prefix ? `${prefix}.${key}` : key, output);

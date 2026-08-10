@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:2.1-SNAPSHOT",
+      "id": "component.sponge.8bf4874999e1b16724c1ab74",
+      "sourceEntries": [
+        {
+          "entryIndex": 30,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.1-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.sponge.6d09973d610a0fa41891ba6a",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 30,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.8bf4874999e1b16724c1ab74"
+    }
+  ],
+  "id": "catalog.sponge.9316adcc04c9db581ed242f2",
+  "key": "2.1",
+  "keyKind": "api",
+  "platform": "sponge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "sponge.b6e6a7dfbfec686a0e244c90"
+  ]
+}

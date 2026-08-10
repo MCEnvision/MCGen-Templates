@@ -8,7 +8,7 @@ Every snapshot records its schema version, adapter identity, retrieval time, fin
 
 ## Current Complete Capture
 
-The current capture set is named by [`catalog/2026-08-10-r4/index.json`](../../catalog/2026-08-10-r4/index.json). It uses the thirteen unaffected `2026-08-10-r2` snapshots and the corrected Paper `2026-08-10-r4` snapshot. It contains 27,706 discovered entries, 20 explicit rejected records, and 1,019 response provenance records. The matching catalog represents every accepted entry and creates one structured coverage blocker for each rejected record.
+The current capture set is named by [`catalog/2026-08-10-final/index.json`](../../catalog/2026-08-10-final/index.json). It uses fourteen immutable current snapshots, including the corrected Paper capture. It contains 27,706 discovered entries, 20 explicit rejected records, and 1,019 response provenance records. The matching catalog represents every accepted entry, assigns one exact blocker to every nonverified component, and creates one structured coverage blocker for each rejected record.
 
 | Adapter | Entries | Rejected | Source records |
 | --- | ---: | ---: | ---: |

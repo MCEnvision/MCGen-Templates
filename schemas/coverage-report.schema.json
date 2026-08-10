@@ -17,6 +17,7 @@
       "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
     },
     "rejectionAccountingVersion": { "const": 1 },
+    "coverageMappingVersion": { "const": 1 },
     "catalogId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
     "sourceSnapshots": {
       "type": "array",
@@ -80,9 +81,13 @@
                 "shardId": {
                   "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
                 },
-                "blockerId": {
+                "componentId": {
                   "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
-                }
+                },
+                "verificationStatus": {
+                  "$ref": "urn:mcgen:schema:common:1#/$defs/verificationStatus"
+                },
+                "resolution": { "$ref": "#/$defs/resolution" }
               }
             }
           },
@@ -95,6 +100,95 @@
             "items": { "type": "string", "minLength": 1, "maxLength": 2048 }
           }
         }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "coverageMappingVersion": { "const": 1 } },
+        "required": ["coverageMappingVersion"]
+      },
+      "then": {
+        "required": ["coverageMappingVersion"],
+        "properties": {
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "entries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "componentId": {
+                        "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+                      },
+                      "verificationStatus": {
+                        "$ref": "urn:mcgen:schema:common:1#/$defs/verificationStatus"
+                      },
+                      "resolution": { "$ref": "#/$defs/resolution" }
+                    },
+                    "required": [
+                      "componentId",
+                      "verificationStatus",
+                      "resolution"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "resolution": {
+      "oneOf": [
+        { "$ref": "#/$defs/exactEvidenceResolution" },
+        { "$ref": "#/$defs/blockerResolution" }
+      ]
+    },
+    "exactEvidenceResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "evidence"],
+      "properties": {
+        "kind": { "const": "exact-evidence" },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/evidenceReference" }
+        }
+      }
+    },
+    "blockerResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "blockerId"],
+      "properties": {
+        "kind": { "const": "blocker" },
+        "blockerId": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+        }
+      }
+    },
+    "evidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tupleId", "evidencePath", "evidenceDigest", "status"],
+      "properties": {
+        "tupleId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "evidencePath": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+        },
+        "evidenceDigest": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        },
+        "status": { "enum": ["verified", "legacy-verified"] }
       }
     }
   }

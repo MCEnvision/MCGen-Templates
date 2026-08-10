@@ -1,0 +1,210 @@
+{
+  "$schema": "urn:mcgen:schema:phase5-execution:1",
+  "artifact": {
+    "expectation": {
+      "entrypointClasses": [
+        "org.example.tuple.TupleProbe"
+      ],
+      "expectedExtension": ".jar",
+      "iconPaths": [],
+      "maxEntries": 128,
+      "metadataFields": {
+        "entrypoint": "org.example.tuple.TupleProbe",
+        "id": "tuple-probe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "metadataPaths": [
+        "META-INF/sponge_plugins.json"
+      ],
+      "patterns": [
+        "build/libs/tuple-probe-1.0.0.jar"
+      ],
+      "projectIdentity": {
+        "id": "tuple-probe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "requiredEntries": [
+        "META-INF/sponge_plugins.json",
+        "org/example/tuple/TupleProbe.class"
+      ],
+      "resourceNamespaces": []
+    },
+    "path": "build/libs/tuple-probe-1.0.0.jar"
+  },
+  "build": {
+    "commands": [
+      {
+        "args": [
+          "build"
+        ],
+        "executable": "./gradlew",
+        "purpose": "build"
+      },
+      {
+        "args": [
+          "test"
+        ],
+        "executable": "./gradlew",
+        "purpose": "unit-tests"
+      }
+    ],
+    "java": {
+      "distribution": "temurin",
+      "runtime": 17
+    },
+    "limits": {
+      "artifactRetentionDays": 30,
+      "maxDiskBytes": 4294967296,
+      "maxOutputBytes": 67108864,
+      "retries": 1,
+      "timeoutMs": 900000
+    },
+    "rawOverridePolicy": "never-execute",
+    "workDirectoryPolicy": "isolated-clean",
+    "wrapper": {
+      "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+      "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+      "kind": "launcher-script",
+      "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+      "version": "8.8"
+    }
+  },
+  "fixture": {
+    "descriptorPath": "templates/sponge/descriptor.json",
+    "fixture": {
+      "id": "sponge.sponge.minimal-java.java",
+      "kind": "minimal-java",
+      "language": "java",
+      "rawOverride": false,
+      "version": "1.0.0"
+    },
+    "spec": {
+      "$schema": "urn:mcgen:schema:project-spec:1",
+      "assets": [],
+      "build": {
+        "dsl": "groovy",
+        "javaLanguage": 17,
+        "system": "gradle"
+      },
+      "dependencies": [],
+      "extensions": {},
+      "features": [],
+      "fileOperations": [],
+      "metadata": {},
+      "mode": "simple",
+      "platform": {
+        "apiVersion": "1.21",
+        "catalogKey": "10.0",
+        "components": {
+          "spongeapi": "org.spongepowered:spongeapi:10.0.0"
+        },
+        "id": "sponge",
+        "java": 17,
+        "javaLanguage": 17
+      },
+      "project": {
+        "authors": [
+          "EnVy"
+        ],
+        "description": "tuple probe",
+        "id": "tuple-probe",
+        "license": "MIT",
+        "mainClass": "TupleProbe",
+        "name": "Tuple Probe",
+        "package": "org.example.tuple",
+        "version": "1.0.0"
+      },
+      "publishing": {},
+      "repositories": [],
+      "repository": {},
+      "schemaVersion": 1,
+      "sourceLayout": {},
+      "targetOverrides": [],
+      "template": "sponge"
+    },
+    "tuple": {
+      "catalogKey": "10.0",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "spongeapi": "org.spongepowered:spongeapi:10.0.0"
+      },
+      "contentDigests": {
+        "catalog": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
+        "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
+        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+        "profile": "6f5601935bac9a11bcc08dcfd973ebd244458a37c42fa8bd9d64cd80f0564ca4",
+        "template": "b2b29ac7914e56c89a34127716f31cdc77a54557c08a47270864fcdd028adb7b"
+      },
+      "descriptorId": "sponge",
+      "descriptorRevision": 2,
+      "family": "sponge",
+      "fixtureId": "sponge.sponge.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+      "profileId": "sponge",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    }
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
+  "profilePath": "profiles/sponge.json",
+  "tuple": {
+    "blockers": [],
+    "id": "09caf147ef5e6c53777366c0bdf9e2149e7692d64687ca0f5e32bd0af638155e",
+    "identity": {
+      "catalogKey": "10.0",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "spongeapi": "org.spongepowered:spongeapi:10.0.0"
+      },
+      "contentDigests": {
+        "catalog": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
+        "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
+        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+        "profile": "6f5601935bac9a11bcc08dcfd973ebd244458a37c42fa8bd9d64cd80f0564ca4",
+        "template": "b2b29ac7914e56c89a34127716f31cdc77a54557c08a47270864fcdd028adb7b"
+      },
+      "descriptorId": "sponge",
+      "descriptorRevision": 2,
+      "family": "sponge",
+      "fixtureId": "sponge.sponge.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+      "profileId": "sponge",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    },
+    "status": "discovered"
+  },
+  "wrapperPath": "gradlew",
+  "wrapperSource": "templates/spigot/gradlew-modern.tmpl"
+}

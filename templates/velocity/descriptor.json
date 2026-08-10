@@ -2,15 +2,8 @@
   "$schema": "urn:mcgen:schema:template-descriptor:1",
   "schemaVersion": 1,
   "id": "velocity",
-  "revision": 1,
-  "status": "blocked",
-  "blockers": [
-    {
-      "code": "proxy-build-evidence",
-      "reason": "Velocity API and protocol compatibility boundaries require later compilation and artifact inspection evidence.",
-      "evidence": ["catalog/2026-08-10-r4/index.json"]
-    }
-  ],
+  "revision": 2,
+  "status": "reviewed",
   "category": "proxy",
   "platforms": ["velocity"],
   "profileRefs": ["velocity"],
@@ -86,7 +79,7 @@
       "rawOverride": "allowed"
     },
     {
-      "source": "templates/shared/build.gradle.tmpl",
+      "source": "templates/velocity/build.gradle.tmpl",
       "destination": "build.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
@@ -117,17 +110,6 @@
     }
   ],
   "renderTargets": [
-    {
-      "id": "velocity-metadata",
-      "path": "src/main/resources/velocity-plugin.json",
-      "format": "json",
-      "fieldMappings": [
-        { "fieldId": "project-id", "path": "id", "format": "literal" },
-        { "fieldId": "main-class", "path": "main", "format": "literal" },
-        { "fieldId": "project-version", "path": "version", "format": "version" }
-      ],
-      "required": true
-    },
     {
       "id": "advanced-field-extension",
       "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",

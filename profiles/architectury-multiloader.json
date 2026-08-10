@@ -13,15 +13,15 @@
       "reason": "Architectury targets must prove a common Minecraft, mappings, Fabric, Forge, or NeoForge intersection before generation.",
       "evidence": [
         "sources/snapshots/architectury/2026-08-10-r2.json",
-        "catalog/2026-08-10-r4/index.json"
+        "catalog/2026-08-10-final/index.json"
       ],
       "resolution": "Verify each selected target set and retain target specific overrides in the resolved ProjectSpec."
     }
   ],
   "catalog": {
-    "snapshotId": "2026-08-10-r4",
-    "indexPath": "catalog/2026-08-10-r4/platforms/architectury/index.json",
-    "indexSha256": "e7e50682e25aaac7a7c7a852050c9b39741ea27b1006c982f240587e5560dbcd",
+    "snapshotId": "2026-08-10-final",
+    "indexPath": "catalog/2026-08-10-final/platforms/architectury/index.json",
+    "indexSha256": "cfa16b9cdec88e87dd63984d1cf4b5326c085ca5b6aad9d6880cc05eccb918ea",
     "selectors": [
       {
         "platform": "architectury",

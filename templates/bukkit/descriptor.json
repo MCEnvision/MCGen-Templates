@@ -2,15 +2,8 @@
   "$schema": "urn:mcgen:schema:template-descriptor:1",
   "schemaVersion": 1,
   "id": "bukkit",
-  "revision": 1,
-  "status": "blocked",
-  "blockers": [
-    {
-      "code": "plugin-build-evidence",
-      "reason": "Bukkit API and server boundary compilation evidence is pending.",
-      "evidence": ["catalog/2026-08-10-r4/index.json"]
-    }
-  ],
+  "revision": 2,
+  "status": "reviewed",
   "category": "plugin",
   "platforms": ["bukkit"],
   "profileRefs": ["bukkit"],
@@ -91,7 +84,7 @@
       "rawOverride": "allowed"
     },
     {
-      "source": "templates/shared/build.gradle.tmpl",
+      "source": "templates/bukkit/build.gradle.tmpl",
       "destination": "build.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
@@ -122,17 +115,6 @@
     }
   ],
   "renderTargets": [
-    {
-      "id": "bukkit-plugin-yml",
-      "path": "src/main/resources/plugin.yml",
-      "format": "yaml",
-      "fieldMappings": [
-        { "fieldId": "project-name", "path": "name", "format": "literal" },
-        { "fieldId": "main-class", "path": "main", "format": "literal" },
-        { "fieldId": "project-version", "path": "version", "format": "version" }
-      ],
-      "required": true
-    },
     {
       "id": "advanced-field-extension",
       "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",

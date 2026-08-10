@@ -1,124 +1,189 @@
 {
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
-  "schemaVersion": 1,
-  "id": "bukkit",
-  "revision": 1,
-  "status": "blocked",
-  "family": "bukkit",
-  "category": "plugin",
-  "platform": "bukkit",
-  "blockers": [
-    {
-      "id": "bukkit-build-evidence",
-      "reason": "Bukkit API and historical Java or build boundaries need representative compilation evidence.",
-      "evidence": ["sources/snapshots/bukkit/2026-08-10-r2.json"],
-      "resolution": "Verify the API and Java boundary before enabling Simple mode."
-    }
-  ],
+  "artifact": {
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 128,
+    "metadataFields": {
+      "main": "org.example.tuple.TupleProbe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "metadataPaths": ["plugin.yml"],
+    "patterns": ["build/libs/tuple-probe-1.0.0.jar"],
+    "projectIdentity": {
+      "id": "Tuple Probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "requiredEntries": ["plugin.yml", "org/example/tuple/TupleProbe.class"],
+    "resourceNamespaces": []
+  },
+  "build": {
+    "dsl": "groovy",
+    "jvmArguments": [],
+    "plugins": [
+      {
+        "id": "java",
+        "repositoryIds": ["central"],
+        "version": "7.6.4"
+      }
+    ],
+    "properties": [],
+    "publishing": false,
+    "sourceSets": [],
+    "system": "gradle",
+    "tasks": [],
+    "wrapper": "7.6.4",
+    "wrapperDistributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+    "wrapperKind": "launcher-script",
+    "wrapperSha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583"
+  },
   "catalog": {
-    "snapshotId": "2026-08-10-r4",
-    "indexPath": "catalog/2026-08-10-r4/platforms/bukkit/index.json",
-    "indexSha256": "f3a39e467e95ab46647065d1ab908fb1dd377db67b3f83a7045cc2a62780938f",
+    "indexPath": "catalog/2026-08-10-final/platforms/bukkit/index.json",
+    "indexSha256": "51d0d38c2858f40b7b3c25b06f8938c621069df0dec0ef4bbd58c8eba7741fa2",
     "selectors": [
       {
-        "platform": "bukkit",
-        "keyKind": "minecraft",
-        "keys": { "mode": "all-shards" },
         "components": [
           {
             "component": "bukkit",
             "coordinatePrefix": "org.bukkit:bukkit:",
-            "mode": "all-components"
+            "mode": "explicit",
+            "versions": ["org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT"]
           }
         ],
         "evidence": [
           {
-            "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
             "path": "sources/snapshots/bukkit/2026-08-10-r2.json",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"],
             "sha256": "57427a88f77c6214ac22572cca4cb8fb1d1bc42696c2bb9fe35eb90847184121",
-            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+            "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c"
           }
-        ]
+        ],
+        "keyKind": "minecraft",
+        "keys": {
+          "mode": "explicit",
+          "values": ["1.8.8"]
+        },
+        "platform": "bukkit"
       }
-    ]
+    ],
+    "snapshotId": "2026-08-10-final"
   },
+  "category": "plugin",
   "components": [
     {
-      "id": "bukkit-api",
+      "catalogComponent": "bukkit",
       "coordinate": "org.bukkit:bukkit",
-      "version": "selected-from-catalog",
+      "id": "bukkit-api",
       "range": "catalog-key-compatible",
       "required": true,
-      "catalogComponent": "bukkit"
+      "version": "1.8.8-R0.1-SNAPSHOT"
     }
   ],
-  "java": {
-    "distribution": "temurin",
-    "runtime": 8,
-    "language": 8,
-    "bytecode": 8
+  "fallback": {
+    "migration": "Use the reviewed Bukkit 1.8.8 API boundary or select a newer explicitly verified profile.",
+    "policy": "blocked"
   },
-  "build": {
-    "system": "gradle",
-    "wrapper": "7.6.4",
-    "wrapperSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
-    "dsl": "groovy",
-    "plugins": [
-      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
-    ],
-    "properties": [],
-    "jvmArguments": [],
-    "sourceSets": [],
-    "tasks": [],
-    "publishing": false
-  },
-  "repositories": [
-    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
-  ],
-  "mappings": { "strategy": "none", "components": [] },
-  "metadata": {
-    "format": "plugin-yml",
-    "files": ["src/main/resources/plugin.yml"],
-    "fieldMappings": [
-      { "field": "project.name", "path": "name", "required": true },
-      { "field": "project.mainClass", "path": "main", "required": true },
-      { "field": "project.version", "path": "version", "required": true }
-    ]
-  },
-  "sourceLayout": {
-    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
-    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
-    "testRoots": [{ "name": "test", "path": "src/test/java" }]
-  },
-  "languages": ["java"],
+  "family": "bukkit",
   "features": [
-    { "id": "commands", "support": "supported" },
-    { "id": "permissions", "support": "supported" },
-    { "id": "libraries", "support": "conditional" }
+    {
+      "id": "commands",
+      "support": "supported"
+    },
+    {
+      "id": "permissions",
+      "support": "supported"
+    },
+    {
+      "id": "libraries",
+      "support": "conditional"
+    }
   ],
+  "id": "bukkit",
   "incompatibilities": [
     {
-      "id": "modern-api",
       "condition": "selected API requires newer Java",
+      "id": "modern-api",
       "reason": "Bukkit API keys do not alone prove the Java toolchain.",
       "resolution": "Resolve Java from the matching server and API evidence."
     }
   ],
+  "java": {
+    "bytecode": 8,
+    "distribution": "temurin",
+    "language": 8,
+    "runtime": 8
+  },
+  "languages": ["java"],
+  "mappings": {
+    "components": [],
+    "strategy": "none"
+  },
+  "metadata": {
+    "fieldMappings": [
+      {
+        "field": "project.name",
+        "path": "name",
+        "required": true
+      },
+      {
+        "field": "project.mainClass",
+        "path": "main",
+        "required": true
+      },
+      {
+        "field": "project.version",
+        "path": "version",
+        "required": true
+      }
+    ],
+    "files": ["src/main/resources/plugin.yml"],
+    "format": "plugin-yml"
+  },
+  "platform": "bukkit",
+  "repositories": [
+    {
+      "id": "central",
+      "url": "https://repo.maven.apache.org/maven2/"
+    },
+    {
+      "contentFilters": ["org.bukkit"],
+      "id": "spigot",
+      "url": "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+  ],
+  "revision": 2,
+  "schemaVersion": 1,
+  "sourceLayout": {
+    "resourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/resources"
+      }
+    ],
+    "sourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/java"
+      }
+    ],
+    "testRoots": [
+      {
+        "name": "test",
+        "path": "src/test/java"
+      }
+    ]
+  },
+  "status": "reviewed",
   "verification": {
+    "artifactPatterns": ["build/libs/tuple-probe-1.0.0.jar"],
     "commands": [
       ["./gradlew", "build"],
       ["./gradlew", "test"]
     ],
-    "artifactPatterns": ["build/libs/*.jar"],
     "inspection": ["plugin.yml"]
-  },
-  "artifact": {
-    "patterns": ["build/libs/*.jar"],
-    "metadataPaths": ["plugin.yml"],
-    "requiredEntries": ["plugin.yml"]
-  },
-  "fallback": {
-    "policy": "blocked",
-    "migration": "Use the exact Bukkit API and server boundary once verified."
   }
 }

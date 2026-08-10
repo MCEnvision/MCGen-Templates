@@ -1,126 +1,197 @@
 {
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
-  "schemaVersion": 1,
-  "id": "sponge",
-  "revision": 1,
-  "status": "blocked",
-  "family": "sponge",
-  "category": "plugin",
-  "platform": "sponge",
-  "blockers": [
-    {
-      "id": "sponge-api-evidence",
-      "reason": "SpongeAPI line, implementation, Java, and historical metadata boundaries need tuple verification.",
-      "evidence": ["sources/snapshots/sponge/2026-08-10-r2.json"],
-      "resolution": "Verify representative API lines and preserve metadata format changes as separate profiles."
-    }
-  ],
+  "artifact": {
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 128,
+    "metadataFields": {
+      "entrypoint": "org.example.tuple.TupleProbe",
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "metadataPaths": ["META-INF/sponge_plugins.json"],
+    "patterns": ["build/libs/tuple-probe-1.0.0.jar"],
+    "projectIdentity": {
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "requiredEntries": [
+      "META-INF/sponge_plugins.json",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "resourceNamespaces": []
+  },
+  "build": {
+    "dsl": "groovy",
+    "jvmArguments": [],
+    "plugins": [
+      {
+        "id": "java-library",
+        "repositoryIds": ["central"],
+        "version": "8.8"
+      }
+    ],
+    "properties": [],
+    "publishing": false,
+    "sourceSets": [],
+    "system": "gradle",
+    "tasks": [],
+    "wrapper": "8.8",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperKind": "launcher-script",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
+  },
   "catalog": {
-    "snapshotId": "2026-08-10-r4",
-    "indexPath": "catalog/2026-08-10-r4/platforms/sponge/index.json",
-    "indexSha256": "a2e90be23debd373565ca45074f6634cd2a7c68d02f85fab4f7a67842ccc6792",
+    "indexPath": "catalog/2026-08-10-final/platforms/sponge/index.json",
+    "indexSha256": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
     "selectors": [
       {
-        "platform": "sponge",
-        "keyKind": "api",
-        "keys": { "mode": "all-shards" },
         "components": [
           {
             "component": "spongeapi",
             "coordinatePrefix": "org.spongepowered:spongeapi:",
-            "mode": "all-components"
+            "mode": "explicit",
+            "versions": ["org.spongepowered:spongeapi:10.0.0"]
           }
         ],
         "evidence": [
           {
-            "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
             "path": "sources/snapshots/sponge/2026-08-10-r2.json",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"],
             "sha256": "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec",
-            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+            "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90"
           }
-        ]
+        ],
+        "keyKind": "api",
+        "keys": {
+          "mode": "explicit",
+          "values": ["10.0"]
+        },
+        "platform": "sponge"
       }
-    ]
+    ],
+    "snapshotId": "2026-08-10-final"
   },
+  "category": "plugin",
   "components": [
     {
-      "id": "spongeapi",
+      "catalogComponent": "spongeapi",
       "coordinate": "org.spongepowered:spongeapi",
-      "version": "selected-from-catalog",
+      "id": "spongeapi",
       "range": "api-key-compatible",
       "required": true,
-      "catalogComponent": "spongeapi"
+      "version": "selected-from-catalog"
     }
   ],
-  "java": {
-    "distribution": "temurin",
-    "runtime": 17,
-    "language": 17,
-    "bytecode": 17
+  "fallback": {
+    "migration": "Resolve the matching Sponge implementation and metadata boundary.",
+    "policy": "blocked"
   },
-  "build": {
-    "system": "gradle",
-    "wrapper": "8.8",
-    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
-    "dsl": "kotlin",
-    "plugins": [
-      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
-    ],
-    "properties": [],
-    "jvmArguments": [],
-    "sourceSets": [],
-    "tasks": [],
-    "publishing": false
-  },
-  "repositories": [
-    { "id": "sponge", "url": "https://repo.spongepowered.org/maven/" },
-    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
-  ],
-  "mappings": { "strategy": "none", "components": [] },
-  "metadata": {
-    "format": "sponge-plugin-json",
-    "files": ["src/main/resources/META-INF/sponge_plugins.json"],
-    "fieldMappings": [
-      { "field": "project.id", "path": "id", "required": true },
-      { "field": "project.name", "path": "name", "required": true },
-      { "field": "project.mainClass", "path": "entrypoint", "required": true },
-      { "field": "project.version", "path": "version", "required": true }
-    ]
-  },
-  "sourceLayout": {
-    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
-    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
-    "testRoots": [{ "name": "test", "path": "src/test/java" }]
-  },
-  "languages": ["java", "kotlin"],
+  "family": "sponge",
   "features": [
-    { "id": "commands", "support": "supported" },
-    { "id": "events", "support": "supported" },
-    { "id": "configuration", "support": "conditional" }
+    {
+      "id": "commands",
+      "support": "supported"
+    },
+    {
+      "id": "events",
+      "support": "supported"
+    },
+    {
+      "id": "configuration",
+      "support": "conditional"
+    }
   ],
+  "id": "sponge",
   "incompatibilities": [
     {
-      "id": "historical-metadata",
       "condition": "selected API line uses a different plugin metadata location",
+      "id": "historical-metadata",
       "reason": "Sponge metadata and implementation compatibility changed across API history.",
       "resolution": "Create a dedicated boundary profile with exact metadata evidence."
     }
   ],
+  "java": {
+    "bytecode": 17,
+    "distribution": "temurin",
+    "language": 17,
+    "runtime": 17
+  },
+  "languages": ["java", "kotlin"],
+  "mappings": {
+    "components": [],
+    "strategy": "none"
+  },
+  "metadata": {
+    "fieldMappings": [
+      {
+        "field": "project.id",
+        "path": "id",
+        "required": true
+      },
+      {
+        "field": "project.name",
+        "path": "name",
+        "required": true
+      },
+      {
+        "field": "project.mainClass",
+        "path": "entrypoint",
+        "required": true
+      },
+      {
+        "field": "project.version",
+        "path": "version",
+        "required": true
+      }
+    ],
+    "files": ["src/main/resources/META-INF/sponge_plugins.json"],
+    "format": "sponge-plugin-json"
+  },
+  "platform": "sponge",
+  "repositories": [
+    {
+      "id": "sponge",
+      "url": "https://repo.spongepowered.org/maven/"
+    },
+    {
+      "id": "central",
+      "url": "https://repo.maven.apache.org/maven2/"
+    }
+  ],
+  "revision": 2,
+  "schemaVersion": 1,
+  "sourceLayout": {
+    "resourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/resources"
+      }
+    ],
+    "sourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/java"
+      }
+    ],
+    "testRoots": [
+      {
+        "name": "test",
+        "path": "src/test/java"
+      }
+    ]
+  },
+  "status": "reviewed",
   "verification": {
+    "artifactPatterns": ["build/libs/*.jar"],
     "commands": [
       ["./gradlew", "build"],
       ["./gradlew", "test"]
     ],
-    "artifactPatterns": ["build/libs/*.jar"],
     "inspection": ["META-INF/sponge_plugins.json"]
-  },
-  "artifact": {
-    "patterns": ["build/libs/*.jar"],
-    "metadataPaths": ["META-INF/sponge_plugins.json"],
-    "requiredEntries": ["META-INF/sponge_plugins.json"]
-  },
-  "fallback": {
-    "policy": "blocked",
-    "migration": "Resolve the matching Sponge implementation and metadata boundary."
   }
 }

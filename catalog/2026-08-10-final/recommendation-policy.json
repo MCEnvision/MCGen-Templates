@@ -1,0 +1,22 @@
+{
+  "$schema": "urn:mcgen:schema:catalog-recommendation-policy:1",
+  "eligibleChannels": [
+    "release"
+  ],
+  "eligibleStatuses": [
+    "verified",
+    "legacy-verified"
+  ],
+  "fallback": "none",
+  "id": "default-recommendation",
+  "schemaVersion": 1,
+  "tieBreakOrder": [
+    "official-marker",
+    "status",
+    "nondeprecated",
+    "version",
+    "evidence",
+    "text"
+  ],
+  "version": "1.0.0"
+}

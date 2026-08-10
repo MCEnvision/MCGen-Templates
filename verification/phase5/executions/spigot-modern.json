@@ -2,7 +2,9 @@
   "$schema": "urn:mcgen:schema:phase5-execution:1",
   "artifact": {
     "expectation": {
-      "entrypointClasses": ["org.example.tuple.TupleProbe"],
+      "entrypointClasses": [
+        "org.example.tuple.TupleProbe"
+      ],
       "expectedExtension": ".jar",
       "iconPaths": [],
       "maxEntries": 128,
@@ -12,14 +14,21 @@
         "name": "Tuple Probe",
         "version": "1.0.0"
       },
-      "metadataPaths": ["plugin.yml"],
-      "patterns": ["build/libs/tuple-probe-1.0.0.jar"],
+      "metadataPaths": [
+        "plugin.yml"
+      ],
+      "patterns": [
+        "build/libs/tuple-probe-1.0.0.jar"
+      ],
       "projectIdentity": {
         "id": "tuple-probe",
         "name": "Tuple Probe",
         "version": "1.0.0"
       },
-      "requiredEntries": ["plugin.yml", "org/example/tuple/TupleProbe.class"],
+      "requiredEntries": [
+        "plugin.yml",
+        "org/example/tuple/TupleProbe.class"
+      ],
       "resourceNamespaces": []
     },
     "path": "build/libs/tuple-probe-1.0.0.jar"
@@ -27,12 +36,16 @@
   "build": {
     "commands": [
       {
-        "args": ["build"],
+        "args": [
+          "build"
+        ],
         "executable": "./gradlew",
         "purpose": "build"
       },
       {
-        "args": ["test"],
+        "args": [
+          "test"
+        ],
         "executable": "./gradlew",
         "purpose": "unit-tests"
       }
@@ -92,7 +105,9 @@
         "javaLanguage": 21
       },
       "project": {
-        "authors": ["EnVy"],
+        "authors": [
+          "EnVy"
+        ],
         "description": "tuple probe",
         "id": "tuple-probe",
         "license": "MIT",
@@ -111,15 +126,15 @@
     },
     "tuple": {
       "catalogKey": "1.21.1",
-      "catalogSnapshotId": "2026-08-10-r4",
+      "catalogSnapshotId": "2026-08-10-final",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+        "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
         "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "0cffc1bd8444d4a459fbec0e19d69f91334245155503bd0964fcbca4ca6a3338",
+        "profile": "e9079c6b8b6375c5d1c66746337c914f992c5e93f949bdf0430a1b71feb36aeb",
         "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
       },
       "descriptorId": "spigot-modern",
@@ -153,18 +168,18 @@
   "profilePath": "profiles/spigot-modern.json",
   "tuple": {
     "blockers": [],
-    "id": "80265f380f7e2feb3c1ea14b9216f795ec9836db3da37422f44d5d260a9f20b4",
+    "id": "93920883baeefed5a8f972a90d60cc07b112e14d1a9168b07a8bdde908693720",
     "identity": {
       "catalogKey": "1.21.1",
-      "catalogSnapshotId": "2026-08-10-r4",
+      "catalogSnapshotId": "2026-08-10-final",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+        "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
         "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "0cffc1bd8444d4a459fbec0e19d69f91334245155503bd0964fcbca4ca6a3338",
+        "profile": "e9079c6b8b6375c5d1c66746337c914f992c5e93f949bdf0430a1b71feb36aeb",
         "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
       },
       "descriptorId": "spigot-modern",

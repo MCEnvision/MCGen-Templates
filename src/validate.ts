@@ -531,6 +531,18 @@ async function catalogIntegrityFailures(
       }
     }
 
+    const catalogComponentById = new Map<
+      string,
+      { component: JsonObject; shard: JsonObject }
+    >();
+    for (const shard of shardById.values()) {
+      for (const component of objects(shard["components"])) {
+        if (typeof component["id"] === "string") {
+          catalogComponentById.set(component["id"], { component, shard });
+        }
+      }
+    }
+
     for (const [shardId, shard] of shardById) {
       if (
         "profileBinding" in shard ||
@@ -686,6 +698,8 @@ async function catalogIntegrityFailures(
           }
           const tracksRejectedRecords =
             loaded.document["rejectionAccountingVersion"] === 1;
+          const tracksComponentMappings =
+            loaded.document["coverageMappingVersion"] === 1;
           const covered = new Map<string, JsonObject>();
           const rejectedCovered = new Map<string, JsonObject>();
           const coverageSnapshots = new Map<string, JsonObject>();
@@ -769,8 +783,176 @@ async function catalogIntegrityFailures(
                     `${root.path} coverage representation has no matching shard`,
                   );
                 }
-                recomputedStatuses["discovered"] =
-                  (recomputedStatuses["discovered"] ?? 0) + 1;
+                if (tracksComponentMappings) {
+                  const componentId = entry["componentId"];
+                  const mapping =
+                    typeof componentId === "string"
+                      ? catalogComponentById.get(componentId)
+                      : undefined;
+                  if (!mapping || !shard || mapping.shard !== shard) {
+                    failures.push(
+                      `${root.path} coverage mapping has no matching component`,
+                    );
+                  }
+                  const componentReferences = mapping
+                    ? objects(mapping.component["sourceEntries"])
+                    : [];
+                  if (
+                    !componentReferences.some(
+                      (reference) =>
+                        reference["snapshotId"] === snapshotId &&
+                        reference["entryIndex"] === entryIndex,
+                    )
+                  ) {
+                    failures.push(
+                      `${root.path} coverage mapping does not reference its source entry`,
+                    );
+                  }
+                  const verificationStatus = entry["verificationStatus"];
+                  if (
+                    verificationStatus !== "verified" &&
+                    verificationStatus !== "legacy-verified" &&
+                    verificationStatus !== "blocked"
+                  ) {
+                    failures.push(
+                      `${root.path} coverage mapping has an invalid verification status`,
+                    );
+                  } else {
+                    recomputedStatuses[verificationStatus] =
+                      (recomputedStatuses[verificationStatus] ?? 0) + 1;
+                  }
+                  const resolution = entry["resolution"];
+                  if (!isObject(resolution)) {
+                    failures.push(
+                      `${root.path} coverage mapping is missing its resolution`,
+                    );
+                  } else if (verificationStatus === "blocked") {
+                    const blockerId = resolution["blockerId"];
+                    const blockerIds = new Set(
+                      objects(platform["blockers"])
+                        .map((blocker) => blocker["id"])
+                        .filter((id): id is string => typeof id === "string"),
+                    );
+                    if (
+                      resolution["kind"] !== "blocker" ||
+                      typeof blockerId !== "string" ||
+                      !blockerIds.has(blockerId)
+                    ) {
+                      failures.push(
+                        `${root.path} blocked coverage mapping does not identify a platform blocker`,
+                      );
+                    }
+                  } else if (
+                    verificationStatus === "verified" ||
+                    verificationStatus === "legacy-verified"
+                  ) {
+                    const evidence = objects(resolution["evidence"]);
+                    if (
+                      resolution["kind"] !== "exact-evidence" ||
+                      evidence.length === 0
+                    ) {
+                      failures.push(
+                        `${root.path} verified coverage mapping does not identify exact evidence`,
+                      );
+                    }
+                    const tupleIds = new Set<string>();
+                    for (const reference of evidence) {
+                      const tupleId = reference["tupleId"];
+                      const evidencePath = reference["evidencePath"];
+                      const evidenceDigest = reference["evidenceDigest"];
+                      const evidenceStatus = reference["status"];
+                      if (
+                        typeof tupleId !== "string" ||
+                        typeof evidencePath !== "string" ||
+                        typeof evidenceDigest !== "string" ||
+                        (evidenceStatus !== "verified" &&
+                          evidenceStatus !== "legacy-verified") ||
+                        tupleIds.has(tupleId) ||
+                        !evidencePath.startsWith(
+                          "verification/phase5/evidence/",
+                        ) ||
+                        evidencePath.includes("..")
+                      ) {
+                        failures.push(
+                          `${root.path} exact coverage evidence reference is invalid`,
+                        );
+                        continue;
+                      }
+                      tupleIds.add(tupleId);
+                      const evidenceDocument = await load(
+                        evidencePath,
+                        root.path,
+                      );
+                      if (!evidenceDocument) continue;
+                      if (
+                        documentSchema(evidenceDocument.document) !==
+                        "urn:mcgen:schema:tuple-evidence:1"
+                      ) {
+                        failures.push(
+                          `${root.path} exact coverage evidence is not a tuple evidence record`,
+                        );
+                        continue;
+                      }
+                      digestMatches(
+                        `${root.path} exact coverage evidence ${evidencePath}`,
+                        evidenceDocument.document,
+                        evidenceDigest,
+                      );
+                      const evidenceRecord = isObject(evidenceDocument.document)
+                        ? evidenceDocument.document
+                        : {};
+                      if (
+                        evidenceRecord["status"] !== evidenceStatus ||
+                        !isObject(evidenceRecord["key"])
+                      ) {
+                        failures.push(
+                          `${root.path} exact coverage evidence status or key does not match`,
+                        );
+                        continue;
+                      }
+                      const key = evidenceRecord["key"];
+                      const identity = isObject(key["identity"])
+                        ? key["identity"]
+                        : {};
+                      const identityComponents = isObject(
+                        identity["components"],
+                      )
+                        ? identity["components"]
+                        : {};
+                      const components = Object.values(identityComponents);
+                      if (key["digest"] !== tupleId) {
+                        failures.push(
+                          `${root.path} exact coverage evidence tuple identity does not match`,
+                        );
+                      }
+                      const snapshotEntries = snapshotById.get(snapshotId);
+                      const sourceEntry = snapshotEntries
+                        ? objects(snapshotEntries["entries"])[entryIndex]
+                        : undefined;
+                      const sourceCoordinate = sourceEntry?.["coordinate"];
+                      const sourceVersion =
+                        typeof sourceCoordinate === "string"
+                          ? sourceCoordinate.slice(
+                              sourceCoordinate.lastIndexOf(":") + 1,
+                            )
+                          : undefined;
+                      if (
+                        identity["catalogKey"] !==
+                          sourceEntry?.["catalogKey"] ||
+                        (typeof sourceCoordinate === "string" &&
+                          !components.includes(sourceCoordinate) &&
+                          !components.includes(sourceVersion))
+                      ) {
+                        failures.push(
+                          `${root.path} exact coverage evidence does not cover the source component`,
+                        );
+                      }
+                    }
+                  }
+                } else {
+                  recomputedStatuses["discovered"] =
+                    (recomputedStatuses["discovered"] ?? 0) + 1;
+                }
               } else {
                 failures.push(
                   `${root.path} coverage entries must represent accepted source entries`,
@@ -789,6 +971,7 @@ async function catalogIntegrityFailures(
             for (const blocker of tracksRejectedRecords
               ? objects(platform["blockers"])
               : []) {
+              if (!("rejectedEntries" in blocker)) continue;
               const rejectedEntries = objects(blocker["rejectedEntries"]);
               if (rejectedEntries.length !== 1) {
                 failures.push(

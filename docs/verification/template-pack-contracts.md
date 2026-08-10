@@ -32,7 +32,7 @@ For every source snapshot:
 
 The first Forge snapshot passes with `5,033` exact artifacts, `77` catalog keys, zero rejected artifacts, and two documented Forge-only historic catalog-key warnings.
 
-The current complete capture and catalog are `2026-08-10-r4`. The fourteen current snapshots contain `27,706` accepted entries and `20` rejected records. The catalog contains `2,540` content addressed shards, represents every accepted entry, and assigns one exact blocker to every rejected record. `tests/committed-snapshot-counts.test.ts` pins the entry, rejection, and provenance-record counts for every historical and current committed snapshot.
+The current complete capture and catalog are `2026-08-10-final`. The fourteen current snapshots contain `27,706` accepted entries and `20` rejected records. The catalog contains `2,540` content addressed component shards, represents every accepted entry, assigns one exact blocker to every nonverified component, and assigns one exact blocker to every rejected record. `tests/committed-snapshot-counts.test.ts` pins the entry, rejection, and provenance-record counts for every historical and current committed snapshot.
 
 ## Required GitHub Checks
 

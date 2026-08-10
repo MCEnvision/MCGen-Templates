@@ -2,46 +2,30 @@
   "$schema": "urn:mcgen:schema:phase5-audit:1",
   "blockers": [
     "descriptor architectury: Architectury generation requires an evidenced intersection for every selected target loader.",
-    "descriptor bukkit: Bukkit API and server boundary compilation evidence is pending.",
-    "descriptor bungeecord: BungeeCord API and protocol compatibility boundaries require later compilation and artifact inspection evidence.",
-    "descriptor fabric: Fabric Loom and mapping intersections remain discovered until later compilation and artifact inspection gates pass.",
     "descriptor forge: Forge tuples remain discovered until later compilation and artifact inspection gates pass.",
     "descriptor multiloader: A multiloader target is selectable only when every selected loader intersection is explicitly evidenced.",
     "descriptor neoforge: NeoForge toolchain boundaries remain discovered until later compilation and artifact inspection gates pass.",
-    "descriptor paper-modern: Paper modern bootstrapper and dependency graph boundaries require later compilation and artifact inspection evidence.",
-    "descriptor paper-traditional: Paper Fill builds and plugin metadata boundaries require later compilation and artifact inspection evidence.",
-    "descriptor spigot: Spigot API and server boundary compilation evidence is pending.",
-    "descriptor sponge: Sponge API and implementation compatibility boundaries require later compilation and artifact inspection evidence.",
-    "descriptor velocity: Velocity API and protocol compatibility boundaries require later compilation and artifact inspection evidence.",
     "profile architectury-multiloader: Architectury targets must prove a common Minecraft, mappings, Fabric, Forge, or NeoForge intersection before generation.",
-    "profile bukkit: Bukkit API and historical Java or build boundaries need representative compilation evidence.",
-    "profile bungeecord: BungeeCord API and historical Java or metadata boundaries need compilation evidence.",
-    "profile fabric: Fabric Loader, Loom, mappings, Fabric API, language adapters, Java, and wrapper intersections are not yet build verified.",
     "profile forge-legacy: ForgeGradle, mappings, wrapper, and JDK boundaries still require tuple specific build evidence.",
     "profile forge-modern: Modern ForgeGradle and metadata boundaries need tuple specific build evidence.",
-    "profile neoforge-modern: NeoGradle and ModDevGradle require separate, tuple specific verification before selection is enabled.",
-    "profile paper-modern: Paper plugin model and dependency graph fields need exact version boundary verification.",
-    "profile paper-traditional: Traditional Paper plugin.yml boundaries need exact API and Java tuple verification.",
-    "profile spigot: Spigot API and BuildTools provenance need representative compilation and metadata evidence.",
-    "profile sponge: SpongeAPI line, implementation, Java, and historical metadata boundaries need tuple verification.",
-    "profile velocity: Velocity API lines, Java, metadata, and optional Kotlin or annotation processing boundaries need compilation evidence."
+    "profile neoforge-modern: NeoGradle and ModDevGradle require separate, tuple specific verification before selection is enabled."
   ],
   "descriptors": {
-    "blocked": 12,
-    "reviewed": 2,
+    "blocked": 4,
+    "reviewed": 10,
     "total": 14
   },
-  "digest": "af2a5412bbe014b8c97c0f45c5fe54055039c50bd7c4634eb8ab0df0b81d8769",
+  "digest": "c51535d7643f05d3c469c6a20c67c4659b42978d0506a6b96d9c76160ba9e19c",
   "evidence": {
-    "total": 2,
+    "total": 10,
     "unresolved": 0,
-    "verified": 2
+    "verified": 10
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "kind": "phase5-audit",
   "profiles": {
-    "blocked": 12,
-    "reviewed": 2,
+    "blocked": 4,
+    "reviewed": 10,
     "total": 14
   },
   "schemaVersion": 1,

@@ -1,0 +1,366 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-20",
+      "id": "component.paper.8d0da8ddff7349ef9ce9605f",
+      "sourceEntries": [
+        {
+          "entryIndex": 4911,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-21",
+      "id": "component.paper.decadad1205212d56da406fc",
+      "sourceEntries": [
+        {
+          "entryIndex": 4912,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "21"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-22",
+      "id": "component.paper.a2a57b9b187f27cfc584ad99",
+      "sourceEntries": [
+        {
+          "entryIndex": 4913,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "22"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-23",
+      "id": "component.paper.ab7c1046b81f219847b60803",
+      "sourceEntries": [
+        {
+          "entryIndex": 4914,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "23"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-24",
+      "id": "component.paper.e7a810b700ed0559c89d7312",
+      "sourceEntries": [
+        {
+          "entryIndex": 4915,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "24"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-25",
+      "id": "component.paper.5451026541b4e9f41251cdc8",
+      "sourceEntries": [
+        {
+          "entryIndex": 4916,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "25"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-26",
+      "id": "component.paper.e53880c277d6df767ce06d07",
+      "sourceEntries": [
+        {
+          "entryIndex": 4917,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "26"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-27",
+      "id": "component.paper.65b5f6dde8a87dfa8d55e465",
+      "sourceEntries": [
+        {
+          "entryIndex": 4918,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "27"
+    },
+    {
+      "channel": "alpha",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.21.11-rc2-29",
+      "id": "component.paper.e55c3695d28579f4ad3c61e7",
+      "sourceEntries": [
+        {
+          "entryIndex": 4919,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "29"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.21.11-rc2",
+      "id": "component.paper.ea2fba71b05e374ca246c714",
+      "sourceEntries": [
+        {
+          "entryIndex": 4920,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.11-rc2"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4916,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.5451026541b4e9f41251cdc8"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4918,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.65b5f6dde8a87dfa8d55e465"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4911,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.8d0da8ddff7349ef9ce9605f"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4913,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.a2a57b9b187f27cfc584ad99"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4914,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.ab7c1046b81f219847b60803"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4912,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.decadad1205212d56da406fc"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4917,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.e53880c277d6df767ce06d07"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4919,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.e55c3695d28579f4ad3c61e7"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4915,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0,
+            48
+          ]
+        }
+      ],
+      "to": "component.paper.e7a810b700ed0559c89d7312"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.24f55f49dc216626c1ff9d00",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4920,
+          "snapshotId": "paper.d0430553c2aaa457429a549e",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.ea2fba71b05e374ca246c714"
+    }
+  ],
+  "id": "catalog.paper.a159cf3d025ff0bd35be3567",
+  "key": "1.21.11-rc2",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.d0430553c2aaa457429a549e"
+  ]
+}
