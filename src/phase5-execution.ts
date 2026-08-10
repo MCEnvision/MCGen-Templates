@@ -1,5 +1,12 @@
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import {
+  mkdir,
+  mkdtemp,
+  readdir,
+  readFile,
+  rm,
+  writeFile,
+} from "node:fs/promises";
+import { dirname, join, relative } from "node:path";
 import { canonicalJson } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
 import {
@@ -66,14 +73,53 @@ export type Phase5ExecutionResult = {
   secondArtifact?: ArtifactInspection;
 };
 
-function treeFiles(fixture: GeneratedFixture): ReproducibilityFile[] {
-  return [...fixture.files.entries()]
-    .sort(([left], [right]) => left.localeCompare(right))
-    .map(([path, content]) => ({
-      path,
+async function outputTreeFiles(
+  root: string,
+  current = root,
+): Promise<ReproducibilityFile[]> {
+  const files: ReproducibilityFile[] = [];
+  for (const entry of await readdir(current, { withFileTypes: true })) {
+    const path = join(current, entry.name);
+    if (entry.isSymbolicLink())
+      throw new Error(`build output contains a symbolic link ${path}`);
+    if (entry.isDirectory()) {
+      files.push(...(await outputTreeFiles(root, path)));
+      continue;
+    }
+    if (!entry.isFile())
+      throw new Error(`build output contains a special file ${path}`);
+    const content = await readFile(path);
+    files.push({
+      path: relative(root, path).replaceAll("\\", "/"),
       sha256: sha256(content),
       bytes: content.byteLength,
-    }));
+    });
+  }
+  return files.sort((left, right) => left.path.localeCompare(right.path));
+}
+
+function failureClass(
+  error: unknown,
+): Exclude<BuildEvidence["failureClass"], undefined> {
+  const message =
+    error instanceof Error
+      ? error.message.toLowerCase()
+      : String(error).toLowerCase();
+  if (
+    /(?:timeout|timed out|econnreset|etimedout|temporary|network)/u.test(
+      message,
+    )
+  )
+    return "transient";
+  if (
+    /(?:policy|raw override|symbolic link|special file|unsafe|wrapper checksum)/u.test(
+      message,
+    )
+  )
+    return "policy";
+  if (/(?:java executable|distribution|enoent)/u.test(message))
+    return "environment";
+  return "deterministic";
 }
 
 function safeArtifactPath(path: string): string {
@@ -106,6 +152,7 @@ async function executeOnce(input: {
   root: string;
   build: BuildEvidence;
   artifact: ArtifactInspection;
+  outputTree: ReproducibilityFile[];
 }> {
   const root = await mkdtemp(
     join(input.request.parentDirectory, "mcgen-phase5-run-"),
@@ -160,6 +207,7 @@ async function executeOnce(input: {
           failures: ["build did not pass, artifact inspection was skipped"],
           warnings: [],
         },
+        outputTree: await outputTreeFiles(root).catch(() => []),
       };
     }
     const artifactBytes = await readFile(absoluteArtifact);
@@ -171,6 +219,7 @@ async function executeOnce(input: {
         artifactBytes,
         input.request.artifact.expectation,
       ),
+      outputTree: await outputTreeFiles(root),
     };
   } catch (error) {
     return {
@@ -180,7 +229,7 @@ async function executeOnce(input: {
         startedAt: input.request.generatedAt,
         finishedAt: new Date().toISOString(),
         commands: [],
-        failureClass: "environment",
+        failureClass: failureClass(error),
       },
       artifact: {
         status: "failed",
@@ -192,6 +241,7 @@ async function executeOnce(input: {
         failures: [error instanceof Error ? error.message : String(error)],
         warnings: [],
       },
+      outputTree: await outputTreeFiles(root).catch(() => []),
     };
   }
 }
@@ -245,8 +295,8 @@ export async function executeTuple(
   const second = await executeOnce({ request, fixture: secondFixture });
   await rm(second.root, { recursive: true, force: true });
   const reproducibility = compareReproducibleTrees(
-    treeFiles(firstFixture),
-    treeFiles(secondFixture),
+    first.outputTree,
+    second.outputTree,
   );
   const artifactSame =
     first.artifact.status === "passed" &&
@@ -265,7 +315,7 @@ export async function executeTuple(
     descriptorRevision: request.tuple.identity.descriptorRevision,
     build: first.build,
     artifact: first.artifact,
-    outputTreeDigest: firstFixture.treeDigest,
+    outputTreeDigest: reproducibility.firstDigest,
     reproducibility: {
       reproducible,
       firstDigest: reproducibility.firstDigest,
