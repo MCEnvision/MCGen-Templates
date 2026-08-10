@@ -230,13 +230,29 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
-        run: gh release create "${RELEASE_TAG}" --draft --prerelease --title "mcgen template pack ${RELEASE_TAG#v}" --notes-file release-assets/release-notes.md --verify-tag
+        run: |
+          if release=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RELEASE_TAG}" 2>/dev/null); then
+            test "$(jq -r .draft <<<"${release}")" = true
+          else
+            prerelease_flag=""
+            [[ "${RELEASE_TAG}" == *-* ]] && prerelease_flag="--prerelease"
+            gh release create "${RELEASE_TAG}" --draft ${prerelease_flag} --title "mcgen template pack ${RELEASE_TAG#v}" --notes-file release-assets/release-notes.md --verify-tag
+          fi
 
       - name: upload validated assets
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
         run: gh release upload "${RELEASE_TAG}" release-assets/* --clobber
+
+      - name: verify draft asset set
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          expected=$(printf '%s\n' coverage.json mcgen-template-pack.zip mcgen-template-pack.zip.sha256 mcgen-template-pack.zip.sha512 pack-manifest.json release-notes.md rollback-test.json source-commit-manifest.json spdx-sbom.json verification-summary.json | sort)
+          actual=$(gh release view "${RELEASE_TAG}" --json assets --jq '.assets[].name' | sort)
+          test "${actual}" = "${expected}"
 
       - name: verify downloaded assets offline
         env:
@@ -256,7 +272,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
-        run: gh release edit "${RELEASE_TAG}" --draft=false --prerelease
+        run: |
+          prerelease_flag=""
+          [[ "${RELEASE_TAG}" == *-* ]] && prerelease_flag="--prerelease"
+          gh release edit "${RELEASE_TAG}" --draft=false ${prerelease_flag}
 
       - name: verify published immutable release
         env:
@@ -266,6 +285,9 @@ jobs:
           release=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RELEASE_TAG}")
           test "$(jq -r .draft <<<"${release}")" = false
           test "$(jq -r .immutable <<<"${release}")" = true
+          expected=$(printf '%s\n' coverage.json mcgen-template-pack.zip mcgen-template-pack.zip.sha256 mcgen-template-pack.zip.sha512 pack-manifest.json release-notes.md rollback-test.json source-commit-manifest.json spdx-sbom.json verification-summary.json | sort)
+          actual=$(jq -r '.assets[].name' <<<"${release}" | sort)
+          test "${actual}" = "${expected}"
           rm -rf remote-release-published
           mkdir remote-release-published
           gh release download "${RELEASE_TAG}" --dir remote-release-published

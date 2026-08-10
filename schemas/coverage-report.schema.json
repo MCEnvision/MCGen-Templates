@@ -17,11 +17,6 @@
       "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
     },
     "rejectionAccountingVersion": { "const": 1 },
-    "packVersion": {
-      "type": "string",
-      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
-    },
-    "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
     "catalogId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
     "sourceSnapshots": {
       "type": "array",

@@ -85,6 +85,15 @@ function safeZipPath(name) {
     name
       .split("/")
       .some((part) => part === "" || part === "." || part === "..") ||
+    name
+      .split("/")
+      .some(
+        (part) =>
+          /[ .]$/u.test(part) ||
+          /^(?:con|prn|aux|nul|clock\$|com[0-9]|lpt[0-9])(?:\..*)?$/iu.test(
+            part,
+          ),
+      ) ||
     [...name].some((character) => character < " " || character === "\u007f")
   ) {
     fail(`unsafe zip path ${name}`);
@@ -201,25 +210,38 @@ function verifyProfile(entries, profilePath) {
   );
   if (!platformIndex || !Array.isArray(platformIndex.shards))
     fail(`missing ${catalog.indexPath}`);
+  const indexBytes = entries.get(catalog.indexPath);
+  if (!indexBytes || digest(indexBytes, "sha256") !== catalog.indexSha256)
+    fail(`${profilePath} catalog index digest mismatch`);
   for (const selector of catalog.selectors ?? []) {
-    const shard = platformIndex.shards.find(
-      (candidate) => candidate.key === selector.keys?.values?.[0],
-    );
-    if (!shard) fail(`${profilePath} selector has no shard`);
-    const shardDocument = JSON.parse(
-      entries.get(shard.path)?.toString("utf8") ?? "null",
-    );
-    if (!shardDocument || !Array.isArray(shardDocument.components))
-      fail(`missing ${shard.path}`);
-    for (const component of selector.components ?? []) {
-      for (const version of component.versions ?? []) {
-        if (
-          !shardDocument.components.some(
+    for (const key of selector.keys?.values ?? []) {
+      const shard = platformIndex.shards.find(
+        (candidate) => candidate.key === key,
+      );
+      if (!shard) fail(`${profilePath} selector has no shard for ${key}`);
+      const shardBytes = entries.get(shard.path);
+      if (!shardBytes || digest(shardBytes, "sha256") !== shard.sha256)
+        fail(`${profilePath} shard digest mismatch for ${key}`);
+      const shardDocument = JSON.parse(shardBytes.toString("utf8"));
+      if (!shardDocument || !Array.isArray(shardDocument.components))
+        fail(`missing ${shard.path}`);
+      for (const component of selector.components ?? []) {
+        for (const version of component.versions ?? []) {
+          const match = shardDocument.components.find(
             (candidate) =>
               candidate.coordinate === version || candidate.version === version,
+          );
+          if (!match)
+            fail(
+              `${profilePath} tuple ${version} is absent from ${shard.path}`,
+            );
+          if (
+            typeof component.coordinatePrefix === "string" &&
+            !String(match.coordinate).startsWith(component.coordinatePrefix)
           )
-        ) {
-          fail(`${profilePath} tuple ${version} is absent from ${shard.path}`);
+            fail(
+              `${profilePath} tuple ${version} has an unexpected coordinate`,
+            );
         }
       }
     }
@@ -231,6 +253,17 @@ const manifest = await json("pack-manifest.json");
 const sourceManifest = await json("source-commit-manifest.json");
 const summary = await json("verification-summary.json");
 const sbom = await json("spdx-sbom.json");
+const { createSchemaRegistry, validateWithSchema } =
+  await import("../dist/schema-registry.js");
+const registry = await createSchemaRegistry();
+function validateDocument(name, value) {
+  const result = validateWithSchema(registry, value);
+  if (!result.valid) fail(`${name} does not satisfy its schema`);
+}
+validateDocument("pack manifest", manifest);
+validateDocument("source commit manifest", sourceManifest);
+validateDocument("verification summary", summary);
+validateDocument("spdx sbom", sbom);
 const sha256 = digest(archive, "sha256");
 const sha512 = digest(archive, "sha512");
 if (
@@ -253,8 +286,11 @@ if (
   fail("sha512 mismatch");
 if (
   summary.status !== "verified" ||
+  summary.packVersion !== manifest.packVersion ||
+  summary.sourceCommit !== manifest.sourceCommit ||
   summary.archive?.sha256 !== sha256 ||
-  summary.archive?.sha512 !== sha512
+  summary.archive?.sha512 !== sha512 ||
+  summary.archive?.bytes !== archive.length
 )
   fail("verification summary does not match archive");
 if (
@@ -294,6 +330,12 @@ const entries = readZip(archive);
 const expected = new Map(
   manifest.files.map((file) => [file.path, file.sha256]),
 );
+if (
+  expected.size !== manifest.files.length ||
+  expected.has("pack-manifest.json")
+)
+  fail("manifest contains duplicate or reserved paths");
+for (const path of expected.keys()) safeZipPath(path);
 expected.set(
   "pack-manifest.json",
   digest(Buffer.from(canonical(manifest)), "sha256"),
@@ -309,11 +351,23 @@ verifyProfile(entries, "profiles/spigot-legacy.json");
 if (requireReleaseEvidence) {
   const coverage = await json("coverage.json");
   const rollback = await json("rollback-test.json");
+  validateDocument("release coverage", coverage);
+  validateDocument("rollback evidence", rollback);
   const releaseNotes = (await bytes("release-notes.md")).toString("utf8");
   if (!releaseNotes.trim()) fail("release notes are empty");
   if (
+    coverage.$schema !== "urn:mcgen:verification:release-coverage:1" ||
+    coverage.schemaVersion !== 1 ||
     coverage.packVersion !== manifest.packVersion ||
-    coverage.sourceCommit !== manifest.sourceCommit
+    coverage.sourceCommit !== manifest.sourceCommit ||
+    coverage.packCoveragePath !== "verification/phase5/coverage.json" ||
+    coverage.packCoverageSha256 !==
+      manifest.files.find(
+        (file) => file.path === "verification/phase5/coverage.json",
+      )?.sha256 ||
+    coverage.coverageDigest !==
+      digest(Buffer.from(canonical(coverage.coverage)), "sha256") ||
+    coverage.coverage?.$schema !== "urn:mcgen:schema:coverage-summary:1"
   )
     fail("coverage evidence identity mismatch");
   if (
