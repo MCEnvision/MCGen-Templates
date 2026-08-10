@@ -19,6 +19,9 @@ const sourceDirectory = resolve(
 const archivePath = join(sourceDirectory, "mcgen-template-pack.zip");
 const original = await readFile(archivePath);
 const originalDigest = createHash("sha256").update(original).digest("hex");
+const manifest = JSON.parse(
+  await readFile(join(sourceDirectory, "pack-manifest.json"), "utf8"),
+);
 const quarantine = await mkdtemp(join(tmpdir(), "mcgen-pack-quarantine-"));
 try {
   const candidate = join(quarantine, "mcgen-template-pack.zip");
@@ -48,6 +51,8 @@ try {
       {
         $schema: "urn:mcgen:verification:release-rollback:1",
         status: "passed",
+        packVersion: manifest.packVersion,
+        sourceCommit: manifest.sourceCommit,
         originalArchiveSha256: originalDigest,
         mutation: "archive byte corruption",
         recovery: "quarantine the candidate and preserve the prior release",

@@ -3,7 +3,7 @@ name: phase 6 immutable release
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+*"
+      - "v*"
   workflow_dispatch:
     inputs:
       tag:
@@ -23,6 +23,11 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: validate tag input
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: '[[ "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]'
+
       - name: checkout first clean copy
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -60,6 +65,32 @@ jobs:
         working-directory: checkout-b
         run: npm run verify
 
+      - name: verify reviewed phase 5 evidence in first copy
+        working-directory: checkout-a
+        run: |
+          backup=$(mktemp -d)
+          cp -a verification/phase5/evidence "${backup}/evidence"
+          find verification/phase5/evidence -type f -name '*.json' -delete
+          npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions --output-dir verification/phase5/evidence
+          diff -ru "${backup}/evidence" verification/phase5/evidence
+          generated_at=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/audit.json", "utf8")); process.stdout.write(value.generatedAt);')
+          npm run phase5:audit -- --output verification/phase5/release-audit.json --generated-at "${generated_at}"
+          cmp verification/phase5/audit.json verification/phase5/release-audit.json
+          rm -rf "${backup}" verification/phase5/release-audit.json
+
+      - name: verify reviewed phase 5 evidence in second copy
+        working-directory: checkout-b
+        run: |
+          backup=$(mktemp -d)
+          cp -a verification/phase5/evidence "${backup}/evidence"
+          find verification/phase5/evidence -type f -name '*.json' -delete
+          npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions --output-dir verification/phase5/evidence
+          diff -ru "${backup}/evidence" verification/phase5/evidence
+          generated_at=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/audit.json", "utf8")); process.stdout.write(value.generatedAt);')
+          npm run phase5:audit -- --output verification/phase5/release-audit.json --generated-at "${generated_at}"
+          cmp verification/phase5/audit.json verification/phase5/release-audit.json
+          rm -rf "${backup}" verification/phase5/release-audit.json
+
       - name: build first candidate
         working-directory: checkout-a
         env:
@@ -67,8 +98,14 @@ jobs:
         run: |
           node scripts/create-pack-input.mjs --pack-version "${PACK_VERSION#v}"
           npm run phase6:pack -- --input verification/phase6/release-input.json --output-dir verification/phase6/release-output
-          node scripts/verify-pack-offline.mjs --dir verification/phase6/release-output
+          node scripts/bind-release-evidence.mjs --dir verification/phase6/release-output --coverage verification/phase5/coverage.json
           node scripts/test-release-rollback.mjs --dir verification/phase6/release-output > verification/phase6/release-output/rollback-test.json
+          cat > verification/phase6/release-output/release-notes.md <<'EOF'
+          this release contains deterministic template pack content, source provenance, checksums, sbom, coverage, and offline verification evidence.
+
+          supported and verified boundaries are listed in the bundled coverage and verification records. discovered and blocked values remain explicit.
+          EOF
+          node scripts/verify-pack-offline.mjs --dir verification/phase6/release-output --require-release-evidence
 
       - name: build second candidate
         working-directory: checkout-b
@@ -77,8 +114,14 @@ jobs:
         run: |
           node scripts/create-pack-input.mjs --pack-version "${PACK_VERSION#v}"
           npm run phase6:pack -- --input verification/phase6/release-input.json --output-dir verification/phase6/release-output
-          node scripts/verify-pack-offline.mjs --dir verification/phase6/release-output
+          node scripts/bind-release-evidence.mjs --dir verification/phase6/release-output --coverage verification/phase5/coverage.json
           node scripts/test-release-rollback.mjs --dir verification/phase6/release-output > verification/phase6/release-output/rollback-test.json
+          cat > verification/phase6/release-output/release-notes.md <<'EOF'
+          this release contains deterministic template pack content, source provenance, checksums, sbom, coverage, and offline verification evidence.
+
+          supported and verified boundaries are listed in the bundled coverage and verification records. discovered and blocked values remain explicit.
+          EOF
+          node scripts/verify-pack-offline.mjs --dir verification/phase6/release-output --require-release-evidence
 
       - name: compare clean checkout outputs
         run: |
@@ -89,6 +132,9 @@ jobs:
           cmp checkout-a/verification/phase6/release-output/source-commit-manifest.json checkout-b/verification/phase6/release-output/source-commit-manifest.json
           cmp checkout-a/verification/phase6/release-output/spdx-sbom.json checkout-b/verification/phase6/release-output/spdx-sbom.json
           cmp checkout-a/verification/phase6/release-output/verification-summary.json checkout-b/verification/phase6/release-output/verification-summary.json
+          cmp checkout-a/verification/phase6/release-output/coverage.json checkout-b/verification/phase6/release-output/coverage.json
+          cmp checkout-a/verification/phase6/release-output/rollback-test.json checkout-b/verification/phase6/release-output/rollback-test.json
+          cmp checkout-a/verification/phase6/release-output/release-notes.md checkout-b/verification/phase6/release-output/release-notes.md
 
       - name: stage release assets
         run: |
@@ -101,7 +147,8 @@ jobs:
           cp checkout-a/verification/phase6/release-output/spdx-sbom.json release-assets/
           cp checkout-a/verification/phase6/release-output/verification-summary.json release-assets/
           cp checkout-a/verification/phase6/release-output/rollback-test.json release-assets/
-          cp checkout-a/verification/phase5/coverage.json release-assets/coverage.json
+          cp checkout-a/verification/phase6/release-output/coverage.json release-assets/
+          cp checkout-a/verification/phase6/release-output/release-notes.md release-assets/
           cat > release-assets/release-notes.md <<'EOF'
           this release contains deterministic template pack content, source provenance, checksums, sbom, coverage, and offline verification evidence.
 
@@ -125,7 +172,13 @@ jobs:
       contents: write
       id-token: write
       attestations: write
+    environment: production
     steps:
+      - name: validate tag input
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: '[[ "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]'
+
       - name: checkout exact tagged commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -150,17 +203,28 @@ jobs:
         run: |
           test "$(git cat-file -t "refs/tags/${RELEASE_TAG}")" = tag
           tag_object=$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${RELEASE_TAG}" --jq .object.sha)
-          tag_type=$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object}" --jq .object.type)
-          tag_commit=$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object}" --jq .object.sha)
-          verified=$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object}" --jq .verification.verified)
+          tag_data=$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object}")
+          tag_type=$(jq -r .object.type <<<"${tag_data}")
+          tag_commit=$(jq -r .object.sha <<<"${tag_data}")
+          verified=$(jq -r .verification.verified <<<"${tag_data}")
+          tagger_name=$(jq -r .tagger.name <<<"${tag_data}")
+          tagger_email=$(jq -r .tagger.email <<<"${tag_data}")
+          main_commit=$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq .object.sha)
           test "${tag_type}" = commit
-          test "${tag_commit}" = "${GITHUB_SHA}"
+          test "${tag_commit}" = "${main_commit}"
           test "${verified}" = true
+          test "${tagger_name}" = EnVy
+          test "${tagger_email}" = contact.enviouse@gmail.com
 
       - name: attest pack archive
         uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2.2.3
         with:
           subject-path: release-assets/mcgen-template-pack.zip
+
+      - name: attest sbom
+        uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2.2.3
+        with:
+          subject-path: release-assets/spdx-sbom.json
 
       - name: create draft release
         env:
@@ -181,15 +245,30 @@ jobs:
         run: |
           rm -rf remote-release
           mkdir remote-release
-          gh release download "${RELEASE_TAG}" --dir remote-release --pattern 'mcgen-template-pack.zip' --pattern 'mcgen-template-pack.zip.sha256' --pattern 'mcgen-template-pack.zip.sha512' --pattern 'pack-manifest.json' --pattern 'source-commit-manifest.json' --pattern 'spdx-sbom.json' --pattern 'verification-summary.json'
-          cp release-assets/coverage.json remote-release/coverage.json
+          gh release download "${RELEASE_TAG}" --dir remote-release --pattern 'mcgen-template-pack.zip' --pattern 'mcgen-template-pack.zip.sha256' --pattern 'mcgen-template-pack.zip.sha512' --pattern 'pack-manifest.json' --pattern 'source-commit-manifest.json' --pattern 'spdx-sbom.json' --pattern 'verification-summary.json' --pattern 'coverage.json' --pattern 'rollback-test.json' --pattern 'release-notes.md'
           npm ci
           npm run build --silent
-          node scripts/verify-pack-offline.mjs --dir remote-release
+          node scripts/verify-pack-offline.mjs --dir remote-release --require-release-evidence
           gh attestation verify remote-release/mcgen-template-pack.zip --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify remote-release/spdx-sbom.json --repo "${GITHUB_REPOSITORY}"
 
       - name: publish release
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
         run: gh release edit "${RELEASE_TAG}" --draft=false --prerelease
+
+      - name: verify published immutable release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          release=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RELEASE_TAG}")
+          test "$(jq -r .draft <<<"${release}")" = false
+          test "$(jq -r .immutable <<<"${release}")" = true
+          rm -rf remote-release-published
+          mkdir remote-release-published
+          gh release download "${RELEASE_TAG}" --dir remote-release-published
+          node scripts/verify-pack-offline.mjs --dir remote-release-published --require-release-evidence
+          gh attestation verify remote-release-published/mcgen-template-pack.zip --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify remote-release-published/spdx-sbom.json --repo "${GITHUB_REPOSITORY}"

@@ -37,6 +37,10 @@ async function json(name) {
   return JSON.parse(await bytes(name));
 }
 
+const requireReleaseEvidence = process.argv.includes(
+  "--require-release-evidence",
+);
+
 function digest(value, algorithm) {
   return createHash(algorithm).update(value).digest("hex");
 }
@@ -56,48 +60,131 @@ function parseChecksum(value, expectedName, expectedLength) {
   return match[1];
 }
 
+const crcTable = Array.from({ length: 256 }, (_, index) => {
+  let value = index;
+  for (let bit = 0; bit < 8; bit += 1) {
+    value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
+  }
+  return value >>> 0;
+});
+
+function crc32(value) {
+  let result = 0xffffffff;
+  for (const byte of value) {
+    result = (result >>> 8) ^ (crcTable[(result ^ byte) & 0xff] ?? 0);
+  }
+  return (result ^ 0xffffffff) >>> 0;
+}
+
+function safeZipPath(name) {
+  if (
+    name.length === 0 ||
+    name.includes("\\") ||
+    name.startsWith("/") ||
+    name.includes("\u0000") ||
+    name
+      .split("/")
+      .some((part) => part === "" || part === "." || part === "..") ||
+    [...name].some((character) => character < " " || character === "\u007f")
+  ) {
+    fail(`unsafe zip path ${name}`);
+  }
+}
+
 function readZip(buffer) {
+  if (buffer.length > 512 * 1024 * 1024) fail("zip exceeds archive bounds");
   let end = -1;
-  for (let offset = buffer.length - 22; offset >= 0; offset -= 1) {
+  const minimumEnd = Math.max(0, buffer.length - 22 - 0xffff);
+  for (let offset = buffer.length - 22; offset >= minimumEnd; offset -= 1) {
     if (buffer.readUInt32LE(offset) === 0x06054b50) {
       end = offset;
       break;
     }
   }
   if (end < 0) fail("zip end record is missing");
+  if (end + 22 !== buffer.length) fail("zip has trailing data");
+  if (buffer.readUInt16LE(end + 4) !== 0 || buffer.readUInt16LE(end + 6) !== 0)
+    fail("zip uses unsupported multi disk layout");
   const count = buffer.readUInt16LE(end + 10);
   const centralSize = buffer.readUInt32LE(end + 12);
   const centralOffset = buffer.readUInt32LE(end + 16);
+  if (count === 0 || count > 50000) fail("zip entry count is outside bounds");
+  if (centralOffset + centralSize !== end)
+    fail("zip central directory bounds are invalid");
   const entries = new Map();
   let cursor = centralOffset;
+  let totalBytes = 0;
+  const ranges = [];
   for (let index = 0; index < count; index += 1) {
+    if (cursor + 46 > end) fail("zip central header is truncated");
     if (buffer.readUInt32LE(cursor) !== 0x02014b50)
       fail("zip central header is invalid");
     const flags = buffer.readUInt16LE(cursor + 8);
     const method = buffer.readUInt16LE(cursor + 10);
+    const crc = buffer.readUInt32LE(cursor + 16);
     const compressedSize = buffer.readUInt32LE(cursor + 20);
+    const uncompressedSize = buffer.readUInt32LE(cursor + 24);
     const nameLength = buffer.readUInt16LE(cursor + 28);
     const extraLength = buffer.readUInt16LE(cursor + 30);
     const commentLength = buffer.readUInt16LE(cursor + 32);
     const localOffset = buffer.readUInt32LE(cursor + 42);
+    const centralEnd = cursor + 46 + nameLength + extraLength + commentLength;
+    if (centralEnd > end) fail("zip central entry is truncated");
     const name = buffer.toString("utf8", cursor + 46, cursor + 46 + nameLength);
-    if (flags !== 0x0800 || method !== 0 || entries.has(name))
+    safeZipPath(name);
+    if (
+      flags !== 0x0800 ||
+      method !== 0 ||
+      compressedSize !== uncompressedSize ||
+      entries.has(name) ||
+      localOffset >= centralOffset
+    )
       fail(`unsafe zip entry ${name}`);
-    if (buffer.readUInt32LE(localOffset) !== 0x04034b50)
+    if (
+      localOffset + 30 > centralOffset ||
+      buffer.readUInt32LE(localOffset) !== 0x04034b50
+    )
       fail(`missing local header ${name}`);
+    const localFlags = buffer.readUInt16LE(localOffset + 6);
+    const localMethod = buffer.readUInt16LE(localOffset + 8);
+    const localCrc = buffer.readUInt32LE(localOffset + 14);
+    const localCompressedSize = buffer.readUInt32LE(localOffset + 18);
+    const localUncompressedSize = buffer.readUInt32LE(localOffset + 22);
     const localNameLength = buffer.readUInt16LE(localOffset + 26);
     const localExtraLength = buffer.readUInt16LE(localOffset + 28);
-    const contentStart = localOffset + 30 + localNameLength + localExtraLength;
-    const content = buffer.subarray(
-      contentStart,
-      contentStart + compressedSize,
+    const localName = buffer.toString(
+      "utf8",
+      localOffset + 30,
+      localOffset + 30 + localNameLength,
     );
+    if (
+      localFlags !== flags ||
+      localMethod !== method ||
+      localName !== name ||
+      localCrc !== crc ||
+      localCompressedSize !== compressedSize ||
+      localUncompressedSize !== uncompressedSize
+    )
+      fail(`zip local and central headers disagree for ${name}`);
+    const contentStart = localOffset + 30 + localNameLength + localExtraLength;
+    const contentEnd = contentStart + compressedSize;
+    if (contentStart < 0 || contentEnd > centralOffset)
+      fail(`zip entry exceeds local data bounds ${name}`);
+    const content = buffer.subarray(contentStart, contentEnd);
     if (content.length !== compressedSize) fail(`truncated zip entry ${name}`);
+    if (crc32(content) !== crc) fail(`zip crc mismatch for ${name}`);
+    totalBytes += content.length;
+    if (totalBytes > 512 * 1024 * 1024) fail("zip content exceeds bounds");
+    ranges.push([localOffset, contentEnd]);
     entries.set(name, content);
-    cursor += 46 + nameLength + extraLength + commentLength;
+    cursor = centralEnd;
   }
-  if (cursor - centralOffset !== centralSize)
-    fail("zip central directory size mismatch");
+  ranges.sort(([left], [right]) => left - right);
+  for (let index = 1; index < ranges.length; index += 1) {
+    if ((ranges[index - 1]?.[1] ?? 0) > (ranges[index]?.[0] ?? 0))
+      fail("zip local entries overlap");
+  }
+  if (cursor !== end) fail("zip central directory size mismatch");
   return entries;
 }
 
@@ -180,11 +267,29 @@ if (
   digest(Buffer.from(canonical(manifest)), "sha256")
 )
   fail("pack manifest digest mismatch");
+if (canonical(sourceManifest.files) !== canonical(manifest.files))
+  fail("source commit manifest inventory mismatch");
 if (
   sbom.packages?.[0]?.versionInfo !== manifest.packVersion ||
   sbom.files?.length !== manifest.files.length + 1
 )
   fail("sbom inventory mismatch");
+const expectedSbomFiles = new Map([
+  ["pack-manifest.json", digest(Buffer.from(canonical(manifest)), "sha256")],
+  ...manifest.files.map((file) => [file.path, file.sha256]),
+]);
+const actualSbomFiles = new Map(
+  (sbom.files ?? []).map((file) => [
+    file.fileName,
+    file.checksums?.[0]?.checksum,
+  ]),
+);
+if (actualSbomFiles.size !== expectedSbomFiles.size)
+  fail("sbom file inventory count mismatch");
+for (const [path, expectedDigest] of expectedSbomFiles) {
+  if (actualSbomFiles.get(path) !== expectedDigest)
+    fail(`sbom digest mismatch for ${path}`);
+}
 const entries = readZip(archive);
 const expected = new Map(
   manifest.files.map((file) => [file.path, file.sha256]),
@@ -201,6 +306,24 @@ for (const [path, expectedDigest] of expected) {
 }
 verifyProfile(entries, "profiles/spigot-modern.json");
 verifyProfile(entries, "profiles/spigot-legacy.json");
+if (requireReleaseEvidence) {
+  const coverage = await json("coverage.json");
+  const rollback = await json("rollback-test.json");
+  const releaseNotes = (await bytes("release-notes.md")).toString("utf8");
+  if (!releaseNotes.trim()) fail("release notes are empty");
+  if (
+    coverage.packVersion !== manifest.packVersion ||
+    coverage.sourceCommit !== manifest.sourceCommit
+  )
+    fail("coverage evidence identity mismatch");
+  if (
+    rollback.status !== "passed" ||
+    rollback.packVersion !== manifest.packVersion ||
+    rollback.sourceCommit !== manifest.sourceCommit ||
+    rollback.originalArchiveSha256 !== sha256
+  )
+    fail("rollback evidence identity mismatch");
+}
 process.stdout.write(
   `offline pack verified ${manifest.packVersion} ${manifest.sourceCommit} ${sha256}\n`,
 );
