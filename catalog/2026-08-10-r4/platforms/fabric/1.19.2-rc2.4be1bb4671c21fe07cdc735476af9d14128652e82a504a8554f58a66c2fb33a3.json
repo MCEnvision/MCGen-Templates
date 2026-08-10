@@ -1,0 +1,117 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.a457a11608c32bf9a81bda4b",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "mappings-intermediary",
+      "coordinate": "net.fabricmc:intermediary:1.19.2-rc2",
+      "id": "component.fabric.f7f2bd524ec3835695dc6b05",
+      "sourceEntries": [
+        {
+          "entryIndex": 1482,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19.2-rc2"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-yarn",
+      "coordinate": "net.fabricmc:yarn:1.19.2-rc2+build.1",
+      "id": "component.fabric.92338fdc1440daa95679a9ad",
+      "sourceEntries": [
+        {
+          "entryIndex": 1483,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19.2-rc2+build.1"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "minecraft",
+      "coordinate": "com.mojang:minecraft:1.19.2-rc2",
+      "id": "component.fabric.708ce7a7841c8659d1427960",
+      "sourceEntries": [
+        {
+          "entryIndex": 1484,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19.2-rc2"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.fabric.94bfd371c9ca2c428ebcfc75",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 1484,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.fabric.708ce7a7841c8659d1427960"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.94bfd371c9ca2c428ebcfc75",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 1483,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            2
+          ]
+        }
+      ],
+      "to": "component.fabric.92338fdc1440daa95679a9ad"
+    },
+    {
+      "confidence": "published",
+      "from": "target.fabric.94bfd371c9ca2c428ebcfc75",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 1482,
+          "snapshotId": "fabric.d5f0718a2c465a479a633101",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.fabric.f7f2bd524ec3835695dc6b05"
+    }
+  ],
+  "id": "catalog.fabric.98d1125990fcff4b25d5d252",
+  "key": "1.19.2-rc2",
+  "keyKind": "minecraft",
+  "platform": "fabric",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "fabric.d5f0718a2c465a479a633101"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.a457a11608c32bf9a81bda4b",
+  "category": "toolchain",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "minecraft-runtime",
+      "coordinate": "com.mojang:jre-legacy:java-8",
+      "id": "component.java.febb22b378b44f9522540584",
+      "sourceEntries": [
+        {
+          "entryIndex": 339,
+          "snapshotId": "java.bcc3a227324932f44e420ef9",
+          "sourceIndexes": [
+            350
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "8"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.java.c4ad12d1dd080e3ea81b6280",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 339,
+          "snapshotId": "java.bcc3a227324932f44e420ef9",
+          "sourceIndexes": [
+            350
+          ]
+        }
+      ],
+      "to": "component.java.febb22b378b44f9522540584"
+    }
+  ],
+  "id": "catalog.java.53844a2a780e2e3ff9254f40",
+  "key": "1.9.1",
+  "keyKind": "minecraft",
+  "platform": "java",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "java.bcc3a227324932f44e420ef9"
+  ]
+}

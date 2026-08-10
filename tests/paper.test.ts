@@ -168,26 +168,26 @@ describe("paper source adapter", () => {
   });
 
   it("rejects a malformed official Paper Fill build record", () => {
-    expect(() => parsePaperFillBuilds(JSON.stringify([{ id: 0 }]))).toThrow(
+    expect(() => parsePaperFillBuilds(JSON.stringify([{ id: -1 }]))).toThrow(
       "paper Fill build id is invalid",
     );
   });
 
   it("parses official array responses with exact server download evidence", () => {
     const builds = parsePaperFillBuilds(
-      JSON.stringify([paperBuild(9, "STABLE")]),
+      JSON.stringify([{ ...paperBuild(1, "STABLE"), id: 0 }]),
     );
     expect(builds).toHaveLength(1);
     const build = builds[0];
     if (!build) throw new Error("paper Fill test omitted its parsed build");
-    expect(build.id).toBe("9");
+    expect(build.id).toBe("0");
     expect(build.channel).toBe("release");
     expect(build.download).toEqual({
-      name: "paper-test-9.jar",
+      name: "paper-test-1.jar",
       sha256:
-        "0000000000000000000000000000000000000000000000000000000000000009",
-      size: "9",
-      url: "https://fill-data.papermc.io/v1/objects/0000000000000000000000000000000000000000000000000000000000000009/paper-test-9.jar",
+        "0000000000000000000000000000000000000000000000000000000000000001",
+      size: "1",
+      url: "https://fill-data.papermc.io/v1/objects/0000000000000000000000000000000000000000000000000000000000000001/paper-test-1.jar",
     });
   });
 });

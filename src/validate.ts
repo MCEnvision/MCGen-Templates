@@ -272,7 +272,9 @@ async function collectJsonFiles(path: string): Promise<string[]> {
     const nested = await Promise.all(
       entries.map(async (entry) => {
         const child = resolve(path, entry.name);
-        if (entry.isDirectory()) return collectJsonFiles(child);
+        if (entry.isDirectory()) {
+          return entry.name.startsWith(".") ? [] : collectJsonFiles(child);
+        }
         return entry.isFile() && extname(entry.name) === ".json" ? [child] : [];
       }),
     );

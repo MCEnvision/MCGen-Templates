@@ -8,7 +8,7 @@ Every snapshot records its schema version, adapter identity, retrieval time, fin
 
 ## Current Complete Capture
 
-The current capture set is named by [`catalog/2026-08-10-r3/index.json`](../../catalog/2026-08-10-r3/index.json). It uses the thirteen unaffected `2026-08-10-r2` snapshots and the corrected Paper `2026-08-10-r3` snapshot. It contains 27,630 discovered entries, 21 explicit rejected records, and 1,019 response provenance records. The matching catalog represents every accepted entry and creates one structured coverage blocker for each rejected record.
+The current capture set is named by [`catalog/2026-08-10-r4/index.json`](../../catalog/2026-08-10-r4/index.json). It uses the thirteen unaffected `2026-08-10-r2` snapshots and the corrected Paper `2026-08-10-r4` snapshot. It contains 27,706 discovered entries, 20 explicit rejected records, and 1,019 response provenance records. The matching catalog represents every accepted entry and creates one structured coverage blocker for each rejected record.
 
 | Adapter | Entries | Rejected | Source records |
 | --- | ---: | ---: | ---: |
@@ -22,12 +22,12 @@ The current capture set is named by [`catalog/2026-08-10-r3/index.json`](../../c
 | Kotlin | 204 | 0 | 2 |
 | Mojang | 905 | 0 | 1 |
 | NeoForge | 2,568 | 0 | 7 |
-| Paper | 5,879 | 2 | 68 |
+| Paper | 5,955 | 1 | 68 |
 | Spigot | 82 | 0 | 1 |
 | Sponge | 74 | 0 | 3 |
 | Velocity | 66 | 0 | 3 |
 
-The earlier `2026-08-10` captures and the superseded Paper `2026-08-10-r2` capture remain immutable historical evidence. They are not current catalog inputs. The count test covers both historical and current snapshots so an accidental mutation is visible in review.
+The earlier `2026-08-10` captures and the superseded Paper `2026-08-10-r2` and `2026-08-10-r3` captures remain immutable historical evidence. They are not current catalog inputs. The count test covers both historical and current snapshots so an accidental mutation is visible in review.
 
 ## Forge Capture
 

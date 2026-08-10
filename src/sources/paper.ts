@@ -11,7 +11,7 @@ import { sha256 } from "../digest.js";
 import { derivePaperFillBuildsSource } from "../source-network-policy.js";
 import { classifyMavenVersion, parseMavenVersions } from "./maven.js";
 
-export const paperAdapterVersion = "1.0.0";
+export const paperAdapterVersion = "1.0.1";
 
 type PaperFillProject = {
   versions: string[];
@@ -130,10 +130,10 @@ function buildChannel(value: unknown): StabilityChannel {
 }
 
 function buildIdentifier(value: unknown): string {
-  if (typeof value === "number" && Number.isSafeInteger(value) && value > 0) {
+  if (typeof value === "number" && Number.isSafeInteger(value) && value >= 0) {
     return String(value);
   }
-  if (typeof value === "string" && /^[1-9][0-9]*$/u.test(value)) {
+  if (typeof value === "string" && /^(?:0|[1-9][0-9]*)$/u.test(value)) {
     return value;
   }
   throw new Error("paper Fill build id is invalid");
