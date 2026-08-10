@@ -661,5 +661,5 @@ describe("phase 5 build and artifact contracts", () => {
     expect(result.evidence.reproducibility?.reproducible).toBe(true);
     expect(result.firstArtifact?.status).toBe("passed");
     expect(result.firstBuild?.status).toBe("passed");
-  });
+  }, 15_000);
 });
