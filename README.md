@@ -98,6 +98,7 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 - [Pack construction](docs/release/pack-construction.md)
 - [Phase 6 release verification](docs/verification/phase6-release.md)
 - [Phase 7 maintenance verification](docs/verification/phase7-maintenance.md)
+- [Repository completion report](docs/verification/phase7-completion-report.md)
 - [Upstream monitoring](docs/operations/upstream-monitoring.md)
 - [Failure recovery](docs/operations/failure-recovery.md)
 - [Repository completion audit](docs/operations/repository-audit.md)

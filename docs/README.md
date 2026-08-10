@@ -20,6 +20,7 @@
 - [Phase 5 build and artifact contracts](verification/phase5-build-contracts.md)
 - [Phase 6 release verification](verification/phase6-release.md)
 - [Phase 7 maintenance verification](verification/phase7-maintenance.md)
+- [Repository completion report](verification/phase7-completion-report.md)
 - [Template pack releases](release/template-pack-releases.md)
 - [Pack construction](release/pack-construction.md)
 - [Project wiki](https://github.com/MCEnvision/MCGen-Templates/wiki)
