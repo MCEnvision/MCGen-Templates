@@ -49,4 +49,4 @@ Only network outages and transient network failures are retryable. Retry counts 
 
 ## Required evidence
 
-The phase 7 workflow runs the full repository verification, creates a read only monitor observation, executes the recovery simulations, and produces a repository audit artifact. The current local audit shows all twenty requirements passed; issue 25 and its Project item remain in review until the reconciliation pull request merges, the signed Phase 7 tag is verified, and the wiki is updated.
+The phase 7 workflow runs the full repository verification, creates a read only monitor observation, executes the recovery simulations, and produces a repository audit artifact. The current local audit shows nineteen of twenty requirements passed. The one intentional blocker is maintenance synchronization because issue 25 remains open. Issue 25 and its Project item remain in review until the reconciliation pull request merges, the signed Phase 7 tag is verified, and the wiki is updated.
