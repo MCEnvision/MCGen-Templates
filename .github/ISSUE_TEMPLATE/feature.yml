@@ -2,7 +2,12 @@ name: feature request
 description: propose a focused improvement
 title: "[feature] "
 labels: ["type feature", "status backlog"]
+type: Feature
 body:
+  - type: markdown
+    attributes:
+      value: |
+        this repository owns template pack contracts, sources, catalogs, profiles, template families, fixtures, verification, releases, and repository controls. website, api, user facing project generator cli, generator application, github app, nginx, cloudflare, and production requests belong in the future mcgen application repository.
   - type: dropdown
     id: area
     attributes:
@@ -10,11 +15,15 @@ body:
       options:
         - descriptor or schema
         - compatibility catalog
+        - catalog generation
         - source adapter
         - toolchain profile
         - template family
+        - customization contract
+        - fixture generation or generated build
         - verification
         - release or repository operation
+        - github repository governance or automation
         - documentation
         - other
     validations:
@@ -37,6 +46,11 @@ body:
     id: alternatives
     attributes:
       label: alternatives considered
+  - type: textarea
+    id: related
+    attributes:
+      label: related work and dependencies
+      description: link related issues, pull requests, milestones, source evidence, or work that blocks or is blocked by this request
   - type: textarea
     id: compatibility
     attributes:
@@ -62,4 +76,6 @@ body:
         - label: i searched for an existing issue
           required: true
         - label: this request does not depend on a branch for every version
+          required: true
+        - label: this request belongs to the mcgen templates repository
           required: true

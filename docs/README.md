@@ -10,6 +10,7 @@
 - [Source snapshots](data/source-snapshots.md)
 - [Trust model](security/trust-model.md)
 - [GitHub foundation verification](verification/github-foundation.md)
+- [GitHub planning verification](verification/github-planning.md)
 - [Template pack contract verification](verification/template-pack-contracts.md)
 - [Template pack releases](release/template-pack-releases.md)
 - [Project wiki](https://github.com/MCEnvision/MCGen-Templates/wiki)
@@ -24,7 +25,7 @@ Documentation is organized by the subjects that currently exist. Add a category 
 - `architecture/` contains the descriptor, catalog, profile, rendering, and adapter boundaries.
 - `data/` contains source snapshot formats, provenance, exact capture evidence, and reconciliation rules.
 - `security/` contains trust boundaries, input handling, execution limits, integrity, and licensing controls.
-- `verification/` contains repository, contract, source, and future compatibility verification gates.
+- `verification/` contains repository governance, planning, contract, source, and future compatibility verification gates.
 - `release/` contains the immutable template pack release contract.
 
 The tracked documentation is canonical. The wiki is a navigation and operator surface and must link back to these files.

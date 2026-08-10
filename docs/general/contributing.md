@@ -2,9 +2,9 @@
 
 ## Current Stage
 
-The repository is in Phase 0. Contributions currently focus on repository foundations, template-pack contracts, authoritative source research, schemas, profiles, fixtures, and verification design. Do not add a ready-made project for one Minecraft version or create a platform/version branch.
+The repository is in product Phase 0. GitHub completion Phase 2 defines planning and documentation control, with completion identified by its verified signed tag. Contributions currently focus on repository foundations, template-pack contracts, authoritative source research, schemas, profiles, fixtures, and verification design. Do not add a ready-made project for one Minecraft version or create a platform/version branch.
 
-Search existing issues and read the [active plan](plan.md) before starting work. Planned behavior must be linked to the correct phase and milestone before implementation.
+Search existing issues and read the [active plan](plan.md) before starting work. Product phases define implementation scope. The [GitHub completion plan](github_plan.md) defines sequential repository integration gates. Planned behavior must be linked to the correct owning repository, product milestone, issue, dependencies, and roadmap item before implementation.
 
 ## Branch and Pull Request Workflow
 
@@ -16,6 +16,8 @@ Search existing issues and read the [active plan](plan.md) before starting work.
 6. Open a pull request using the repository template.
 7. Resolve review conversations and required checks.
 8. Merge through GitHub using the merge-commit method.
+
+The website, API, user facing CLI, generator core, GitHub App, destination repository writes, Nginx, Cloudflare, and production deployment belong to the future `MCEnvision/MCGen` repository. Do not open implementation issues for those components here.
 
 Do not force-push shared phase branches, rewrite published history, bypass checks, or push directly to `main`.
 

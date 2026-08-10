@@ -117,7 +117,7 @@ Establish and audit the GitHub controls required for safe sequential development
 
 ## Status
 
-Complete only when this identity reconciliation is present on `main` and the verified signed annotated tag `phase-1-github-governance-reconciliation` points to that merge commit. The earlier `phase-1-github-governance` tag preserves the first governance audit. Before the reconciliation merge and tag, this phase is in progress. Every later phase must repeat the applicable drift checks.
+Complete. The identity reconciliation is present on `main`, and the verified signed annotated tag `phase-1-github-governance-reconciliation` points to that merge commit. The earlier `phase-1-github-governance` tag preserves the first governance audit. Every later phase must repeat the applicable drift checks.
 
 ## Workstreams
 
@@ -211,7 +211,7 @@ Make GitHub the synchronized execution and evidence surface for all repository o
 
 ## Status
 
-Foundation complete. Detailed phase decomposition and repository implementation tracking remain active.
+Phase 1 is merged and identified by the verified signed annotated tag `phase-1-github-governance-reconciliation`. Phase 2 is complete only when the planning controls and documentation in this section are merged, post merge checks pass, the Project and issue state are reconciled, the wiki is updated, and the verified signed annotated tag `phase-2-github-planning` identifies the approved `main` commit. Before that tag exists, Phase 2 remains the active GitHub completion gate.
 
 ## Workstreams
 
@@ -220,7 +220,7 @@ Foundation complete. Detailed phase decomposition and repository implementation 
 1. Maintain one Project named `MCGen-Templates roadmap`.
 2. Maintain Status, Phase, Priority, Type, Target version, Effort, and Risk fields.
 3. Maintain Current phase, Roadmap, Board, Bugs, and Releases views where useful.
-4. Configure native workflows for newly added items, reopened items, closed issues, merged pull requests, and archival.
+4. Configure native workflows for newly added items, reopened items, closed issues, and merged pull requests. Keep automatic archival disabled until the owner selects a retention period, then record that policy before enabling it.
 5. Keep repository issues and pull requests automatically added when supported.
 
 ### Milestones and seven phase mapping
@@ -230,6 +230,20 @@ Foundation complete. Detailed phase decomposition and repository implementation 
 3. Do not assign application work to template repository milestones.
 4. Do not invent due dates.
 5. Keep milestone descriptions tied to measurable exit criteria.
+
+The seven GitHub completion phases and the product phases in `docs/general/plan.md` are different planning layers. GitHub phases describe repository governance, evidence, and integration gates. Product phases describe implementation scope across the template repository and the future application repository. This repository keeps only the five product milestones it owns and maps GitHub work to them as follows:
+
+| GitHub completion phase                                                     | Primary repository milestone             | Additional relationship                                                                              |
+| --------------------------------------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Phase 1. GitHub governance and repository control                           | Phase 0. Repository foundation           | Completed foundation and governance evidence.                                                        |
+| Phase 2. Planning, issues, Projects, and documentation control              | Phase 0. Repository foundation           | Establishes tracking for all later repository work.                                                  |
+| Phase 3. Authoritative sources and complete compatibility catalog           | Phase 10. Complete catalog conformance   | Source adapters begin in Product Phase 0, but the complete catalog gate belongs to Product Phase 10. |
+| Phase 4. Toolchain profiles, template families, and customization contracts | Phase 2. Reference template families     | Historic profiles also contribute to Product Phase 9.                                                |
+| Phase 5. Generated project build and artifact verification                  | Phase 10. Complete catalog conformance   | Historic tuple verification also contributes to Product Phase 9.                                     |
+| Phase 6. Pack publication, releases, and documentation                      | Phase 10. Complete catalog conformance   | Publication proves the complete approved pack.                                                       |
+| Phase 7. Automated maintenance and repository complete gate                 | Phase 11. Automated template maintenance | Final completion depends on all earlier product milestone evidence.                                  |
+
+This mapping does not create seven duplicate product milestones. An issue uses the milestone that owns its implementation result, while its Project Phase and Target version fields may record the applicable GitHub completion phase.
 
 ### Issue structure
 
@@ -260,7 +274,7 @@ Foundation complete. Detailed phase decomposition and repository implementation 
 
 ## Deliverables
 
-1. Seven phase tracking structure.
+1. A documented mapping from the seven GitHub completion phases to the five repository owned product milestones.
 2. Deduplicated issues and dependencies.
 3. Synchronized Project fields and views.
 4. Complete canonical documentation navigation.
@@ -279,6 +293,7 @@ Foundation complete. Detailed phase decomposition and repository implementation 
 1. No active repository task exists only in chat or an unlinked branch.
 2. No stale issue, milestone, Project status, or wiki claim remains.
 3. Each later phase has explicit entry criteria, work items, evidence, and exit criteria.
+4. The verified signed annotated tag `phase-2-github-planning` identifies the merged Phase 2 commit on `main`.
 
 # Phase 3. Authoritative Sources and Complete Compatibility Catalog
 
@@ -288,7 +303,7 @@ Discover every official platform and component version, normalize compatibility 
 
 ## Status
 
-In progress. Forge discovery exists on `main`. Complete adapter, profile input, and catalog coverage does not.
+Pending Phase 2 completion. Forge discovery already exists on `main`, but complete adapter, profile input, and catalog coverage work must begin from the approved Phase 2 merge under the sequential phase policy.
 
 ## Supported source adapters
 
