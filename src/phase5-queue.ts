@@ -57,7 +57,11 @@ export function buildQueuePlan(input: {
     input.shardIndex >= input.shardCount
   )
     throw new Error("queue shard index is invalid");
+  if (!input.event.subject || /[\s/\\]/u.test(input.event.subject))
+    throw new Error("queue subject must be a stable identifier");
   const tupleIds = [...new Set(input.event.tupleIds)].sort(compareText);
+  if (tupleIds.length > 100_000)
+    throw new Error("queue contains too many tuple ids");
   const event = {
     ...input.event,
     changedPaths: [...new Set(input.event.changedPaths)].sort(compareText),
@@ -76,7 +80,7 @@ export function buildQueuePlan(input: {
     kind: "queue-plan",
     queue: input.event.queue,
     eventDigest,
-    cancelKey: `phase5-${input.event.queue}-${eventDigest}`,
+    cancelKey: `phase5-${input.event.queue}-${input.event.subject}-${input.shardIndex}`,
     shardCount: input.shardCount,
     shardIndex: input.shardIndex,
     tupleIds: selected,

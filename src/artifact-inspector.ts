@@ -298,6 +298,12 @@ export function inspectArtifactEntries(
     )
       warnings.push("project name is not present in artifact metadata");
   }
+  for (const [path, expected] of Object.entries(
+    expectation.metadataFields ?? {},
+  )) {
+    if (metadataValues[path] !== expected)
+      failures.push(`artifact metadata field does not match ${path}`);
+  }
   if (expectation.publicationCoordinates) {
     for (const value of Object.values(expectation.publicationCoordinates)) {
       if (!Object.values(metadataValues).includes(value))
@@ -331,6 +337,13 @@ export function inspectArtifactEntries(
     } catch {
       failures.push(`icon is not a valid png ${path}`);
     }
+  }
+  for (const reference of expectation.iconReferences ?? []) {
+    const referenced = metadataValues[reference.metadataPath];
+    if (referenced !== reference.iconPath)
+      failures.push(
+        `artifact icon reference does not match ${reference.metadataPath}`,
+      );
   }
   return {
     status: failures.length ? "failed" : "passed",

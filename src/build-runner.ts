@@ -92,6 +92,7 @@ export type BuildRunRequest = {
   execute: CommandExecutor;
   wrapperPath?: string;
   verifyJava?: () => Promise<void>;
+  requireExactToolchain?: boolean;
 };
 
 export type IsolatedWorkspace = {
@@ -120,10 +121,12 @@ export function verifyJavaRuntime(
   expectedDistribution?: string,
   distributionOutput?: string,
 ): void {
-  const match =
-    /version\s+"(\d+)(?:[.\s]|$)/u.exec(versionOutput) ??
-    /^(\d+)(?:[.\s]|$)/u.exec(versionOutput.trim());
-  if (!match || Number(match[1]) !== expectedRuntime)
+  const version =
+    /version\s+"([^"\s]+)"/u.exec(versionOutput)?.[1] ??
+    /^(\S+)/u.exec(versionOutput.trim())?.[1];
+  const parts = version?.split(".").map((value) => Number(value));
+  const runtime = parts?.[0] === 1 ? parts[1] : parts?.[0];
+  if (!Number.isInteger(runtime) || runtime !== expectedRuntime)
     throw new Error(`java runtime does not match profile ${expectedRuntime}`);
   if (
     expectedDistribution &&
@@ -219,6 +222,10 @@ export async function runBuild(
   if (failures.length)
     throw new Error(`invalid build contract\n${failures.join("\n")}`);
   const workDirectory = safeWorkDirectory(request.workDirectory);
+  if (request.requireExactToolchain && !request.wrapperPath)
+    throw new Error("exact builds require a verified wrapper path");
+  if (request.requireExactToolchain && !request.verifyJava)
+    throw new Error("exact builds require a verified Java runtime");
   const workDirectoryPolicy: unknown = request.contract.workDirectoryPolicy;
   if (workDirectoryPolicy !== "isolated-clean")
     throw new Error("build work directory policy must be isolated-clean");

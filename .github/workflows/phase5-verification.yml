@@ -7,9 +7,14 @@ on:
       - "templates/**"
       - "fixtures/**"
       - "catalog/**"
+      - "sources/**"
       - "schemas/**"
       - "src/**"
       - "tests/**"
+      - "docs/general/github_plan.md"
+      - "docs/verification/**"
+      - ".github/workflows/**"
+      - "package.json"
       - "package-lock.json"
   push:
     branches:
@@ -19,9 +24,14 @@ on:
       - "templates/**"
       - "fixtures/**"
       - "catalog/**"
+      - "sources/**"
       - "schemas/**"
       - "src/**"
       - "tests/**"
+      - "docs/general/github_plan.md"
+      - "docs/verification/**"
+      - ".github/workflows/**"
+      - "package.json"
       - "package-lock.json"
   schedule:
     - cron: "17 4 * * 1"
@@ -53,3 +63,13 @@ jobs:
         run: npm ci
       - name: verify phase 5 contracts
         run: npm run verify
+      - name: execute reviewed phase 5 tuples
+        run: |
+          if [ -d verification/phase5/executions ]; then
+            npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions/ --output-dir verification/phase5/evidence/
+          fi
+      - name: write phase 5 audit
+        run: |
+          node dist/cli.js phase5 audit --generated-at 2000-01-01T00:00:00.000Z --output verification/phase5/ci-audit.json
+          node -e "const a=require('./verification/phase5/ci-audit.json'); if(!['blocked','verified'].includes(a.status)) process.exit(1)"
+          rm -f verification/phase5/ci-audit.json

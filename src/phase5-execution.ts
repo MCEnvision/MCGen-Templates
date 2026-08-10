@@ -48,6 +48,7 @@ export type Phase5ExecutionRequest = {
   generatorDigest: string;
   sourceEvidence?: readonly string[];
   parentDirectory: string;
+  reviewedProfile: { id: string; digest: string; artifactDigest: string };
   wrapperPath?: string;
   wrapperContent?: Uint8Array;
   execute?: CommandExecutor;
@@ -132,6 +133,7 @@ async function executeOnce(input: {
       workDirectory: root,
       startedAt: input.request.generatedAt,
       execute: input.request.execute ?? nodeCommandExecutor,
+      requireExactToolchain: true,
       ...(input.request.wrapperPath
         ? { wrapperPath: join(root, input.request.wrapperPath) }
         : {}),
@@ -203,6 +205,34 @@ export async function executeTuple(
     throw new Error("tuple blockers must be resolved before execution");
   if (request.fixture.fixture.rawOverride)
     throw new Error("raw override fixtures are validate only");
+  if (
+    request.reviewedProfile.digest !==
+    request.tuple.identity.contentDigests.profile
+  )
+    throw new Error("reviewed profile digest does not match tuple identity");
+  if (request.reviewedProfile.id !== request.tuple.identity.profileId)
+    throw new Error("reviewed profile id does not match tuple identity");
+  if (
+    request.reviewedProfile.artifactDigest !==
+    sha256(canonicalJson(request.artifact.expectation))
+  )
+    throw new Error("artifact expectation does not match reviewed profile");
+  if (
+    canonicalJson(request.build.java) !==
+    canonicalJson(request.tuple.identity.java)
+  )
+    throw new Error("build Java runtime does not match tuple identity");
+  if (
+    canonicalJson(request.build.wrapper) !==
+    canonicalJson(request.tuple.identity.wrapper)
+  )
+    throw new Error("build wrapper does not match tuple identity");
+  if (
+    request.fixture.spec.fileOperations.some(
+      (operation) => operation["trust"] === "custom-unverified",
+    )
+  )
+    throw new Error("custom unverified file operations are never executable");
   if (
     canonicalJson(request.fixture.tuple) !==
     canonicalJson(request.tuple.identity)

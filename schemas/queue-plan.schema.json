@@ -36,6 +36,7 @@
     "shardIndex": { "type": "integer", "minimum": 0 },
     "tupleIds": {
       "type": "array",
+      "maxItems": 100000,
       "uniqueItems": true,
       "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
     },

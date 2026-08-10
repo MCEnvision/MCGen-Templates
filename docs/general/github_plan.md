@@ -533,7 +533,7 @@ Prove that every tuple advertised as verified generates, compiles, packages, and
 
 ## Status
 
-Active on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. Issue [23](https://github.com/MCEnvision/MCGen-Templates/issues/23) is in progress. The branch adds deterministic fixture, matrix, bounded build, artifact, reproducibility, evidence, coverage, and queue contracts. No Phase 5 tuple is advertised as verified until a complete generated project build, artifact inspection, and reproducibility record exists for its exact identity.
+Active on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. Issue [23](https://github.com/MCEnvision/MCGen-Templates/issues/23) is in progress. The branch adds deterministic fixture, matrix, bounded build, artifact, reproducibility, evidence, coverage, queue, reviewed batch execution, and audit contracts. The audit currently reports twelve blocked profiles, twelve blocked descriptors, and zero reviewed tuple evidence. No Phase 5 tuple is advertised as verified until a complete generated project build, artifact inspection, and reproducibility record exists for its exact identity.
 
 ## Verification levels
 

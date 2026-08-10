@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:phase5-execution:1",
+  "title": "MCGen phase 5 reviewed tuple execution input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tuple",
+    "fixture",
+    "build",
+    "artifact",
+    "generatorDigest",
+    "generatedAt",
+    "profilePath"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:phase5-execution:1" },
+    "tuple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "blockers", "identity"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "status": { "enum": ["discovered", "blocked", "failed", "queued"] },
+        "blockers": { "type": "array", "items": { "type": "string" } },
+        "identity": {
+          "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/tupleIdentity"
+        }
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tuple", "fixture", "descriptorPath", "spec"],
+      "properties": {
+        "tuple": {
+          "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/tupleIdentity"
+        },
+        "fixture": {
+          "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/fixture"
+        },
+        "descriptorPath": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+        },
+        "spec": { "$ref": "urn:mcgen:schema:project-spec:1" }
+      }
+    },
+    "build": {
+      "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/buildContract"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "expectation"],
+      "properties": {
+        "path": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" },
+        "expectation": {
+          "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/artifactExpectation"
+        }
+      }
+    },
+    "generatorDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "profilePath": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" },
+    "wrapperSource": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+    },
+    "wrapperPath": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" }
+  }
+}

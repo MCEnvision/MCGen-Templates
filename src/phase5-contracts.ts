@@ -27,6 +27,13 @@ export type TupleIdentity = {
   catalogKey: string;
   components: Readonly<Record<string, string>>;
   fixtureId: string;
+  contentDigests: {
+    descriptor: string;
+    profile: string;
+    catalog: string;
+    fixture: string;
+    template: string;
+  };
   java: {
     distribution: string;
     runtime: number;
@@ -95,6 +102,11 @@ export type ArtifactExpectation = {
     name?: string;
     version: string;
   };
+  metadataFields?: Readonly<Record<string, string>>;
+  iconReferences?: readonly {
+    metadataPath: string;
+    iconPath: string;
+  }[];
   maxEntries?: number;
 };
 
@@ -148,6 +160,7 @@ export type TupleEvidenceRecord = {
   blockers: readonly string[];
   invalidation: {
     sourceDigests: readonly string[];
+    contentDigests: TupleIdentity["contentDigests"];
     profileRevision: number;
     descriptorRevision: number;
     wrapperSha256: string;
@@ -172,10 +185,16 @@ export function validateBuildLimits(limits: BuildLimits): string[] {
   const failures: string[] = [];
   if (!Number.isInteger(limits.timeoutMs) || limits.timeoutMs < 1_000)
     failures.push("timeoutMs must be at least 1000");
+  if (limits.timeoutMs > 3_600_000)
+    failures.push("timeoutMs must not exceed one hour");
   if (!Number.isInteger(limits.maxOutputBytes) || limits.maxOutputBytes < 1_024)
     failures.push("maxOutputBytes must be at least 1024");
+  if (limits.maxOutputBytes > 64 * 1024 * 1024)
+    failures.push("maxOutputBytes must not exceed 64 MiB");
   if (!Number.isInteger(limits.maxDiskBytes) || limits.maxDiskBytes < 1_024)
     failures.push("maxDiskBytes must be at least 1024");
+  if (limits.maxDiskBytes > 4 * 1024 * 1024 * 1024)
+    failures.push("maxDiskBytes must not exceed 4 GiB");
   if (
     !Number.isInteger(limits.retries) ||
     limits.retries < 0 ||

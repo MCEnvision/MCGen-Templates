@@ -31,6 +31,11 @@ export type MatrixProfile = {
   wrapper: { version: string; sha256: string };
   mappingDigest: string;
   sourceDigests: readonly string[];
+  contentDigests: {
+    profile: string;
+    catalog: string;
+    template: string;
+  };
   blockers?: readonly string[];
 };
 
@@ -40,6 +45,7 @@ export type MatrixDescriptor = {
   status: "reviewed" | "blocked";
   family: string;
   profileRefs: readonly string[];
+  contentDigests: { descriptor: string };
   blockers?: readonly string[];
 };
 
@@ -49,6 +55,7 @@ export type MatrixPlanInput = {
     Record<string, Readonly<Record<string, readonly string[]>>>
   >;
   fixtureIds: readonly string[];
+  fixtureDigests?: Readonly<Record<string, string>>;
   /**
    * Optional fixture scope for each descriptor and profile pair. The legacy
    * `fixtureIds` list remains the fallback for callers that plan one shared
@@ -144,6 +151,7 @@ function tupleWithFixture(
   catalogKey: string,
   components: Readonly<Record<string, string>>,
   fixtureId: string,
+  fixtureDigests: Readonly<Record<string, string>> | undefined,
 ): MatrixTuple {
   const identity: TupleIdentity = {
     family: descriptor.family,
@@ -155,6 +163,13 @@ function tupleWithFixture(
     catalogKey,
     components,
     fixtureId,
+    contentDigests: {
+      descriptor: descriptor.contentDigests.descriptor,
+      profile: profile.contentDigests.profile,
+      catalog: profile.contentDigests.catalog,
+      fixture: fixtureDigests?.[fixtureId] ?? sha256(canonicalJson(fixtureId)),
+      template: profile.contentDigests.template,
+    },
     java: structuredClone(profile.java),
     wrapper: structuredClone(profile.wrapper),
     mappingDigest: profile.mappingDigest,
@@ -258,12 +273,20 @@ export function buildMatrixPlan(input: MatrixPlanInput): MatrixPlan {
                 `${descriptor.id}\u0000${profile.id}`
               ] ?? input.fixtureIds;
             for (const fixtureId of [...fixtureScope].sort()) {
+              if (
+                profile.status === "reviewed" &&
+                !input.fixtureDigests?.[fixtureId]
+              )
+                throw new Error(
+                  `reviewed matrix fixture requires an immutable digest ${fixtureId}`,
+                );
               const tuple = tupleWithFixture(
                 descriptor,
                 profile,
                 catalogKey,
                 components,
                 fixtureId,
+                input.fixtureDigests,
               );
               if (seen.has(tuple.id)) continue;
               seen.add(tuple.id);
@@ -329,6 +352,7 @@ export function validateMatrixPlan(plan: MatrixPlan): string[] {
     tupleIds.add(tuple.id);
   }
   const shardIds = new Set<string>();
+  const tuplesById = new Map(plan.tuples.map((tuple) => [tuple.id, tuple]));
   for (const [expectedIndex, shard] of plan.shards.entries()) {
     if (shard.index !== expectedIndex)
       failures.push(`matrix shard index is not contiguous ${shard.index}`);
@@ -341,6 +365,12 @@ export function validateMatrixPlan(plan: MatrixPlan): string[] {
       if (shardIds.has(tuple.id))
         failures.push(`matrix tuple is in multiple shards ${tuple.id}`);
       shardIds.add(tuple.id);
+      const topLevelTuple = tuplesById.get(tuple.id);
+      if (
+        topLevelTuple &&
+        canonicalJson(topLevelTuple) !== canonicalJson(tuple)
+      )
+        failures.push(`matrix shard tuple differs from top level ${tuple.id}`);
       const expectedShard =
         Number.parseInt(tuple.id.slice(0, 8), 16) % plan.shardCount;
       if (expectedShard !== shard.index)

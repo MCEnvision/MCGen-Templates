@@ -1,6 +1,10 @@
 import { canonicalJson } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
-import { evidenceRecordDigest, evidenceReusable } from "./evidence.js";
+import {
+  evidenceRecordDigest,
+  evidenceReusable,
+  invalidationReasons,
+} from "./evidence.js";
 import {
   coverageSummarySchema,
   type TupleEvidenceRecord,
@@ -54,6 +58,12 @@ export function buildCoverageSummary(input: {
   const byKey = new Map(
     input.evidence.map((record) => [record.key.digest, record]),
   );
+  if (byKey.size !== input.evidence.length)
+    throw new Error("coverage evidence contains duplicate tuple records");
+  const tupleIds = new Set(input.tuples.map((tuple) => tuple.id));
+  for (const record of input.evidence)
+    if (!tupleIds.has(record.key.digest))
+      throw new Error(`coverage evidence is orphaned ${record.key.digest}`);
   const counts: Record<VerificationStatus, number> = {
     verified: 0,
     "legacy-verified": 0,
@@ -89,16 +99,31 @@ export function buildCoverageSummary(input: {
     if (status !== "verified" && status !== "legacy-verified")
       family.unresolved += 1;
     familyCounts.set(tuple.identity.family, family);
-    const reusable =
-      record !== undefined &&
-      evidenceReusable(record, tuple.identity, input.generatorDigest);
-    const reasons =
-      reusable && record.blockers.length ? record.blockers : tuple.blockers;
-    if (reasons.length)
+    const reusableRecord =
+      record && evidenceReusable(record, tuple.identity, input.generatorDigest)
+        ? record
+        : undefined;
+    let reasons: readonly string[];
+    if (reusableRecord) {
+      reasons = reusableRecord.blockers;
+    } else if (record) {
+      reasons = invalidationReasons(
+        record,
+        tuple.identity,
+        input.generatorDigest,
+      );
+    } else {
+      reasons = tuple.blockers;
+    }
+    const normalizedReasons =
+      reasons.length || status === "verified" || status === "legacy-verified"
+        ? reasons
+        : ["tuple has no current verified evidence"];
+    if (normalizedReasons.length)
       blockers.push({
         tupleId: tuple.id,
         status,
-        reasons: [...reasons].sort(),
+        reasons: [...normalizedReasons].sort(),
       });
   }
   const byFamily = [...familyCounts.entries()]

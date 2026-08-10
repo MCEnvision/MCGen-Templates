@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, relative, resolve } from "node:path";
 import { canonicalJson } from "./canonical-json.js";
+import { sha256 } from "./digest.js";
 import { buildCatalog } from "./catalog/build.js";
 import { buildCatalogDriftReport } from "./catalog/drift.js";
 import { requireCatalogKeyKind } from "./catalog/platforms.js";
@@ -12,8 +13,13 @@ import type {
   SnapshotInput,
 } from "./catalog/contracts.js";
 import type { SourceSnapshot } from "./contracts.js";
+import type { TupleEvidenceRecord } from "./phase5-contracts.js";
 import { fetchDerivedResource, fetchResource } from "./fetch-resource.js";
-import { createSchemaRegistry, repositoryRoot } from "./schema-registry.js";
+import {
+  createSchemaRegistry,
+  repositoryRoot,
+  validateWithSchema,
+} from "./schema-registry.js";
 import { loadSourceDefinition } from "./source-definition.js";
 import {
   buildFixtureManifest,
@@ -22,10 +28,13 @@ import {
 import {
   buildMatrixPlan,
   validateMatrixPlan,
+  type MatrixPlan,
   type MatrixPlanInput,
 } from "./matrix-planner.js";
 import { validateEvidenceRecord } from "./evidence.js";
 import { buildQueuePlan, type QueueEvent } from "./phase5-queue.js";
+import { buildCoverageSummary } from "./coverage-summary.js";
+import { buildPhase5Audit } from "./phase5-audit.js";
 import {
   executeTuple,
   type Phase5ExecutionRequest,
@@ -258,15 +267,90 @@ async function phase5ValidateEvidence(args: readonly string[]): Promise<void> {
   process.stdout.write("validated phase 5 evidence\n");
 }
 
+async function phase5Coverage(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output)
+    throw new Error("phase5 coverage requires --input and --output");
+  const document = requireRecord(
+    await readJson(input),
+    "phase5 coverage input",
+  );
+  const matrix = requireRecord(
+    document["matrix"],
+    "phase5 matrix",
+  ) as unknown as MatrixPlan;
+  const matrixFailures = validateMatrixPlan(matrix);
+  if (matrixFailures.length)
+    throw new Error(`phase 5 matrix is invalid\n${matrixFailures.join("\n")}`);
+  const evidenceValue = document["evidence"];
+  if (!Array.isArray(evidenceValue))
+    throw new Error("phase5 coverage evidence must be an array");
+  const evidence = evidenceValue as TupleEvidenceRecord[];
+  const catalogSnapshotId = document["catalogSnapshotId"];
+  const generatedAt = document["generatedAt"];
+  const generatorDigest = document["generatorDigest"];
+  if (
+    typeof catalogSnapshotId !== "string" ||
+    typeof generatedAt !== "string" ||
+    typeof generatorDigest !== "string"
+  )
+    throw new Error(
+      "phase5 coverage input requires catalogSnapshotId, generatedAt, and generatorDigest",
+    );
+  if (
+    matrix.tuples.some(
+      (tuple) => tuple.identity.catalogSnapshotId !== catalogSnapshotId,
+    )
+  )
+    throw new Error("phase5 coverage catalog snapshot does not match matrix");
+  const summary = buildCoverageSummary({
+    catalogSnapshotId,
+    generatedAt,
+    matrixDigest: matrix.digest,
+    tuples: matrix.tuples,
+    evidence,
+    generatorDigest,
+  });
+  await writePhase5Document(output, summary);
+  process.stdout.write(`wrote phase 5 coverage summary ${summary.digest}\n`);
+}
+
+async function phase5Audit(args: readonly string[]): Promise<void> {
+  const output = option(args, "--output");
+  if (!output) throw new Error("phase5 audit requires --output");
+  const generatedAt = option(args, "--generated-at");
+  if (!generatedAt) throw new Error("phase5 audit requires --generated-at");
+  const audit = await buildPhase5Audit({ generatedAt });
+  await writePhase5Document(output, audit);
+  process.stdout.write(`wrote phase 5 audit ${audit.digest}\n`);
+}
+
 async function phase5Queue(args: readonly string[]): Promise<void> {
   const input = option(args, "--input");
   const output = option(args, "--output");
   const shardCount = Number(option(args, "--shard-count"));
   const shardIndex = Number(option(args, "--shard-index"));
-  if (!input || !output)
-    throw new Error("phase5 queue requires --input and --output");
+  if (!output) throw new Error("phase5 queue requires --output");
+  const event = input
+    ? ((await readJson(input)) as QueueEvent)
+    : {
+        queue: option(args, "--queue"),
+        subject: option(args, "--subject"),
+        changedPaths: options(args, "--changed-path"),
+        tupleIds: options(args, "--tuple-id"),
+        createdAt: option(args, "--created-at") ?? new Date().toISOString(),
+      };
+  if (
+    typeof event.queue !== "string" ||
+    typeof event.subject !== "string" ||
+    typeof event.createdAt !== "string" ||
+    !Array.isArray(event.changedPaths) ||
+    !Array.isArray(event.tupleIds)
+  )
+    throw new Error("phase5 queue event is incomplete");
   const plan = buildQueuePlan({
-    event: (await readJson(input)) as QueueEvent,
+    event: event as QueueEvent,
     shardCount,
     shardIndex,
   });
@@ -282,6 +366,13 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
   if (!input || !output)
     throw new Error("phase5 execute requires --input and --output");
   const document = requireRecord(await readJson(input), "phase5 execute input");
+  const validation = validateWithSchema(await createSchemaRegistry(), document);
+  if (!validation.valid)
+    throw new Error(
+      `phase5 execution input is invalid\n${validation.errors
+        .map((error) => `${error.instancePath} ${error.message ?? "invalid"}`)
+        .join("\n")}`,
+    );
   const {
     tuple,
     fixture,
@@ -291,6 +382,7 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
     generatedAt,
     wrapperSource,
     wrapperPath,
+    profilePath,
   } = document;
   if (
     tuple === undefined ||
@@ -303,16 +395,96 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
     throw new Error(
       "phase5 execute input requires tuple, fixture, build, artifact, generatorDigest, and generatedAt",
     );
+  if (typeof profilePath !== "string")
+    throw new Error("phase5 execute requires a reviewed profilePath");
+  const profileAbsolute = requireRepositoryPath(profilePath);
+  const profileRelative = relative(repositoryRoot, profileAbsolute);
+  if (
+    !profileRelative.startsWith("profiles/") ||
+    !profileRelative.endsWith(".json")
+  )
+    throw new Error("phase5 profilePath must point to a profile document");
+  const profile = requireRecord(
+    JSON.parse(await readFile(profileAbsolute, "utf8")) as unknown,
+    "phase5 profile",
+  );
+  if (profile["status"] !== "reviewed")
+    throw new Error("phase5 execution requires a reviewed profile");
+  const profileDigest = sha256(canonicalJson(profile));
+  const tupleRecord = requireRecord(tuple, "phase5 tuple");
+  const identity = requireRecord(
+    tupleRecord["identity"],
+    "phase5 tuple identity",
+  );
+  if (identity["profileId"] !== profile["id"])
+    throw new Error("phase5 profile does not match tuple identity");
+  const identityDigests = requireRecord(
+    identity["contentDigests"],
+    "phase5 tuple content digests",
+  );
+  if (identityDigests["profile"] !== profileDigest)
+    throw new Error("phase5 profile digest does not match tuple identity");
+  const profileBuild = requireRecord(profile["build"], "phase5 profile build");
+  const profileJava = requireRecord(profile["java"], "phase5 profile java");
+  const profileArtifact = requireRecord(
+    profile["artifact"],
+    "phase5 profile artifact",
+  );
+  const artifactRecord = requireRecord(artifact, "phase5 artifact");
+  const artifactExpectation = requireRecord(
+    artifactRecord["expectation"],
+    "phase5 artifact expectation",
+  );
+  if (canonicalJson(artifactExpectation) !== canonicalJson(profileArtifact))
+    throw new Error(
+      "phase5 artifact expectation does not match reviewed profile",
+    );
+  const buildRecord = requireRecord(build, "phase5 build");
+  const buildJava = requireRecord(buildRecord["java"], "phase5 build java");
+  if (
+    buildJava["runtime"] !== profileJava["runtime"] ||
+    buildJava["distribution"] !== profileJava["distribution"] ||
+    requireRecord(buildRecord["wrapper"], "phase5 build wrapper")["sha256"] !==
+      profileBuild["wrapperSha256"]
+  )
+    throw new Error("phase5 build toolchain does not match reviewed profile");
+  const verification = requireRecord(
+    profile["verification"],
+    "phase5 profile verification",
+  );
+  const profileCommands = verification["commands"];
+  const buildCommands = buildRecord["commands"];
+  if (!Array.isArray(profileCommands) || !Array.isArray(buildCommands))
+    throw new Error("phase5 profile and build commands are required");
+  const commandShape = buildCommands.map((command) => {
+    const item = requireRecord(command, "phase5 build command");
+    const executable = item["executable"];
+    const args = item["args"];
+    if (
+      typeof executable !== "string" ||
+      !Array.isArray(args) ||
+      args.some((argument) => typeof argument !== "string")
+    )
+      throw new Error("phase5 build command is invalid");
+    return [executable, ...args.map((argument) => String(argument))];
+  });
+  if (canonicalJson(commandShape) !== canonicalJson(profileCommands))
+    throw new Error("phase5 build commands do not match reviewed profile");
   const request = {
-    tuple: requireRecord(tuple, "phase5 tuple"),
+    tuple: tupleRecord,
     fixture: {
       ...requireRecord(fixture, "phase5 fixture"),
       repositoryRoot: repositoryRoot,
     },
     build: requireRecord(build, "phase5 build"),
-    artifact: requireRecord(artifact, "phase5 artifact"),
+    artifact: artifactRecord,
     generatorDigest,
     parentDirectory: tmpdir(),
+    reviewedProfile: {
+      id: String(profile["id"]),
+      digest: profileDigest,
+      artifactDigest: sha256(canonicalJson(profileArtifact)),
+    },
     generatedAt,
     ...(typeof wrapperSource === "string"
       ? {
@@ -327,6 +499,39 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
   process.stdout.write(
     `wrote phase 5 evidence ${result.evidence.key.digest}\n`,
   );
+}
+
+async function phase5ExecuteReviewed(args: readonly string[]): Promise<void> {
+  const inputDirectory = option(args, "--input-dir");
+  const outputDirectory = option(args, "--output-dir");
+  if (!inputDirectory || !outputDirectory)
+    throw new Error(
+      "phase5 execute-reviewed requires --input-dir and --output-dir",
+    );
+  const inputAbsolute = requireRepositoryPath(inputDirectory);
+  const outputAbsolute = requireRepositoryPath(outputDirectory);
+  const inputRelative = relative(repositoryRoot, inputAbsolute);
+  const outputRelative = relative(repositoryRoot, outputAbsolute);
+  if (
+    !inputRelative.startsWith("verification/phase5/executions/") ||
+    !outputRelative.startsWith("verification/phase5/evidence/")
+  )
+    throw new Error(
+      "phase5 execute-reviewed directories must be under verification/phase5",
+    );
+  const inputs = (await readdir(inputAbsolute))
+    .filter((name) => name.endsWith(".json"))
+    .sort();
+  await mkdir(outputAbsolute, { recursive: true });
+  for (const name of inputs) {
+    await phase5Execute([
+      "--input",
+      `${inputRelative}${name}`,
+      "--output",
+      `${outputRelative}${name}`,
+    ]);
+  }
+  process.stdout.write(`executed ${inputs.length} reviewed phase 5 tuples\n`);
 }
 
 async function validate(args: readonly string[]): Promise<void> {
@@ -622,12 +827,24 @@ async function main(): Promise<void> {
     await phase5ValidateEvidence(args);
     return;
   }
+  if (command === "phase5" && subject === "coverage") {
+    await phase5Coverage(args);
+    return;
+  }
+  if (command === "phase5" && subject === "audit") {
+    await phase5Audit(args);
+    return;
+  }
   if (command === "phase5" && subject === "queue") {
     await phase5Queue(args);
     return;
   }
   if (command === "phase5" && subject === "execute") {
     await phase5Execute(args);
+    return;
+  }
+  if (command === "phase5" && subject === "execute-reviewed") {
+    await phase5ExecuteReviewed(args);
     return;
   }
   throw new Error(

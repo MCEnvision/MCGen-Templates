@@ -3,7 +3,11 @@ import {
   inspectArtifact,
   inspectArtifactEntries,
 } from "../src/artifact-inspector.js";
-import { runBuild, rejectRawOverrideExecution } from "../src/build-runner.js";
+import {
+  runBuild,
+  rejectRawOverrideExecution,
+  verifyJavaRuntime,
+} from "../src/build-runner.js";
 import { buildCoverageSummary } from "../src/coverage-summary.js";
 import {
   createEvidenceRecord,
@@ -12,11 +16,12 @@ import {
   validateEvidenceRecord,
 } from "../src/evidence.js";
 import { buildFixtureManifest } from "../src/fixture-generator.js";
-import { buildMatrixPlan } from "../src/matrix-planner.js";
+import { buildMatrixPlan, validateMatrixPlan } from "../src/matrix-planner.js";
 import { buildQueuePlan } from "../src/phase5-queue.js";
 import { executeTuple } from "../src/phase5-execution.js";
 import { compareReproducibleTrees } from "../src/reproducibility.js";
 import { sha256 } from "../src/digest.js";
+import { canonicalJson } from "../src/canonical-json.js";
 import {
   validateWithSchema,
   createSchemaRegistry,
@@ -43,6 +48,13 @@ const identity: TupleIdentity = {
   catalogKey: "1.21.1",
   components: { loader: "net.fabricmc:fabric-loader:0.16.14" },
   fixtureId: "fabric.fabric.minimal-java",
+  contentDigests: {
+    descriptor: sha256("descriptor"),
+    profile: sha256("profile"),
+    catalog: sha256("catalog"),
+    fixture: sha256("fixture"),
+    template: sha256("template"),
+  },
   java: { distribution: "temurin", runtime: 21, checksum: sha256("java") },
   wrapper: { version: "8.8", sha256: sha256("wrapper") },
   mappingDigest: sha256("mappings"),
@@ -102,6 +114,11 @@ describe("phase 5 build and artifact contracts", () => {
       wrapper: identity.wrapper,
       mappingDigest: identity.mappingDigest,
       sourceDigests: identity.sourceDigests,
+      contentDigests: {
+        profile: sha256("profile"),
+        catalog: sha256("catalog"),
+        template: sha256("template"),
+      },
       blockers: ["tuple build evidence is pending"],
     };
     const descriptor = {
@@ -110,6 +127,7 @@ describe("phase 5 build and artifact contracts", () => {
       status: "blocked" as const,
       family: "fabric",
       profileRefs: ["fabric"],
+      contentDigests: { descriptor: sha256("descriptor") },
       blockers: ["descriptor evidence is pending"],
     };
     const input = {
@@ -132,6 +150,44 @@ describe("phase 5 build and artifact contracts", () => {
       fixtureIdsByProfile: { "fabric\u0000fabric": ["scoped-fixture"] },
     });
     expect(scoped.tuples[0]?.identity.fixtureId).toBe("scoped-fixture");
+    const firstShard = first.shards.find((shard) => shard.tuples.length > 0);
+    if (!firstShard) throw new Error("expected a populated matrix shard");
+    const tuple = firstShard.tuples[0];
+    if (!tuple) throw new Error("expected a matrix tuple");
+    const altered = {
+      ...first,
+      shards: first.shards.map((shard) =>
+        shard.index === firstShard.index
+          ? {
+              ...shard,
+              tuples: shard.tuples.map((item, index) =>
+                index === 0
+                  ? { ...item, blockers: [...item.blockers, "tampered"] }
+                  : item,
+              ),
+            }
+          : shard,
+      ),
+    };
+    expect(validateMatrixPlan(altered).join(" ")).toContain(
+      "matrix shard tuple differs from top level",
+    );
+    expect(() =>
+      buildMatrixPlan({
+        ...input,
+        profiles: [{ ...profile, status: "reviewed", blockers: [] }],
+        descriptors: [{ ...descriptor, status: "reviewed", blockers: [] }],
+        compatibility: [
+          {
+            platform: "fabric",
+            catalogKey: "1.21.1",
+            components: {
+              loader: "net.fabricmc:fabric-loader:0.16.14",
+            },
+          },
+        ],
+      }),
+    ).toThrow("immutable digest");
   });
 
   it("runs only bounded profile commands and rejects raw overrides", async () => {
@@ -184,6 +240,15 @@ describe("phase 5 build and artifact contracts", () => {
         },
       }),
     ).toContain("unsafe executable for build");
+  });
+
+  it("parses legacy Java 8 version output correctly", () => {
+    expect(() =>
+      verifyJavaRuntime(8, 'java version "1.8.0_402"'),
+    ).not.toThrow();
+    expect(() => verifyJavaRuntime(17, 'java version "1.8.0_402"')).toThrow(
+      "does not match profile 17",
+    );
   });
 
   it("inspects metadata, classes, namespaces, icons, and secret absence", () => {
@@ -409,6 +474,11 @@ describe("phase 5 build and artifact contracts", () => {
       artifact: {} as never,
       generatorDigest: sha256("generator"),
       parentDirectory: "/tmp/mcgen-phase5-test",
+      reviewedProfile: {
+        id: "fabric",
+        digest: identity.contentDigests.profile,
+        artifactDigest: sha256(canonicalJson({})),
+      },
       generatedAt: "2026-08-10T00:00:00.000Z",
     };
     await expect(executeTuple(request)).rejects.toThrow(

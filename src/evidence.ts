@@ -61,6 +61,7 @@ export function createEvidenceRecord(
     blockers: sorted(input.blockers ?? []),
     invalidation: {
       sourceDigests: sorted(input.identity.sourceDigests),
+      contentDigests: structuredClone(input.identity.contentDigests),
       profileRevision: input.profileRevision,
       descriptorRevision: input.descriptorRevision,
       wrapperSha256: input.identity.wrapper.sha256,
@@ -114,7 +115,9 @@ export function evidenceReusable(
     record.invalidation.profileRevision === identity.profileRevision &&
     record.invalidation.descriptorRevision === identity.descriptorRevision &&
     canonicalJson(record.invalidation.sourceDigests) ===
-      canonicalJson(sorted(identity.sourceDigests))
+      canonicalJson(sorted(identity.sourceDigests)) &&
+    canonicalJson(record.invalidation.contentDigests) ===
+      canonicalJson(identity.contentDigests)
   );
 }
 
@@ -143,6 +146,13 @@ export function invalidationReasons(
     canonicalJson(sorted(identity.sourceDigests))
   )
     reasons.push("source evidence changed");
+  if (
+    canonicalJson(record.invalidation.contentDigests) !==
+    canonicalJson(identity.contentDigests)
+  )
+    reasons.push(
+      "descriptor, profile, catalog, fixture, or template content changed",
+    );
   if (record.invalidation.javaChecksum !== identity.java.checksum)
     reasons.push("java runtime changed");
   return reasons;
@@ -177,6 +187,11 @@ export function validateEvidenceRecord(
     canonicalJson(sorted(record.key.identity.sourceDigests))
   )
     failures.push("evidence source digests do not match tuple identity");
+  if (
+    canonicalJson(record.invalidation.contentDigests) !==
+    canonicalJson(record.key.identity.contentDigests)
+  )
+    failures.push("evidence content digests do not match tuple identity");
   if (record.invalidation.javaChecksum !== record.key.identity.java.checksum)
     failures.push("evidence java checksum does not match tuple identity");
   const exactStatus =

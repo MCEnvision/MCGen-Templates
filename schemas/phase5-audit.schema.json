@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:phase5-audit:1",
+  "title": "MCGen phase 5 repository audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "generatedAt",
+    "status",
+    "profiles",
+    "descriptors",
+    "evidence",
+    "blockers",
+    "digest"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:phase5-audit:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "phase5-audit" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["candidate", "blocked", "verified"] },
+    "profiles": { "$ref": "#/$defs/counts" },
+    "descriptors": { "$ref": "#/$defs/counts" },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "verified", "unresolved"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "verified": { "type": "integer", "minimum": 0 },
+        "unresolved": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+  },
+  "$defs": {
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "reviewed", "blocked"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "reviewed": { "type": "integer", "minimum": 0 },
+        "blocked": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
