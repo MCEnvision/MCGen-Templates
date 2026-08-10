@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:coverage-change:1",
+  "title": "MCGen maintenance coverage change input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "baseline",
+    "candidate",
+    "blockers"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:coverage-change:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "coverage-change" },
+    "baseline": {
+      "anyOf": [{ "$ref": "#/$defs/point" }, { "type": "null" }]
+    },
+    "candidate": {
+      "anyOf": [{ "$ref": "#/$defs/point" }, { "type": "null" }]
+    },
+    "blockers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "verified", "unresolved"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "verified": { "type": "integer", "minimum": 0 },
+        "unresolved": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

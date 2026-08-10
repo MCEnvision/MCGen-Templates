@@ -112,6 +112,14 @@ jobs:
           node dist/cli.js validate verification/phase7/ci/invalidation-plan.json
           node dist/cli.js phase7 proposal --input verification/phase7/ci/maintenance-plan.json --output verification/phase7/ci/maintenance-proposal.json
           node dist/cli.js validate verification/phase7/ci/maintenance-proposal.json
+          node dist/cli.js phase7 pull-request \
+            --plan verification/phase7/ci/maintenance-plan.json \
+            --monitor verification/phase7/ci/monitor-run.json \
+            --profile forge-modern \
+            --changed-path sources/snapshots/forge/forge-candidate.json \
+            --changed-path catalog/2026-08-10-r4/index.json \
+            --output verification/phase7/ci/maintenance-pull-request.json
+          node dist/cli.js validate verification/phase7/ci/maintenance-pull-request.json
 
       - name: run recovery simulations
         run: |
