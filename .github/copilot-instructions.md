@@ -4,7 +4,7 @@
 
 this repository owns versioned mcgen template packs, compatibility catalogs, source adapters, toolchain profiles, schemas, fixtures, and verification evidence. the website, api, github app, account data, queues, and nginx deployment belong in the future `MCEnvision/MCGen` application repository.
 
-phase 0 is active. github foundation work must merge and receive its signed phase tag before descriptor, catalog, adapter, profile, or renderer implementation starts.
+phase 0 is active. the github foundation is merged and tagged. current work owns serialized contracts, source adapters, immutable snapshots, deterministic validation, and the later template, catalog, profile, fixture, and verification layers.
 
 ## sources of truth
 
@@ -37,6 +37,6 @@ focus on correctness, deterministic output, catalog integrity, compatibility bou
 
 ## verification
 
-run the repository documented formatting, schema, unit, property, snapshot, fixture generation, build, artifact inspection, coverage, and packaging checks that apply. during the github foundation phase, run the checks documented in `docs/verification/github-foundation.md`.
+use node 22 and the npm lockfile. run `npm run verify` for implementation changes. run the documented schema, source, snapshot, fixture generation, tuple build, artifact inspection, coverage, and packaging checks that apply.
 
 do not approve when a required check failed, exact compatibility evidence is absent, documentation describes unmerged behavior as implemented, or the final diff contains credentials, generated output, machine local state, or unrelated changes.

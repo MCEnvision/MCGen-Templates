@@ -44,4 +44,4 @@ Record the pull request, source commit, quality run URLs, observed check names, 
 
 ## Remaining Owner Decisions
 
-Repository licensing remains an explicit owner choice. GitHub Project setup requires the authenticated token to include `project` scope. Record either the configured result or the exact authorization blocker.
+Repository licensing remains an explicit owner choice. Project scope was approved, and [the repository roadmap](https://github.com/orgs/MCEnvision/projects/9) is configured and synchronized.

@@ -1,0 +1,35 @@
+{
+  "name": "@mcgen/template-pack",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0 <23"
+  },
+  "packageManager": "npm@10.9.7",
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"schemas/**/*.json\" \"sources/**/*.json\" \"*.json\" \"*.js\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"schemas/**/*.json\" \"sources/**/*.json\" \"*.json\" \"*.js\"",
+    "lint": "eslint src tests",
+    "snapshot:forge": "npm run build --silent && node dist/cli.js snapshot forge",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run build --silent && node dist/cli.js validate",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build && npm run validate"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "fast-xml-parser": "5.10.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.19.21",
+    "eslint": "10.8.1",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.66.0",
+    "vitest": "4.1.10"
+  }
+}

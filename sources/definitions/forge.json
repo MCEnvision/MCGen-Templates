@@ -1,0 +1,20 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "forge",
+  "platform": "forge",
+  "category": "mod",
+  "adapter": "forge-maven",
+  "primaryUrl": "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+  "prerequisiteUrls": [
+    "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
+  ],
+  "corroboratingUrls": [
+    "https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json"
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 16777216
+  }
+}

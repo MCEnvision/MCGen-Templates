@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in Phase 0, repository foundation. The repository currently contains planning, documentation, and GitHub collaboration controls. It does not yet contain a template pack, compatibility catalog, source adapters, schemas, fixtures, build manifest, published package, or release artifact.
+MCGen Templates is in Phase 0, template-pack contract foundation. The GitHub collaboration and security gate is merged and tagged. The repository now contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, Mojang and Forge source adapters, parser tests, and one immutable normalized Forge source snapshot. It does not yet contain a template family, compatibility catalog, toolchain profile instance, generated project fixture, published package, or release artifact.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -46,7 +46,7 @@ Minecraft versions, API lines, exact loader builds, mappings, build plugins, wra
 
 The architecture is informed by the Minecraft Development plugin's descriptor, property, conditional-file, and version-resolver separation. MCGen does not copy the plugin's LGPL-licensed source or bundled templates without a separate license review.
 
-## Planned Repository Layout
+## Repository Layout
 
 ```text
 templates/
@@ -65,11 +65,13 @@ catalog/
 schemas/
 sources/
 fixtures/
+src/
+tests/
 docs/
 .github/
 ```
 
-`templates/` will contain reusable family files. `catalog/` will contain normalized compatibility data and evidence references. `schemas/` will define every serialized contract. `sources/` will define authoritative endpoints and parser fixtures. `fixtures/` will contain deterministic generation cases, not generated build output.
+`schemas/`, `sources/`, `src/`, and `tests/` are implemented. `templates/`, `catalog/`, profile instances, and generated fixtures remain planned until their exact content and evidence are reviewed. `fixtures/` will contain deterministic generation cases, not generated build output.
 
 ## Data Ownership and Resolution
 
@@ -124,15 +126,20 @@ GitHub destination branches created by MCGen are user project output. They are u
 
 ## Current Development Commands
 
-There is no runtime or build tool on the current branch. Use these checks for documentation and GitHub foundation changes:
+Use Node.js 22 and the checked-in npm lockfile:
 
 ```bash
-git diff --check
-git status --short
-git ls-files
+npm ci
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run validate
+npm run verify
 ```
 
-GitHub Actions will provide documentation validation and credential scanning. Exact Node.js, Gradle, schema, fixture, catalog, generation, and release commands will be added with their implementation manifests.
+`npm run snapshot:forge -- --output <repository path>` captures a new source snapshot without overwriting an existing file. GitHub Actions run the same locked Node.js checks through the pinned central reusable workflow, plus documentation validation, credential scanning, and dependency review.
 
 ## Verification Policy
 
@@ -156,12 +163,11 @@ Release validation remains disabled until a real deterministic pack artifact exi
 ## Known Limitations and Decisions Pending
 
 - No repository license has been selected.
-- No template descriptor schema has been implemented.
-- No source adapter has captured a reproducible upstream snapshot.
+- No template descriptor instance has been implemented.
 - No compatibility tuple has been generated or verified.
-- No package manager or build tool has been selected for this repository.
+- Forge discovery does not yet resolve ForgeGradle, Gradle, Java, mappings, recommendation, generation, build, or artifact evidence.
+- Source adapters for other planned platforms are not implemented yet.
 - No template-pack release has been published.
-- Roadmap Project synchronization requires the authenticated GitHub token to include the `project` scope.
 
 These limitations block claims of template availability, but they do not change the approved architecture or complete-coverage requirement.
 

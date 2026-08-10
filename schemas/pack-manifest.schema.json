@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:pack-manifest:1",
+  "title": "MCGen template pack manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "packVersion",
+    "sourceCommit",
+    "createdAt",
+    "schemas",
+    "families",
+    "profiles",
+    "catalogs",
+    "files"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:pack-manifest:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "packVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "schemas": { "$ref": "#/$defs/digestedPaths" },
+    "families": { "$ref": "#/$defs/digestedPaths" },
+    "profiles": { "$ref": "#/$defs/digestedPaths" },
+    "catalogs": { "$ref": "#/$defs/digestedPaths" },
+    "files": { "$ref": "#/$defs/digestedPaths" }
+  },
+  "$defs": {
+    "digestedPaths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+          },
+          "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        }
+      }
+    }
+  }
+}
