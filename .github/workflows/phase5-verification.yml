@@ -70,7 +70,21 @@ jobs:
             if [ -d verification/phase5/evidence ]; then
               find verification/phase5/evidence -type f -name '*.json' -exec mv {} /tmp/mcgen-phase5-existing-evidence/ \;
             fi
-            npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions/ --output-dir verification/phase5/evidence/
+            active_pids=()
+            for input in verification/phase5/executions/*.json; do
+              name="${input##*/}"
+              node dist/cli.js phase5 execute --input "$input" --output "verification/phase5/evidence/$name" &
+              active_pids+=("$!")
+              if [ "${#active_pids[@]}" -eq 3 ]; then
+                for pid in "${active_pids[@]}"; do
+                  wait "$pid"
+                done
+                active_pids=()
+              fi
+            done
+            for pid in "${active_pids[@]}"; do
+              wait "$pid"
+            done
           fi
       - name: write phase 5 audit
         run: |
