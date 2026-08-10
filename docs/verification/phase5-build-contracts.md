@@ -1,6 +1,6 @@
 # Phase 5 Build and Artifact Contracts
 
-Phase 5 is in review on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. It proves exact generated project tuples. The branch provides deterministic fixture and matrix planning, isolated bounded command execution, real zip artifact parsing, reproducibility comparison, exact evidence invalidation, public coverage summaries, and queue plans. The reviewed Spigot modern tuple for Minecraft 1.21.1 and the reviewed Spigot legacy tuple for Minecraft 1.8.8 each have current build, artifact, and reproducibility evidence. Other boundaries remain explicitly blocked until their own exact evidence exists.
+Phase 5 is complete on `main` and identified by the verified signed tag `phase-5-build-verification`. It proves exact generated project tuples. The implementation provides deterministic fixture and matrix planning, isolated bounded command execution, real zip artifact parsing, reproducibility comparison, exact evidence invalidation, public coverage summaries, and queue plans. The reviewed Spigot modern tuple for Minecraft 1.21.1 and the reviewed Spigot legacy tuple for Minecraft 1.8.8 each have current build, artifact, and reproducibility evidence. Other boundaries remain explicitly blocked until their own exact evidence exists.
 
 ## Exact tuple identity
 
