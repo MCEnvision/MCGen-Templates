@@ -271,6 +271,10 @@ const sourceAdapters = [
   }),
 ] as const satisfies readonly SourceAdapter[];
 
+export function listSourceAdapters(): readonly SourceAdapter[] {
+  return sourceAdapters;
+}
+
 export function requireSourceAdapter(id: string): SourceAdapter {
   const adapter = sourceAdapters.find((candidate) => candidate.id === id);
   if (!adapter) {

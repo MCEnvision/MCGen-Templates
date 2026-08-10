@@ -19,6 +19,7 @@
 - [Phase 4 contract verification](verification/phase4-contracts.md)
 - [Phase 5 build and artifact contracts](verification/phase5-build-contracts.md)
 - [Phase 6 release verification](verification/phase6-release.md)
+- [Phase 7 maintenance verification](verification/phase7-maintenance.md)
 - [Template pack releases](release/template-pack-releases.md)
 - [Pack construction](release/pack-construction.md)
 - [Project wiki](https://github.com/MCEnvision/MCGen-Templates/wiki)
@@ -35,5 +36,6 @@ Documentation is organized by the subjects that currently exist. Add a category 
 - `security/` contains trust boundaries, input handling, execution limits, integrity, and licensing controls.
 - `verification/` contains repository governance, planning, contract, source, and future compatibility verification gates.
 - `release/` contains the immutable template pack release contract.
+- `operations/` contains upstream monitoring, failure recovery, and repository completion audit procedures.
 
 The tracked documentation is canonical. The wiki is a navigation and operator surface and must link back to these files.

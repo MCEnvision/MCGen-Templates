@@ -26,7 +26,6 @@ import type {
 } from "./catalog/contracts.js";
 import type { SourceSnapshot } from "./contracts.js";
 import type { TupleEvidenceRecord } from "./phase5-contracts.js";
-import { fetchDerivedResource, fetchResource } from "./fetch-resource.js";
 import {
   createSchemaRegistry,
   repositoryRoot,
@@ -47,6 +46,24 @@ import { validateEvidenceRecord } from "./evidence.js";
 import { buildQueuePlan, type QueueEvent } from "./phase5-queue.js";
 import { buildCoverageSummary } from "./coverage-summary.js";
 import { buildPhase5Audit } from "./phase5-audit.js";
+import {
+  buildMonitorRun,
+  buildQuarantineRecord,
+  type MonitorObservation,
+  type MonitorRun,
+} from "./phase7-monitor.js";
+import {
+  buildMaintenanceAudit,
+  buildMaintenancePlan,
+  repositoryAuditRequirementIds,
+  simulateRecovery,
+  type RecoveryScenario,
+  type RepositoryAuditRequirementId,
+} from "./phase7-maintenance.js";
+import { buildInvalidationPlan } from "./phase7-invalidation.js";
+import { buildMaintenanceProposal } from "./phase7-proposal.js";
+import { runSourceMonitoring } from "./phase7-runner.js";
+import { runGitHubAudit } from "./phase7-github-audit.js";
 import { readZipEntries } from "./artifact-inspector.js";
 import {
   buildPack,
@@ -63,6 +80,7 @@ import {
   requireSourceAdapter,
   requireSourceAdapterByAdapterId,
 } from "./source-adapters.js";
+import { captureSourceSnapshot } from "./source-capture.js";
 import {
   canonicalJsonFiles,
   documentFailures,
@@ -89,32 +107,6 @@ function options(args: readonly string[], name: string): string[] {
     }
   }
   return values;
-}
-
-const sourceFetchConcurrency = 8;
-
-async function fetchAll<T, Result>(
-  values: readonly T[],
-  operation: (value: T) => Promise<Result>,
-): Promise<Result[]> {
-  const results = new Array<Result>(values.length);
-  let nextIndex = 0;
-  const worker = async (): Promise<void> => {
-    for (;;) {
-      const index = nextIndex;
-      nextIndex += 1;
-      const value = values[index];
-      if (value === undefined) return;
-      results[index] = await operation(value);
-    }
-  };
-  await Promise.all(
-    Array.from(
-      { length: Math.min(sourceFetchConcurrency, values.length) },
-      () => worker(),
-    ),
-  );
-  return results;
 }
 
 function requireRepositoryPath(path: string): string {
@@ -226,6 +218,91 @@ function requirePhase6OutputDirectory(path: string): {
     );
   }
   return { absolute, relative: repositoryRelative };
+}
+
+function requirePhase7DocumentPath(path: string): string {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("verification/phase7/") ||
+    !repositoryRelative.endsWith(".json")
+  ) {
+    throw new Error(
+      "phase 7 output must be a json file under verification/phase7",
+    );
+  }
+  return absolute;
+}
+
+function requirePhase7DirectoryPath(path: string): {
+  absolute: string;
+  relative: string;
+} {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("verification/phase7/") ||
+    repositoryRelative.endsWith(".json")
+  ) {
+    throw new Error("phase 7 directory must be under verification/phase7");
+  }
+  return { absolute, relative: repositoryRelative };
+}
+
+async function requireSafePhase7InputPath(path: string): Promise<string> {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  let current = repositoryRoot;
+  const parts = repositoryRelative.split("/").filter(Boolean);
+  for (const [index, part] of parts.entries()) {
+    current = resolve(current, part);
+    const metadata = await lstat(current);
+    if (metadata.isSymbolicLink()) {
+      throw new Error(`phase 7 input cannot contain symlinks: ${path}`);
+    }
+    if (index < parts.length - 1 && !metadata.isDirectory()) {
+      throw new Error(`phase 7 input path is not a directory: ${path}`);
+    }
+    if (index === parts.length - 1 && !metadata.isFile()) {
+      throw new Error(`phase 7 input path is not a regular file: ${path}`);
+    }
+  }
+  return absolute;
+}
+
+async function requireSafePhase7OutputPath(path: string): Promise<string> {
+  const absolute = requirePhase7DocumentPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  let current = repositoryRoot;
+  const parts = repositoryRelative.split("/").filter(Boolean);
+  for (const [index, part] of parts.entries()) {
+    current = resolve(current, part);
+    try {
+      const metadata = await lstat(current);
+      if (metadata.isSymbolicLink()) {
+        throw new Error(`phase 7 output cannot contain symlinks: ${path}`);
+      }
+      if (index < parts.length - 1 && !metadata.isDirectory()) {
+        throw new Error(`phase 7 output path is not a directory: ${path}`);
+      }
+      if (index === parts.length - 1 && !metadata.isFile()) {
+        throw new Error(`phase 7 output path is not a regular file: ${path}`);
+      }
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as NodeJS.ErrnoException).code === "ENOENT"
+      ) {
+        if (index < parts.length - 1) {
+          await mkdir(current, { recursive: false });
+        }
+        continue;
+      }
+      throw error;
+    }
+  }
+  return absolute;
 }
 
 async function requireSafePhase6OutputParent(path: string): Promise<void> {
@@ -399,6 +476,29 @@ async function writePhase5Document(
     throw new Error(
       `phase 5 document validation failed\n${failures.join("\n")}`,
     );
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, canonicalJson(document), {
+    encoding: "utf8",
+    flag: "wx",
+  });
+}
+
+async function writePhase7Document(
+  path: string,
+  document: unknown,
+): Promise<void> {
+  const outputPath = await requireSafePhase7OutputPath(path);
+  await requireUnusedPath(outputPath);
+  const failures = documentFailures(
+    await createSchemaRegistry(),
+    outputPath,
+    document,
+  );
+  if (failures.length) {
+    throw new Error(
+      `phase 7 document validation failed\n${failures.join("\n")}`,
+    );
+  }
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, canonicalJson(document), {
     encoding: "utf8",
@@ -722,6 +822,283 @@ async function phase5ExecuteReviewed(args: readonly string[]): Promise<void> {
   process.stdout.write(`executed ${inputs.length} reviewed phase 5 tuples\n`);
 }
 
+async function phase7Monitor(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  const catalog = option(args, "--catalog");
+  const candidateDirectory = option(args, "--candidate-dir");
+  if (!output) {
+    throw new Error("phase7 monitor requires --output");
+  }
+  if (!input && catalog) {
+    if (!candidateDirectory) {
+      throw new Error(
+        "phase7 monitor live mode requires --catalog, --candidate-dir, and --output",
+      );
+    }
+    const catalogPath = requireCatalogDocumentPath(catalog);
+    const candidatePath = requirePhase7DirectoryPath(candidateDirectory);
+    const monitorPath = requirePhase7DirectoryPath(
+      `${candidatePath.relative}/monitors`,
+    );
+    const result = await runSourceMonitoring({
+      baselineCatalogPath: relative(repositoryRoot, catalogPath),
+      candidateDirectory: candidatePath.relative,
+      monitorDirectory: monitorPath.relative,
+      generatedAt: new Date().toISOString(),
+    });
+    for (const candidate of result.candidates) {
+      await writePhase7Document(candidate.path, candidate.document);
+    }
+    for (const monitor of result.monitors) {
+      await writePhase7Document(monitor.path, monitor.document);
+    }
+    await writePhase7Document(output, result.run);
+    process.stdout.write(
+      `wrote phase 7 maintenance run ${result.run.runId} for ${result.run.adapters.length} adapters\n`,
+    );
+    return;
+  }
+  if (!input) {
+    throw new Error("phase7 monitor requires --input or --catalog");
+  }
+  const run = buildMonitorRun(
+    JSON.parse(
+      await readFile(await requireSafePhase7InputPath(input), "utf8"),
+    ) as MonitorObservation,
+  );
+  await writePhase7Document(output, run);
+  process.stdout.write(`wrote phase 7 monitor run ${run.runId}\n`);
+}
+
+async function phase7Quarantine(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 quarantine requires --input and --output");
+  }
+  const run = JSON.parse(
+    await readFile(await requireSafePhase7InputPath(input), "utf8"),
+  ) as MonitorRun;
+  const validation = validateWithSchema(await createSchemaRegistry(), run);
+  if (!validation.valid) {
+    throw new Error(
+      `phase 7 monitor input is invalid\n${validation.errors
+        .map((error) => `${error.instancePath} ${error.message ?? "invalid"}`)
+        .join("\n")}`,
+    );
+  }
+  const record = buildQuarantineRecord(run);
+  await writePhase7Document(output, record);
+  process.stdout.write(
+    `wrote phase 7 quarantine record ${record.quarantineId}\n`,
+  );
+}
+
+async function phase7Plan(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 plan requires --input and --output");
+  }
+  const plan = buildMaintenancePlan(
+    requireRecord(
+      JSON.parse(
+        await readFile(await requireSafePhase7InputPath(input), "utf8"),
+      ),
+      "phase 7 plan input",
+    ) as unknown as Parameters<typeof buildMaintenancePlan>[0],
+  );
+  await writePhase7Document(output, plan);
+  process.stdout.write(`wrote phase 7 maintenance plan ${plan.planId}\n`);
+}
+
+async function phase7Audit(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 audit requires --input and --output");
+  }
+  const document = requireRecord(
+    JSON.parse(await readFile(await requireSafePhase7InputPath(input), "utf8")),
+    "phase 7 audit input",
+  );
+  const requirements = Object.fromEntries(
+    repositoryAuditRequirementIds.map((id) => {
+      const value = requireRecord(document[id], `phase 7 requirement ${id}`);
+      if (
+        typeof value["passed"] !== "boolean" ||
+        typeof value["detail"] !== "string"
+      ) {
+        throw new Error(`phase 7 requirement ${id} is incomplete`);
+      }
+      return [id, { passed: value["passed"], detail: value["detail"] }];
+    }),
+  ) as Record<
+    RepositoryAuditRequirementId,
+    { passed: boolean; detail: string }
+  >;
+  const audit = buildMaintenanceAudit({
+    generatedAt: option(args, "--generated-at") ?? new Date().toISOString(),
+    requirements,
+  });
+  await writePhase7Document(output, audit);
+  process.stdout.write(`wrote phase 7 repository audit ${audit.digest}\n`);
+}
+
+async function phase7GitHubAudit(args: readonly string[]): Promise<void> {
+  const output = option(args, "--output");
+  if (!output) {
+    throw new Error("phase7 audit-live requires --output");
+  }
+  const { stdout: remoteOutput } = await execFileAsync(
+    "git",
+    ["config", "--get", "remote.origin.url"],
+    { cwd: repositoryRoot },
+  );
+  const remote = remoteOutput.trim();
+  const match =
+    /^https?:\/\/github\.com\/([^/]+)\/([^/]+?)(?:\.git)?$|^git@github\.com:([^/]+)\/([^/]+?)(?:\.git)?$/u.exec(
+      remote,
+    );
+  if (!match) {
+    throw new Error("phase7 audit-live requires a github origin");
+  }
+  const owner = match[1] ?? match[3];
+  const name = match[2] ?? match[4];
+  if (!owner || !name) {
+    throw new Error("phase7 audit-live could not resolve the github origin");
+  }
+  const audit = await runGitHubAudit({
+    owner,
+    name,
+    generatedAt: option(args, "--generated-at") ?? new Date().toISOString(),
+    api: async (path) => {
+      const { stdout } = await execFileAsync("gh", ["api", path], {
+        cwd: repositoryRoot,
+        maxBuffer: 4 * 1024 * 1024,
+      });
+      return stdout.trim() === "" ? true : (JSON.parse(stdout) as unknown);
+    },
+  });
+  await writePhase7Document(output, audit);
+  process.stdout.write(`wrote read only github audit ${audit.auditId}\n`);
+}
+
+async function phase7Recovery(args: readonly string[]): Promise<void> {
+  const scenario = option(args, "--scenario") as RecoveryScenario | undefined;
+  const output = option(args, "--output");
+  if (!scenario || !output) {
+    throw new Error("phase7 recovery requires --scenario and --output");
+  }
+  const report = simulateRecovery(scenario);
+  await writePhase7Document(output, report);
+  process.stdout.write(`wrote phase 7 recovery report ${report.digest}\n`);
+}
+
+async function phase7Invalidation(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const evidenceDirectory = option(args, "--evidence-dir");
+  const output = option(args, "--output");
+  if (!input || !evidenceDirectory || !output) {
+    throw new Error(
+      "phase7 invalidation requires --input, --evidence-dir, and --output",
+    );
+  }
+  const monitor = JSON.parse(
+    await readFile(await requireSafePhase7InputPath(input), "utf8"),
+  ) as MonitorRun;
+  const registry = await createSchemaRegistry();
+  const monitorValidation = validateWithSchema(registry, monitor);
+  if (!monitorValidation.valid) {
+    throw new Error(
+      `phase 7 invalidation monitor input is invalid\n${monitorValidation.errors
+        .map((error) => `${error.instancePath} ${error.message ?? "invalid"}`)
+        .join("\n")}`,
+    );
+  }
+  const evidenceAbsolute = requireRepositoryPath(evidenceDirectory);
+  const evidenceRelative = relative(repositoryRoot, evidenceAbsolute);
+  if (
+    evidenceRelative !== "verification/phase5/evidence" &&
+    !evidenceRelative.startsWith("verification/phase5/evidence/")
+  ) {
+    throw new Error(
+      "phase 7 evidence directory must be under verification/phase5/evidence",
+    );
+  }
+  const evidenceMetadata = await lstat(evidenceAbsolute);
+  if (evidenceMetadata.isSymbolicLink() || !evidenceMetadata.isDirectory()) {
+    throw new Error("phase 7 evidence directory is not a regular directory");
+  }
+  const evidence: TupleEvidenceRecord[] = [];
+  for (const name of (await readdir(evidenceAbsolute))
+    .filter((candidate) => candidate.endsWith(".json"))
+    .sort(compareText)) {
+    const record = JSON.parse(
+      await readFile(resolve(evidenceAbsolute, name), "utf8"),
+    ) as unknown;
+    const validation = validateWithSchema(registry, record);
+    if (!validation.valid) {
+      throw new Error(
+        `phase 7 evidence input ${name} is invalid\n${validation.errors
+          .map((error) => `${error.instancePath} ${error.message ?? "invalid"}`)
+          .join("\n")}`,
+      );
+    }
+    if (
+      record === null ||
+      typeof record !== "object" ||
+      (record as { $schema?: unknown }).$schema !==
+        "urn:mcgen:schema:tuple-evidence:1"
+    ) {
+      throw new Error(`phase 7 evidence input ${name} is not tuple evidence`);
+    }
+    evidence.push(record as TupleEvidenceRecord);
+  }
+  const shardCountValue = option(args, "--shard-count");
+  const shardCount =
+    shardCountValue === undefined ? 1 : Number(shardCountValue);
+  const plan = buildInvalidationPlan({
+    monitor,
+    evidence,
+    shardCount,
+    changedPaths: options(args, "--changed-path"),
+  });
+  await writePhase7Document(output, plan);
+  process.stdout.write(
+    `wrote phase 7 invalidation plan ${plan.planId} for ${plan.summary.invalidatedTupleCount} tuples\n`,
+  );
+}
+
+async function phase7Proposal(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output) {
+    throw new Error("phase7 proposal requires --input and --output");
+  }
+  const plan = requireRecord(
+    JSON.parse(await readFile(await requireSafePhase7InputPath(input), "utf8")),
+    "phase 7 maintenance plan input",
+  );
+  if (plan["$schema"] !== "urn:mcgen:schema:maintenance-plan:1") {
+    throw new Error("phase 7 proposal input is not a maintenance plan");
+  }
+  const releaseTag = option(args, "--release-tag");
+  const proposal = buildMaintenanceProposal({
+    plan: plan as unknown as Parameters<
+      typeof buildMaintenanceProposal
+    >[0]["plan"],
+    generatedAt: option(args, "--generated-at") ?? new Date().toISOString(),
+    candidatePaths: options(args, "--candidate-path"),
+    ...(releaseTag ? { releaseTag } : {}),
+  });
+  await writePhase7Document(output, proposal);
+  process.stdout.write(
+    `wrote phase 7 maintenance proposal ${proposal.proposalId}\n`,
+  );
+}
+
 async function validate(args: readonly string[]): Promise<void> {
   const files = args.length
     ? args.map((path) => requireRepositoryPath(path))
@@ -747,35 +1124,10 @@ async function snapshotSource(
   const adapter = requireSourceAdapter(sourceId);
   const outputPath = requireSnapshotPath(adapter.snapshotDirectory, output);
   await requireUnusedPath(outputPath);
-  const definition = await loadSourceDefinition(adapter.id);
-  const fetched = await fetchAll(definition.sources, (source) =>
-    fetchResource(source, definition.requestPolicy),
+  const { snapshot } = await captureSourceSnapshot(
+    sourceId,
+    new Date().toISOString(),
   );
-  const resources = new Map<string, (typeof fetched)[number]>();
-  for (const [index, resource] of fetched.entries()) {
-    const source = definition.sources[index];
-    if (!source) {
-      throw new Error("fetched source has no definition resource");
-    }
-    resources.set(source.id, resource);
-  }
-  const derivedSources = adapter.derive?.(resources) ?? [];
-  for (const source of derivedSources) {
-    if (resources.has(source.key)) {
-      throw new Error(`derived source key is duplicated ${source.key}`);
-    }
-  }
-  const derivedFetched = await fetchAll(derivedSources, (source) =>
-    fetchDerivedResource(source, definition.requestPolicy),
-  );
-  for (const [index, source] of derivedSources.entries()) {
-    const resource = derivedFetched[index];
-    if (!resource) {
-      throw new Error(`derived source was not fetched ${source.key}`);
-    }
-    resources.set(source.key, resource);
-  }
-  const snapshot = adapter.build(resources, new Date().toISOString());
   const failures = documentFailures(
     await createSchemaRegistry(),
     outputPath,
@@ -1226,8 +1578,40 @@ async function main(): Promise<void> {
     await phase5ExecuteReviewed(args);
     return;
   }
+  if (command === "phase7" && subject === "monitor") {
+    await phase7Monitor(args);
+    return;
+  }
+  if (command === "phase7" && subject === "quarantine") {
+    await phase7Quarantine(args);
+    return;
+  }
+  if (command === "phase7" && subject === "plan") {
+    await phase7Plan(args);
+    return;
+  }
+  if (command === "phase7" && subject === "audit") {
+    await phase7Audit(args);
+    return;
+  }
+  if (command === "phase7" && subject === "audit-live") {
+    await phase7GitHubAudit(args);
+    return;
+  }
+  if (command === "phase7" && subject === "recovery") {
+    await phase7Recovery(args);
+    return;
+  }
+  if (command === "phase7" && subject === "invalidation") {
+    await phase7Invalidation(args);
+    return;
+  }
+  if (command === "phase7" && subject === "proposal") {
+    await phase7Proposal(args);
+    return;
+  }
   throw new Error(
-    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
+    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase7 monitor --input <path> --output <path> or phase7 monitor --catalog <catalog index> --candidate-dir <directory> --output <path>, or phase7 quarantine --input <monitor run> --output <path>, or phase7 plan --input <path> --output <path>, or phase7 audit --input <path> --output <path>, or phase7 audit-live --output <path>, or phase7 recovery --scenario <scenario> --output <path>, or phase7 invalidation --input <monitor run> --evidence-dir <directory> --output <path> --shard-count <n>, or phase7 proposal --input <maintenance plan> --output <path>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
   );
 }
 

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:maintenance-proposal:1",
+  "title": "MCGen reviewed maintenance pull request proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "proposalId",
+    "digest",
+    "generatedAt",
+    "deduplicationKey",
+    "status",
+    "sourceFamily",
+    "baseline",
+    "candidate",
+    "branchName",
+    "title",
+    "body",
+    "affectedCoordinates",
+    "affectedTuples",
+    "invalidationScope",
+    "candidatePaths",
+    "verificationCommands",
+    "rollback",
+    "requiresReview",
+    "autoMerge"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:maintenance-proposal:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "maintenance-proposal" },
+    "proposalId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "deduplicationKey": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "status": { "enum": ["no-change", "ready-for-review", "blocked"] },
+    "sourceFamily": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "baseline": { "$ref": "#/$defs/snapshot" },
+    "candidate": {
+      "anyOf": [{ "$ref": "#/$defs/snapshot" }, { "type": "null" }]
+    },
+    "branchName": {
+      "type": "string",
+      "pattern": "^envy/maintenance/[a-f0-9]{16}$"
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "body": { "type": "string", "minLength": 1, "maxLength": 8192 },
+    "affectedCoordinates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "affectedTuples": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "invalidationScope": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+    },
+    "candidatePaths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-zA-Z0-9._/-]+\\.json$" }
+    },
+    "verificationCommands": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "rollback": { "$ref": "#/$defs/rollback" },
+    "requiresReview": { "const": true },
+    "autoMerge": { "const": false }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "digest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preserveBaseline", "releaseTag", "baselineReference"],
+      "properties": {
+        "preserveBaseline": { "const": true },
+        "releaseTag": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+        },
+        "baselineReference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    }
+  }
+}

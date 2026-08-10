@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:maintenance-recovery:1",
+  "title": "MCGen maintenance recovery simulation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "scenario",
+    "status",
+    "preserved",
+    "action",
+    "steps",
+    "digest"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:maintenance-recovery:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "maintenance-recovery" },
+    "scenario": {
+      "enum": [
+        "new-component",
+        "new-boundary",
+        "outage",
+        "empty-response",
+        "bulk-removal",
+        "artifact-mutation",
+        "transient-build",
+        "template-failure",
+        "historical-rebuild"
+      ]
+    },
+    "status": { "enum": ["passed", "blocked"] },
+    "preserved": { "type": "boolean" },
+    "action": {
+      "enum": ["propose", "review", "retry", "quarantine", "preserve"]
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+  }
+}

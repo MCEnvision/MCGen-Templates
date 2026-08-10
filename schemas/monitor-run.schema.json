@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:monitor-run:1",
+  "title": "MCGen deterministic upstream monitor run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "runId",
+    "generatedAt",
+    "sourceFamily",
+    "adapterId",
+    "outcome",
+    "classification",
+    "baseline",
+    "candidate",
+    "addedCoordinates",
+    "removedCoordinates",
+    "changedSources",
+    "affectedTuples",
+    "retry",
+    "policy",
+    "reasons"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:monitor-run:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "kind": { "const": "monitor-run" },
+    "runId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sourceFamily": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+    },
+    "adapterId": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+    },
+    "outcome": {
+      "enum": [
+        "unchanged",
+        "additions",
+        "compatibility-boundary",
+        "source-unavailable",
+        "source-mutation",
+        "artifact-missing",
+        "artifact-mutated",
+        "repository-protocol-failure",
+        "unsupported-host-jdk",
+        "profile-mismatch",
+        "template-defect",
+        "upstream-defect",
+        "transient-network-failure",
+        "test-infrastructure-failure",
+        "empty-response",
+        "malformed-response",
+        "bulk-removal"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "no-change",
+        "additive",
+        "boundary",
+        "review",
+        "retry",
+        "quarantine"
+      ]
+    },
+    "baseline": { "$ref": "#/$defs/snapshot" },
+    "candidate": {
+      "anyOf": [{ "$ref": "#/$defs/snapshot" }, { "type": "null" }]
+    },
+    "addedCoordinates": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "removedCoordinates": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "changedSources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceChange" }
+    },
+    "affectedTuples": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "retry": { "$ref": "#/$defs/retry" },
+    "policy": { "$ref": "#/$defs/policy" },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1, "maxLength": 1024 }
+    },
+    "quarantineId": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+    }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "digest"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "path": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9._/-]+\\.json$"
+        }
+      }
+    },
+    "sourceChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "previousDigest", "candidateDigest"],
+      "properties": {
+        "sourceId": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+        },
+        "previousDigest": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        },
+        "candidateDigest": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        }
+      }
+    },
+    "retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt", "maxAttempts", "eligible", "backoffSeconds"],
+      "properties": {
+        "attempt": { "type": "integer", "minimum": 0 },
+        "maxAttempts": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "eligible": { "type": "boolean" },
+        "backoffSeconds": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 300 }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proposeCandidate",
+        "requiresPullRequest",
+        "preserveLastKnownGood",
+        "publicationBlocked"
+      ],
+      "properties": {
+        "proposeCandidate": { "type": "boolean" },
+        "requiresPullRequest": { "type": "boolean" },
+        "preserveLastKnownGood": { "type": "boolean" },
+        "publicationBlocked": { "type": "boolean" }
+      }
+    }
+  }
+}

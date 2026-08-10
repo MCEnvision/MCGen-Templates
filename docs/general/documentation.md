@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in product Phase 0, template pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. GitHub completion Phase 4 is complete and identified by the verified signed tag `phase-4-profiles-templates-customization`. The merged Phase 4 contracts provide versioned profiles, descriptors, project specifications, PNG assets, safe file operations, and deterministic rendering. Phase 5 is complete and identified by the verified signed tag `phase-5-build-verification`. It owns exact fixture, matrix, build, artifact, reproducibility, evidence, queue, and audit verification. The reviewed Spigot modern and legacy profiles have real reproducible evidence. GitHub completion Phase 6 is complete and identified by the verified signed tag `phase-6-pack-publication`. The immutable prerelease `v1.0.0-beta.1` is published from main commit `99c6f8d5772bde176ac6358214933efbf8286199`, with remote asset verification, offline consumer verification, supported attestations, and rollback evidence. Other profiles remain intentionally blocked with explicit upstream or platform boundary reasons.
+MCGen Templates is in product Phase 0, template pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. GitHub completion Phase 4 is complete and identified by the verified signed tag `phase-4-profiles-templates-customization`. The merged Phase 4 contracts provide versioned profiles, descriptors, project specifications, PNG assets, safe file operations, and deterministic rendering. Phase 5 is complete and identified by the verified signed tag `phase-5-build-verification`. It owns exact fixture, matrix, build, artifact, reproducibility, evidence, queue, and audit verification. The reviewed Spigot modern and legacy profiles have real reproducible evidence. GitHub completion Phase 6 is complete and identified by the verified signed tag `phase-6-pack-publication`. The immutable prerelease `v1.0.0-beta.1` is published from main commit `99c6f8d5772bde176ac6358214933efbf8286199`, with remote asset verification, offline consumer verification, supported attestations, and rollback evidence. GitHub completion Phase 7 is in progress and adds deterministic monitoring, quarantine, recovery, and repository completion audit contracts. Other profiles remain intentionally blocked with explicit upstream or platform boundary reasons.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -164,6 +164,8 @@ The first template-pack release is published as immutable prerelease `v1.0.0-bet
 
 Phase 6 release validation is active through the tag-only [immutable release workflow](../../.github/workflows/phase6-release.yml). It requires a signed release tag, a clean main checkout, complete release assets, remote verification, and offline consumer checks. The [phase 6 release verification record](../verification/phase6-release.md) records the published beta evidence. See [Template Pack Releases](../release/template-pack-releases.md).
 
+Phase 7 maintenance validation is active through the scheduled and manually dispatched [maintenance workflow](../../.github/workflows/phase7-maintenance.yml). It runs repository verification, deterministic monitor and recovery simulations, and the twenty requirement repository audit without publishing from partial evidence. See [Phase 7 Maintenance Verification](../verification/phase7-maintenance.md) and the [repository audit procedure](../operations/repository-audit.md).
+
 ## Known Limitations and Decisions Pending
 
 - No repository license has been selected.
@@ -189,3 +191,7 @@ These limitations block claims of template availability, but they do not change 
 - [Template Pack Releases](../release/template-pack-releases.md)
 - [Pack Construction](../release/pack-construction.md)
 - [Phase 6 Release Verification](../verification/phase6-release.md)
+- [Phase 7 Maintenance Verification](../verification/phase7-maintenance.md)
+- [Upstream Monitoring](../operations/upstream-monitoring.md)
+- [Failure Recovery](../operations/failure-recovery.md)
+- [Repository Completion Audit](../operations/repository-audit.md)

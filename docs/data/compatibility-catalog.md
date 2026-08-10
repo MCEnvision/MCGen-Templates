@@ -40,3 +40,5 @@ Advanced mode may display every discovered catalog component. A manual value rem
 ## Additive Drift
 
 Catalog drift compares a baseline snapshot set with a candidate snapshot set using exact platform, component, catalog-key, and coordinate identities. New entries are additions. Missing entries and changed source response digests require review; they never remove existing catalog content automatically. Source metadata cannot by itself prove that a binary artifact changed, so any suspected artifact mutation remains quarantined until artifact-specific evidence is captured.
+
+Phase 7 maintenance plans consume catalog drift without mutating historical indexes or shards. A candidate catalog is publishable only after every required source succeeds and the affected profiles and tuples pass review. See [Phase 7 Maintenance Verification](../verification/phase7-maintenance.md).

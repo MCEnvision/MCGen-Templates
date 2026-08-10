@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:maintenance-run:1",
+  "title": "MCGen complete source maintenance run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "runId",
+    "generatedAt",
+    "baselineCatalog",
+    "candidateDirectory",
+    "adapters",
+    "candidateComplete",
+    "publicationBlocked",
+    "failedAdapters"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:maintenance-run:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "maintenance-run" },
+    "runId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "baselineCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "digest"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^catalog/.+\\.json$" },
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    },
+    "candidateDirectory": {
+      "type": "string",
+      "pattern": "^verification/phase7/.+"
+    },
+    "adapters": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceFamily",
+          "adapterId",
+          "status",
+          "outcome",
+          "classification",
+          "monitorPath",
+          "monitorRunId"
+        ],
+        "properties": {
+          "sourceFamily": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+          },
+          "adapterId": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+          },
+          "status": { "enum": ["captured", "failed"] },
+          "outcome": {
+            "$ref": "urn:mcgen:schema:monitor-run:1#/properties/outcome"
+          },
+          "classification": {
+            "$ref": "urn:mcgen:schema:monitor-run:1#/properties/classification"
+          },
+          "monitorPath": {
+            "type": "string",
+            "pattern": "^verification/phase7/.+\\.json$"
+          },
+          "candidatePath": {
+            "type": "string",
+            "pattern": "^verification/phase7/.+\\.json$"
+          },
+          "monitorRunId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+          "error": { "type": "string", "maxLength": 1024 }
+        }
+      }
+    },
+    "candidateComplete": { "type": "boolean" },
+    "publicationBlocked": { "type": "boolean" },
+    "failedAdapters": {
+      "type": "array",
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+    }
+  }
+}

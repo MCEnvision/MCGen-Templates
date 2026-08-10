@@ -732,7 +732,7 @@ Keep the repository complete after initial publication and prove that every requ
 
 ## Status
 
-Pending the first pack release.
+In progress. The first immutable beta release is published and verified. Issue [25](https://github.com/MCEnvision/MCGen-Templates/issues/25) is active in the phase 11 milestone and roadmap. This phase implements deterministic maintenance classification, non destructive reconciliation, bounded retry and quarantine plans, repository completion audits, and recovery simulations. It does not implement the deferred application, website, GitHub App, Nginx, or Cloudflare work.
 
 ## Upstream monitoring
 
