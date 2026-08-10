@@ -1,0 +1,669 @@
+{
+  "$schema": "urn:mcgen:schema:catalog-platform-index:1",
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "id": "catalog-platform.paper.c96fecb11c77378d2096cdec",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "shards": [
+    {
+      "bytes": 3852,
+      "id": "catalog.paper.6bd96c6e57d6ea9a439b6b97",
+      "key": "1.10.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.10.2.13ba5ea4b40fb0a1764640428fc1ebcf2ca5eebb59dd8ec874a9909f9f7738cc.json",
+      "sha256": "13ba5ea4b40fb0a1764640428fc1ebcf2ca5eebb59dd8ec874a9909f9f7738cc",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 3858,
+      "id": "catalog.paper.8ecee194c3de642549288310",
+      "key": "1.11.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.11.2.6b42a50a6d94f823d38b700236269dffe84a4a5d11cfb9a186c0e704a696c0e8.json",
+      "sha256": "6b42a50a6d94f823d38b700236269dffe84a4a5d11cfb9a186c0e704a696c0e8",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 53896,
+      "id": "catalog.paper.6265a7eefb4984bbead7e88e",
+      "key": "1.12",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.12.6aa2b955700768d190a8b86818511b4b4ecb3180718f6d4612098006b0de61bd.json",
+      "sha256": "6aa2b955700768d190a8b86818511b4b4ecb3180718f6d4612098006b0de61bd",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 32036,
+      "id": "catalog.paper.4a129e0ae41e6888109697b7",
+      "key": "1.12.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.12.1.e2f93038c17e06c7dfc8e690b0154114ad40ee92433d89463e20b358c85aad9f.json",
+      "sha256": "e2f93038c17e06c7dfc8e690b0154114ad40ee92433d89463e20b358c85aad9f",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 356674,
+      "id": "catalog.paper.fee21b14e965229442991061",
+      "key": "1.12.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.12.2.459d574d2f69294bbf335378143a7f09b4590a8431829f3aea75c6a8e0cac757.json",
+      "sha256": "459d574d2f69294bbf335378143a7f09b4590a8431829f3aea75c6a8e0cac757",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 135390,
+      "id": "catalog.paper.756cf21c6ed54152113844ce",
+      "key": "1.13",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.13.bc7dbad0e8d363928489d44409ea7d7a97db8ba8debde28327bc29884da957f7.json",
+      "sha256": "bc7dbad0e8d363928489d44409ea7d7a97db8ba8debde28327bc29884da957f7",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 11801,
+      "id": "catalog.paper.7f8c7f1b6e9e4d3512b1f521",
+      "key": "1.13-pre7",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.13-pre7.49362d05c303edf90c3a21cdb9966e2d8c031f178b1f685143302a7a0d75cb4c.json",
+      "sha256": "49362d05c303edf90c3a21cdb9966e2d8c031f178b1f685143302a7a0d75cb4c",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 182508,
+      "id": "catalog.paper.a144f3e8e94ab7293492b8d9",
+      "key": "1.13.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.13.1.f3f01161f052f1b200ef57be48ea5a9113e22c896798d8b8e044030b8cd3fa65.json",
+      "sha256": "f3f01161f052f1b200ef57be48ea5a9113e22c896798d8b8e044030b8cd3fa65",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 230836,
+      "id": "catalog.paper.1e29433c5d68e37f663a9ac4",
+      "key": "1.13.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.13.2.b25dc5b52a00252d80168dfca0132803c0be1f9b4ece058eecd450dc153209b5.json",
+      "sha256": "b25dc5b52a00252d80168dfca0132803c0be1f9b4ece058eecd450dc153209b5",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 15288,
+      "id": "catalog.paper.c58631c5165402448e277b92",
+      "key": "1.14",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.14.6eb66bd2e5d78f882d6d57fb8d9dcaf2a843dd471585abe71811987ed3b4853c.json",
+      "sha256": "6eb66bd2e5d78f882d6d57fb8d9dcaf2a843dd471585abe71811987ed3b4853c",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 28572,
+      "id": "catalog.paper.9665910d1c5b7f4815e0c00a",
+      "key": "1.14.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.14.1.6e6413f3d1c5fd6bbfafc74e37100ba0c88462a6e106c3465cb4b200be8b07c9.json",
+      "sha256": "6e6413f3d1c5fd6bbfafc74e37100ba0c88462a6e106c3465cb4b200be8b07c9",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 48872,
+      "id": "catalog.paper.20b75c9a31511db6739e0271",
+      "key": "1.14.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.14.2.e53e96a84b05b25c6995dce3a5e75f470e65ffc826608824db2605782a9602f6.json",
+      "sha256": "e53e96a84b05b25c6995dce3a5e75f470e65ffc826608824db2605782a9602f6",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 25098,
+      "id": "catalog.paper.a8359292501ae7991cdc6236",
+      "key": "1.14.3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.14.3.458f6a1d4751293082065531b8e0006f8e17ad3f920605dfb20afbeca5c9fb08.json",
+      "sha256": "458f6a1d4751293082065531b8e0006f8e17ad3f920605dfb20afbeca5c9fb08",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 92282,
+      "id": "catalog.paper.1bcfc18f40f3910ed5b983ee",
+      "key": "1.14.4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.14.4.f3688e763b2f6d2059619d92fd9424fffff8d78e75e1d167042aa7356c65c497.json",
+      "sha256": "f3688e763b2f6d2059619d92fd9424fffff8d78e75e1d167042aa7356c65c497",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 18806,
+      "id": "catalog.paper.898c619607ff27ae398875a4",
+      "key": "1.15",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.15.87270fcdc20dc8078f976fe21777373a3edd0aeef9dd37cb073c105b39fc21f1.json",
+      "sha256": "87270fcdc20dc8078f976fe21777373a3edd0aeef9dd37cb073c105b39fc21f1",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 33864,
+      "id": "catalog.paper.533776da163111534a191157",
+      "key": "1.15.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.15.1.ffdd596e1e47afcd97c1a534a0b0a805d64d9ca4038fe9676bbcb765c9c9fb67.json",
+      "sha256": "ffdd596e1e47afcd97c1a534a0b0a805d64d9ca4038fe9676bbcb765c9c9fb67",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 280504,
+      "id": "catalog.paper.7bd1e531bf88fc2790a52a98",
+      "key": "1.15.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.15.2.fa1bc5f1c36affe857f250d24760414a68c0761e5f47bf5233e59dc9015dab54.json",
+      "sha256": "fa1bc5f1c36affe857f250d24760414a68c0761e5f47bf5233e59dc9015dab54",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 114180,
+      "id": "catalog.paper.beb25ece345c249216939c0a",
+      "key": "1.16.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.16.1.84a9f4cc37075c33f4b9d5fe662d8c0e962cf550af1c4bdc6874ee682003ff69.json",
+      "sha256": "84a9f4cc37075c33f4b9d5fe662d8c0e962cf550af1c4bdc6874ee682003ff69",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 43662,
+      "id": "catalog.paper.8626c0af3773de308f5e0661",
+      "key": "1.16.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.16.2.7f41e6d89c6af0ad7020a11aba403c3fa550a15f73228a5ac5a3d1af8bd8e2ea.json",
+      "sha256": "7f41e6d89c6af0ad7020a11aba403c3fa550a15f73228a5ac5a3d1af8bd8e2ea",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 56922,
+      "id": "catalog.paper.44e3f98e49f11e21af595e82",
+      "key": "1.16.3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.16.3.406432ec967df6b085be5a28484958c22aca3fd02a670e59be18a2cfc9cade68.json",
+      "sha256": "406432ec967df6b085be5a28484958c22aca3fd02a670e59be18a2cfc9cade68",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 140018,
+      "id": "catalog.paper.99a079c9b74ae324281ab2dc",
+      "key": "1.16.4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.16.4.80d2bafd67dd7719ee68d31f3e762346a34501ccf9365de69461d01ea034b570.json",
+      "sha256": "80d2bafd67dd7719ee68d31f3e762346a34501ccf9365de69461d01ea034b570",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 322122,
+      "id": "catalog.paper.3776c8e61ef374c5a737f916",
+      "key": "1.16.5",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.16.5.cf8d5b7e9ed846682f61f6d18ba95c34374bea3b6c58eebe5743f76582ce0fa4.json",
+      "sha256": "cf8d5b7e9ed846682f61f6d18ba95c34374bea3b6c58eebe5743f76582ce0fa4",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 66359,
+      "id": "catalog.paper.81b00db1b76378a800240ac2",
+      "key": "1.17",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.17.f9e511ef3354ec3ec149f45a964b46a86ddbbc56eb2c9bea656309792bbf056f.json",
+      "sha256": "f9e511ef3354ec3ec149f45a964b46a86ddbbc56eb2c9bea656309792bbf056f",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 284101,
+      "id": "catalog.paper.ffcb1ad68859cca731aee63e",
+      "key": "1.17.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.17.1.515945e1f69975ce068b7a102d1a9a45696bc9b7815fcc01c618520cf1a2a48e.json",
+      "sha256": "515945e1f69975ce068b7a102d1a9a45696bc9b7815fcc01c618520cf1a2a48e",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 50458,
+      "id": "catalog.paper.85eef8b461f054ec41f9a65d",
+      "key": "1.18",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.18.b02194920b46ead412f40485fba10b86a07a4d9933f51794ac98f39076d710a3.json",
+      "sha256": "b02194920b46ead412f40485fba10b86a07a4d9933f51794ac98f39076d710a3",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 130129,
+      "id": "catalog.paper.462f23e1191ab1332a45a178",
+      "key": "1.18.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.18.1.8d4ca0a687a923038570299df6bfc8d6037adc6b45b3d483e69d41a1815b6eec.json",
+      "sha256": "8d4ca0a687a923038570299df6bfc8d6037adc6b45b3d483e69d41a1815b6eec",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 151537,
+      "id": "catalog.paper.73280ed8a98eef458e8bef73",
+      "key": "1.18.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.18.2.a1695f457b063302d5242432775e91946233465810cabcbb779ada54949a615a.json",
+      "sha256": "a1695f457b063302d5242432775e91946233465810cabcbb779ada54949a615a",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 2131,
+      "id": "catalog.paper.adc57dfc45b58d740b88650f",
+      "key": "1.19",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.19.68b3a09042a8e4ec62239d641255333cdc513016494a65b9c23ddf606e07949d.json",
+      "sha256": "68b3a09042a8e4ec62239d641255333cdc513016494a65b9c23ddf606e07949d",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 28625,
+      "id": "catalog.paper.643dcedd2b6fd2dd27ed51f1",
+      "key": "1.19.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.19.1.247d990f00abd00ab97d870e635259dc76ecd0ec3d24c0a2c07a60aebd0b034b.json",
+      "sha256": "247d990f00abd00ab97d870e635259dc76ecd0ec3d24c0a2c07a60aebd0b034b",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 169217,
+      "id": "catalog.paper.08be61178191f0138b18e2b6",
+      "key": "1.19.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.19.2.c77003fca8a70f30c2e322fb96261327e5548dbefd908633e981404b632319c5.json",
+      "sha256": "c77003fca8a70f30c2e322fb96261327e5548dbefd908633e981404b632319c5",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 125877,
+      "id": "catalog.paper.f4a34b6e617c9bc9ee003597",
+      "key": "1.19.3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.19.3.785fc1746ca3951438a50cf3ce4657b76cdedb09d3d9c6b00f408b76c0ea0f0e.json",
+      "sha256": "785fc1746ca3951438a50cf3ce4657b76cdedb09d3d9c6b00f408b76c0ea0f0e",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 92289,
+      "id": "catalog.paper.01bea637e43a966cac6c5114",
+      "key": "1.19.4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.19.4.291b6b907beecbec9d4378a6ac7f7b12fc047b65e5e82ee3a9b14e85716247da.json",
+      "sha256": "291b6b907beecbec9d4378a6ac7f7b12fc047b65e5e82ee3a9b14e85716247da",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 16177,
+      "id": "catalog.paper.9721a3cf6a777b5a4ab5118e",
+      "key": "1.20",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.20.96e55ad8b2cff03371e7b54aad38ddb8120558daf9450baf94677f8fdfac7f99.json",
+      "sha256": "96e55ad8b2cff03371e7b54aad38ddb8120558daf9450baf94677f8fdfac7f99",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 159331,
+      "id": "catalog.paper.1ec3eab84eba486abe3083ba",
+      "key": "1.20.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.20.1.e67c647f57a047ef1852fbe02f80d8eedc377482b5c4f07490f6e02dced10458.json",
+      "sha256": "e67c647f57a047ef1852fbe02f80d8eedc377482b5c4f07490f6e02dced10458",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 104651,
+      "id": "catalog.paper.40bf53a77b5bd9b699dbfa53",
+      "key": "1.20.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.20.2.e6e931d11dacf16eb54d1880353fff0ef3bdbbe37004c8511c145528814faf9c.json",
+      "sha256": "e6e931d11dacf16eb54d1880353fff0ef3bdbbe37004c8511c145528814faf9c",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 156793,
+      "id": "catalog.paper.5d0a18fc4f3363d159a59d54",
+      "key": "1.20.4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.20.4.2284c7cf2b0c356184f1d39ddde760a71a7c9460618a4e648d576b25486fb215.json",
+      "sha256": "2284c7cf2b0c356184f1d39ddde760a71a7c9460618a4e648d576b25486fb215",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 17971,
+      "id": "catalog.paper.740a8d4fc2285244654b7d3f",
+      "key": "1.20.5",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.20.5.be763129567815e70e10f8fbbd7d885d2a662f511505e29583587371fcd73725.json",
+      "sha256": "be763129567815e70e10f8fbbd7d885d2a662f511505e29583587371fcd73725",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 114079,
+      "id": "catalog.paper.5b49e6b2265880abcc0120cc",
+      "key": "1.20.6",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.20.6.0a295e87b59fe066095bba7912065306479572b952a4be1d04dd5ca1d895551a.json",
+      "sha256": "0a295e87b59fe066095bba7912065306479572b952a4be1d04dd5ca1d895551a",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 115493,
+      "id": "catalog.paper.120471e03b18571fa9634c0b",
+      "key": "1.21",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.8a321120c9a1995fdb2e70dd01cbe8f44716628aabdd4abb07a460cea59c3eaf.json",
+      "sha256": "8a321120c9a1995fdb2e70dd01cbe8f44716628aabdd4abb07a460cea59c3eaf",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 115085,
+      "id": "catalog.paper.319da508737611c8b75c5027",
+      "key": "1.21.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.1.55eac1d7b94c80fc660033978c5a3e7419a2e534467bcd083e77bde5b7a7a639.json",
+      "sha256": "55eac1d7b94c80fc660033978c5a3e7419a2e534467bcd083e77bde5b7a7a639",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 47114,
+      "id": "catalog.paper.4da536ded1d8597d4d14b86d",
+      "key": "1.21.10",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.10.c639ab3914b4403df1557894e2358645514698871d644bcb1a4ca8586afdb6ca.json",
+      "sha256": "c639ab3914b4403df1557894e2358645514698871d644bcb1a4ca8586afdb6ca",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 88903,
+      "id": "catalog.paper.bd439029f2ede5f1fbaa9c38",
+      "key": "1.21.11",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11.ecabfec23832b175307d85cb314d49e3a5f37fdcf25163289a4ca3369419f954.json",
+      "sha256": "ecabfec23832b175307d85cb314d49e3a5f37fdcf25163289a4ca3369419f954",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 4794,
+      "id": "catalog.paper.3e7afe285bc9d3d7375ecc1e",
+      "key": "1.21.11-pre3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11-pre3.98ea8c77717555ac175af741f92fcba959ef42c8ccad9f788f3402be8d17e9e7.json",
+      "sha256": "98ea8c77717555ac175af741f92fcba959ef42c8ccad9f788f3402be8d17e9e7",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 5686,
+      "id": "catalog.paper.e449548c25666f74812391d2",
+      "key": "1.21.11-pre4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11-pre4.f459a17656ef7c564e99011f7d7c65a6229a9d0accc8c9fba922a570206b3bc1.json",
+      "sha256": "f459a17656ef7c564e99011f7d7c65a6229a9d0accc8c9fba922a570206b3bc1",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 3030,
+      "id": "catalog.paper.ad30c39b3fda1d57a1f0b3e8",
+      "key": "1.21.11-pre5",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11-pre5.e5e23cce27da682f138ffa8426f70c30fdea89b0b28cf6cdad3509057cedb39a.json",
+      "sha256": "e5e23cce27da682f138ffa8426f70c30fdea89b0b28cf6cdad3509057cedb39a",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.paper.dffdf68d8db05abc2570ca58",
+      "key": "1.21.11-rc1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11-rc1.426f1f59e15f8f5ce21fb54aa47f09fd3c733af8886b91865a534b3ca54bb4cc.json",
+      "sha256": "426f1f59e15f8f5ce21fb54aa47f09fd3c733af8886b91865a534b3ca54bb4cc",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 9220,
+      "id": "catalog.paper.bd68543b306d544a04decf73",
+      "key": "1.21.11-rc2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11-rc2.d1b048bf40c05c1edcca788aa1b6f8591bee47449d9ffc0e5868a83666ff392d.json",
+      "sha256": "d1b048bf40c05c1edcca788aa1b6f8591bee47449d9ffc0e5868a83666ff392d",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.paper.a63cde71a4f3a5be5f47232f",
+      "key": "1.21.11-rc3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.11-rc3.5d87663a4dec285f425828032a41f78120d8da5535a5565ce7a1944c327601e1.json",
+      "sha256": "5d87663a4dec285f425828032a41f78120d8da5535a5565ce7a1944c327601e1",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 74335,
+      "id": "catalog.paper.1670f42a0302efe750d7f0e5",
+      "key": "1.21.3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.3.48644b3e953a927bc65143ef271703c057e0ba9630f217fd61b3613504fc0def.json",
+      "sha256": "48644b3e953a927bc65143ef271703c057e0ba9630f217fd61b3613504fc0def",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 199763,
+      "id": "catalog.paper.4adf20af9ec450c5cc59c2fc",
+      "key": "1.21.4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.4.62d9d8891fd60d649b9b59ab2cc91a1364d7da70691c8c264768e82264211f5d.json",
+      "sha256": "62d9d8891fd60d649b9b59ab2cc91a1364d7da70691c8c264768e82264211f5d",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 100756,
+      "id": "catalog.paper.300d30f76dd9145c6b54c063",
+      "key": "1.21.5",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.5.4035dc52f2693c48c13e130a3ca563cbad0c79723e6cc237c7b8d8f3f9f52d5e.json",
+      "sha256": "4035dc52f2693c48c13e130a3ca563cbad0c79723e6cc237c7b8d8f3f9f52d5e",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 42615,
+      "id": "catalog.paper.130366a5ea96c96ac5027be6",
+      "key": "1.21.6",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.6.4e602241e268ab3af7a2e9a96052a228aae6effbb5ffdcc06e02b2cd62329571.json",
+      "sha256": "4e602241e268ab3af7a2e9a96052a228aae6effbb5ffdcc06e02b2cd62329571",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 26823,
+      "id": "catalog.paper.a14e8fc8b18f84a6443691e5",
+      "key": "1.21.7",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.7.85d3cd07672e4be02ffa459c7bcd1b580b46d3552f876e4bd6362ca38b6b48d2.json",
+      "sha256": "85d3cd07672e4be02ffa459c7bcd1b580b46d3552f876e4bd6362ca38b6b48d2",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 50633,
+      "id": "catalog.paper.d3238e9236c591276fc8aae5",
+      "key": "1.21.8",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.8.4068eab0e6046e1130696e237960ccf48581613e9ef7acbd5e69c8568794102d.json",
+      "sha256": "4068eab0e6046e1130696e237960ccf48581613e9ef7acbd5e69c8568794102d",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 23423,
+      "id": "catalog.paper.67d19c3c9d20c788c46952c3",
+      "key": "1.21.9",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.9.65e119769ef3a8d88fb7a9656ec3d7ddc51708f5ae96e80f7218412de6dc68a0.json",
+      "sha256": "65e119769ef3a8d88fb7a9656ec3d7ddc51708f5ae96e80f7218412de6dc68a0",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 5670,
+      "id": "catalog.paper.cb99957ad3671efa8be48a05",
+      "key": "1.21.9-pre2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.9-pre2.345e5050a5f409e725758a03dc5d2006b67d1fbef350af5c637f3d44a94d1174.json",
+      "sha256": "345e5050a5f409e725758a03dc5d2006b67d1fbef350af5c637f3d44a94d1174",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 5676,
+      "id": "catalog.paper.4715fa1e4cecd52d8d73d2dc",
+      "key": "1.21.9-pre3",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.9-pre3.6967081ed890576c58b3c6544966b6855be754cc8de7a67e7760d69d376210b1.json",
+      "sha256": "6967081ed890576c58b3c6544966b6855be754cc8de7a67e7760d69d376210b1",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 9220,
+      "id": "catalog.paper.874d4130bd056e258cedbd24",
+      "key": "1.21.9-pre4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.9-pre4.fc0a1c2cad8d1574a6aefa20a83922667c176e90e885de5a5dbfe8adcfdaf205.json",
+      "sha256": "fc0a1c2cad8d1574a6aefa20a83922667c176e90e885de5a5dbfe8adcfdaf205",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 12744,
+      "id": "catalog.paper.34723543ee97027f8a8a3145",
+      "key": "1.21.9-rc1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.21.9-rc1.6cea489f088d81d78a90f3f19c012927788b0d07494529b87ea802309c7eb325.json",
+      "sha256": "6cea489f088d81d78a90f3f19c012927788b0d07494529b87ea802309c7eb325",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 2116,
+      "id": "catalog.paper.a4008aeb013977abb60c262f",
+      "key": "1.7.10",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.7.10.3cb0e328f07f00528c7f182b5bb63258330b9993420316142b5fe40f9afff8cc.json",
+      "sha256": "3cb0e328f07f00528c7f182b5bb63258330b9993420316142b5fe40f9afff8cc",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 3876,
+      "id": "catalog.paper.0a0482d83e3300ca19177177",
+      "key": "1.8.8",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.8.8.5d61b06d0a67c43394b4a24d48ed098604e637f823606f399e2d2e43b78b7b43.json",
+      "sha256": "5d61b06d0a67c43394b4a24d48ed098604e637f823606f399e2d2e43b78b7b43",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 3876,
+      "id": "catalog.paper.7ef1d54f384e6f2851d20417",
+      "key": "1.9.4",
+      "path": "catalog/2026-08-10-r3/platforms/paper/1.9.4.c61a5f0e54ef17091bacfa8952608c6bfffc897695af564e8139a486830fac5b.json",
+      "sha256": "c61a5f0e54ef17091bacfa8952608c6bfffc897695af564e8139a486830fac5b",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 40568,
+      "id": "catalog.paper.147891d389f0d7a9ad6e0b79",
+      "key": "26.1.1",
+      "path": "catalog/2026-08-10-r3/platforms/paper/26.1.1.54e6f30e9493bf41cafdd2186fd96f98b3b03d0783458ca8c24166cf2c979027.json",
+      "sha256": "54e6f30e9493bf41cafdd2186fd96f98b3b03d0783458ca8c24166cf2c979027",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 127486,
+      "id": "catalog.paper.a67f1dd8dc351bbe5ea22505",
+      "key": "26.1.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/26.1.2.c4d87270e943912334c928855066680cf2ec603eff1104a6bde44e8dd893d690.json",
+      "sha256": "c4d87270e943912334c928855066680cf2ec603eff1104a6bde44e8dd893d690",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 182572,
+      "id": "catalog.paper.32b5252e235787a285d52fb6",
+      "key": "26.2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/26.2.5639f7bf1413217bbb26897de71222a4bf128ce9e02aa4b82c645113fcab3f5f.json",
+      "sha256": "5639f7bf1413217bbb26897de71222a4bf128ce9e02aa4b82c645113fcab3f5f",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    },
+    {
+      "bytes": 8297,
+      "id": "catalog.paper.f5220afc476adb7fe1bfdbea",
+      "key": "26.2-rc-2",
+      "path": "catalog/2026-08-10-r3/platforms/paper/26.2-rc-2.5e215e8768acd8d0dc25b1b0eaab3e7a549bff7d0cdca55c084269dba4c49da7.json",
+      "sha256": "5e215e8768acd8d0dc25b1b0eaab3e7a549bff7d0cdca55c084269dba4c49da7",
+      "sourceSnapshots": [
+        "paper.e9a48aeb643a97705e3dcd9d"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.a457a11608c32bf9a81bda4b",
+  "category": "multiloader",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:2.4.25",
+      "id": "component.architectury.f308ea6cecfbda4708948d53",
+      "sourceEntries": [
+        {
+          "entryIndex": 269,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.4.25"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:2.4.26",
+      "id": "component.architectury.045bd99280366ccb1d7928d1",
+      "sourceEntries": [
+        {
+          "entryIndex": 270,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.4.26"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:2.4.25",
+      "id": "component.architectury.7dc1bad34149cba376cfae29",
+      "sourceEntries": [
+        {
+          "entryIndex": 271,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.4.25"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:2.4.26",
+      "id": "component.architectury.00067b2d89453482c7581f98",
+      "sourceEntries": [
+        {
+          "entryIndex": 272,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.4.26"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.architectury.d491153d8c0bc17bfa7c7ad8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 272,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.00067b2d89453482c7581f98"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.d491153d8c0bc17bfa7c7ad8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 270,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.045bd99280366ccb1d7928d1"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.d491153d8c0bc17bfa7c7ad8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 271,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.7dc1bad34149cba376cfae29"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.d491153d8c0bc17bfa7c7ad8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 269,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.f308ea6cecfbda4708948d53"
+    }
+  ],
+  "id": "catalog.architectury.49a1e0064438bb2d6f7cf0e7",
+  "key": "2.4",
+  "keyKind": "minecraft",
+  "platform": "architectury",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "architectury.df9f4c866e0c6749913054ad"
+  ]
+}

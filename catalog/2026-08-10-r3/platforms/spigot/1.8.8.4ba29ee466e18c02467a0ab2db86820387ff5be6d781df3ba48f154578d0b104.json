@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT",
+      "id": "component.spigot.e1fa06d83a4d30bc198bc16b",
+      "sourceEntries": [
+        {
+          "entryIndex": 74,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.8.8-R0.1-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.spigot.b17da181f92ce1b17e85cb4b",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 74,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.e1fa06d83a4d30bc198bc16b"
+    }
+  ],
+  "id": "catalog.spigot.bfb89770ddd4cb8b5138b2cf",
+  "key": "1.8.8",
+  "keyKind": "minecraft",
+  "platform": "spigot",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "spigot.d3e7e6031437b0eb7447a6df"
+  ]
+}

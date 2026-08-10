@@ -1,0 +1,86 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "paper-api",
+      "coordinate": "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT",
+      "id": "component.paper.8dfda2714b66bc40b91038c1",
+      "sourceEntries": [
+        {
+          "entryIndex": 41,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19.4-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.19.4",
+      "id": "component.paper.7909db18fd0a3d666558fb56",
+      "sourceEntries": [
+        {
+          "entryIndex": 42,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19.4"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.581c222a29bf9999542bbbf4",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 42,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.7909db18fd0a3d666558fb56"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.581c222a29bf9999542bbbf4",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 41,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.paper.8dfda2714b66bc40b91038c1"
+    }
+  ],
+  "id": "catalog.paper.37d10692afb600b5fbad3711",
+  "key": "1.19.4",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.e9a48aeb643a97705e3dcd9d"
+  ]
+}

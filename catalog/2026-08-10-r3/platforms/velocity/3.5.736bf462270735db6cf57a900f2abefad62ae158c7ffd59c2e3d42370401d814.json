@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "proxy",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "velocity-api",
+      "coordinate": "com.velocitypowered:velocity-api:3.5.0-SNAPSHOT",
+      "id": "component.velocity.fda18b3a03ca12a2ec7edbff",
+      "sourceEntries": [
+        {
+          "entryIndex": 60,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.5.0-SNAPSHOT"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "velocity-api",
+      "coordinate": "com.velocitypowered:velocity-api:3.5.1",
+      "id": "component.velocity.02d2b79b50335f31740cc464",
+      "sourceEntries": [
+        {
+          "entryIndex": 61,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.5.1"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.velocity.1ebc488a76cd658802912014",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 61,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.velocity.02d2b79b50335f31740cc464"
+    },
+    {
+      "confidence": "published",
+      "from": "target.velocity.1ebc488a76cd658802912014",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 60,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.velocity.fda18b3a03ca12a2ec7edbff"
+    }
+  ],
+  "id": "catalog.velocity.bfc682d314ea5bf7745d7272",
+  "key": "3.5",
+  "keyKind": "api",
+  "platform": "velocity",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "velocity.0dd1e06d8ce24cb894449c49"
+  ]
+}

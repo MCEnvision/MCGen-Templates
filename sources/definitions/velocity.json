@@ -1,0 +1,33 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "velocity",
+  "platform": "velocity",
+  "category": "proxy",
+  "adapter": "velocity-maven",
+  "sources": [
+    {
+      "id": "velocity-api-maven-metadata",
+      "role": "primary",
+      "url": "https://repo.papermc.io/repository/maven-public/com/velocitypowered/velocity-api/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "velocity-server-compatibility-documentation",
+      "role": "corroborating",
+      "url": "https://docs.papermc.io/velocity/server-compatibility/",
+      "expectedContentTypes": ["text/html"]
+    },
+    {
+      "id": "velocity-player-information-forwarding-documentation",
+      "role": "corroborating",
+      "url": "https://docs.papermc.io/velocity/player-information-forwarding/",
+      "expectedContentTypes": ["text/html"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

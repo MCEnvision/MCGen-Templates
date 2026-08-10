@@ -1,0 +1,21 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "bukkit",
+  "platform": "bukkit",
+  "category": "plugin",
+  "adapter": "bukkit-maven",
+  "sources": [
+    {
+      "id": "bukkit-api-maven-metadata",
+      "role": "primary",
+      "url": "https://hub.spigotmc.org/nexus/content/groups/public/org/bukkit/bukkit/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

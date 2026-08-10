@@ -1,0 +1,191 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.minecraftforge:forge:1.2.4-2.0.0.65",
+      "id": "component.forge.5f842649094bcec8d2de432b",
+      "sourceEntries": [
+        {
+          "entryIndex": 4746,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.2.4-2.0.0.65"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.minecraftforge:forge:1.2.4-2.0.0.66",
+      "id": "component.forge.efd4d8b35f2a72a241ea9664",
+      "sourceEntries": [
+        {
+          "entryIndex": 4747,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.2.4-2.0.0.66"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.minecraftforge:forge:1.2.4-2.0.0.67",
+      "id": "component.forge.8b16a0a0b437781e2ea79f95",
+      "sourceEntries": [
+        {
+          "entryIndex": 4748,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.2.4-2.0.0.67"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.minecraftforge:forge:1.2.4-2.0.0.68",
+      "id": "component.forge.dbb303d2fcd647d2d4cf5dad",
+      "sourceEntries": [
+        {
+          "entryIndex": 4749,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.2.4-2.0.0.68"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "promotion",
+      "coordinate": "net.minecraftforge:forge-promotion:1.2.4-latest:2.0.0.68",
+      "id": "component.forge.d98a58cf4a1eb9d2acebcf96",
+      "sourceEntries": [
+        {
+          "entryIndex": 4750,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            6
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.0.0.68"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.a5590b47ab54cf906f91a681",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4746,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.forge.5f842649094bcec8d2de432b"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.a5590b47ab54cf906f91a681",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4748,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.forge.8b16a0a0b437781e2ea79f95"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.a5590b47ab54cf906f91a681",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4750,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            6
+          ]
+        }
+      ],
+      "to": "component.forge.d98a58cf4a1eb9d2acebcf96"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.a5590b47ab54cf906f91a681",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4749,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.forge.dbb303d2fcd647d2d4cf5dad"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.a5590b47ab54cf906f91a681",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4747,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.forge.efd4d8b35f2a72a241ea9664"
+    }
+  ],
+  "id": "catalog.forge.27e1eb25c468832bb33c28b1",
+  "key": "1.2.4",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

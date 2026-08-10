@@ -1,0 +1,2289 @@
+{
+  "$schema": "urn:mcgen:schema:catalog-platform-index:1",
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "id": "catalog-platform.fabric.86c2b30e436a1c7b95bf5c4d",
+  "platform": "fabric",
+  "schemaVersion": 1,
+  "shards": [
+    {
+      "bytes": 80355,
+      "id": "catalog.fabric.f173895256602fa47b7cadce",
+      "key": "1.14",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.58aee1ea9313be292e8dd3080638f59544cf6bcc81f24ef07a15dfcafbf912b8.json",
+      "sha256": "58aee1ea9313be292e8dd3080638f59544cf6bcc81f24ef07a15dfcafbf912b8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 25036,
+      "id": "catalog.fabric.33aca8aef372aa508c9b73af",
+      "key": "1.14.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.1.0b5c432246323ed8e3cebe034544dafe24298a782d9be66657e51111da975aa3.json",
+      "sha256": "0b5c432246323ed8e3cebe034544dafe24298a782d9be66657e51111da975aa3",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 22415,
+      "id": "catalog.fabric.1d0f0ce6677f5b6c5a868ac2",
+      "key": "1.14.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.2.b2d1272a5f0600b0b6182742e6ab7fb0afbaf0ec816344d25cccc59b69c5ae05.json",
+      "sha256": "b2d1272a5f0600b0b6182742e6ab7fb0afbaf0ec816344d25cccc59b69c5ae05",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 13377,
+      "id": "catalog.fabric.a6d521d567a326c53eb94b03",
+      "key": "1.14.3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.3.c6f992e610765e98070702c84116541c27df03be156c01b7751efee21d5f31ce.json",
+      "sha256": "c6f992e610765e98070702c84116541c27df03be156c01b7751efee21d5f31ce",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7449,
+      "id": "catalog.fabric.ac94c6ed082eae5f42e38d3c",
+      "key": "1.14.3-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.3-pre1.c8239fa070c8707b8a4c96743b375ab5599d2ef5a9fef036caa573ab0109375a.json",
+      "sha256": "c8239fa070c8707b8a4c96743b375ab5599d2ef5a9fef036caa573ab0109375a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 18099,
+      "id": "catalog.fabric.59ec1a8b9117fafccb09a1b8",
+      "key": "1.14.3-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.3-pre2.5db49048a6df8fd9e66e0f392cc758714ff7c57ae9d1fdddb98cfe4bc623af8b.json",
+      "sha256": "5db49048a6df8fd9e66e0f392cc758714ff7c57ae9d1fdddb98cfe4bc623af8b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.3f6fdb95540c92fd40baf716",
+      "key": "1.14.3-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.3-pre3.9bd1e3c4f5cb5f4c268e7d88e3189195255f7f55e8bc0743b8ce7cc193630c6f.json",
+      "sha256": "9bd1e3c4f5cb5f4c268e7d88e3189195255f7f55e8bc0743b8ce7cc193630c6f",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4791,
+      "id": "catalog.fabric.b499e48555bc13dc4476da15",
+      "key": "1.14.3-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.3-pre4.8c0924b95bf145b1cea36f99b6e78a10f26e0ea70f0fae950eb96aecc1d476ac.json",
+      "sha256": "8c0924b95bf145b1cea36f99b6e78a10f26e0ea70f0fae950eb96aecc1d476ac",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 17722,
+      "id": "catalog.fabric.d5c47acab5c9c339d81ee313",
+      "key": "1.14.4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4.6bffe186142b5be9133464f5ab29eb325f10cb68d6e7a8f743ce20bc94f51fb5.json",
+      "sha256": "6bffe186142b5be9133464f5ab29eb325f10cb68d6e7a8f743ce20bc94f51fb5",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3905,
+      "id": "catalog.fabric.6da76643ba5bc973857a4557",
+      "key": "1.14.4-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre1.27975e3b1e98e608779c3843654be22646b7bba795197a92bbfa2e3a5f5f11f2.json",
+      "sha256": "27975e3b1e98e608779c3843654be22646b7bba795197a92bbfa2e3a5f5f11f2",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3905,
+      "id": "catalog.fabric.64ec7ee381e02cf2cd367b22",
+      "key": "1.14.4-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre2.3399ad03310885cdcaffe85827b88311734cdfd313b01549cdedf58bffff065b.json",
+      "sha256": "3399ad03310885cdcaffe85827b88311734cdfd313b01549cdedf58bffff065b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5677,
+      "id": "catalog.fabric.40136fa4fe4c748b728c86f6",
+      "key": "1.14.4-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre3.42a55e1580761afd6b9e1796b8a2dc64abb8471d02c933ca23fe80276992d0ae.json",
+      "sha256": "42a55e1580761afd6b9e1796b8a2dc64abb8471d02c933ca23fe80276992d0ae",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.49f6077a4a65adf76e226f47",
+      "key": "1.14.4-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre4.611fbb8608e5f011f98c0507ab1a42f18ea422925406b019cfb0056541d5e951.json",
+      "sha256": "611fbb8608e5f011f98c0507ab1a42f18ea422925406b019cfb0056541d5e951",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5677,
+      "id": "catalog.fabric.c4042b427461eaff3558099b",
+      "key": "1.14.4-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre5.6fcf6915b6151eb9e270d141f6470e1a583b37f887dc27cc3fde5652268b4204.json",
+      "sha256": "6fcf6915b6151eb9e270d141f6470e1a583b37f887dc27cc3fde5652268b4204",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6563,
+      "id": "catalog.fabric.078686b4f25749652c89133b",
+      "key": "1.14.4-pre6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre6.6f6105fddbee2f7b0571e58dd061ddab5b1f8bd19f1a52edaadf31d26dcbe5a5.json",
+      "sha256": "6f6105fddbee2f7b0571e58dd061ddab5b1f8bd19f1a52edaadf31d26dcbe5a5",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.f1382fc7dddc39d24f084069",
+      "key": "1.14.4-pre7",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.14.4-pre7.b3f840d178b74f1fe4f068d770e427a2b253cc1eb04c31e83b1e90e5af17314f.json",
+      "sha256": "b3f840d178b74f1fe4f068d770e427a2b253cc1eb04c31e83b1e90e5af17314f",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 9061,
+      "id": "catalog.fabric.e4b7287c7e93b5dd926b634a",
+      "key": "1.15",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15.7f81cb777a2d24195e195bef7ce4818bcf2dcfedd18f9a1ecac07513ab4b29ea.json",
+      "sha256": "7f81cb777a2d24195e195bef7ce4818bcf2dcfedd18f9a1ecac07513ab4b29ea",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7415,
+      "id": "catalog.fabric.6bc70c0c4fa7be3850bda46c",
+      "key": "1.15-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre1.4d40fb935568c88aabfe70e1c14b78b8ffbe05b8b66a9efb61de0d2e48388157.json",
+      "sha256": "4d40fb935568c88aabfe70e1c14b78b8ffbe05b8b66a9efb61de0d2e48388157",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5651,
+      "id": "catalog.fabric.e37ef5962694991e32abb46c",
+      "key": "1.15-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre2.c679b99120d9cc91ce8328688af7f4b05a5203c28342b2382266a1a680ac950d.json",
+      "sha256": "c679b99120d9cc91ce8328688af7f4b05a5203c28342b2382266a1a680ac950d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7415,
+      "id": "catalog.fabric.8f1c2c221e8c9489dd873092",
+      "key": "1.15-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre3.feaa1a6dd7533ff507f88ee5ca39e1e58db7b866d486528e831926252b5312eb.json",
+      "sha256": "feaa1a6dd7533ff507f88ee5ca39e1e58db7b866d486528e831926252b5312eb",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4769,
+      "id": "catalog.fabric.9ac739409fd52477427019ba",
+      "key": "1.15-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre4.40cad8f279b6512c0b2c30484ea544620694b35da2562d5b4d3ff819ab7cd6a5.json",
+      "sha256": "40cad8f279b6512c0b2c30484ea544620694b35da2562d5b4d3ff819ab7cd6a5",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3887,
+      "id": "catalog.fabric.beaffb20099c6f34698d880e",
+      "key": "1.15-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre5.fba8fbf57faf5606acbf417806ebdbebac8c1de1924bd1952ec4da7536829511.json",
+      "sha256": "fba8fbf57faf5606acbf417806ebdbebac8c1de1924bd1952ec4da7536829511",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4769,
+      "id": "catalog.fabric.36b9c2a70b97aa49389c60fe",
+      "key": "1.15-pre6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre6.632b303e78eacf2a61cf13ca99a845b04ca39a28221a16b58f240cf9d114c9cc.json",
+      "sha256": "632b303e78eacf2a61cf13ca99a845b04ca39a28221a16b58f240cf9d114c9cc",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3887,
+      "id": "catalog.fabric.1a5c0f49a22c89b417e76e8d",
+      "key": "1.15-pre7",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15-pre7.cb0078a735a6916ff7821ad21f3bb21718a3ab081d32116aa796029d5873135a.json",
+      "sha256": "cb0078a735a6916ff7821ad21f3bb21718a3ab081d32116aa796029d5873135a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 34233,
+      "id": "catalog.fabric.66ce67595b82a069733644e9",
+      "key": "1.15.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15.1.0b3d32314bceb0a86dbb4a0158a7bd4c986de99b646c9985aacce00d65ba0403.json",
+      "sha256": "0b3d32314bceb0a86dbb4a0158a7bd4c986de99b646c9985aacce00d65ba0403",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.809d35f2994c71226f28847e",
+      "key": "1.15.1-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15.1-pre1.160ff49e52dd03c392ce88cba9b694b4fb07e2eaf2dc3aa700960ef5630a67cb.json",
+      "sha256": "160ff49e52dd03c392ce88cba9b694b4fb07e2eaf2dc3aa700960ef5630a67cb",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 16853,
+      "id": "catalog.fabric.357a9adf9b6c3b4e2846e227",
+      "key": "1.15.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15.2.7fc3b6dcf7d4fa79eb76f28da875cab61269577f652ac17c011bedfb68d535bc.json",
+      "sha256": "7fc3b6dcf7d4fa79eb76f28da875cab61269577f652ac17c011bedfb68d535bc",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.ef25d6f1d3dba7b710993836",
+      "key": "1.15.2-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15.2-pre1.eb74adc5c7dcde50f218afd0471f852409efb301e5e7e730df55d40aa6773bb6.json",
+      "sha256": "eb74adc5c7dcde50f218afd0471f852409efb301e5e7e730df55d40aa6773bb6",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 10107,
+      "id": "catalog.fabric.d28aef023f5a29c379ac0c9e",
+      "key": "1.15.2-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.15.2-pre2.6d813e363e8a58cff1a4a47b7730007e680d801e7a46f95f11edc7e45917c812.json",
+      "sha256": "6d813e363e8a58cff1a4a47b7730007e680d801e7a46f95f11edc7e45917c812",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 49243,
+      "id": "catalog.fabric.db756c81998ee975e61d216f",
+      "key": "1.16",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.58b0b29e9b0a864520f8b1ade6b03486ba8df6b24fa6c09793977a64c3ac9241.json",
+      "sha256": "58b0b29e9b0a864520f8b1ade6b03486ba8df6b24fa6c09793977a64c3ac9241",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5651,
+      "id": "catalog.fabric.47c80c22e6f4d754f25b885e",
+      "key": "1.16-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre1.7deeb1806cc1237ca2d29d1dc56cf65ba694ff8f407e74be680c6ffc5438f7ff.json",
+      "sha256": "7deeb1806cc1237ca2d29d1dc56cf65ba694ff8f407e74be680c6ffc5438f7ff",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 27741,
+      "id": "catalog.fabric.1252b4ad425c9ffd8a8e8856",
+      "key": "1.16-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre2.3d966c0574ad49f0e19a54af373c7c7a2afecbf52d28d3206e261e1e0e47bce2.json",
+      "sha256": "3d966c0574ad49f0e19a54af373c7c7a2afecbf52d28d3206e261e1e0e47bce2",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5651,
+      "id": "catalog.fabric.d81c044cb47ee6702834288c",
+      "key": "1.16-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre3.6963947e79db82638c69fb6c270b7a6f736d0912426da801632b6f19fb91e710.json",
+      "sha256": "6963947e79db82638c69fb6c270b7a6f736d0912426da801632b6f19fb91e710",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3005,
+      "id": "catalog.fabric.e5cdce1dd5821a0b12ceba73",
+      "key": "1.16-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre4.55fa8aad035382d9e12bef947b38b3fe8c1966bd3e18630cffa6863d0e843a3c.json",
+      "sha256": "55fa8aad035382d9e12bef947b38b3fe8c1966bd3e18630cffa6863d0e843a3c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6533,
+      "id": "catalog.fabric.7d4e9c42d6cb54844b85c590",
+      "key": "1.16-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre5.5928961960402c955c26906af46866a0c31f5d545fdbbba1c986b39cd78cb9bc.json",
+      "sha256": "5928961960402c955c26906af46866a0c31f5d545fdbbba1c986b39cd78cb9bc",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6533,
+      "id": "catalog.fabric.0b4ca068433a83148eea5704",
+      "key": "1.16-pre6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre6.41b88bda605c8dbd44d1769cb2126430591cb98f61ffb0584c3ea9420775099c.json",
+      "sha256": "41b88bda605c8dbd44d1769cb2126430591cb98f61ffb0584c3ea9420775099c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3005,
+      "id": "catalog.fabric.c8ff5acc6f5326af1a40eee4",
+      "key": "1.16-pre7",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre7.b35c12b8d0e9de003c9c6c8e58ffcce1b6d3500f8582671c4f23d730d43739cf.json",
+      "sha256": "b35c12b8d0e9de003c9c6c8e58ffcce1b6d3500f8582671c4f23d730d43739cf",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3887,
+      "id": "catalog.fabric.1c9053fa9cd51ccb9ad5acc6",
+      "key": "1.16-pre8",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-pre8.118348fe402279dbf3ef75d5a94f4df6d660be8a692bd55656aec9e1dd19a7c8.json",
+      "sha256": "118348fe402279dbf3ef75d5a94f4df6d660be8a692bd55656aec9e1dd19a7c8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 12684,
+      "id": "catalog.fabric.9c2dfd9408656c656a588d35",
+      "key": "1.16-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16-rc1.b7c1515ba00667d3364708d0f79159c2f5728430acc441b81b693e78408f415c.json",
+      "sha256": "b7c1515ba00667d3364708d0f79159c2f5728430acc441b81b693e78408f415c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 20329,
+      "id": "catalog.fabric.7c72bd890ba8e0121afc030c",
+      "key": "1.16.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.1.3cdccfa2457f16d015b2dd5cc5bca694488b91a9382d106325ae81243e612c34.json",
+      "sha256": "3cdccfa2457f16d015b2dd5cc5bca694488b91a9382d106325ae81243e612c34",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 42923,
+      "id": "catalog.fabric.85486ba2ce5b959216542d77",
+      "key": "1.16.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.2.e47043ad477ad87e1910fd54e7f0e13f05158f1550553275b1db6775f2c36e69.json",
+      "sha256": "e47043ad477ad87e1910fd54e7f0e13f05158f1550553275b1db6775f2c36e69",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 19875,
+      "id": "catalog.fabric.3f510032a5e0c4bd41261baf",
+      "key": "1.16.2-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.2-pre1.35980dbb3d49dbcd26ba018358a02911280fef863876f6c4346af52e1d98b238.json",
+      "sha256": "35980dbb3d49dbcd26ba018358a02911280fef863876f6c4346af52e1d98b238",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.a7eceb3bb439164e4368d5db",
+      "key": "1.16.2-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.2-pre2.2a3e0944d3255f71358d17f540c122866901c4bac44894a4dfa46896f89e73c8.json",
+      "sha256": "2a3e0944d3255f71358d17f540c122866901c4bac44894a4dfa46896f89e73c8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3905,
+      "id": "catalog.fabric.f003472ddc444a3c34ba2a65",
+      "key": "1.16.2-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.2-pre3.0e795e5e4e2ba57bff504b90ffa5d3d440981552343998f42ec1161089178ae6.json",
+      "sha256": "0e795e5e4e2ba57bff504b90ffa5d3d440981552343998f42ec1161089178ae6",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7432,
+      "id": "catalog.fabric.680acfbb3fdcab5421c92d95",
+      "key": "1.16.2-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.2-rc1.d6a0d019dc76007bd2a8264bf7adc56371ca8468ac924cb82987630bda452397.json",
+      "sha256": "d6a0d019dc76007bd2a8264bf7adc56371ca8468ac924cb82987630bda452397",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3012,
+      "id": "catalog.fabric.247c654bf24fcd7c1d27903e",
+      "key": "1.16.2-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.2-rc2.59ed1f59566065940cc7e533d2d2cb4ca5017d5344f9fd61dc81de839c53766d.json",
+      "sha256": "59ed1f59566065940cc7e533d2d2cb4ca5017d5344f9fd61dc81de839c53766d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 42923,
+      "id": "catalog.fabric.0377aa56a8cecc18a118aef2",
+      "key": "1.16.3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.3.158abf884e2a882cb81eb6703d10d43f9801fdf71fde014484844a409f724832.json",
+      "sha256": "158abf884e2a882cb81eb6703d10d43f9801fdf71fde014484844a409f724832",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3896,
+      "id": "catalog.fabric.01ca706403a5860127ccc3c0",
+      "key": "1.16.3-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.3-rc1.0354032f050caa47071f96a7e34c0affaf7044deda50a5e958782f4dc98e4455.json",
+      "sha256": "0354032f050caa47071f96a7e34c0affaf7044deda50a5e958782f4dc98e4455",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 9034,
+      "id": "catalog.fabric.cc2adc1ebf386edf8bef3c75",
+      "key": "1.16.4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.4.0d8d8cfa5bdb13a8b17078d938695ee7efab5248b3608d093c2a8de227d54c57.json",
+      "sha256": "0d8d8cfa5bdb13a8b17078d938695ee7efab5248b3608d093c2a8de227d54c57",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6563,
+      "id": "catalog.fabric.74778095cf3ba13d7c7f2c34",
+      "key": "1.16.4-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.4-pre1.82ec671a1779e9b02eba0dd2e0d02ffbd95dc228249e7cc5e20fd13a64150bd1.json",
+      "sha256": "82ec671a1779e9b02eba0dd2e0d02ffbd95dc228249e7cc5e20fd13a64150bd1",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3019,
+      "id": "catalog.fabric.c8f23499ffe31513b875a992",
+      "key": "1.16.4-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.4-pre2.038e659beca4da3014d368b11d27ffc80241ff33e759691b370e8d127a01d217.json",
+      "sha256": "038e659beca4da3014d368b11d27ffc80241ff33e759691b370e8d127a01d217",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 13628,
+      "id": "catalog.fabric.12c9753bf92c2c0c7d7200cb",
+      "key": "1.16.4-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.4-rc1.c5e76a4990df1b94a9194f4f92c1d129aea497928606cc68b3e09eafd0a0a7f0.json",
+      "sha256": "c5e76a4990df1b94a9194f4f92c1d129aea497928606cc68b3e09eafd0a0a7f0",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 9903,
+      "id": "catalog.fabric.14a4b06a97a2982e6c2609c3",
+      "key": "1.16.5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.5.a0e01880c566849be3ec34ea2b75075737b99b59e635b4e7d5f013b8b2a35c4d.json",
+      "sha256": "a0e01880c566849be3ec34ea2b75075737b99b59e635b4e7d5f013b8b2a35c4d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3896,
+      "id": "catalog.fabric.c5e591b2f91e7f8011a95a7c",
+      "key": "1.16.5-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.16.5-rc1.aed3cd4035cd5dd2cca38a4b48d0d1f928fa8a3bee6350519bfaba7e68706550.json",
+      "sha256": "aed3cd4035cd5dd2cca38a4b48d0d1f928fa8a3bee6350519bfaba7e68706550",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 92851,
+      "id": "catalog.fabric.2ec86b8b6747a10efaf59180",
+      "key": "1.17",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.a79bb93a61cf5ba929d964508c2f1d332e328723b20cd6ad99bad9a6c66a1b19.json",
+      "sha256": "a79bb93a61cf5ba929d964508c2f1d332e328723b20cd6ad99bad9a6c66a1b19",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 14481,
+      "id": "catalog.fabric.bcbf0ad7e34965e50f9e8c50",
+      "key": "1.17-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-pre1.980895c2fc0353523f08ab8519f9d63cda08f4e60a8fecf0d341f8ec48b46712.json",
+      "sha256": "980895c2fc0353523f08ab8519f9d63cda08f4e60a8fecf0d341f8ec48b46712",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6533,
+      "id": "catalog.fabric.322fcbdaffd41289c035665d",
+      "key": "1.17-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-pre2.0d7dfe5f0d429cc0de33f916ab64fd3446da792b258e82a98f980ff247a12ba8.json",
+      "sha256": "0d7dfe5f0d429cc0de33f916ab64fd3446da792b258e82a98f980ff247a12ba8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6533,
+      "id": "catalog.fabric.4ee542f8b8bc30e5fbcc4488",
+      "key": "1.17-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-pre3.0599ce885bad7099cbb40a4d837b14a615c5334c3ebb033de5a0550fa2d16d37.json",
+      "sha256": "0599ce885bad7099cbb40a4d837b14a615c5334c3ebb033de5a0550fa2d16d37",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3005,
+      "id": "catalog.fabric.ad5f274eebf2bcbd302fe94f",
+      "key": "1.17-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-pre4.a9642297658c02d390fad63a949c5b72ceac564834d41bde1910ffc07944bfef.json",
+      "sha256": "a9642297658c02d390fad63a949c5b72ceac564834d41bde1910ffc07944bfef",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7415,
+      "id": "catalog.fabric.04d876a0b1e189586d5a496c",
+      "key": "1.17-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-pre5.14c844111bc968790e3290c2f28b98d1d19a2babcebfc43861b4b22cd95c2d39.json",
+      "sha256": "14c844111bc968790e3290c2f28b98d1d19a2babcebfc43861b4b22cd95c2d39",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6518,
+      "id": "catalog.fabric.bfbae814edf94b0c35526a22",
+      "key": "1.17-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-rc1.20df8a77511ee3f0bde9a06af6c2bafd63ed47d5ab8dc545098ec8d5ef272791.json",
+      "sha256": "20df8a77511ee3f0bde9a06af6c2bafd63ed47d5ab8dc545098ec8d5ef272791",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 10920,
+      "id": "catalog.fabric.8b086b0a14d6793aa81ab5ac",
+      "key": "1.17-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17-rc2.e0b664486c4a3bc18151d7764e470362affdcab67cadad0a557e88d88c8b3356.json",
+      "sha256": "e0b664486c4a3bc18151d7764e470362affdcab67cadad0a557e88d88c8b3356",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 58565,
+      "id": "catalog.fabric.ff27bf3b07bff9ebecb3ff0c",
+      "key": "1.17.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.1.6968efd9a4066b79c0d7defe3b61f8e96d7c52da89ca56c34cfd138eb8cb70c9.json",
+      "sha256": "6968efd9a4066b79c0d7defe3b61f8e96d7c52da89ca56c34cfd138eb8cb70c9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 16329,
+      "id": "catalog.fabric.a02ea15bbf00ee3a98a41843",
+      "key": "1.17.1-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.1-pre1.5d5d7507ee9d064fb64c4a9c51dcf0f4371c81873cdae32ab99dad6a9eed6237.json",
+      "sha256": "5d5d7507ee9d064fb64c4a9c51dcf0f4371c81873cdae32ab99dad6a9eed6237",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3905,
+      "id": "catalog.fabric.02d72ce16bdbd1d10f5bc34a",
+      "key": "1.17.1-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.1-pre2.b1f3ccbde537c65fce3176402d0d6be40b434f17fb3613a2a7cb3870cbdb38f9.json",
+      "sha256": "b1f3ccbde537c65fce3176402d0d6be40b434f17fb3613a2a7cb3870cbdb38f9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7449,
+      "id": "catalog.fabric.eae677fe5436273652d86fd3",
+      "key": "1.17.1-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.1-pre3.2ab8b8da8a32698dc8490ec043eee961a4140e0993cf55ef6913a3b27630bafc.json",
+      "sha256": "2ab8b8da8a32698dc8490ec043eee961a4140e0993cf55ef6913a3b27630bafc",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 10970,
+      "id": "catalog.fabric.f9eee3fa9b8a78083dfcec14",
+      "key": "1.17.1-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.1-rc1.dcb36ff68fe7c14ae18d89e84b99d3d385f156066d23125b0bd99c57231aa56f.json",
+      "sha256": "dcb36ff68fe7c14ae18d89e84b99d3d385f156066d23125b0bd99c57231aa56f",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.4354dd5593308a7bc0a6cbd2",
+      "key": "1.17.1-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.17.1-rc2.0481b29c306b4270823be0b4ba4c532a01c23ca59ec3dc9699eb11ea8559109a.json",
+      "sha256": "0481b29c306b4270823be0b4ba4c532a01c23ca59ec3dc9699eb11ea8559109a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 71837,
+      "id": "catalog.fabric.39fbf6fd39ea01619658923f",
+      "key": "1.18",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.946189d9f95bbbb7be380c9d5119b462751188bd4ccb5472e7eb9a1353c7080b.json",
+      "sha256": "946189d9f95bbbb7be380c9d5119b462751188bd4ccb5472e7eb9a1353c7080b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 13629,
+      "id": "catalog.fabric.965049fb3e64b0ece8c58f7f",
+      "key": "1.18-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre1.16cdc190055f235568c30ac08c6764487ae83ec8f5528bd32eb7cf17c280cdb8.json",
+      "sha256": "16cdc190055f235568c30ac08c6764487ae83ec8f5528bd32eb7cf17c280cdb8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5663,
+      "id": "catalog.fabric.63e6536fd34ed0c2e667ad02",
+      "key": "1.18-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre2.ca5f6742d501b9019637cbe2e7b3c2171b8603395771d92720e22457d4315229.json",
+      "sha256": "ca5f6742d501b9019637cbe2e7b3c2171b8603395771d92720e22457d4315229",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4779,
+      "id": "catalog.fabric.106b955c1992c4ec21f584c6",
+      "key": "1.18-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre3.bed9561664e828494c00f16afa7f0352321e60f4425cc1e89478160f121b7bcd.json",
+      "sha256": "bed9561664e828494c00f16afa7f0352321e60f4425cc1e89478160f121b7bcd",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 9199,
+      "id": "catalog.fabric.19cd54bc811ef9ce1b4ace3e",
+      "key": "1.18-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre4.5279a0c6f5e16030b59e6eee326d7cef4baf36542b4e526b97f0d34758825e3f.json",
+      "sha256": "5279a0c6f5e16030b59e6eee326d7cef4baf36542b4e526b97f0d34758825e3f",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 11855,
+      "id": "catalog.fabric.43c47cc187566646c3feac5e",
+      "key": "1.18-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre5.addef9f7fd0bf3b86508424deb0659327e49da77b9cd66dc4842e2e8b4dbeb22.json",
+      "sha256": "addef9f7fd0bf3b86508424deb0659327e49da77b9cd66dc4842e2e8b4dbeb22",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4779,
+      "id": "catalog.fabric.7480ea8d6d93fa6c803ff870",
+      "key": "1.18-pre6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre6.94562fd4247c6a1a2b7088acb0c83de79dae122d5b9404a83b7138b9b1f63a7e.json",
+      "sha256": "94562fd4247c6a1a2b7088acb0c83de79dae122d5b9404a83b7138b9b1f63a7e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6547,
+      "id": "catalog.fabric.bdcb757989383c3daa6e7738",
+      "key": "1.18-pre7",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre7.0a45f395b649f32d14e82e272ff23de64bc6c97a9696828cba79b83e66f9a04b.json",
+      "sha256": "0a45f395b649f32d14e82e272ff23de64bc6c97a9696828cba79b83e66f9a04b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6547,
+      "id": "catalog.fabric.1776d7f664e1ae176ba9f041",
+      "key": "1.18-pre8",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-pre8.2d68288b5ab66e92c8fe5a59ae2e172fcca6bcb78255b8c694c8b763af591da7.json",
+      "sha256": "2d68288b5ab66e92c8fe5a59ae2e172fcca6bcb78255b8c694c8b763af591da7",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3004,
+      "id": "catalog.fabric.032773c70e2f613331809c65",
+      "key": "1.18-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-rc1.092f49bc93bbb2673f209da57eecdd74c14891d035f6b3ced9bd458d0c0214e4.json",
+      "sha256": "092f49bc93bbb2673f209da57eecdd74c14891d035f6b3ced9bd458d0c0214e4",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3004,
+      "id": "catalog.fabric.e22b55711264e78869f4cb31",
+      "key": "1.18-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-rc2.9e33de44607dc7a994737e6d6cbca35b6bfeec065da51e7affe652f76918dd89.json",
+      "sha256": "9e33de44607dc7a994737e6d6cbca35b6bfeec065da51e7affe652f76918dd89",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3886,
+      "id": "catalog.fabric.ad63885e5d07cdc05739a369",
+      "key": "1.18-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-rc3.c8a3d877f6b72b06d3924d996a89de509592e094678cb933365fd9cc664ecca9.json",
+      "sha256": "c8a3d877f6b72b06d3924d996a89de509592e094678cb933365fd9cc664ecca9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3004,
+      "id": "catalog.fabric.cea90179d4aceb0d37e0d55d",
+      "key": "1.18-rc4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18-rc4.4a37d6925939e8d3482e568e26e0ae2acc9352b2f45b94aabfa9df4ece4df98a.json",
+      "sha256": "4a37d6925939e8d3482e568e26e0ae2acc9352b2f45b94aabfa9df4ece4df98a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 21246,
+      "id": "catalog.fabric.c9d11c9a6599282199f122b4",
+      "key": "1.18.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.1.2179d69625c68eb5285f49ed470ee9f608dad43e143109da9fd565d57f17a9b2.json",
+      "sha256": "2179d69625c68eb5285f49ed470ee9f608dad43e143109da9fd565d57f17a9b2",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6577,
+      "id": "catalog.fabric.f4eee41b785011bb9a1c9bc3",
+      "key": "1.18.1-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.1-pre1.e513a35d093aef58fbf1dbb0a98447f5e7bea3f1c5013bbd1136fdc2e0ecf2de.json",
+      "sha256": "e513a35d093aef58fbf1dbb0a98447f5e7bea3f1c5013bbd1136fdc2e0ecf2de",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.19d41d8d280f0072b4e4babc",
+      "key": "1.18.1-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.1-rc1.42696bb81f3d048e744d39aeaa3b28f756e42600115aad07dee749db349fead1.json",
+      "sha256": "42696bb81f3d048e744d39aeaa3b28f756e42600115aad07dee749db349fead1",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.d50c78bb278065d782334bf8",
+      "key": "1.18.1-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.1-rc2.85c0a16b54c246db9ff1e8869490a3d0abc0e41e549ab94354a6d9d605f5a001.json",
+      "sha256": "85c0a16b54c246db9ff1e8869490a3d0abc0e41e549ab94354a6d9d605f5a001",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.47937b4f7bb398547f56393d",
+      "key": "1.18.1-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.1-rc3.3830ab3c8178019c6036170402397bf3c67d2464d01bba05a9fafbfe2efb187e.json",
+      "sha256": "3830ab3c8178019c6036170402397bf3c67d2464d01bba05a9fafbfe2efb187e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 35500,
+      "id": "catalog.fabric.6ae050e28bd435b6f65fd8f7",
+      "key": "1.18.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.2.a9dfd100580f0ae8d7f240965cc95a4cc17f3eb5b20a5f3d10dac735b28eecef.json",
+      "sha256": "a9dfd100580f0ae8d7f240965cc95a4cc17f3eb5b20a5f3d10dac735b28eecef",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6577,
+      "id": "catalog.fabric.9982669aad85748224784d8a",
+      "key": "1.18.2-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.2-pre1.60c1e996e5ac9ec5608928f2b90110634fc32125a38d6cd173166a3fc0c96562.json",
+      "sha256": "60c1e996e5ac9ec5608928f2b90110634fc32125a38d6cd173166a3fc0c96562",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 8353,
+      "id": "catalog.fabric.d76dd38d98a58cdb25bbaf7a",
+      "key": "1.18.2-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.2-pre2.ab1542473760191973725b868f96529b0ac3ab07876862a5892ecb57df33ac0d.json",
+      "sha256": "ab1542473760191973725b868f96529b0ac3ab07876862a5892ecb57df33ac0d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 9241,
+      "id": "catalog.fabric.e9283edcae19282a86db24d9",
+      "key": "1.18.2-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.2-pre3.16b3faa3cbf92ad49476ad92da9743e3b44679bdb26ab757eb50eb02a59a5f9d.json",
+      "sha256": "16b3faa3cbf92ad49476ad92da9743e3b44679bdb26ab757eb50eb02a59a5f9d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.b40aa9433e6a553eb4f75a0e",
+      "key": "1.18.2-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.18.2-rc1.e6c2ebf3c50611663179b8529f9018a2521647ef0d3dd4c8d5d13a9294d90d09.json",
+      "sha256": "e6c2ebf3c50611663179b8529f9018a2521647ef0d3dd4c8d5d13a9294d90d09",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 40916,
+      "id": "catalog.fabric.fcb3893e634ec59c730a925f",
+      "key": "1.19",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.120ba347bf2e2e5a34ae357727cf9cf5b40838ce07068a945a87ac96aac4fa9c.json",
+      "sha256": "120ba347bf2e2e5a34ae357727cf9cf5b40838ce07068a945a87ac96aac4fa9c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 10969,
+      "id": "catalog.fabric.b6bb14c3a5ff599dcfcd9f6e",
+      "key": "1.19-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-pre1.184fc007e552419257526f82be3c2409b7a0ba5339b08598d84a07fb7b3b6e3b.json",
+      "sha256": "184fc007e552419257526f82be3c2409b7a0ba5339b08598d84a07fb7b3b6e3b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4779,
+      "id": "catalog.fabric.6baebce95a37a905e2261132",
+      "key": "1.19-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-pre2.dd4cee2fb2a01d71035c9a5ecce292b51dd981467618b8f009f4990b2f844fc9.json",
+      "sha256": "dd4cee2fb2a01d71035c9a5ecce292b51dd981467618b8f009f4990b2f844fc9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7431,
+      "id": "catalog.fabric.92f056321c233b93f8ec421a",
+      "key": "1.19-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-pre3.fb9294195c1471f58ca7a20008044371ccf53f66db2684758768d292a52952e0.json",
+      "sha256": "fb9294195c1471f58ca7a20008044371ccf53f66db2684758768d292a52952e0",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3895,
+      "id": "catalog.fabric.ab0db02ab462484b29c084c7",
+      "key": "1.19-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-pre4.334841212ed900baf077905ec962ba551c45ec28dc20b4243c40c9c8c162540a.json",
+      "sha256": "334841212ed900baf077905ec962ba551c45ec28dc20b4243c40c9c8c162540a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5663,
+      "id": "catalog.fabric.faba90bde53dd8d2f279fa71",
+      "key": "1.19-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-pre5.22921fd4b3b03900a9d7e9b044f8739c283ddc1ff03056ce7153a0a9c6a8c28a.json",
+      "sha256": "22921fd4b3b03900a9d7e9b044f8739c283ddc1ff03056ce7153a0a9c6a8c28a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3886,
+      "id": "catalog.fabric.4a08f27e95b9b61c4db3b80d",
+      "key": "1.19-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-rc1.6069da61e4dcc342352423d266159e70e9cbe2c1238f5a7c579adef15f1807fc.json",
+      "sha256": "6069da61e4dcc342352423d266159e70e9cbe2c1238f5a7c579adef15f1807fc",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3004,
+      "id": "catalog.fabric.e28587f4fd2166993221cbfb",
+      "key": "1.19-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19-rc2.4c2478d1c66bbc9283e4c326fb410add167e008e1cbd6d393ecfd77b0796d975.json",
+      "sha256": "4c2478d1c66bbc9283e4c326fb410add167e008e1cbd6d393ecfd77b0796d975",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 15236,
+      "id": "catalog.fabric.ab6bce795c2e437f7696fbca",
+      "key": "1.19.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1.a4cb946e0241fc886a608ba1e041e48c2c497609d9c1ad8754e22fe9d4ba6c17.json",
+      "sha256": "a4cb946e0241fc886a608ba1e041e48c2c497609d9c1ad8754e22fe9d4ba6c17",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.cb6fcca466450d9e3e3f7f3d",
+      "key": "1.19.1-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-pre1.4d10e4febeca29778417d15bc3deeaa4e26cf954e448de12055151e6ebd1a946.json",
+      "sha256": "4d10e4febeca29778417d15bc3deeaa4e26cf954e448de12055151e6ebd1a946",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.afdd1b0090ae0bb4f7aa9386",
+      "key": "1.19.1-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-pre2.0fcc4d1d93c1dc731fa882f21f1aa926d6d232c4d31fb2a363e3834272a205e0.json",
+      "sha256": "0fcc4d1d93c1dc731fa882f21f1aa926d6d232c4d31fb2a363e3834272a205e0",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.b5777ea058f7fc3ee9e0682c",
+      "key": "1.19.1-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-pre3.26517529376ea2aa46fe3261bcd1eaeb4f5d9be690619af7b3df1a44860c4826.json",
+      "sha256": "26517529376ea2aa46fe3261bcd1eaeb4f5d9be690619af7b3df1a44860c4826",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.35f50f28e87a05d437ff66b8",
+      "key": "1.19.1-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-pre4.2ad2315324db2bb9eb74100f9df5aff08e16253c324171de0cab822703b0b232.json",
+      "sha256": "2ad2315324db2bb9eb74100f9df5aff08e16253c324171de0cab822703b0b232",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.3a93be4512e855a2b23d99ba",
+      "key": "1.19.1-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-pre5.37943270227660ea8b0cf4c362322887aa82916be54efce43f698d753fe91434.json",
+      "sha256": "37943270227660ea8b0cf4c362322887aa82916be54efce43f698d753fe91434",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.fabric.3fb7da8671f6ed797be1bfa6",
+      "key": "1.19.1-pre6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-pre6.3a603514e5bd71f53bbdbfbf4be0321b502263edaabba19fe17442484d112599.json",
+      "sha256": "3a603514e5bd71f53bbdbfbf4be0321b502263edaabba19fe17442484d112599",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5676,
+      "id": "catalog.fabric.077e5acd857e51321fe8303c",
+      "key": "1.19.1-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-rc1.34f2ae990b0c141ab453cfd738dc4df9322a383b331712e29fcb1962701791b2.json",
+      "sha256": "34f2ae990b0c141ab453cfd738dc4df9322a383b331712e29fcb1962701791b2",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 8334,
+      "id": "catalog.fabric.e5ba577de329452d9bd71a88",
+      "key": "1.19.1-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-rc2.f46bd87aedcd8f9ca93aa5c1c5a3dbd9613267859b084a6245dc4f88b5eef670.json",
+      "sha256": "f46bd87aedcd8f9ca93aa5c1c5a3dbd9613267859b084a6245dc4f88b5eef670",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.95c40ff275bbd7f03e824466",
+      "key": "1.19.1-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.1-rc3.c7f3593c4073066be26ea15e4e93de4fb691a58a821309a38a0813ab5208a2de.json",
+      "sha256": "c7f3593c4073066be26ea15e4e93de4fb691a58a821309a38a0813ab5208a2de",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 45832,
+      "id": "catalog.fabric.4fdd961ca379dcaac0470140",
+      "key": "1.19.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.2.d53f62dc685e3c945062d2618852bd040ad4b68bb5de6f7c97d75bb16983e120.json",
+      "sha256": "d53f62dc685e3c945062d2618852bd040ad4b68bb5de6f7c97d75bb16983e120",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.3b0c2d17fce15812cb05f900",
+      "key": "1.19.2-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.2-rc1.7d27700279d2abc55d23e37e1dd059c3e3ed454c9b006d0023cfeb6377771a68.json",
+      "sha256": "7d27700279d2abc55d23e37e1dd059c3e3ed454c9b006d0023cfeb6377771a68",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.b98b15f7ff397c766023dae2",
+      "key": "1.19.2-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.2-rc2.96c4e0cb896828c1e5999eab90de0f93d2f7b428bb01005db079dd130a583224.json",
+      "sha256": "96c4e0cb896828c1e5999eab90de0f93d2f7b428bb01005db079dd130a583224",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 31087,
+      "id": "catalog.fabric.80c199b9f3c9776642cae498",
+      "key": "1.19.3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3.d0e9eef1e159e3889145c85e694e6ff1e0aeac4fd16d84154eb404541c5dbc2b.json",
+      "sha256": "d0e9eef1e159e3889145c85e694e6ff1e0aeac4fd16d84154eb404541c5dbc2b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 9241,
+      "id": "catalog.fabric.78eb5c575fc6120634fea0bb",
+      "key": "1.19.3-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3-pre1.80d331b5e7cc663fd38ac57ed927dc7f9c6b0f05668d24ed8fbf0c876f8d1d7a.json",
+      "sha256": "80d331b5e7cc663fd38ac57ed927dc7f9c6b0f05668d24ed8fbf0c876f8d1d7a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 12799,
+      "id": "catalog.fabric.ecd578de8d968179321a12d4",
+      "key": "1.19.3-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3-pre2.cea2456c00833afcae7d3491fd11908eb9f48060bc17cc4c450825217b4d9df8.json",
+      "sha256": "cea2456c00833afcae7d3491fd11908eb9f48060bc17cc4c450825217b4d9df8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.0ab703df42df5f7fe4324904",
+      "key": "1.19.3-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3-pre3.07ebcc8610f1a73557c5f1a88d64c6b1c56cac8d906fd415e4635b125175a7eb.json",
+      "sha256": "07ebcc8610f1a73557c5f1a88d64c6b1c56cac8d906fd415e4635b125175a7eb",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5676,
+      "id": "catalog.fabric.e23ea9f1713c973ffa0267df",
+      "key": "1.19.3-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3-rc1.133066d2b9b7bfe64d8dc5c5cb96fae78ffeb761bc437893b51d1de752ff4143.json",
+      "sha256": "133066d2b9b7bfe64d8dc5c5cb96fae78ffeb761bc437893b51d1de752ff4143",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.4586adacca5591b27127fea0",
+      "key": "1.19.3-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3-rc2.6bcea6277de16f5c6dc31372e992af656abc45f113df2ae8613008056de0ee64.json",
+      "sha256": "6bcea6277de16f5c6dc31372e992af656abc45f113df2ae8613008056de0ee64",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.151f23362a45e93dcca1c49c",
+      "key": "1.19.3-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.3-rc3.c4e14b024b10ca00a1988a5a5e3907f341de2b55d48ef590c1ca6547d7282ddf.json",
+      "sha256": "c4e14b024b10ca00a1988a5a5e3907f341de2b55d48ef590c1ca6547d7282ddf",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 30240,
+      "id": "catalog.fabric.55d38342b25a7bbbac1e9e79",
+      "key": "1.19.4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4.0d88b3012cf5b930fcb120d74f61f04623adceacd5435732f2e9a07acefb3e94.json",
+      "sha256": "0d88b3012cf5b930fcb120d74f61f04623adceacd5435732f2e9a07acefb3e94",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7465,
+      "id": "catalog.fabric.d6a6e0d599271bf2a06d238d",
+      "key": "1.19.4-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-pre1.0f93cc34acf65c8ab755a4339373449423a7ace7be69ffe6cdbd5d383e183e13.json",
+      "sha256": "0f93cc34acf65c8ab755a4339373449423a7ace7be69ffe6cdbd5d383e183e13",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.34a2417a4581fdccf6da8e6f",
+      "key": "1.19.4-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-pre2.78a2a5ab63349e09914604bc49dd00c4d397c2681331f3d959b0c36a7e8d7e51.json",
+      "sha256": "78a2a5ab63349e09914604bc49dd00c4d397c2681331f3d959b0c36a7e8d7e51",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.e15cf7b7b62436d09b53c47b",
+      "key": "1.19.4-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-pre3.311367ffa9b11944937dd4957b86960676dd13063e43d54d476c0777f8cd12e0.json",
+      "sha256": "311367ffa9b11944937dd4957b86960676dd13063e43d54d476c0777f8cd12e0",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.fabric.5f34a2d5012d2e817c51c07e",
+      "key": "1.19.4-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-pre4.c17858ffc3d9504472993f6225275bc40540772d2135d89bc4312bcbcf9db221.json",
+      "sha256": "c17858ffc3d9504472993f6225275bc40540772d2135d89bc4312bcbcf9db221",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.1637a05ca5f42ddbb5da287d",
+      "key": "1.19.4-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-rc1.cf7543609c5ef877f432f584ad136a619f0eccfb1082ec8373d2749dd734d299.json",
+      "sha256": "cf7543609c5ef877f432f584ad136a619f0eccfb1082ec8373d2749dd734d299",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.db937c21c3461cc6b418a36e",
+      "key": "1.19.4-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-rc2.19dbbe42e53305f4fa1b0046df7b1832303c696931b771a95776e3be899f4d32.json",
+      "sha256": "19dbbe42e53305f4fa1b0046df7b1832303c696931b771a95776e3be899f4d32",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.82d58bc435ae1d5045de3b37",
+      "key": "1.19.4-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.19.4-rc3.06e321670baf93dffacd2b83d10348fed40d55d7a34c4ff19b9e78639f3c53b8.json",
+      "sha256": "06e321670baf93dffacd2b83d10348fed40d55d7a34c4ff19b9e78639f3c53b8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 21353,
+      "id": "catalog.fabric.1e4e3995b3429fb3a86aac71",
+      "key": "1.20",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.bb908cd14f528602269b7428a27a8d445091bc92f7a42e6446810386533e7a96.json",
+      "sha256": "bb908cd14f528602269b7428a27a8d445091bc92f7a42e6446810386533e7a96",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 11855,
+      "id": "catalog.fabric.a8839aa4d0a95001edad0853",
+      "key": "1.20-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre1.a692e774d459d3a6df764d3f720f7c818f5fb83574810060529b8fcd62153efc.json",
+      "sha256": "a692e774d459d3a6df764d3f720f7c818f5fb83574810060529b8fcd62153efc",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3895,
+      "id": "catalog.fabric.f0b2ee442eee4eee678a1586",
+      "key": "1.20-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre2.97bc5569285b0ecd61c31741c50fdd2ae2edba5760c9e03094508728d55ff8a6.json",
+      "sha256": "97bc5569285b0ecd61c31741c50fdd2ae2edba5760c9e03094508728d55ff8a6",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3011,
+      "id": "catalog.fabric.2b9c02cf6ae2042b88edfe79",
+      "key": "1.20-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre3.aca14a0a2ba214e52bc820186f626e55754b8e2550f0cae098282ebdf0964530.json",
+      "sha256": "aca14a0a2ba214e52bc820186f626e55754b8e2550f0cae098282ebdf0964530",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5663,
+      "id": "catalog.fabric.cf1e6fc677ea463fd037aa55",
+      "key": "1.20-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre4.d9f8877472210dbb8abc0da4d38ce971f0ee77620672762633251e984558b0b1.json",
+      "sha256": "d9f8877472210dbb8abc0da4d38ce971f0ee77620672762633251e984558b0b1",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4779,
+      "id": "catalog.fabric.457e56ac936d46c3b133fca3",
+      "key": "1.20-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre5.95b9fee30e40783beb64acb193ede101f7288353ff1770c9c1dd846c11306ab9.json",
+      "sha256": "95b9fee30e40783beb64acb193ede101f7288353ff1770c9c1dd846c11306ab9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3895,
+      "id": "catalog.fabric.96932e02f5df1bfe7336e878",
+      "key": "1.20-pre6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre6.10c4077ad7355abf3b42588f4ec4b2d85cba8cd23f67fd08a1090f01ae23adb4.json",
+      "sha256": "10c4077ad7355abf3b42588f4ec4b2d85cba8cd23f67fd08a1090f01ae23adb4",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3895,
+      "id": "catalog.fabric.6286e81a81337fb511ad5306",
+      "key": "1.20-pre7",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-pre7.4a5138ca5723ddfa6fb85ccec63950d9e2c7a0f17df25d4be710b798fb66d76a.json",
+      "sha256": "4a5138ca5723ddfa6fb85ccec63950d9e2c7a0f17df25d4be710b798fb66d76a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3886,
+      "id": "catalog.fabric.f4d53ae0adc84d913051b0fa",
+      "key": "1.20-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20-rc1.afb5ec31f84d25d957254d07101feb93962b211768e36ecde972c50ba78e11cd.json",
+      "sha256": "afb5ec31f84d25d957254d07101feb93962b211768e36ecde972c50ba78e11cd",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 35438,
+      "id": "catalog.fabric.2032dd318a5e83ba780ec30d",
+      "key": "1.20.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.1.e483bea6df8881611204006ad1ca5df59908b91d4cc5d63adb3708e7f445a601.json",
+      "sha256": "e483bea6df8881611204006ad1ca5df59908b91d4cc5d63adb3708e7f445a601",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.835994f400727126cea9d9c0",
+      "key": "1.20.1-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.1-rc1.6efcea476d05bad312f13c35809d547ad2d16396e5f634a345d00eb4e8f94ebd.json",
+      "sha256": "6efcea476d05bad312f13c35809d547ad2d16396e5f634a345d00eb4e8f94ebd",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 28458,
+      "id": "catalog.fabric.cbde92fe27512fab9ea9660c",
+      "key": "1.20.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2.6989e86a66691ed1e6cc927622ade8c8b3c92627e302743bee418c90c18fb3de.json",
+      "sha256": "6989e86a66691ed1e6cc927622ade8c8b3c92627e302743bee418c90c18fb3de",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.ce062967c9b1eb5a77e4f24a",
+      "key": "1.20.2-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2-pre1.0e2dec48b34cd30af06896e9af75f81daaa1de6d49e856b0fecfa867923427eb.json",
+      "sha256": "0e2dec48b34cd30af06896e9af75f81daaa1de6d49e856b0fecfa867923427eb",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7465,
+      "id": "catalog.fabric.68674a573fc4cce7a0f9444b",
+      "key": "1.20.2-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2-pre2.81519c41c6412bd9e2d6db39799a0b8cf61413e5123010099f48cd8f94f63f04.json",
+      "sha256": "81519c41c6412bd9e2d6db39799a0b8cf61413e5123010099f48cd8f94f63f04",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.23bbfde0f550a241b87cba69",
+      "key": "1.20.2-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2-pre3.ea877f57ecabebf03921e0d8cdfd08fc951213576cef0487d9c1626254b2b6da.json",
+      "sha256": "ea877f57ecabebf03921e0d8cdfd08fc951213576cef0487d9c1626254b2b6da",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.e8c9473458c31cf54755b641",
+      "key": "1.20.2-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2-pre4.16ff46c849b9612e5b4c57e5944059b7de4a88f81a6d4a3bffad469bfe1a32c0.json",
+      "sha256": "16ff46c849b9612e5b4c57e5944059b7de4a88f81a6d4a3bffad469bfe1a32c0",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4790,
+      "id": "catalog.fabric.0e541854c6019c490b81f22a",
+      "key": "1.20.2-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2-rc1.c130bb87bdc58991fa2ab07d05df47b651475322d1f1f5940df4683861a08068.json",
+      "sha256": "c130bb87bdc58991fa2ab07d05df47b651475322d1f1f5940df4683861a08068",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5676,
+      "id": "catalog.fabric.d99e5d8516480ca97d5820f8",
+      "key": "1.20.2-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.2-rc2.7c159b796c05e142e9e04bce76a0e47cd955b2e82d5796360c5692b0cbc6e207.json",
+      "sha256": "7c159b796c05e142e9e04bce76a0e47cd955b2e82d5796360c5692b0cbc6e207",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 17057,
+      "id": "catalog.fabric.f0a57abb4ac7acc819d88d26",
+      "key": "1.20.3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.3.c2e3394580b11814d6be009ac023b404fe70208a299fe507f78428bee92e6afa.json",
+      "sha256": "c2e3394580b11814d6be009ac023b404fe70208a299fe507f78428bee92e6afa",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7465,
+      "id": "catalog.fabric.6cafd5f6cedfd3d1ed46c9b1",
+      "key": "1.20.3-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.3-pre1.09f909544d2eab91e098800aa8b25bff70d50c88ca3fd931876b8c8d346e2732.json",
+      "sha256": "09f909544d2eab91e098800aa8b25bff70d50c88ca3fd931876b8c8d346e2732",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6577,
+      "id": "catalog.fabric.846bc7440db7585ba67d784a",
+      "key": "1.20.3-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.3-pre2.7ede58b0fa8592d28ed5575197c558bcc1912ccd3e31812c50d51adb8cfe9183.json",
+      "sha256": "7ede58b0fa8592d28ed5575197c558bcc1912ccd3e31812c50d51adb8cfe9183",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.04226b809f74e51a1b1225a1",
+      "key": "1.20.3-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.3-pre3.87bf027066a306ab687530286bcc05a185b4221b22a0ab135cf0468e31ae6f8d.json",
+      "sha256": "87bf027066a306ab687530286bcc05a185b4221b22a0ab135cf0468e31ae6f8d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.4e3eb792e50ac3860b1114c3",
+      "key": "1.20.3-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.3-pre4.b74007f645f32328aefca1531fe0a95092adb3917417e766682da4675fa34918.json",
+      "sha256": "b74007f645f32328aefca1531fe0a95092adb3917417e766682da4675fa34918",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.ca7593b1379817c2548116ac",
+      "key": "1.20.3-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.3-rc1.41f32052ebc4bec2a54444a1d85dbd0c2d72b3d4fa230ab2a76911dcd0cac028.json",
+      "sha256": "41f32052ebc4bec2a54444a1d85dbd0c2d72b3d4fa230ab2a76911dcd0cac028",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 24071,
+      "id": "catalog.fabric.c29addd5f5b72070c7ac7da1",
+      "key": "1.20.4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.4.9f3e9db937cc3a6b4c37c17901468939d6fb743242c27015ee8095b605b5e8a5.json",
+      "sha256": "9f3e9db937cc3a6b4c37c17901468939d6fb743242c27015ee8095b605b5e8a5",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.d15993fe7b3995070a57bb02",
+      "key": "1.20.4-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.4-rc1.d5cd3cc9467d1f47af768c1330456bfbd95c78a8506dfc1edccaaa2ccb1f044e.json",
+      "sha256": "d5cd3cc9467d1f47af768c1330456bfbd95c78a8506dfc1edccaaa2ccb1f044e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 35543,
+      "id": "catalog.fabric.1295b96467e775fa17f7a78c",
+      "key": "1.20.5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5.35bff1864e85ed4ee963635d8f854feffff7d8a33122828b2eafd006c682a1b8.json",
+      "sha256": "35bff1864e85ed4ee963635d8f854feffff7d8a33122828b2eafd006c682a1b8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.1d8e3b209c336e017c673a69",
+      "key": "1.20.5-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-pre1.9ddf916c2a915418b73d854d717a8108aca7845e29be63d9316dfe3667272fec.json",
+      "sha256": "9ddf916c2a915418b73d854d717a8108aca7845e29be63d9316dfe3667272fec",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.fd0144b3758d7b627d33919f",
+      "key": "1.20.5-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-pre2.8f7cce93161b01f6a97ee469adba82e3ab1a0be7eb098cc8a2fef8c15ab87ef6.json",
+      "sha256": "8f7cce93161b01f6a97ee469adba82e3ab1a0be7eb098cc8a2fef8c15ab87ef6",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.44db380c214f621b34bde21d",
+      "key": "1.20.5-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-pre3.05a1bd4567c61192eb2965c9c20aa71faa8ea91562ce25952e6c599e9f3fefb6.json",
+      "sha256": "05a1bd4567c61192eb2965c9c20aa71faa8ea91562ce25952e6c599e9f3fefb6",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.fabric.09a3e43844998afa45775414",
+      "key": "1.20.5-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-pre4.787f1f9617f6ad8bd8ea8cbc0ec9ca65b7b8367f8e206f6d11833c0751f404ab.json",
+      "sha256": "787f1f9617f6ad8bd8ea8cbc0ec9ca65b7b8367f8e206f6d11833c0751f404ab",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4790,
+      "id": "catalog.fabric.0d90de01ed641773b49ec1fa",
+      "key": "1.20.5-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-rc1.a638edc41e99197a255dde60c527e9b8a93adda2b5914d7c58e0ed55cd454dc4.json",
+      "sha256": "a638edc41e99197a255dde60c527e9b8a93adda2b5914d7c58e0ed55cd454dc4",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.36dd1eb85db7fff495767a3b",
+      "key": "1.20.5-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-rc2.1c39d0a64d89236aa2f03335fe7e212937d30428bdf4d7ba61ee30cc331be57c.json",
+      "sha256": "1c39d0a64d89236aa2f03335fe7e212937d30428bdf4d7ba61ee30cc331be57c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.6fb54c45fc7cf4907a4e5a22",
+      "key": "1.20.5-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.5-rc3.e3f09639341a5f830a06c170c3c709c363cccfda1e1e1efb7f8d7f268b3eb191.json",
+      "sha256": "e3f09639341a5f830a06c170c3c709c363cccfda1e1e1efb7f8d7f268b3eb191",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 14397,
+      "id": "catalog.fabric.aeac7d676378d9a8a74423b2",
+      "key": "1.20.6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.6.84c15790a152893cfe376123f2f8862685c365b9a0a68c90a153ef5b3edf3a98.json",
+      "sha256": "84c15790a152893cfe376123f2f8862685c365b9a0a68c90a153ef5b3edf3a98",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5676,
+      "id": "catalog.fabric.4a6242e581648ad5ac0524d4",
+      "key": "1.20.6-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.20.6-rc1.d38620dac7c90e1aba8d90a2bad9b796af7c8be6c29d63befe616cead6f89463.json",
+      "sha256": "d38620dac7c90e1aba8d90a2bad9b796af7c8be6c29d63befe616cead6f89463",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 30051,
+      "id": "catalog.fabric.d63b05db69141504f9caa075",
+      "key": "1.21",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2f942a1a517fee2470b92a1d6b887edfc2d993ff135961a51d51862d54a4adcd.json",
+      "sha256": "2f942a1a517fee2470b92a1d6b887edfc2d993ff135961a51d51862d54a4adcd",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5663,
+      "id": "catalog.fabric.ba1eb74bcb47f2c8678bfaee",
+      "key": "1.21-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21-pre1.d68cd7e4c6f671da4fa479ac77615552cad9b82ecaa6d8290126b95a1ab9a27c.json",
+      "sha256": "d68cd7e4c6f671da4fa479ac77615552cad9b82ecaa6d8290126b95a1ab9a27c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3895,
+      "id": "catalog.fabric.156402201759894e1c90f92e",
+      "key": "1.21-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21-pre2.01f33f5352c9945fc3bf894e4f28e0421d70532800dca1a8ebec84219a77b83c.json",
+      "sha256": "01f33f5352c9945fc3bf894e4f28e0421d70532800dca1a8ebec84219a77b83c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3011,
+      "id": "catalog.fabric.e7f1daabab5c342c30ffcc80",
+      "key": "1.21-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21-pre3.888502eb2d0d20751c8cc409feffb1721c2941408cf348179b91b034eb2c372a.json",
+      "sha256": "888502eb2d0d20751c8cc409feffb1721c2941408cf348179b91b034eb2c372a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4779,
+      "id": "catalog.fabric.413101c2f8b682e31aeeba26",
+      "key": "1.21-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21-pre4.c732de6080bd6e32bffdda645a7a441f6e73e3e63bedab785bd70c7adbc10940.json",
+      "sha256": "c732de6080bd6e32bffdda645a7a441f6e73e3e63bedab785bd70c7adbc10940",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3004,
+      "id": "catalog.fabric.83c42fd4e300af5d699d1429",
+      "key": "1.21-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21-rc1.6dd5a3d34f949cf8c2975f6f33f64d96284aa502e71cf7eef721f2a16a94391e.json",
+      "sha256": "6dd5a3d34f949cf8c2975f6f33f64d96284aa502e71cf7eef721f2a16a94391e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 35591,
+      "id": "catalog.fabric.ba1c7b8e59cb8a68137c799e",
+      "key": "1.21.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.1.d2883e432e9be1261855e9ca0e4d47965fd1333f9855db0ac1aa63d1ae5c6b28.json",
+      "sha256": "d2883e432e9be1261855e9ca0e4d47965fd1333f9855db0ac1aa63d1ae5c6b28",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.c3a8260a34ef1fc31d01d2aa",
+      "key": "1.21.1-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.1-rc1.82283f7f457b32863aa6d988df1412cf137568803a3b353774c29ac6c0cee241.json",
+      "sha256": "82283f7f457b32863aa6d988df1412cf137568803a3b353774c29ac6c0cee241",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 10908,
+      "id": "catalog.fabric.6983c61e831472da7f7275a0",
+      "key": "1.21.10",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.10.79b5c6045c978a919b9b4dd85a4a66a047416bd83adbe67bf6d59ad02d682792.json",
+      "sha256": "79b5c6045c978a919b9b4dd85a4a66a047416bd83adbe67bf6d59ad02d682792",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.60dd5e9faf5e2daef03c324b",
+      "key": "1.21.10-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.10-rc1.4962515d53bafa14888d6b533555f0685134f5267b76e61104f5d0b0f39d7192.json",
+      "sha256": "4962515d53bafa14888d6b533555f0685134f5267b76e61104f5d0b0f39d7192",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 32976,
+      "id": "catalog.fabric.8d4e14720fbe2d697a5e2217",
+      "key": "1.21.11",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11.67c86b0b4ae262a503f52f765a92bfed982bf2e2c935d9a8aa2c1b1aaeeb7dc7.json",
+      "sha256": "67c86b0b4ae262a503f52f765a92bfed982bf2e2c935d9a8aa2c1b1aaeeb7dc7",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6617,
+      "id": "catalog.fabric.1e9fc211177fcd3eccc66e45",
+      "key": "1.21.11-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-pre1.fd195a22fe8c3337e11e0aab5f837209d985117e3831be0c9c0e4c3d9bb6747d.json",
+      "sha256": "fd195a22fe8c3337e11e0aab5f837209d985117e3831be0c9c0e4c3d9bb6747d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7507,
+      "id": "catalog.fabric.bcf341d4d44e239c98a3ac8d",
+      "key": "1.21.11-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-pre2.6b75f20597ac67dcf5d502619efcb5c97ab8ce7455446b477b71202390569ed7.json",
+      "sha256": "6b75f20597ac67dcf5d502619efcb5c97ab8ce7455446b477b71202390569ed7",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5727,
+      "id": "catalog.fabric.1970eff92637be5631bb1735",
+      "key": "1.21.11-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-pre3.b8d005cd9c4a2ecaf0f9f45975654a616907062e690eaa06bc34e739b49ebb30.json",
+      "sha256": "b8d005cd9c4a2ecaf0f9f45975654a616907062e690eaa06bc34e739b49ebb30",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4837,
+      "id": "catalog.fabric.2f82fcde8ddd5f8a20cd92f8",
+      "key": "1.21.11-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-pre4.3dac7fb01ba8099fc7bdbe8a3927b84266e8ec314d793b2a0d34a2af5f7e80e4.json",
+      "sha256": "3dac7fb01ba8099fc7bdbe8a3927b84266e8ec314d793b2a0d34a2af5f7e80e4",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4837,
+      "id": "catalog.fabric.9fcf9174a24682946007e3f9",
+      "key": "1.21.11-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-pre5.2bea8094a329db72173254ed88d80ca4dde772f441a8feb8d94e98cbf41ccb7b.json",
+      "sha256": "2bea8094a329db72173254ed88d80ca4dde772f441a8feb8d94e98cbf41ccb7b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4826,
+      "id": "catalog.fabric.325b65d4538aac23cf6e9c8b",
+      "key": "1.21.11-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-rc1.1867e8f6ed9a06976f0d5027596e3138b2b31473acdcb81fde24595383f69067.json",
+      "sha256": "1867e8f6ed9a06976f0d5027596e3138b2b31473acdcb81fde24595383f69067",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4826,
+      "id": "catalog.fabric.d625228a2dcfd73ea979e6a5",
+      "key": "1.21.11-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-rc2.5145f27629fd1a14da67de165ebc568cdc2069d7af02d6751aa8e25489965f66.json",
+      "sha256": "5145f27629fd1a14da67de165ebc568cdc2069d7af02d6751aa8e25489965f66",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4826,
+      "id": "catalog.fabric.6d452fbc9777e503119dd184",
+      "key": "1.21.11-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.11-rc3.833b6f45bc3e172c17a02b33b70bf93e9091aba25ef41449eb1127110d28af98.json",
+      "sha256": "833b6f45bc3e172c17a02b33b70bf93e9091aba25ef41449eb1127110d28af98",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 16201,
+      "id": "catalog.fabric.62cda7c2c94c25c5ecbb5c6d",
+      "key": "1.21.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2.326828d248c2cad6c8bee3eaa8551501847ccd064131436fb8cde871b2642ff8.json",
+      "sha256": "326828d248c2cad6c8bee3eaa8551501847ccd064131436fb8cde871b2642ff8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.899c72057314fc264302e74f",
+      "key": "1.21.2-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-pre1.f58fccfb45f5ec6140790e42dd4893976dbe445e6fd854d1a159df44f7781f6a.json",
+      "sha256": "f58fccfb45f5ec6140790e42dd4893976dbe445e6fd854d1a159df44f7781f6a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.07b6dd02f653432e434ca3af",
+      "key": "1.21.2-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-pre2.6602a7850700fce101e88d02a583c6f7afab76aa446bb7ee7b6ae63911292ff9.json",
+      "sha256": "6602a7850700fce101e88d02a583c6f7afab76aa446bb7ee7b6ae63911292ff9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.701f71368f6a1025336bb69b",
+      "key": "1.21.2-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-pre3.06dcaff99cbfa1639895bcf7d3872248360c00ef14fa3a839efa775fe58d8119.json",
+      "sha256": "06dcaff99cbfa1639895bcf7d3872248360c00ef14fa3a839efa775fe58d8119",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5689,
+      "id": "catalog.fabric.301a7e625e8a266017d94c1c",
+      "key": "1.21.2-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-pre4.dd2edd8b6fbc22b3f0051d81c552dcb2cbf9e4c41ad00de59ec5627c22bed9ed.json",
+      "sha256": "dd2edd8b6fbc22b3f0051d81c552dcb2cbf9e4c41ad00de59ec5627c22bed9ed",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.0f2798784fff876d524bd63e",
+      "key": "1.21.2-pre5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-pre5.b720179009d4880e4ccedfc10080ed277409819d538afee753027735bf266fed.json",
+      "sha256": "b720179009d4880e4ccedfc10080ed277409819d538afee753027735bf266fed",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.8f32e31480e56b7d754e8ee9",
+      "key": "1.21.2-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-rc1.7f5a4aedaab622f63b7aa1b940222e9167139762b926a4749747a18e2023f5b7.json",
+      "sha256": "7f5a4aedaab622f63b7aa1b940222e9167139762b926a4749747a18e2023f5b7",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.0efdac0be93187481fb9882e",
+      "key": "1.21.2-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.2-rc2.3e21b6490f6c1ecd4c2aaaab3aabcd8c5f50f5761428ac5a3e2e80b82609f7d3.json",
+      "sha256": "3e21b6490f6c1ecd4c2aaaab3aabcd8c5f50f5761428ac5a3e2e80b82609f7d3",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 12660,
+      "id": "catalog.fabric.219c558f8e478541d5c34270",
+      "key": "1.21.3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.3.c6fd3eae4f383dd99feea0a41cdac6512a63b3bdb5aa1b9f01b0f0e5be8fe742.json",
+      "sha256": "c6fd3eae4f383dd99feea0a41cdac6512a63b3bdb5aa1b9f01b0f0e5be8fe742",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 39042,
+      "id": "catalog.fabric.a406c817365153733238998e",
+      "key": "1.21.4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4.37dcf2cb689f49fa94d5339d13d1b6be677e84ff033890aa0a9a76b95bc2f304.json",
+      "sha256": "37dcf2cb689f49fa94d5339d13d1b6be677e84ff033890aa0a9a76b95bc2f304",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7465,
+      "id": "catalog.fabric.ca47c01509e1f0acaa744905",
+      "key": "1.21.4-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4-pre1.edef6dd652f5bfc256cf9711b6fd6928b04a9a2be831dd8f11d7d67374fecc4e.json",
+      "sha256": "edef6dd652f5bfc256cf9711b6fd6928b04a9a2be831dd8f11d7d67374fecc4e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.01b55fa08629e7d4cdc3a2bc",
+      "key": "1.21.4-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4-pre2.4010bbabb0d419e4f579008fc3a1bc972f3f1cc1e24f046d254a73a2a2d2e89b.json",
+      "sha256": "4010bbabb0d419e4f579008fc3a1bc972f3f1cc1e24f046d254a73a2a2d2e89b",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.fabric.212c3d422857d09a2874631d",
+      "key": "1.21.4-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4-pre3.cfd1270e7d02f3d4282dc696c2bf8ab4e4bf5ac3b03abb6af4fc3fb03786591e.json",
+      "sha256": "cfd1270e7d02f3d4282dc696c2bf8ab4e4bf5ac3b03abb6af4fc3fb03786591e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.b95a40c34b51a10a00bb4219",
+      "key": "1.21.4-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4-rc1.3415d2af29d683daaf03a00f14bd548098466fdf7943eb0ab619594059f09632.json",
+      "sha256": "3415d2af29d683daaf03a00f14bd548098466fdf7943eb0ab619594059f09632",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.c512a85a4dc7f34861a9a928",
+      "key": "1.21.4-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4-rc2.642050b0f3a74eb8d75dc941624870780ebfc136c732ed2ef45090a8fb9b2253.json",
+      "sha256": "642050b0f3a74eb8d75dc941624870780ebfc136c732ed2ef45090a8fb9b2253",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 5676,
+      "id": "catalog.fabric.596ed90cb813f78ce4f54804",
+      "key": "1.21.4-rc3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.4-rc3.e4eaaf67abe86a3af7e5e06abc7d50a30364106f2b643d9afa02982bd8fb7ea1.json",
+      "sha256": "e4eaaf67abe86a3af7e5e06abc7d50a30364106f2b643d9afa02982bd8fb7ea1",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 41779,
+      "id": "catalog.fabric.337a1c0d76a364e010867e02",
+      "key": "1.21.5",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.5.e507f3a97e19c862a7daad291a01948a923031798c7023d2554330cc86ddeb4a.json",
+      "sha256": "e507f3a97e19c862a7daad291a01948a923031798c7023d2554330cc86ddeb4a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.720bc9dcb44a0ea4c87daaa1",
+      "key": "1.21.5-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.5-pre1.acd1afa828221066142fada850fbaeee5b9aba58b7097b3a40effac61cb7e167.json",
+      "sha256": "acd1afa828221066142fada850fbaeee5b9aba58b7097b3a40effac61cb7e167",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 7465,
+      "id": "catalog.fabric.d6243aebf96a6864a878a3e8",
+      "key": "1.21.5-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.5-pre2.d67a5236d8e77082d13329897fbabeb085a28724d58d629032958f630123e1f0.json",
+      "sha256": "d67a5236d8e77082d13329897fbabeb085a28724d58d629032958f630123e1f0",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.a3796c6ea3e6dc7f5f9859a5",
+      "key": "1.21.5-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.5-pre3.8fc98366d3b7eedc2b81ef4c48b9d5189553eba0ad9a7d8a9936c0bf5d6a6f7e.json",
+      "sha256": "8fc98366d3b7eedc2b81ef4c48b9d5189553eba0ad9a7d8a9936c0bf5d6a6f7e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4790,
+      "id": "catalog.fabric.cc72d411fe933beca859f69a",
+      "key": "1.21.5-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.5-rc1.055168af4b754764826d4924c40720f74c1bbc89797d20b6da75a134721febd8.json",
+      "sha256": "055168af4b754764826d4924c40720f74c1bbc89797d20b6da75a134721febd8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.5a824ccf5e156e741bacec4c",
+      "key": "1.21.5-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.5-rc2.f4ba206e7b42bd57642f7f307f1b793184cf25144964ab45fc4be8376ab7e01a.json",
+      "sha256": "f4ba206e7b42bd57642f7f307f1b793184cf25144964ab45fc4be8376ab7e01a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 26787,
+      "id": "catalog.fabric.a3a1eb09a48630544d6803e1",
+      "key": "1.21.6",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.6.dd4b384dbf1d26d81e3a0c1282cf9abfd2ded75943529d9d168c3c0f33e353a3.json",
+      "sha256": "dd4b384dbf1d26d81e3a0c1282cf9abfd2ded75943529d9d168c3c0f33e353a3",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.279dcc3e319fd69af90817fc",
+      "key": "1.21.6-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.6-pre1.a81358504ec999d0b7c35703829bc3c5009c650db21392fe1ba760caf6575503.json",
+      "sha256": "a81358504ec999d0b7c35703829bc3c5009c650db21392fe1ba760caf6575503",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3913,
+      "id": "catalog.fabric.e0e0622d510b2545dc3f9452",
+      "key": "1.21.6-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.6-pre2.03dd22c672acc26f58315c1f5c53dc538c6e0fb957c34e17a9f20b7fdeabf4fb.json",
+      "sha256": "03dd22c672acc26f58315c1f5c53dc538c6e0fb957c34e17a9f20b7fdeabf4fb",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6577,
+      "id": "catalog.fabric.2ac8656442b0ebe410a7351c",
+      "key": "1.21.6-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.6-pre3.6047f218061796b7ed310e9d54546d8d23d7bd60a4e73f235eca4327aa618ea8.json",
+      "sha256": "6047f218061796b7ed310e9d54546d8d23d7bd60a4e73f235eca4327aa618ea8",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.fabric.2656b35ff028b152c3f16767",
+      "key": "1.21.6-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.6-pre4.388a11c814e508838017288b726e631993d377d8914affdbd6799a39c35c0851.json",
+      "sha256": "388a11c814e508838017288b726e631993d377d8914affdbd6799a39c35c0851",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.bed09ab9bbfc5a8d629052fb",
+      "key": "1.21.6-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.6-rc1.777f7da7e3b3044e9b4ba7af58a96cebb2d5b2052e1fd9164fe30d54165f69cb.json",
+      "sha256": "777f7da7e3b3044e9b4ba7af58a96cebb2d5b2052e1fd9164fe30d54165f69cb",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 12582,
+      "id": "catalog.fabric.655a3eef08d8894ba512509c",
+      "key": "1.21.7",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.7.df6a75a844ad8d16ad548baf4b69af8f35b4859c0f455c0ca2f49943b3233ac3.json",
+      "sha256": "df6a75a844ad8d16ad548baf4b69af8f35b4859c0f455c0ca2f49943b3233ac3",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3018,
+      "id": "catalog.fabric.09f13d363c47d00fcf6dcd68",
+      "key": "1.21.7-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.7-rc1.2bcb5f5d705057537d9e26455b79e6c385ce320ccb7113f63fd52538082ef09e.json",
+      "sha256": "2bcb5f5d705057537d9e26455b79e6c385ce320ccb7113f63fd52538082ef09e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.a53552f4dc28de711777a564",
+      "key": "1.21.7-rc2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.7-rc2.256e6adbd8ed14ebdf0c8b2db169d0f3dd5184a30936c0372f6284bced58cb69.json",
+      "sha256": "256e6adbd8ed14ebdf0c8b2db169d0f3dd5184a30936c0372f6284bced58cb69",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 12673,
+      "id": "catalog.fabric.b46081e2199ced61ef78628e",
+      "key": "1.21.8",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.8.f750a47b1fbb9f3deda36ea7d8cfa389078b8064b30d7f91a69484b19273c882.json",
+      "sha256": "f750a47b1fbb9f3deda36ea7d8cfa389078b8064b30d7f91a69484b19273c882",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.d5e37340f4f602c5d815868a",
+      "key": "1.21.8-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.8-rc1.b6ab3e9f942b628d4d1ca178beb08e50f906432759951d8767e9242a0278723a.json",
+      "sha256": "b6ab3e9f942b628d4d1ca178beb08e50f906432759951d8767e9242a0278723a",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 24149,
+      "id": "catalog.fabric.76f35f4d4258d641ad51d2f3",
+      "key": "1.21.9",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.9.03fbade8d353f6adddd3950627a5546fe4a4b7fdb06fc89c35398655b4090cb9.json",
+      "sha256": "03fbade8d353f6adddd3950627a5546fe4a4b7fdb06fc89c35398655b4090cb9",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 11911,
+      "id": "catalog.fabric.80b219234bf6f7d7702dd3ef",
+      "key": "1.21.9-pre1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.9-pre1.b91662dd62d64bdcbe2814220bd9668330a04262c37080657f0ea5d59f122e2d.json",
+      "sha256": "b91662dd62d64bdcbe2814220bd9668330a04262c37080657f0ea5d59f122e2d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3025,
+      "id": "catalog.fabric.d9c184b176656b6848bc9cf9",
+      "key": "1.21.9-pre2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.9-pre2.2a5d56ebff6e1d834ec2f7ba49e58beb22c49c415ceeec954a6ac94badf566e1.json",
+      "sha256": "2a5d56ebff6e1d834ec2f7ba49e58beb22c49c415ceeec954a6ac94badf566e1",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.b93a323cbce86b26fff270a9",
+      "key": "1.21.9-pre3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.9-pre3.603540bb13299ca3d343ec4ab7d6ccac3c627eff50cf6b672775221d86dd2a9c.json",
+      "sha256": "603540bb13299ca3d343ec4ab7d6ccac3c627eff50cf6b672775221d86dd2a9c",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 4801,
+      "id": "catalog.fabric.fe9d91bd7e4d95b3fe5919cf",
+      "key": "1.21.9-pre4",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.9-pre4.b89f4ef50cbb9010a6a3e6d1c6b6430409439687f03238730ed02dee918d02a7.json",
+      "sha256": "b89f4ef50cbb9010a6a3e6d1c6b6430409439687f03238730ed02dee918d02a7",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 3904,
+      "id": "catalog.fabric.4e392d7562b1eda22d5ca15c",
+      "key": "1.21.9-rc1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/1.21.9-rc1.608ca37000982435c55385a46ae7237c6ce4a0e596c73f4ea23a309d38b9272d.json",
+      "sha256": "608ca37000982435c55385a46ae7237c6ce4a0e596c73f4ea23a309d38b9272d",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 61711,
+      "id": "catalog.fabric.2b9b40cccbc943e2c30b9c03",
+      "key": "26.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/26.1.e1d2fea1c643298815dcc07fb15d81d1e9b47e53a2c5779f8933a8353d6f22ed.json",
+      "sha256": "e1d2fea1c643298815dcc07fb15d81d1e9b47e53a2c5779f8933a8353d6f22ed",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 6497,
+      "id": "catalog.fabric.da7282fc44c08b370729866b",
+      "key": "26.1.1",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/26.1.1.487305b075ef16b1d70a6aff8a1f8070f7ed1284bce66abec29dfe2aa9724067.json",
+      "sha256": "487305b075ef16b1d70a6aff8a1f8070f7ed1284bce66abec29dfe2aa9724067",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 17963,
+      "id": "catalog.fabric.4848db3a213f1ca28f5c79b2",
+      "key": "26.1.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/26.1.2.faadf65dd4255dce93b3b773a5515b9ec6063139b3a7d8836fe839e240997949.json",
+      "sha256": "faadf65dd4255dce93b3b773a5515b9ec6063139b3a7d8836fe839e240997949",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 56378,
+      "id": "catalog.fabric.087988cddfd1e013b8dd929d",
+      "key": "26.2",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/26.2.abdf6e72210bb3f744940767963e345ce8917bb8313c4768a4f92ed715f3863e.json",
+      "sha256": "abdf6e72210bb3f744940767963e345ce8917bb8313c4768a4f92ed715f3863e",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 24965,
+      "id": "catalog.fabric.c5587d5f4e64bf4c258f2db8",
+      "key": "26.3",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/26.3.35edfadac2d14f5dca34043cbe53ea11aa0bd5d955471baca1e5346a35f6305f.json",
+      "sha256": "35edfadac2d14f5dca34043cbe53ea11aa0bd5d955471baca1e5346a35f6305f",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 626021,
+      "id": "catalog.fabric.f9d9915dc189f5f288fa94da",
+      "key": "all",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/all.69544c336675ec941d339ec30c80516a53f4604481dd78114ec10383fb788580.json",
+      "sha256": "69544c336675ec941d339ec30c80516a53f4604481dd78114ec10383fb788580",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    },
+    {
+      "bytes": 1400837,
+      "id": "catalog.fabric.745d49831359d133ad318e9f",
+      "key": "unresolved",
+      "path": "catalog/2026-08-10-r2/platforms/fabric/unresolved.d593d178ad79e7b7056bb85e47e8624cd9ac7cce9318efc30614b8f7b4cf3944.json",
+      "sha256": "d593d178ad79e7b7056bb85e47e8624cd9ac7cce9318efc30614b8f7b4cf3944",
+      "sourceSnapshots": [
+        "fabric.d5f0718a2c465a479a633101"
+      ]
+    }
+  ]
+}

@@ -28,9 +28,9 @@ Descriptors are data. They cannot execute code, start processes, access credenti
 
 ## Compatibility Catalog
 
-The catalog is a normalized graph of Minecraft versions, platforms, loaders, APIs, mappings, build plugins, wrappers, Java versions, language adapters, template families, profiles, and verification evidence.
+The catalog is a normalized evidence graph of upstream Minecraft versions, platforms, loaders, APIs, mappings, build plugins, wrappers, Java versions, and language adapters. It preserves exactly what an immutable source snapshot observed.
 
-Every edge records whether its relationship is published, documented, verified, or inferred. Inferred relationships may be exposed only as Advanced experimental choices and cannot drive Simple-mode recommendations.
+During Phase 3, catalog components are only `discovered`, and non-global shards contain only source-published `targets` edges. A global component, such as a standalone build tool release, has no target edge because discovery does not prove Minecraft compatibility. Profiles, template families, tuple intersections, and compilation evidence are intentionally outside the catalog until later phases add their own contracts. No discovered component can drive a Simple-mode recommendation.
 
 The catalog is split into content-addressed shards so clients load only the selected platform and compatibility key. Clients verify shard digests before parsing.
 
@@ -54,15 +54,15 @@ Profiles never emit mutable `latest` selectors into generated build files.
 
 ## Version Source Adapters
 
-Source adapters fetch authoritative upstream metadata outside generator core. Each fetch records adapter version, request URL, retrieval time, cache validators, media type, response digest, parser schema, normalized entry count, warnings, and rejected entries.
+Source adapters fetch authoritative upstream metadata outside generator core. Each fetch records adapter version, policy source ID, declared resource role, requested URL, approved redirect chain, final URL, retrieval time, cache validators, media type, response digest, parser schema, normalized entry count, warnings, and rejected entries.
 
-Metadata fetching is a privileged maintenance boundary. Repository-owned source definitions select inputs, while code-owned network policies bind each source ID to exact HTTPS URLs and a redirect limit. The fetcher validates the initial URL and every redirect target before access, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, and redirect loops. User configuration cannot add a source URL.
+Metadata fetching is a privileged maintenance boundary. Repository-owned source definitions select named resources and declare their expected media types, while code-owned network policies bind each source ID to exact HTTPS URLs, approved media types, and a redirect limit. The fetcher validates the initial URL and every redirect target before access, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, redirect loops, and media types outside both policy and definition. User configuration cannot add a source URL.
 
 An outage retains the last-known-good snapshot and marks it stale. Empty responses, parser failures, unexpected removals, or artifact mutations never delete catalog data automatically.
 
 The implemented Forge adapter uses the Mojang version manifest as catalog-key corroboration and official Forge Maven metadata as primary discovery. It retains every exact Forge artifact. Strict historic Forge keys missing from the current Mojang manifest remain discoverable from their official Forge coordinate and carry an explicit warning instead of being discarded.
 
-Source snapshots contain response URLs after redirects, retrieval timestamps, media types, cache validators when supplied, byte counts, SHA-256 digests, adapter identity, normalized entries, rejected values, and warnings. Snapshot identity depends on adapter identity and ordered source digests, not retrieval time.
+Source snapshots contain policy source IDs, declared resource roles, requested URLs, approved redirect chains, final response URLs, retrieval timestamps, media types, cache validators when supplied, byte counts, SHA-256 digests, adapter identity, normalized entries, rejected values, and warnings. Snapshot identity depends on adapter identity and ordered source digests, not retrieval time. Provenance version one is required for new Phase 3 captures. The preexisting version one snapshot remains valid historical evidence without the newer provenance fields.
 
 ## Generator Boundary
 

@@ -8,6 +8,7 @@
 - [Contribution guide](general/contributing.md)
 - [Template pack architecture](architecture/template-pack.md)
 - [Source snapshots](data/source-snapshots.md)
+- [Compatibility catalog](data/compatibility-catalog.md)
 - [Trust model](security/trust-model.md)
 - [GitHub foundation verification](verification/github-foundation.md)
 - [GitHub planning verification](verification/github-planning.md)

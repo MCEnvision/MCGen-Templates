@@ -1,0 +1,33 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "sponge",
+  "platform": "sponge",
+  "category": "plugin",
+  "adapter": "sponge-maven",
+  "sources": [
+    {
+      "id": "sponge-api-maven-metadata",
+      "role": "primary",
+      "url": "https://repo.spongepowered.org/repository/maven-public/org/spongepowered/spongeapi/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "sponge-versioning-documentation",
+      "role": "corroborating",
+      "url": "https://docs.spongepowered.org/stable/en/versions/versioning.html",
+      "expectedContentTypes": ["text/html"]
+    },
+    {
+      "id": "sponge-implementations-documentation",
+      "role": "corroborating",
+      "url": "https://docs.spongepowered.org/stable/en/server/getting-started/implementations/index.html",
+      "expectedContentTypes": ["text/html"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

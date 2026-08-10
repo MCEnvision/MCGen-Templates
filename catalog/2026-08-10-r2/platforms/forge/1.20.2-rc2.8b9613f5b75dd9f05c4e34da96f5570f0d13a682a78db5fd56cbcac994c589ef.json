@@ -1,0 +1,117 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.20.2-rc2",
+      "id": "component.forge.fe25da9c6135a4b4a496cf2b",
+      "sourceEntries": [
+        {
+          "entryIndex": 5049,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.2-rc2"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.20.2-rc2-20230918.103016",
+      "id": "component.forge.cb1c244c75afcb000370e19d",
+      "sourceEntries": [
+        {
+          "entryIndex": 5050,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.2-rc2-20230918.103016"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.20.2-rc2-20230918.104552",
+      "id": "component.forge.a15ae5068f1691c0b4df77d1",
+      "sourceEntries": [
+        {
+          "entryIndex": 5051,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.2-rc2-20230918.104552"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.8e7c15b1c8288e9dfbb36242",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5051,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.a15ae5068f1691c0b4df77d1"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.8e7c15b1c8288e9dfbb36242",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5050,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.cb1c244c75afcb000370e19d"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.8e7c15b1c8288e9dfbb36242",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5049,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.fe25da9c6135a4b4a496cf2b"
+    }
+  ],
+  "id": "catalog.forge.cd2248d341002d910218748f",
+  "key": "1.20.2-rc2",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

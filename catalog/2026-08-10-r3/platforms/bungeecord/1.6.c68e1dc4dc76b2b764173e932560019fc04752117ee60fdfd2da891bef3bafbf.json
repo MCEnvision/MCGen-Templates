@@ -1,0 +1,117 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "proxy",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "bungeecord-api",
+      "coordinate": "net.md-5:bungeecord-api:1.6.1-SNAPSHOT",
+      "id": "component.bungeecord.2f8cad04058c218257672f40",
+      "sourceEntries": [
+        {
+          "entryIndex": 14,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.6.1-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "bungeecord-api",
+      "coordinate": "net.md-5:bungeecord-api:1.6.2-SNAPSHOT",
+      "id": "component.bungeecord.2ee5dc1bc690c7e77d62eb09",
+      "sourceEntries": [
+        {
+          "entryIndex": 15,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.6.2-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "bungeecord-api",
+      "coordinate": "net.md-5:bungeecord-api:1.6.4-SNAPSHOT",
+      "id": "component.bungeecord.09380a6f60d6759fd36fb584",
+      "sourceEntries": [
+        {
+          "entryIndex": 16,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.6.4-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.bungeecord.000c2b2b3adf3727787bbf2e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 16,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bungeecord.09380a6f60d6759fd36fb584"
+    },
+    {
+      "confidence": "published",
+      "from": "target.bungeecord.000c2b2b3adf3727787bbf2e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 15,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bungeecord.2ee5dc1bc690c7e77d62eb09"
+    },
+    {
+      "confidence": "published",
+      "from": "target.bungeecord.000c2b2b3adf3727787bbf2e",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 14,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bungeecord.2f8cad04058c218257672f40"
+    }
+  ],
+  "id": "catalog.bungeecord.01c90c84b292cb2e6584452e",
+  "key": "1.6",
+  "keyKind": "api",
+  "platform": "bungeecord",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "bungeecord.bd6cb074e1fb40ebddd0f0b6"
+  ]
+}

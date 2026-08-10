@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. The repository now contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, Mojang and Forge source adapters, parser tests, and one immutable normalized Forge source snapshot. It does not yet contain a template family, compatibility catalog, toolchain profile instance, generated project fixture, published package, or release artifact.
+MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is active for authoritative source coverage. The Phase 3 branch contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, fourteen authoritative source adapters, immutable snapshots, content-addressed catalog shards, coverage, and drift evidence. It does not yet contain a template family, toolchain profile instance, generated project fixture, published package, or release artifact.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -71,7 +71,7 @@ docs/
 .github/
 ```
 
-`schemas/`, `sources/`, `src/`, and `tests/` are implemented. `templates/`, `catalog/`, profile instances, and generated fixtures remain planned until their exact content and evidence are reviewed. `fixtures/` will contain deterministic generation cases, not generated build output.
+`schemas/`, `sources/`, `catalog/`, `src/`, and `tests/` are implemented on the active Phase 3 branch. `templates/`, profile instances, and generated fixtures remain planned until their exact content and evidence are reviewed. `fixtures/` will contain deterministic generation cases, not generated build output.
 
 ## Data Ownership and Resolution
 
@@ -114,7 +114,7 @@ Canonical descriptors and family files are trusted repository content reviewed t
 
 The public generation service may validate and package untrusted input, but it must never execute generated Gradle, Maven, Java, Kotlin, shell, Git, descriptor, or uploaded binary content. Conditions use a bounded expression language without network, process, filesystem, reflection, or arbitrary-code access.
 
-Canonical source capture is a separate maintainer-only network path. Repository source definitions cannot expand network authority by themselves. Each source ID resolves through a code-owned policy containing exact HTTPS URLs and a redirect limit, and every initial or redirect URL is checked before access. Invalid, credentialed, downgraded, undeclared, or excessive redirect targets fail before parsing or snapshot writes.
+Canonical source capture is a separate maintainer-only network path. Repository source definitions cannot expand network authority by themselves. A definition names every source resource, gives it a primary, prerequisite, or corroborating role, and declares its expected media types. Each resource ID resolves through a code-owned policy containing exact HTTPS URLs, approved media types, and a redirect limit. Every initial or redirect URL is checked before access. Invalid, credentialed, downgraded, undeclared, unexpected-media-type, or excessive-redirect targets fail before parsing or snapshot writes. Capture records retain the source ID, requested URL, final URL, redirect chain, cache validators, response digest, and byte count.
 
 See [Template Pack Trust Model](../security/trust-model.md) for security requirements.
 
@@ -143,7 +143,7 @@ npm run validate
 npm run verify
 ```
 
-`npm run snapshot:forge -- --output <repository path>` captures a new source snapshot without overwriting an existing file. GitHub Actions run the same locked Node.js checks through the pinned central reusable workflow, plus documentation validation, credential scanning, and dependency review.
+`node dist/cli.js snapshot <adapter> --output <repository path>` captures a new source snapshot without overwriting an existing file. `node dist/cli.js catalog generate --output <repository directory>` derives content-addressed catalog data only from immutable snapshots. `node dist/cli.js catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>` produces a non-destructive drift report for one source family. GitHub Actions run the same locked Node.js checks through the pinned central reusable workflow, plus documentation validation, credential scanning, and dependency review.
 
 ## Verification Policy
 
@@ -169,8 +169,8 @@ Release validation remains disabled until a real deterministic pack artifact exi
 - No repository license has been selected.
 - No template descriptor instance has been implemented.
 - No compatibility tuple has been generated or verified.
-- Forge discovery does not yet resolve ForgeGradle, Gradle, Java, mappings, recommendation, generation, build, or artifact evidence.
-- Source adapters for other planned platforms are not implemented yet.
+- Source discovery does not yet establish toolchain profiles, template intersections, recommendations, generation, build, or artifact evidence.
+- Java requirements and Paper build numbers remain explicit blocked source values until their per-version authoritative metadata is captured.
 - No template-pack release has been published.
 
 These limitations block claims of template availability, but they do not change the approved architecture or complete-coverage requirement.

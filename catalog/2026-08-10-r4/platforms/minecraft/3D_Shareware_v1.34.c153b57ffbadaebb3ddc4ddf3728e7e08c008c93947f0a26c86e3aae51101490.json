@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.a457a11608c32bf9a81bda4b",
+  "category": "toolchain",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "game-version",
+      "coordinate": "com.mojang:minecraft:3D Shareware v1.34",
+      "id": "component.minecraft.296f17a6277d2202b224441d",
+      "sourceEntries": [
+        {
+          "entryIndex": 843,
+          "snapshotId": "mojang.378f919a766c4184b3ce9210",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3D Shareware v1.34"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.minecraft.698cbb42ba46f51875ed977c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 843,
+          "snapshotId": "mojang.378f919a766c4184b3ce9210",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.minecraft.296f17a6277d2202b224441d"
+    }
+  ],
+  "id": "catalog.minecraft.db7417689d9a1aa9dd55bd06",
+  "key": "3D Shareware v1.34",
+  "keyKind": "minecraft",
+  "platform": "minecraft",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "mojang.378f919a766c4184b3ce9210"
+  ]
+}

@@ -1,7 +1,15 @@
 import { sha256 } from "./digest.js";
-import type { FetchedResource, SourceRecord } from "./contracts.js";
+import type {
+  DerivedSourceResource,
+  FetchedResource,
+  SourceRecord,
+  SourceResource,
+} from "./contracts.js";
 import {
+  expectedSourceContentTypes,
+  isCanonicalSourceId,
   resolveCanonicalSourceUrl,
+  resolveDerivedSourceUrl,
   sourceRedirectLimit,
   type CanonicalSourceId,
 } from "./source-network-policy.js";
@@ -9,6 +17,7 @@ import {
 export type FetchPolicy = {
   timeoutMs: number;
   maxBytes: number;
+  userAgent?: string;
 };
 
 export async function readBoundedBody(
@@ -48,21 +57,30 @@ export async function readBoundedBody(
   return bytes;
 }
 
-export async function fetchResource(
-  sourceId: CanonicalSourceId,
-  url: string,
+async function fetchApprovedResource(
+  source: SourceResource | DerivedSourceResource,
   policy: FetchPolicy,
+  initialUrl: URL,
+  derived: boolean,
 ): Promise<FetchedResource> {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  const sourceId: CanonicalSourceId = source.id;
   const signal = AbortSignal.timeout(policy.timeoutMs);
   const maxRedirects = sourceRedirectLimit(sourceId);
-  let currentUrl = resolveCanonicalSourceUrl(sourceId, url);
+  let currentUrl = initialUrl;
+  const requestedUrl = currentUrl.href;
+  const redirectChain = [requestedUrl];
   let redirects = 0;
   let response: Response;
   for (;;) {
     response = await fetch(currentUrl, {
       headers: {
         accept: "application/json, application/xml, text/xml;q=0.9, */*;q=0.1",
-        "user-agent": "mcgen-template-snapshot/1.0",
+        "user-agent": policy.userAgent ?? "mcgen-template-snapshot/1.0",
       },
       redirect: "manual",
       signal,
@@ -84,7 +102,13 @@ export async function fetchResource(
     } catch {
       throw new Error(`source redirect location is invalid for ${sourceId}`);
     }
+    if (derived) {
+      throw new Error(
+        `derived source redirects are not approved for ${sourceId}`,
+      );
+    }
     currentUrl = resolveCanonicalSourceUrl(sourceId, redirectUrl.href);
+    redirectChain.push(currentUrl.href);
     redirects += 1;
   }
   if (!response.ok) {
@@ -100,8 +124,22 @@ export async function fetchResource(
   if (!contentType) {
     throw new Error(`source response omitted content type for ${sourceId}`);
   }
+  const mediaType = contentType.split(";", 1)[0]?.trim().toLowerCase();
+  if (
+    !mediaType ||
+    !expectedSourceContentTypes(sourceId).includes(mediaType) ||
+    !source.expectedContentTypes.includes(mediaType)
+  ) {
+    throw new Error(
+      `source response content type is not approved for ${sourceId}`,
+    );
+  }
   const record: SourceRecord = {
+    sourceId,
+    role: source.role,
+    requestedUrl,
     url: currentUrl.href,
+    redirectChain,
     retrievedAt: new Date().toISOString(),
     contentType,
     sha256: sha256(bytes),
@@ -115,8 +153,45 @@ export async function fetchResource(
   if (lastModified) {
     record.lastModified = lastModified;
   }
+  if ("derivedFrom" in source) {
+    record.derivedFrom = source.derivedFrom;
+  }
   return {
     record,
     text: new TextDecoder("utf-8", { fatal: true }).decode(bytes),
   };
+}
+
+export async function fetchResource(
+  source: SourceResource,
+  policy: FetchPolicy,
+): Promise<FetchedResource> {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  return fetchApprovedResource(
+    source,
+    policy,
+    resolveCanonicalSourceUrl(source.id, source.url),
+    false,
+  );
+}
+
+export async function fetchDerivedResource(
+  source: DerivedSourceResource,
+  policy: FetchPolicy,
+): Promise<FetchedResource> {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `derived source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  return fetchApprovedResource(
+    source,
+    policy,
+    resolveDerivedSourceUrl(source),
+    true,
+  );
 }

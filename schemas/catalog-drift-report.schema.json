@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:catalog-drift-report:1",
+  "title": "MCGen additive catalog drift report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "baseline",
+    "candidate",
+    "added",
+    "retained",
+    "removed",
+    "changedSources",
+    "requiresReview"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:catalog-drift-report:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "baseline": { "$ref": "#/$defs/snapshotSet" },
+    "candidate": { "$ref": "#/$defs/snapshotSet" },
+    "added": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "retained": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "removed": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "changedSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceId", "previousDigest", "candidateDigest"],
+        "properties": {
+          "sourceId": { "type": "string", "minLength": 1 },
+          "previousDigest": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+          },
+          "candidateDigest": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+          }
+        }
+      }
+    },
+    "requiresReview": { "type": "boolean" }
+  },
+  "$defs": {
+    "snapshotSet": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "digest"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-snapshot",
+      "coordinate": "de.oceanlabs.mcp:mcp_snapshot:20140624-1.7.10-pre4",
+      "id": "component.forge.19a5227207bf37344690cceb",
+      "sourceEntries": [
+        {
+          "entryIndex": 6498,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            4
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20140624-1.7.10-pre4"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.7fa53675b5d6c171cd22cb89",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 6498,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            4
+          ]
+        }
+      ],
+      "to": "component.forge.19a5227207bf37344690cceb"
+    }
+  ],
+  "id": "catalog.forge.d4f818bca939583f021aa4f9",
+  "key": "1.7.10-pre4",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

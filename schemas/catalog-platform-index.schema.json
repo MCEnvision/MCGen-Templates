@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:catalog-platform-index:1",
+  "title": "MCGen platform catalog index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "id",
+    "catalogId",
+    "platform",
+    "shards"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:catalog-platform-index:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "catalogId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "shards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "id", "path", "sha256", "bytes", "sourceSnapshots"],
+        "properties": {
+          "key": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "path": {
+            "type": "string",
+            "pattern": "^catalog(?:/[a-zA-Z0-9._-]+)*/platforms/[a-z0-9._-]+/[a-zA-Z0-9._-]+\\.[a-f0-9]{64}\\.json$"
+          },
+          "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "sourceSnapshots": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+          }
+        }
+      }
+    }
+  }
+}

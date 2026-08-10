@@ -13,10 +13,23 @@ const fixtureUrl = new URL(
   import.meta.url,
 );
 
-function resource(url: string, text: string): FetchedResource {
+function resource(
+  sourceId: string,
+  url: string,
+  text: string,
+): FetchedResource {
   return {
     record: {
+      sourceId,
+      role:
+        sourceId === "forge-maven-metadata"
+          ? "primary"
+          : sourceId === "forge-promotions"
+            ? "corroborating"
+            : "prerequisite",
+      requestedUrl: url,
       url,
+      redirectChain: [url],
       retrievedAt: "2026-08-09T00:00:00.000Z",
       contentType: url.endsWith(".json")
         ? "application/json"
@@ -26,6 +39,69 @@ function resource(url: string, text: string): FetchedResource {
     },
     text,
   };
+}
+
+function forgeResources(manifest: string, forge: string) {
+  const componentMetadata =
+    "<metadata><versioning><versions><version>1.20.1</version></versions></versioning></metadata>";
+  return new Map([
+    [
+      "mojang-version-manifest",
+      resource(
+        "mojang-version-manifest",
+        "https://example.invalid/manifest.json",
+        manifest,
+      ),
+    ],
+    [
+      "forge-maven-metadata",
+      resource(
+        "forge-maven-metadata",
+        "https://example.invalid/forge.xml",
+        forge,
+      ),
+    ],
+    [
+      "forgegradle-maven-metadata",
+      resource(
+        "forgegradle-maven-metadata",
+        "https://example.invalid/forgegradle.xml",
+        componentMetadata,
+      ),
+    ],
+    [
+      "mcp-config-maven-metadata",
+      resource(
+        "mcp-config-maven-metadata",
+        "https://example.invalid/mcp-config.xml",
+        componentMetadata,
+      ),
+    ],
+    [
+      "mcp-snapshot-maven-metadata",
+      resource(
+        "mcp-snapshot-maven-metadata",
+        "https://example.invalid/mcp-snapshot.xml",
+        componentMetadata,
+      ),
+    ],
+    [
+      "mcp-stable-maven-metadata",
+      resource(
+        "mcp-stable-maven-metadata",
+        "https://example.invalid/mcp-stable.xml",
+        componentMetadata,
+      ),
+    ],
+    [
+      "forge-promotions",
+      resource(
+        "forge-promotions",
+        "https://example.invalid/promotions.json",
+        JSON.stringify({ promos: { "1.20.1-recommended": "1.20.1-47.7.0" } }),
+      ),
+    ],
+  ]);
 }
 
 describe("forge source adapter", () => {
@@ -64,17 +140,17 @@ describe("forge source adapter", () => {
       versions: [{ id: "1.8.9" }, { id: "1.20.1" }, { id: "1.20.3" }],
     });
     const first = buildForgeSnapshot(
-      resource("https://example.invalid/manifest.json", manifest),
-      resource("https://example.invalid/maven-metadata.xml", xml),
+      forgeResources(manifest, xml),
       "2026-08-09T00:00:00.000Z",
     );
     const second = buildForgeSnapshot(
-      resource("https://example.invalid/manifest.json", manifest),
-      resource("https://example.invalid/maven-metadata.xml", xml),
+      forgeResources(manifest, xml),
       "2026-08-10T00:00:00.000Z",
     );
     expect(first.snapshotId).toBe(second.snapshotId);
-    expect(first.entries).toHaveLength(4);
+    expect(first.provenanceVersion).toBe(1);
+    expect(first.sources).toHaveLength(7);
+    expect(first.entries).toHaveLength(9);
     expect(first.rejected).toHaveLength(1);
   });
 
@@ -104,5 +180,11 @@ describe("forge source adapter", () => {
     expect(() => parseForgeVersions("<metadata />")).toThrow(
       "forge maven metadata contains no versions",
     );
+  });
+
+  it("refuses to capture a partially declared forge source set", () => {
+    expect(() =>
+      buildForgeSnapshot(new Map(), "2026-08-09T00:00:00.000Z"),
+    ).toThrow("forge adapter requires source mojang-version-manifest");
   });
 });

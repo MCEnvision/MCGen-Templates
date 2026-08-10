@@ -11,9 +11,7 @@
     "platform",
     "category",
     "adapter",
-    "primaryUrl",
-    "prerequisiteUrls",
-    "corroboratingUrls",
+    "sources",
     "removalPolicy",
     "requestPolicy"
   ],
@@ -24,18 +22,45 @@
     },
     "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
     "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-    "category": { "enum": ["mod", "plugin", "proxy", "multiloader"] },
-    "adapter": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-    "primaryUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
-    "prerequisiteUrls": {
-      "type": "array",
-      "items": { "type": "string", "format": "uri", "pattern": "^https://" },
-      "uniqueItems": true
+    "category": {
+      "enum": ["mod", "plugin", "proxy", "multiloader", "toolchain"]
     },
-    "corroboratingUrls": {
+    "adapter": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "sources": {
       "type": "array",
-      "items": { "type": "string", "format": "uri", "pattern": "^https://" },
-      "uniqueItems": true
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "role", "url", "expectedContentTypes"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "role": { "enum": ["primary", "prerequisite", "corroborating"] },
+          "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "expectedContentTypes": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z]+/[a-z0-9.+-]+$" }
+          }
+        }
+      }
+    },
+    "derivedSources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "parentSourceId", "role"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "parentSourceId": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+          },
+          "role": { "enum": ["prerequisite", "corroborating"] }
+        }
+      }
     },
     "removalPolicy": { "const": "additive-only" },
     "requestPolicy": {
@@ -44,7 +69,8 @@
       "required": ["timeoutMs", "maxBytes"],
       "properties": {
         "timeoutMs": { "type": "integer", "minimum": 1000, "maximum": 120000 },
-        "maxBytes": { "type": "integer", "minimum": 1024, "maximum": 52428800 }
+        "maxBytes": { "type": "integer", "minimum": 1024, "maximum": 52428800 },
+        "userAgent": { "type": "string", "minLength": 16, "maxLength": 256 }
       }
     }
   }

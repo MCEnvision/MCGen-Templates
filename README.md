@@ -2,7 +2,7 @@
 
 MCGen Templates is the canonical public source for the versioned template pack and compatibility catalog used by MCGen.
 
-The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. Product Phase 0 implementation provides versioned template-pack contracts, locked Node.js validation tooling, authoritative Mojang and Forge source adapters, and the first normalized Forge metadata snapshot. No template family, compatibility catalog, generated project, or pack release has been published yet.
+The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is active on authoritative source coverage. The Phase 3 branch provides versioned template-pack contracts, locked Node.js validation tooling, fourteen authoritative source adapters, immutable snapshots, and a deterministic source-backed compatibility catalog. No template family, toolchain profile, generated project, or pack release has been published yet.
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
@@ -45,7 +45,7 @@ tests/        Unit, parser, schema, and repository-document verification.
 docs/         Architecture, data, security, contribution, verification, and release guidance.
 ```
 
-`templates/`, `catalog/`, and generated verification fixtures will be added only when their reviewed families, profiles, and exact evidence exist.
+`catalog/` contains immutable discovered-source evidence. `templates/`, toolchain profile instances, and generated verification fixtures will be added only when their reviewed families and exact evidence exist.
 
 ## Development
 
@@ -64,6 +64,13 @@ npm run snapshot:forge -- --output sources/snapshots/forge/YYYY-MM-DD.json
 
 The snapshot writer refuses to overwrite an existing file.
 
+Generate a content-addressed catalog from immutable snapshots with an unused output directory:
+
+```bash
+npm run build --silent
+node dist/cli.js catalog generate --output catalog/YYYY-MM-DD
+```
+
 ## Documentation
 
 The [complete project plan](docs/general/plan.md) defines product phases and implementation ownership. The [GitHub completion plan](docs/general/github_plan.md) defines seven sequential repository integration and evidence phases. These phase systems are related but are not interchangeable.
@@ -74,6 +81,7 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 - [GitHub completion plan](docs/general/github_plan.md)
 - [Contribution guide](docs/general/contributing.md)
 - [Source snapshots](docs/data/source-snapshots.md)
+- [Compatibility catalog](docs/data/compatibility-catalog.md)
 - [Template pack contract verification](docs/verification/template-pack-contracts.md)
 - [GitHub governance verification](docs/verification/github-foundation.md)
 - [GitHub planning verification](docs/verification/github-planning.md)
@@ -83,6 +91,6 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 
 ## Current Status
 
-The first source snapshot contains all `5,033` official Forge artifacts discovered in the pinned upstream response across `77` Minecraft catalog keys. No artifact was dropped. Two historic catalog keys are retained from official Forge coordinates because they are absent from the current Mojang manifest, and the snapshot records that provenance warning explicitly.
+The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. No catalog component is a verified generated project tuple.
 
 The repository license is not selected yet. No third-party source or template content may be imported until its license and redistribution obligations are reviewed. Snapshot discovery does not claim that any generated Forge project or exact tuple is verified.
