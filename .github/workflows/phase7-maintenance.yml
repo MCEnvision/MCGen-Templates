@@ -67,7 +67,8 @@ jobs:
             baseline: { id: "forge.2026-08-09", digest: digest("a") },
             candidate: { id: "forge.2026-08-10", digest: digest("b") },
             outcome: "additions",
-            addedCoordinates: ["net.minecraftforge:forge:1.20.1-47.3.0"]
+            addedCoordinates: ["net.minecraftforge:forge:1.20.1-47.3.0"],
+            changedCoordinates: ["net.minecraftforge:forge:1.20.1-47.3.0"]
           };
           await writeFile("verification/phase7/ci/monitor-input.json", JSON.stringify(base));
           await writeFile("verification/phase7/ci/failure-input.json", JSON.stringify({

@@ -18,6 +18,7 @@
     "candidate",
     "addedCoordinates",
     "removedCoordinates",
+    "changedCoordinates",
     "changedSources",
     "affectedTuples",
     "retry",
@@ -78,6 +79,10 @@
       "items": { "type": "string", "minLength": 1, "maxLength": 512 }
     },
     "removedCoordinates": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "changedCoordinates": {
       "type": "array",
       "items": { "type": "string", "minLength": 1, "maxLength": 512 }
     },
