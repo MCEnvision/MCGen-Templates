@@ -1,0 +1,35 @@
+# Local repository instructions and indexes
+AGENTS.md
+.codegraph/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs, caches, dependencies, and generated output
+*.log
+node_modules/
+.pnpm-store/
+.yarn/
+coverage/
+dist/
+build/
+out/
+.gradle/
+.cache/
+tmp/
+work/
+
+# Generated verification projects and local source snapshots
+fixtures/generated/
+catalog/sources/local/

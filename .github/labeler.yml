@@ -1,0 +1,55 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "README.md"
+          - "docs/**"
+          - ".github/**/*.md"
+
+type dependency:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/gradle.properties"
+          - "**/gradle/libs.versions.toml"
+          - "**/package.json"
+          - "**/package-lock.json"
+          - "**/pom.xml"
+          - "**/pyproject.toml"
+          - ".github/dependabot.yml"
+          - ".github/dependabot.yaml"
+
+github actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+
+templates:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "families/**"
+          - "fragments/**"
+          - "templates/**"
+
+catalog:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "catalog/**"
+          - "sources/**"
+
+profiles:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "profiles/**"
+
+verification:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "fixtures/**"
+          - "schemas/**"
+          - "tests/**"
+          - "tools/**"
+
+type security:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/SECURITY.md"
+          - "docs/security/**"

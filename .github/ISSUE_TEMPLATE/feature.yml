@@ -1,0 +1,65 @@
+name: feature request
+description: propose a focused improvement
+title: "[feature] "
+labels: ["type feature", "status backlog"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: affected area
+      options:
+        - descriptor or schema
+        - compatibility catalog
+        - source adapter
+        - toolchain profile
+        - template family
+        - verification
+        - release or repository operation
+        - documentation
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: problem
+      description: explain the user or maintainer problem this should solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: proposed behavior
+      description: describe the observable behavior and important edge cases
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: alternatives considered
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: compatibility and provenance
+      description: identify affected platforms, versions, authoritative sources, licensing constraints, and migration requirements
+  - type: textarea
+    id: risks
+    attributes:
+      label: risks and failure behavior
+      description: describe security, reproducibility, performance, outage, fallback, and rollback concerns
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: acceptance criteria
+      description: list concrete outcomes that prove the request is complete
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: checks
+      options:
+        - label: i searched for an existing issue
+          required: true
+        - label: this request does not depend on a branch for every version
+          required: true

@@ -1,0 +1,28 @@
+name: quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality:
+    permissions:
+      actions: read
+      contents: read
+    uses: MCEnvision/.github/.github/workflows/quality.yml@52eb01f2a9d378693156c88e03e41dcb9f5e25bb
+    with:
+      shared-ref: "52eb01f2a9d378693156c88e03e41dcb9f5e25bb"
+      gradle-enabled: false
+      node-enabled: false
+      native-security: false
+      enforce-docs-layout: true
