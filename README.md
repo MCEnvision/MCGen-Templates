@@ -2,7 +2,7 @@
 
 MCGen Templates is the canonical public source for the versioned template pack and compatibility catalog used by MCGen.
 
-The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is complete. The verified signed tag `phase-3-authoritative-sources-catalog` identifies the merged source coverage, immutable snapshots, and deterministic catalog evidence on `main`. No template family, toolchain profile, generated project, or pack release has been published yet.
+The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is complete. The verified signed tag `phase-3-authoritative-sources-catalog` identifies the merged source coverage, immutable snapshots, and deterministic catalog evidence on `main`. GitHub completion Phase 4 is active on `envy/phase_4_profiles_templates`, adding reviewed profile, descriptor, customization, asset, and rendering contracts. No Phase 4 behavior is complete until its pull request merges and is tagged.
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
@@ -38,14 +38,17 @@ Coverage is evidence-driven. A version remains visible with its exact status whe
 The current implementation layout is:
 
 ```text
-schemas/      Versioned descriptor, source, catalog, profile, coverage, and pack contracts.
+schemas/      Versioned descriptor, source, catalog, profile, customization, asset, and pack contracts.
+profiles/     Reviewed toolchain profile instances and explicit compatibility blockers.
+templates/    Descriptor-driven family definitions and reusable file boundaries.
+fixtures/     Deterministic Simple and Advanced generation fixtures.
 sources/      Authoritative source definitions and immutable normalized snapshots.
-src/          Deterministic validation, digest, fetch, and source-adapter tooling.
-tests/        Unit, parser, schema, and repository-document verification.
+src/          Deterministic validation, digest, fetch, source-adapter, and rendering tooling.
+tests/        Unit, parser, schema, rendering, and repository-document verification.
 docs/         Architecture, data, security, contribution, verification, and release guidance.
 ```
 
-`catalog/` contains immutable discovered-source evidence. `templates/`, toolchain profile instances, and generated verification fixtures will be added only when their reviewed families and exact evidence exist.
+`catalog/` contains immutable discovered-source evidence. Phase 4 adds declarative profiles, descriptors, and contract fixtures without claiming that discovered catalog components are build-verified. Build and artifact execution remains a later phase gate.
 
 ## Development
 
@@ -82,7 +85,11 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 - [Contribution guide](docs/general/contributing.md)
 - [Source snapshots](docs/data/source-snapshots.md)
 - [Compatibility catalog](docs/data/compatibility-catalog.md)
+- [Toolchain profiles](docs/data/toolchain-profiles.md)
+- [Project specification and customization](docs/data/project-spec.md)
+- [Template families](docs/architecture/template-families.md)
 - [Template pack contract verification](docs/verification/template-pack-contracts.md)
+- [Phase 4 contract verification](docs/verification/phase4-contracts.md)
 - [GitHub governance verification](docs/verification/github-foundation.md)
 - [GitHub planning verification](docs/verification/github-planning.md)
 - [Security policy](.github/SECURITY.md)
@@ -91,6 +98,6 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 
 ## Current Status
 
-The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. No catalog component is a verified generated project tuple.
+The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contract work is active on its phase branch. No catalog component or generated fixture is a build verified project tuple until the later verification gate passes.
 
 The repository license is not selected yet. No third-party source or template content may be imported until its license and redistribution obligations are reviewed. Snapshot discovery does not claim that any generated Forge project or exact tuple is verified.

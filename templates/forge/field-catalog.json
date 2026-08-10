@@ -1,0 +1,115 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "forge",
+  "fields": [
+    {
+      "id": "loader-version",
+      "type": "version",
+      "label": "Forge loader version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "services",
+      "type": "list",
+      "label": "Forge services",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "links",
+      "type": "map",
+      "label": "Forge links",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "mods",
+      "type": "list",
+      "label": "Forge mods",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "display",
+      "type": "object",
+      "label": "Display fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "logo",
+      "type": "asset",
+      "label": "Forge logo",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "features",
+      "type": "map",
+      "label": "Forge features",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "display-test",
+      "type": "enum",
+      "label": "Forge display test",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "dependencies",
+      "type": "list",
+      "label": "Forge dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "ordering",
+      "type": "map",
+      "label": "Forge dependency ordering",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "logical-sides",
+      "type": "map",
+      "label": "Forge logical sides",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom Forge fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

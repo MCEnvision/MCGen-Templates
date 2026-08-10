@@ -1,0 +1,125 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "fabric",
+  "fields": [
+    {
+      "id": "environment",
+      "type": "enum",
+      "label": "Environment",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog",
+      "validation": { "allowedValues": ["*", "client", "server"] }
+    },
+    {
+      "id": "entrypoints",
+      "type": "map",
+      "label": "Entrypoints",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "contact",
+      "type": "object",
+      "label": "Contact information",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "mixins",
+      "type": "list",
+      "label": "Mixins",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "access-wideners",
+      "type": "list",
+      "label": "Access wideners",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "nested-jars",
+      "type": "list",
+      "label": "Nested jars",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "language-adapters",
+      "type": "list",
+      "label": "Language adapters",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "provides",
+      "type": "list",
+      "label": "Provided identifiers",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "depends",
+      "type": "map",
+      "label": "Required dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "recommends",
+      "type": "map",
+      "label": "Recommended dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "breaks",
+      "type": "map",
+      "label": "Breaking dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "conflicts",
+      "type": "map",
+      "label": "Conflicting dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom Fabric fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

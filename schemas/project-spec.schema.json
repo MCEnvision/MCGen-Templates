@@ -1,0 +1,309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:project-spec:1",
+  "title": "MCGen portable project specification",
+  "description": "The shared input contract for Simple and Advanced generation. It is portable and contains no secrets or executable instructions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "template",
+    "mode",
+    "project",
+    "platform",
+    "metadata",
+    "build",
+    "dependencies",
+    "repositories",
+    "sourceLayout",
+    "features",
+    "assets",
+    "publishing",
+    "repository",
+    "targetOverrides",
+    "fileOperations",
+    "extensions"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:project-spec:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "template": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "mode": { "enum": ["simple", "advanced"] },
+    "project": { "$ref": "#/$defs/project" },
+    "platform": { "$ref": "#/$defs/platform" },
+    "metadata": { "type": "object", "additionalProperties": true },
+    "build": { "$ref": "#/$defs/build" },
+    "dependencies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dependency" }
+    },
+    "repositories": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/repository" }
+    },
+    "sourceLayout": { "$ref": "#/$defs/sourceLayout" },
+    "features": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "urn:mcgen:schema:asset-png:1" }
+    },
+    "publishing": { "type": "object", "additionalProperties": true },
+    "repository": { "type": "object", "additionalProperties": true },
+    "targetOverrides": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/targetOverride" }
+    },
+    "fileOperations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fileOperation" }
+    },
+    "extensions": { "$ref": "urn:mcgen:schema:common:1#/$defs/extensions" },
+    "dormant": { "type": "object", "additionalProperties": true },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "id", "package", "mainClass", "version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "package": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+          "maxLength": 256
+        },
+        "mainClass": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Za-z0-9_]*$",
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[0-9A-Za-z][0-9A-Za-z.+_-]*$"
+        },
+        "groupId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "artifactId": {
+          "type": "string",
+          "$comment": "The published artifact identifier.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "archiveName": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "classifier": { "type": "string", "maxLength": 128 },
+        "appendix": { "type": "string", "maxLength": 128 },
+        "extension": { "type": "string", "minLength": 1, "maxLength": 32 },
+        "description": { "type": "string", "maxLength": 4096 },
+        "authors": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 256 }
+        },
+        "website": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "license": { "type": "string", "maxLength": 256 }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "catalogKey", "components"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "catalogKey": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "java": { "type": "integer", "minimum": 6, "maximum": 99 },
+        "javaLanguage": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 99
+        },
+        "loader": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "apiVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "bootstrapper": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "environment": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "mappings": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "components": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system"],
+      "properties": {
+        "system": { "enum": ["gradle", "maven"] },
+        "dsl": { "enum": ["groovy", "kotlin", "xml"] },
+        "javaLanguage": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 99
+        },
+        "wrapper": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "plugins": { "type": "array", "items": { "$ref": "#/$defs/plugin" } },
+        "properties": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nameValue" }
+        },
+        "jvmArguments": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 256 }
+        },
+        "sourceSets": {
+          "type": "array",
+          "items": { "type": "object", "additionalProperties": true }
+        },
+        "tasks": {
+          "type": "array",
+          "items": { "type": "object", "additionalProperties": true }
+        },
+        "runs": {
+          "type": "array",
+          "items": { "type": "object", "additionalProperties": true }
+        },
+        "publishing": { "type": "boolean" },
+        "overrides": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "plugin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "repositories": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "nameValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "value": { "type": "string", "maxLength": 4096 }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate", "configuration"],
+      "properties": {
+        "coordinate": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "configuration": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "optional": { "type": "boolean" },
+        "exclusions": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 256 }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 256 }
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "url"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "contentFilters": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 256 }
+        },
+        "credentials": { "enum": ["none", "placeholder"] }
+      }
+    },
+    "sourceLayout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourceRoots": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+          }
+        },
+        "resourceRoots": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+          }
+        },
+        "testRoots": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+          }
+        },
+        "generatedRoots": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+          }
+        }
+      }
+    },
+    "targetOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "values"],
+      "properties": {
+        "target": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "values": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "fileOperation": {
+      "allOf": [{ "$ref": "urn:mcgen:schema:file-operation:1" }]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source"],
+      "properties": {
+        "source": {
+          "enum": [
+            "template-default",
+            "catalog",
+            "imported",
+            "session",
+            "structured-override",
+            "raw-override"
+          ]
+        },
+        "catalogSnapshotId": { "type": "string", "maxLength": 256 },
+        "profileId": { "type": "string", "maxLength": 128 },
+        "descriptorId": { "type": "string", "maxLength": 128 }
+      }
+    }
+  }
+}

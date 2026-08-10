@@ -1,0 +1,79 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "sponge",
+  "fields": [
+    {
+      "id": "entrypoint",
+      "type": "string",
+      "label": "Sponge entrypoint",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "dependencies",
+      "type": "list",
+      "label": "Sponge dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "optional-dependencies",
+      "type": "list",
+      "label": "Optional dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "load",
+      "type": "enum",
+      "label": "Sponge load phase",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "url",
+      "type": "string",
+      "label": "Project URL",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "properties",
+      "type": "map",
+      "label": "Sponge properties",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "extensions",
+      "type": "map",
+      "label": "Sponge extensions",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom Sponge fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "velocity",
+  "fields": [
+    {
+      "id": "entrypoint",
+      "type": "string",
+      "label": "Velocity entrypoint",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "dependencies",
+      "type": "list",
+      "label": "Velocity dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "optional-dependencies",
+      "type": "list",
+      "label": "Optional dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "url",
+      "type": "string",
+      "label": "Project URL",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "supported-versions",
+      "type": "list",
+      "label": "Supported proxy versions",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom Velocity fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

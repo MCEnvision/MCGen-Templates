@@ -1,0 +1,287 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "common",
+  "fields": [
+    {
+      "id": "project-name",
+      "type": "string",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "Example Project"
+    },
+    {
+      "id": "project-id",
+      "type": "string",
+      "label": "Project identifier",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "example-project"
+    },
+    {
+      "id": "project-version",
+      "type": "version",
+      "label": "Project version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "1.0.0"
+    },
+    {
+      "id": "main-class",
+      "type": "string",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "ExampleMain"
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "label": "Description",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": ""
+    },
+    {
+      "id": "authors",
+      "type": "list",
+      "label": "Authors",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": []
+    },
+    {
+      "id": "website",
+      "type": "string",
+      "label": "Website",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "license",
+      "type": "string",
+      "label": "License",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "All Rights Reserved"
+    },
+    {
+      "id": "package",
+      "type": "string",
+      "label": "Base package",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "org.example.project"
+    },
+    {
+      "id": "group-id",
+      "type": "string",
+      "label": "Group identifier",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "artifact-id",
+      "type": "string",
+      "label": "Artifact identifier",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "archive-name",
+      "type": "string",
+      "label": "Archive base name",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "classifier",
+      "type": "string",
+      "label": "Artifact classifier",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "appendix",
+      "type": "string",
+      "label": "Artifact appendix",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "extension",
+      "type": "string",
+      "label": "Artifact extension",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "jar"
+    },
+    {
+      "id": "java-runtime",
+      "type": "integer",
+      "label": "Java runtime",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "java-language",
+      "type": "integer",
+      "label": "Java language level",
+      "modes": ["advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "build-dsl",
+      "type": "enum",
+      "label": "Build DSL",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog",
+      "validation": { "allowedValues": ["groovy", "kotlin"] }
+    },
+    {
+      "id": "wrapper-version",
+      "type": "version",
+      "label": "Build wrapper",
+      "modes": ["advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "gradle-properties",
+      "type": "map",
+      "label": "Gradle properties",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "jvm-arguments",
+      "type": "list",
+      "label": "JVM arguments",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "dependencies",
+      "type": "list",
+      "label": "Dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "repositories",
+      "type": "list",
+      "label": "Repositories",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "source-sets",
+      "type": "list",
+      "label": "Source sets",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "tasks",
+      "type": "list",
+      "label": "Build tasks",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "runs",
+      "type": "list",
+      "label": "Run profiles",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "publishing",
+      "type": "object",
+      "label": "Publishing",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "icon",
+      "type": "asset",
+      "label": "Project icon",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "metadata-extensions",
+      "type": "map",
+      "label": "Metadata extensions",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "raw-file-operations",
+      "type": "list",
+      "label": "Raw file operations",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

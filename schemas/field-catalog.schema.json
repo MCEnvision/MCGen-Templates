@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:field-catalog:1",
+  "title": "MCGen reusable descriptor field catalog",
+  "description": "Reusable structured fields consumed by a template descriptor.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "id", "fields"],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:field-catalog:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:field-metadata:1" }
+    }
+  }
+}

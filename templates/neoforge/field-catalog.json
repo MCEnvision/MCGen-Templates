@@ -1,0 +1,115 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "neoforge",
+  "fields": [
+    {
+      "id": "loader-version",
+      "type": "version",
+      "label": "NeoForge loader version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "services",
+      "type": "list",
+      "label": "NeoForge services",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "links",
+      "type": "map",
+      "label": "NeoForge links",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "mods",
+      "type": "list",
+      "label": "NeoForge mods",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "display",
+      "type": "object",
+      "label": "Display fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "logo",
+      "type": "asset",
+      "label": "NeoForge logo",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "features",
+      "type": "map",
+      "label": "NeoForge features",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "display-test",
+      "type": "enum",
+      "label": "NeoForge display test",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "dependencies",
+      "type": "list",
+      "label": "NeoForge dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "ordering",
+      "type": "map",
+      "label": "NeoForge dependency ordering",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "logical-sides",
+      "type": "map",
+      "label": "NeoForge logical sides",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom NeoForge fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

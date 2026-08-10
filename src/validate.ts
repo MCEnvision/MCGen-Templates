@@ -1,4 +1,4 @@
-import { readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import { extname, resolve } from "node:path";
 import { canonicalJson, compareText } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
@@ -20,6 +20,7 @@ import type { SourceDefinition } from "./contracts.js";
 const canonicalDirectories = [
   "catalog",
   "fixtures",
+  "profiles",
   "sources/definitions",
   "sources/snapshots",
   "templates",
@@ -923,6 +924,213 @@ async function catalogIntegrityFailures(
   return failures;
 }
 
+async function phase4IntegrityFailures(
+  initial: readonly LoadedDocument[],
+): Promise<string[]> {
+  const failures: string[] = [];
+  const documents = new Map(initial.map((item) => [item.path, item.document]));
+  const profileDocuments = initial.filter(
+    (item) =>
+      documentSchema(item.document) === "urn:mcgen:schema:toolchain-profile:1",
+  );
+  const profileIds = new Set(
+    profileDocuments
+      .map((item) =>
+        isObject(item.document) ? item.document["id"] : undefined,
+      )
+      .filter((id): id is string => typeof id === "string"),
+  );
+  for (const item of initial) {
+    if (
+      documentSchema(item.document) ===
+      "urn:mcgen:schema:toolchain-profile-index:1"
+    ) {
+      if (!isObject(item.document)) continue;
+      const references = objects(item.document["profiles"]);
+      const ids = references
+        .map((reference) => reference["id"])
+        .filter((id): id is string => typeof id === "string");
+      if (
+        ids.length !== profileIds.size ||
+        new Set(ids).size !== ids.length ||
+        !sorted(ids)
+      ) {
+        failures.push(
+          `${item.path}/profiles must index every unique profile in sorted order`,
+        );
+      }
+      for (const reference of references) {
+        const path = reference["path"];
+        const id = reference["id"];
+        if (typeof path !== "string" || typeof id !== "string") continue;
+        if (!path.startsWith("profiles/") || path.includes("..")) {
+          failures.push(`${item.path} profile path is outside profiles`);
+          continue;
+        }
+        const document = documents.get(resolve(repositoryRoot, path));
+        if (!document) {
+          failures.push(`${item.path} references missing profile ${path}`);
+          continue;
+        }
+        if (!isObject(document) || document["id"] !== id) {
+          failures.push(`${item.path} profile id does not match ${path}`);
+        }
+        if (sha256(canonicalJson(document)) !== reference["sha256"]) {
+          failures.push(`${item.path} profile digest does not match ${path}`);
+        }
+      }
+    }
+    if (
+      documentSchema(item.document) === "urn:mcgen:schema:template-index:1" &&
+      isObject(item.document)
+    ) {
+      const references = objects(item.document["descriptors"]);
+      const ids = references
+        .map((reference) => reference["id"])
+        .filter((id): id is string => typeof id === "string");
+      if (new Set(ids).size !== ids.length || !sorted(ids)) {
+        failures.push(
+          `${item.path}/descriptors must be unique and sorted by id`,
+        );
+      }
+      for (const reference of references) {
+        const path = reference["path"];
+        const id = reference["id"];
+        if (typeof path !== "string" || typeof id !== "string") continue;
+        if (!path.startsWith("templates/") || path.includes("..")) {
+          failures.push(`${item.path} descriptor path is outside templates`);
+          continue;
+        }
+        const document = documents.get(resolve(repositoryRoot, path));
+        if (!document) {
+          failures.push(`${item.path} references missing descriptor ${path}`);
+          continue;
+        }
+        if (!isObject(document) || document["id"] !== id) {
+          failures.push(`${item.path} descriptor id does not match ${path}`);
+        }
+        if (sha256(canonicalJson(document)) !== reference["sha256"]) {
+          failures.push(
+            `${item.path} descriptor digest does not match ${path}`,
+          );
+        }
+      }
+    }
+    if (
+      documentSchema(item.document) ===
+        "urn:mcgen:schema:template-descriptor:1" &&
+      isObject(item.document)
+    ) {
+      const refs = stringArray(item.document["profileRefs"]);
+      for (const ref of refs) {
+        if (!profileIds.has(ref))
+          failures.push(`${item.path} references missing profile ${ref}`);
+      }
+      if (
+        item.document["status"] === "blocked" &&
+        objects(item.document["blockers"]).length === 0
+      ) {
+        failures.push(`${item.path} blocked descriptor must declare blockers`);
+      }
+      const customization = isObject(item.document["customization"])
+        ? item.document["customization"]
+        : undefined;
+      const catalogPaths = customization
+        ? stringArray(customization["fieldCatalogPaths"])
+        : [];
+      const catalogFieldIds = new Set<string>();
+      for (const catalogPath of catalogPaths) {
+        const catalog = documents.get(resolve(repositoryRoot, catalogPath));
+        if (!catalog || !isObject(catalog)) {
+          failures.push(
+            `${item.path} references missing field catalog ${catalogPath}`,
+          );
+          continue;
+        }
+        for (const field of objects(catalog["fields"])) {
+          const id = field["id"];
+          if (typeof id === "string") catalogFieldIds.add(id);
+        }
+      }
+      if (customization && catalogFieldIds.size > 0) {
+        const renderTargets = objects(item.document["renderTargets"]);
+        const mappedFieldIds = new Set(
+          renderTargets.flatMap((target) =>
+            objects(target["fieldMappings"])
+              .map((mapping) => mapping["fieldId"])
+              .filter((id): id is string => typeof id === "string"),
+          ),
+        );
+        const hasWildcard = mappedFieldIds.has("*");
+        const unmapped = hasWildcard
+          ? []
+          : [...catalogFieldIds].filter((id) => !mappedFieldIds.has(id));
+        if (unmapped.length) {
+          failures.push(
+            `${item.path} metadata render targets omit catalog fields ${unmapped.join(", ")}`,
+          );
+        }
+        for (const mode of ["simple", "advanced"] as const) {
+          const modeDocument = isObject(customization[mode])
+            ? customization[mode]
+            : undefined;
+          const modeFields = new Set(
+            modeDocument ? stringArray(modeDocument["fields"]) : [],
+          );
+          const unknown = [...modeFields].filter(
+            (id) => !catalogFieldIds.has(id),
+          );
+          if (unknown.length) {
+            failures.push(
+              `${item.path} ${mode} customization references fields outside its catalogs ${unknown.join(", ")}`,
+            );
+          }
+          const missing = [...catalogFieldIds].filter((id) => {
+            const catalog = catalogPaths
+              .map((catalogPath) =>
+                documents.get(resolve(repositoryRoot, catalogPath)),
+              )
+              .find(
+                (document) =>
+                  isObject(document) &&
+                  objects(document["fields"]).some(
+                    (field) => field["id"] === id,
+                  ),
+              );
+            const field =
+              catalog && isObject(catalog)
+                ? objects(catalog["fields"]).find((value) => value["id"] === id)
+                : undefined;
+            return (
+              isObject(field) &&
+              field["modes"] instanceof Array &&
+              field["modes"].includes(mode) &&
+              !modeFields.has(id)
+            );
+          });
+          if (missing.length) {
+            failures.push(
+              `${item.path} ${mode} customization omits catalog fields ${missing.join(", ")}`,
+            );
+          }
+        }
+      }
+      for (const file of objects(item.document["files"])) {
+        const source = file["source"];
+        if (typeof source !== "string") continue;
+        try {
+          await stat(resolve(repositoryRoot, source));
+        } catch {
+          failures.push(
+            `${item.path} references missing template source ${source}`,
+          );
+        }
+      }
+    }
+  }
+  return failures;
+}
+
 export async function validateFiles(
   paths: readonly string[],
 ): Promise<string[]> {
@@ -935,6 +1143,7 @@ export async function validateFiles(
     failures.push(...documentFailures(ajv, path, document));
   }
   failures.push(...(await catalogIntegrityFailures(ajv, documents)));
+  failures.push(...(await phase4IntegrityFailures(documents)));
   return failures;
 }
 

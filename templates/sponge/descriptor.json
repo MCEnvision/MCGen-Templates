@@ -1,0 +1,251 @@
+{
+  "$schema": "urn:mcgen:schema:template-descriptor:1",
+  "schemaVersion": 1,
+  "id": "sponge",
+  "revision": 1,
+  "status": "blocked",
+  "blockers": [
+    {
+      "code": "sponge-build-evidence",
+      "reason": "Sponge API and implementation compatibility boundaries require later compilation and artifact inspection evidence.",
+      "evidence": ["catalog/2026-08-10-r4/index.json"]
+    }
+  ],
+  "category": "plugin",
+  "platforms": ["sponge"],
+  "profileRefs": ["sponge"],
+  "capabilities": [
+    "commands",
+    "permissions",
+    "dependencies",
+    "advanced-overrides"
+  ],
+  "fieldGroups": [
+    {
+      "id": "identity",
+      "label": "Plugin identity",
+      "order": 0,
+      "fieldIds": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class"
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "id": "project-name",
+      "type": "string",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "Example Plugin"
+    },
+    {
+      "id": "project-id",
+      "type": "string",
+      "label": "Plugin id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "example-plugin"
+    },
+    {
+      "id": "project-version",
+      "type": "version",
+      "label": "Plugin version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "1.0.0"
+    },
+    {
+      "id": "main-class",
+      "type": "string",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "ExamplePlugin"
+    }
+  ],
+  "conditions": [],
+  "files": [
+    {
+      "source": "templates/shared/README.md.tmpl",
+      "destination": "README.md",
+      "renderer": "text",
+      "includeWhen": "true",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/LICENSE.tmpl",
+      "destination": "LICENSE",
+      "renderer": "text",
+      "rawOverride": "allowed"
+    },
+    {
+      "source": "templates/shared/build.gradle.tmpl",
+      "destination": "build.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/settings.gradle.tmpl",
+      "destination": "settings.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/gradle.properties.tmpl",
+      "destination": "gradle.properties",
+      "renderer": "properties",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/entrypoint.java.tmpl",
+      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "renderer": "text",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/sponge/sponge-plugin.json.tmpl",
+      "destination": "src/main/resources/sponge_plugins.json",
+      "renderer": "json",
+      "rawOverride": "advanced-only"
+    }
+  ],
+  "renderTargets": [
+    {
+      "id": "sponge-metadata",
+      "path": "src/main/resources/sponge_plugins.json",
+      "format": "json",
+      "fieldMappings": [
+        { "fieldId": "project-id", "path": "id", "format": "literal" },
+        { "fieldId": "project-name", "path": "name", "format": "literal" },
+        { "fieldId": "project-version", "path": "version", "format": "version" }
+      ],
+      "required": true
+    },
+    {
+      "id": "advanced-field-extension",
+      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
+      "format": "json",
+      "fieldMappings": [
+        { "fieldId": "*", "path": "extensions", "format": "json" }
+      ],
+      "required": false
+    }
+  ],
+  "assetSlots": [
+    {
+      "id": "icon",
+      "mediaTypes": ["image/png"],
+      "maxBytes": 1048576,
+      "maxWidth": 512,
+      "maxHeight": 512,
+      "destinations": ["src/main/resources/icon.png"]
+    }
+  ],
+  "rawOperations": {
+    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
+    "canonicalCi": "never-execute",
+    "pathPolicy": "relative-safe"
+  },
+  "customization": {
+    "$schema": "urn:mcgen:schema:customization-contract:1",
+    "schemaVersion": 1,
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/sponge/field-catalog.json"
+    ],
+    "simple": {
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "entrypoint",
+        "url"
+      ],
+      "defaultPolicy": "descriptor-defaults",
+      "warnings": true,
+      "overrides": "visible"
+    },
+    "advanced": {
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "group-id",
+        "artifact-id",
+        "archive-name",
+        "classifier",
+        "appendix",
+        "extension",
+        "java-runtime",
+        "java-language",
+        "build-dsl",
+        "wrapper-version",
+        "gradle-properties",
+        "jvm-arguments",
+        "dependencies",
+        "repositories",
+        "source-sets",
+        "tasks",
+        "runs",
+        "publishing",
+        "icon",
+        "metadata-extensions",
+        "raw-file-operations",
+        "entrypoint",
+        "optional-dependencies",
+        "load",
+        "url",
+        "properties",
+        "extensions",
+        "custom-fields"
+      ],
+      "defaultPolicy": "descriptor-defaults",
+      "warnings": true,
+      "overrides": "all"
+    },
+    "modeSwitch": {
+      "preservesValues": true,
+      "preservesDormantValues": true,
+      "resolver": "shared"
+    },
+    "rawFiles": {
+      "allowedOperations": [
+        "add",
+        "replace",
+        "rename",
+        "delete",
+        "reset",
+        "diff"
+      ],
+      "canonicalCiPolicy": "never-execute",
+      "pathPolicy": "relative-safe"
+    }
+  }
+}

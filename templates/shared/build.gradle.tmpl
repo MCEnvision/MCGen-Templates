@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

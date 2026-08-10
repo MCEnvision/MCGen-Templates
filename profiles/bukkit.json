@@ -1,0 +1,124 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "bukkit",
+  "revision": 1,
+  "status": "blocked",
+  "family": "bukkit",
+  "category": "plugin",
+  "platform": "bukkit",
+  "blockers": [
+    {
+      "id": "bukkit-build-evidence",
+      "reason": "Bukkit API and historical Java or build boundaries need representative compilation evidence.",
+      "evidence": ["sources/snapshots/bukkit/2026-08-10-r2.json"],
+      "resolution": "Verify the API and Java boundary before enabling Simple mode."
+    }
+  ],
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/bukkit/index.json",
+    "indexSha256": "f3a39e467e95ab46647065d1ab908fb1dd377db67b3f83a7045cc2a62780938f",
+    "selectors": [
+      {
+        "platform": "bukkit",
+        "keyKind": "minecraft",
+        "keys": { "mode": "all-shards" },
+        "components": [
+          {
+            "component": "bukkit",
+            "coordinatePrefix": "org.bukkit:bukkit:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+            "path": "sources/snapshots/bukkit/2026-08-10-r2.json",
+            "sha256": "57427a88f77c6214ac22572cca4cb8fb1d1bc42696c2bb9fe35eb90847184121",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit",
+      "version": "selected-from-catalog",
+      "range": "catalog-key-compatible",
+      "required": true,
+      "catalogComponent": "bukkit"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 8,
+    "language": 8,
+    "bytecode": 8
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "7.6.4",
+    "wrapperSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+    "dsl": "groovy",
+    "plugins": [
+      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
+    ],
+    "properties": [],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
+  ],
+  "mappings": { "strategy": "none", "components": [] },
+  "metadata": {
+    "format": "plugin-yml",
+    "files": ["src/main/resources/plugin.yml"],
+    "fieldMappings": [
+      { "field": "project.name", "path": "name", "required": true },
+      { "field": "project.mainClass", "path": "main", "required": true },
+      { "field": "project.version", "path": "version", "required": true }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
+    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
+    "testRoots": [{ "name": "test", "path": "src/test/java" }]
+  },
+  "languages": ["java"],
+  "features": [
+    { "id": "commands", "support": "supported" },
+    { "id": "permissions", "support": "supported" },
+    { "id": "libraries", "support": "conditional" }
+  ],
+  "incompatibilities": [
+    {
+      "id": "modern-api",
+      "condition": "selected API requires newer Java",
+      "reason": "Bukkit API keys do not alone prove the Java toolchain.",
+      "resolution": "Resolve Java from the matching server and API evidence."
+    }
+  ],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["build/libs/*.jar"],
+    "inspection": ["plugin.yml"]
+  },
+  "artifact": {
+    "patterns": ["build/libs/*.jar"],
+    "metadataPaths": ["plugin.yml"],
+    "requiredEntries": ["plugin.yml"]
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "Use the exact Bukkit API and server boundary once verified."
+  }
+}

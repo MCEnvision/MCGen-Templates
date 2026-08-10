@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:file-operation:1",
+  "title": "MCGen deterministic file operation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "path", "trust"],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:file-operation:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "kind": { "enum": ["add", "replace", "rename", "delete", "reset", "diff"] },
+    "path": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" },
+    "from": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" },
+    "content": { "type": "string", "maxLength": 16777216 },
+    "encoding": { "enum": ["utf8", "base64"] },
+    "trust": { "enum": ["canonical", "custom-unverified"] },
+    "reason": { "type": "string", "maxLength": 2048 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "rename" } } },
+      "then": {
+        "properties": {
+          "from": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" }
+        },
+        "required": ["from"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "kind": { "enum": ["add", "replace", "reset"] } }
+      },
+      "then": {
+        "properties": { "content": { "type": "string" } },
+        "required": ["content"]
+      }
+    }
+  ]
+}

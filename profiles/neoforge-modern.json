@@ -1,0 +1,166 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "neoforge-modern",
+  "revision": 1,
+  "status": "blocked",
+  "family": "neoforge",
+  "category": "mod",
+  "platform": "neoforge",
+  "blockers": [
+    {
+      "id": "neoforge-build-evidence",
+      "reason": "NeoGradle and ModDevGradle require separate, tuple specific verification before selection is enabled.",
+      "evidence": [
+        "sources/snapshots/neoforge/2026-08-10-r2.json",
+        "sources/snapshots/gradle/2026-08-10-r2.json"
+      ],
+      "resolution": "Add one profile per proven NeoGradle or ModDevGradle boundary."
+    }
+  ],
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/neoforge/index.json",
+    "indexSha256": "c2d03d0fe64e2d732feb5fa5d5e3e094b9af8a14ed2ecb62a688ec3a3400344f",
+    "selectors": [
+      {
+        "platform": "neoforge",
+        "keyKind": "minecraft",
+        "keys": { "mode": "all-shards" },
+        "components": [
+          {
+            "component": "neoforge",
+            "coordinatePrefix": "net.neoforged:neoforge:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+            "path": "sources/snapshots/neoforge/2026-08-10-r2.json",
+            "sha256": "53ef3e26fd1b0c0483e53bf0bcad9f3830bf29a72096a37916991c63f79382fd",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "neoforge",
+      "coordinate": "net.neoforged:neoforge",
+      "version": "selected-from-catalog",
+      "range": "catalog-key-compatible",
+      "required": true,
+      "catalogComponent": "neoforge"
+    },
+    {
+      "id": "neogradle",
+      "coordinate": "net.neoforged.gradle.userdev",
+      "version": "selected-from-catalog",
+      "range": "boundary-selected",
+      "required": true,
+      "catalogComponent": "neogradle"
+    },
+    {
+      "id": "moddevgradle",
+      "coordinate": "net.neoforged.moddev",
+      "version": "selected-from-catalog",
+      "range": "boundary-selected",
+      "required": false,
+      "catalogComponent": "moddevgradle"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 21,
+    "language": 21,
+    "bytecode": 21
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "8.8",
+    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "dsl": "groovy",
+    "plugins": [
+      {
+        "id": "net.neoforged.moddev",
+        "version": "selected-from-catalog",
+        "repositoryIds": ["neoforge"]
+      }
+    ],
+    "properties": [{ "name": "minecraftVersion", "value": "catalog-selected" }],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    { "id": "neoforge", "url": "https://maven.neoforged.net/releases/" },
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
+  ],
+  "mappings": {
+    "strategy": "official",
+    "components": [
+      {
+        "id": "official-mappings",
+        "version": "selected-from-catalog",
+        "coordinate": "net.minecraft:mappings"
+      }
+    ]
+  },
+  "metadata": {
+    "format": "neoforge-neoforge-mods-toml",
+    "files": ["src/main/resources/META-INF/neoforge.mods.toml"],
+    "fieldMappings": [
+      { "field": "project.id", "path": "mods[0].modId", "required": true },
+      {
+        "field": "project.name",
+        "path": "mods[0].displayName",
+        "required": true
+      },
+      {
+        "field": "project.version",
+        "path": "mods[0].version",
+        "required": true
+      }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
+    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
+    "testRoots": [{ "name": "test", "path": "src/test/java" }],
+    "generatedRoots": [{ "name": "data", "path": "src/generated/resources" }]
+  },
+  "languages": ["java", "kotlin"],
+  "features": [
+    { "id": "mixins", "support": "conditional" },
+    { "id": "data-generation", "support": "conditional" },
+    { "id": "access-transformers", "support": "conditional" }
+  ],
+  "incompatibilities": [
+    {
+      "id": "legacy-neoforge",
+      "condition": "selected NeoForge key predates the ModDevGradle boundary",
+      "reason": "Historical NeoForge build plugins and metadata require another profile.",
+      "resolution": "Create a reviewed legacy boundary profile."
+    }
+  ],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["build/libs/*.jar"],
+    "inspection": ["META-INF/neoforge.mods.toml", "META-INF/MANIFEST.MF"]
+  },
+  "artifact": {
+    "patterns": ["build/libs/*.jar"],
+    "metadataPaths": ["META-INF/neoforge.mods.toml"],
+    "requiredEntries": ["META-INF/MANIFEST.MF"]
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "Resolve the exact NeoGradle or ModDevGradle boundary before generation."
+  }
+}

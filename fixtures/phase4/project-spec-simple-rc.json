@@ -1,0 +1,43 @@
+{
+  "$schema": "urn:mcgen:schema:project-spec:1",
+  "schemaVersion": 1,
+  "template": "mod.fabric",
+  "mode": "simple",
+  "project": {
+    "name": "Fixture Mod",
+    "id": "fixture-mod",
+    "package": "org.example.fixture",
+    "mainClass": "FixtureMod",
+    "version": "1.0-rc.1"
+  },
+  "platform": {
+    "id": "fabric",
+    "catalogKey": "1.21.1",
+    "components": { "loader": "0.16.14" }
+  },
+  "metadata": {},
+  "build": { "system": "gradle", "dsl": "kotlin" },
+  "dependencies": [],
+  "repositories": [],
+  "sourceLayout": {},
+  "features": [],
+  "assets": [
+    {
+      "$schema": "urn:mcgen:schema:asset-png:1",
+      "schemaVersion": 1,
+      "id": "icon",
+      "mediaType": "image/png",
+      "sha256": "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460",
+      "bytes": 68,
+      "width": 1,
+      "height": 1,
+      "path": "src/main/resources/assets/icon.png",
+      "alpha": true
+    }
+  ],
+  "publishing": {},
+  "repository": {},
+  "targetOverrides": [],
+  "fileOperations": [],
+  "extensions": {}
+}

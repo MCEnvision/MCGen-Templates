@@ -52,6 +52,14 @@ Profiles describe structural and build constraints that cannot be represented by
 
 Profiles never emit mutable `latest` selectors into generated build files.
 
+Phase 4 profile instances live under `profiles/`. A blocked profile records the exact source and catalog evidence still needed. Resolution returns one profile, an ambiguity error, or an explicit blocker. It never selects a nearby version.
+
+## Simple and Advanced Customization
+
+The portable `ProjectSpec` contract keeps project identity, arbitrary project version, platform components, metadata, build settings, dependencies, repositories, source layout, features, assets, publishing, target overrides, and raw file operations in one versioned document. Simple mode exposes safe common fields and Advanced mode exposes the complete descriptor field surface. Switching modes preserves values and dormant values. Raw Gradle and text overrides remain `custom-unverified` and are validated but never executed by canonical CI.
+
+PNG assets are validated as binary input with signature, CRC, dimensions, pixel count, size, and path checks. The same bytes and digest flow to each descriptor destination. File operations are applied to a virtual tree after safe path normalization, with explicit add, replace, rename, delete, reset, preserve, and diff semantics.
+
 ## Version Source Adapters
 
 Source adapters fetch authoritative upstream metadata outside generator core. Each fetch records adapter version, policy source ID, declared resource role, requested URL, approved redirect chain, final URL, retrieval time, cache validators, media type, response digest, parser schema, normalized entry count, warnings, and rejected entries.
