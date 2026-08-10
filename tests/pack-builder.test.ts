@@ -81,6 +81,16 @@ describe("phase 6 deterministic pack contracts", () => {
     expect(() =>
       buildPackManifest({ ...input, sourceCommit: "not-a-commit" }),
     ).toThrow("source commit");
+    for (const path of [
+      "docs/release/build/secret.txt",
+      "docs/release/dist/secret.txt",
+      "profiles/foo/.git/config",
+      "catalog/foo/.gradle/cache",
+    ]) {
+      expect(() =>
+        buildPackManifest({ ...input, files: [{ path, content: "x" }] }),
+      ).toThrow("protected");
+    }
   });
 
   it("creates a deterministic SPDX 2.3 file inventory", async () => {

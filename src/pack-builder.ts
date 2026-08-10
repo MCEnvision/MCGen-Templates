@@ -173,6 +173,16 @@ function normalizePackPath(path: string): string {
     throw new Error(`pack path is not portable: ${path}`);
   }
   const parts = path.split("/");
+  const protectedComponents = new Set([
+    ".git",
+    ".gradle",
+    "build",
+    "dist",
+    "logs",
+    "node_modules",
+    "tmp",
+    "cache",
+  ]);
   const hasControlCharacter = (part: string): boolean => {
     for (const character of part) {
       if (character < " " || character === "\u007f") return true;
@@ -187,6 +197,7 @@ function normalizePackPath(path: string): string {
         part.length > 255 ||
         part === "." ||
         part === ".." ||
+        protectedComponents.has(part.toLocaleLowerCase("en-US")) ||
         /[ .]$/u.test(part) ||
         /^(?:con|prn|aux|nul|clock\$|com[0-9]|lpt[0-9])(?:\..*)?$/iu.test(
           part,
@@ -194,7 +205,10 @@ function normalizePackPath(path: string): string {
         hasControlCharacter(part),
     )
   ) {
-    throw new Error(`pack path is not normalized: ${path}`);
+    throw new Error(`pack path contains protected or unsafe content: ${path}`);
+  }
+  if (/(?:^|\/)verification\/phase6(?:\/|$)/u.test(path)) {
+    throw new Error(`pack path contains protected or unsafe content: ${path}`);
   }
   return path;
 }

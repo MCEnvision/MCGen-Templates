@@ -228,6 +228,39 @@ function requirePhase6OutputDirectory(path: string): {
   return { absolute, relative: repositoryRelative };
 }
 
+async function requireSafePhase6OutputParent(path: string): Promise<void> {
+  const parent = dirname(path);
+  const repositoryRelative = relative(repositoryRoot, parent);
+  if (repositoryRelative.startsWith("..")) {
+    throw new Error("phase 6 output parent must remain inside the repository");
+  }
+  let current = repositoryRoot;
+  for (const part of repositoryRelative.split("/")) {
+    if (!part) continue;
+    current = resolve(current, part);
+    try {
+      const metadata = await lstat(current);
+      if (metadata.isSymbolicLink()) {
+        throw new Error(
+          `phase 6 output parent cannot contain symlinks: ${part}`,
+        );
+      }
+      if (!metadata.isDirectory()) {
+        throw new Error(`phase 6 output parent is not a directory: ${part}`);
+      }
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as NodeJS.ErrnoException).code === "ENOENT"
+      ) {
+        return;
+      }
+      throw error;
+    }
+  }
+}
+
 function phase6InputPath(path: string): string {
   const normalized = path.replaceAll("\\", "/");
   const allowed =
@@ -1078,6 +1111,7 @@ async function phase6Pack(args: readonly string[]): Promise<void> {
   }
   await stat(inputAbsolute);
   await requireUnusedPath(output.absolute);
+  await requireSafePhase6OutputParent(output.absolute);
   await mkdir(dirname(output.absolute), { recursive: true });
   const staging = await mkdtemp(
     resolve(dirname(output.absolute), ".mcgen-phase6-"),
