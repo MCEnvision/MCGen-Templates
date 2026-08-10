@@ -643,7 +643,7 @@ Publish a deterministic, signed, independently verifiable template pack from app
 
 ## Status
 
-The implementation is merged on `main` at [phase-6-pack-publication](https://github.com/MCEnvision/MCGen-Templates/releases/tag/phase-6-pack-publication). The deterministic candidate pack, checksums, source manifest, SPDX SBOM, archive readback, guarded input, and read only verification workflow are complete. Issue [24](https://github.com/MCEnvision/MCGen-Templates/issues/24) remains open for the owner gated first immutable release, offline consumer verification, supported artifact attestations, remote asset verification, and rollback testing. No GitHub Release is published yet.
+Complete. The implementation is merged on `main` at [phase-6-pack-publication](https://github.com/MCEnvision/MCGen-Templates/releases/tag/phase-6-pack-publication). The first immutable semantic release, [`v1.0.0-beta.1`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.1), was built from main commit `99c6f8d5772bde176ac6358214933efbf8286199`, published as a prerelease, and verified remotely. The release includes the deterministic archive, SHA-256 and SHA-512 checksums, source commit manifest, SPDX SBOM, coverage envelope, verification summary, rollback result, release notes, and supported archive and SBOM attestations. Offline verification passed after downloading the published assets, and the release is immutable. The exact evidence is recorded in [phase 6 release verification](../verification/phase6-release.md). Issue [24](https://github.com/MCEnvision/MCGen-Templates/issues/24) is complete after the release and evidence gates passed.
 
 ## Pack construction
 

@@ -18,6 +18,7 @@
 - [Template pack contract verification](verification/template-pack-contracts.md)
 - [Phase 4 contract verification](verification/phase4-contracts.md)
 - [Phase 5 build and artifact contracts](verification/phase5-build-contracts.md)
+- [Phase 6 release verification](verification/phase6-release.md)
 - [Template pack releases](release/template-pack-releases.md)
 - [Pack construction](release/pack-construction.md)
 - [Project wiki](https://github.com/MCEnvision/MCGen-Templates/wiki)

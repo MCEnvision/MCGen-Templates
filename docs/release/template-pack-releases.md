@@ -2,7 +2,7 @@
 
 ## Current Status
 
-Phase 6 implementation is merged and tagged as `phase-6-pack-publication`. The deterministic pack builder, two clean checkout release workflow, release evidence contract, and offline verifier are available. The first semantic pack release remains gated until the release workflow completes, remote assets and attestations verify, offline consumers resolve representative tuples, rollback is tested, and the owner approves publication.
+Phase 6 is complete. The implementation is merged and tagged as `phase-6-pack-publication`, and the first immutable semantic pack release [`v1.0.0-beta.1`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.1) is published as a prerelease from main commit `99c6f8d5772bde176ac6358214933efbf8286199`. The [phase 6 release verification record](../verification/phase6-release.md) contains the exact asset list, digests, coverage binding, offline verification, attestations, and rollback evidence.
 
 ## Release Identity
 
@@ -33,7 +33,7 @@ supported build and sbom attestations
 coverage report
 ```
 
-The release remains a draft until every asset is generated from the same merged commit, verified, uploaded, and cross-checked.
+The release remains a draft until every asset is generated from the same merged commit, verified, uploaded, and cross-checked. The `v1.0.0-beta.1` release passed this gate and is immutable.
 
 ## Release Gate
 
