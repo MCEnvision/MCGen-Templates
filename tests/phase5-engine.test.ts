@@ -5,6 +5,7 @@ import {
 } from "../src/artifact-inspector.js";
 import {
   runBuild,
+  nodeCommandExecutor,
   rejectRawOverrideExecution,
   verifyJavaRuntime,
 } from "../src/build-runner.js";
@@ -453,7 +454,7 @@ describe("phase 5 build and artifact contracts", () => {
   it("refuses blocked tuples and raw override execution before rendering", async () => {
     const request = {
       tuple: {
-        id: sha256("tuple"),
+        id: sha256(canonicalJson(identity)),
         status: "discovered" as const,
         blockers: [],
         identity,
@@ -490,5 +491,151 @@ describe("phase 5 build and artifact contracts", () => {
         tuple: { ...request.tuple, status: "blocked", blockers: ["profile"] },
       }),
     ).rejects.toThrow("only discovered tuples");
+  });
+
+  it("executes a reviewed generated project through javac and jar", async () => {
+    const builtIdentity: TupleIdentity = {
+      ...identity,
+      family: "bukkit",
+      descriptorId: "bukkit",
+      profileId: "bukkit",
+      catalogKey: "1.21.1",
+      components: { bukkit: "org.bukkit:bukkit:1.21.1" },
+      fixtureId: "bukkit.built.minimal-java",
+      java: { distribution: "temurin", runtime: 21 },
+      wrapper: { version: "test-wrapper", sha256: sha256("test-wrapper") },
+    };
+    const expectation = {
+      patterns: ["build/libs/*.jar"],
+      metadataPaths: ["plugin.yml"],
+      requiredEntries: ["plugin.yml"],
+      entrypointClasses: ["org.example.ExamplePlugin"],
+      resourceNamespaces: [],
+      iconPaths: [],
+      expectedExtension: ".jar" as const,
+      projectIdentity: { id: "Example Plugin", version: "1.0.0" },
+    };
+    const spec = {
+      $schema: "urn:mcgen:schema:project-spec:1" as const,
+      schemaVersion: 1 as const,
+      template: "plugin.bukkit",
+      mode: "simple" as const,
+      project: {
+        name: "Example Plugin",
+        id: "example",
+        package: "org.example",
+        mainClass: "ExamplePlugin",
+        version: "1.0.0",
+      },
+      platform: {
+        id: "bukkit",
+        catalogKey: "1.21.1",
+        components: { bukkit: "org.bukkit:bukkit:1.21.1" },
+        java: 21,
+      },
+      metadata: {},
+      build: { system: "gradle", dsl: "groovy" },
+      dependencies: [],
+      repositories: [],
+      sourceLayout: {},
+      features: [],
+      assets: [],
+      publishing: {},
+      repository: {},
+      targetOverrides: [],
+      fileOperations: [],
+      extensions: {},
+    };
+    const build = {
+      java: builtIdentity.java,
+      wrapper: builtIdentity.wrapper,
+      commands: [
+        {
+          executable: "mkdir",
+          args: ["-p", "build/classes"],
+          purpose: "static-validation" as const,
+        },
+        {
+          executable: "javac",
+          args: [
+            "-d",
+            "build/classes",
+            "src/main/java/org/example/ExamplePlugin.java",
+          ],
+          purpose: "build" as const,
+        },
+        {
+          executable: "mkdir",
+          args: ["-p", "build/libs"],
+          purpose: "static-validation" as const,
+        },
+        {
+          executable: "jar",
+          args: [
+            "--create",
+            "-M",
+            "--file",
+            "build/libs/example.jar",
+            "--date=2020-01-01T00:00:00Z",
+            "-C",
+            "build/classes",
+            "org/example/ExamplePlugin.class",
+            "-C",
+            "src/main/resources",
+            "plugin.yml",
+          ],
+          purpose: "package" as const,
+        },
+      ],
+      workDirectoryPolicy: "isolated-clean" as const,
+      rawOverridePolicy: "never-execute" as const,
+      limits: {
+        timeoutMs: 30_000,
+        maxOutputBytes: 64 * 1024,
+        maxDiskBytes: 128 * 1024 * 1024,
+        retries: 0,
+        artifactRetentionDays: 1,
+      },
+    };
+    const result = await executeTuple({
+      tuple: {
+        id: sha256(canonicalJson(builtIdentity)),
+        status: "discovered",
+        blockers: [],
+        identity: builtIdentity,
+      },
+      fixture: {
+        tuple: builtIdentity,
+        fixture: {
+          id: builtIdentity.fixtureId,
+          kind: "minimal-java",
+          language: "java",
+          version: "1.0.0",
+          rawOverride: false,
+        },
+        descriptorPath: "templates/bukkit/descriptor.json",
+        spec,
+      },
+      build,
+      artifact: { path: "build/libs/example.jar", expectation },
+      generatorDigest: sha256("generator"),
+      parentDirectory: "/tmp",
+      reviewedProfile: {
+        id: builtIdentity.profileId,
+        digest: builtIdentity.contentDigests.profile,
+        artifactDigest: sha256(canonicalJson(expectation)),
+      },
+      wrapperPath: "gradlew",
+      wrapperContent: new TextEncoder().encode("test-wrapper"),
+      execute: nodeCommandExecutor,
+      verifyJava: () => Promise.resolve(),
+      generatedAt: "2026-08-10T00:00:00.000Z",
+    });
+    expect(result.evidence.status, JSON.stringify(result.evidence)).toBe(
+      "verified",
+    );
+    expect(result.evidence.reproducibility?.reproducible).toBe(true);
+    expect(result.firstArtifact?.status).toBe("passed");
+    expect(result.firstBuild?.status).toBe("passed");
   });
 });

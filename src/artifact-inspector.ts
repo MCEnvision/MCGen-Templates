@@ -194,9 +194,15 @@ function parseMetadata(
         ? trimmed.indexOf("=")
         : trimmed.indexOf(":");
       if (separator <= 0) continue;
-      values[trimmed.slice(0, separator).trim()] = trimmed
-        .slice(separator + 1)
-        .trim();
+      const key = trimmed.slice(0, separator).trim();
+      const rawValue = trimmed.slice(separator + 1).trim();
+      const value =
+        rawValue.length >= 2 &&
+        ((rawValue.startsWith('"') && rawValue.endsWith('"')) ||
+          (rawValue.startsWith("'") && rawValue.endsWith("'")))
+          ? rawValue.slice(1, -1)
+          : rawValue;
+      values[key] = value;
     }
     return { format: "properties", valid: true, values };
   }

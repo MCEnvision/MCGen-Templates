@@ -37,6 +37,7 @@ import type {
   TupleEvidenceRecord,
   TupleIdentity,
 } from "./phase5-contracts.js";
+import { tupleIdentityDigest } from "./phase5-contracts.js";
 import type { GeneratedFixture } from "./fixture-generator.js";
 
 export type Phase5ExecutionRequest = {
@@ -251,6 +252,8 @@ export async function executeTuple(
 ): Promise<Phase5ExecutionResult> {
   if (request.tuple.status !== "discovered")
     throw new Error("only discovered tuples without blockers may execute");
+  if (request.tuple.id !== tupleIdentityDigest(request.tuple.identity))
+    throw new Error("execution tuple id does not match tuple identity");
   if (request.tuple.blockers.length)
     throw new Error("tuple blockers must be resolved before execution");
   if (request.fixture.fixture.rawOverride)
