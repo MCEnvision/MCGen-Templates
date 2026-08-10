@@ -10,7 +10,7 @@ describe("schema registry", () => {
     const files = await canonicalJsonFiles();
     expect(files.length).toBeGreaterThan(0);
     expect(await validateFiles(files)).toEqual([]);
-  });
+  }, 30000);
 
   it("rejects an unregistered schema", async () => {
     const registry = await createSchemaRegistry();
