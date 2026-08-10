@@ -1,4 +1,5 @@
 import type {
+  DerivedSourceResource,
   FetchedResource,
   SourceDefinition,
   SourceSnapshot,
@@ -15,14 +16,22 @@ import {
   type MavenPlatformAdapterOptions,
 } from "./sources/maven-platform.js";
 import { buildMojangSnapshot } from "./sources/mojang.js";
-import { buildPaperSnapshot } from "./sources/paper.js";
+import {
+  buildPaperSnapshot,
+  derivePaperFillBuildResources,
+} from "./sources/paper.js";
 import { buildNeoForgeSnapshot } from "./sources/neoforge.js";
+import { deriveMojangVersionMetadataResources } from "./sources/mojang.js";
 
 export type SourceAdapter = {
   id: string;
   adapterId: string;
   snapshotDirectory: string;
   requiredSourceIds: readonly string[];
+  requiredDerivedSourceIds?: readonly string[];
+  derive?: (
+    resources: ReadonlyMap<string, FetchedResource>,
+  ) => readonly DerivedSourceResource[];
   build: (
     resources: ReadonlyMap<string, FetchedResource>,
     createdAt: string,
@@ -68,6 +77,8 @@ const sourceAdapters = [
     adapterId: "paper-fill",
     snapshotDirectory: "paper",
     requiredSourceIds: ["paper-fill-project", "paper-api-maven-metadata"],
+    requiredDerivedSourceIds: ["paper-fill-builds"],
+    derive: derivePaperFillBuildResources,
     build: buildPaperSnapshot,
   },
   {
@@ -89,6 +100,8 @@ const sourceAdapters = [
       "velocity-getting-started-documentation",
       "architectury-setup-documentation",
     ],
+    requiredDerivedSourceIds: ["mojang-version-metadata"],
+    derive: deriveMojangVersionMetadataResources,
     build: buildJavaSnapshot,
   },
   {
@@ -297,6 +310,20 @@ export function sourceAdapterFailures(definition: SourceDefinition): string[] {
     declared.some((sourceId, index) => sourceId !== required[index])
   ) {
     return ["source definition resources do not match its registered adapter"];
+  }
+  const declaredDerived = (definition.derivedSources ?? [])
+    .map((source) => source.id)
+    .sort();
+  const requiredDerived = [...(adapter.requiredDerivedSourceIds ?? [])].sort();
+  if (
+    declaredDerived.length !== requiredDerived.length ||
+    declaredDerived.some(
+      (sourceId, index) => sourceId !== requiredDerived[index],
+    )
+  ) {
+    return [
+      "source definition derived resources do not match its registered adapter",
+    ];
   }
   return [];
 }

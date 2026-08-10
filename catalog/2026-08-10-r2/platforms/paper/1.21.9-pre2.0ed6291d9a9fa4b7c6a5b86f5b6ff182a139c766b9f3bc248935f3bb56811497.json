@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.21.9-pre2",
+      "id": "component.paper.143d9fcbe644cd3dd76bfee7",
+      "sourceEntries": [
+        {
+          "entryIndex": 94,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.9-pre2"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.4d33667cce2a60f5b9b7fa84",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 94,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.143d9fcbe644cd3dd76bfee7"
+    }
+  ],
+  "id": "catalog.paper.cd0bbf03f778cd7e72190430",
+  "key": "1.21.9-pre2",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.e9a48aeb643a97705e3dcd9d"
+  ]
+}

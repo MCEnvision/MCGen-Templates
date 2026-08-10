@@ -1,0 +1,86 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "paper-api",
+      "coordinate": "io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT",
+      "id": "component.paper.ef7a739b41de2b20b6785760",
+      "sourceEntries": [
+        {
+          "entryIndex": 84,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.7-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.21.7",
+      "id": "component.paper.7beafecc18440d50bb8b8dff",
+      "sourceEntries": [
+        {
+          "entryIndex": 85,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.7"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.9331b7bba5b64a83ab21305f",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 85,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.7beafecc18440d50bb8b8dff"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.9331b7bba5b64a83ab21305f",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 84,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.paper.ef7a739b41de2b20b6785760"
+    }
+  ],
+  "id": "catalog.paper.3ffefa6b7c7871f99eae8f7b",
+  "key": "1.21.7",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.e9a48aeb643a97705e3dcd9d"
+  ]
+}

@@ -4,6 +4,8 @@ export const sourceSnapshotSchema =
 export type StabilityChannel =
   "release" | "release-candidate" | "beta" | "alpha" | "snapshot" | "custom";
 
+export type SnapshotCompatibility = "declared" | "unresolved";
+
 export type SourceRecord = {
   sourceId?: string;
   role?: SourceResourceRole;
@@ -14,6 +16,11 @@ export type SourceRecord = {
   contentType: string;
   etag?: string;
   lastModified?: string;
+  derivedFrom?: {
+    sourceId: string;
+    sha256: string;
+    selector: string;
+  };
   sha256: string;
   bytes: number;
 };
@@ -25,6 +32,7 @@ export type SnapshotEntry = {
   version: string;
   coordinate: string;
   channel: StabilityChannel;
+  compatibility?: SnapshotCompatibility;
   sourceIndexes: number[];
   details?: Record<string, string>;
 };
@@ -56,6 +64,11 @@ export type FetchedResource = {
   text: string;
 };
 
+export type DerivedSourceResource = SourceResource & {
+  key: string;
+  derivedFrom: NonNullable<SourceRecord["derivedFrom"]>;
+};
+
 export type SourceDefinition = {
   $schema: "urn:mcgen:schema:source-definition:1";
   schemaVersion: 1;
@@ -64,6 +77,7 @@ export type SourceDefinition = {
   category: "mod" | "plugin" | "proxy" | "multiloader" | "toolchain";
   adapter: string;
   sources: SourceResource[];
+  derivedSources?: DerivedSourceDeclaration[];
   removalPolicy: "additive-only";
   requestPolicy: {
     timeoutMs: number;
@@ -79,4 +93,10 @@ export type SourceResource = {
   role: SourceResourceRole;
   url: string;
   expectedContentTypes: string[];
+};
+
+export type DerivedSourceDeclaration = {
+  id: string;
+  parentSourceId: string;
+  role: Exclude<SourceResourceRole, "primary">;
 };

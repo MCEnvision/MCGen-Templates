@@ -46,6 +46,22 @@
         }
       }
     },
+    "derivedSources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "parentSourceId", "role"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "parentSourceId": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+          },
+          "role": { "enum": ["prerequisite", "corroborating"] }
+        }
+      }
+    },
     "removalPolicy": { "const": "additive-only" },
     "requestPolicy": {
       "type": "object",

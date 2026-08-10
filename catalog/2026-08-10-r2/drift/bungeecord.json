@@ -1,0 +1,43 @@
+{
+  "$schema": "urn:mcgen:schema:catalog-drift-report:1",
+  "added": [],
+  "baseline": [
+    {
+      "digest": "fb6540713ef82146f2103175f715c846b85bd6785c758255e20aef1d52db8c0a",
+      "id": "bungeecord.bd6cb074e1fb40ebddd0f0b6"
+    }
+  ],
+  "candidate": [
+    {
+      "digest": "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c",
+      "id": "bungeecord.bd6cb074e1fb40ebddd0f0b6"
+    }
+  ],
+  "changedSources": [],
+  "removed": [],
+  "requiresReview": false,
+  "retained": [
+    "bungeecord\u0000bungeecord-api\u00001.10\u0000net.md-5:bungeecord-api:1.10-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.11\u0000net.md-5:bungeecord-api:1.11-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.12\u0000net.md-5:bungeecord-api:1.12-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.13\u0000net.md-5:bungeecord-api:1.13-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.14\u0000net.md-5:bungeecord-api:1.14-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.15\u0000net.md-5:bungeecord-api:1.15-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.16\u0000net.md-5:bungeecord-api:1.16-R0.5-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.17\u0000net.md-5:bungeecord-api:1.17-R0.1-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.18\u0000net.md-5:bungeecord-api:1.18-R0.1-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.19\u0000net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.20\u0000net.md-5:bungeecord-api:1.20-R0.3-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.21\u0000net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.4\u0000net.md-5:bungeecord-api:1.4.7-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.5\u0000net.md-5:bungeecord-api:1.5-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.6\u0000net.md-5:bungeecord-api:1.6.1-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.6\u0000net.md-5:bungeecord-api:1.6.2-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.6\u0000net.md-5:bungeecord-api:1.6.4-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.7\u0000net.md-5:bungeecord-api:1.7-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.8\u0000net.md-5:bungeecord-api:1.8-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u00001.9\u0000net.md-5:bungeecord-api:1.9-SNAPSHOT",
+    "bungeecord\u0000bungeecord-api\u000026.1\u0000net.md-5:bungeecord-api:26.1-R0.1-SNAPSHOT"
+  ],
+  "schemaVersion": 1
+}

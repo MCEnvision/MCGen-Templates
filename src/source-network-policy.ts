@@ -1,4 +1,8 @@
-import type { SourceDefinition } from "./contracts.js";
+import type {
+  DerivedSourceResource,
+  SourceDefinition,
+  SourceRecord,
+} from "./contracts.js";
 
 type SourceNetworkPolicy = {
   maxRedirects: number;
@@ -12,6 +16,11 @@ const sourceNetworkPolicies = {
     allowedUrls: [
       "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
     ],
+    expectedContentTypes: ["application/json"],
+  },
+  "mojang-version-metadata": {
+    maxRedirects: 0,
+    allowedUrls: [],
     expectedContentTypes: ["application/json"],
   },
   "forge-maven-metadata": {
@@ -158,6 +167,11 @@ const sourceNetworkPolicies = {
   "paper-fill-project": {
     maxRedirects: 2,
     allowedUrls: ["https://fill.papermc.io/v3/projects/paper"],
+    expectedContentTypes: ["application/json"],
+  },
+  "paper-fill-builds": {
+    maxRedirects: 0,
+    allowedUrls: [],
     expectedContentTypes: ["application/json"],
   },
   "paper-api-maven-metadata": {
@@ -423,6 +437,207 @@ export function resolveCanonicalSourceUrl(
   return new URL(allowedUrl);
 }
 
+function requireDerivedParent(
+  parent: SourceRecord,
+  sourceId: CanonicalSourceId,
+): NonNullable<SourceRecord["sourceId"]> {
+  if (!parent.sourceId || parent.sourceId !== sourceId) {
+    throw new Error(`derived source parent must be ${sourceId}`);
+  }
+  if (!/^[a-f0-9]{64}$/u.test(parent.sha256)) {
+    throw new Error("derived source parent hash is invalid");
+  }
+  return parent.sourceId;
+}
+
+function requireDerivedVersion(value: string, label: string): string {
+  if (
+    value.length === 0 ||
+    value.trim() !== value ||
+    !/^[A-Za-z0-9._-]+$/u.test(value)
+  ) {
+    throw new Error(`${label} is invalid`);
+  }
+  return value;
+}
+
+function requireMojangVersionId(value: string): string {
+  if (
+    value.length === 0 ||
+    value.trim() !== value ||
+    !/^[A-Za-z0-9 ._-]+$/u.test(value)
+  ) {
+    throw new Error("mojang version id is invalid");
+  }
+  return value;
+}
+
+function derivedResource(
+  key: string,
+  id: CanonicalSourceId,
+  role: DerivedSourceResource["role"],
+  url: string,
+  parent: SourceRecord,
+  selector: string,
+): DerivedSourceResource {
+  return {
+    key,
+    id,
+    role,
+    url,
+    expectedContentTypes: [...expectedSourceContentTypes(id)],
+    derivedFrom: {
+      sourceId: parent.sourceId ?? "",
+      sha256: parent.sha256,
+      selector,
+    },
+  };
+}
+
+export function deriveMojangVersionMetadataSource(
+  parent: SourceRecord,
+  version: { id: string; sha1: string; url: string },
+): DerivedSourceResource {
+  requireDerivedParent(parent, "mojang-version-manifest");
+  const id = requireMojangVersionId(version.id);
+  if (!/^[a-f0-9]{40}$/u.test(version.sha1)) {
+    throw new Error("mojang version metadata sha1 is invalid");
+  }
+  const url = `https://piston-meta.mojang.com/v1/packages/${version.sha1}/${encodeURIComponent(id)}.json`;
+  if (version.url !== url) {
+    throw new Error(
+      "mojang version metadata url does not match its manifest id and sha1",
+    );
+  }
+  return derivedResource(
+    `mojang-version-metadata:${id}`,
+    "mojang-version-metadata",
+    "prerequisite",
+    url,
+    parent,
+    `version:${id}`,
+  );
+}
+
+export function derivePaperFillBuildsSource(
+  parent: SourceRecord,
+  version: string,
+): DerivedSourceResource {
+  requireDerivedParent(parent, "paper-fill-project");
+  const minecraftVersion = requireDerivedVersion(
+    version,
+    "paper minecraft version",
+  );
+  return derivedResource(
+    `paper-fill-builds:${minecraftVersion}`,
+    "paper-fill-builds",
+    "prerequisite",
+    `https://fill.papermc.io/v3/projects/paper/versions/${encodeURIComponent(minecraftVersion)}/builds`,
+    parent,
+    `version:${minecraftVersion}`,
+  );
+}
+
+function requireDerivedUrl(source: DerivedSourceResource): URL {
+  const parent = source.derivedFrom;
+  if (source.id === "mojang-version-metadata") {
+    if (parent.sourceId !== "mojang-version-manifest") {
+      throw new Error("mojang metadata provenance parent is invalid");
+    }
+    const match = /^version:([A-Za-z0-9 ._-]+)$/u.exec(parent.selector);
+    if (!match) {
+      throw new Error("mojang metadata provenance selector is invalid");
+    }
+    const candidate = new URL(source.url);
+    const expectedPath =
+      /^\/v1\/packages\/([a-f0-9]{40})\/((?:[A-Za-z0-9._-]|%[A-F0-9]{2})+)\.json$/u.exec(
+        candidate.pathname,
+      );
+    if (
+      candidate.protocol !== "https:" ||
+      candidate.hostname !== "piston-meta.mojang.com" ||
+      candidate.port ||
+      candidate.username ||
+      candidate.password ||
+      candidate.search ||
+      candidate.hash ||
+      !expectedPath ||
+      decodeURIComponent(expectedPath[2] ?? "") !== match[1]
+    ) {
+      throw new Error(
+        "mojang metadata url is outside the derived source policy",
+      );
+    }
+    return candidate;
+  }
+  if (source.id === "paper-fill-builds") {
+    if (parent.sourceId !== "paper-fill-project") {
+      throw new Error("paper build provenance parent is invalid");
+    }
+    const match = /^version:([A-Za-z0-9._-]+)$/u.exec(parent.selector);
+    if (!match) {
+      throw new Error("paper build provenance selector is invalid");
+    }
+    const candidate = new URL(source.url);
+    const expectedPath =
+      /^\/v3\/projects\/paper\/versions\/([A-Za-z0-9._-]+)\/builds$/u.exec(
+        candidate.pathname,
+      );
+    if (
+      candidate.protocol !== "https:" ||
+      candidate.hostname !== "fill.papermc.io" ||
+      candidate.port ||
+      candidate.username ||
+      candidate.password ||
+      candidate.search ||
+      candidate.hash ||
+      !expectedPath ||
+      decodeURIComponent(expectedPath[1] ?? "") !== match[1]
+    ) {
+      throw new Error("paper build url is outside the derived source policy");
+    }
+    return candidate;
+  }
+  throw new Error(`source ${source.id} is not an approved derived source`);
+}
+
+export function resolveDerivedSourceUrl(source: DerivedSourceResource): URL {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `derived source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  if (!/^[a-f0-9]{64}$/u.test(source.derivedFrom.sha256)) {
+    throw new Error("derived source provenance hash is invalid");
+  }
+  return requireDerivedUrl(source);
+}
+
+export function resolveCapturedSourceUrl(
+  source: Pick<SourceRecord, "sourceId" | "role" | "url" | "derivedFrom">,
+): URL {
+  if (!source.sourceId || !isCanonicalSourceId(source.sourceId)) {
+    throw new Error("captured source has an unknown source id");
+  }
+  if (
+    source.sourceId === "mojang-version-metadata" ||
+    source.sourceId === "paper-fill-builds"
+  ) {
+    if (!source.role || source.role === "primary" || !source.derivedFrom) {
+      throw new Error("captured derived source provenance is incomplete");
+    }
+    return resolveDerivedSourceUrl({
+      id: source.sourceId,
+      role: source.role,
+      url: source.url,
+      expectedContentTypes: [...expectedSourceContentTypes(source.sourceId)],
+      key: "captured-source",
+      derivedFrom: source.derivedFrom,
+    });
+  }
+  return resolveCanonicalSourceUrl(source.sourceId, source.url);
+}
+
 export function sourceDefinitionPolicyFailures(
   definition: SourceDefinition,
 ): string[] {
@@ -457,6 +672,26 @@ export function sourceDefinitionPolicyFailures(
   );
   if (primarySources.length !== 1) {
     failures.push("source definition must declare exactly one primary source");
+  }
+  const derivedIds = new Set<string>();
+  for (const derivedSource of definition.derivedSources ?? []) {
+    if (derivedIds.has(derivedSource.id)) {
+      failures.push(
+        `source definition repeats derived source id ${derivedSource.id}`,
+      );
+      continue;
+    }
+    derivedIds.add(derivedSource.id);
+    if (!isCanonicalSourceId(derivedSource.id)) {
+      failures.push(
+        `source definition uses unknown derived policy ${derivedSource.id}`,
+      );
+    }
+    if (!ids.has(derivedSource.parentSourceId)) {
+      failures.push(
+        `derived source ${derivedSource.id} parent is not a declared static source`,
+      );
+    }
   }
   return failures;
 }

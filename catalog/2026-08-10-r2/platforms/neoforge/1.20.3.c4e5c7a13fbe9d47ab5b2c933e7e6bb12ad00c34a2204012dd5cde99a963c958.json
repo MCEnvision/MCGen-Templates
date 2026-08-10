@@ -1,0 +1,249 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.1-beta",
+      "id": "component.neoforge.4e3d2a05c8e032a6131b547b",
+      "sourceEntries": [
+        {
+          "entryIndex": 124,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.1-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.2-beta",
+      "id": "component.neoforge.b9bf9f71fa56b9a60ed69170",
+      "sourceEntries": [
+        {
+          "entryIndex": 125,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.2-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.3-beta",
+      "id": "component.neoforge.1d16680dff33f3d49cfd410e",
+      "sourceEntries": [
+        {
+          "entryIndex": 126,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.3-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.4-beta",
+      "id": "component.neoforge.bcdef18b7b5bc614cf4b5c9b",
+      "sourceEntries": [
+        {
+          "entryIndex": 127,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.4-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.6-beta",
+      "id": "component.neoforge.e75fc7fb9c8ba3ccac850e99",
+      "sourceEntries": [
+        {
+          "entryIndex": 128,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.6-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.7-beta",
+      "id": "component.neoforge.13eeab5be25ee00a3fb67089",
+      "sourceEntries": [
+        {
+          "entryIndex": 129,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.7-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:20.3.8-beta",
+      "id": "component.neoforge.276b025c8f9989fad020e0a1",
+      "sourceEntries": [
+        {
+          "entryIndex": 130,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "20.3.8-beta"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 129,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.13eeab5be25ee00a3fb67089"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 126,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.1d16680dff33f3d49cfd410e"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 130,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.276b025c8f9989fad020e0a1"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 124,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.4e3d2a05c8e032a6131b547b"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 125,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.b9bf9f71fa56b9a60ed69170"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 127,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.bcdef18b7b5bc614cf4b5c9b"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7b3bb36cea1d2a795e92dfd9",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 128,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.e75fc7fb9c8ba3ccac850e99"
+    }
+  ],
+  "id": "catalog.neoforge.d8ed143277d0ca2a952a19a9",
+  "key": "1.20.3",
+  "keyKind": "minecraft",
+  "platform": "neoforge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "neoforge.454d86de20b17a45eb60bd52"
+  ]
+}

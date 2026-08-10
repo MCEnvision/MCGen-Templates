@@ -9,7 +9,7 @@ import {
 import { sha256 } from "../digest.js";
 import { classifyMavenVersion, parseMavenVersions } from "./maven.js";
 
-export const neoForgeAdapterVersion = "1.0.0";
+export const neoForgeAdapterVersion = "1.1.0";
 
 type NeoForgeSnapshotSourceId =
   | "neoforge-maven-metadata"
@@ -56,16 +56,25 @@ function mavenComponentEntries(
   component: string,
   coordinate: string,
   catalogKey: (version: string) => string | undefined,
-): { entries: SnapshotEntry[]; rejected: RejectedEntry[] } {
+): { entries: SnapshotEntry[] } {
   const entries: SnapshotEntry[] = [];
-  const rejected: RejectedEntry[] = [];
   for (const version of parseMavenVersions(resource.text)) {
     const key = catalogKey(version);
     if (!key) {
-      rejected.push({
-        value: version,
-        reason: `${component} version does not encode an authoritative catalog key`,
-        sourceIndex,
+      entries.push({
+        platform: "neoforge",
+        component,
+        catalogKey: "unresolved",
+        version,
+        coordinate: `${coordinate}:${version}`,
+        channel: classifyMavenVersion(version),
+        compatibility: "unresolved",
+        details: {
+          catalogKeyStatus: "unresolved",
+          unresolvedReason:
+            "version does not encode an authoritative minecraft key",
+        },
+        sourceIndexes: [sourceIndex],
       });
       continue;
     }
@@ -76,10 +85,11 @@ function mavenComponentEntries(
       version,
       coordinate: `${coordinate}:${version}`,
       channel: classifyMavenVersion(version),
+      compatibility: "declared",
       sourceIndexes: [sourceIndex],
     });
   }
-  return { entries, rejected };
+  return { entries };
 }
 
 export function buildNeoForgeSnapshot(
@@ -176,7 +186,7 @@ export function buildNeoForgeSnapshot(
         compareText(left.version, right.version) ||
         compareText(left.coordinate, right.coordinate),
     );
-  const rejected = groups.flatMap((group) => group.rejected);
+  const rejected: RejectedEntry[] = [];
   const identity = sha256(
     canonicalJson({
       adapter: { id: "neoforge-maven", version: neoForgeAdapterVersion },
@@ -186,11 +196,6 @@ export function buildNeoForgeSnapshot(
   const warnings = [
     "neoforge-versioning-documentation is preserved as corroborating evidence",
   ];
-  if (rejected.length) {
-    warnings.push(
-      `${rejected.length} neoforge versions require catalog-key review`,
-    );
-  }
   return {
     $schema: sourceSnapshotSchema,
     schemaVersion: 1,

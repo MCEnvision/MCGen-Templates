@@ -50,4 +50,22 @@ describe("source definition network policy", () => {
       "source definition must declare exactly one primary source",
     ]);
   });
+
+  it("requires each declared derived source to use a named policy and static parent", () => {
+    expect(
+      sourceDefinitionPolicyFailures({
+        ...definition,
+        derivedSources: [
+          {
+            id: "unreviewed-derived-source",
+            parentSourceId: "missing-parent",
+            role: "prerequisite",
+          },
+        ],
+      }),
+    ).toEqual([
+      "source definition uses unknown derived policy unreviewed-derived-source",
+      "derived source unreviewed-derived-source parent is not a declared static source",
+    ]);
+  });
 });

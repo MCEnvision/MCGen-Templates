@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit:1.13-R0.1-SNAPSHOT",
+      "id": "component.bukkit.805f9cb334637c7c903828fc",
+      "sourceEntries": [
+        {
+          "entryIndex": 11,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.13-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit:1.13-pre7-R0.1-SNAPSHOT",
+      "id": "component.bukkit.1bd295c52589e23554634e7f",
+      "sourceEntries": [
+        {
+          "entryIndex": 12,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.13-pre7-R0.1-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.bukkit.09c81a81d5ff43dde6939d98",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 12,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bukkit.1bd295c52589e23554634e7f"
+    },
+    {
+      "confidence": "published",
+      "from": "target.bukkit.09c81a81d5ff43dde6939d98",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 11,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bukkit.805f9cb334637c7c903828fc"
+    }
+  ],
+  "id": "catalog.bukkit.7d5d238f1e28f4cb6e6c603b",
+  "key": "1.13",
+  "keyKind": "minecraft",
+  "platform": "bukkit",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "bukkit.d6706b848d7d7899f7a09e7c"
+  ]
+}

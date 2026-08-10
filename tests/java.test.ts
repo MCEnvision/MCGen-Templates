@@ -5,6 +5,7 @@ import {
   buildJavaSnapshot,
   javaRequirementEntryFromMetadata,
 } from "../src/sources/java.js";
+import { deriveMojangVersionMetadataResources } from "../src/sources/mojang.js";
 
 const sourceIds = [
   "mojang-version-manifest",
@@ -84,5 +85,68 @@ describe("java source adapter", () => {
       version: "17",
       sourceIndexes: [6],
     });
+  });
+
+  it("preserves manifest provenance when creating Java requirements", () => {
+    const manifestResource = resource("mojang-version-manifest", manifest);
+    const [derived] = deriveMojangVersionMetadataResources(
+      new Map([["mojang-version-manifest", manifestResource]]),
+    );
+    if (!derived) {
+      throw new Error("expected derived Mojang metadata source");
+    }
+    expect(derived).toMatchObject({
+      id: "mojang-version-metadata",
+      key: "mojang-version-metadata:1.20.1",
+      derivedFrom: {
+        sourceId: "mojang-version-manifest",
+        sha256: manifestResource.record.sha256,
+        selector: "version:1.20.1",
+      },
+    });
+    const metadata = JSON.stringify({
+      javaVersion: { component: "java-runtime-gamma", majorVersion: 17 },
+    });
+    const snapshot = buildJavaSnapshot(
+      new Map([
+        ...sourceIds.map(
+          (sourceId) =>
+            [
+              sourceId,
+              resource(
+                sourceId,
+                sourceId === "mojang-version-manifest" ? manifest : "<html />",
+              ),
+            ] as const,
+        ),
+        [
+          derived.key,
+          {
+            record: {
+              sourceId: derived.id,
+              role: derived.role,
+              requestedUrl: derived.url,
+              url: derived.url,
+              redirectChain: [derived.url],
+              retrievedAt: "2026-08-10T00:00:00.000Z",
+              contentType: "application/json",
+              sha256: sha256(metadata),
+              bytes: Buffer.byteLength(metadata),
+              derivedFrom: derived.derivedFrom,
+            },
+            text: metadata,
+          },
+        ],
+      ]),
+      "2026-08-10T00:00:00.000Z",
+    );
+    expect(snapshot.entries).toEqual([
+      expect.objectContaining({
+        catalogKey: "1.20.1",
+        version: "17",
+        sourceIndexes: [6],
+      }),
+    ]);
+    expect(snapshot.rejected).toEqual([]);
   });
 });

@@ -102,9 +102,11 @@ export function buildCatalog(input: CatalogBuildInput): CatalogBuildResult {
     snapshot.snapshot.entries.forEach((entry, entryIndex) => {
       const category = input.categoryByPlatform[entry.platform];
       const keyKind =
-        entry.catalogKey === "all"
-          ? "global"
-          : input.keyKindByPlatform[entry.platform];
+        entry.compatibility === "unresolved"
+          ? "unresolved"
+          : entry.catalogKey === "all"
+            ? "global"
+            : input.keyKindByPlatform[entry.platform];
       if (!category || !keyKind) {
         throw new Error(
           `catalog generation has no category or key kind for ${entry.platform}`,
@@ -145,6 +147,7 @@ export function buildCatalog(input: CatalogBuildInput): CatalogBuildResult {
         version: entry.version,
         coordinate: entry.coordinate,
         channel: entry.channel,
+        compatibility: entry.compatibility ?? "declared",
         status: "discovered",
         sourceEntries: [reference],
       };
@@ -182,7 +185,7 @@ export function buildCatalog(input: CatalogBuildInput): CatalogBuildResult {
           coordinate: component.coordinate,
         }),
       ).slice(0, 24)}`;
-      if (shard.keyKind !== "global") {
+      if (shard.keyKind !== "global" && shard.keyKind !== "unresolved") {
         const targetId = `target.${shard.platform}.${sha256(
           canonicalJson({ key: shard.key }),
         ).slice(0, 24)}`;

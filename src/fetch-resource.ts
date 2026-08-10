@@ -1,5 +1,6 @@
 import { sha256 } from "./digest.js";
 import type {
+  DerivedSourceResource,
   FetchedResource,
   SourceRecord,
   SourceResource,
@@ -8,6 +9,7 @@ import {
   expectedSourceContentTypes,
   isCanonicalSourceId,
   resolveCanonicalSourceUrl,
+  resolveDerivedSourceUrl,
   sourceRedirectLimit,
   type CanonicalSourceId,
 } from "./source-network-policy.js";
@@ -55,9 +57,11 @@ export async function readBoundedBody(
   return bytes;
 }
 
-export async function fetchResource(
-  source: SourceResource,
+async function fetchApprovedResource(
+  source: SourceResource | DerivedSourceResource,
   policy: FetchPolicy,
+  initialUrl: URL,
+  derived: boolean,
 ): Promise<FetchedResource> {
   if (!isCanonicalSourceId(source.id)) {
     throw new Error(
@@ -67,7 +71,7 @@ export async function fetchResource(
   const sourceId: CanonicalSourceId = source.id;
   const signal = AbortSignal.timeout(policy.timeoutMs);
   const maxRedirects = sourceRedirectLimit(sourceId);
-  let currentUrl = resolveCanonicalSourceUrl(sourceId, source.url);
+  let currentUrl = initialUrl;
   const requestedUrl = currentUrl.href;
   const redirectChain = [requestedUrl];
   let redirects = 0;
@@ -97,6 +101,11 @@ export async function fetchResource(
       redirectUrl = new URL(location, currentUrl);
     } catch {
       throw new Error(`source redirect location is invalid for ${sourceId}`);
+    }
+    if (derived) {
+      throw new Error(
+        `derived source redirects are not approved for ${sourceId}`,
+      );
     }
     currentUrl = resolveCanonicalSourceUrl(sourceId, redirectUrl.href);
     redirectChain.push(currentUrl.href);
@@ -144,8 +153,45 @@ export async function fetchResource(
   if (lastModified) {
     record.lastModified = lastModified;
   }
+  if ("derivedFrom" in source) {
+    record.derivedFrom = source.derivedFrom;
+  }
   return {
     record,
     text: new TextDecoder("utf-8", { fatal: true }).decode(bytes),
   };
+}
+
+export async function fetchResource(
+  source: SourceResource,
+  policy: FetchPolicy,
+): Promise<FetchedResource> {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  return fetchApprovedResource(
+    source,
+    policy,
+    resolveCanonicalSourceUrl(source.id, source.url),
+    false,
+  );
+}
+
+export async function fetchDerivedResource(
+  source: DerivedSourceResource,
+  policy: FetchPolicy,
+): Promise<FetchedResource> {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `derived source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  return fetchApprovedResource(
+    source,
+    policy,
+    resolveDerivedSourceUrl(source),
+    true,
+  );
 }

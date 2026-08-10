@@ -5,8 +5,10 @@ import {
   type RejectedEntry,
   type SnapshotEntry,
   type SourceSnapshot,
+  type StabilityChannel,
 } from "../contracts.js";
 import { sha256 } from "../digest.js";
+import { derivePaperFillBuildsSource } from "../source-network-policy.js";
 import { classifyMavenVersion, parseMavenVersions } from "./maven.js";
 
 export const paperAdapterVersion = "1.0.0";
@@ -14,6 +16,13 @@ export const paperAdapterVersion = "1.0.0";
 type PaperFillProject = {
   versions: string[];
 };
+
+export type PaperFillBuild = {
+  id: string;
+  channel: StabilityChannel;
+};
+
+const paperBuildPrefix = "paper-fill-builds:";
 
 function requireRecord(
   value: unknown,
@@ -82,6 +91,71 @@ export function parsePaperFillProject(text: string): PaperFillProject {
   return { versions: [...flattened].sort(compareText) };
 }
 
+export function derivePaperFillBuildResources(
+  resources: ReadonlyMap<string, FetchedResource>,
+) {
+  const fill = requirePaperResource(resources, "paper-fill-project");
+  return parsePaperFillProject(fill.text).versions.map((version) =>
+    derivePaperFillBuildsSource(fill.record, version),
+  );
+}
+
+function buildChannel(value: unknown): StabilityChannel {
+  if (typeof value !== "string") {
+    return "release";
+  }
+  switch (value.toLowerCase()) {
+    case "release":
+    case "stable":
+      return "release";
+    case "release-candidate":
+    case "rc":
+      return "release-candidate";
+    case "beta":
+      return "beta";
+    case "alpha":
+      return "alpha";
+    case "snapshot":
+    case "experimental":
+      return "snapshot";
+    default:
+      return "custom";
+  }
+}
+
+function buildIdentifier(value: unknown): string {
+  if (typeof value === "number" && Number.isSafeInteger(value) && value > 0) {
+    return String(value);
+  }
+  if (typeof value === "string" && /^[1-9][0-9]*$/u.test(value)) {
+    return value;
+  }
+  throw new Error("paper Fill build id is invalid");
+}
+
+export function parsePaperFillBuilds(text: string): PaperFillBuild[] {
+  const payload = requireRecord(
+    JSON.parse(text) as unknown,
+    "paper Fill builds response must be an object",
+  );
+  if (!Array.isArray(payload["builds"])) {
+    throw new Error("paper Fill builds response does not contain builds");
+  }
+  const builds = payload["builds"].map((candidate) => {
+    const build = requireRecord(candidate, "paper Fill build is invalid");
+    return {
+      id: buildIdentifier(build["id"]),
+      channel: buildChannel(build["channel"]),
+    };
+  });
+  if (new Set(builds.map((build) => build.id)).size !== builds.length) {
+    throw new Error("paper Fill builds response contains duplicate build ids");
+  }
+  return builds.sort((left, right) =>
+    left.id.localeCompare(right.id, "en", { numeric: true }),
+  );
+}
+
 function minecraftKeyFromPaperApi(version: string): string | undefined {
   const match = /^(?:1\.)?\d+\.\d+(?:\.\d+)?/u.exec(version);
   return match?.[0];
@@ -94,6 +168,20 @@ export function buildPaperSnapshot(
   const fill = requirePaperResource(resources, "paper-fill-project");
   const api = requirePaperResource(resources, "paper-api-maven-metadata");
   const project = parsePaperFillProject(fill.text);
+  const buildResources = [...resources.entries()]
+    .filter(([key]) => key.startsWith(paperBuildPrefix))
+    .sort(([left], [right]) => compareText(left, right));
+  const orderedResources = [
+    fill,
+    api,
+    ...buildResources.map(([, resource]) => resource),
+  ];
+  const buildSourceIndexByMinecraftVersion = new Map(
+    buildResources.map(([key], index) => [
+      key.slice(paperBuildPrefix.length),
+      index + 2,
+    ]),
+  );
   const publishedMinecraftVersions = new Set(project.versions);
   const entries: SnapshotEntry[] = project.versions.map((version) => ({
     platform: "paper",
@@ -105,6 +193,61 @@ export function buildPaperSnapshot(
     sourceIndexes: [0],
   }));
   const rejected: RejectedEntry[] = [];
+  for (const minecraftVersion of project.versions) {
+    const sourceIndex =
+      buildSourceIndexByMinecraftVersion.get(minecraftVersion);
+    if (sourceIndex === undefined) {
+      rejected.push({
+        value: minecraftVersion,
+        reason:
+          "official Paper Fill build metadata was not captured for this Minecraft version",
+        sourceIndex: 0,
+      });
+      continue;
+    }
+    const builds = orderedResources[sourceIndex];
+    if (!builds) {
+      throw new Error("paper adapter build source ordering is incomplete");
+    }
+    const provenance = builds.record.derivedFrom;
+    if (
+      builds.record.sourceId !== "paper-fill-builds" ||
+      provenance?.sourceId !== "paper-fill-project" ||
+      provenance.sha256 !== fill.record.sha256 ||
+      provenance.selector !== `version:${minecraftVersion}`
+    ) {
+      rejected.push({
+        value: minecraftVersion,
+        reason:
+          "captured Paper Fill build metadata does not preserve project provenance",
+        sourceIndex,
+      });
+      continue;
+    }
+    try {
+      for (const build of parsePaperFillBuilds(builds.text)) {
+        entries.push({
+          platform: "paper",
+          component: "paper-server",
+          catalogKey: minecraftVersion,
+          version: build.id,
+          coordinate: `io.papermc.paper:paper:${minecraftVersion}-${build.id}`,
+          channel: build.channel,
+          sourceIndexes: [0, sourceIndex],
+          details: {
+            minecraftVersion,
+            buildId: build.id,
+          },
+        });
+      }
+    } catch (error) {
+      rejected.push({
+        value: minecraftVersion,
+        reason: `captured Paper Fill build metadata is invalid, ${error instanceof Error ? error.message : String(error)}`,
+        sourceIndex,
+      });
+    }
+  }
   for (const version of parseMavenVersions(api.text)) {
     const catalogKey = minecraftKeyFromPaperApi(version);
     if (!catalogKey || !publishedMinecraftVersions.has(catalogKey)) {
@@ -141,12 +284,15 @@ export function buildPaperSnapshot(
   const identity = sha256(
     canonicalJson({
       adapter: { id: "paper-fill", version: paperAdapterVersion },
-      sources: [fill.record.sha256, api.record.sha256],
+      sources: orderedResources.map((resource) => resource.record.sha256),
     }),
   ).slice(0, 24);
-  const warnings = [
-    "Paper build numbers require an immutable capture of each official Paper Fill build response",
-  ];
+  const warnings = [];
+  if (buildResources.length !== project.versions.length) {
+    warnings.push(
+      "Paper build records are incomplete until every official Paper Fill version response is captured",
+    );
+  }
   if (rejected.length) {
     warnings.push(
       `${rejected.length} Paper API versions require explicit compatibility review`,
@@ -159,7 +305,7 @@ export function buildPaperSnapshot(
     snapshotId: `paper.${identity}`,
     adapter: { id: "paper-fill", version: paperAdapterVersion },
     createdAt,
-    sources: [fill.record, api.record],
+    sources: orderedResources.map((resource) => resource.record),
     entries,
     rejected,
     warnings,

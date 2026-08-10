@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { fetchResource, readBoundedBody } from "../src/fetch-resource.js";
+import {
+  fetchDerivedResource,
+  fetchResource,
+  readBoundedBody,
+} from "../src/fetch-resource.js";
 
 const requestPolicy = {
   timeoutMs: 1_000,
@@ -25,6 +29,19 @@ const forgeSource = source(
   "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
   ["application/xml", "text/xml"],
 );
+
+const derivedMojangMetadataSource = {
+  key: "mojang-version-metadata:1.20.1",
+  id: "mojang-version-metadata",
+  role: "prerequisite" as const,
+  url: `https://piston-meta.mojang.com/v1/packages/${"a".repeat(40)}/1.20.1.json`,
+  expectedContentTypes: ["application/json"],
+  derivedFrom: {
+    sourceId: "mojang-version-manifest",
+    sha256: "b".repeat(64),
+    selector: "version:1.20.1",
+  },
+};
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -124,6 +141,48 @@ describe("fetchResource", () => {
     expect(resource.record.url).toBe(
       "https://maven.minecraftforge.net/releases/net/minecraftforge/forge/maven-metadata.xml",
     );
+  });
+
+  it("fetches only a manifest bound Mojang metadata resource", async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(
+        '{"javaVersion":{"component":"java-runtime-gamma","majorVersion":17}}',
+        {
+          headers: { "content-type": "application/json" },
+        },
+      ),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    const resource = await fetchDerivedResource(
+      derivedMojangMetadataSource,
+      requestPolicy,
+    );
+
+    expect(resource.record.derivedFrom).toEqual(
+      derivedMojangMetadataSource.derivedFrom,
+    );
+    expect(fetchMock.mock.calls[0]?.[0]).toEqual(
+      new URL(derivedMojangMetadataSource.url),
+    );
+  });
+
+  it("rejects a malformed derived source before fetching", async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(
+      fetchDerivedResource(
+        {
+          ...derivedMojangMetadataSource,
+          url: "https://piston-meta.mojang.com/v1/packages/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/not-the-manifest.json",
+        },
+        requestPolicy,
+      ),
+    ).rejects.toThrow(
+      "mojang metadata url is outside the derived source policy",
+    );
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it.each([

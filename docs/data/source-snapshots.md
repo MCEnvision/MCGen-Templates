@@ -6,6 +6,29 @@ Source snapshots preserve exactly what authoritative upstream systems published 
 
 Every snapshot records its schema version, adapter identity, retrieval time, final response URL, media type, cache validators when available, byte count, SHA-256 response digest, normalized entries, rejected values, and warnings. New captures also retain the policy source ID, declared resource role, requested URL, and full approved redirect chain. Snapshot identity is derived from the adapter identity and ordered source digests. A repeated capture of unchanged bytes with the same adapter therefore has the same identity even though retrieval timestamps differ.
 
+## Current Complete Capture
+
+The current capture set is the fourteen immutable `2026-08-10-r2` snapshots named by [`catalog/2026-08-10-r2/index.json`](../../catalog/2026-08-10-r2/index.json). It contains 22,052 discovered entries, 86 explicit rejected records, and 1,019 response provenance records. The matching catalog represents every accepted entry and creates one structured coverage blocker for each rejected record.
+
+| Adapter | Entries | Rejected | Source records |
+| --- | ---: | ---: | ---: |
+| Architectury | 1,130 | 0 | 5 |
+| Bukkit | 37 | 0 | 1 |
+| BungeeCord | 21 | 0 | 1 |
+| Fabric | 6,866 | 0 | 8 |
+| Forge | 8,390 | 1 | 7 |
+| Gradle | 521 | 0 | 1 |
+| Java | 887 | 18 | 911 |
+| Kotlin | 204 | 0 | 2 |
+| Mojang | 905 | 0 | 1 |
+| NeoForge | 2,568 | 0 | 7 |
+| Paper | 301 | 67 | 68 |
+| Spigot | 82 | 0 | 1 |
+| Sponge | 74 | 0 | 3 |
+| Velocity | 66 | 0 | 3 |
+
+The earlier `2026-08-10` captures remain immutable historical evidence. They are not current catalog inputs. The count test covers both historical and current snapshots so an accidental mutation is visible in review.
+
 ## Forge Capture
 
 The first Forge snapshot is [`sources/snapshots/forge/2026-08-09.json`](../../sources/snapshots/forge/2026-08-09.json). It uses:
@@ -25,7 +48,7 @@ Use an unused repository-relative output path:
 npm run snapshot:forge -- --output sources/snapshots/forge/YYYY-MM-DD.json
 ```
 
-The command fetches both sources concurrently with one 30 second timeout per source and a 16 MiB response limit. Each source definition names its primary, prerequisite, and corroborating resources. Each canonical source ID has a code-owned exact HTTPS URL policy, approved media types, and redirect limit. The fetcher validates the initial URL and every redirect target before requesting it, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, redirect loops, and unexpected media types. It also rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
+The command uses at most eight concurrent requests with one 30 second timeout per source and the definition response limit. Each source definition names its primary, prerequisite, and corroborating resources. Each canonical source ID has a code owned exact HTTPS URL policy, approved media types, and redirect limit. The fetcher validates the initial URL and every redirect target before requesting it, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, redirect loops, and unexpected media types. It also rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
 
 ## Reconciliation Rules
 

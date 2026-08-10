@@ -2,12 +2,13 @@ import type {
   SnapshotEntry,
   SourceSnapshot,
   StabilityChannel,
+  SnapshotCompatibility,
 } from "../contracts.js";
 
 export type CatalogCategory =
   "mod" | "plugin" | "proxy" | "multiloader" | "toolchain";
 
-export type CatalogKeyKind = "minecraft" | "api" | "global";
+export type CatalogKeyKind = "minecraft" | "api" | "global" | "unresolved";
 
 export type CatalogStatus =
   | "discovered"
@@ -47,6 +48,7 @@ export type CatalogComponent = {
   version: string;
   coordinate: string;
   channel: StabilityChannel;
+  compatibility?: SnapshotCompatibility;
   status: CatalogStatus;
   sourceEntries: SourceEntryReference[];
 };
@@ -70,6 +72,13 @@ export type CatalogBlocker = {
   subject: string;
   reason: string;
   evidence: string[];
+  rejectedEntries?: RejectedEntryReference[];
+};
+
+export type RejectedEntryReference = {
+  snapshotId: string;
+  rejectedIndex: number;
+  sourceIndex: number;
 };
 
 export type CatalogShard = {
@@ -117,6 +126,7 @@ export type CoveragePlatform = {
   platform: string;
   discovered: number;
   represented: number;
+  rejected: number;
   statuses: Record<string, number>;
   entries: CatalogCoverageEntry[];
   blockers: CatalogBlocker[];
@@ -126,6 +136,7 @@ export type CoveragePlatform = {
 export type CoverageReport = {
   $schema: "urn:mcgen:schema:coverage-report:1";
   schemaVersion: 1;
+  rejectionAccountingVersion: 1;
   catalogId: string;
   sourceSnapshots: (SnapshotReference & {
     entries: number;

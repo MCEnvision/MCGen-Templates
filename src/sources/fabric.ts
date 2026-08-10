@@ -10,7 +10,7 @@ import {
 import { sha256 } from "../digest.js";
 import { classifyMavenVersion, parseMavenVersions } from "./maven.js";
 
-export const fabricAdapterVersion = "1.0.0";
+export const fabricAdapterVersion = "1.1.0";
 
 type FabricSnapshotSourceId =
   | "fabric-meta-game"
@@ -130,11 +130,40 @@ function parseFabricRecords(
 }
 
 function minecraftCatalogKey(version: string): string | undefined {
-  return /^(?:1\.)?\d+\.\d+(?:\.\d+)?/u.exec(version)?.[0];
+  const match = /^((?:1\.)?\d+\.\d+(?:\.\d+)?(?:-(?:pre|rc)\d+)?)/u.exec(
+    version,
+  );
+  return match?.[1];
 }
 
 function fabricApiCatalogKey(version: string): string | undefined {
-  return /\+((?:1\.)?\d+\.\d+(?:\.\d+)?)$/u.exec(version)?.[1];
+  return /\+((?:1\.)?\d+\.\d+(?:\.\d+)?(?:-(?:pre|rc)\d+)?)$/u.exec(
+    version,
+  )?.[1];
+}
+
+function unresolvedEntry(
+  component: string,
+  version: string,
+  coordinate: string,
+  channel: StabilityChannel,
+  sourceIndex: number,
+): SnapshotEntry {
+  return {
+    platform: "fabric",
+    component,
+    catalogKey: "unresolved",
+    version,
+    coordinate,
+    channel,
+    compatibility: "unresolved",
+    details: {
+      catalogKeyStatus: "unresolved",
+      unresolvedReason:
+        "version does not encode an authoritative minecraft key",
+    },
+    sourceIndexes: [sourceIndex],
+  };
 }
 
 function metaEntries(
@@ -143,17 +172,20 @@ function metaEntries(
   component: string,
   catalogKey: (version: string) => string | undefined,
   coordinate: (record: FabricVersionRecord) => string,
-): { entries: SnapshotEntry[]; rejected: RejectedEntry[] } {
+): { entries: SnapshotEntry[] } {
   const entries: SnapshotEntry[] = [];
-  const rejected: RejectedEntry[] = [];
   for (const record of records) {
     const key = catalogKey(record.version);
     if (!key) {
-      rejected.push({
-        value: record.version,
-        reason: `${component} version does not encode an authoritative catalog key`,
-        sourceIndex,
-      });
+      entries.push(
+        unresolvedEntry(
+          component,
+          record.version,
+          coordinate(record),
+          channelFromFabricStability(record.stable, record.version),
+          sourceIndex,
+        ),
+      );
       continue;
     }
     entries.push({
@@ -163,10 +195,11 @@ function metaEntries(
       version: record.version,
       coordinate: coordinate(record),
       channel: channelFromFabricStability(record.stable, record.version),
+      compatibility: "declared",
       sourceIndexes: [sourceIndex],
     });
   }
-  return { entries, rejected };
+  return { entries };
 }
 
 function mavenEntries(
@@ -175,17 +208,20 @@ function mavenEntries(
   component: string,
   coordinate: string,
   catalogKey: (version: string) => string | undefined,
-): { entries: SnapshotEntry[]; rejected: RejectedEntry[] } {
+): { entries: SnapshotEntry[] } {
   const entries: SnapshotEntry[] = [];
-  const rejected: RejectedEntry[] = [];
   for (const version of parseMavenVersions(resource.text)) {
     const key = catalogKey(version);
     if (!key) {
-      rejected.push({
-        value: version,
-        reason: `${component} version does not encode an authoritative catalog key`,
-        sourceIndex,
-      });
+      entries.push(
+        unresolvedEntry(
+          component,
+          version,
+          `${coordinate}:${version}`,
+          classifyMavenVersion(version),
+          sourceIndex,
+        ),
+      );
       continue;
     }
     entries.push({
@@ -195,10 +231,11 @@ function mavenEntries(
       version,
       coordinate: `${coordinate}:${version}`,
       channel: classifyMavenVersion(version),
+      compatibility: "declared",
       sourceIndexes: [sourceIndex],
     });
   }
-  return { entries, rejected };
+  return { entries };
 }
 
 export function buildFabricSnapshot(
@@ -333,7 +370,6 @@ export function buildFabricSnapshot(
     ...yarn.rejected,
     ...intermediary.rejected,
     ...installer.rejected,
-    ...entryGroups.flatMap((group) => group.rejected),
   ];
   const identity = sha256(
     canonicalJson({
@@ -343,9 +379,7 @@ export function buildFabricSnapshot(
   ).slice(0, 24);
   const warnings: string[] = [];
   if (rejected.length) {
-    warnings.push(
-      `${rejected.length} fabric records require catalog-key review`,
-    );
+    warnings.push(`${rejected.length} fabric records are structurally invalid`);
   }
   return {
     $schema: sourceSnapshotSchema,

@@ -11,7 +11,7 @@ import {
 import {
   expectedSourceContentTypes,
   isCanonicalSourceId,
-  resolveCanonicalSourceUrl,
+  resolveCapturedSourceUrl,
   sourceDefinitionPolicyFailures,
 } from "./source-network-policy.js";
 import { sourceAdapterFailures } from "./source-adapters.js";
@@ -65,6 +65,28 @@ function entryReferenceKey(snapshotId: string, entryIndex: number): string {
   return `${snapshotId}:${entryIndex}`;
 }
 
+function rejectedReferenceKey(
+  snapshotId: string,
+  rejectedIndex: number,
+): string {
+  return `${snapshotId}:${rejectedIndex}`;
+}
+
+function snapshotRejectionPlatform(snapshot: JsonObject): string | undefined {
+  const platforms = [
+    ...new Set(
+      objects(snapshot["entries"])
+        .map((entry) => entry["platform"])
+        .filter((platform): platform is string => typeof platform === "string"),
+    ),
+  ];
+  if (platforms.length === 1) return platforms[0];
+  const adapter = snapshot["adapter"];
+  return isObject(adapter) && typeof adapter["id"] === "string"
+    ? adapter["id"]
+    : undefined;
+}
+
 function snapshotFailures(path: string, document: unknown): string[] {
   if (
     !isObject(document) ||
@@ -74,8 +96,11 @@ function snapshotFailures(path: string, document: unknown): string[] {
   }
   const sources = Array.isArray(document["sources"]) ? document["sources"] : [];
   const entries = Array.isArray(document["entries"]) ? document["entries"] : [];
+  const rejected = Array.isArray(document["rejected"])
+    ? document["rejected"]
+    : [];
   const failures: string[] = [];
-  const coordinates = new Set<string>();
+  const catalogCoordinates = new Set<string>();
   if (document["provenanceVersion"] === 1) {
     sources.forEach((value, index) => {
       if (!isObject(value)) return;
@@ -103,10 +128,39 @@ function snapshotFailures(path: string, document: unknown): string[] {
           `${path}/sources/${index} redirect chain omits final url`,
         );
       }
-      for (const value of redirectChain) {
-        if (typeof value !== "string") continue;
+      const role = value["role"];
+      const derivedFrom = value["derivedFrom"];
+      for (const redirectUrl of redirectChain) {
+        if (typeof redirectUrl !== "string") continue;
         try {
-          resolveCanonicalSourceUrl(sourceId, value);
+          const captured = { sourceId, url: redirectUrl };
+          const capturedRole =
+            role === "primary" ||
+            role === "prerequisite" ||
+            role === "corroborating"
+              ? role
+              : undefined;
+          const capturedProvenance = isObject(derivedFrom)
+            ? {
+                sourceId:
+                  typeof derivedFrom["sourceId"] === "string"
+                    ? derivedFrom["sourceId"]
+                    : "",
+                sha256:
+                  typeof derivedFrom["sha256"] === "string"
+                    ? derivedFrom["sha256"]
+                    : "",
+                selector:
+                  typeof derivedFrom["selector"] === "string"
+                    ? derivedFrom["selector"]
+                    : "",
+              }
+            : undefined;
+          resolveCapturedSourceUrl({
+            ...captured,
+            ...(capturedRole ? { role: capturedRole } : {}),
+            ...(capturedProvenance ? { derivedFrom: capturedProvenance } : {}),
+          });
         } catch {
           failures.push(
             `${path}/sources/${index} redirect chain is outside the approved policy`,
@@ -134,12 +188,21 @@ function snapshotFailures(path: string, document: unknown): string[] {
   let previousCoordinate = "";
   entries.forEach((value, index) => {
     if (!isObject(value)) return;
+    const platform = value["platform"];
+    const catalogKey = value["catalogKey"];
+    const component = value["component"];
     const coordinate = value["coordinate"];
-    if (typeof coordinate === "string") {
-      if (coordinates.has(coordinate)) {
+    if (
+      typeof platform === "string" &&
+      typeof catalogKey === "string" &&
+      typeof component === "string" &&
+      typeof coordinate === "string"
+    ) {
+      const identity = `${platform}:${catalogKey}:${component}:${coordinate}`;
+      if (catalogCoordinates.has(identity)) {
         failures.push(`${path}/entries/${index}/coordinate is duplicated`);
       }
-      coordinates.add(coordinate);
+      catalogCoordinates.add(identity);
     }
     const sourceIndexes = Array.isArray(value["sourceIndexes"])
       ? value["sourceIndexes"]
@@ -185,6 +248,19 @@ function snapshotFailures(path: string, document: unknown): string[] {
       previousVersion = version;
       previousCoordinate =
         typeof value["coordinate"] === "string" ? value["coordinate"] : "";
+    }
+  });
+  rejected.forEach((value, index) => {
+    if (!isObject(value)) return;
+    const sourceIndex = value["sourceIndex"];
+    if (
+      typeof sourceIndex === "number" &&
+      Number.isInteger(sourceIndex) &&
+      sourceIndex >= sources.length
+    ) {
+      failures.push(
+        `${path}/rejected/${index}/sourceIndex references missing source ${sourceIndex}`,
+      );
     }
   });
   return failures;
@@ -522,6 +598,14 @@ async function catalogIntegrityFailures(
               );
             }
           }
+          if (
+            (entry["compatibility"] ?? "declared") !==
+            (component["compatibility"] ?? "declared")
+          ) {
+            failures.push(
+              `${prefix} source entry does not match component compatibility`,
+            );
+          }
           const entrySourceIndexes = Array.isArray(entry["sourceIndexes"])
             ? entry["sourceIndexes"]
             : [];
@@ -536,7 +620,9 @@ async function catalogIntegrityFailures(
       });
       const edges = objects(shard["edges"]);
       const expectedEdges =
-        shard["keyKind"] === "global" ? 0 : components.length;
+        shard["keyKind"] === "global" || shard["keyKind"] === "unresolved"
+          ? 0
+          : components.length;
       if (edges.length !== expectedEdges) {
         failures.push(
           `${shardId} must have exactly one observed target edge per component`,
@@ -549,6 +635,7 @@ async function catalogIntegrityFailures(
             : undefined;
         if (
           shard["keyKind"] === "global" ||
+          shard["keyKind"] === "unresolved" ||
           edge["kind"] !== "targets" ||
           edge["confidence"] !== "published" ||
           !component ||
@@ -594,11 +681,68 @@ async function catalogIntegrityFailures(
           if (loaded.document["catalogId"] !== catalogId) {
             failures.push(`${root.path} coverage belongs to another catalog`);
           }
+          const tracksRejectedRecords =
+            loaded.document["rejectionAccountingVersion"] === 1;
           const covered = new Map<string, JsonObject>();
+          const rejectedCovered = new Map<string, JsonObject>();
+          const coverageSnapshots = new Map<string, JsonObject>();
+          for (const reference of objects(loaded.document["sourceSnapshots"])) {
+            const snapshotId = reference["id"];
+            if (typeof snapshotId !== "string") continue;
+            if (coverageSnapshots.has(snapshotId)) {
+              failures.push(
+                `${root.path} coverage repeats source snapshot ${snapshotId}`,
+              );
+            }
+            coverageSnapshots.set(snapshotId, reference);
+            const snapshot = snapshotById.get(snapshotId);
+            if (!snapshot) {
+              failures.push(
+                `${root.path} coverage references an unknown source snapshot ${snapshotId}`,
+              );
+              continue;
+            }
+            const entries = Array.isArray(snapshot["entries"])
+              ? snapshot["entries"]
+              : [];
+            const rejected = Array.isArray(snapshot["rejected"])
+              ? snapshot["rejected"]
+              : [];
+            if (reference["entries"] !== entries.length) {
+              failures.push(
+                `${root.path} coverage totals do not match source snapshot ${snapshotId}`,
+              );
+            }
+            if (
+              tracksRejectedRecords &&
+              (typeof reference["rejected"] !== "number" ||
+                reference["rejected"] !== rejected.length)
+            ) {
+              failures.push(
+                `${root.path} coverage rejected totals do not match source snapshot ${snapshotId}`,
+              );
+            }
+          }
+          for (const snapshotId of snapshotById.keys()) {
+            if (!coverageSnapshots.has(snapshotId)) {
+              failures.push(
+                `${root.path} coverage omits source snapshot ${snapshotId}`,
+              );
+            }
+          }
           for (const platform of objects(loaded.document["platforms"])) {
             const platformName = platform["platform"];
+            if (
+              tracksRejectedRecords &&
+              typeof platform["rejected"] !== "number"
+            ) {
+              failures.push(
+                `${root.path} rejection accounting platform total is missing`,
+              );
+            }
             const entries = objects(platform["entries"]);
             const recomputedStatuses: Record<string, number> = {};
+            let represented = 0;
             for (const entry of entries) {
               const snapshotId = entry["snapshotId"];
               const entryIndex = entry["entryIndex"];
@@ -612,6 +756,7 @@ async function catalogIntegrityFailures(
                 failures.push(`${root.path} coverage repeats ${key}`);
               covered.set(key, entry);
               if (entry["disposition"] === "represented") {
+                represented += 1;
                 const shard =
                   typeof entry["shardId"] === "string"
                     ? shardById.get(entry["shardId"])
@@ -623,7 +768,97 @@ async function catalogIntegrityFailures(
                 }
                 recomputedStatuses["discovered"] =
                   (recomputedStatuses["discovered"] ?? 0) + 1;
+              } else {
+                failures.push(
+                  `${root.path} coverage entries must represent accepted source entries`,
+                );
               }
+            }
+            if (
+              platform["discovered"] !== entries.length ||
+              platform["represented"] !== represented
+            ) {
+              failures.push(
+                `${root.path} coverage accepted totals do not match platform entries`,
+              );
+            }
+            let rejected = 0;
+            for (const blocker of tracksRejectedRecords
+              ? objects(platform["blockers"])
+              : []) {
+              const rejectedEntries = objects(blocker["rejectedEntries"]);
+              if (rejectedEntries.length !== 1) {
+                failures.push(
+                  `${root.path} coverage blocker must identify exactly one rejected source record`,
+                );
+                continue;
+              }
+              const reference = rejectedEntries[0] ?? {};
+              const snapshotId = reference["snapshotId"];
+              const rejectedIndex = reference["rejectedIndex"];
+              const sourceIndex = reference["sourceIndex"];
+              if (
+                typeof snapshotId !== "string" ||
+                typeof rejectedIndex !== "number" ||
+                typeof sourceIndex !== "number"
+              ) {
+                continue;
+              }
+              const key = rejectedReferenceKey(snapshotId, rejectedIndex);
+              if (rejectedCovered.has(key)) {
+                failures.push(
+                  `${root.path} coverage repeats rejected record ${key}`,
+                );
+              }
+              rejectedCovered.set(key, blocker);
+              const snapshot = snapshotById.get(snapshotId);
+              const snapshotRejected = snapshot
+                ? Array.isArray(snapshot["rejected"])
+                  ? (snapshot["rejected"] as unknown[])
+                  : []
+                : [];
+              const rejectedRecord = snapshotRejected[rejectedIndex];
+              if (
+                !isObject(rejectedRecord) ||
+                rejectedRecord["sourceIndex"] !== sourceIndex
+              ) {
+                failures.push(
+                  `${root.path} coverage blocker references a missing or changed rejected source record`,
+                );
+                continue;
+              }
+              if (blocker["reason"] !== rejectedRecord["reason"]) {
+                failures.push(
+                  `${root.path} coverage blocker reason does not match the rejected source record`,
+                );
+              }
+              const evidence = stringArray(blocker["evidence"]);
+              const expectedEvidence = [
+                `snapshot ${snapshotId}`,
+                `rejected record ${rejectedIndex}`,
+                `source ${sourceIndex}`,
+              ];
+              if (
+                !expectedEvidence.every((value) => evidence.includes(value))
+              ) {
+                failures.push(
+                  `${root.path} coverage blocker evidence does not identify the rejected source record`,
+                );
+              }
+              if (
+                snapshot &&
+                platformName !== snapshotRejectionPlatform(snapshot)
+              ) {
+                failures.push(
+                  `${root.path} coverage blocker is assigned to the wrong platform`,
+                );
+              }
+              rejected += 1;
+            }
+            if (tracksRejectedRecords && platform["rejected"] !== rejected) {
+              failures.push(
+                `${root.path} coverage rejected totals do not match platform blockers`,
+              );
             }
             if (
               canonicalJson(platform["statuses"]) !==
@@ -651,6 +886,19 @@ async function catalogIntegrityFailures(
                 );
               }
             });
+            if (tracksRejectedRecords) {
+              const rejected = Array.isArray(snapshot["rejected"])
+                ? snapshot["rejected"]
+                : [];
+              rejected.forEach((_, rejectedIndex) => {
+                const key = rejectedReferenceKey(snapshotId, rejectedIndex);
+                if (!rejectedCovered.has(key)) {
+                  failures.push(
+                    `${root.path} coverage omits rejected record ${key}`,
+                  );
+                }
+              });
+            }
           }
         }
       }

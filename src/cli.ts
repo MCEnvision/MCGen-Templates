@@ -11,7 +11,7 @@ import type {
   SnapshotInput,
 } from "./catalog/contracts.js";
 import type { SourceSnapshot } from "./contracts.js";
-import { fetchResource } from "./fetch-resource.js";
+import { fetchDerivedResource, fetchResource } from "./fetch-resource.js";
 import { createSchemaRegistry, repositoryRoot } from "./schema-registry.js";
 import { loadSourceDefinition } from "./source-definition.js";
 import {
@@ -42,6 +42,32 @@ function options(args: readonly string[], name: string): string[] {
     }
   }
   return values;
+}
+
+const sourceFetchConcurrency = 8;
+
+async function fetchAll<T, Result>(
+  values: readonly T[],
+  operation: (value: T) => Promise<Result>,
+): Promise<Result[]> {
+  const results = new Array<Result>(values.length);
+  let nextIndex = 0;
+  const worker = async (): Promise<void> => {
+    for (;;) {
+      const index = nextIndex;
+      nextIndex += 1;
+      const value = values[index];
+      if (value === undefined) return;
+      results[index] = await operation(value);
+    }
+  };
+  await Promise.all(
+    Array.from(
+      { length: Math.min(sourceFetchConcurrency, values.length) },
+      () => worker(),
+    ),
+  );
+  return results;
 }
 
 function requireRepositoryPath(path: string): string {
@@ -151,18 +177,32 @@ async function snapshotSource(
   const outputPath = requireSnapshotPath(adapter.snapshotDirectory, output);
   await requireUnusedPath(outputPath);
   const definition = await loadSourceDefinition(adapter.id);
-  const fetched = await Promise.all(
-    definition.sources.map((source) =>
-      fetchResource(source, definition.requestPolicy),
-    ),
+  const fetched = await fetchAll(definition.sources, (source) =>
+    fetchResource(source, definition.requestPolicy),
   );
   const resources = new Map<string, (typeof fetched)[number]>();
-  for (const resource of fetched) {
-    const sourceId = resource.record.sourceId;
-    if (!sourceId) {
-      throw new Error("fetched source omitted its policy id");
+  for (const [index, resource] of fetched.entries()) {
+    const source = definition.sources[index];
+    if (!source) {
+      throw new Error("fetched source has no definition resource");
     }
-    resources.set(sourceId, resource);
+    resources.set(source.id, resource);
+  }
+  const derivedSources = adapter.derive?.(resources) ?? [];
+  for (const source of derivedSources) {
+    if (resources.has(source.key)) {
+      throw new Error(`derived source key is duplicated ${source.key}`);
+    }
+  }
+  const derivedFetched = await fetchAll(derivedSources, (source) =>
+    fetchDerivedResource(source, definition.requestPolicy),
+  );
+  for (const [index, source] of derivedSources.entries()) {
+    const resource = derivedFetched[index];
+    if (!resource) {
+      throw new Error(`derived source was not fetched ${source.key}`);
+    }
+    resources.set(source.key, resource);
   }
   const snapshot = adapter.build(resources, new Date().toISOString());
   const failures = documentFailures(

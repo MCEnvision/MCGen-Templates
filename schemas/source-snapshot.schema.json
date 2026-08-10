@@ -60,6 +60,18 @@
           "contentType": { "type": "string", "minLength": 1 },
           "etag": { "type": "string", "minLength": 1 },
           "lastModified": { "type": "string", "minLength": 1 },
+          "derivedFrom": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sourceId", "sha256", "selector"],
+            "properties": {
+              "sourceId": {
+                "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+              },
+              "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+              "selector": { "type": "string", "minLength": 1, "maxLength": 256 }
+            }
+          },
           "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
           "bytes": { "type": "integer", "minimum": 1 }
         }
@@ -89,6 +101,9 @@
           "coordinate": { "type": "string", "minLength": 1, "maxLength": 512 },
           "channel": {
             "$ref": "urn:mcgen:schema:common:1#/$defs/stabilityChannel"
+          },
+          "compatibility": {
+            "enum": ["declared", "unresolved"]
           },
           "details": {
             "type": "object",

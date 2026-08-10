@@ -3,6 +3,8 @@ import { sha256 } from "../src/digest.js";
 import type { FetchedResource } from "../src/contracts.js";
 import {
   buildPaperSnapshot,
+  derivePaperFillBuildResources,
+  parsePaperFillBuilds,
   parsePaperFillProject,
 } from "../src/sources/paper.js";
 
@@ -34,6 +36,49 @@ const project = JSON.stringify({
   },
 });
 
+function buildsResource(version: string, text: string): FetchedResource {
+  const url = `https://fill.papermc.io/v3/projects/paper/versions/${version}/builds`;
+  return {
+    record: {
+      sourceId: "paper-fill-builds",
+      role: "prerequisite",
+      requestedUrl: url,
+      url,
+      redirectChain: [url],
+      retrievedAt: "2026-08-10T00:00:00.000Z",
+      contentType: "application/json",
+      sha256: sha256(text),
+      bytes: Buffer.byteLength(text),
+      derivedFrom: {
+        sourceId: "paper-fill-project",
+        sha256: sha256(project),
+        selector: `version:${version}`,
+      },
+    },
+    text,
+  };
+}
+
+function buildResponses() {
+  return [
+    [
+      "paper-fill-builds:1.20.6",
+      buildsResource("1.20.6", JSON.stringify({ builds: [{ id: 2 }] })),
+    ],
+    [
+      "paper-fill-builds:1.21",
+      buildsResource("1.21", JSON.stringify({ builds: [{ id: 3 }] })),
+    ],
+    [
+      "paper-fill-builds:1.21.1",
+      buildsResource(
+        "1.21.1",
+        JSON.stringify({ builds: [{ id: 4, channel: "stable" }] }),
+      ),
+    ],
+  ] as const;
+}
+
 describe("paper source adapter", () => {
   it("keeps server releases and API artifacts separate under exact published keys", () => {
     const snapshot = buildPaperSnapshot(
@@ -46,10 +91,11 @@ describe("paper source adapter", () => {
             "<metadata><versioning><versions><version>1.21.1-R0.1-SNAPSHOT</version><version>1.20.6-R0.1-SNAPSHOT</version></versions></versioning></metadata>",
           ),
         ],
+        ...buildResponses(),
       ]),
       "2026-08-10T00:00:00.000Z",
     );
-    expect(snapshot.entries).toHaveLength(5);
+    expect(snapshot.entries).toHaveLength(8);
     expect(
       snapshot.entries.filter((entry) => entry.component === "paper-api"),
     ).toEqual([
@@ -70,10 +116,11 @@ describe("paper source adapter", () => {
             "<metadata><versioning><versions><version>1.21.2-R0.1-SNAPSHOT</version></versions></versioning></metadata>",
           ),
         ],
+        ...buildResponses(),
       ]),
       "2026-08-10T00:00:00.000Z",
     );
-    expect(snapshot.entries).toHaveLength(3);
+    expect(snapshot.entries).toHaveLength(6);
     expect(snapshot.rejected).toEqual([
       expect.objectContaining({
         value: "1.21.2-R0.1-SNAPSHOT",
@@ -88,5 +135,29 @@ describe("paper source adapter", () => {
         JSON.stringify({ project: { id: "velocity" }, versions: {} }),
       ),
     ).toThrow("paper fill response is not the paper project");
+  });
+
+  it("derives build sources only from validated Paper Fill versions", () => {
+    expect(
+      derivePaperFillBuildResources(
+        new Map([
+          ["paper-fill-project", resource("paper-fill-project", project)],
+        ]),
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "paper-fill-builds",
+          key: "paper-fill-builds:1.21.1",
+          url: "https://fill.papermc.io/v3/projects/paper/versions/1.21.1/builds",
+        }),
+      ]),
+    );
+  });
+
+  it("rejects a malformed official Paper Fill build record", () => {
+    expect(() =>
+      parsePaperFillBuilds(JSON.stringify({ builds: [{ id: 0 }] })),
+    ).toThrow("paper Fill build id is invalid");
   });
 });

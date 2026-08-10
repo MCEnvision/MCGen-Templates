@@ -1,0 +1,86 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.2f6abac0f1061095b2999e9c",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "paper-api",
+      "coordinate": "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT",
+      "id": "component.paper.9b0131079ef8f38df4710a5d",
+      "sourceEntries": [
+        {
+          "entryIndex": 49,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.4-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.20.4",
+      "id": "component.paper.267b462fbefe4a81a6cc1946",
+      "sourceEntries": [
+        {
+          "entryIndex": 50,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.4"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.4843ff2643a25104c90cc008",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 50,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.267b462fbefe4a81a6cc1946"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.4843ff2643a25104c90cc008",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 49,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.paper.9b0131079ef8f38df4710a5d"
+    }
+  ],
+  "id": "catalog.paper.a5ecf2a3e074d233297da750",
+  "key": "1.20.4",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.e9a48aeb643a97705e3dcd9d"
+  ]
+}

@@ -40,7 +40,10 @@ function outputDocuments(result: ReturnType<typeof buildCatalog>) {
   ];
 }
 
-function snapshot(entries: SourceSnapshot["entries"]): SourceSnapshot {
+function snapshot(
+  entries: SourceSnapshot["entries"],
+  rejected: SourceSnapshot["rejected"] = [],
+): SourceSnapshot {
   return {
     $schema: "urn:mcgen:schema:source-snapshot:1",
     schemaVersion: 1,
@@ -52,9 +55,12 @@ function snapshot(entries: SourceSnapshot["entries"]): SourceSnapshot {
       {
         sourceId: "forge-maven-metadata",
         role: "primary",
-        requestedUrl: "https://files.minecraftforge.net/maven/metadata.xml",
-        url: "https://files.minecraftforge.net/maven/metadata.xml",
-        redirectChain: ["https://files.minecraftforge.net/maven/metadata.xml"],
+        requestedUrl:
+          "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+        url: "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+        redirectChain: [
+          "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+        ],
         retrievedAt: "2026-08-10T00:00:00.000Z",
         contentType: "application/xml",
         sha256: "0".repeat(64),
@@ -62,15 +68,18 @@ function snapshot(entries: SourceSnapshot["entries"]): SourceSnapshot {
       },
     ],
     entries,
-    rejected: [],
+    rejected,
     warnings: [],
   };
 }
 
-function input(entries: SourceSnapshot["entries"]): SnapshotInput {
+function input(
+  entries: SourceSnapshot["entries"],
+  rejected: SourceSnapshot["rejected"] = [],
+): SnapshotInput {
   return {
     path: "sources/snapshots/forge/test.json",
-    snapshot: snapshot(entries),
+    snapshot: snapshot(entries, rejected),
   };
 }
 
@@ -143,6 +152,34 @@ describe("deterministic compatibility catalog", () => {
     });
     const shard = result.shards[0]?.document;
     expect(shard).toMatchObject({ key: "all", keyKind: "global", edges: [] });
+  });
+
+  it("preserves unresolved source discoveries without inventing a compatibility target", () => {
+    const firstEntry = entries[0];
+    if (!firstEntry) throw new Error("catalog fixture omitted its first entry");
+    const result = buildCatalog({
+      snapshots: [
+        input([
+          {
+            ...firstEntry,
+            catalogKey: "unresolved",
+            compatibility: "unresolved",
+            version: "24w14a",
+            coordinate: "com.mojang:minecraft:24w14a",
+            channel: "snapshot",
+          },
+        ]),
+      ],
+      categoryByPlatform: { forge: "mod" },
+      keyKindByPlatform: { forge: "minecraft" },
+    });
+    const shard = result.shards[0]?.document;
+    expect(shard).toMatchObject({
+      key: "unresolved",
+      keyKind: "unresolved",
+      edges: [],
+      components: [expect.objectContaining({ compatibility: "unresolved" })],
+    });
   });
 
   it("validates every generated catalog document against its registered contract", async () => {
@@ -249,6 +286,133 @@ describe("deterministic compatibility catalog", () => {
     expect(coverage.platforms[0]?.unexplainedGaps).toHaveLength(2);
   });
 
+  it("makes every rejected source record an exact coverage blocker", () => {
+    const result = buildCatalog({
+      snapshots: [
+        input(entries, [
+          {
+            value: "1.20.1-47.bad",
+            reason: "version does not match the published coordinate",
+            sourceIndex: 0,
+          },
+        ]),
+      ],
+      categoryByPlatform: { forge: "mod" },
+      keyKindByPlatform: { forge: "minecraft" },
+    });
+    const platform = result.coverage.platforms[0];
+    expect(platform).toMatchObject({
+      platform: "forge",
+      discovered: 2,
+      represented: 2,
+      rejected: 1,
+      unexplainedGaps: [],
+    });
+    expect(platform?.blockers).toEqual([
+      expect.objectContaining({
+        reason: "version does not match the published coordinate",
+        rejectedEntries: [
+          {
+            snapshotId: "forge.test",
+            rejectedIndex: 0,
+            sourceIndex: 0,
+          },
+        ],
+      }),
+    ]);
+    expect(result).toEqual(
+      buildCatalog({
+        snapshots: [
+          input(entries, [
+            {
+              value: "1.20.1-47.bad",
+              reason: "version does not match the published coordinate",
+              sourceIndex: 0,
+            },
+          ]),
+        ],
+        categoryByPlatform: { forge: "mod" },
+        keyKindByPlatform: { forge: "minecraft" },
+      }),
+    );
+  });
+
+  it("audits accepted and rejected snapshot totals against coverage", async () => {
+    await mkdir(resolve(repositoryRoot, "catalog"), { recursive: true });
+    const directory = await mkdtemp(
+      resolve(repositoryRoot, "catalog/.catalog-coverage-test-"),
+    );
+    const sourceDirectory = await mkdtemp(
+      resolve(
+        repositoryRoot,
+        "sources/snapshots/forge/.catalog-coverage-test-",
+      ),
+    );
+    try {
+      const sourcePath = relative(
+        repositoryRoot,
+        resolve(sourceDirectory, "snapshot.json"),
+      );
+      const source = input(entries, [
+        {
+          value: "malformed release",
+          reason: "release metadata is malformed",
+          sourceIndex: 0,
+        },
+      ]);
+      source.path = sourcePath;
+      const result = buildCatalog({
+        snapshots: [source],
+        categoryByPlatform: { forge: "mod" },
+        keyKindByPlatform: { forge: "minecraft" },
+        outputRoot: relative(repositoryRoot, directory),
+      });
+      const documents = outputDocuments(result);
+      await writeFile(
+        resolve(repositoryRoot, source.path),
+        canonicalJson(source.snapshot),
+        "utf8",
+      );
+      for (const { path, document } of documents) {
+        const absolute = resolve(repositoryRoot, path);
+        await mkdir(dirname(absolute), { recursive: true });
+        await writeFile(absolute, canonicalJson(document), "utf8");
+      }
+      const paths = [
+        resolve(repositoryRoot, source.path),
+        ...documents.map(({ path }) => resolve(repositoryRoot, path)),
+      ];
+      expect(await validateFiles(paths)).toEqual([]);
+
+      const invalid = structuredClone(result.coverage);
+      const sourceSnapshot = invalid.sourceSnapshots.at(0);
+      const blocker = invalid.platforms.at(0)?.blockers.at(0);
+      if (!sourceSnapshot || !blocker) {
+        throw new Error("catalog fixture did not create rejected coverage");
+      }
+      sourceSnapshot.rejected = 0;
+      blocker.reason = "unrelated reason";
+      await writeFile(
+        resolve(repositoryRoot, result.index.coverage.path),
+        canonicalJson(invalid),
+        "utf8",
+      );
+      expect(await validateFiles(paths)).toContainEqual(
+        expect.stringContaining(
+          "coverage rejected totals do not match source snapshot",
+        ),
+      );
+      expect(await validateFiles(paths)).toContainEqual(
+        expect.stringContaining(
+          "coverage blocker reason does not match the rejected source record",
+        ),
+      );
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+      await rm(sourceDirectory, { recursive: true, force: true });
+    }
+  });
+
   it("does not recommend a discovered component before tuple verification", () => {
     const component: CatalogComponent = {
       id: "component.forge.test",
@@ -256,6 +420,7 @@ describe("deterministic compatibility catalog", () => {
       version: "1.20.1-47.7.0",
       coordinate: "net.minecraftforge:forge:1.20.1-47.7.0",
       channel: "release",
+      compatibility: "declared",
       status: "discovered",
       sourceEntries: [
         { snapshotId: "forge.test", entryIndex: 0, sourceIndexes: [0] },

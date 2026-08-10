@@ -19,6 +19,13 @@
       "expectedContentTypes": ["application/xml", "text/xml"]
     }
   ],
+  "derivedSources": [
+    {
+      "id": "paper-fill-builds",
+      "parentSourceId": "paper-fill-project",
+      "role": "prerequisite"
+    }
+  ],
   "removalPolicy": "additive-only",
   "requestPolicy": {
     "timeoutMs": 30000,

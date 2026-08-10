@@ -29,7 +29,7 @@
     "category": {
       "enum": ["mod", "plugin", "proxy", "multiloader", "toolchain"]
     },
-    "keyKind": { "enum": ["minecraft", "api", "global"] },
+    "keyKind": { "enum": ["minecraft", "api", "global", "unresolved"] },
     "key": { "type": "string", "minLength": 1, "maxLength": 128 },
     "sourceSnapshots": {
       "type": "array",
@@ -86,6 +86,7 @@
         "channel": {
           "$ref": "urn:mcgen:schema:common:1#/$defs/stabilityChannel"
         },
+        "compatibility": { "enum": ["declared", "unresolved"] },
         "status": {
           "$ref": "urn:mcgen:schema:common:1#/$defs/verificationStatus"
         },
@@ -135,6 +136,22 @@
           "type": "array",
           "minItems": 1,
           "items": { "type": "string", "minLength": 1, "maxLength": 256 }
+        },
+        "rejectedEntries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["snapshotId", "rejectedIndex", "sourceIndex"],
+            "properties": {
+              "snapshotId": {
+                "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+              },
+              "rejectedIndex": { "type": "integer", "minimum": 0 },
+              "sourceIndex": { "type": "integer", "minimum": 0 }
+            }
+          }
         }
       }
     }
@@ -146,6 +163,13 @@
         "required": ["keyKind"]
       },
       "then": { "properties": { "key": { "const": "all" } } }
+    },
+    {
+      "if": {
+        "properties": { "keyKind": { "const": "unresolved" } },
+        "required": ["keyKind"]
+      },
+      "then": { "properties": { "key": { "const": "unresolved" } } }
     }
   ]
 }

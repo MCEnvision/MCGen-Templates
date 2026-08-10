@@ -16,6 +16,7 @@
     "schemaVersion": {
       "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
     },
+    "rejectionAccountingVersion": { "const": 1 },
     "catalogId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
     "sourceSnapshots": {
       "type": "array",
@@ -23,7 +24,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "digest", "path", "entries", "rejected"],
+        "required": ["id", "digest", "path", "entries"],
         "properties": {
           "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
           "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
@@ -54,6 +55,7 @@
           "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
           "discovered": { "type": "integer", "minimum": 0 },
           "represented": { "type": "integer", "minimum": 0 },
+          "rejected": { "type": "integer", "minimum": 0 },
           "statuses": {
             "type": "object",
             "additionalProperties": { "type": "integer", "minimum": 0 }

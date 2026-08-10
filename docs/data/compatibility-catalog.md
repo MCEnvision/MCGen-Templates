@@ -16,6 +16,8 @@ catalog/platforms/<platform>/index.json
 catalog/platforms/<platform>/<key>.<sha256>.json
 ```
 
+The current catalog is [`catalog/2026-08-10-r2/index.json`](../../catalog/2026-08-10-r2/index.json). It contains 2,540 immutable shards from fourteen current source snapshots. Its coverage report represents 22,052 accepted entries and records 86 rejected records as exact structured blockers.
+
 The root index names every immutable source snapshot by repository path and canonical document digest. It maps each platform to a small platform index. A platform index maps each Minecraft or API key to a shard path, exact digest, byte length, and source snapshot set. Shard filenames include their digest so a changed catalog can add a new shard without rewriting historical evidence.
 
 Each shard contains only observed exact components and directly evidenced edges. A `targets` edge connects the selected Minecraft or API key to one exact component. A global shard uses the key `all` and has no target edge because an independently discovered tool component is not proof of Minecraft compatibility. The catalog does not connect every loader, mapping, Gradle plugin, Java version, or API build to every other component. Such a tuple requires a later profile or verification record with explicit intersection evidence.
@@ -27,7 +29,7 @@ Each catalog component retains one or more source entry references. A reference 
 - `represented`, with the exact shard identifier.
 - `blocked`, with a structured blocker identifier, reason, and evidence.
 
-An unexplained gap is a validation failure. Rejected source values remain in their source snapshot with their parser reason and do not become invisible catalog entries.
+An unexplained accepted-entry gap is a validation failure. Catalogs generated with rejection accounting version `1` also require one structured blocker for every rejected source record, preserving its exact snapshot, rejected-record index, source-record index, parser reason, and evidence. Earlier immutable catalog revisions remain readable as legacy accepted-entry coverage, but current generation always writes rejection accounting version `1`.
 
 ## Recommendation Policy
 

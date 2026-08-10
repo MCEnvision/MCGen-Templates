@@ -7,10 +7,11 @@ import {
   type StabilityChannel,
 } from "../contracts.js";
 import { sha256 } from "../digest.js";
+import { deriveMojangVersionMetadataSource } from "../source-network-policy.js";
 
 export const mojangAdapterVersion = "1.0.0";
 
-type MojangManifestVersion = {
+export type MojangManifestVersion = {
   id: string;
   type: string;
   url: string;
@@ -185,6 +186,15 @@ export function parseMojangJavaRequirement(
     throw new Error("mojang version metadata java major version is invalid");
   }
   return { component, majorVersion: javaVersion.majorVersion };
+}
+
+export function deriveMojangVersionMetadataResources(
+  resources: ReadonlyMap<string, FetchedResource>,
+) {
+  const manifest = requireMojangResource(resources);
+  return parseMojangManifest(manifest.text).versions.map((version) =>
+    deriveMojangVersionMetadataSource(manifest.record, version),
+  );
 }
 
 export function buildMojangSnapshot(

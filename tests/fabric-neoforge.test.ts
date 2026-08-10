@@ -43,6 +43,7 @@ function fabricResources(): Map<string, FetchedResource> {
         JSON.stringify([
           { version: "1.21.1", stable: true },
           { version: "1.21.2-pre1", stable: false },
+          { version: "24w14a", stable: false },
           { version: "", stable: false },
         ]),
       ),
@@ -176,28 +177,39 @@ describe("fabric source adapter", () => {
       "2026-08-10T00:00:00.000Z",
     );
     expect(snapshot.sources).toHaveLength(8);
-    expect(snapshot.entries).toHaveLength(9);
+    expect(snapshot.entries).toHaveLength(11);
     expect(snapshot.entries.some((entry) => entry.component === "loader")).toBe(
       true,
     );
     expect(
       snapshot.entries.find((entry) => entry.component === "mappings-yarn"),
     ).toMatchObject({ catalogKey: "1.21.1", sourceIndexes: [2] });
+    expect(snapshot.entries).toContainEqual(
+      expect.objectContaining({
+        component: "minecraft",
+        version: "24w14a",
+        catalogKey: "unresolved",
+        compatibility: "unresolved",
+        channel: "snapshot",
+      }),
+    );
+    expect(snapshot.entries).toContainEqual(
+      expect.objectContaining({
+        component: "fabric-api",
+        version: "0.102.1",
+        catalogKey: "unresolved",
+        compatibility: "unresolved",
+      }),
+    );
     expect(snapshot.rejected).toEqual([
       {
-        value: "record 2",
+        value: "record 3",
         reason: "fabric-meta-game record must contain a nonempty version",
         sourceIndex: 0,
       },
-      {
-        value: "0.102.1",
-        reason:
-          "fabric-api version does not encode an authoritative catalog key",
-        sourceIndex: 5,
-      },
     ]);
     expect(snapshot.warnings).toEqual([
-      "2 fabric records require catalog-key review",
+      "1 fabric records are structurally invalid",
     ]);
   });
 
@@ -257,7 +269,7 @@ describe("neoforge source adapter", () => {
     ]);
   });
 
-  it("accounts for unkeyed neoforge versions instead of dropping them", () => {
+  it("preserves unkeyed neoforge versions without creating compatibility evidence", () => {
     const resources = neoForgeResources();
     resources.set(
       "neoforge-maven-metadata",
@@ -267,10 +279,15 @@ describe("neoforge source adapter", () => {
       resources,
       "2026-08-10T00:00:00.000Z",
     );
-    expect(snapshot.rejected).toContainEqual({
-      value: "legacy",
-      reason: "loader version does not encode an authoritative catalog key",
-      sourceIndex: 0,
-    });
+    expect(snapshot.rejected).toEqual([]);
+    expect(snapshot.entries).toContainEqual(
+      expect.objectContaining({
+        component: "loader",
+        version: "legacy",
+        catalogKey: "unresolved",
+        compatibility: "unresolved",
+        channel: "release",
+      }),
+    );
   });
 });
