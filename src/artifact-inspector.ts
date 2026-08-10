@@ -255,9 +255,7 @@ export function inspectArtifactEntries(
     if (entry.content.byteLength > 16 * 1024 * 1024)
       failures.push(`artifact entry is too large ${entry.path}`);
   }
-  if (
-    !new RegExp(`\\${expectation.expectedExtension}$`, "u").test(artifactPath)
-  )
+  if (!artifactPath.endsWith(expectation.expectedExtension))
     failures.push(`artifact extension is not ${expectation.expectedExtension}`);
   for (const pattern of expectation.patterns) {
     if (!pathMatches(pattern, artifactPath))
