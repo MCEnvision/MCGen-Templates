@@ -9,9 +9,11 @@
 
 The GitHub foundation gate completed on August 9, 2026. Pull request `6` merged at commit `c044312f3a0786057c629122054f2451996dd78c`, both required quality checks passed on the pull request and `main`, and the merged commit received the verified signed annotated tag `phase-0-github-foundation`.
 
-The active repository-owned work is the remaining Phase 0 template-pack contract foundation on `envy/phase_0_template_pack_contracts`. This slice introduces the versioned serialized contracts, deterministic validation tooling, authoritative source-adapter boundary, and first reproducible Mojang and Forge metadata snapshot. It does not publish a template family or mark any compatibility tuple verified.
+The template-pack contract and source-evidence slice completed on August 9, 2026. Pull request `9` merged at commit `2a8ff64d2bbe818b314ba034c5d744ec9d4d331b`, all applicable pull-request and post-merge checks passed, and the merged commit received the verified signed annotated tag `phase-0-template-pack-contracts`. This slice added versioned serialized contracts, deterministic validation tooling, the authoritative source-adapter boundary, and the first reproducible Mojang and Forge metadata snapshot.
 
-Repository tooling uses Node.js 22, npm lockfiles, TypeScript 5.9, JSON Schema Draft 2020-12, and repository-defined formatting, linting, type-checking, tests, builds, schema validation, and snapshot verification. Application code remains owned by the future `MCEnvision/MCGen` repository.
+The remaining active repository-owned Phase 0 work is the normalized compatibility graph, complete source-adapter coverage, toolchain profiles, template-family descriptors, deterministic pack construction, and verification foundation. No template family, generated project, compatibility recommendation, or exact compatibility tuple is verified yet.
+
+Repository tooling uses Node.js 22, npm lockfiles, TypeScript 5.9, JSON Schema Draft 2020-12, and repository-defined formatting, linting, type-checking, tests, builds, schema validation, and snapshot verification. GitHub CodeQL default setup analyzes GitHub Actions and JavaScript or TypeScript sources. Application code remains owned by the future `MCEnvision/MCGen` repository.
 
 ---
 
