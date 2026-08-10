@@ -2,26 +2,15 @@
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
   "schemaVersion": 1,
   "id": "forge-modern",
-  "revision": 1,
-  "status": "blocked",
+  "revision": 2,
+  "status": "reviewed",
   "family": "forge",
   "category": "mod",
   "platform": "forge",
-  "blockers": [
-    {
-      "id": "modern-toolchain-evidence",
-      "reason": "Modern ForgeGradle and metadata boundaries need tuple specific build evidence.",
-      "evidence": [
-        "sources/snapshots/forge/2026-08-10-r2.json",
-        "sources/snapshots/gradle/2026-08-10-r2.json"
-      ],
-      "resolution": "Compile representative modern Forge tuples and promote this profile after artifact inspection."
-    }
-  ],
   "catalog": {
-    "snapshotId": "2026-08-10-final",
-    "indexPath": "catalog/2026-08-10-final/platforms/forge/index.json",
-    "indexSha256": "e4d76da5667f69c0caea493978c650e620e4eb8ab6996c33490baa3e45fd2d82",
+    "snapshotId": "2026-08-10-phase7",
+    "indexPath": "catalog/2026-08-10-phase7/platforms/forge/index.json",
+    "indexSha256": "55448611e968847adcf4953db3320f006faef5408b6abb9e98081dcd51d31774",
     "selectors": [
       {
         "platform": "forge",
@@ -49,16 +38,16 @@
     {
       "id": "forge",
       "coordinate": "net.minecraftforge:forge",
-      "version": "selected-from-catalog",
-      "range": "catalog-key-compatible",
+      "version": "1.20.1-47.1.0",
+      "range": "1.20.1-47.1.0",
       "required": true,
       "catalogComponent": "forge"
     },
     {
       "id": "forgegradle",
       "coordinate": "net.minecraftforge.gradle:ForgeGradle",
-      "version": "selected-from-catalog",
-      "range": "modern-boundary",
+      "version": "6.0.47",
+      "range": "catalog-backed-modern-boundary",
       "required": true,
       "catalogComponent": "forgegradle"
     }
@@ -71,13 +60,16 @@
   },
   "build": {
     "system": "gradle",
-    "wrapper": "7.6.4",
-    "wrapperSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+    "wrapper": "8.8",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperKind": "launcher-script",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
     "dsl": "groovy",
     "plugins": [
       {
         "id": "net.minecraftforge.gradle",
-        "version": "selected-from-catalog",
+        "version": "6.0.47",
         "repositoryIds": ["forge"]
       }
     ],
@@ -92,12 +84,12 @@
     { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
   ],
   "mappings": {
-    "strategy": "platform-defined",
+    "strategy": "official",
     "components": [
       {
-        "id": "forge-mappings",
+        "id": "official-mappings",
         "version": "selected-from-catalog",
-        "coordinate": "net.minecraftforge:forge"
+        "coordinate": "net.minecraft:mappings"
       }
     ]
   },
@@ -154,9 +146,27 @@
     "inspection": ["META-INF/mods.toml", "META-INF/MANIFEST.MF"]
   },
   "artifact": {
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 128,
+    "metadataFields": {
+      "mods[0].modId": "tuple-probe",
+      "mods[0].displayName": "Tuple Probe",
+      "mods[0].version": "1.0.0"
+    },
     "patterns": ["build/libs/*.jar"],
     "metadataPaths": ["META-INF/mods.toml"],
-    "requiredEntries": ["META-INF/MANIFEST.MF"]
+    "projectIdentity": {
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "requiredEntries": [
+      "META-INF/mods.toml",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "resourceNamespaces": []
   },
   "fallback": {
     "policy": "profile",

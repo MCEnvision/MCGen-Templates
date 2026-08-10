@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT",
+      "id": "component.bukkit.804401cb98b1057fc22e82b5",
+      "sourceEntries": [
+        {
+          "entryIndex": 25,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.15.2-R0.1-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.bukkit.684729a0603c73c6f7ed3aa8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 25,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bukkit.804401cb98b1057fc22e82b5"
+    }
+  ],
+  "id": "catalog.bukkit.24749261905dc553108fef9d",
+  "key": "1.15.2",
+  "keyKind": "minecraft",
+  "platform": "bukkit",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "bukkit.d6706b848d7d7899f7a09e7c"
+  ]
+}

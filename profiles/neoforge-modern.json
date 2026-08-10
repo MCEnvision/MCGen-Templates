@@ -2,26 +2,15 @@
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
   "schemaVersion": 1,
   "id": "neoforge-modern",
-  "revision": 1,
-  "status": "blocked",
+  "revision": 2,
+  "status": "reviewed",
   "family": "neoforge",
   "category": "mod",
   "platform": "neoforge",
-  "blockers": [
-    {
-      "id": "neoforge-build-evidence",
-      "reason": "NeoGradle and ModDevGradle require separate, tuple specific verification before selection is enabled.",
-      "evidence": [
-        "sources/snapshots/neoforge/2026-08-10-r2.json",
-        "sources/snapshots/gradle/2026-08-10-r2.json"
-      ],
-      "resolution": "Add one profile per proven NeoGradle or ModDevGradle boundary."
-    }
-  ],
   "catalog": {
-    "snapshotId": "2026-08-10-final",
-    "indexPath": "catalog/2026-08-10-final/platforms/neoforge/index.json",
-    "indexSha256": "099ac775f95bfe99b8067c9ff0e03c9f04557400e952c7d6be18408f2b74fab6",
+    "snapshotId": "2026-08-10-phase7",
+    "indexPath": "catalog/2026-08-10-phase7/platforms/neoforge/index.json",
+    "indexSha256": "93fdbe2011bda976e8387d9882d3028fee3fa922d1fceb9796f433d32adcb128",
     "selectors": [
       {
         "platform": "neoforge",
@@ -31,7 +20,8 @@
           {
             "component": "neoforge",
             "coordinatePrefix": "net.neoforged:neoforge:",
-            "mode": "all-components"
+            "mode": "explicit",
+            "versions": ["net.neoforged:neoforge:21.1.248"]
           }
         ],
         "evidence": [
@@ -49,24 +39,16 @@
     {
       "id": "neoforge",
       "coordinate": "net.neoforged:neoforge",
-      "version": "selected-from-catalog",
-      "range": "catalog-key-compatible",
+      "version": "21.1.248",
+      "range": "1.21.1-modern",
       "required": true,
       "catalogComponent": "neoforge"
     },
     {
-      "id": "neogradle",
-      "coordinate": "net.neoforged.gradle.userdev",
-      "version": "selected-from-catalog",
-      "range": "boundary-selected",
-      "required": true,
-      "catalogComponent": "neogradle"
-    },
-    {
       "id": "moddevgradle",
-      "coordinate": "net.neoforged.moddev",
-      "version": "selected-from-catalog",
-      "range": "boundary-selected",
+      "coordinate": "net.neoforged:moddev-gradle",
+      "version": "2.0.143",
+      "range": "moddevgradle-2.0.143",
       "required": false,
       "catalogComponent": "moddevgradle"
     }
@@ -80,16 +62,18 @@
   "build": {
     "system": "gradle",
     "wrapper": "8.8",
-    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
     "dsl": "groovy",
     "plugins": [
       {
         "id": "net.neoforged.moddev",
-        "version": "selected-from-catalog",
+        "version": "2.0.143",
         "repositoryIds": ["neoforge"]
       }
     ],
-    "properties": [{ "name": "minecraftVersion", "value": "catalog-selected" }],
+    "properties": [{ "name": "minecraftVersion", "value": "1.21.1" }],
     "jvmArguments": [],
     "sourceSets": [],
     "tasks": [],
@@ -104,7 +88,7 @@
     "components": [
       {
         "id": "official-mappings",
-        "version": "selected-from-catalog",
+        "version": "1.21.1",
         "coordinate": "net.minecraft:mappings"
       }
     ]
@@ -157,10 +141,29 @@
   "artifact": {
     "patterns": ["build/libs/*.jar"],
     "metadataPaths": ["META-INF/neoforge.mods.toml"],
-    "requiredEntries": ["META-INF/MANIFEST.MF"]
+    "requiredEntries": [
+      "META-INF/MANIFEST.MF",
+      "META-INF/neoforge.mods.toml",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 256,
+    "metadataFields": {
+      "mods[0].modId": "tuple-probe",
+      "mods[0].displayName": "Tuple Probe",
+      "mods[0].version": "1.0.0"
+    },
+    "projectIdentity": {
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "resourceNamespaces": []
   },
   "fallback": {
-    "policy": "blocked",
-    "migration": "Resolve the exact NeoGradle or ModDevGradle boundary before generation."
+    "policy": "none",
+    "migration": "Split a new profile if the NeoForge ModDevGradle boundary changes."
   }
 }

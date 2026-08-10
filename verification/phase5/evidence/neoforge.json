@@ -1,0 +1,134 @@
+{
+  "$schema": "urn:mcgen:schema:tuple-evidence:1",
+  "artifact": {
+    "bytes": 1549,
+    "entries": [
+      "META-INF/MANIFEST.MF",
+      "META-INF/mcgen-advanced-fields.json",
+      "META-INF/neoforge.mods.toml",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "failures": [],
+    "metadata": [
+      {
+        "format": "toml",
+        "path": "META-INF/neoforge.mods.toml",
+        "valid": true,
+        "values": {
+          "mods[0].authors": "[\"EnVy\"]",
+          "mods[0].description": "tuple probe",
+          "mods[0].displayName": "Tuple Probe",
+          "mods[0].modId": "tuple-probe",
+          "mods[0].version": "1.0.0"
+        }
+      }
+    ],
+    "path": "build/libs/tuple-probe-1.0.0.jar",
+    "sha256": "cb86a7f8e19e1271944b15a0e7b942f5ce609402a5c84c374e5e27c1c34d8d66",
+    "status": "passed",
+    "warnings": []
+  },
+  "blockers": [],
+  "build": {
+    "commands": [
+      {
+        "command": [
+          "./gradlew",
+          "build"
+        ],
+        "diskBytes": 73730289,
+        "durationMs": 2538,
+        "exitCode": 0,
+        "outputBytes": 2055,
+        "outputDigest": "434d7437b5718280431dda4fad02aed387acae5ff814f983e3435c9ebfaeb870"
+      },
+      {
+        "command": [
+          "./gradlew",
+          "test"
+        ],
+        "diskBytes": 73730289,
+        "durationMs": 673,
+        "exitCode": 0,
+        "outputBytes": 325,
+        "outputDigest": "d0d01b17b0501a3fd14ef69c62052ce3093f33661363537e6f5c7fac9f8e4c8c"
+      }
+    ],
+    "finishedAt": "2026-08-10T21:29:51.646Z",
+    "startedAt": "2026-08-10T00:00:00.000Z",
+    "status": "passed"
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "invalidation": {
+    "contentDigests": {
+      "catalog": "64089c2f5743104242538f2c7c86b74e5a5131afb5e4f245349a81d49865d0aa",
+      "descriptor": "c630e2da2f0d58414acba225de65598e8d7f824871d9af4cb17ae53a7f686520",
+      "fixture": "407b184a6a46be4b37b028e9b1f1e7c01f1c2579aa1504898e4b0d5de6e09203",
+      "profile": "bd2c1f6e6c14af534983bf9c45748c34a3407a973859bd80c42df587c996298d",
+      "template": "6aad7af3b36206a512c494411fab354e837c9edd279f153b9456effecb798e4b"
+    },
+    "descriptorRevision": 2,
+    "mappingDigest": "57e0e681b5de3b1fe45837182168e5b6bb3ed347fc5560c08275df7d89f8d669",
+    "procedureDigest": "6536112964a3da6318d16fcd1bfc95f3604239396e79249d48eb08de95b71850",
+    "profileRevision": 2,
+    "sourceDigests": [
+      "53ef3e26fd1b0c0483e53bf0bcad9f3830bf29a72096a37916991c63f79382fd",
+      "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+      "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+    ],
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
+  },
+  "key": {
+    "digest": "feedfe8448b2c96880dae956a2c0e0bb6e5cf3848dea566b5161e463553ff261",
+    "identity": {
+      "catalogKey": "1.21.1",
+      "catalogSnapshotId": "2026-08-10-phase7",
+      "components": {
+        "minecraft": "1.21.1",
+        "moddevgradle": "2.0.143",
+        "neoforge": "21.1.248"
+      },
+      "contentDigests": {
+        "catalog": "64089c2f5743104242538f2c7c86b74e5a5131afb5e4f245349a81d49865d0aa",
+        "descriptor": "c630e2da2f0d58414acba225de65598e8d7f824871d9af4cb17ae53a7f686520",
+        "fixture": "407b184a6a46be4b37b028e9b1f1e7c01f1c2579aa1504898e4b0d5de6e09203",
+        "profile": "bd2c1f6e6c14af534983bf9c45748c34a3407a973859bd80c42df587c996298d",
+        "template": "6aad7af3b36206a512c494411fab354e837c9edd279f153b9456effecb798e4b"
+      },
+      "descriptorId": "neoforge",
+      "descriptorRevision": 2,
+      "family": "neoforge",
+      "fixtureId": "neoforge.neoforge-modern.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 21
+      },
+      "mappingDigest": "57e0e681b5de3b1fe45837182168e5b6bb3ed347fc5560c08275df7d89f8d669",
+      "procedureDigest": "6536112964a3da6318d16fcd1bfc95f3604239396e79249d48eb08de95b71850",
+      "profileId": "neoforge-modern",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "53ef3e26fd1b0c0483e53bf0bcad9f3830bf29a72096a37916991c63f79382fd",
+        "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+        "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    }
+  },
+  "outputTreeDigest": "d1b7fc0349df7552eaa9933f924118ee97f12f39ac282bb20ad0b1566fa80e00",
+  "reproducibility": {
+    "differences": [],
+    "firstDigest": "d1b7fc0349df7552eaa9933f924118ee97f12f39ac282bb20ad0b1566fa80e00",
+    "reproducible": true,
+    "secondDigest": "d1b7fc0349df7552eaa9933f924118ee97f12f39ac282bb20ad0b1566fa80e00"
+  },
+  "schemaVersion": 1,
+  "status": "verified"
+}

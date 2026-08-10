@@ -174,16 +174,27 @@ function parseMetadata(
   path: string,
   content: Uint8Array,
 ): {
-  format: "json" | "properties" | "text" | "unknown";
+  format: "json" | "properties" | "toml" | "text" | "unknown";
   valid: boolean;
   values: Record<string, string>;
 } {
   const text = new TextDecoder().decode(content);
-  if (extname(path) === ".json") {
+  if (extname(path) === ".json" || extname(path) === ".info") {
     try {
-      return { format: "json", valid: true, values: flatten(JSON.parse(text)) };
+      const parsed = JSON.parse(text) as unknown;
+      if (
+        extname(path) === ".info" &&
+        !text.trim().startsWith("[") &&
+        !text.trim().startsWith("{")
+      )
+        return { format: "text", valid: true, values: { text } };
+      return { format: "json", valid: true, values: flatten(parsed) };
     } catch {
-      return { format: "json", valid: false, values: {} };
+      return {
+        format: extname(path) === ".info" ? "text" : "json",
+        valid: extname(path) === ".info",
+        values: extname(path) === ".info" ? { text } : {},
+      };
     }
   }
   if (
@@ -210,6 +221,49 @@ function parseMetadata(
       values[key] = value;
     }
     return { format: "properties", valid: true, values };
+  }
+  if (extname(path) === ".toml") {
+    const values: Record<string, string> = {};
+    let section = "";
+    const sectionCounts = new Map<string, number>();
+    for (const rawLine of text.split(/\r?\n/u)) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith("#")) continue;
+      const arraySection = /^\[\[([^\]]+)\]\]$/u.exec(line);
+      if (arraySection?.[1]) {
+        const name = arraySection[1].trim();
+        const index = sectionCounts.get(name) ?? 0;
+        sectionCounts.set(name, index + 1);
+        section = `${name}[${index}]`;
+        continue;
+      }
+      const namedSection = /^\[([^\]]+)\]$/u.exec(line);
+      if (namedSection?.[1]) {
+        section = namedSection[1].trim();
+        continue;
+      }
+      const separator = line.indexOf("=");
+      if (separator <= 0) return { format: "toml", valid: false, values: {} };
+      const key = line.slice(0, separator).trim();
+      const rawValue = line.slice(separator + 1).trim();
+      if (!/^[A-Za-z0-9_-]+$/u.test(key) || rawValue.length === 0)
+        return { format: "toml", valid: false, values: {} };
+      let value = rawValue;
+      if (rawValue.startsWith("'''") && rawValue.endsWith("'''"))
+        value = rawValue.slice(3, -3);
+      else if (rawValue.startsWith('"') && rawValue.endsWith('"')) {
+        try {
+          const parsed = JSON.parse(rawValue) as unknown;
+          if (typeof parsed !== "string")
+            return { format: "toml", valid: false, values: {} };
+          value = parsed;
+        } catch {
+          return { format: "toml", valid: false, values: {} };
+        }
+      }
+      values[section ? `${section}.${key}` : key] = value;
+    }
+    return { format: "toml", valid: true, values };
   }
   if (text.includes("\u0000"))
     return { format: "unknown", valid: false, values: {} };

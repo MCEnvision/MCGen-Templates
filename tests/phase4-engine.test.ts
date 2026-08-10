@@ -220,7 +220,7 @@ describe("phase 4 engine contracts", () => {
       'commands:\n  shop:\n    description: "open shop"\nname: "Example Mod"\nversion: "1.0-beta.1"\n',
     );
     expect(new TextDecoder().decode(result.files.get("mods.toml"))).toBe(
-      'version = "1.0-beta.1"\n[mod]\nid = "example-mod"\n',
+      'version = "1.0-beta.1"\n\n[mod]\nid = "example-mod"\n',
     );
     expect(
       new TextDecoder().decode(result.files.get("gradle.properties")),
@@ -271,6 +271,18 @@ describe("phase 4 engine contracts", () => {
     expect(build).toContain("JavaLanguageVersion.of(21)");
     expect(build).not.toContain("undefined");
     expect(result.files.get("src/main/resources/assets/icon.png")).toEqual(png);
+  });
+
+  it("retains every mapped field in array table metadata", () => {
+    const result = renderDescriptor("templates/neoforge/descriptor.json", spec);
+    const metadata = new TextDecoder().decode(
+      result.files.get("src/main/resources/META-INF/neoforge.mods.toml"),
+    );
+    expect(metadata).toContain('modId = "example-mod"');
+    expect(metadata).toContain('displayName = "Example Mod"');
+    expect(metadata).toContain("authors = []");
+    expect(metadata).toContain('description = ""');
+    expect(metadata).toContain('version = "1.0-beta.1"');
   });
 
   it("evaluates only the bounded condition language", () => {

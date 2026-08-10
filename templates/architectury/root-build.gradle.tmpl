@@ -1,0 +1,46 @@
+plugins {
+    id 'architectury-plugin' version '${platform.components.architectury-plugin}'
+    id 'dev.architectury.loom' version '${platform.components.architectury-loom}' apply false
+    id 'net.minecraftforge.gradle' version '${platform.components.forge-gradle}' apply false
+}
+
+architectury {
+    minecraft = rootProject.minecraft_version
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    loom {
+        silentMojangMappingsLicense()
+    }
+    dependencies {
+        minecraft 'com.mojang:minecraft:' + rootProject.minecraft_version
+        mappings loom.officialMojangMappings()
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'architectury-plugin'
+    group = rootProject.maven_group
+    version = rootProject.mod_version
+    base {
+        archivesName = rootProject.archives_base_name
+    }
+    repositories {
+        maven { url = uri('https://maven.architectury.dev') }
+        maven { url = uri('https://maven.fabricmc.net') }
+        maven { url = uri('https://maven.minecraftforge.net') }
+        mavenCentral()
+    }
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+    }
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+    tasks.withType(Jar).configureEach {
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+    }
+}

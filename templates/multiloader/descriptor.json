@@ -2,15 +2,8 @@
   "$schema": "urn:mcgen:schema:template-descriptor:1",
   "schemaVersion": 1,
   "id": "multiloader",
-  "revision": 1,
-  "status": "blocked",
-  "blockers": [
-    {
-      "code": "intersection-evidence",
-      "reason": "A multiloader target is selectable only when every selected loader intersection is explicitly evidenced.",
-      "evidence": ["catalog/2026-08-10-final/index.json"]
-    }
-  ],
+  "revision": 2,
+  "status": "reviewed",
   "category": "multiloader",
   "platforms": ["architectury"],
   "profileRefs": ["architectury-multiloader"],
@@ -86,55 +79,79 @@
       "rawOverride": "allowed"
     },
     {
-      "source": "templates/shared/build.gradle.tmpl",
+      "source": "templates/architectury/root-build.gradle.tmpl",
       "destination": "build.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/shared/settings.gradle.tmpl",
+      "source": "templates/multiloader/settings.gradle.tmpl",
       "destination": "settings.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/shared/gradle.properties.tmpl",
+      "source": "templates/architectury/gradle.properties.tmpl",
       "destination": "gradle.properties",
       "renderer": "properties",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/shared/entrypoint.java.tmpl",
+      "source": "templates/architectury/common-entrypoint.java.tmpl",
       "destination": "common/src/main/java/${project.packagePath}/${project.mainClass}.java",
       "renderer": "text",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/multiloader/common-mods.toml.tmpl",
-      "destination": "common/src/main/resources/META-INF/mods.toml",
+      "source": "templates/architectury/common-build.gradle.tmpl",
+      "destination": "common/build.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/fabric-build.gradle.tmpl",
+      "destination": "fabric/build.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/forge-build.gradle.tmpl",
+      "destination": "forge/build.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/forge-gradle.properties.tmpl",
+      "destination": "forge/gradle.properties",
+      "renderer": "properties",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/fabric-entrypoint.java.tmpl",
+      "destination": "fabric/src/main/java/${project.packagePath}/${project.mainClass}Fabric.java",
+      "renderer": "text",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/forge-entrypoint.java.tmpl",
+      "destination": "forge/src/main/java/${project.packagePath}/${project.mainClass}Forge.java",
+      "renderer": "text",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/fabric.mod.json.tmpl",
+      "destination": "fabric/src/main/resources/fabric.mod.json",
+      "renderer": "json",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/architectury/forge.mods.toml.tmpl",
+      "destination": "forge/src/main/resources/META-INF/mods.toml",
       "renderer": "toml",
       "rawOverride": "advanced-only"
     }
   ],
   "renderTargets": [
-    {
-      "id": "multiloader-common-metadata",
-      "path": "common/src/main/resources/META-INF/mods.toml",
-      "format": "toml",
-      "fieldMappings": [
-        {
-          "fieldId": "project-id",
-          "path": "mods[0].modId",
-          "format": "literal"
-        },
-        {
-          "fieldId": "project-version",
-          "path": "mods[0].version",
-          "format": "version"
-        }
-      ],
-      "required": true
-    },
     {
       "id": "advanced-field-extension",
       "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
@@ -152,7 +169,11 @@
       "maxBytes": 1048576,
       "maxWidth": 512,
       "maxHeight": 512,
-      "destinations": ["common/src/main/resources/icon.png"]
+      "destinations": [
+        "common/src/main/resources/icon.png",
+        "fabric/src/main/resources/assets/${project.id}/icon.png",
+        "forge/src/main/resources/assets/${project.id}/icon.png"
+      ]
     }
   ],
   "rawOperations": {

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "${project.id}",
+  "version": "${project.version}",
+  "name": "${project.name}",
+  "description": "${project.description}",
+  "authors": ["${project.authors.0}"],
+  "entrypoints": {
+    "main": ["${project.package}.${project.mainClass}Fabric"]
+  },
+  "depends": {
+    "fabricloader": ">=${platform.components.fabric-loader}",
+    "minecraft": "~${platform.components.minecraft}",
+    "architectury": "*"
+  }
+}

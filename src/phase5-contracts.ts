@@ -121,7 +121,7 @@ export type ArtifactInspection = {
   entries: readonly string[];
   metadata: readonly {
     path: string;
-    format: "json" | "properties" | "text" | "unknown";
+    format: "json" | "properties" | "toml" | "text" | "unknown";
     valid: boolean;
     values: Readonly<Record<string, string>>;
   }[];

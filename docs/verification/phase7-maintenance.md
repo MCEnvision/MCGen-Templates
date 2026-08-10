@@ -2,7 +2,7 @@
 
 ## Status
 
-Phase 7 is in progress on the maintenance branch and is tracked by [issue 25](https://github.com/MCEnvision/MCGen-Templates/issues/25). The first immutable beta release is already verified. The current branch adds the `2026-08-10-final` catalog, ten exact tuple evidence records, and explicit blockers for every nonverified catalog component. Four Forge, NeoForge, and Architectury profile and descriptor boundaries remain blocked. This record describes the deterministic maintenance contracts that must pass before the final repository complete gate is claimed.
+Phase 7 is ready for final review on the maintenance branch and is tracked by [issue 25](https://github.com/MCEnvision/MCGen-Templates/issues/25). The first immutable beta release is already verified. The current branch adds the immutable `2026-08-10-phase7` catalog, fifteen exact tuple evidence records, and explicit blockers for every nonverified catalog component. All fourteen Forge, NeoForge, Architectury, plugin, and proxy profile and descriptor boundaries are reviewed with zero blocked records. This record describes the deterministic maintenance contracts that must pass before the final repository complete gate is claimed.
 
 ## Contracts
 
@@ -49,4 +49,4 @@ Only network outages and transient network failures are retryable. Retry counts 
 
 ## Required evidence
 
-The phase 7 workflow runs the full repository verification, creates a read only monitor observation, executes the recovery simulations, and produces a repository audit artifact. The audit must show all twenty requirements as passed before issue 25 and its Project item can be marked done. Until then, the workflow and this document must report the exact blocker rather than implying final completion.
+The phase 7 workflow runs the full repository verification, creates a read only monitor observation, executes the recovery simulations, and produces a repository audit artifact. The current local audit shows all twenty requirements passed; issue 25 and its Project item remain in review until the reconciliation pull request merges, the signed Phase 7 tag is verified, and the wiki is updated.

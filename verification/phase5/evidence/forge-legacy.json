@@ -1,0 +1,139 @@
+{
+  "$schema": "urn:mcgen:schema:tuple-evidence:1",
+  "artifact": {
+    "bytes": 1933,
+    "entries": [
+      "mcmod.info",
+      "META-INF/MANIFEST.MF",
+      "META-INF/mcgen-advanced-fields.json",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "failures": [],
+    "metadata": [
+      {
+        "format": "json",
+        "path": "mcmod.info",
+        "valid": true,
+        "values": {
+          "[0].authorList[0]": "EnVy",
+          "[0].credits": "",
+          "[0].description": "tuple probe",
+          "[0].logoFile": "icon.png",
+          "[0].mcversion": "1.12.2",
+          "[0].modid": "tuple-probe",
+          "[0].name": "Tuple Probe",
+          "[0].url": "",
+          "[0].version": "1.0.0"
+        }
+      }
+    ],
+    "path": "build/libs/tuple-probe-1.0.0.jar",
+    "sha256": "a0e194a99ce818a2b215d81e3a9064d93acb4fd9c1bd47eb74cac2602275c219",
+    "status": "passed",
+    "warnings": []
+  },
+  "blockers": [],
+  "build": {
+    "commands": [
+      {
+        "command": [
+          "./gradlew",
+          "build"
+        ],
+        "diskBytes": 3825087,
+        "durationMs": 4141,
+        "exitCode": 0,
+        "outputBytes": 790,
+        "outputDigest": "3c642c505a73dbddfad18ae07c14e04784aa69bc1d7e2b99dac1823816cbb811"
+      },
+      {
+        "command": [
+          "./gradlew",
+          "test"
+        ],
+        "diskBytes": 3825087,
+        "durationMs": 2010,
+        "exitCode": 0,
+        "outputBytes": 645,
+        "outputDigest": "e1de12f9f69aac1b67e763a40ab36bb816bb46ceeac946b53085e917abdbcf0f"
+      }
+    ],
+    "finishedAt": "2026-08-10T21:28:54.333Z",
+    "startedAt": "2026-08-10T00:00:00.000Z",
+    "status": "passed"
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "invalidation": {
+    "contentDigests": {
+      "catalog": "9ae57ebaed21bf837569c4acc36dfdef41933fee1c666e60e08789be6ddfc21b",
+      "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
+      "fixture": "cb1f4a76ae3887cc2798a5460e33265bf2a4ec40171fd193e2d0864e3ea6b635",
+      "profile": "7c34968a7f2baf3612b17677eea8412b2ec242fee950b6d855538ebf13b735b0",
+      "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+    },
+    "descriptorRevision": 2,
+    "mappingDigest": "b5aaf696f98390375147ed3d872e73de5c42f919b7738c289088a48d3f02c930",
+    "procedureDigest": "dcd328c6fad5cb37c0c7439df737849f9436c1de2b81aa05d9425a6d06cb6d18",
+    "profileRevision": 2,
+    "sourceDigests": [
+      "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
+      "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+      "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+    ],
+    "wrapperSha256": "c04e350a66b20c3491c15bddbaf162d7d036b7eeec928838f627deb393500fe2"
+  },
+  "key": {
+    "digest": "f193863b84595aa5bee829180aee084468b98caf6acfcc7b74a3fa27e7ee5f88",
+    "identity": {
+      "catalogKey": "1.12.2",
+      "catalogSnapshotId": "2026-08-10-phase7",
+      "components": {
+        "forge": "1.12.2-14.23.5.2859",
+        "forgegradle": "3.0.197",
+        "mcpmappings": "20171003-1.12",
+        "minecraft": "1.12.2"
+      },
+      "contentDigests": {
+        "catalog": "9ae57ebaed21bf837569c4acc36dfdef41933fee1c666e60e08789be6ddfc21b",
+        "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
+        "fixture": "cb1f4a76ae3887cc2798a5460e33265bf2a4ec40171fd193e2d0864e3ea6b635",
+        "profile": "7c34968a7f2baf3612b17677eea8412b2ec242fee950b6d855538ebf13b735b0",
+        "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+      },
+      "descriptorId": "forge",
+      "descriptorRevision": 2,
+      "family": "forge",
+      "fixtureId": "forge.forge-legacy.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 8
+      },
+      "mappingDigest": "b5aaf696f98390375147ed3d872e73de5c42f919b7738c289088a48d3f02c930",
+      "procedureDigest": "dcd328c6fad5cb37c0c7439df737849f9436c1de2b81aa05d9425a6d06cb6d18",
+      "profileId": "forge-legacy",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
+        "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+        "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+      ],
+      "wrapper": {
+        "distributionSha256": "e66e69dce8173dd2004b39ba93586a184628bc6c28461bc771d6835f7f9b0d28",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-4.9-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "c04e350a66b20c3491c15bddbaf162d7d036b7eeec928838f627deb393500fe2",
+        "version": "4.9"
+      }
+    }
+  },
+  "outputTreeDigest": "7066caae60f7b038dbc6092a60ae90c2f018cd074f3c6a58f05e0c84eeec24e2",
+  "reproducibility": {
+    "differences": [],
+    "firstDigest": "7066caae60f7b038dbc6092a60ae90c2f018cd074f3c6a58f05e0c84eeec24e2",
+    "reproducible": true,
+    "secondDigest": "7066caae60f7b038dbc6092a60ae90c2f018cd074f3c6a58f05e0c84eeec24e2"
+  },
+  "schemaVersion": 1,
+  "status": "verified"
+}

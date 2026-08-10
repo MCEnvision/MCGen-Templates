@@ -1,33 +1,24 @@
 {
   "$schema": "urn:mcgen:schema:phase5-audit:1",
-  "schemaVersion": 1,
-  "kind": "phase5-audit",
-  "generatedAt": "2026-08-10T00:00:00.000Z",
-  "status": "verified",
-  "profiles": {
-    "total": 14,
-    "reviewed": 10,
-    "blocked": 4
-  },
+  "blockers": [],
   "descriptors": {
-    "total": 14,
-    "reviewed": 10,
-    "blocked": 4
+    "blocked": 0,
+    "reviewed": 14,
+    "total": 14
   },
+  "digest": "575c1757ee34466c8b506cb015c3cb4b39d996f38212ef945e0d85228f9c660a",
   "evidence": {
-    "total": 10,
-    "verified": 10,
-    "unresolved": 0
+    "total": 15,
+    "unresolved": 0,
+    "verified": 15
   },
-  "blockers": [
-    "descriptor architectury: Architectury generation requires an evidenced intersection for every selected target loader.",
-    "descriptor forge: Forge tuples remain discovered until later compilation and artifact inspection gates pass.",
-    "descriptor multiloader: A multiloader target is selectable only when every selected loader intersection is explicitly evidenced.",
-    "descriptor neoforge: NeoForge toolchain boundaries remain discovered until later compilation and artifact inspection gates pass.",
-    "profile architectury-multiloader: Architectury targets must prove a common Minecraft, mappings, Fabric, Forge, or NeoForge intersection before generation.",
-    "profile forge-legacy: ForgeGradle, mappings, wrapper, and JDK boundaries still require tuple specific build evidence.",
-    "profile forge-modern: Modern ForgeGradle and metadata boundaries need tuple specific build evidence.",
-    "profile neoforge-modern: NeoGradle and ModDevGradle require separate, tuple specific verification before selection is enabled."
-  ],
-  "digest": "c51535d7643f05d3c469c6a20c67c4659b42978d0506a6b96d9c76160ba9e19c"
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "kind": "phase5-audit",
+  "profiles": {
+    "blocked": 0,
+    "reviewed": 14,
+    "total": 14
+  },
+  "schemaVersion": 1,
+  "status": "verified"
 }

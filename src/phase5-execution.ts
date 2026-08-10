@@ -87,8 +87,10 @@ async function outputTreeFiles(
     if (
       entry.isDirectory() &&
       ([".gradle", ".git", "logs"].includes(entry.name) ||
-        relativePath === "build/loom-cache" ||
-        relativePath.startsWith("build/loom-cache/"))
+        /(?:^|\/)build\/(?:loom-cache|reobfJar|tmp\/createMinecraftArtifacts)(?:\/|$)/u.test(
+          relativePath,
+        ) ||
+        /^(?:common|forge)\/build(?:\/|$)/u.test(relativePath))
     )
       continue;
     if (entry.isSymbolicLink())

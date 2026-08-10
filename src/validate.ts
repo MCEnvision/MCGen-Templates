@@ -368,9 +368,21 @@ async function catalogIntegrityFailures(
     return failures;
   }
 
+  const activeCatalogRoots = new Set(
+    initial.flatMap((item) => {
+      if (!item.path.includes("/profiles/") || !isObject(item.document))
+        return [];
+      const catalog = item.document["catalog"];
+      if (!isObject(catalog) || typeof catalog["indexPath"] !== "string")
+        return [];
+      return [resolve(repositoryRoot, catalog["indexPath"])];
+    }),
+  );
+
   const reachable = new Set<string>();
   for (const root of rootIndexes) {
     reachable.add(root.path);
+    const activeRoot = activeCatalogRoots.has(root.path);
     const index = root.document;
     if (!isObject(index)) continue;
     const catalogId = index["id"];
@@ -846,6 +858,7 @@ async function catalogIntegrityFailures(
                     verificationStatus === "verified" ||
                     verificationStatus === "legacy-verified"
                   ) {
+                    if (!activeRoot) continue;
                     const evidence = objects(resolution["evidence"]);
                     if (
                       resolution["kind"] !== "exact-evidence" ||

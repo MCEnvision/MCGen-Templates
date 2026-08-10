@@ -2,15 +2,8 @@
   "$schema": "urn:mcgen:schema:template-descriptor:1",
   "schemaVersion": 1,
   "id": "neoforge",
-  "revision": 1,
-  "status": "blocked",
-  "blockers": [
-    {
-      "code": "tuple-build-evidence",
-      "reason": "NeoForge toolchain boundaries remain discovered until later compilation and artifact inspection gates pass.",
-      "evidence": ["catalog/2026-08-10-final/index.json"]
-    }
-  ],
+  "revision": 2,
+  "status": "reviewed",
   "category": "mod",
   "platforms": ["neoforge"],
   "profileRefs": ["neoforge-modern"],
@@ -91,13 +84,13 @@
       "rawOverride": "allowed"
     },
     {
-      "source": "templates/shared/build.gradle.tmpl",
+      "source": "templates/neoforge/build.gradle.tmpl",
       "destination": "build.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/shared/settings.gradle.tmpl",
+      "source": "templates/neoforge/settings.gradle.tmpl",
       "destination": "settings.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
@@ -130,6 +123,21 @@
         {
           "fieldId": "project-id",
           "path": "mods[0].modId",
+          "format": "literal"
+        },
+        {
+          "fieldId": "project-name",
+          "path": "mods[0].displayName",
+          "format": "literal"
+        },
+        {
+          "fieldId": "authors",
+          "path": "mods[0].authors",
+          "format": "literal"
+        },
+        {
+          "fieldId": "description",
+          "path": "mods[0].description",
           "format": "literal"
         },
         {

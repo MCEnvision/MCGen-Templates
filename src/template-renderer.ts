@@ -155,16 +155,38 @@ function tomlValue(value: unknown): string {
   return scalar(value, "toml");
 }
 
-function toml(value: unknown, prefix = ""): string {
-  if (value === null || typeof value !== "object" || Array.isArray(value))
-    throw new Error("toml metadata must be an object");
-  const entries = Object.entries(value as Record<string, unknown>).sort(
-    ([left], [right]) => left.localeCompare(right),
+function tomlObject(value: Record<string, unknown>, prefix = ""): string[] {
+  const entries = Object.entries(value).sort(([left], [right]) =>
+    left.localeCompare(right),
   );
   const lines: string[] = [];
   const nested: [string, Record<string, unknown>][] = [];
+  const tables: [string, Record<string, unknown>][] = [];
   for (const [key, item] of entries) {
-    if (item !== null && typeof item === "object" && !Array.isArray(item)) {
+    if (Array.isArray(item)) {
+      if (
+        item.some(
+          (candidate) => candidate !== null && typeof candidate === "object",
+        )
+      ) {
+        if (
+          item.some(
+            (candidate) =>
+              candidate === null ||
+              typeof candidate !== "object" ||
+              Array.isArray(candidate),
+          )
+        )
+          throw new Error("toml arrays of tables must contain only objects");
+        for (const candidate of item) {
+          tables.push([key, candidate as Record<string, unknown>]);
+        }
+      } else {
+        lines.push(`${tomlKey(key)} = ${tomlValue(item)}`);
+      }
+      continue;
+    }
+    if (item !== null && typeof item === "object") {
       nested.push([key, item as Record<string, unknown>]);
       continue;
     }
@@ -174,9 +196,21 @@ function toml(value: unknown, prefix = ""): string {
     if (lines.length > 0) lines.push("");
     const section = prefix ? `${prefix}.${key}` : key;
     lines.push(`[${section.split(".").map(tomlKey).join(".")}]`);
-    lines.push(toml(item, section).trimEnd());
+    lines.push(...tomlObject(item, section));
   }
-  return `${lines.filter((line, index) => line || index === 0).join("\n")}\n`;
+  for (const [key, item] of tables) {
+    if (lines.length > 0) lines.push("");
+    const section = prefix ? `${prefix}.${key}` : key;
+    lines.push(`[[${section.split(".").map(tomlKey).join(".")}]]`);
+    lines.push(...tomlObject(item, section));
+  }
+  return lines;
+}
+
+function toml(value: unknown): string {
+  if (value === null || typeof value !== "object" || Array.isArray(value))
+    throw new Error("toml metadata must be an object");
+  return `${tomlObject(value as Record<string, unknown>).join("\n")}\n`;
 }
 
 function yamlScalar(value: unknown): string {
@@ -328,7 +362,13 @@ function setPath(
         throw new Error("metadata mapping array index is invalid");
       if (last) current[position] = value;
       else {
-        const next: Record<string, unknown> = {};
+        const existing = current[position];
+        const next: Record<string, unknown> =
+          existing !== null &&
+          typeof existing === "object" &&
+          !Array.isArray(existing)
+            ? (existing as Record<string, unknown>)
+            : {};
         current[position] = next;
         current = next;
       }
@@ -339,9 +379,13 @@ function setPath(
       return;
     }
     const nextSegment = segments[index + 1] ?? "";
-    const next: Record<string, unknown> | unknown[] = /^\d+$/u.test(nextSegment)
-      ? []
-      : {};
+    const existing = current[segment];
+    const next: Record<string, unknown> | unknown[] =
+      existing !== null && typeof existing === "object"
+        ? (existing as Record<string, unknown> | unknown[])
+        : /^\d+$/u.test(nextSegment)
+          ? []
+          : {};
     current[segment] = next;
     current = next;
   });

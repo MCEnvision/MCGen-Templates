@@ -1,0 +1,225 @@
+{
+  "$schema": "urn:mcgen:schema:phase5-execution:1",
+  "artifact": {
+    "expectation": {
+      "entrypointClasses": [
+        "org.example.tuple.TupleProbe"
+      ],
+      "expectedExtension": ".jar",
+      "iconPaths": [],
+      "maxEntries": 128,
+      "metadataFields": {
+        "mods[0].displayName": "Tuple Probe",
+        "mods[0].modId": "tuple-probe",
+        "mods[0].version": "1.0.0"
+      },
+      "metadataPaths": [
+        "META-INF/mods.toml"
+      ],
+      "patterns": [
+        "build/libs/*.jar"
+      ],
+      "projectIdentity": {
+        "id": "tuple-probe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "requiredEntries": [
+        "META-INF/mods.toml",
+        "org/example/tuple/TupleProbe.class"
+      ],
+      "resourceNamespaces": []
+    },
+    "path": "build/libs/tuple-probe-1.0.0.jar"
+  },
+  "build": {
+    "commands": [
+      {
+        "args": [
+          "build"
+        ],
+        "executable": "./gradlew",
+        "purpose": "build"
+      },
+      {
+        "args": [
+          "test"
+        ],
+        "executable": "./gradlew",
+        "purpose": "unit-tests"
+      }
+    ],
+    "java": {
+      "distribution": "temurin",
+      "runtime": 17
+    },
+    "limits": {
+      "artifactRetentionDays": 30,
+      "maxDiskBytes": 4294967296,
+      "maxOutputBytes": 67108864,
+      "retries": 1,
+      "timeoutMs": 900000
+    },
+    "rawOverridePolicy": "never-execute",
+    "workDirectoryPolicy": "isolated-clean",
+    "wrapper": {
+      "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+      "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+      "kind": "launcher-script",
+      "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+      "version": "8.8"
+    }
+  },
+  "fixture": {
+    "descriptorPath": "templates/forge/descriptor.json",
+    "fixture": {
+      "id": "forge.forge-modern.minimal-java.java",
+      "kind": "minimal-java",
+      "language": "java",
+      "rawOverride": false,
+      "version": "1.0.0"
+    },
+    "spec": {
+      "$schema": "urn:mcgen:schema:project-spec:1",
+      "assets": [],
+      "build": {
+        "dsl": "groovy",
+        "javaLanguage": 17,
+        "system": "gradle"
+      },
+      "dependencies": [],
+      "extensions": {},
+      "features": [],
+      "fileOperations": [],
+      "metadata": {},
+      "mode": "simple",
+      "platform": {
+        "catalogKey": "1.20.1",
+        "components": {
+          "forge": "1.20.1-47.1.0",
+          "forgeVersion": "47.1.0",
+          "forgegradle": "6.0.47",
+          "minecraft": "1.20.1"
+        },
+        "id": "forge",
+        "java": 17,
+        "javaLanguage": 17,
+        "loader": "0.14.23"
+      },
+      "project": {
+        "archiveName": "tuple-probe",
+        "artifactId": "tuple-probe",
+        "authors": [
+          "EnVy"
+        ],
+        "description": "tuple probe",
+        "groupId": "org.example.tuple",
+        "id": "tuple-probe",
+        "license": "MIT",
+        "mainClass": "TupleProbe",
+        "name": "Tuple Probe",
+        "package": "org.example.tuple",
+        "version": "1.0.0"
+      },
+      "publishing": {},
+      "repositories": [],
+      "repository": {},
+      "schemaVersion": 1,
+      "sourceLayout": {},
+      "targetOverrides": [],
+      "template": "forge"
+    },
+    "tuple": {
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-10-phase7",
+      "components": {
+        "forge": "1.20.1-47.1.0",
+        "forgeVersion": "47.1.0",
+        "forgegradle": "6.0.47",
+        "minecraft": "1.20.1"
+      },
+      "contentDigests": {
+        "catalog": "0921cd2648d66043a3b8c5a381181a37be17fbf55a261d29cbb94fc09ffe29e7",
+        "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
+        "fixture": "8256d470837092082c355e46a0ff6cec30744beed96293e3d8df8c5ec10ce931",
+        "profile": "a3b79010fe64644bb87fdc3f9bc8da07d7324f167f1bae60a6c7d2786d2a9086",
+        "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+      },
+      "descriptorId": "forge",
+      "descriptorRevision": 2,
+      "family": "forge",
+      "fixtureId": "forge.forge-modern.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "23d3caf1c657abef0bc079d85a71c36af137ec5779a8c9c0f6b132509feba2b9",
+      "procedureDigest": "1d52c5d453abfa9348bc9fe276235f023cedc36095c9e23545ae64439dc45a28",
+      "profileId": "forge-modern",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
+        "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+        "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    }
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "profilePath": "profiles/forge-modern.json",
+  "tuple": {
+    "blockers": [],
+    "id": "28d7aa77389e1c0ee2af7b1ae7228f632483180ea322131df04d288313cb476e",
+    "identity": {
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-10-phase7",
+      "components": {
+        "forge": "1.20.1-47.1.0",
+        "forgeVersion": "47.1.0",
+        "forgegradle": "6.0.47",
+        "minecraft": "1.20.1"
+      },
+      "contentDigests": {
+        "catalog": "0921cd2648d66043a3b8c5a381181a37be17fbf55a261d29cbb94fc09ffe29e7",
+        "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
+        "fixture": "8256d470837092082c355e46a0ff6cec30744beed96293e3d8df8c5ec10ce931",
+        "profile": "a3b79010fe64644bb87fdc3f9bc8da07d7324f167f1bae60a6c7d2786d2a9086",
+        "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+      },
+      "descriptorId": "forge",
+      "descriptorRevision": 2,
+      "family": "forge",
+      "fixtureId": "forge.forge-modern.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "23d3caf1c657abef0bc079d85a71c36af137ec5779a8c9c0f6b132509feba2b9",
+      "procedureDigest": "1d52c5d453abfa9348bc9fe276235f023cedc36095c9e23545ae64439dc45a28",
+      "profileId": "forge-modern",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
+        "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+        "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    },
+    "status": "discovered"
+  },
+  "wrapperPath": "gradlew",
+  "wrapperSource": "templates/spigot/gradlew-modern.tmpl"
+}

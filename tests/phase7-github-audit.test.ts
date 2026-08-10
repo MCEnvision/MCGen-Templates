@@ -80,7 +80,7 @@ describe("phase 7 GitHub audit", () => {
     expect(audit.capabilities.every((item) => item.evidence.length > 0)).toBe(
       true,
     );
-    expect(audit.status).toBe("blocked");
+    expect(audit.status).toBe("passed");
     expect(
       audit.capabilities.find((item) => item.id === "catalog-coverage")?.state,
     ).toBe("passed");
@@ -90,7 +90,7 @@ describe("phase 7 GitHub audit", () => {
     ).toBe("passed");
     expect(
       audit.capabilities.find((item) => item.id === "forge-toolchain")?.state,
-    ).toBe("blocked");
+    ).toBe("passed");
     expect(
       audit.capabilities.find((item) => item.id === "tuple-evidence")?.state,
     ).toBe("passed");

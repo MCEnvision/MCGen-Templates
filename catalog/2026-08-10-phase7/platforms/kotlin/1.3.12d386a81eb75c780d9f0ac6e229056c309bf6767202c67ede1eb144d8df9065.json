@@ -1,0 +1,579 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.008de6ad1b5a39d3d1751d8e",
+  "category": "toolchain",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.0",
+      "id": "component.kotlin.3302523e6d09cad0ebe0dbbe",
+      "sourceEntries": [
+        {
+          "entryIndex": 32,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.0"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.0-rc-190",
+      "id": "component.kotlin.a6d02c82cf7f1381934aeebf",
+      "sourceEntries": [
+        {
+          "entryIndex": 33,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.0-rc-190"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.0-rc-198",
+      "id": "component.kotlin.859c2fef654bfa63ef525098",
+      "sourceEntries": [
+        {
+          "entryIndex": 34,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.0-rc-198"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.10",
+      "id": "component.kotlin.f981eae6d1138a0e8f08fea6",
+      "sourceEntries": [
+        {
+          "entryIndex": 35,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.10"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.11",
+      "id": "component.kotlin.adcac72a98a6633ab8ccdca5",
+      "sourceEntries": [
+        {
+          "entryIndex": 36,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.11"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.20",
+      "id": "component.kotlin.ca292424763cb4cd74b02a0d",
+      "sourceEntries": [
+        {
+          "entryIndex": 37,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.20"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.21",
+      "id": "component.kotlin.7aa139542f07501e67b1d6ab",
+      "sourceEntries": [
+        {
+          "entryIndex": 38,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.21"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.30",
+      "id": "component.kotlin.5aa1d12040d6cac74154e3c3",
+      "sourceEntries": [
+        {
+          "entryIndex": 39,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.30"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.31",
+      "id": "component.kotlin.2ede43e61ff6b3da69520551",
+      "sourceEntries": [
+        {
+          "entryIndex": 40,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.31"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.40",
+      "id": "component.kotlin.bebb12c30004a70d2c0614a8",
+      "sourceEntries": [
+        {
+          "entryIndex": 41,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.40"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.41",
+      "id": "component.kotlin.a895fe1773a98ac7f1c69620",
+      "sourceEntries": [
+        {
+          "entryIndex": 42,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.41"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.50",
+      "id": "component.kotlin.e9b083fd74b64f151465987e",
+      "sourceEntries": [
+        {
+          "entryIndex": 43,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.50"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.60",
+      "id": "component.kotlin.e2e5d21f35b35bc0164bc4bc",
+      "sourceEntries": [
+        {
+          "entryIndex": 44,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.60"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.61",
+      "id": "component.kotlin.6ba9063d8c650b00a5a159cf",
+      "sourceEntries": [
+        {
+          "entryIndex": 45,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.61"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.70",
+      "id": "component.kotlin.a7cfb5e2dbc079c94b895137",
+      "sourceEntries": [
+        {
+          "entryIndex": 46,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.70"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.71",
+      "id": "component.kotlin.05ede78b63103118132b0d2d",
+      "sourceEntries": [
+        {
+          "entryIndex": 47,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.71"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "kotlin-jvm-plugin",
+      "coordinate": "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.3.72",
+      "id": "component.kotlin.fae39bf16f5db7a938a98f06",
+      "sourceEntries": [
+        {
+          "entryIndex": 48,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.3.72"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 47,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.05ede78b63103118132b0d2d"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 40,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.2ede43e61ff6b3da69520551"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 32,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.3302523e6d09cad0ebe0dbbe"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 39,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.5aa1d12040d6cac74154e3c3"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 45,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.6ba9063d8c650b00a5a159cf"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 38,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.7aa139542f07501e67b1d6ab"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 34,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.859c2fef654bfa63ef525098"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 33,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.a6d02c82cf7f1381934aeebf"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 46,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.a7cfb5e2dbc079c94b895137"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 42,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.a895fe1773a98ac7f1c69620"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 36,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.adcac72a98a6633ab8ccdca5"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 41,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.bebb12c30004a70d2c0614a8"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 37,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.ca292424763cb4cd74b02a0d"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 44,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.e2e5d21f35b35bc0164bc4bc"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 43,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.e9b083fd74b64f151465987e"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 35,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.f981eae6d1138a0e8f08fea6"
+    },
+    {
+      "confidence": "published",
+      "from": "target.kotlin.bb006d645148ff312a524418",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 48,
+          "snapshotId": "kotlin.576b1748d0cc1e310a956f71",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.kotlin.fae39bf16f5db7a938a98f06"
+    }
+  ],
+  "id": "catalog.kotlin.b1d4232e732484b488b3fe99",
+  "key": "1.3",
+  "keyKind": "api",
+  "platform": "kotlin",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "kotlin.576b1748d0cc1e310a956f71"
+  ]
+}

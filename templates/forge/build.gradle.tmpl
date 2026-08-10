@@ -1,0 +1,70 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.47'
+    id 'java'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+base {
+    archivesName = '${project.archiveName}'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'forge'
+        url = uri('https://maven.minecraftforge.net/')
+    }
+}
+
+minecraft {
+    mappings channel: 'official', version: '${platform.components.minecraft}'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                '${project.id}' {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${platform.components.minecraft}-${platform.components.forgeVersion}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+        minecraft_version: '${platform.components.minecraft}',
+        forge_version: '${platform.components.forgeVersion}',
+        loader_version_range: '[${platform.loader},)',
+        mod_id: '${project.id}',
+        mod_name: '${project.name}',
+        mod_license: '${project.license}',
+        mod_version: '${project.version}',
+        mod_authors: ${project.authors},
+        mod_description: '${project.description}'
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml']) {
+        expand replaceProperties + [project: project]
+    }
+}
