@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:common:1",
+  "title": "MCGen common contract definitions",
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "maxLength": 128
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "stabilityChannel": {
+      "enum": [
+        "release",
+        "release-candidate",
+        "beta",
+        "alpha",
+        "snapshot",
+        "custom"
+      ]
+    },
+    "verificationStatus": {
+      "enum": [
+        "discovered",
+        "resolvable",
+        "verified",
+        "legacy-verified",
+        "experimental",
+        "blocked",
+        "withdrawn",
+        "broken",
+        "deprecated",
+        "custom-unverified"
+      ]
+    }
+  }
+}

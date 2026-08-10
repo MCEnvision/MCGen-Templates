@@ -5,6 +5,16 @@
 
 ---
 
+## Implementation Status
+
+The GitHub foundation gate completed on August 9, 2026. Pull request `6` merged at commit `c044312f3a0786057c629122054f2451996dd78c`, both required quality checks passed on the pull request and `main`, and the merged commit received the verified signed annotated tag `phase-0-github-foundation`.
+
+The active repository-owned work is the remaining Phase 0 template-pack contract foundation on `envy/phase_0_template_pack_contracts`. This slice introduces the versioned serialized contracts, deterministic validation tooling, authoritative source-adapter boundary, and first reproducible Mojang and Forge metadata snapshot. It does not publish a template family or mark any compatibility tuple verified.
+
+Repository tooling uses Node.js 22, npm lockfiles, TypeScript 5.9, JSON Schema Draft 2020-12, and repository-defined formatting, linting, type-checking, tests, builds, schema validation, and snapshot verification. Application code remains owned by the future `MCEnvision/MCGen` repository.
+
+---
+
 ## 1. Executive Summary
 
 MCGen will provide a single, intuitive way to create Minecraft development projects without requiring IntelliJ IDEA or the Minecraft Development plugin.
@@ -3426,6 +3436,8 @@ New GitHub repository creation remains an MVP target only after the GitHub App A
 
 # 99. Phase 0 — Repository Foundation
 
+Status: the GitHub collaboration, security, planning, ruleset, environment, wiki, and release-control foundation is complete. The active Phase 0 work is now the repository-owned schema, source-adapter, catalog, profile, deterministic pack, and verification foundation. License selection and production or GitHub App decisions remain explicit owner decisions and do not permit importing third-party template content.
+
 Tasks:
 
 - Decide project name.
@@ -5743,3 +5755,5 @@ The GitHub foundation gate passes only when:
 9. Organization hard-stop budgets are verified before scheduled workflows are enabled.
 10. The merged GitHub foundation commit has a verified signed annotated tag.
 11. No product implementation branch is created before criteria 1 through 10 pass, except that criterion 7 may remain blocked solely on owner authorization for the required token scope.
+
+The gate passed on August 9, 2026. Roadmap Project `9` is linked and synchronized, the exact wiki navigation is published, organization hard-stop budgets remain enabled, and the signed `phase-0-github-foundation` tag identifies the approved merge commit. Later work must preserve these controls and return to ordinary sequential phase pull requests.

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:source-definition:1",
+  "title": "MCGen authoritative source definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "id",
+    "platform",
+    "category",
+    "adapter",
+    "primaryUrl",
+    "prerequisiteUrls",
+    "corroboratingUrls",
+    "removalPolicy",
+    "requestPolicy"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:source-definition:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "category": { "enum": ["mod", "plugin", "proxy", "multiloader"] },
+    "adapter": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "primaryUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "prerequisiteUrls": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" },
+      "uniqueItems": true
+    },
+    "corroboratingUrls": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" },
+      "uniqueItems": true
+    },
+    "removalPolicy": { "const": "additive-only" },
+    "requestPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timeoutMs", "maxBytes"],
+      "properties": {
+        "timeoutMs": { "type": "integer", "minimum": 1000, "maximum": 120000 },
+        "maxBytes": { "type": "integer", "minimum": 1024, "maximum": 52428800 }
+      }
+    }
+  }
+}

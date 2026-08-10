@@ -54,17 +54,17 @@ Documentation must distinguish planned behavior from implemented behavior. Examp
 
 ## Current Verification
 
-Until implementation manifests exist, run:
+Use Node.js 22 and the locked npm dependency graph. Run:
 
 ```bash
+npm ci
+npm run verify
 git diff --check
-git status --short
-git ls-files
 ```
 
-Also verify Markdown fence pairing, links, paths, secrets, machine-local files, and the complete diff. GitHub quality checks provide documentation and credential validation.
+`npm run verify` runs formatting, linting, type checking, unit tests, compilation, and canonical schema validation. Also verify Markdown fence pairing, links, paths, secrets, machine-local files, source evidence, snapshot deltas, and the complete diff. GitHub quality checks provide locked Node.js verification, documentation validation, credential scanning, and dependency review.
 
-Future implementation phases will add repository-specific schema, unit, property, snapshot, generation, build, artifact, and coverage commands.
+Future implementation phases will add property, generation, exact tuple build, artifact, and coverage commands as the corresponding systems become real.
 
 ## Security
 

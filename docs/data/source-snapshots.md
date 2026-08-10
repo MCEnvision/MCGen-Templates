@@ -1,0 +1,34 @@
+# Source Snapshots
+
+## Purpose
+
+Source snapshots preserve exactly what authoritative upstream systems published and exactly how MCGen normalized it. They are discovery evidence, not generated project templates and not proof that a compatibility tuple builds.
+
+Every snapshot records its schema version, adapter identity, retrieval time, final response URL, media type, cache validators when available, byte count, SHA-256 response digest, normalized entries, rejected values, and warnings. Snapshot identity is derived from the adapter identity and ordered source digests. A repeated capture of unchanged bytes with the same adapter therefore has the same identity even though retrieval timestamps differ.
+
+## Forge Capture
+
+The first Forge snapshot is [`sources/snapshots/forge/2026-08-09.json`](../../sources/snapshots/forge/2026-08-09.json). It uses:
+
+- Mojang version manifest SHA-256 `380769b566afa9e768c82e1337fa3af3052aea47c7a9fe09d2c5a96edcef2e6c`.
+- Forge Maven metadata SHA-256 `a77d717fdf878c11ef7dedb05bdebb02d1e756b6e1a48279489d26d6ad7ae220`.
+- Adapter `forge-maven` version `1.0.2`.
+- Snapshot identity `forge.a2da6567ebd0bf6f7978e735`.
+
+The normalized result contains `5,033` exact `net.minecraftforge:forge` artifacts across `77` catalog keys. It classifies `5,023` release artifacts and `10` prerelease artifacts, and it has zero rejected artifacts. Catalog keys `1.4.0` and `1.7.10_pre4` are absent from the current Mojang manifest, so the adapter derives those strict historic keys from the official Forge coordinates, uses Forge evidence only for those entries, and records explicit warnings.
+
+## Capture Command
+
+Use an unused repository-relative output path:
+
+```bash
+npm run snapshot:forge -- --output sources/snapshots/forge/YYYY-MM-DD.json
+```
+
+The command fetches both sources concurrently with a 30 second timeout and a 16 MiB response limit, rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
+
+## Reconciliation Rules
+
+Snapshots are immutable evidence. A later capture is additive by default. It may not automatically delete an earlier entry or replace a prior digest. Unexpected removals, new rejected values, response mutations, parser failures, empty responses, and large count changes require review before catalog reconciliation.
+
+The committed snapshot currently proves source discovery only. ForgeGradle, Gradle, Java, mappings, recommendation policy, profile resolution, template generation, compilation, and artifact inspection remain separate evidence gates.

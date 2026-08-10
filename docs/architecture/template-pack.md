@@ -58,6 +58,10 @@ Source adapters fetch authoritative upstream metadata outside generator core. Ea
 
 An outage retains the last-known-good snapshot and marks it stale. Empty responses, parser failures, unexpected removals, or artifact mutations never delete catalog data automatically.
 
+The implemented Forge adapter uses the Mojang version manifest as catalog-key corroboration and official Forge Maven metadata as primary discovery. It retains every exact Forge artifact. Strict historic Forge keys missing from the current Mojang manifest remain discoverable from their official Forge coordinate and carry an explicit warning instead of being discarded.
+
+Source snapshots contain response URLs after redirects, retrieval timestamps, media types, cache validators when supplied, byte counts, SHA-256 digests, adapter identity, normalized entries, rejected values, and warnings. Snapshot identity depends on adapter identity and ordered source digests, not retrieval time.
+
 ## Generator Boundary
 
 The future generator core receives a pinned pack, catalog snapshot, resolved tuple, validated project specification, and asset resolver. It returns a virtual file tree and performs no filesystem, GitHub, browser, or network effects.

@@ -19,10 +19,11 @@ jobs:
     permissions:
       actions: read
       contents: read
-    uses: MCEnvision/.github/.github/workflows/quality.yml@52eb01f2a9d378693156c88e03e41dcb9f5e25bb
+    uses: MCEnvision/.github/.github/workflows/quality.yml@c5a9c2ee5002d40b20002f543866a19f52a8e3af
     with:
-      shared-ref: "52eb01f2a9d378693156c88e03e41dcb9f5e25bb"
+      shared-ref: "c5a9c2ee5002d40b20002f543866a19f52a8e3af"
       gradle-enabled: false
-      node-enabled: false
-      native-security: false
+      node-enabled: true
+      node-version: "22"
+      native-security: true
       enforce-docs-layout: true

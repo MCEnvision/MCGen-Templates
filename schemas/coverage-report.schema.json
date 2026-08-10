@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:coverage-report:1",
+  "title": "MCGen public coverage report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "catalogDigest",
+    "generatedAt",
+    "platforms"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:coverage-report:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "catalogDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["platform", "discovered", "statuses", "unexplainedGaps"],
+        "properties": {
+          "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "discovered": { "type": "integer", "minimum": 0 },
+          "statuses": {
+            "type": "object",
+            "additionalProperties": { "type": "integer", "minimum": 0 }
+          },
+          "unexplainedGaps": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 2048 }
+          }
+        }
+      }
+    }
+  }
+}
