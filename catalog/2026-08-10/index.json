@@ -1,0 +1,157 @@
+{
+  "$schema": "urn:mcgen:schema:catalog-index:1",
+  "coverage": {
+    "path": "catalog/2026-08-10/coverage.json",
+    "sha256": "f971865af9b2227d6a8a90eb04409399a23d33f697df99ab0b551ea4f78cb148"
+  },
+  "id": "catalog.8c773be4f246b07e7bf6fa49",
+  "platforms": [
+    {
+      "path": "catalog/2026-08-10/platforms/architectury/index.json",
+      "platform": "architectury",
+      "sha256": "95cf2ca3c0927468943c4009132a437c6db141f1d74cbe0937dad0a1358d3447"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/bukkit/index.json",
+      "platform": "bukkit",
+      "sha256": "92ada73f1bcc7bc320cd351b394cd682da6f11748493ba0b6f4503d1962f43d0"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/bungeecord/index.json",
+      "platform": "bungeecord",
+      "sha256": "406b32dc514ac4932f05ab64def09d96dca20993b2e81f9bc57adfecd77cfaf9"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/fabric/index.json",
+      "platform": "fabric",
+      "sha256": "9a1d04ae4cd24182f64d51e60e7822f082235387eb719b799c90d6a7f72deddc"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/forge/index.json",
+      "platform": "forge",
+      "sha256": "3e94c8500ce7f692d136b25a613796f59cff1fc959b3645c695e25dc539da466"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/gradle/index.json",
+      "platform": "gradle",
+      "sha256": "ad1a169d66dd621eb09b330eabeb491e722b357276964939dfbf3e20bf700987"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/kotlin/index.json",
+      "platform": "kotlin",
+      "sha256": "0f0dd90e014401b67fb41644f144b7c9f6a01a55234fabeb5efee402207dc192"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/minecraft/index.json",
+      "platform": "minecraft",
+      "sha256": "56bffbadd7099589ab37228db06670017feb813714206f010bb2551884bd7483"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/neoforge/index.json",
+      "platform": "neoforge",
+      "sha256": "11dfc424794c169649030805272ac3ec0604a836c2bd61d8cd4da9b14b14aeb8"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/paper/index.json",
+      "platform": "paper",
+      "sha256": "6de2bc9d6bbaa35458c71e0f075882d92f2d24ba25887786ec49935b83e88a9c"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/spigot/index.json",
+      "platform": "spigot",
+      "sha256": "172b3547fa61954a718686d33c1de1b65c838cb508d43581b2269d996da2dbe1"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/sponge/index.json",
+      "platform": "sponge",
+      "sha256": "cd97195952f275f3e64468dc40e619c832bb3f037bacb002ffe7c0feccb784ea"
+    },
+    {
+      "path": "catalog/2026-08-10/platforms/velocity/index.json",
+      "platform": "velocity",
+      "sha256": "9a7a982a8fbb8696eb3510ea392ed0be81a524417c69dc8d95ec015cf9242bc5"
+    }
+  ],
+  "recommendationPolicy": {
+    "path": "catalog/2026-08-10/recommendation-policy.json",
+    "sha256": "aa6ecd701008bf351dd97fe2b0556a4a9f327f00ef48996651578f693d339b1c"
+  },
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    {
+      "digest": "6ba4b9743482e08ab1d87c7c4a3c9d034d8ca160a6d522b493b352e5ec1aa305",
+      "id": "architectury.df9f4c866e0c6749913054ad",
+      "path": "sources/snapshots/architectury/2026-08-10.json"
+    },
+    {
+      "digest": "313a5fe334b8c5c571464509e124fecc9f13213cbc34304e04b40a9f3f0347da",
+      "id": "bukkit.d6706b848d7d7899f7a09e7c",
+      "path": "sources/snapshots/bukkit/2026-08-10.json"
+    },
+    {
+      "digest": "fb6540713ef82146f2103175f715c846b85bd6785c758255e20aef1d52db8c0a",
+      "id": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+      "path": "sources/snapshots/bungeecord/2026-08-10.json"
+    },
+    {
+      "digest": "31f45e883556b47b44a1c8555a6031f9746b9cf8bbf2977f8467ad629d31bb0a",
+      "id": "fabric.d4a830165f36e4b71ba21ed0",
+      "path": "sources/snapshots/fabric/2026-08-10.json"
+    },
+    {
+      "digest": "7fdd10529ee3e4330e9f193bdaa9111781e875bc2fd3e1b658b29077b75be24c",
+      "id": "forge.7bb8d1fe2c4ab6007a79b73a",
+      "path": "sources/snapshots/forge/2026-08-10.json"
+    },
+    {
+      "digest": "925df9729c07173dd95bc204dd211eb9b5575c1f9cffa459b90be916bf2bc88d",
+      "id": "forge.a2da6567ebd0bf6f7978e735",
+      "path": "sources/snapshots/forge/2026-08-09.json"
+    },
+    {
+      "digest": "28ecc399d26b1d5638c6e0e99233ecb8b8f4c164df7456a13ceb61c5f7dc866b",
+      "id": "gradle.de13586552d90031cb212ed1",
+      "path": "sources/snapshots/gradle/2026-08-10.json"
+    },
+    {
+      "digest": "08a2253c9144a0723975c063079c620a5b39ebe378aac77f4633a78b3fd0b025",
+      "id": "java.b1cb2c43c11d7da60cae7817",
+      "path": "sources/snapshots/java/2026-08-10.json"
+    },
+    {
+      "digest": "e659da1b7af9d79f56297d01d296a2da1d850a7e09de93a498c87e1f2a432564",
+      "id": "kotlin.576b1748d0cc1e310a956f71",
+      "path": "sources/snapshots/kotlin/2026-08-10.json"
+    },
+    {
+      "digest": "2e0bec43e1f657788fda615a420909d506effcd2e3d5f2b2efd9c4f755de7fda",
+      "id": "mojang.378f919a766c4184b3ce9210",
+      "path": "sources/snapshots/mojang/2026-08-10.json"
+    },
+    {
+      "digest": "0e8f9f5cc96b41e356da1b9d914f07587afe05f733da03f947410762d95ce6f1",
+      "id": "neoforge.ca7ae6afb4470d1ea6f55629",
+      "path": "sources/snapshots/neoforge/2026-08-10.json"
+    },
+    {
+      "digest": "96d0917ca7927717fe6718b6808e07ab38b105ee73ea1aafabc8b42c96778261",
+      "id": "paper.f7956eeac913ab4015ccf80e",
+      "path": "sources/snapshots/paper/2026-08-10.json"
+    },
+    {
+      "digest": "e554825b994b999d2bfce50764b1bbb99a5c24f253d99718a2921cf0169ae24f",
+      "id": "spigot.d3e7e6031437b0eb7447a6df",
+      "path": "sources/snapshots/spigot/2026-08-10.json"
+    },
+    {
+      "digest": "edb6b42555dad4bdbb0fb14a4e24fc340768087d7588605dbbb74eb564a68833",
+      "id": "sponge.b6e6a7dfbfec686a0e244c90",
+      "path": "sources/snapshots/sponge/2026-08-10.json"
+    },
+    {
+      "digest": "4d7546a4513c22b1e55c35cbca706556b3ff1b5a032c4b8ad5014f76e5c79cfd",
+      "id": "velocity.0dd1e06d8ce24cb894449c49",
+      "path": "sources/snapshots/velocity/2026-08-10.json"
+    }
+  ]
+}

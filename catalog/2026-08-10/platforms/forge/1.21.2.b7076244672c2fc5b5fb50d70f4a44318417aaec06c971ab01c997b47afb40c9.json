@@ -1,0 +1,82 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.21.2",
+      "id": "component.forge.4a7a4e93d2e8079972ead3d6",
+      "sourceEntries": [
+        {
+          "entryIndex": 5404,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.2"
+    },
+    {
+      "channel": "release",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.21.2-20241025.104818",
+      "id": "component.forge.55ba31ddd97bd8b3c29dc1d8",
+      "sourceEntries": [
+        {
+          "entryIndex": 5405,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.2-20241025.104818"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.7f0a8e1279bd415a924c072c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5404,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.4a7a4e93d2e8079972ead3d6"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.7f0a8e1279bd415a924c072c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5405,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.55ba31ddd97bd8b3c29dc1d8"
+    }
+  ],
+  "id": "catalog.forge.47c124e72f4d1bbada4fa8c8",
+  "key": "1.21.2",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

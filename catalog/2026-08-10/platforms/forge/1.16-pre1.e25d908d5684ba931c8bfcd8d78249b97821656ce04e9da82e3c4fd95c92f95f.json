@@ -1,0 +1,82 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.16-pre1",
+      "id": "component.forge.a3d3aee7c1f9de508c60c6d5",
+      "sourceEntries": [
+        {
+          "entryIndex": 3506,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.16-pre1"
+    },
+    {
+      "channel": "release-candidate",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.16-pre1-20201018.162134",
+      "id": "component.forge.22a4c5c78dc4b8e766c4626c",
+      "sourceEntries": [
+        {
+          "entryIndex": 3507,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.16-pre1-20201018.162134"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.a9671af8888b998a71c53246",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 3507,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.22a4c5c78dc4b8e766c4626c"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.a9671af8888b998a71c53246",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 3506,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.a3d3aee7c1f9de508c60c6d5"
+    }
+  ],
+  "id": "catalog.forge.b00031d5abc1db94b1dc8ec1",
+  "key": "1.16-pre1",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

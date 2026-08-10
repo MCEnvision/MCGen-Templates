@@ -1,0 +1,50 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.21.11-rc3",
+      "id": "component.paper.8d06e89b3491ceca33bea56e",
+      "sourceEntries": [
+        {
+          "entryIndex": 74,
+          "snapshotId": "paper.f7956eeac913ab4015ccf80e",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.11-rc3"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.8771cd1340efe52735fdbe6c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 74,
+          "snapshotId": "paper.f7956eeac913ab4015ccf80e",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.8d06e89b3491ceca33bea56e"
+    }
+  ],
+  "id": "catalog.paper.912c042e404aca0b368a11d0",
+  "key": "1.21.11-rc3",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.f7956eeac913ab4015ccf80e"
+  ]
+}

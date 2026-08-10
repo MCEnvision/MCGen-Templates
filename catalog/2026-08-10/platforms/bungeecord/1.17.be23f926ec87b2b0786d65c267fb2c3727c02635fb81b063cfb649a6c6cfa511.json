@@ -1,0 +1,50 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "proxy",
+  "components": [
+    {
+      "channel": "snapshot",
+      "component": "bungeecord-api",
+      "coordinate": "net.md-5:bungeecord-api:1.17-R0.1-SNAPSHOT",
+      "id": "component.bungeecord.b4772b9fe633fcfd5b11f448",
+      "sourceEntries": [
+        {
+          "entryIndex": 7,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.17-R0.1-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.bungeecord.e635b31af8ad58c032a24b6c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 7,
+          "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bungeecord.b4772b9fe633fcfd5b11f448"
+    }
+  ],
+  "id": "catalog.bungeecord.cb709c40baa363e1e911949f",
+  "key": "1.17",
+  "keyKind": "api",
+  "platform": "bungeecord",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "bungeecord.bd6cb074e1fb40ebddd0f0b6"
+  ]
+}

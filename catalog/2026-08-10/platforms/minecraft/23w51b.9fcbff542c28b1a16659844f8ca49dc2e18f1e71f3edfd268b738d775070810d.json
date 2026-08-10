@@ -1,0 +1,50 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "toolchain",
+  "components": [
+    {
+      "channel": "snapshot",
+      "component": "game-version",
+      "coordinate": "com.mojang:minecraft:23w51b",
+      "id": "component.minecraft.48f65bbe179aaefdfb5fe7c1",
+      "sourceEntries": [
+        {
+          "entryIndex": 731,
+          "snapshotId": "mojang.378f919a766c4184b3ce9210",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "23w51b"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.minecraft.4cc47a42f967c82cee29f823",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 731,
+          "snapshotId": "mojang.378f919a766c4184b3ce9210",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.minecraft.48f65bbe179aaefdfb5fe7c1"
+    }
+  ],
+  "id": "catalog.minecraft.68847f72a8864fabaf3d6d27",
+  "key": "23w51b",
+  "keyKind": "minecraft",
+  "platform": "minecraft",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "mojang.378f919a766c4184b3ce9210"
+  ]
+}

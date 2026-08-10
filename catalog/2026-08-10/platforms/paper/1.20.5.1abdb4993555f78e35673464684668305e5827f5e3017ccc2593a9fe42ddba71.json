@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "component": "paper-api",
+      "coordinate": "io.papermc.paper:paper-api:1.20.5-R0.1-SNAPSHOT",
+      "id": "component.paper.9aec0521958e60a6e0434e79",
+      "sourceEntries": [
+        {
+          "entryIndex": 51,
+          "snapshotId": "paper.f7956eeac913ab4015ccf80e",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.5-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "release",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.20.5",
+      "id": "component.paper.961347d36e6d148a1d0eac98",
+      "sourceEntries": [
+        {
+          "entryIndex": 52,
+          "snapshotId": "paper.f7956eeac913ab4015ccf80e",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.20.5"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.21977b525f15b426a4b98119",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 52,
+          "snapshotId": "paper.f7956eeac913ab4015ccf80e",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.961347d36e6d148a1d0eac98"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.21977b525f15b426a4b98119",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 51,
+          "snapshotId": "paper.f7956eeac913ab4015ccf80e",
+          "sourceIndexes": [
+            0,
+            1
+          ]
+        }
+      ],
+      "to": "component.paper.9aec0521958e60a6e0434e79"
+    }
+  ],
+  "id": "catalog.paper.e9263631d6a50e41d591983e",
+  "key": "1.20.5",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.f7956eeac913ab4015ccf80e"
+  ]
+}

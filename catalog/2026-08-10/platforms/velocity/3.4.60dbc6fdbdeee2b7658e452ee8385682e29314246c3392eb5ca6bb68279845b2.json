@@ -1,0 +1,82 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "proxy",
+  "components": [
+    {
+      "channel": "release",
+      "component": "velocity-api",
+      "coordinate": "com.velocitypowered:velocity-api:3.4.0",
+      "id": "component.velocity.6bf08a9109b6976be5690934",
+      "sourceEntries": [
+        {
+          "entryIndex": 58,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.4.0"
+    },
+    {
+      "channel": "snapshot",
+      "component": "velocity-api",
+      "coordinate": "com.velocitypowered:velocity-api:3.4.0-SNAPSHOT",
+      "id": "component.velocity.bfb72dd686ddca11db70cc1d",
+      "sourceEntries": [
+        {
+          "entryIndex": 59,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.4.0-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.velocity.8c6216a009a2b2c2e17ffbd1",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 58,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.velocity.6bf08a9109b6976be5690934"
+    },
+    {
+      "confidence": "published",
+      "from": "target.velocity.8c6216a009a2b2c2e17ffbd1",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 59,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.velocity.bfb72dd686ddca11db70cc1d"
+    }
+  ],
+  "id": "catalog.velocity.d3216bc69e71506159d29967",
+  "key": "3.4",
+  "keyKind": "api",
+  "platform": "velocity",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "velocity.0dd1e06d8ce24cb894449c49"
+  ]
+}

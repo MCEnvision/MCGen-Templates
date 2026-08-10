@@ -1,0 +1,274 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "multiloader",
+  "components": [
+    {
+      "channel": "release",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:5.14.68",
+      "id": "component.architectury.53222a8c7cfae7c5c35bf990",
+      "sourceEntries": [
+        {
+          "entryIndex": 598,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.68"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:5.14.76",
+      "id": "component.architectury.6f74b70a9cd88b0a34080fe4",
+      "sourceEntries": [
+        {
+          "entryIndex": 599,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.76"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:5.14.83",
+      "id": "component.architectury.c99ee461ca9ccdb75a5b0e54",
+      "sourceEntries": [
+        {
+          "entryIndex": 600,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.83"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:5.14.84",
+      "id": "component.architectury.4d7a0ec3caed433aef51d449",
+      "sourceEntries": [
+        {
+          "entryIndex": 601,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.84"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:5.14.68",
+      "id": "component.architectury.c9b95c3fd9b5e1c0cbcce3e3",
+      "sourceEntries": [
+        {
+          "entryIndex": 602,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.68"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:5.14.76",
+      "id": "component.architectury.983d2c530a45f5e76ba29baa",
+      "sourceEntries": [
+        {
+          "entryIndex": 603,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.76"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:5.14.83",
+      "id": "component.architectury.b0842078a8a754806e08e102",
+      "sourceEntries": [
+        {
+          "entryIndex": 604,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.83"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:5.14.84",
+      "id": "component.architectury.3e73471b808b2436a767141f",
+      "sourceEntries": [
+        {
+          "entryIndex": 605,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.14.84"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 605,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.3e73471b808b2436a767141f"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 601,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.4d7a0ec3caed433aef51d449"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 598,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.53222a8c7cfae7c5c35bf990"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 599,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.6f74b70a9cd88b0a34080fe4"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 603,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.983d2c530a45f5e76ba29baa"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 604,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.b0842078a8a754806e08e102"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 600,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.c99ee461ca9ccdb75a5b0e54"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.103bc24c815062798bf6b97c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 602,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.c9b95c3fd9b5e1c0cbcce3e3"
+    }
+  ],
+  "id": "catalog.architectury.a3fb083a708524417eaafbd5",
+  "key": "5.14",
+  "keyKind": "minecraft",
+  "platform": "architectury",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "architectury.df9f4c866e0c6749913054ad"
+  ]
+}

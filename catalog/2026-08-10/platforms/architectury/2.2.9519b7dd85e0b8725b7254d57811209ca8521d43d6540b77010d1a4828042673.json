@@ -1,0 +1,82 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "multiloader",
+  "components": [
+    {
+      "channel": "release",
+      "component": "architectury-api",
+      "coordinate": "dev.architectury:architectury:2.2.21",
+      "id": "component.architectury.e72b4295d0a9cba08dff1953",
+      "sourceEntries": [
+        {
+          "entryIndex": 261,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.2.21"
+    },
+    {
+      "channel": "release",
+      "component": "architectury-fabric",
+      "coordinate": "dev.architectury:architectury-fabric:2.2.21",
+      "id": "component.architectury.b3d5bf5bfcb65a37f9918563",
+      "sourceEntries": [
+        {
+          "entryIndex": 262,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "2.2.21"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.architectury.aacf41fead4e170973b590ef",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 262,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            1
+          ]
+        }
+      ],
+      "to": "component.architectury.b3d5bf5bfcb65a37f9918563"
+    },
+    {
+      "confidence": "published",
+      "from": "target.architectury.aacf41fead4e170973b590ef",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 261,
+          "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.architectury.e72b4295d0a9cba08dff1953"
+    }
+  ],
+  "id": "catalog.architectury.4a2481f812a4af25b2eeb209",
+  "key": "2.2",
+  "keyKind": "minecraft",
+  "platform": "architectury",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "architectury.df9f4c866e0c6749913054ad"
+  ]
+}

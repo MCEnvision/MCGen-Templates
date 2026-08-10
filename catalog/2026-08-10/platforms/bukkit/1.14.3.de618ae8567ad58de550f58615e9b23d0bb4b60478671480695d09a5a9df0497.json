@@ -1,0 +1,114 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "component": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit:1.14.3-R0.1-SNAPSHOT",
+      "id": "component.bukkit.5e3c8b1195aa3d5301eac534",
+      "sourceEntries": [
+        {
+          "entryIndex": 19,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.14.3-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "component": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit:1.14.3-SNAPSHOT",
+      "id": "component.bukkit.be37d74f818753d6cf345e2b",
+      "sourceEntries": [
+        {
+          "entryIndex": 20,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.14.3-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "component": "bukkit-api",
+      "coordinate": "org.bukkit:bukkit:1.14.3-pre4-SNAPSHOT",
+      "id": "component.bukkit.3c700b7f6c8f77b79b6210cb",
+      "sourceEntries": [
+        {
+          "entryIndex": 21,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.14.3-pre4-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.bukkit.db7860d3e9e6f4c5166060f5",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 21,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bukkit.3c700b7f6c8f77b79b6210cb"
+    },
+    {
+      "confidence": "published",
+      "from": "target.bukkit.db7860d3e9e6f4c5166060f5",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 19,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bukkit.5e3c8b1195aa3d5301eac534"
+    },
+    {
+      "confidence": "published",
+      "from": "target.bukkit.db7860d3e9e6f4c5166060f5",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 20,
+          "snapshotId": "bukkit.d6706b848d7d7899f7a09e7c",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.bukkit.be37d74f818753d6cf345e2b"
+    }
+  ],
+  "id": "catalog.bukkit.92c0bd421edb01ccf974d018",
+  "key": "1.14.3",
+  "keyKind": "minecraft",
+  "platform": "bukkit",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "bukkit.d6706b848d7d7899f7a09e7c"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8c773be4f246b07e7bf6fa49",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.1.0",
+      "id": "component.sponge.ec8735f6113c5a21b7785965",
+      "sourceEntries": [
+        {
+          "entryIndex": 47,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.1.0"
+    },
+    {
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.1.0-SNAPSHOT",
+      "id": "component.sponge.3a0facf1b1381ff6c1e983f8",
+      "sourceEntries": [
+        {
+          "entryIndex": 48,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "5.1.0-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.sponge.2fb8743a30ed3beb79881743",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 48,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.3a0facf1b1381ff6c1e983f8"
+    },
+    {
+      "confidence": "published",
+      "from": "target.sponge.2fb8743a30ed3beb79881743",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 47,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.ec8735f6113c5a21b7785965"
+    }
+  ],
+  "id": "catalog.sponge.f57b12ffebc5617d4c256fb4",
+  "key": "5.1",
+  "keyKind": "api",
+  "platform": "sponge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "sponge.b6e6a7dfbfec686a0e244c90"
+  ]
+}
