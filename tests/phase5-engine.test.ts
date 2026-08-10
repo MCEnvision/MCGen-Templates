@@ -14,6 +14,7 @@ import {
 import { buildFixtureManifest } from "../src/fixture-generator.js";
 import { buildMatrixPlan } from "../src/matrix-planner.js";
 import { buildQueuePlan } from "../src/phase5-queue.js";
+import { executeTuple } from "../src/phase5-execution.js";
 import { compareReproducibleTrees } from "../src/reproducibility.js";
 import { sha256 } from "../src/digest.js";
 import {
@@ -377,5 +378,42 @@ describe("phase 5 build and artifact contracts", () => {
     );
     expect(report.status).toBe("failed");
     expect(report.failures.join(" ")).toContain("zip archive");
+  });
+
+  it("refuses blocked tuples and raw override execution before rendering", async () => {
+    const request = {
+      tuple: {
+        id: sha256("tuple"),
+        status: "discovered" as const,
+        blockers: [],
+        identity,
+      },
+      fixture: {
+        tuple: identity,
+        fixture: {
+          id: "raw",
+          kind: "raw-override" as const,
+          language: "java" as const,
+          version: "1.0.0",
+          rawOverride: true,
+        },
+        descriptorPath: "templates/fabric/descriptor.json",
+        spec: {} as never,
+      },
+      build: {} as never,
+      artifact: {} as never,
+      generatorDigest: sha256("generator"),
+      parentDirectory: "/tmp/mcgen-phase5-test",
+      generatedAt: "2026-08-10T00:00:00.000Z",
+    };
+    await expect(executeTuple(request)).rejects.toThrow(
+      "raw override fixtures are validate only",
+    );
+    await expect(
+      executeTuple({
+        ...request,
+        tuple: { ...request.tuple, status: "blocked", blockers: ["profile"] },
+      }),
+    ).rejects.toThrow("only discovered tuples");
   });
 });

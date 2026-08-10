@@ -17,6 +17,7 @@
     "phase5:matrix": "npm run build --silent && node dist/cli.js phase5 matrix-plan",
     "phase5:evidence": "npm run build --silent && node dist/cli.js phase5 validate-evidence",
     "phase5:queue": "npm run build --silent && node dist/cli.js phase5 queue",
+    "phase5:execute": "npm run build --silent && node dist/cli.js phase5 execute",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "validate": "npm run build --silent && node dist/cli.js validate",

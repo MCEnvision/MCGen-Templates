@@ -48,8 +48,11 @@ npm run phase5:fixture -- --input verification/phase5/fixture-input.json --outpu
 npm run phase5:matrix -- --input verification/phase5/matrix-input.json --output verification/phase5/matrix-plan.json
 npm run phase5:evidence -- --input verification/phase5/tuple-evidence.json
 npm run phase5:queue -- --input verification/phase5/queue-event.json --output verification/phase5/queue-plan.json --shard-count 4 --shard-index 0
+npm run phase5:execute -- --input verification/phase5/execution-input.json --output verification/phase5/tuple-evidence.json
 ```
 
 The input documents are reviewed repository data, not user supplied shell commands. Raw Advanced build overrides remain validate only and are never passed to the executor.
+
+`phase5 execute` renders a descriptor fixture into a clean temporary workspace, runs only an unblocked discovered tuple with its declared bounded command contract, inspects the declared artifact, repeats the generation and build, compares both output trees and artifact digests, and writes one schema validated evidence record. It refuses blocked tuples, unresolved blockers, and raw override fixtures. The command must be supplied with a reviewed wrapper file and exact artifact expectation when the selected profile requires them.
 
 The thin `phase 5 tuple verification` workflow runs the deterministic contract gate on boundary changes, main updates, and the weekly scheduled audit. `phase5-queue.ts` keeps changed boundaries, new tuples, invalidation, scheduled audits, and transient recovery as separate bounded queues with deterministic shard assignment and cancellation keys. Real tuple execution remains limited to profiles with reviewed exact commands and complete upstream evidence.

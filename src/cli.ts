@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { dirname, relative, resolve } from "node:path";
 import { canonicalJson } from "./canonical-json.js";
 import { buildCatalog } from "./catalog/build.js";
@@ -25,6 +26,10 @@ import {
 } from "./matrix-planner.js";
 import { validateEvidenceRecord } from "./evidence.js";
 import { buildQueuePlan, type QueueEvent } from "./phase5-queue.js";
+import {
+  executeTuple,
+  type Phase5ExecutionRequest,
+} from "./phase5-execution.js";
 import {
   requireSourceAdapter,
   requireSourceAdapterByAdapterId,
@@ -262,6 +267,59 @@ async function phase5Queue(args: readonly string[]): Promise<void> {
   await writePhase5Document(output, plan);
   process.stdout.write(
     `planned ${plan.tupleIds.length} phase 5 queue tuples\n`,
+  );
+}
+
+async function phase5Execute(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output)
+    throw new Error("phase5 execute requires --input and --output");
+  const document = (await readJson(input)) as Record<string, unknown>;
+  const {
+    tuple,
+    fixture,
+    build,
+    artifact,
+    generatorDigest,
+    generatedAt,
+    wrapperSource,
+    wrapperPath,
+  } = document;
+  if (
+    tuple === undefined ||
+    fixture === undefined ||
+    build === undefined ||
+    artifact === undefined ||
+    typeof generatorDigest !== "string" ||
+    typeof generatedAt !== "string"
+  )
+    throw new Error(
+      "phase5 execute input requires tuple, fixture, build, artifact, generatorDigest, and generatedAt",
+    );
+  const request = {
+    tuple,
+    fixture: {
+      ...(fixture as Record<string, unknown>),
+      repositoryRoot: repositoryRoot,
+    },
+    build,
+    artifact,
+    generatorDigest,
+    parentDirectory: tmpdir(),
+    generatedAt,
+    ...(typeof wrapperSource === "string"
+      ? {
+          wrapperPath:
+            typeof wrapperPath === "string" ? wrapperPath : "gradlew",
+          wrapperContent: await readFile(requireRepositoryPath(wrapperSource)),
+        }
+      : {}),
+  } as unknown as Phase5ExecutionRequest;
+  const result = await executeTuple(request);
+  await writePhase5Document(output, result.evidence);
+  process.stdout.write(
+    `wrote phase 5 evidence ${result.evidence.key.digest}\n`,
   );
 }
 
@@ -560,6 +618,10 @@ async function main(): Promise<void> {
   }
   if (command === "phase5" && subject === "queue") {
     await phase5Queue(args);
+    return;
+  }
+  if (command === "phase5" && subject === "execute") {
+    await phase5Execute(args);
     return;
   }
   throw new Error(
