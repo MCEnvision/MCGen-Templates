@@ -4,6 +4,7 @@
 
 - [Technical overview](general/documentation.md)
 - [Active plan](general/plan.md)
+- [GitHub completion plan](general/github_plan.md)
 - [Contribution guide](general/contributing.md)
 - [Template pack architecture](architecture/template-pack.md)
 - [Source snapshots](data/source-snapshots.md)
