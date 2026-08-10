@@ -23,12 +23,15 @@ The repository license remains an explicit owner decision. No template pack rele
 
 ## Git Identity and Signing
 
-1. Git author and committer identity is `EnVy` with `contact.enviouse@gmail.com`.
-2. Commits and annotated tags use SSH signing key fingerprint `SHA256:5jmRCFzo+bZaW2BhCjheIiFmhSXZTs+m3gah/SANlhI`.
-3. Local signing is mandatory for commits and tags.
-4. GitHub reports the foundation merge commit and signed annotated foundation tag as verified.
-5. The signed annotated tag `phase-0-github-foundation` points to merge commit `c044312f3a0786057c629122054f2451996dd78c`.
-6. API authorization and cryptographic signing remain separate gates. The current token intentionally lacks SSH signing key administration scope. Remote verification of pushed signed objects proves the configured key is registered without broadening token authority.
+1. Every locally created source commit and annotated tag uses `EnVy` with `contact.enviouse@gmail.com` as its author, committer, or tagger identity.
+2. Locally created commits and annotated tags use SSH signing key fingerprint `SHA256:5jmRCFzo+bZaW2BhCjheIiFmhSXZTs+m3gah/SANlhI`.
+3. Local signing is mandatory for source commits and annotated tags.
+4. GitHub generated pull request merge commits are platform authored objects. GitHub is necessarily their committer and must provide valid GitHub signature verification.
+5. Future GraphQL merges explicitly set `authorEmail` to `contact.enviouse@gmail.com`. The merge author remains `EnVy`.
+6. Pull request 14 predates that explicit merge input. Its verified GitHub merge commit uses `EnVy` with an approved EnVisione account email and GitHub as the signed committer. Protected published history is not rewritten solely to change merge metadata.
+7. GitHub reports the foundation merge commit and signed annotated foundation tag as verified.
+8. The signed annotated tag `phase-0-github-foundation` points to merge commit `c044312f3a0786057c629122054f2451996dd78c`.
+9. API authorization and cryptographic signing remain separate gates. The current token intentionally lacks SSH signing key administration scope. Remote verification of pushed signed objects proves the configured key is registered without broadening token authority.
 
 ## Main Branch Ruleset
 
@@ -59,6 +62,7 @@ The successful merge of [foundation pull request 6](https://github.com/MCEnvisio
 8. Full commit SHA pinning is required.
 9. Repository workflow files contain no floating Action references.
 10. Workflow permissions use least privilege and do not expose secrets to untrusted pull requests.
+11. Pull request merges use the GraphQL `authorEmail` input when available so the EnVy merge author uses `contact.enviouse@gmail.com` while GitHub remains the verified platform committer.
 
 ## Tracked Collaboration Baseline
 
@@ -105,7 +109,7 @@ The following baseline is present and linked from canonical documentation.
 
 ## Planning, Issues, and Wiki
 
-1. [Foundation issue 5](https://github.com/MCEnvision/MCGen-Templates/issues/5) records the scope, acceptance criteria, and completion evidence. It is closed as completed and remains the deduplicated tracker for this governance work.
+1. [Foundation issue 5](https://github.com/MCEnvision/MCGen-Templates/issues/5) records the scope, acceptance criteria, identity reconciliation, and completion evidence. Its state must match the latest Phase 1 integration state, and it remains the deduplicated tracker for this governance work.
 2. [Foundation pull request 6](https://github.com/MCEnvision/MCGen-Templates/pull/6) is merged through GitHub with the `phase 0. repository foundation` milestone.
 3. The [MCGen Templates roadmap](https://github.com/orgs/MCEnvision/projects/9) is linked to the repository and contains lifecycle fields, roadmap views, and status workflows.
 4. Repository milestones represent phases owned by this repository.
@@ -120,7 +124,10 @@ The following baseline is present and linked from canonical documentation.
 4. Main quality run: [run 31344733119](https://github.com/MCEnvision/MCGen-Templates/actions/runs/31344733119).
 5. Foundation merge commit: [`c044312f3a0786057c629122054f2451996dd78c`](https://github.com/MCEnvision/MCGen-Templates/commit/c044312f3a0786057c629122054f2451996dd78c).
 6. Verified signed foundation tag: [`phase-0-github-foundation`](https://github.com/MCEnvision/MCGen-Templates/tree/phase-0-github-foundation).
-7. Phase 1 completion tag: `phase-1-github-governance`. This tag must point to the GitHub merge commit containing this completed audit.
+7. Phase 1 audit pull request: [pull request 14](https://github.com/MCEnvision/MCGen-Templates/pull/14).
+8. Phase 1 audit merge commit: [`a917585249198fad6df859e45add83844a15d906`](https://github.com/MCEnvision/MCGen-Templates/commit/a917585249198fad6df859e45add83844a15d906).
+9. Verified signed Phase 1 audit tag: [`phase-1-github-governance`](https://github.com/MCEnvision/MCGen-Templates/tree/phase-1-github-governance).
+10. Phase 1 identity reconciliation tag: `phase-1-github-governance-reconciliation`. This tag must point to the GitHub merge commit containing the identity correction.
 
 ## Local Verification
 

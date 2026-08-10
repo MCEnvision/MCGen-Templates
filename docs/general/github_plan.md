@@ -117,7 +117,7 @@ Establish and audit the GitHub controls required for safe sequential development
 
 ## Status
 
-Complete when this document is read from a `main` commit carrying the verified signed annotated tag `phase-1-github-governance`. The August 9, 2026 audit found no unresolved governance drift. Before that merge and tag, this phase is in review. Every later phase must repeat the applicable drift checks.
+Complete only when this identity reconciliation is present on `main` and the verified signed annotated tag `phase-1-github-governance-reconciliation` points to that merge commit. The earlier `phase-1-github-governance` tag preserves the first governance audit. Before the reconciliation merge and tag, this phase is in progress. Every later phase must repeat the applicable drift checks.
 
 ## Workstreams
 
@@ -131,11 +131,13 @@ Complete when this document is read from a `main` commit carrying the verified s
 
 ### Git identity and signing
 
-1. Configure `EnVy` and `contact.enviouse@gmail.com` as sole author and committer.
-2. Use the registered EnVisione SSH signing key.
-3. Sign every commit and annotated tag.
-4. Verify signed objects on GitHub after push.
-5. Keep API authorization and signing verification as separate gates.
+1. Configure every locally created source commit and annotated tag with `EnVy` and `contact.enviouse@gmail.com` as the sole author, committer, and tagger identity.
+2. Use the registered EnVisione SSH signing key for locally created commits and annotated tags.
+3. Verify signed source commits and annotated tags on GitHub after push.
+4. Treat GitHub generated pull request merge commits as platform authored objects. GitHub is their committer and must provide valid GitHub signature verification.
+5. Require the merge author to be `EnVy`. Use the GraphQL `authorEmail` input with `contact.enviouse@gmail.com` for future merges when that merge interface is available.
+6. Preserve already published verified merge commits even when they used another approved EnVisione account email. Do not rewrite protected history to change merge metadata.
+7. Keep API authorization and signing verification as separate gates.
 
 ### Merge and branch protections
 
