@@ -128,13 +128,19 @@ describe("phase 7 GitHub audit", () => {
       api: apiStub(new Set(), [
         {
           workflow_id: 42,
+          status: "in_progress",
+        },
+        {
+          workflow_id: 42,
           status: "completed",
           conclusion: "success",
+          created_at: "2026-08-10T00:00:00.000Z",
         },
         {
           workflow_id: 42,
           status: "completed",
           conclusion: "failure",
+          created_at: "2026-08-09T00:00:00.000Z",
         },
       ]).api,
       root: repositoryRoot,
@@ -142,6 +148,32 @@ describe("phase 7 GitHub audit", () => {
     expect(
       audit.capabilities.find((item) => item.id === "required-checks")?.state,
     ).toBe("passed");
+  });
+
+  it("uses run timestamps instead of response order for the latest workflow run", async () => {
+    const audit = await runGitHubAudit({
+      owner: "MCEnvision",
+      name: "MCGen-Templates",
+      generatedAt: "2026-08-10T00:00:00.000Z",
+      api: apiStub(new Set(), [
+        {
+          workflow_id: 42,
+          status: "completed",
+          conclusion: "success",
+          created_at: "2026-08-09T00:00:00.000Z",
+        },
+        {
+          workflow_id: 42,
+          status: "completed",
+          conclusion: "failure",
+          created_at: "2026-08-10T00:00:00.000Z",
+        },
+      ]).api,
+      root: repositoryRoot,
+    });
+    expect(
+      audit.capabilities.find((item) => item.id === "required-checks")?.state,
+    ).toBe("blocked");
   });
 
   it("does not pass a loader capability when indexed files only exist but statuses are invalid", async () => {

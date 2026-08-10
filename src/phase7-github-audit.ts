@@ -124,9 +124,41 @@ function hasNoOpenAlerts(value: unknown): boolean {
 
 function hasHealthyRuns(value: unknown): boolean {
   const runs = array(isRecord(value) ? value["workflow_runs"] : undefined);
-  const latestByWorkflow = new Map<string, Record<string, unknown>>();
+  const latestByWorkflow = new Map<
+    string,
+    { run: Record<string, unknown>; index: number }
+  >();
+  const timestamp = (run: Record<string, unknown>): number | undefined => {
+    for (const key of ["updated_at", "created_at", "run_started_at"]) {
+      if (typeof run[key] !== "string") continue;
+      const parsed = Date.parse(run[key]);
+      if (Number.isFinite(parsed)) return parsed;
+    }
+    return undefined;
+  };
+  const runNumber = (run: Record<string, unknown>): number | undefined =>
+    typeof run["run_number"] === "number" && Number.isFinite(run["run_number"])
+      ? run["run_number"]
+      : undefined;
+  const isNewer = (
+    candidate: Record<string, unknown>,
+    current: Record<string, unknown>,
+    candidateIndex: number,
+    currentIndex: number,
+  ): boolean => {
+    const candidateTime = timestamp(candidate);
+    const currentTime = timestamp(current);
+    if (candidateTime !== undefined && currentTime !== undefined)
+      return candidateTime > currentTime;
+    const candidateRunNumber = runNumber(candidate);
+    const currentRunNumber = runNumber(current);
+    if (candidateRunNumber !== undefined && currentRunNumber !== undefined)
+      return candidateRunNumber > currentRunNumber;
+    return candidateIndex < currentIndex;
+  };
   runs.forEach((value, index) => {
     if (!isRecord(value)) return;
+    if (value["status"] !== "completed") return;
     const workflow =
       typeof value["workflow_id"] === "string" ||
       typeof value["workflow_id"] === "number"
@@ -135,12 +167,17 @@ function hasHealthyRuns(value: unknown): boolean {
           ? value["name"]
           : `observation-${index}`;
     const key = String(workflow);
-    if (!latestByWorkflow.has(key)) latestByWorkflow.set(key, value);
+    const current = latestByWorkflow.get(key);
+    if (
+      current === undefined ||
+      isNewer(value, current.run, index, current.index)
+    )
+      latestByWorkflow.set(key, { run: value, index });
   });
   return (
     latestByWorkflow.size > 0 &&
     [...latestByWorkflow.values()].every(
-      (run) =>
+      ({ run }) =>
         run["status"] === "completed" &&
         ["success", "skipped", "neutral", "cancelled"].includes(
           String(run["conclusion"]),
