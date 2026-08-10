@@ -85,6 +85,42 @@
       "renderer": "text",
       "includeWhen": "true",
       "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/LICENSE.tmpl",
+      "destination": "LICENSE",
+      "renderer": "text",
+      "rawOverride": "allowed"
+    },
+    {
+      "source": "templates/shared/build.gradle.tmpl",
+      "destination": "build.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/settings.gradle.tmpl",
+      "destination": "settings.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/gradle.properties.tmpl",
+      "destination": "gradle.properties",
+      "renderer": "properties",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/entrypoint.java.tmpl",
+      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "renderer": "text",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/paper/paper-plugin.yml.tmpl",
+      "destination": "src/main/resources/paper-plugin.yml",
+      "renderer": "yaml",
+      "rawOverride": "advanced-only"
     }
   ],
   "renderTargets": [
@@ -114,5 +150,101 @@
     "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
     "canonicalCi": "never-execute",
     "pathPolicy": "relative-safe"
+  },
+  "customization": {
+    "$schema": "urn:mcgen:schema:customization-contract:1",
+    "schemaVersion": 1,
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/paper/field-catalog.json"
+    ],
+    "simple": {
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "api-version"
+      ],
+      "defaultPolicy": "descriptor-defaults",
+      "warnings": true,
+      "overrides": "visible"
+    },
+    "advanced": {
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "group-id",
+        "artifact-id",
+        "archive-name",
+        "classifier",
+        "appendix",
+        "extension",
+        "java-runtime",
+        "java-language",
+        "build-dsl",
+        "wrapper-version",
+        "gradle-properties",
+        "jvm-arguments",
+        "dependencies",
+        "repositories",
+        "source-sets",
+        "tasks",
+        "runs",
+        "publishing",
+        "icon",
+        "metadata-extensions",
+        "raw-file-operations",
+        "api-version",
+        "load",
+        "commands",
+        "permissions",
+        "depend",
+        "soft-depend",
+        "load-before",
+        "libraries",
+        "bootstrapper",
+        "loader",
+        "paper-dependencies",
+        "paper-provides",
+        "paper-plugin-json",
+        "custom-fields"
+      ],
+      "defaultPolicy": "descriptor-defaults",
+      "warnings": true,
+      "overrides": "all"
+    },
+    "modeSwitch": {
+      "preservesValues": true,
+      "preservesDormantValues": true,
+      "resolver": "shared"
+    },
+    "rawFiles": {
+      "allowedOperations": [
+        "add",
+        "replace",
+        "rename",
+        "delete",
+        "reset",
+        "diff"
+      ],
+      "canonicalCiPolicy": "never-execute",
+      "pathPolicy": "relative-safe"
+    }
   }
 }

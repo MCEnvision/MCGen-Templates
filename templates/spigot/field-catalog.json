@@ -1,0 +1,90 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "spigot",
+  "fields": [
+    {
+      "id": "api-version",
+      "type": "version",
+      "label": "Spigot API version",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "load",
+      "type": "enum",
+      "label": "Load phase",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "POSTWORLD",
+      "validation": { "allowedValues": ["STARTUP", "POSTWORLD"] }
+    },
+    {
+      "id": "commands",
+      "type": "map",
+      "label": "Commands",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "permissions",
+      "type": "map",
+      "label": "Permissions",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "depend",
+      "type": "list",
+      "label": "Required plugins",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "soft-depend",
+      "type": "list",
+      "label": "Soft dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "load-before",
+      "type": "list",
+      "label": "Load before",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "libraries",
+      "type": "list",
+      "label": "Plugin libraries",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom Spigot fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

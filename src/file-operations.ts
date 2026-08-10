@@ -15,7 +15,8 @@ export type FileOperation =
       from: string;
       path: string;
       trust: "canonical" | "custom-unverified";
-    };
+    }
+  | { kind: "diff"; path: string; trust: "canonical" | "custom-unverified" };
 
 export type FileChange = {
   path: string;
@@ -81,10 +82,10 @@ export function applyFileOperations(
     ]),
   );
   for (const operation of operations) {
-    if (operation.trust === "custom-unverified" && operation.kind === "reset") {
-      throw new Error("custom unverified reset is not allowed");
-    }
     const path = normalizeProjectPath(operation.path);
+    if (operation.kind === "diff") {
+      continue;
+    }
     if (operation.kind === "rename") {
       const from = normalizeProjectPath(operation.from);
       const value = result.get(from);

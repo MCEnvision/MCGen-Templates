@@ -43,9 +43,11 @@ function selectorMatches(
     const selected = selection.components[component.component];
     if (!selected) return false;
     const exactVersion = component.versions?.includes(selected) ?? false;
-    if (!exactVersion && !selected.startsWith(component.coordinatePrefix))
+    const coordinate = selected.startsWith(component.coordinatePrefix);
+    const bareVersion = /^[0-9A-Za-z][0-9A-Za-z.+_-]*$/.test(selected);
+    if (!exactVersion && !coordinate && !bareVersion) return false;
+    if (component.mode === "explicit" && !exactVersion && !coordinate)
       return false;
-    if (component.mode === "explicit" && !exactVersion) return false;
   }
   return true;
 }

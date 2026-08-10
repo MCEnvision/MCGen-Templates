@@ -102,6 +102,37 @@ describe("phase 4 engine contracts", () => {
     ]);
   });
 
+  it("supports reset, diff, and binary encoded raw operations", () => {
+    const before = new Map([["README.md", new Uint8Array([1])]]);
+    const after = applyFileOperations(before, [
+      {
+        kind: "reset",
+        path: "README.md",
+        content: new Uint8Array([2]),
+        trust: "custom-unverified",
+      },
+      { kind: "diff", path: "README.md", trust: "custom-unverified" },
+    ]);
+    expect(after.get("README.md")).toEqual(new Uint8Array([2]));
+    const rendered = renderTemplate({
+      descriptorId: "raw",
+      spec: {
+        ...spec,
+        fileOperations: [
+          {
+            kind: "add",
+            path: "icon.bin",
+            content: "AQID",
+            encoding: "base64",
+            trust: "custom-unverified",
+          },
+        ],
+      },
+      files: [],
+    });
+    expect(rendered.files.get("icon.bin")).toEqual(new Uint8Array([1, 2, 3]));
+  });
+
   it("keeps advanced values dormant across a mode switch", () => {
     const advanced = switchProjectMode(spec, "advanced");
     expect(advanced.mode).toBe("advanced");
@@ -150,6 +181,53 @@ describe("phase 4 engine contracts", () => {
     );
   });
 
+  it("serializes supported metadata formats deterministically", () => {
+    const result = renderTemplate({
+      descriptorId: "metadata",
+      spec,
+      files: [],
+      metadata: [
+        {
+          path: "plugin.yml",
+          format: "yaml",
+          value: {
+            version: "${project.version}",
+            name: "${project.name}",
+            commands: { shop: { description: "open shop" } },
+          },
+        },
+        {
+          path: "mods.toml",
+          format: "toml",
+          value: {
+            version: "${project.version}",
+            mod: { id: "${project.id}" },
+          },
+        },
+        {
+          path: "gradle.properties",
+          format: "properties",
+          value: { version: "${project.version}" },
+        },
+        {
+          path: "icon.png",
+          format: "binary",
+          value: png,
+        },
+      ],
+    });
+    expect(new TextDecoder().decode(result.files.get("plugin.yml"))).toBe(
+      'commands:\n  shop:\n    description: "open shop"\nname: "Example Mod"\nversion: "1.0-beta.1"\n',
+    );
+    expect(new TextDecoder().decode(result.files.get("mods.toml"))).toBe(
+      'version = "1.0-beta.1"\n[mod]\nid = "example-mod"\n',
+    );
+    expect(
+      new TextDecoder().decode(result.files.get("gradle.properties")),
+    ).toBe("version=1.0-beta.1\n");
+    expect(result.files.get("icon.png")).toEqual(png);
+  });
+
   it("evaluates only the bounded condition language", () => {
     const context = {
       fields: { loader: "0.16.14" },
@@ -195,6 +273,10 @@ describe("phase 4 engine contracts", () => {
         ],
       },
     };
+    const baseSelector = base.catalog.selectors[0];
+    if (!baseSelector) throw new Error("base selector is missing");
+    const baseComponent = baseSelector.components[0];
+    if (!baseComponent) throw new Error("base component is missing");
     expect(
       resolveProfile([base], {
         platform: "fabric",
@@ -216,5 +298,32 @@ describe("phase 4 engine contracts", () => {
         components: { loader: "0.16.14" },
       }).status,
     ).toBe("ambiguous");
+    expect(
+      resolveProfile(
+        [
+          {
+            ...base,
+            catalog: {
+              selectors: [
+                {
+                  ...baseSelector,
+                  components: [
+                    {
+                      ...baseComponent,
+                      mode: "all-components",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+        {
+          platform: "fabric",
+          catalogKey: "1.21.1",
+          components: { loader: "0.16.14" },
+        },
+      ).status,
+    ).toBe("matched");
   });
 });

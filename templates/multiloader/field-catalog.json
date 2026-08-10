@@ -1,0 +1,70 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "multiloader",
+  "fields": [
+    {
+      "id": "targets",
+      "type": "list",
+      "label": "Target loaders",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "common-metadata",
+      "type": "object",
+      "label": "Common metadata",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "target-overrides",
+      "type": "map",
+      "label": "Target metadata overrides",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "target-dependencies",
+      "type": "map",
+      "label": "Target dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "target-source-layout",
+      "type": "map",
+      "label": "Target source layout",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "catalog"
+    },
+    {
+      "id": "target-artifacts",
+      "type": "map",
+      "label": "Target artifacts",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom multiloader fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

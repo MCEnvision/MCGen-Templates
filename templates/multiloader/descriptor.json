@@ -78,6 +78,42 @@
       "renderer": "text",
       "includeWhen": "true",
       "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/LICENSE.tmpl",
+      "destination": "LICENSE",
+      "renderer": "text",
+      "rawOverride": "allowed"
+    },
+    {
+      "source": "templates/shared/build.gradle.tmpl",
+      "destination": "build.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/settings.gradle.tmpl",
+      "destination": "settings.gradle",
+      "renderer": "gradle",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/gradle.properties.tmpl",
+      "destination": "gradle.properties",
+      "renderer": "properties",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/shared/entrypoint.java.tmpl",
+      "destination": "common/src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "renderer": "text",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/multiloader/common-mods.toml.tmpl",
+      "destination": "common/src/main/resources/META-INF/mods.toml",
+      "renderer": "toml",
+      "rawOverride": "advanced-only"
     }
   ],
   "renderTargets": [
@@ -114,5 +150,119 @@
     "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
     "canonicalCi": "never-execute",
     "pathPolicy": "relative-safe"
+  },
+  "customization": {
+    "$schema": "urn:mcgen:schema:customization-contract:1",
+    "schemaVersion": 1,
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/multiloader/field-catalog.json"
+    ],
+    "simple": {
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "loader-version",
+        "environment",
+        "targets",
+        "common-metadata"
+      ],
+      "defaultPolicy": "descriptor-defaults",
+      "warnings": true,
+      "overrides": "visible"
+    },
+    "advanced": {
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "group-id",
+        "artifact-id",
+        "archive-name",
+        "classifier",
+        "appendix",
+        "extension",
+        "java-runtime",
+        "java-language",
+        "build-dsl",
+        "wrapper-version",
+        "gradle-properties",
+        "jvm-arguments",
+        "dependencies",
+        "repositories",
+        "source-sets",
+        "tasks",
+        "runs",
+        "publishing",
+        "icon",
+        "metadata-extensions",
+        "raw-file-operations",
+        "loader-version",
+        "services",
+        "links",
+        "mods",
+        "display",
+        "logo",
+        "features",
+        "display-test",
+        "ordering",
+        "logical-sides",
+        "custom-fields",
+        "environment",
+        "entrypoints",
+        "contact",
+        "mixins",
+        "access-wideners",
+        "nested-jars",
+        "language-adapters",
+        "provides",
+        "depends",
+        "recommends",
+        "breaks",
+        "conflicts",
+        "targets",
+        "common-metadata",
+        "target-overrides",
+        "target-dependencies",
+        "target-source-layout",
+        "target-artifacts"
+      ],
+      "defaultPolicy": "descriptor-defaults",
+      "warnings": true,
+      "overrides": "all"
+    },
+    "modeSwitch": {
+      "preservesValues": true,
+      "preservesDormantValues": true,
+      "resolver": "shared"
+    },
+    "rawFiles": {
+      "allowedOperations": [
+        "add",
+        "replace",
+        "rename",
+        "delete",
+        "reset",
+        "diff"
+      ],
+      "canonicalCiPolicy": "never-execute",
+      "pathPolicy": "relative-safe"
+    }
   }
 }

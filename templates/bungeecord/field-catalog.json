@@ -1,0 +1,61 @@
+{
+  "$schema": "urn:mcgen:schema:field-catalog:1",
+  "schemaVersion": 1,
+  "id": "bungeecord",
+  "fields": [
+    {
+      "id": "main",
+      "type": "string",
+      "label": "BungeeCord main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "derived"
+    },
+    {
+      "id": "depends",
+      "type": "list",
+      "label": "BungeeCord dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "soft-depends",
+      "type": "list",
+      "label": "Soft dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "optional-dependencies",
+      "type": "list",
+      "label": "Optional dependencies",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "url",
+      "type": "string",
+      "label": "Project URL",
+      "modes": ["simple", "advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    },
+    {
+      "id": "custom-fields",
+      "type": "map",
+      "label": "Custom BungeeCord fields",
+      "modes": ["advanced"],
+      "required": false,
+      "editable": true,
+      "defaultPolicy": "unset"
+    }
+  ]
+}

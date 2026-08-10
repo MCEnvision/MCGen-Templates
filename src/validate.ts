@@ -1032,6 +1032,64 @@ async function phase4IntegrityFailures(
       ) {
         failures.push(`${item.path} blocked descriptor must declare blockers`);
       }
+      const customization = isObject(item.document["customization"])
+        ? item.document["customization"]
+        : undefined;
+      const catalogPaths = customization
+        ? stringArray(customization["fieldCatalogPaths"])
+        : [];
+      const catalogFieldIds = new Set<string>();
+      for (const catalogPath of catalogPaths) {
+        const catalog = documents.get(resolve(repositoryRoot, catalogPath));
+        if (!catalog || !isObject(catalog)) {
+          failures.push(
+            `${item.path} references missing field catalog ${catalogPath}`,
+          );
+          continue;
+        }
+        for (const field of objects(catalog["fields"])) {
+          const id = field["id"];
+          if (typeof id === "string") catalogFieldIds.add(id);
+        }
+      }
+      if (customization && catalogFieldIds.size > 0) {
+        for (const mode of ["simple", "advanced"] as const) {
+          const modeDocument = isObject(customization[mode])
+            ? customization[mode]
+            : undefined;
+          const modeFields = new Set(
+            modeDocument ? stringArray(modeDocument["fields"]) : [],
+          );
+          const missing = [...catalogFieldIds].filter((id) => {
+            const catalog = catalogPaths
+              .map((catalogPath) =>
+                documents.get(resolve(repositoryRoot, catalogPath)),
+              )
+              .find(
+                (document) =>
+                  isObject(document) &&
+                  objects(document["fields"]).some(
+                    (field) => field["id"] === id,
+                  ),
+              );
+            const field =
+              catalog && isObject(catalog)
+                ? objects(catalog["fields"]).find((value) => value["id"] === id)
+                : undefined;
+            return (
+              isObject(field) &&
+              field["modes"] instanceof Array &&
+              field["modes"].includes(mode) &&
+              !modeFields.has(id)
+            );
+          });
+          if (missing.length) {
+            failures.push(
+              `${item.path} ${mode} customization omits catalog fields ${missing.join(", ")}`,
+            );
+          }
+        }
+      }
       for (const file of objects(item.document["files"])) {
         const source = file["source"];
         if (typeof source !== "string") continue;
