@@ -1,9 +1,7 @@
 {
   "$schema": "urn:mcgen:schema:github-audit:1",
-  "auditId": "9e717f417bd71225a6b390fe38496da6d00ff95b9f2c3b89ae308b5038057fa9",
-  "blockers": [
-    "maintenance-automation: maintenance workflow exists but phase seven completion issue remains open or unavailable"
-  ],
+  "auditId": "222a8169a6a109607bd9dc4673b799110bbf361b260fb5e6b7b56a06e0550fba",
+  "blockers": [],
   "capabilities": [
     {
       "detail": "repository identity and active main ruleset match policy",
@@ -23624,7 +23622,7 @@
       "state": "passed"
     },
     {
-      "detail": "maintenance workflow exists but phase seven completion issue remains open or unavailable",
+      "detail": "maintenance workflow evidence is present and phase seven issue is closed",
       "evidence": [
         {
           "detail": "path exists and was read without mutation",
@@ -23658,7 +23656,7 @@
         }
       ],
       "id": "maintenance-automation",
-      "state": "blocked"
+      "state": "passed"
     },
     {
       "detail": "required repository evidence was read and its expected contract was verified",
@@ -23767,5 +23765,5 @@
     "visibility": "public"
   },
   "schemaVersion": 1,
-  "status": "blocked"
+  "status": "passed"
 }
