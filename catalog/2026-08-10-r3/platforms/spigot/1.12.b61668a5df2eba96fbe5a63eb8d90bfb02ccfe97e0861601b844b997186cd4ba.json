@@ -1,0 +1,150 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT",
+      "id": "component.spigot.abe12da7e0a6fe76f13f6690",
+      "sourceEntries": [
+        {
+          "entryIndex": 5,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.12-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.12-pre2-SNAPSHOT",
+      "id": "component.spigot.f4862949ccf32cdeda4ccefe",
+      "sourceEntries": [
+        {
+          "entryIndex": 6,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.12-pre2-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.12-pre5-SNAPSHOT",
+      "id": "component.spigot.7448e649891a8d852c524318",
+      "sourceEntries": [
+        {
+          "entryIndex": 7,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.12-pre5-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.12-pre6-SNAPSHOT",
+      "id": "component.spigot.c87b2759c5799643bf05ace0",
+      "sourceEntries": [
+        {
+          "entryIndex": 8,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.12-pre6-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.spigot.60c564b5b8a1ce5632d8beaa",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 7,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.7448e649891a8d852c524318"
+    },
+    {
+      "confidence": "published",
+      "from": "target.spigot.60c564b5b8a1ce5632d8beaa",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.abe12da7e0a6fe76f13f6690"
+    },
+    {
+      "confidence": "published",
+      "from": "target.spigot.60c564b5b8a1ce5632d8beaa",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 8,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.c87b2759c5799643bf05ace0"
+    },
+    {
+      "confidence": "published",
+      "from": "target.spigot.60c564b5b8a1ce5632d8beaa",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 6,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.f4862949ccf32cdeda4ccefe"
+    }
+  ],
+  "id": "catalog.spigot.d854fcaf1c2e39d35a163631",
+  "key": "1.12",
+  "keyKind": "minecraft",
+  "platform": "spigot",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "spigot.d3e7e6031437b0eb7447a6df"
+  ]
+}

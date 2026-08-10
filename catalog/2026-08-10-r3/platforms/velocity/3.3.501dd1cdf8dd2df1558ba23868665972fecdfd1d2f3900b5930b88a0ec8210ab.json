@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "proxy",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "velocity-api",
+      "coordinate": "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT",
+      "id": "component.velocity.c4d43b0679b7023471b8d1c2",
+      "sourceEntries": [
+        {
+          "entryIndex": 57,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "3.3.0-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.velocity.a9cea8a042489b55cd862464",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 57,
+          "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.velocity.c4d43b0679b7023471b8d1c2"
+    }
+  ],
+  "id": "catalog.velocity.06be702ff33a2e5367cbbbe1",
+  "key": "3.3",
+  "keyKind": "api",
+  "platform": "velocity",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "velocity.0dd1e06d8ce24cb894449c49"
+  ]
+}

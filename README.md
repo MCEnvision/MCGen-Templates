@@ -91,6 +91,6 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 
 ## Current Status
 
-The current Phase 3 evidence set contains twenty nine immutable source snapshots, including fifteen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all eighty six rejected upstream values have exact structured coverage blockers. No catalog component is a verified generated project tuple.
+The current Phase 3 evidence set contains thirty immutable source snapshots, including sixteen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty one rejected upstream values have exact structured coverage blockers. No catalog component is a verified generated project tuple.
 
 The repository license is not selected yet. No third-party source or template content may be imported until its license and redistribution obligations are reviewed. Snapshot discovery does not claim that any generated Forge project or exact tuple is verified.

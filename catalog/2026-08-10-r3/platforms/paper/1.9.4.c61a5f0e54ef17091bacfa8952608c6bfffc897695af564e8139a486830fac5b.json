@@ -1,0 +1,156 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.9.4-773",
+      "id": "component.paper.6181dedd2857d4c023896d43",
+      "sourceEntries": [
+        {
+          "entryIndex": 5475,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            63
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "773"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.9.4-774",
+      "id": "component.paper.e3acc4b6c0b443e1bd83b0b7",
+      "sourceEntries": [
+        {
+          "entryIndex": 5476,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            63
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "774"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "paper-server",
+      "coordinate": "io.papermc.paper:paper:1.9.4-775",
+      "id": "component.paper.e912907aa62ac1bee238132c",
+      "sourceEntries": [
+        {
+          "entryIndex": 5477,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            63
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "775"
+    },
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "server-release",
+      "coordinate": "paper-fill:paper:1.9.4",
+      "id": "component.paper.ab743c4183a03f85e4e640bc",
+      "sourceEntries": [
+        {
+          "entryIndex": 5478,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.9.4"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.paper.259b197c34bd19155ef81a5d",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5475,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            63
+          ]
+        }
+      ],
+      "to": "component.paper.6181dedd2857d4c023896d43"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.259b197c34bd19155ef81a5d",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5478,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.paper.ab743c4183a03f85e4e640bc"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.259b197c34bd19155ef81a5d",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5476,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            63
+          ]
+        }
+      ],
+      "to": "component.paper.e3acc4b6c0b443e1bd83b0b7"
+    },
+    {
+      "confidence": "published",
+      "from": "target.paper.259b197c34bd19155ef81a5d",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 5477,
+          "snapshotId": "paper.e9a48aeb643a97705e3dcd9d",
+          "sourceIndexes": [
+            0,
+            63
+          ]
+        }
+      ],
+      "to": "component.paper.e912907aa62ac1bee238132c"
+    }
+  ],
+  "id": "catalog.paper.7ef1d54f384e6f2851d20417",
+  "key": "1.9.4",
+  "keyKind": "minecraft",
+  "platform": "paper",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "paper.e9a48aeb643a97705e3dcd9d"
+  ]
+}

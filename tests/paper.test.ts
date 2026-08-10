@@ -59,22 +59,34 @@ function buildsResource(version: string, text: string): FetchedResource {
   };
 }
 
+function paperBuild(id: number, channel = "stable") {
+  return {
+    id,
+    channel,
+    downloads: {
+      "server:default": {
+        name: `paper-test-${id}.jar`,
+        size: id,
+        url: `https://fill-data.papermc.io/v1/objects/${String(id).padStart(64, "0")}/paper-test-${id}.jar`,
+        checksums: { sha256: String(id).padStart(64, "0") },
+      },
+    },
+  };
+}
+
 function buildResponses() {
   return [
     [
       "paper-fill-builds:1.20.6",
-      buildsResource("1.20.6", JSON.stringify({ builds: [{ id: 2 }] })),
+      buildsResource("1.20.6", JSON.stringify([paperBuild(2)])),
     ],
     [
       "paper-fill-builds:1.21",
-      buildsResource("1.21", JSON.stringify({ builds: [{ id: 3 }] })),
+      buildsResource("1.21", JSON.stringify([paperBuild(3)])),
     ],
     [
       "paper-fill-builds:1.21.1",
-      buildsResource(
-        "1.21.1",
-        JSON.stringify({ builds: [{ id: 4, channel: "stable" }] }),
-      ),
+      buildsResource("1.21.1", JSON.stringify([paperBuild(4)])),
     ],
   ] as const;
 }
@@ -156,8 +168,26 @@ describe("paper source adapter", () => {
   });
 
   it("rejects a malformed official Paper Fill build record", () => {
-    expect(() =>
-      parsePaperFillBuilds(JSON.stringify({ builds: [{ id: 0 }] })),
-    ).toThrow("paper Fill build id is invalid");
+    expect(() => parsePaperFillBuilds(JSON.stringify([{ id: 0 }]))).toThrow(
+      "paper Fill build id is invalid",
+    );
+  });
+
+  it("parses official array responses with exact server download evidence", () => {
+    const builds = parsePaperFillBuilds(
+      JSON.stringify([paperBuild(9, "STABLE")]),
+    );
+    expect(builds).toHaveLength(1);
+    const build = builds[0];
+    if (!build) throw new Error("paper Fill test omitted its parsed build");
+    expect(build.id).toBe("9");
+    expect(build.channel).toBe("release");
+    expect(build.download).toEqual({
+      name: "paper-test-9.jar",
+      sha256:
+        "0000000000000000000000000000000000000000000000000000000000000009",
+      size: "9",
+      url: "https://fill-data.papermc.io/v1/objects/0000000000000000000000000000000000000000000000000000000000000009/paper-test-9.jar",
+    });
   });
 });

@@ -20,6 +20,12 @@ type PaperFillProject = {
 export type PaperFillBuild = {
   id: string;
   channel: StabilityChannel;
+  download: {
+    name: string;
+    sha256: string;
+    size: string;
+    url: string;
+  };
 };
 
 const paperBuildPrefix = "paper-fill-builds:";
@@ -133,19 +139,57 @@ function buildIdentifier(value: unknown): string {
   throw new Error("paper Fill build id is invalid");
 }
 
-export function parsePaperFillBuilds(text: string): PaperFillBuild[] {
-  const payload = requireRecord(
-    JSON.parse(text) as unknown,
-    "paper Fill builds response must be an object",
+function buildDownload(value: unknown): PaperFillBuild["download"] {
+  const downloads = requireRecord(value, "paper Fill downloads are invalid");
+  const server = requireRecord(
+    downloads["server:default"],
+    "paper Fill server download is missing",
   );
-  if (!Array.isArray(payload["builds"])) {
+  const name = server["name"];
+  const size = server["size"];
+  const url = server["url"];
+  const checksums = requireRecord(
+    server["checksums"],
+    "paper Fill server checksums are missing",
+  );
+  const sha256 = checksums["sha256"];
+  if (
+    typeof name !== "string" ||
+    name.length === 0 ||
+    name.trim() !== name ||
+    typeof size !== "number" ||
+    !Number.isSafeInteger(size) ||
+    size < 1 ||
+    typeof url !== "string" ||
+    !/^[a-f0-9]{64}$/u.test(String(sha256))
+  ) {
+    throw new Error("paper Fill server download is invalid");
+  }
+  const checksum = String(sha256);
+  const expectedUrl = `https://fill-data.papermc.io/v1/objects/${checksum}/${encodeURIComponent(name)}`;
+  if (url !== expectedUrl) {
+    throw new Error("paper Fill server download url is invalid");
+  }
+  return { name, sha256: checksum, size: String(size), url };
+}
+
+export function parsePaperFillBuilds(text: string): PaperFillBuild[] {
+  const payload = JSON.parse(text) as unknown;
+  const candidates = Array.isArray(payload)
+    ? payload
+    : requireRecord(
+        payload,
+        "paper Fill builds response must be an array or object",
+      )["builds"];
+  if (!Array.isArray(candidates)) {
     throw new Error("paper Fill builds response does not contain builds");
   }
-  const builds = payload["builds"].map((candidate) => {
+  const builds = candidates.map((candidate) => {
     const build = requireRecord(candidate, "paper Fill build is invalid");
     return {
       id: buildIdentifier(build["id"]),
       channel: buildChannel(build["channel"]),
+      download: buildDownload(build["downloads"]),
     };
   });
   if (new Set(builds.map((build) => build.id)).size !== builds.length) {
@@ -237,6 +281,10 @@ export function buildPaperSnapshot(
           details: {
             minecraftVersion,
             buildId: build.id,
+            downloadName: build.download.name,
+            downloadSha256: build.download.sha256,
+            downloadSize: build.download.size,
+            downloadUrl: build.download.url,
           },
         });
       }

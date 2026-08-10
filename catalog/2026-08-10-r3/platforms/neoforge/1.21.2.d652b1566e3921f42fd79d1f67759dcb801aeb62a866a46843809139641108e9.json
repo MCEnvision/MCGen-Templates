@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:21.2.0-beta",
+      "id": "component.neoforge.8bc637214a12b4efbc787d60",
+      "sourceEntries": [
+        {
+          "entryIndex": 1037,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "21.2.0-beta"
+    },
+    {
+      "channel": "beta",
+      "compatibility": "declared",
+      "component": "loader",
+      "coordinate": "net.neoforged:neoforge:21.2.1-beta",
+      "id": "component.neoforge.4a795d8b4e7be536b99560da",
+      "sourceEntries": [
+        {
+          "entryIndex": 1038,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "21.2.1-beta"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7f0a8e1279bd415a924c072c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 1038,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.4a795d8b4e7be536b99560da"
+    },
+    {
+      "confidence": "published",
+      "from": "target.neoforge.7f0a8e1279bd415a924c072c",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 1037,
+          "snapshotId": "neoforge.454d86de20b17a45eb60bd52",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.neoforge.8bc637214a12b4efbc787d60"
+    }
+  ],
+  "id": "catalog.neoforge.ae3c6a90e1a93bdfc8cf9540",
+  "key": "1.21.2",
+  "keyKind": "minecraft",
+  "platform": "neoforge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "neoforge.454d86de20b17a45eb60bd52"
+  ]
+}

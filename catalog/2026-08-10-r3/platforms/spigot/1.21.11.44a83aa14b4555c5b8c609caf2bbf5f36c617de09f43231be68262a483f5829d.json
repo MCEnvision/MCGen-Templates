@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT",
+      "id": "component.spigot.11874fab0d161b842b558b47",
+      "sourceEntries": [
+        {
+          "entryIndex": 58,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.11-R0.1-SNAPSHOT"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api:1.21.11-R0.2-SNAPSHOT",
+      "id": "component.spigot.c7a7f2b97973467912cec8e9",
+      "sourceEntries": [
+        {
+          "entryIndex": 59,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.21.11-R0.2-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.spigot.a6e4a84e115c8b83238d09b3",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 58,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.11874fab0d161b842b558b47"
+    },
+    {
+      "confidence": "published",
+      "from": "target.spigot.a6e4a84e115c8b83238d09b3",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 59,
+          "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.spigot.c7a7f2b97973467912cec8e9"
+    }
+  ],
+  "id": "catalog.spigot.71cbe36677e8840159b43349",
+  "key": "1.21.11",
+  "keyKind": "minecraft",
+  "platform": "spigot",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "spigot.d3e7e6031437b0eb7447a6df"
+  ]
+}

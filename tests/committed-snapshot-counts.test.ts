@@ -115,6 +115,11 @@ const expectedCounts = {
     rejected: 67,
     sources: 68,
   },
+  "sources/snapshots/paper/2026-08-10-r3.json": {
+    entries: 5879,
+    rejected: 2,
+    sources: 68,
+  },
   "sources/snapshots/paper/2026-08-10.json": {
     entries: 301,
     rejected: 1,

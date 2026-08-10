@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.9dacda0438726d9cc8ae048a",
+  "category": "plugin",
+  "components": [
+    {
+      "channel": "release",
+      "compatibility": "declared",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.0.0",
+      "id": "component.sponge.bf3c17003857add284cac141",
+      "sourceEntries": [
+        {
+          "entryIndex": 53,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "7.0.0"
+    },
+    {
+      "channel": "snapshot",
+      "compatibility": "declared",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.0.0-SNAPSHOT",
+      "id": "component.sponge.9cbb1c12eb6797091ad88016",
+      "sourceEntries": [
+        {
+          "entryIndex": 54,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "7.0.0-SNAPSHOT"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.sponge.d5e8d761e32145aedaf57dbb",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 54,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.9cbb1c12eb6797091ad88016"
+    },
+    {
+      "confidence": "published",
+      "from": "target.sponge.d5e8d761e32145aedaf57dbb",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 53,
+          "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+          "sourceIndexes": [
+            0
+          ]
+        }
+      ],
+      "to": "component.sponge.bf3c17003857add284cac141"
+    }
+  ],
+  "id": "catalog.sponge.deb93db59d5c7ffbd57b2caa",
+  "key": "7.0",
+  "keyKind": "api",
+  "platform": "sponge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "sponge.b6e6a7dfbfec686a0e244c90"
+  ]
+}
