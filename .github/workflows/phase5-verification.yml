@@ -1,0 +1,79 @@
+name: phase 5 tuple verification
+
+on:
+  pull_request:
+    paths:
+      - "profiles/**"
+      - "templates/**"
+      - "fixtures/**"
+      - "catalog/**"
+      - "sources/**"
+      - "schemas/**"
+      - "src/**"
+      - "tests/**"
+      - "docs/general/github_plan.md"
+      - "docs/verification/**"
+      - ".github/workflows/**"
+      - "package.json"
+      - "package-lock.json"
+  push:
+    branches:
+      - main
+    paths:
+      - "profiles/**"
+      - "templates/**"
+      - "fixtures/**"
+      - "catalog/**"
+      - "sources/**"
+      - "schemas/**"
+      - "src/**"
+      - "tests/**"
+      - "docs/general/github_plan.md"
+      - "docs/verification/**"
+      - ".github/workflows/**"
+      - "package.json"
+      - "package-lock.json"
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase5-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    name: phase 5 contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 1
+      - name: setup node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22.13.0"
+          cache: npm
+      - name: install
+        run: npm ci
+      - name: verify phase 5 contracts
+        run: npm run verify
+      - name: execute reviewed phase 5 tuples
+        run: |
+          if [ -d verification/phase5/executions ]; then
+            mkdir -p /tmp/mcgen-phase5-existing-evidence
+            if [ -d verification/phase5/evidence ]; then
+              find verification/phase5/evidence -type f -name '*.json' -exec mv {} /tmp/mcgen-phase5-existing-evidence/ \;
+            fi
+            npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions/ --output-dir verification/phase5/evidence/
+          fi
+      - name: write phase 5 audit
+        run: |
+          node dist/cli.js phase5 audit --generated-at 2000-01-01T00:00:00.000Z --output verification/phase5/ci-audit.json
+          node -e "const a=require('./verification/phase5/ci-audit.json'); if(a.status !== 'verified') process.exit(1)"
+          rm -f verification/phase5/ci-audit.json

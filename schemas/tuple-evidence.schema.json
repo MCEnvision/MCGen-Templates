@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:tuple-evidence:1",
+  "title": "MCGen exact tuple evidence record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "key",
+    "status",
+    "generatedAt",
+    "generatorDigest",
+    "blockers",
+    "invalidation"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:tuple-evidence:1" },
+    "schemaVersion": { "const": 1 },
+    "key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "identity"],
+      "properties": {
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "identity": {
+          "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/tupleIdentity"
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "verified",
+        "legacy-verified",
+        "discovered",
+        "blocked",
+        "failed",
+        "skipped",
+        "queued"
+      ]
+    },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "generatorDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "build": {
+      "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/buildEvidence"
+    },
+    "artifact": {
+      "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/artifactInspection"
+    },
+    "outputTreeDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "reproducibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reproducible",
+        "firstDigest",
+        "secondDigest",
+        "differences"
+      ],
+      "properties": {
+        "reproducible": { "type": "boolean" },
+        "firstDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "secondDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "differences": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "invalidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceDigests",
+        "contentDigests",
+        "profileRevision",
+        "descriptorRevision",
+        "wrapperSha256",
+        "mappingDigest",
+        "procedureDigest"
+      ],
+      "properties": {
+        "sourceDigests": {
+          "type": "array",
+          "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        },
+        "contentDigests": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "descriptor",
+            "profile",
+            "catalog",
+            "fixture",
+            "template"
+          ],
+          "properties": {
+            "descriptor": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+            "profile": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+            "catalog": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+            "fixture": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+            "template": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+          }
+        },
+        "profileRevision": { "type": "integer", "minimum": 1 },
+        "descriptorRevision": { "type": "integer", "minimum": 1 },
+        "wrapperSha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "javaChecksum": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "mappingDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "procedureDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "enum": ["verified", "legacy-verified"] } }
+      },
+      "then": {
+        "required": [
+          "build",
+          "artifact",
+          "outputTreeDigest",
+          "reproducibility"
+        ],
+        "properties": {
+          "build": {
+            "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/buildEvidence",
+            "type": "object",
+            "properties": { "status": { "const": "passed" } }
+          },
+          "artifact": {
+            "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/artifactInspection",
+            "type": "object",
+            "properties": { "status": { "const": "passed" } }
+          },
+          "outputTreeDigest": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+          },
+          "reproducibility": {
+            "type": "object",
+            "required": ["reproducible"],
+            "properties": { "reproducible": { "const": true } }
+          }
+        }
+      }
+    }
+  ]
+}

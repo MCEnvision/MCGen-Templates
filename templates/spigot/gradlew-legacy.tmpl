@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eu
+version=7.6.4
+distribution_sha256=bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1
+base="${GRADLE_USER_HOME:-${HOME:-.}/.gradle}/mcgen-distributions"
+install="$base/gradle-$version"
+archive="$base/gradle-$version-bin.zip"
+if [ ! -x "$install/bin/gradle" ]; then
+    mkdir -p "$base"
+    if [ ! -f "$archive" ]; then
+        curl --fail --location --silent --show-error --output "$archive" "https://services.gradle.org/distributions/gradle-$version-bin.zip"
+    fi
+    actual=""
+    if command -v sha256sum >/dev/null 2>&1; then
+        actual=$(sha256sum "$archive" | awk '{print $1}')
+    elif command -v shasum >/dev/null 2>&1; then
+        actual=$(shasum -a 256 "$archive" | awk '{print $1}')
+    fi
+    if [ "$actual" != "$distribution_sha256" ]; then
+        printf '%s\n' "gradle distribution checksum mismatch" >&2
+        exit 1
+    fi
+    unzip -q -o "$archive" -d "$base"
+fi
+exec "$install/bin/gradle" "$@"

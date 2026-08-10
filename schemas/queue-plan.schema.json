@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:queue-plan:1",
+  "title": "MCGen bounded phase 5 verification queue plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "queue",
+    "eventDigest",
+    "cancelKey",
+    "shardCount",
+    "shardIndex",
+    "tupleIds",
+    "maxAttempts",
+    "timeoutMinutes"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:queue-plan:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "queue-plan" },
+    "queue": {
+      "enum": [
+        "changed-boundaries",
+        "new-tuples",
+        "invalidation",
+        "scheduled-audit",
+        "transient-recovery"
+      ]
+    },
+    "eventDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "cancelKey": { "type": "string", "minLength": 1, "maxLength": 512 },
+    "shardCount": { "type": "integer", "minimum": 1 },
+    "shardIndex": { "type": "integer", "minimum": 0 },
+    "tupleIds": {
+      "type": "array",
+      "maxItems": 100000,
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+    },
+    "maxAttempts": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "timeoutMinutes": { "type": "integer", "minimum": 1, "maximum": 120 }
+  }
+}

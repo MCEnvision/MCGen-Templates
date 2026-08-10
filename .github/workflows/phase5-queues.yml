@@ -1,0 +1,102 @@
+name: phase 5 queue planner
+
+on:
+  pull_request:
+    paths:
+      - "catalog/**"
+      - "profiles/**"
+      - "templates/**"
+      - "fixtures/**"
+      - "sources/**"
+      - "schemas/**"
+      - "src/**"
+      - "tests/**"
+      - "package.json"
+      - "package-lock.json"
+  push:
+    branches: ["main"]
+    paths:
+      - "catalog/**"
+      - "profiles/**"
+      - "templates/**"
+      - "fixtures/**"
+      - "sources/**"
+      - "schemas/**"
+      - "src/**"
+      - "tests/**"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+    inputs:
+      queue:
+        description: verification queue
+        required: true
+        type: choice
+        options:
+          - changed-boundaries
+          - new-tuples
+          - invalidation
+          - scheduled-audit
+          - transient-recovery
+      subject:
+        description: stable queue subject
+        required: true
+        type: string
+      shard_count:
+        description: number of deterministic shards
+        required: true
+        default: "1"
+        type: string
+      shard_index:
+        description: zero based shard index
+        required: true
+        default: "0"
+        type: string
+  schedule:
+    - cron: "47 4 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase5-queue-${{ inputs.queue || 'scheduled-audit' }}-${{ inputs.subject || github.ref }}-${{ inputs.shard_index || '0' }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    name: plan bounded verification queue
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: setup node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22.13.0"
+          cache: npm
+      - name: install
+        run: npm ci
+      - name: build
+        run: npm run build
+      - name: plan queue
+        env:
+          QUEUE: ${{ inputs.queue || (github.event_name == 'pull_request' && 'changed-boundaries') || (github.event_name == 'push' && 'invalidation') || 'scheduled-audit' }}
+          SUBJECT: ${{ inputs.subject || (github.event.pull_request.number && format('pr-{0}', github.event.pull_request.number)) || github.ref_name }}
+          SHARD_COUNT: ${{ inputs.shard_count || '1' }}
+          SHARD_INDEX: ${{ inputs.shard_index || '0' }}
+        run: |
+          mkdir -p verification/phase5
+          node dist/cli.js phase5 queue --queue "$QUEUE" --subject "$SUBJECT" --output verification/phase5/queue-plan.json --shard-count "$SHARD_COUNT" --shard-index "$SHARD_INDEX"
+          node dist/cli.js validate verification/phase5/queue-plan.json
+          if [ -d verification/phase5/executions ]; then
+            mkdir -p /tmp/mcgen-phase5-existing-evidence
+            if [ -d verification/phase5/evidence ]; then
+              find verification/phase5/evidence -type f -name '*.json' -exec mv {} /tmp/mcgen-phase5-existing-evidence/ \;
+            fi
+            npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions/ --output-dir verification/phase5/evidence/
+          fi
+          node dist/cli.js phase5 audit --generated-at 2000-01-01T00:00:00.000Z --output verification/phase5/ci-audit.json
+          node -e "const a=require('./verification/phase5/ci-audit.json'); if(a.status !== 'verified') process.exit(1)"
+          rm -f verification/phase5/queue-plan.json
+          rm -f verification/phase5/ci-audit.json

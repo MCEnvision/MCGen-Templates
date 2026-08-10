@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in product Phase 0, template pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. GitHub completion Phase 4 is complete and identified by the verified signed tag `phase-4-profiles-templates-customization`. The merged Phase 4 contracts provide versioned profiles, descriptors, project specifications, PNG assets, safe file operations, and deterministic rendering. Phase 5 is the next gate for generated project compilation and artifact evidence.
+MCGen Templates is in product Phase 0, template pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. GitHub completion Phase 4 is complete and identified by the verified signed tag `phase-4-profiles-templates-customization`. The merged Phase 4 contracts provide versioned profiles, descriptors, project specifications, PNG assets, safe file operations, and deterministic rendering. Phase 5 is in review on `envy/phase_5_build_verification` and owns exact fixture, matrix, build, artifact, reproducibility, evidence, queue, and audit verification. The reviewed Spigot modern and legacy profiles have real reproducible evidence. Other profiles remain intentionally blocked with explicit upstream or platform boundary reasons.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -185,4 +185,5 @@ These limitations block claims of template availability, but they do not change 
 - [Template Pack Trust Model](../security/trust-model.md)
 - [GitHub Foundation Verification](../verification/github-foundation.md)
 - [GitHub Planning Verification](../verification/github-planning.md)
+- [Phase 5 Build and Artifact Contracts](../verification/phase5-build-contracts.md)
 - [Template Pack Releases](../release/template-pack-releases.md)

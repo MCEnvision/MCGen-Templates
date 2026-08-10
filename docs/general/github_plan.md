@@ -211,7 +211,7 @@ Make GitHub the synchronized execution and evidence surface for all repository o
 
 ## Status
 
-Phase 1 is merged and identified by the verified signed annotated tag `phase-1-github-governance-reconciliation`. Phase 2 is complete only when the planning controls and documentation in this section are merged, post merge checks pass, the Project and issue state are reconciled, the wiki is updated, and the verified signed annotated tag `phase-2-github-planning` identifies the approved `main` commit. Before that tag exists, Phase 2 remains the active GitHub completion gate.
+Phase 1 is merged and identified by the verified signed annotated tag `phase-1-github-governance-reconciliation`. Phase 2 is complete and identified by the verified signed annotated tag `phase-2-github-planning`. Its planning controls and documentation are merged, post merge checks passed, the Project and issue state were reconciled, and the wiki navigation was published. Later phases must preserve this planning contract.
 
 ## Workstreams
 
@@ -533,7 +533,7 @@ Prove that every tuple advertised as verified generates, compiles, packages, and
 
 ## Status
 
-Pending Phase 4 families and profiles.
+In review on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. Issue [23](https://github.com/MCEnvision/MCGen-Templates/issues/23) is in progress. The branch adds deterministic fixture, matrix, bounded build, artifact, reproducibility, evidence, coverage, queue, reviewed batch execution, and audit contracts. The reviewed Spigot modern profile and descriptor verify Minecraft 1.21.1 with Temurin 21 and Gradle 8.8. The reviewed Spigot legacy profile and descriptor verify Minecraft 1.8.8 with Temurin 8 and Gradle 7.6.4. Both exact tuples have current generated build, artifact inspection, and reproducibility evidence. The remaining twelve profiles and twelve descriptors retain explicit blockers and are not advertised as verified.
 
 ## Verification levels
 
