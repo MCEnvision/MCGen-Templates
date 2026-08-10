@@ -42,6 +42,8 @@ function resource(
 }
 
 function forgeResources(manifest: string, forge: string) {
+  const componentMetadata =
+    "<metadata><versioning><versions><version>1.20.1</version></versions></versioning></metadata>";
   return new Map([
     [
       "mojang-version-manifest",
@@ -64,7 +66,7 @@ function forgeResources(manifest: string, forge: string) {
       resource(
         "forgegradle-maven-metadata",
         "https://example.invalid/forgegradle.xml",
-        "<metadata><versioning><versions><version>1.0</version></versions></versioning></metadata>",
+        componentMetadata,
       ),
     ],
     [
@@ -72,7 +74,7 @@ function forgeResources(manifest: string, forge: string) {
       resource(
         "mcp-config-maven-metadata",
         "https://example.invalid/mcp-config.xml",
-        "<metadata><versioning><versions><version>1.0</version></versions></versioning></metadata>",
+        componentMetadata,
       ),
     ],
     [
@@ -80,7 +82,7 @@ function forgeResources(manifest: string, forge: string) {
       resource(
         "mcp-snapshot-maven-metadata",
         "https://example.invalid/mcp-snapshot.xml",
-        "<metadata><versioning><versions><version>1.0</version></versions></versioning></metadata>",
+        componentMetadata,
       ),
     ],
     [
@@ -88,7 +90,7 @@ function forgeResources(manifest: string, forge: string) {
       resource(
         "mcp-stable-maven-metadata",
         "https://example.invalid/mcp-stable.xml",
-        "<metadata><versioning><versions><version>1.0</version></versions></versioning></metadata>",
+        componentMetadata,
       ),
     ],
     [
@@ -96,7 +98,7 @@ function forgeResources(manifest: string, forge: string) {
       resource(
         "forge-promotions",
         "https://example.invalid/promotions.json",
-        "{}",
+        JSON.stringify({ promos: { "1.20.1-recommended": "1.20.1-47.7.0" } }),
       ),
     ],
   ]);
@@ -148,7 +150,7 @@ describe("forge source adapter", () => {
     expect(first.snapshotId).toBe(second.snapshotId);
     expect(first.provenanceVersion).toBe(1);
     expect(first.sources).toHaveLength(7);
-    expect(first.entries).toHaveLength(4);
+    expect(first.entries).toHaveLength(9);
     expect(first.rejected).toHaveLength(1);
   });
 

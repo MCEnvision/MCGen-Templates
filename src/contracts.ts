@@ -26,6 +26,7 @@ export type SnapshotEntry = {
   coordinate: string;
   channel: StabilityChannel;
   sourceIndexes: number[];
+  details?: Record<string, string>;
 };
 
 export type RejectedEntry = {
@@ -67,6 +68,7 @@ export type SourceDefinition = {
   requestPolicy: {
     timeoutMs: number;
     maxBytes: number;
+    userAgent?: string;
   };
 };
 

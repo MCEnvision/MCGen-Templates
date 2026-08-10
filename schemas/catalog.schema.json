@@ -8,10 +8,15 @@
     "$schema",
     "schemaVersion",
     "id",
-    "snapshotId",
+    "catalogId",
     "platform",
+    "category",
     "keyKind",
-    "targets"
+    "key",
+    "sourceSnapshots",
+    "components",
+    "edges",
+    "blockers"
   ],
   "properties": {
     "$schema": { "const": "urn:mcgen:schema:catalog:1" },
@@ -19,58 +24,128 @@
       "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
     },
     "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-    "snapshotId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "catalogId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
     "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-    "keyKind": { "enum": ["minecraft", "api"] },
-    "targets": {
+    "category": {
+      "enum": ["mod", "plugin", "proxy", "multiloader", "toolchain"]
+    },
+    "keyKind": { "enum": ["minecraft", "api", "global"] },
+    "key": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "sourceSnapshots": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "key",
-          "family",
-          "profile",
-          "components",
-          "status",
-          "evidence"
-        ],
-        "properties": {
-          "key": { "type": "string", "minLength": 1, "maxLength": 128 },
-          "family": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-          "profile": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-          "components": {
-            "type": "object",
-            "minProperties": 1,
-            "additionalProperties": {
-              "type": "array",
-              "minItems": 1,
-              "uniqueItems": true,
-              "items": { "type": "string", "minLength": 1, "maxLength": 256 }
-            }
-          },
-          "recommended": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 256
-            }
-          },
-          "status": {
-            "$ref": "urn:mcgen:schema:common:1#/$defs/verificationStatus"
-          },
-          "evidence": {
-            "type": "array",
-            "minItems": 1,
-            "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
-          },
-          "blockers": {
-            "type": "array",
-            "items": { "type": "string", "minLength": 1, "maxLength": 2048 }
-          }
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+    },
+    "components": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/component" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/blocker" }
+    }
+  },
+  "$defs": {
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshotId", "entryIndex", "sourceIndexes"],
+      "properties": {
+        "snapshotId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "entryIndex": { "type": "integer", "minimum": 0 },
+        "sourceIndexes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "component",
+        "version",
+        "coordinate",
+        "channel",
+        "status",
+        "sourceEntries"
+      ],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "component": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "coordinate": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "channel": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/stabilityChannel"
+        },
+        "status": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/verificationStatus"
+        },
+        "sourceEntries": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceEntry" }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "from", "to", "confidence", "sourceEntries"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "targets",
+            "requires",
+            "supports",
+            "conflicts-with",
+            "replaces",
+            "deprecated-by"
+          ]
+        },
+        "from": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "to": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "confidence": {
+          "enum": ["published", "documented", "verified", "inferred"]
+        },
+        "sourceEntries": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceEntry" }
+        }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "subject", "reason", "evidence"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "subject": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 2048 },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1, "maxLength": 256 }
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "keyKind": { "const": "global" } },
+        "required": ["keyKind"]
+      },
+      "then": { "properties": { "key": { "const": "all" } } }
+    }
+  ]
 }

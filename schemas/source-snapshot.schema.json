@@ -90,6 +90,14 @@
           "channel": {
             "$ref": "urn:mcgen:schema:common:1#/$defs/stabilityChannel"
           },
+          "details": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            }
+          },
           "sourceIndexes": {
             "type": "array",
             "minItems": 1,

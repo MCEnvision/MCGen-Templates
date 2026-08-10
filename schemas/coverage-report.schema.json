@@ -7,8 +7,8 @@
   "required": [
     "$schema",
     "schemaVersion",
-    "catalogDigest",
-    "generatedAt",
+    "catalogId",
+    "sourceSnapshots",
     "platforms"
   ],
   "properties": {
@@ -16,20 +16,77 @@
     "schemaVersion": {
       "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
     },
-    "catalogDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
-    "generatedAt": { "type": "string", "format": "date-time" },
+    "catalogId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "sourceSnapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "digest", "path", "entries", "rejected"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+          "path": {
+            "type": "string",
+            "pattern": "^(?:sources|catalog)/[a-zA-Z0-9._/-]+\\.json$"
+          },
+          "entries": { "type": "integer", "minimum": 0 },
+          "rejected": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
     "platforms": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["platform", "discovered", "statuses", "unexplainedGaps"],
+        "required": [
+          "platform",
+          "discovered",
+          "represented",
+          "statuses",
+          "entries",
+          "blockers",
+          "unexplainedGaps"
+        ],
         "properties": {
           "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
           "discovered": { "type": "integer", "minimum": 0 },
+          "represented": { "type": "integer", "minimum": 0 },
           "statuses": {
             "type": "object",
             "additionalProperties": { "type": "integer", "minimum": 0 }
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "snapshotId",
+                "entryIndex",
+                "disposition",
+                "shardId"
+              ],
+              "properties": {
+                "snapshotId": {
+                  "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+                },
+                "entryIndex": { "type": "integer", "minimum": 0 },
+                "disposition": { "enum": ["represented", "blocked"] },
+                "shardId": {
+                  "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+                },
+                "blockerId": {
+                  "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+                }
+              }
+            }
+          },
+          "blockers": {
+            "type": "array",
+            "items": { "$ref": "urn:mcgen:schema:catalog:1#/$defs/blocker" }
           },
           "unexplainedGaps": {
             "type": "array",

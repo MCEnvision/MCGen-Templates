@@ -1,0 +1,45 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "architectury",
+  "platform": "architectury",
+  "category": "multiloader",
+  "adapter": "architectury-maven",
+  "sources": [
+    {
+      "id": "architectury-api-maven-metadata",
+      "role": "primary",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "architectury-fabric-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury-fabric/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "architectury-neoforge-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury-neoforge/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "architectury-loom-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury-loom/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "architectury-setup-documentation",
+      "role": "corroborating",
+      "url": "https://docs.architectury.dev/api/getting-started/setup/",
+      "expectedContentTypes": ["text/html"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

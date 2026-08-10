@@ -7,6 +7,7 @@ import {
   validateWithSchema,
 } from "./schema-registry.js";
 import { sourceDefinitionPolicyFailures } from "./source-network-policy.js";
+import { sourceAdapterFailures } from "./source-adapters.js";
 
 export async function loadSourceDefinition(
   id: string,
@@ -28,10 +29,13 @@ export async function loadSourceDefinition(
     );
   }
   const definition = document as SourceDefinition;
-  const policyFailures = sourceDefinitionPolicyFailures(definition);
-  if (policyFailures.length) {
+  const failures = [
+    ...sourceDefinitionPolicyFailures(definition),
+    ...sourceAdapterFailures(definition),
+  ];
+  if (failures.length) {
     throw new Error(
-      `source definition ${id} is outside the approved network policy\n${policyFailures.join("\n")}`,
+      `source definition ${id} is invalid for source capture\n${failures.join("\n")}`,
     );
   }
   return definition;

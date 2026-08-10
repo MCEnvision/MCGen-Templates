@@ -28,9 +28,9 @@ Descriptors are data. They cannot execute code, start processes, access credenti
 
 ## Compatibility Catalog
 
-The catalog is a normalized graph of Minecraft versions, platforms, loaders, APIs, mappings, build plugins, wrappers, Java versions, language adapters, template families, profiles, and verification evidence.
+The catalog is a normalized evidence graph of upstream Minecraft versions, platforms, loaders, APIs, mappings, build plugins, wrappers, Java versions, and language adapters. It preserves exactly what an immutable source snapshot observed.
 
-Every edge records whether its relationship is published, documented, verified, or inferred. Inferred relationships may be exposed only as Advanced experimental choices and cannot drive Simple-mode recommendations.
+During Phase 3, catalog components are only `discovered`, and non-global shards contain only source-published `targets` edges. A global component, such as a standalone build tool release, has no target edge because discovery does not prove Minecraft compatibility. Profiles, template families, tuple intersections, and compilation evidence are intentionally outside the catalog until later phases add their own contracts. No discovered component can drive a Simple-mode recommendation.
 
 The catalog is split into content-addressed shards so clients load only the selected platform and compatibility key. Clients verify shard digests before parsing.
 

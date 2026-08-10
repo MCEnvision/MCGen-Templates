@@ -33,6 +33,95 @@ function requireForgeResource(
   return resource;
 }
 
+function minecraftKeyFromVersion(version: string): string | undefined {
+  const match =
+    /(?:^|[-_])((?:1\.)?\d+\.\d+(?:\.\d+)?(?:[_-](?:pre|rc)\d+)?)/iu.exec(
+      version,
+    );
+  return match?.[1];
+}
+
+function mavenComponentEntries(
+  resource: FetchedResource,
+  sourceIndex: number,
+  component: string,
+  coordinate: string,
+  catalogKey: (version: string) => string | undefined,
+): { entries: SnapshotEntry[]; rejected: RejectedEntry[] } {
+  const entries: SnapshotEntry[] = [];
+  const rejected: RejectedEntry[] = [];
+  for (const version of parseMavenVersions(resource.text)) {
+    const key = catalogKey(version);
+    if (!key) {
+      rejected.push({
+        value: version,
+        reason: `${component} version does not encode a Minecraft catalog key`,
+        sourceIndex,
+      });
+      continue;
+    }
+    entries.push({
+      platform: "forge",
+      component,
+      catalogKey: key,
+      version,
+      coordinate: `${coordinate}:${version}`,
+      channel: classifyMavenVersion(version),
+      sourceIndexes: [sourceIndex],
+    });
+  }
+  return { entries, rejected };
+}
+
+function promotionEntries(resource: FetchedResource): {
+  entries: SnapshotEntry[];
+  rejected: RejectedEntry[];
+} {
+  const document = JSON.parse(resource.text) as unknown;
+  const object: Record<string, unknown> | undefined =
+    document !== null &&
+    typeof document === "object" &&
+    !Array.isArray(document)
+      ? (document as Record<string, unknown>)
+      : undefined;
+  if (
+    !object ||
+    !Object.hasOwn(object, "promos") ||
+    object["promos"] === null ||
+    typeof object["promos"] !== "object" ||
+    Array.isArray(object["promos"])
+  ) {
+    throw new Error("forge promotions response must contain a promos object");
+  }
+  const entries: SnapshotEntry[] = [];
+  const rejected: RejectedEntry[] = [];
+  for (const [key, value] of Object.entries(object["promos"]).sort(
+    ([left], [right]) => compareText(left, right),
+  )) {
+    const match = /^(.*)-(?:recommended|latest)$/u.exec(key);
+    const catalogKey = match?.[1];
+    if (!catalogKey || typeof value !== "string" || value.length === 0) {
+      rejected.push({
+        value: `${key}=${String(value)}`,
+        reason:
+          "forge promotion must contain a Minecraft key and exact Forge version",
+        sourceIndex: 6,
+      });
+      continue;
+    }
+    entries.push({
+      platform: "forge",
+      component: "promotion",
+      catalogKey,
+      version: value,
+      coordinate: `net.minecraftforge:forge-promotion:${key}:${value}`,
+      channel: classifyMavenVersion(value),
+      sourceIndexes: [6],
+    });
+  }
+  return { entries, rejected };
+}
+
 export function parseForgeVersions(xml: string): string[] {
   try {
     return parseMavenVersions(xml);
@@ -114,11 +203,61 @@ export function buildForgeSnapshot(
   }
   const minecraftVersions = parseMojangVersionIds(mojang.text);
   const forgeVersions = parseForgeVersions(forge.text);
-  const {
-    entries,
-    rejected,
-    warnings: normalizationWarnings,
-  } = normalizeForgeVersions(forgeVersions, minecraftVersions);
+  const loader = normalizeForgeVersions(forgeVersions, minecraftVersions);
+  const forgeGradle = mavenComponentEntries(
+    requireForgeResource(resources, "forgegradle-maven-metadata"),
+    2,
+    "build-plugin",
+    "net.minecraftforge.gradle:ForgeGradle",
+    () => "all",
+  );
+  const mcpConfig = mavenComponentEntries(
+    requireForgeResource(resources, "mcp-config-maven-metadata"),
+    3,
+    "mappings-config",
+    "de.oceanlabs.mcp:mcp_config",
+    minecraftKeyFromVersion,
+  );
+  const mcpSnapshot = mavenComponentEntries(
+    requireForgeResource(resources, "mcp-snapshot-maven-metadata"),
+    4,
+    "mappings-snapshot",
+    "de.oceanlabs.mcp:mcp_snapshot",
+    minecraftKeyFromVersion,
+  );
+  const mcpStable = mavenComponentEntries(
+    requireForgeResource(resources, "mcp-stable-maven-metadata"),
+    5,
+    "mappings-stable",
+    "de.oceanlabs.mcp:mcp_stable",
+    minecraftKeyFromVersion,
+  );
+  const promotions = promotionEntries(
+    requireForgeResource(resources, "forge-promotions"),
+  );
+  const entries = [
+    ...loader.entries,
+    ...forgeGradle.entries,
+    ...mcpConfig.entries,
+    ...mcpSnapshot.entries,
+    ...mcpStable.entries,
+    ...promotions.entries,
+  ].sort(
+    (left, right) =>
+      compareText(left.catalogKey, right.catalogKey) ||
+      compareText(left.component, right.component) ||
+      compareText(left.version, right.version) ||
+      compareText(left.coordinate, right.coordinate),
+  );
+  const rejected = [
+    ...loader.rejected,
+    ...forgeGradle.rejected,
+    ...mcpConfig.rejected,
+    ...mcpSnapshot.rejected,
+    ...mcpStable.rejected,
+    ...promotions.rejected,
+  ];
+  const normalizationWarnings = [...loader.warnings];
   const identity = sha256(
     canonicalJson({
       adapter: {

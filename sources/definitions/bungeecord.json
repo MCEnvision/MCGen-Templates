@@ -1,0 +1,21 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "bungeecord",
+  "platform": "bungeecord",
+  "category": "proxy",
+  "adapter": "bungeecord-maven",
+  "sources": [
+    {
+      "id": "bungeecord-api-maven-metadata",
+      "role": "primary",
+      "url": "https://hub.spigotmc.org/nexus/content/groups/public/net/md-5/bungeecord-api/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

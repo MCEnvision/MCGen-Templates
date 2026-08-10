@@ -15,6 +15,7 @@ import {
 export type FetchPolicy = {
   timeoutMs: number;
   maxBytes: number;
+  userAgent?: string;
 };
 
 export async function readBoundedBody(
@@ -75,7 +76,7 @@ export async function fetchResource(
     response = await fetch(currentUrl, {
       headers: {
         accept: "application/json, application/xml, text/xml;q=0.9, */*;q=0.1",
-        "user-agent": "mcgen-template-snapshot/1.0",
+        "user-agent": policy.userAgent ?? "mcgen-template-snapshot/1.0",
       },
       redirect: "manual",
       signal,

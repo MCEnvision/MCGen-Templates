@@ -47,6 +47,7 @@ describe("source definition network policy", () => {
       "source definition uses unknown policy unreviewed-source",
       "source url is outside the approved policy for forgegradle-maven-metadata",
       "source definition content type application/json is outside the approved policy for forgegradle-maven-metadata",
+      "source definition must declare exactly one primary source",
     ]);
   });
 });

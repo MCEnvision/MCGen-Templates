@@ -1,0 +1,27 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "kotlin",
+  "platform": "kotlin",
+  "category": "toolchain",
+  "adapter": "kotlin-gradle-plugin",
+  "sources": [
+    {
+      "id": "kotlin-jvm-plugin-maven-metadata",
+      "role": "primary",
+      "url": "https://plugins.gradle.org/m2/org/jetbrains/kotlin/jvm/org.jetbrains.kotlin.jvm.gradle.plugin/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "kotlin-gradle-documentation",
+      "role": "corroborating",
+      "url": "https://kotlinlang.org/docs/gradle-configure-project.html",
+      "expectedContentTypes": ["text/html"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

@@ -1,0 +1,877 @@
+{
+  "$schema": "urn:mcgen:schema:source-snapshot:1",
+  "adapter": {
+    "id": "sponge-maven",
+    "version": "1.0.0"
+  },
+  "createdAt": "2026-08-10T05:33:36.584Z",
+  "entries": [
+    {
+      "catalogKey": "1.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:1.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "1.0"
+    },
+    {
+      "catalogKey": "1.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:1.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "1.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "1.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:1.1-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "1.1-SNAPSHOT"
+    },
+    {
+      "catalogKey": "10.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:10.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "10.0.0"
+    },
+    {
+      "catalogKey": "10.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:10.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "10.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "10.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:10.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "10.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "11.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:11.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "11.0.0"
+    },
+    {
+      "catalogKey": "11.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:11.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "11.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "11.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:11.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "11.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "12.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:12.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "12.0.0"
+    },
+    {
+      "catalogKey": "12.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:12.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "12.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "12.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:12.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "12.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "13.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:13.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "13.0.0"
+    },
+    {
+      "catalogKey": "13.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:13.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "13.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "13.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:13.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "13.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "14.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:14.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "14.0.0"
+    },
+    {
+      "catalogKey": "14.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:14.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "14.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "14.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:14.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "14.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "15.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:15.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "15.0.0"
+    },
+    {
+      "catalogKey": "15.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:15.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "15.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "15.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:15.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "15.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "16.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:16.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "16.0.0"
+    },
+    {
+      "catalogKey": "16.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:16.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "16.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "16.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:16.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "16.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "17.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:17.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "17.0.0"
+    },
+    {
+      "catalogKey": "17.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:17.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "17.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "17.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:17.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "17.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "18.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:18.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "18.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "19.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:19.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "19.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "2.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:2.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "2.0"
+    },
+    {
+      "catalogKey": "2.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:2.1-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "2.1-SNAPSHOT"
+    },
+    {
+      "catalogKey": "20.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:20.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "20.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "3.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "3.0.0"
+    },
+    {
+      "catalogKey": "3.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.0.1-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "3.0.1-SNAPSHOT"
+    },
+    {
+      "catalogKey": "3.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.0.1-indev",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "3.0.1-indev"
+    },
+    {
+      "catalogKey": "3.1",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.1.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "3.1.0"
+    },
+    {
+      "catalogKey": "3.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:3.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "3.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "4.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.0.0"
+    },
+    {
+      "catalogKey": "4.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "4.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.0.1",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.0.1"
+    },
+    {
+      "catalogKey": "4.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.0.2",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.0.2"
+    },
+    {
+      "catalogKey": "4.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.0.3",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.0.3"
+    },
+    {
+      "catalogKey": "4.1",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.1.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.1.0"
+    },
+    {
+      "catalogKey": "4.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "4.2",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:4.2.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "4.2.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "5.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "5.0.0"
+    },
+    {
+      "catalogKey": "5.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "5.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "5.1",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.1.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "5.1.0"
+    },
+    {
+      "catalogKey": "5.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "5.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "5.2",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:5.2.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "5.2.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "6.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:6.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "6.0.0"
+    },
+    {
+      "catalogKey": "6.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:6.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "6.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "6.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:6.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "6.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "7.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.0.0"
+    },
+    {
+      "catalogKey": "7.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "7.1",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.1.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.1.0"
+    },
+    {
+      "catalogKey": "7.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "7.2",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.2.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "catalogKey": "7.2",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.2.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.2.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "7.3",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.3.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.3.0"
+    },
+    {
+      "catalogKey": "7.3",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.3.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.3.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "7.4",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.4.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.4.0"
+    },
+    {
+      "catalogKey": "7.4",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.4.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.4.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "7.5",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:7.5.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "7.5.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "8.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.0.0"
+    },
+    {
+      "catalogKey": "8.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "8.1",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.1.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.1.0"
+    },
+    {
+      "catalogKey": "8.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.1.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "8.2",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.2.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.2.0"
+    },
+    {
+      "catalogKey": "8.2",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.2.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.2.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "8.3",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:8.3.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "8.3.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "9.0",
+      "channel": "release",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:9.0.0",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "9.0.0"
+    },
+    {
+      "catalogKey": "9.0",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:9.0.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "9.0.0-SNAPSHOT"
+    },
+    {
+      "catalogKey": "9.1",
+      "channel": "snapshot",
+      "component": "sponge-api",
+      "coordinate": "org.spongepowered:spongeapi:9.1.0-SNAPSHOT",
+      "platform": "sponge",
+      "sourceIndexes": [
+        0
+      ],
+      "version": "9.1.0-SNAPSHOT"
+    }
+  ],
+  "provenanceVersion": 1,
+  "rejected": [],
+  "schemaVersion": 1,
+  "snapshotId": "sponge.b6e6a7dfbfec686a0e244c90",
+  "sources": [
+    {
+      "bytes": 3049,
+      "contentType": "application/xml",
+      "etag": "W/\"{SHA1{69991ff9b1198539200ade070a4c188c49792979}}\"",
+      "lastModified": "Mon, 10 Aug 2026 05:33:36 GMT",
+      "redirectChain": [
+        "https://repo.spongepowered.org/repository/maven-public/org/spongepowered/spongeapi/maven-metadata.xml"
+      ],
+      "requestedUrl": "https://repo.spongepowered.org/repository/maven-public/org/spongepowered/spongeapi/maven-metadata.xml",
+      "retrievedAt": "2026-08-10T05:33:36.583Z",
+      "role": "primary",
+      "sha256": "20319b2845c10cd2856959a7cb6afd6d773ebc27be59598aac3848745054d6fe",
+      "sourceId": "sponge-api-maven-metadata",
+      "url": "https://repo.spongepowered.org/repository/maven-public/org/spongepowered/spongeapi/maven-metadata.xml"
+    },
+    {
+      "bytes": 20970,
+      "contentType": "text/html",
+      "lastModified": "Wed, 22 Jul 2026 11:35:44 GMT",
+      "redirectChain": [
+        "https://docs.spongepowered.org/stable/en/versions/versioning.html"
+      ],
+      "requestedUrl": "https://docs.spongepowered.org/stable/en/versions/versioning.html",
+      "retrievedAt": "2026-08-10T05:33:36.533Z",
+      "role": "corroborating",
+      "sha256": "1db937befc85e7ac8d04ff5f3efc4e5fe99fd4b0c24975ab6b3c8910504a0a0b",
+      "sourceId": "sponge-versioning-documentation",
+      "url": "https://docs.spongepowered.org/stable/en/versions/versioning.html"
+    },
+    {
+      "bytes": 17503,
+      "contentType": "text/html",
+      "lastModified": "Wed, 22 Jul 2026 11:35:44 GMT",
+      "redirectChain": [
+        "https://docs.spongepowered.org/stable/en/server/getting-started/implementations/index.html"
+      ],
+      "requestedUrl": "https://docs.spongepowered.org/stable/en/server/getting-started/implementations/index.html",
+      "retrievedAt": "2026-08-10T05:33:36.532Z",
+      "role": "corroborating",
+      "sha256": "ec969576f33852d2dbf6c6d177218e14f1e094a6da6ddff2060ca2324d050196",
+      "sourceId": "sponge-implementations-documentation",
+      "url": "https://docs.spongepowered.org/stable/en/server/getting-started/implementations/index.html"
+    }
+  ],
+  "warnings": [
+    "sponge-versioning-documentation is preserved as corroborating evidence",
+    "sponge-implementations-documentation is preserved as corroborating evidence"
+  ]
+}

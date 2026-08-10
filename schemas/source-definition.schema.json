@@ -53,7 +53,8 @@
       "required": ["timeoutMs", "maxBytes"],
       "properties": {
         "timeoutMs": { "type": "integer", "minimum": 1000, "maximum": 120000 },
-        "maxBytes": { "type": "integer", "minimum": 1024, "maximum": 52428800 }
+        "maxBytes": { "type": "integer", "minimum": 1024, "maximum": 52428800 },
+        "userAgent": { "type": "string", "minLength": 16, "maxLength": 256 }
       }
     }
   }

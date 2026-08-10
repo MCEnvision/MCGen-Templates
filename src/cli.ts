@@ -1,11 +1,23 @@
 #!/usr/bin/env node
-import { mkdir, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { dirname, relative, resolve } from "node:path";
 import { canonicalJson } from "./canonical-json.js";
+import { buildCatalog } from "./catalog/build.js";
+import { buildCatalogDriftReport } from "./catalog/drift.js";
+import { requireCatalogKeyKind } from "./catalog/platforms.js";
+import type {
+  CatalogCategory,
+  CatalogKeyKind,
+  SnapshotInput,
+} from "./catalog/contracts.js";
+import type { SourceSnapshot } from "./contracts.js";
 import { fetchResource } from "./fetch-resource.js";
 import { createSchemaRegistry, repositoryRoot } from "./schema-registry.js";
 import { loadSourceDefinition } from "./source-definition.js";
-import { buildForgeSnapshot } from "./sources/forge.js";
+import {
+  requireSourceAdapter,
+  requireSourceAdapterByAdapterId,
+} from "./source-adapters.js";
 import {
   canonicalJsonFiles,
   documentFailures,
@@ -17,6 +29,21 @@ function option(args: readonly string[], name: string): string | undefined {
   return index >= 0 ? args[index + 1] : undefined;
 }
 
+function options(args: readonly string[], name: string): string[] {
+  const values: string[] = [];
+  for (let index = 0; index < args.length; index += 1) {
+    if (args[index] === name) {
+      const value = args[index + 1];
+      if (!value || value.startsWith("--")) {
+        throw new Error(`${name} requires a repository path`);
+      }
+      values.push(value);
+      index += 1;
+    }
+  }
+  return values;
+}
+
 function requireRepositoryPath(path: string): string {
   const absolute = resolve(repositoryRoot, path);
   const repositoryRelative = relative(repositoryRoot, absolute);
@@ -26,15 +53,15 @@ function requireRepositoryPath(path: string): string {
   return absolute;
 }
 
-function requireForgeSnapshotPath(path: string): string {
+function requireSnapshotPath(snapshotDirectory: string, path: string): string {
   const absolute = requireRepositoryPath(path);
   const repositoryRelative = relative(repositoryRoot, absolute);
   if (
-    !repositoryRelative.startsWith("sources/snapshots/forge/") ||
+    !repositoryRelative.startsWith(`sources/snapshots/${snapshotDirectory}/`) ||
     !repositoryRelative.endsWith(".json")
   ) {
     throw new Error(
-      "forge snapshots must use a json file under sources/snapshots/forge",
+      `snapshots must use a json file under sources/snapshots/${snapshotDirectory}`,
     );
   }
   return absolute;
@@ -56,6 +83,48 @@ async function requireUnusedPath(path: string): Promise<void> {
   throw new Error(`snapshot output already exists at ${path}`);
 }
 
+function requireCatalogDirectory(path: string): {
+  absolute: string;
+  relative: string;
+} {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("catalog/") ||
+    repositoryRelative === "catalog" ||
+    repositoryRelative.endsWith(".json")
+  ) {
+    throw new Error("catalog output must be a new directory under catalog");
+  }
+  return { absolute, relative: repositoryRelative };
+}
+
+function requireSourceSnapshotPath(path: string): string {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("sources/snapshots/") ||
+    !repositoryRelative.endsWith(".json")
+  ) {
+    throw new Error(
+      "catalog snapshots must be immutable json files under sources/snapshots",
+    );
+  }
+  return absolute;
+}
+
+function requireCatalogDocumentPath(path: string): string {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("catalog/") ||
+    !repositoryRelative.endsWith(".json")
+  ) {
+    throw new Error("catalog report output must be a json file under catalog");
+  }
+  return absolute;
+}
+
 async function validate(args: readonly string[]): Promise<void> {
   const files = args.length
     ? args.map((path) => requireRepositoryPath(path))
@@ -70,14 +139,18 @@ async function validate(args: readonly string[]): Promise<void> {
   process.stdout.write(`validated ${files.length} canonical documents\n`);
 }
 
-async function snapshotForge(args: readonly string[]): Promise<void> {
+async function snapshotSource(
+  sourceId: string,
+  args: readonly string[],
+): Promise<void> {
   const output = option(args, "--output");
   if (!output) {
-    throw new Error("snapshot forge requires --output <repository path>");
+    throw new Error("snapshot requires --output <repository path>");
   }
-  const outputPath = requireForgeSnapshotPath(output);
+  const adapter = requireSourceAdapter(sourceId);
+  const outputPath = requireSnapshotPath(adapter.snapshotDirectory, output);
   await requireUnusedPath(outputPath);
-  const definition = await loadSourceDefinition("forge");
+  const definition = await loadSourceDefinition(adapter.id);
   const fetched = await Promise.all(
     definition.sources.map((source) =>
       fetchResource(source, definition.requestPolicy),
@@ -91,7 +164,7 @@ async function snapshotForge(args: readonly string[]): Promise<void> {
     }
     resources.set(sourceId, resource);
   }
-  const snapshot = buildForgeSnapshot(resources, new Date().toISOString());
+  const snapshot = adapter.build(resources, new Date().toISOString());
   const failures = documentFailures(
     await createSchemaRegistry(),
     outputPath,
@@ -106,7 +179,198 @@ async function snapshotForge(args: readonly string[]): Promise<void> {
     flag: "wx",
   });
   process.stdout.write(
-    `captured ${snapshot.entries.length} forge versions with ${snapshot.rejected.length} rejected entries\n`,
+    `captured ${snapshot.entries.length} ${adapter.id} entries with ${snapshot.rejected.length} rejected entries\n`,
+  );
+}
+
+async function catalogSourceSnapshots(
+  args: readonly string[],
+): Promise<SnapshotInput[]> {
+  const requested = options(args, "--snapshot");
+  const paths = requested.length
+    ? requested.map(requireSourceSnapshotPath)
+    : (await canonicalJsonFiles()).filter((path) =>
+        relative(repositoryRoot, path).startsWith("sources/snapshots/"),
+      );
+  if (paths.length === 0) {
+    throw new Error(
+      "catalog generation requires at least one immutable source snapshot",
+    );
+  }
+  const registry = await createSchemaRegistry();
+  const snapshots: SnapshotInput[] = [];
+  for (const path of paths.sort((left, right) => left.localeCompare(right))) {
+    const document = JSON.parse(await readFile(path, "utf8")) as unknown;
+    const failures = documentFailures(registry, path, document);
+    if (failures.length) {
+      throw new Error(
+        `source snapshot validation failed\n${failures.join("\n")}`,
+      );
+    }
+    if (
+      document === null ||
+      typeof document !== "object" ||
+      (document as { $schema?: unknown }).$schema !==
+        "urn:mcgen:schema:source-snapshot:1"
+    ) {
+      throw new Error(
+        `catalog input ${relative(repositoryRoot, path)} is not a source snapshot`,
+      );
+    }
+    snapshots.push({
+      path: relative(repositoryRoot, path),
+      snapshot: document as SourceSnapshot,
+    });
+  }
+  return snapshots;
+}
+
+async function catalogSourceSnapshot(path: string): Promise<SnapshotInput> {
+  const absolute = requireSourceSnapshotPath(path);
+  const registry = await createSchemaRegistry();
+  const document = JSON.parse(await readFile(absolute, "utf8")) as unknown;
+  const failures = documentFailures(registry, absolute, document);
+  if (failures.length) {
+    throw new Error(
+      `source snapshot validation failed\n${failures.join("\n")}`,
+    );
+  }
+  if (
+    document === null ||
+    typeof document !== "object" ||
+    (document as { $schema?: unknown }).$schema !==
+      "urn:mcgen:schema:source-snapshot:1"
+  ) {
+    throw new Error(
+      `catalog input ${relative(repositoryRoot, absolute)} is not a source snapshot`,
+    );
+  }
+  return {
+    path: relative(repositoryRoot, absolute),
+    snapshot: document as SourceSnapshot,
+  };
+}
+
+async function generateCatalogDrift(args: readonly string[]): Promise<void> {
+  const baselinePath = option(args, "--baseline");
+  const candidatePath = option(args, "--candidate");
+  const output = option(args, "--output");
+  if (!baselinePath || !candidatePath || !output) {
+    throw new Error(
+      "catalog drift requires --baseline <snapshot> --candidate <snapshot> --output <report>",
+    );
+  }
+  const outputPath = requireCatalogDocumentPath(output);
+  await requireUnusedPath(outputPath);
+  const [baseline, candidate] = await Promise.all([
+    catalogSourceSnapshot(baselinePath),
+    catalogSourceSnapshot(candidatePath),
+  ]);
+  if (baseline.snapshot.adapter.id !== candidate.snapshot.adapter.id) {
+    throw new Error("catalog drift snapshots must use the same adapter");
+  }
+  const report = buildCatalogDriftReport([baseline], [candidate]);
+  const failures = documentFailures(
+    await createSchemaRegistry(),
+    outputPath,
+    report,
+  );
+  if (failures.length) {
+    throw new Error(`catalog drift validation failed\n${failures.join("\n")}`);
+  }
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, canonicalJson(report), {
+    encoding: "utf8",
+    flag: "wx",
+  });
+  process.stdout.write(
+    `generated catalog drift with ${report.added.length} additions and ${report.removed.length} removals\n`,
+  );
+}
+
+async function generateCatalog(args: readonly string[]): Promise<void> {
+  const output = option(args, "--output");
+  if (!output) {
+    throw new Error(
+      "catalog generate requires --output <repository directory>",
+    );
+  }
+  const destination = requireCatalogDirectory(output);
+  await requireUnusedPath(destination.absolute);
+  const snapshots = await catalogSourceSnapshots(args);
+  const categoryByPlatform: Record<string, CatalogCategory> = {};
+  const keyKindByPlatform: Record<string, CatalogKeyKind> = {};
+  for (const snapshot of snapshots) {
+    const adapter = requireSourceAdapterByAdapterId(
+      snapshot.snapshot.adapter.id,
+    );
+    const definition = await loadSourceDefinition(adapter.id);
+    for (const entry of snapshot.snapshot.entries) {
+      categoryByPlatform[entry.platform] = definition.category;
+      keyKindByPlatform[entry.platform] = requireCatalogKeyKind(
+        definition.platform,
+      );
+    }
+  }
+  const catalog = buildCatalog({
+    snapshots,
+    categoryByPlatform,
+    keyKindByPlatform,
+    outputRoot: destination.relative,
+  });
+  const documents: { path: string; document: unknown }[] = [
+    { path: `${destination.relative}/index.json`, document: catalog.index },
+    {
+      path: `${destination.relative}/recommendation-policy.json`,
+      document: catalog.policy,
+    },
+    {
+      path: `${destination.relative}/coverage.json`,
+      document: catalog.coverage,
+    },
+    ...catalog.platformIndexes.map((document) => ({
+      path: `${destination.relative}/platforms/${document.platform}/index.json`,
+      document,
+    })),
+    ...catalog.shards,
+  ];
+  const registry = await createSchemaRegistry();
+  const failures = documents.flatMap(({ path, document }) =>
+    documentFailures(registry, resolve(repositoryRoot, path), document),
+  );
+  if (failures.length) {
+    throw new Error(`catalog validation failed\n${failures.join("\n")}`);
+  }
+  for (const { path } of documents) {
+    if (!path.startsWith(`${destination.relative}/`)) {
+      throw new Error(
+        "catalog generator emitted a document outside its output directory",
+      );
+    }
+  }
+  await mkdir(destination.absolute, { recursive: true });
+  for (const { path, document } of documents) {
+    const absolute = requireRepositoryPath(path);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, canonicalJson(document), {
+      encoding: "utf8",
+      flag: "wx",
+    });
+  }
+  const generatedPaths = documents.map(({ path }) =>
+    requireRepositoryPath(path),
+  );
+  const postWriteFailures = await validateFiles([
+    ...snapshots.map(({ path }) => requireRepositoryPath(path)),
+    ...generatedPaths,
+  ]);
+  if (postWriteFailures.length) {
+    throw new Error(
+      `catalog integrity validation failed\n${postWriteFailures.join("\n")}`,
+    );
+  }
+  process.stdout.write(
+    `generated ${catalog.shards.length} immutable catalog shards from ${snapshots.length} source snapshots\n`,
   );
 }
 
@@ -116,12 +380,20 @@ async function main(): Promise<void> {
     await validate(subject ? [subject, ...args] : args);
     return;
   }
-  if (command === "snapshot" && subject === "forge") {
-    await snapshotForge(args);
+  if (command === "snapshot" && subject) {
+    await snapshotSource(subject, args);
+    return;
+  }
+  if (command === "catalog" && subject === "generate") {
+    await generateCatalog(args);
+    return;
+  }
+  if (command === "catalog" && subject === "drift") {
+    await generateCatalogDrift(args);
     return;
   }
   throw new Error(
-    "usage: mcgen-template-tool validate [paths...] or snapshot forge --output <path>",
+    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>",
   );
 }
 

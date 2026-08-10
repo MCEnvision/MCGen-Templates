@@ -303,7 +303,7 @@ Discover every official platform and component version, normalize compatibility 
 
 ## Status
 
-Active. Issue [17](https://github.com/MCEnvision/MCGen-Templates/issues/17) owns the authoritative source adapter work on `envy/phase_3_sources_catalog`, created from the approved Phase 2 merge. Forge discovery remains the existing baseline; this phase expands it into complete, independently evidenced source coverage before catalog generation can begin.
+Active. Issue [17](https://github.com/MCEnvision/MCGen-Templates/issues/17) owns the authoritative source adapter work on `envy/phase_3_sources_catalog`, created from the approved Phase 2 merge. The branch contains complete source adapters, immutable evidence snapshots, deterministic catalog generation, coverage, and drift evidence. Phase completion remains pending independent review, required pull request checks, merge, signed tag, and post merge verification.
 
 ## Supported source adapters
 

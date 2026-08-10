@@ -1,0 +1,21 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "gradle",
+  "platform": "gradle",
+  "category": "toolchain",
+  "adapter": "gradle-releases",
+  "sources": [
+    {
+      "id": "gradle-versions",
+      "role": "primary",
+      "url": "https://services.gradle.org/versions/all",
+      "expectedContentTypes": ["application/json"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 8388608
+  }
+}

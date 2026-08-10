@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:catalog-index:1",
+  "title": "MCGen catalog root index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "id",
+    "sourceSnapshots",
+    "recommendationPolicy",
+    "platforms",
+    "coverage"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:catalog-index:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "sourceSnapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "digest", "path"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+          "path": {
+            "type": "string",
+            "pattern": "^sources/snapshots/[a-zA-Z0-9._/-]+\\.json$"
+          }
+        }
+      }
+    },
+    "recommendationPolicy": { "$ref": "#/$defs/referencedDocument" },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["platform", "path", "sha256"],
+        "properties": {
+          "platform": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "path": {
+            "type": "string",
+            "pattern": "^catalog(?:/[a-zA-Z0-9._-]+)*/platforms/[a-z0-9._-]+/index\\.json$"
+          },
+          "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        }
+      }
+    },
+    "coverage": { "$ref": "#/$defs/referencedDocument" }
+  },
+  "$defs": {
+    "referencedDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^catalog/[a-zA-Z0-9._/-]+\\.json$"
+        },
+        "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    }
+  }
+}

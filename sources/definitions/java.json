@@ -1,0 +1,51 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "java",
+  "platform": "java",
+  "category": "toolchain",
+  "adapter": "java-requirements",
+  "sources": [
+    {
+      "id": "mojang-version-manifest",
+      "role": "primary",
+      "url": "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+      "expectedContentTypes": ["application/json"]
+    },
+    {
+      "id": "forge-getting-started-documentation",
+      "role": "corroborating",
+      "url": "https://docs.minecraftforge.net/en/latest/gettingstarted/",
+      "expectedContentTypes": ["text/html"]
+    },
+    {
+      "id": "neoforge-user-documentation",
+      "role": "corroborating",
+      "url": "https://docs.neoforged.net/user/docs/",
+      "expectedContentTypes": ["text/html"]
+    },
+    {
+      "id": "paper-getting-started-documentation",
+      "role": "corroborating",
+      "url": "https://docs.papermc.io/paper/getting-started/",
+      "expectedContentTypes": ["text/html"]
+    },
+    {
+      "id": "velocity-getting-started-documentation",
+      "role": "corroborating",
+      "url": "https://docs.papermc.io/velocity/getting-started/",
+      "expectedContentTypes": ["text/html"]
+    },
+    {
+      "id": "architectury-setup-documentation",
+      "role": "corroborating",
+      "url": "https://docs.architectury.dev/api/getting-started/setup/",
+      "expectedContentTypes": ["text/html"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 2097152
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "urn:mcgen:schema:source-definition:1",
+  "schemaVersion": 1,
+  "id": "mojang",
+  "platform": "minecraft",
+  "category": "toolchain",
+  "adapter": "mojang-version-manifest",
+  "sources": [
+    {
+      "id": "mojang-version-manifest",
+      "role": "primary",
+      "url": "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+      "expectedContentTypes": ["application/json"]
+    }
+  ],
+  "removalPolicy": "additive-only",
+  "requestPolicy": {
+    "timeoutMs": 30000,
+    "maxBytes": 8388608
+  }
+}

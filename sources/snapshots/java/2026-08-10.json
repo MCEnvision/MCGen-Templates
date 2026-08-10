@@ -1,0 +1,4626 @@
+{
+  "$schema": "urn:mcgen:schema:source-snapshot:1",
+  "adapter": {
+    "id": "java-requirements",
+    "version": "1.0.0"
+  },
+  "createdAt": "2026-08-10T05:41:53.499Z",
+  "entries": [],
+  "provenanceVersion": 1,
+  "rejected": [
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.0"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.10"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.10-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.10-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.10.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.10.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.11"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.11-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.11.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.11.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.12.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre10"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13-pre9"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13.1-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.13.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14 Pre-Release 1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14 Pre-Release 2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14 Pre-Release 3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14 Pre-Release 4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14 Pre-Release 5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.1 Pre-Release 1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.1 Pre-Release 2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.2 Pre-Release 1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.2 Pre-Release 2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.2 Pre-Release 3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.2 Pre-Release 4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.3-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.3-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.3-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.3-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.14.4-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.15.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-pre8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.2-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.2-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.2-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.3-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.4-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.4-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.4-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.16.5-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17.1-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17.1-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17.1-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.17.1-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-pre8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18-rc4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.1-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.1-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.1-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.2-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.18.2-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.1-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.2-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.2-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.3-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.19.4-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.2.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.2.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.2.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.2.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.2.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.1-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.2-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.3-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.3-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.3-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.3-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.3-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.4-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.5-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.20.6-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.1-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.10"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.10-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.11-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.2-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.4-rc3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.5-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.5-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.5-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.5-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.5-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.6-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.6-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.6-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.6-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.6-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.7-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.7-rc2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.8-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.9"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.9-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.9-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.9-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.9-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.21.9-rc1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.3.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.3.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.4.7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.5.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.5.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.6.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.6.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.6.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.6.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.10"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.10-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.10-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.10-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.10-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.6-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.6-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.7.9"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.1-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.1-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.1-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.1-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.2-pre7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.8.9"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9-pre4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.1-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.1-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.1-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.3-pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.3-pre2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.3-pre3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.9.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "1.RV-Pre1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w16b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w18b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w18c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w21b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w22a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w23a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w23b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w24a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w24b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w25a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w25b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w25c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w26a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w36a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w36b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w37a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w37b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w38a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w38b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w38c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w39a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w39b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w41b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w42b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w47a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w47b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w47c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w47d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w47e"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w48a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w48b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "13w49a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w02a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w02b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w02c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w03b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w04a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w04b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w05b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w06b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w08a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w10a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w10b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w10c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w11b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w18b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w20b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w21b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w25a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w25b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w26a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w26b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w26c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w27a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w27b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w28a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w28b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w29a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w29b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w30a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w30b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w30c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w31a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w32a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w32b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w32c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w32d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w33b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w33c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w34a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w34b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w34c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "14w34d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w31a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w31b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w31c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w32a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w32b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w32c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w33b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w33c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w34a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w34b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w34c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w34d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w35a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w35b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w35c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w35d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w35e"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w36a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w36b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w36c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w36d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w37a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w38a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w38b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w39a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w39b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w39c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w40a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w40b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w41b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w43b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w43c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w44b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w47a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w47b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w47c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w49a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w49b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w50a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w51a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "15w51b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w02a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w04a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w05b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w07b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w15b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w21b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w32a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w32b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w35a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w36a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w38a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w39a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w39b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w39c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w40a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "16w50a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w13b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w16b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w17b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w18b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w31a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w43b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w45b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w47a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w47b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w48a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w49a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w49b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "17w50a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w01a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w02a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w03b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w07b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w07c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w08a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w08b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w09a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w10a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w10b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w10c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w10d"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w14b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w19b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w20b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w20c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w21b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w22a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w22b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w22c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w30a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w30b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w31a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w32a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w43b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w43c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w47a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w47b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w48a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w48b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w49a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "18w50a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w02a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w03b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w03c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w04a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w04b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w08a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w08b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w09a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w11b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w12a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w12b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w13b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w14b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w34a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w35a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w36a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w37a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w38a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w38b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w39a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w40a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w45b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "19w46b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w08a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w09a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w10a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w12a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w13b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w14infinite"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w20b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w22a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w27a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w28a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w29a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w30a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w48a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w49a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "20w51a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w05b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w08a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w08b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w10a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w37a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w38a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w39a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w40a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "21w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w12a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w13oneblockatatime"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w16b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w24a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "22w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w04a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w12a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w13a_or_b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w31a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w32a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w35a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w40a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w43b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w51a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "23w51b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w03b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w04a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w05b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w09a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w10a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w12a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w14potato"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w19b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w21b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w34a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w35a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w36a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w37a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w38a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w39a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w40a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "24w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w02a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w03a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w04a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w05a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w06a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w07a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w08a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w09a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w09b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w10a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w14craftmine"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w15a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w16a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w17a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w18a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w19a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w20a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w21a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w31a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w32a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w33a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w34a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w34b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w35a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w36a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w36b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w37a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w41a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w42a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w43a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w44a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w45a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "25w46a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-pre-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-pre-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-pre-3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-rc-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-rc-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-rc-3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-10"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-11"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1-snapshot-9"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1.1-rc-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.1.2-rc-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-pre-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-pre-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-pre-3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-pre-4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-pre-5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-pre-6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-rc-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-rc-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.2-snapshot-8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26.3-snapshot-7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "26w14a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "3D Shareware v1.34"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.11"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.14"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.15"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.16"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.17_02"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.17_04"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.0.5_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.1.0"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.1.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.1.2_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.0"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.0_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.0_02"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.1_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.2a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.2b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.3_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.3_02"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.3_04"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.4_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "a1.2.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.0"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.0.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.0_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.1_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.1_02"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.2_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.2_02"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.3_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.3b"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.4_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.5_01"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6.4"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6.5"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.6.6"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.7"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.7.2"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.7.3"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.8"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "b1.8.1"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "c0.0.11a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "c0.0.13a"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "c0.0.13a_03"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "c0.30_01c"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "inf-20100618"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "rd-132211"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "rd-132328"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "rd-160052"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "rd-161348"
+    },
+    {
+      "reason": "official Mojang version metadata is required before its Java requirement can be derived",
+      "sourceIndex": 0,
+      "value": "rd-20090515"
+    }
+  ],
+  "schemaVersion": 1,
+  "snapshotId": "java.b1cb2c43c11d7da60cae7817",
+  "sources": [
+    {
+      "bytes": 273470,
+      "contentType": "application/json",
+      "lastModified": "Tue, 04 Aug 2026 14:02:29 GMT",
+      "redirectChain": [
+        "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
+      ],
+      "requestedUrl": "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+      "retrievedAt": "2026-08-10T05:41:53.482Z",
+      "role": "primary",
+      "sha256": "380769b566afa9e768c82e1337fa3af3052aea47c7a9fe09d2c5a96edcef2e6c",
+      "sourceId": "mojang-version-manifest",
+      "url": "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
+    },
+    {
+      "bytes": 31054,
+      "contentType": "text/html; charset=utf-8",
+      "lastModified": "Sat, 28 Dec 2024 19:37:15 GMT",
+      "redirectChain": [
+        "https://docs.minecraftforge.net/en/latest/gettingstarted/"
+      ],
+      "requestedUrl": "https://docs.minecraftforge.net/en/latest/gettingstarted/",
+      "retrievedAt": "2026-08-10T05:41:53.474Z",
+      "role": "corroborating",
+      "sha256": "1d7c860a84bb7fc3fae6a626a35364fb3d93e70ac4d51c57133e66b4c0f59d33",
+      "sourceId": "forge-getting-started-documentation",
+      "url": "https://docs.minecraftforge.net/en/latest/gettingstarted/"
+    },
+    {
+      "bytes": 25466,
+      "contentType": "text/html; charset=utf-8",
+      "redirectChain": [
+        "https://docs.neoforged.net/user/docs/"
+      ],
+      "requestedUrl": "https://docs.neoforged.net/user/docs/",
+      "retrievedAt": "2026-08-10T05:41:53.477Z",
+      "role": "corroborating",
+      "sha256": "e7157d57627d76eb88a3a2b111e9925545d487229062dc1cec6878b176e985de",
+      "sourceId": "neoforge-user-documentation",
+      "url": "https://docs.neoforged.net/user/docs/"
+    },
+    {
+      "bytes": 215441,
+      "contentType": "text/html; charset=utf-8",
+      "redirectChain": [
+        "https://docs.papermc.io/paper/getting-started/"
+      ],
+      "requestedUrl": "https://docs.papermc.io/paper/getting-started/",
+      "retrievedAt": "2026-08-10T05:41:53.498Z",
+      "role": "corroborating",
+      "sha256": "c341498f2db743eb4c600506a8f9c830e94323209ed196340ed2d3605ec715b8",
+      "sourceId": "paper-getting-started-documentation",
+      "url": "https://docs.papermc.io/paper/getting-started/"
+    },
+    {
+      "bytes": 214296,
+      "contentType": "text/html; charset=utf-8",
+      "redirectChain": [
+        "https://docs.papermc.io/velocity/getting-started/"
+      ],
+      "requestedUrl": "https://docs.papermc.io/velocity/getting-started/",
+      "retrievedAt": "2026-08-10T05:41:53.479Z",
+      "role": "corroborating",
+      "sha256": "38264f992170b1abe850214973371a90997b830e1200c736d18f941d72282111",
+      "sourceId": "velocity-getting-started-documentation",
+      "url": "https://docs.papermc.io/velocity/getting-started/"
+    },
+    {
+      "bytes": 35807,
+      "contentType": "text/html; charset=utf-8",
+      "lastModified": "Thu, 02 Jul 2026 01:45:18 GMT",
+      "redirectChain": [
+        "https://docs.architectury.dev/api/getting-started/setup/"
+      ],
+      "requestedUrl": "https://docs.architectury.dev/api/getting-started/setup/",
+      "retrievedAt": "2026-08-10T05:41:53.481Z",
+      "role": "corroborating",
+      "sha256": "8fab60c1d8a5fd47e36e38b19a6c3abbcef156ef4415fb4c1a3c5aad6a6add8a",
+      "sourceId": "architectury-setup-documentation",
+      "url": "https://docs.architectury.dev/api/getting-started/setup/"
+    }
+  ],
+  "warnings": [
+    "Java requirements remain blocked until verified Mojang version metadata is captured for every Minecraft version",
+    "Platform documentation is retained as corroborating evidence and is not parsed into compatibility assertions"
+  ]
+}
