@@ -6,6 +6,8 @@ The GitHub governance phase is complete. GitHub completion Phase 2 defines plann
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
+GitHub completion Phase 6 is in progress. The deterministic pack builder, source commit manifest, checksums, SPDX SBOM, archive readback, and draft only workflow evidence are implemented. No template pack release is published yet.
+
 ## Repository Model
 
 The `main` branch is the canonical release source. Its initial bootstrap commit contains only this README and the [active project plan](docs/general/plan.md).
@@ -91,6 +93,7 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 - [Template pack contract verification](docs/verification/template-pack-contracts.md)
 - [Phase 4 contract verification](docs/verification/phase4-contracts.md)
 - [Phase 5 build and artifact contracts](docs/verification/phase5-build-contracts.md)
+- [Pack construction](docs/release/pack-construction.md)
 - [GitHub governance verification](docs/verification/github-foundation.md)
 - [GitHub planning verification](docs/verification/github-planning.md)
 - [Security policy](.github/SECURITY.md)
@@ -99,6 +102,6 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 
 ## Current Status
 
-The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contracts are merged and tagged. Phase 5 is complete with schema validated reviewed execution inputs, bounded batch execution, queue consumers, an explicit audit report, and two verified Spigot boundary tuples. The remaining twelve profile and descriptor boundaries retain explicit blockers, so no unverified catalog component is advertised as a build verified project tuple.
+The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contracts are merged and tagged. Phase 5 is complete with schema validated reviewed execution inputs, bounded batch execution, queue consumers, an explicit audit report, and two verified Spigot boundary tuples. Phase 6 is in progress with deterministic candidate pack and release evidence generation. No template pack release is published yet. The remaining twelve profile and descriptor boundaries retain explicit blockers, so no unverified catalog component is advertised as a build verified project tuple.
 
 The repository license is not selected yet. No third-party source or template content may be imported until its license and redistribution obligations are reviewed. Snapshot discovery does not claim that any generated Forge project or exact tuple is verified.

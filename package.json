@@ -21,6 +21,7 @@
     "phase5:queue": "npm run build --silent && node dist/cli.js phase5 queue",
     "phase5:execute": "npm run build --silent && node dist/cli.js phase5 execute",
     "phase5:execute-reviewed": "npm run build --silent && node dist/cli.js phase5 execute-reviewed",
+    "phase6:pack": "npm run build --silent && node dist/cli.js phase6 pack",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "validate": "npm run build --silent && node dist/cli.js validate",

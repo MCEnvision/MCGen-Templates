@@ -14,7 +14,10 @@
     "families",
     "profiles",
     "catalogs",
-    "files"
+    "files",
+    "sourceReferences",
+    "fixtures",
+    "evidence"
   ],
   "properties": {
     "$schema": { "const": "urn:mcgen:schema:pack-manifest:1" },
@@ -31,7 +34,17 @@
     "families": { "$ref": "#/$defs/digestedPaths" },
     "profiles": { "$ref": "#/$defs/digestedPaths" },
     "catalogs": { "$ref": "#/$defs/digestedPaths" },
-    "files": { "$ref": "#/$defs/digestedPaths" }
+    "files": { "$ref": "#/$defs/digestedPaths" },
+    "sourceReferences": { "$ref": "#/$defs/digestedPaths" },
+    "fixtures": { "$ref": "#/$defs/digestedPaths" },
+    "evidence": { "$ref": "#/$defs/digestedPaths" },
+    "catalogSnapshot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "familyRevisions": { "$ref": "#/$defs/revisions" },
+    "profileRevisions": { "$ref": "#/$defs/revisions" }
   },
   "$defs": {
     "digestedPaths": {
@@ -48,6 +61,20 @@
             "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
           },
           "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        }
+      }
+    },
+    "revisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "revision"],
+        "properties": {
+          "id": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+          },
+          "revision": { "type": "integer", "minimum": 1 }
         }
       }
     }

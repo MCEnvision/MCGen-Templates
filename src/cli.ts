@@ -1,8 +1,20 @@
 #!/usr/bin/env node
-import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import {
+  lstat,
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  rename,
+  rm,
+  stat,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { delimiter, dirname, relative, resolve } from "node:path";
-import { canonicalJson } from "./canonical-json.js";
+import { promisify } from "node:util";
+import { canonicalJson, compareText } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
 import { buildCatalog } from "./catalog/build.js";
 import { buildCatalogDriftReport } from "./catalog/drift.js";
@@ -35,6 +47,14 @@ import { validateEvidenceRecord } from "./evidence.js";
 import { buildQueuePlan, type QueueEvent } from "./phase5-queue.js";
 import { buildCoverageSummary } from "./coverage-summary.js";
 import { buildPhase5Audit } from "./phase5-audit.js";
+import { readZipEntries } from "./artifact-inspector.js";
+import {
+  buildPack,
+  buildSourceCommitManifest,
+  buildSpdxSbom,
+  type PackBuildInput,
+  type PackFile,
+} from "./pack-builder.js";
 import {
   executeTuple,
   type Phase5ExecutionRequest,
@@ -48,6 +68,8 @@ import {
   documentFailures,
   validateFiles,
 } from "./validate.js";
+
+const execFileAsync = promisify(execFile);
 
 function option(args: readonly string[], name: string): string | undefined {
   const index = args.indexOf(name);
@@ -187,6 +209,157 @@ function requirePhase5DocumentPath(path: string): string {
       "phase 5 output must be a json file under verification/phase5",
     );
   return absolute;
+}
+
+function requirePhase6OutputDirectory(path: string): {
+  absolute: string;
+  relative: string;
+} {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("verification/phase6/") ||
+    repositoryRelative.endsWith("/")
+  ) {
+    throw new Error(
+      "phase 6 output must be a directory under verification/phase6",
+    );
+  }
+  return { absolute, relative: repositoryRelative };
+}
+
+async function requireSafePhase6OutputParent(path: string): Promise<void> {
+  const parent = dirname(path);
+  const repositoryRelative = relative(repositoryRoot, parent);
+  if (repositoryRelative.startsWith("..")) {
+    throw new Error("phase 6 output parent must remain inside the repository");
+  }
+  let current = repositoryRoot;
+  for (const part of repositoryRelative.split("/")) {
+    if (!part) continue;
+    current = resolve(current, part);
+    try {
+      const metadata = await lstat(current);
+      if (metadata.isSymbolicLink()) {
+        throw new Error(
+          `phase 6 output parent cannot contain symlinks: ${part}`,
+        );
+      }
+      if (!metadata.isDirectory()) {
+        throw new Error(`phase 6 output parent is not a directory: ${part}`);
+      }
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        (error as NodeJS.ErrnoException).code === "ENOENT"
+      ) {
+        return;
+      }
+      throw error;
+    }
+  }
+}
+
+function phase6InputPath(path: string): string {
+  const normalized = path.replaceAll("\\", "/");
+  const allowed =
+    normalized === "README.md" ||
+    [
+      "catalog/",
+      "docs/architecture/",
+      "docs/data/",
+      "docs/release/",
+      "docs/verification/",
+      "fixtures/",
+      "profiles/",
+      "schemas/",
+      "sources/definitions/",
+      "sources/snapshots/",
+      "templates/",
+      "verification/phase5/evidence/",
+    ].some((prefix) => normalized.startsWith(prefix));
+  const approvedPhase5Document = [
+    "verification/phase5/audit.json",
+    "verification/phase5/coverage.json",
+    "verification/phase5/matrix.json",
+  ].includes(normalized);
+  const approved = allowed || approvedPhase5Document;
+  if (!approved) {
+    throw new Error(`phase 6 path is outside the pack allowlist: ${path}`);
+  }
+  const protectedComponents = new Set([
+    ".git",
+    ".gradle",
+    "build",
+    "dist",
+    "logs",
+    "node_modules",
+    "tmp",
+    "cache",
+  ]);
+  const components = normalized.split("/");
+  if (
+    normalized.startsWith("verification/phase6/") ||
+    normalized.includes("/.git/") ||
+    normalized.includes("/node_modules/") ||
+    normalized.includes("/.gradle/") ||
+    normalized.startsWith(".git/") ||
+    normalized.startsWith("node_modules/") ||
+    normalized.startsWith(".gradle/") ||
+    normalized.startsWith("dist/") ||
+    normalized.startsWith("logs/") ||
+    /(?:^|\/)(?:\.env|.*\.pem|.*\.key)$/u.test(normalized) ||
+    components.some((component) =>
+      protectedComponents.has(component.toLocaleLowerCase("en-US")),
+    )
+  ) {
+    throw new Error(`phase 6 path is outside the pack allowlist: ${path}`);
+  }
+  return normalized;
+}
+
+async function readPackInputFile(path: string): Promise<Uint8Array> {
+  try {
+    await execFileAsync("git", ["ls-files", "--error-unmatch", "--", path], {
+      cwd: repositoryRoot,
+    });
+  } catch {
+    throw new Error(`phase 6 pack input must be a tracked file: ${path}`);
+  }
+  const parts = path.split("/");
+  let current = repositoryRoot;
+  for (const [index, part] of parts.entries()) {
+    current = resolve(current, part);
+    const metadata = await lstat(current);
+    if (metadata.isSymbolicLink()) {
+      throw new Error(`phase 6 pack input cannot contain symlinks: ${path}`);
+    }
+    if (index < parts.length - 1 && !metadata.isDirectory()) {
+      throw new Error(`phase 6 pack input path is not a directory: ${path}`);
+    }
+    if (index === parts.length - 1 && !metadata.isFile()) {
+      throw new Error(`phase 6 pack input is not a regular file: ${path}`);
+    }
+    if (index === parts.length - 1 && metadata.size > 32 * 1024 * 1024) {
+      throw new Error(`phase 6 pack input file is too large: ${path}`);
+    }
+  }
+  const content = await readFile(current);
+  const text = content.toString("utf8");
+  if (
+    /-----BEGIN [A-Z ]*PRIVATE KEY-----/iu.test(text) ||
+    /(?:github_pat_|ghp_|gho_|ghs_|ghu_|ghr_|npm_)[A-Za-z0-9_]{20,}/u.test(
+      text,
+    ) ||
+    /(?:aws_access_key_id|aws_secret_access_key)\s*=\s*[^\s]+/iu.test(text) ||
+    /\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/u.test(text)
+  ) {
+    throw new Error(
+      `phase 6 pack input appears to contain a credential: ${path}`,
+    );
+  }
+  return content;
 }
 
 async function readJson(path: string): Promise<unknown> {
@@ -812,6 +985,193 @@ async function generateCatalog(args: readonly string[]): Promise<void> {
   );
 }
 
+async function phase6Pack(args: readonly string[]): Promise<void> {
+  const inputPath = option(args, "--input");
+  const outputDirectory = option(args, "--output-dir");
+  if (!inputPath || !outputDirectory) {
+    throw new Error("phase6 pack requires --input and --output-dir");
+  }
+  const inputAbsolute = requireRepositoryPath(inputPath);
+  const input = requireRecord(await readJson(inputPath), "phase 6 pack input");
+  const { stdout: headOutput } = await execFileAsync(
+    "git",
+    ["rev-parse", "HEAD"],
+    { cwd: repositoryRoot },
+  );
+  const checkedOutCommit = headOutput.trim();
+  if (String(input["sourceCommit"]) !== checkedOutCommit) {
+    throw new Error(
+      `phase 6 pack source commit ${String(input["sourceCommit"])} does not match checked out commit ${checkedOutCommit}`,
+    );
+  }
+  const registry = await createSchemaRegistry();
+  const inputValidation = validateWithSchema(registry, input);
+  if (!inputValidation.valid) {
+    throw new Error(
+      `phase 6 pack input is invalid\n${inputValidation.errors
+        .map((error) => `${error.instancePath} ${error.message ?? "invalid"}`)
+        .join("\n")}`,
+    );
+  }
+  const output = requirePhase6OutputDirectory(outputDirectory);
+  const inputFiles = input["files"];
+  if (!Array.isArray(inputFiles)) {
+    throw new Error("phase 6 pack input files are required");
+  }
+  const files: PackFile[] = [];
+  for (const value of inputFiles) {
+    const record = requireRecord(value, "phase 6 pack file");
+    const path = phase6InputPath(String(record["path"]));
+    files.push({ path, content: await readPackInputFile(path) });
+  }
+  const buildInput: PackBuildInput = {
+    packVersion: String(input["packVersion"]),
+    sourceCommit: String(input["sourceCommit"]),
+    createdAt: String(input["createdAt"]),
+    files,
+    ...(typeof input["catalogSnapshot"] === "string"
+      ? { catalogSnapshot: input["catalogSnapshot"] }
+      : {}),
+    ...(Array.isArray(input["familyRevisions"])
+      ? {
+          familyRevisions: input["familyRevisions"] as NonNullable<
+            PackBuildInput["familyRevisions"]
+          >,
+        }
+      : {}),
+    ...(Array.isArray(input["profileRevisions"])
+      ? {
+          profileRevisions: input["profileRevisions"] as NonNullable<
+            PackBuildInput["profileRevisions"]
+          >,
+        }
+      : {}),
+  };
+  const first = buildPack(buildInput);
+  const second = buildPack(buildInput);
+  const archiveReproducible =
+    Buffer.from(first.archive).equals(Buffer.from(second.archive)) &&
+    first.archiveSha256 === second.archiveSha256 &&
+    first.archiveSha512 === second.archiveSha512;
+  if (!archiveReproducible) {
+    throw new Error("phase 6 pack archive is not reproducible");
+  }
+  const archiveEntries = readZipEntries(first.archive);
+  const expectedArchivePaths = [
+    ...first.manifest.files.map((file) => file.path),
+    "pack-manifest.json",
+  ].sort(compareText);
+  const actualArchivePaths = archiveEntries
+    .map((entry) => entry.path)
+    .sort(compareText);
+  if (
+    canonicalJson(actualArchivePaths) !== canonicalJson(expectedArchivePaths)
+  ) {
+    throw new Error("phase 6 archive readback does not match its manifest");
+  }
+  const manifestEntry = archiveEntries.find(
+    (entry) => entry.path === "pack-manifest.json",
+  );
+  if (
+    !manifestEntry ||
+    new TextDecoder().decode(manifestEntry.content) !==
+      canonicalJson(first.manifest)
+  ) {
+    throw new Error("phase 6 archive manifest readback is invalid");
+  }
+  const sbom = buildSpdxSbom(first.manifest);
+  const sourceCommitManifest = buildSourceCommitManifest(first.manifest);
+  const summary = {
+    $schema: "urn:mcgen:schema:verification-summary:1",
+    schemaVersion: 1,
+    packVersion: first.manifest.packVersion,
+    sourceCommit: first.manifest.sourceCommit,
+    status: "verified" as const,
+    archive: {
+      path: `${output.relative}/mcgen-template-pack.zip`,
+      sha256: first.archiveSha256,
+      sha512: first.archiveSha512,
+      bytes: first.archiveBytes,
+    },
+    ...(first.manifest.files.some(
+      (file) => file.path === "verification/phase5/coverage.json",
+    )
+      ? { coverage: "verification/phase5/coverage.json" }
+      : {}),
+    checks: [
+      {
+        id: "pack-manifest",
+        status: "passed" as const,
+        detail: "all source paths are normalized and content addressed",
+      },
+      {
+        id: "archive-reproducibility",
+        status: "passed" as const,
+        detail: "two in memory builds produced byte identical archives",
+      },
+      {
+        id: "spdx-sbom",
+        status: "passed" as const,
+        detail: "the SPDX 2.3 file inventory matches the pack manifest",
+      },
+    ],
+  };
+  const documents: { path: string; value: unknown }[] = [
+    { path: "pack-manifest.json", value: first.manifest },
+    { path: "source-commit-manifest.json", value: sourceCommitManifest },
+    { path: "spdx-sbom.json", value: sbom },
+    { path: "verification-summary.json", value: summary },
+  ];
+  const documentFailuresList = documents.flatMap(({ path, value }) =>
+    documentFailures(registry, resolve(output.absolute, path), value),
+  );
+  if (documentFailuresList.length) {
+    throw new Error(
+      `phase 6 generated document validation failed\n${documentFailuresList.join("\n")}`,
+    );
+  }
+  await stat(inputAbsolute);
+  await requireUnusedPath(output.absolute);
+  await requireSafePhase6OutputParent(output.absolute);
+  await mkdir(dirname(output.absolute), { recursive: true });
+  const staging = await mkdtemp(
+    resolve(dirname(output.absolute), ".mcgen-phase6-"),
+  );
+  try {
+    for (const document of documents) {
+      const path = resolve(staging, document.path);
+      await writeFile(path, canonicalJson(document.value), {
+        encoding: "utf8",
+        flag: "wx",
+      });
+    }
+    await writeFile(
+      resolve(staging, "mcgen-template-pack.zip"),
+      first.archive,
+      {
+        flag: "wx",
+      },
+    );
+    await writeFile(
+      resolve(staging, "mcgen-template-pack.zip.sha256"),
+      `${first.archiveSha256}  mcgen-template-pack.zip\n`,
+      { encoding: "utf8", flag: "wx" },
+    );
+    await writeFile(
+      resolve(staging, "mcgen-template-pack.zip.sha512"),
+      `${first.archiveSha512}  mcgen-template-pack.zip\n`,
+      { encoding: "utf8", flag: "wx" },
+    );
+    await rename(staging, output.absolute);
+  } catch (error) {
+    await rm(staging, { recursive: true, force: true });
+    throw error;
+  }
+  process.stdout.write(
+    `built deterministic phase 6 pack ${first.archiveSha256}\n`,
+  );
+}
+
 async function main(): Promise<void> {
   const [command, subject, ...args] = process.argv.slice(2);
   if (command === "validate") {
@@ -828,6 +1188,10 @@ async function main(): Promise<void> {
   }
   if (command === "catalog" && subject === "drift") {
     await generateCatalogDrift(args);
+    return;
+  }
+  if (command === "phase6" && subject === "pack") {
+    await phase6Pack(args);
     return;
   }
   if (command === "phase5" && subject === "fixture-manifest") {
@@ -863,7 +1227,7 @@ async function main(): Promise<void> {
     return;
   }
   throw new Error(
-    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
+    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
   );
 }
 
