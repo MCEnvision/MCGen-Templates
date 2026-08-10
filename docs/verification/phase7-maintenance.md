@@ -2,7 +2,7 @@
 
 ## Status
 
-Phase 7 is ready for final review on the maintenance branch and is tracked by [issue 25](https://github.com/MCEnvision/MCGen-Templates/issues/25). The first immutable beta release is already verified. The current branch adds the immutable `2026-08-10-phase7` catalog, fifteen exact tuple evidence records, and explicit blockers for every nonverified catalog component. All fourteen Forge, NeoForge, Architectury, plugin, and proxy profile and descriptor boundaries are reviewed with zero blocked records. This record describes the deterministic maintenance contracts that must pass before the final repository complete gate is claimed.
+Phase 7 is complete on main at commit `2a26970d01c4597425a20cb62861b5bf7e869350` and is identified by the verified signed tag `phase-7-automated-maintenance`. The first immutable beta release is already verified. The immutable `2026-08-10-phase7` catalog contains fifteen exact tuple evidence records and explicit blockers for every nonverified catalog component. All fourteen Forge, NeoForge, Architectury, plugin, and proxy profile and descriptor boundaries are reviewed with zero blocked records. Issue 25 and its roadmap item are closed after the post merge audit and wiki publication. This record describes the deterministic maintenance contracts that keep the repository complete.
 
 ## Contracts
 
@@ -49,4 +49,4 @@ Only network outages and transient network failures are retryable. Retry counts 
 
 ## Required evidence
 
-The phase 7 workflow runs the full repository verification, creates a read only monitor observation, executes the recovery simulations, and produces a repository audit artifact. The current local audit shows nineteen of twenty requirements passed. The one intentional blocker is maintenance synchronization because issue 25 remains open. Issue 25 and its Project item remain in review until the reconciliation pull request merges, the signed Phase 7 tag is verified, and the wiki is updated.
+The phase 7 workflow runs the full repository verification, creates a read only monitor observation, executes the recovery simulations, and produces a repository audit artifact. The post merge local and remote audit shows all twenty requirements passed. Issue 25 and its roadmap item are closed after the reconciliation pull request, signed Phase 7 tag, and wiki update.
