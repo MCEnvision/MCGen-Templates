@@ -2,11 +2,12 @@ name: bug report
 description: report a reproducible defect
 title: "[bug] "
 labels: ["type defect", "status backlog"]
+type: Bug
 body:
   - type: markdown
     attributes:
       value: |
-        thank you for reporting the issue. remove credentials and private data from every field and attachment.
+        thank you for reporting the issue. this repository owns template pack contracts, sources, catalogs, profiles, template families, fixtures, verification, releases, and repository controls. website, api, user facing project generator cli, generator application, github app, nginx, cloudflare, and production defects belong in the future mcgen application repository. remove credentials and private data from every field and attachment.
   - type: input
     id: source
     attributes:
@@ -24,10 +25,13 @@ body:
         - compatibility catalog
         - source adapter
         - toolchain profile
+        - template family
+        - customization contract
+        - fixture generation
         - template rendering
         - generated build
         - metadata or assets
-        - github repository operation
+        - github repository governance or automation
         - documentation
         - other
     validations:
@@ -69,6 +73,18 @@ body:
       label: logs and evidence
       description: attach sanitized logs, generated metadata, catalog entries, screenshots, configuration, or a minimal reproduction
       render: text
+  - type: textarea
+    id: related
+    attributes:
+      label: related work and dependencies
+      description: link related issues, pull requests, milestones, source evidence, or work that blocks or is blocked by this defect
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: acceptance criteria
+      description: list the concrete checks that prove the defect is fixed without regression
+    validations:
+      required: true
   - type: checkboxes
     id: checks
     attributes:
@@ -77,4 +93,6 @@ body:
         - label: i searched for an existing issue
           required: true
         - label: i removed credentials, tokens, addresses, and private data
+          required: true
+        - label: this defect belongs to the mcgen templates repository
           required: true

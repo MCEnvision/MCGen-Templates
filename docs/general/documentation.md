@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in Phase 0, template-pack contract foundation. The GitHub collaboration and security gate is merged and tagged. The repository now contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, Mojang and Forge source adapters, parser tests, and one immutable normalized Forge source snapshot. It does not yet contain a template family, compatibility catalog, toolchain profile instance, generated project fixture, published package, or release artifact.
+MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. The repository now contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, Mojang and Forge source adapters, parser tests, and one immutable normalized Forge source snapshot. It does not yet contain a template family, compatibility catalog, toolchain profile instance, generated project fixture, published package, or release artifact.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -124,6 +124,8 @@ See [Template Pack Trust Model](../security/trust-model.md) for security require
 
 The default-branch ruleset blocks direct updates, deletion, and force pushes. Pull requests use merge commits and require resolved conversations. Required check names are added only after GitHub observes stable successful runs. Every locally created repository commit and annotated tag uses the EnVy SSH signing identity and `contact.enviouse@gmail.com`. GitHub generated merge commits retain GitHub as their verified platform committer, and future GraphQL merges explicitly select `contact.enviouse@gmail.com` for the EnVy merge author. The [GitHub completion plan](github_plan.md) defines the seven repository completion phases, and the [Phase 1 governance audit](../verification/github-foundation.md) records the exact configured controls and evidence.
 
+The seven GitHub completion phases are integration and evidence gates. They map to the five product milestones owned by this repository and do not replace or renumber the product phases in the active plan. The [Phase 2 planning verification](../verification/github-planning.md) defines that mapping, the Project and issue contract, application ownership boundaries, and the post merge completion gate.
+
 GitHub destination branches created by MCGen are user project output. They are unrelated to template storage and do not require matching branches in this repository.
 
 ## Current Development Commands
@@ -182,4 +184,5 @@ These limitations block claims of template availability, but they do not change 
 - [Template Pack Architecture](../architecture/template-pack.md)
 - [Template Pack Trust Model](../security/trust-model.md)
 - [GitHub Foundation Verification](../verification/github-foundation.md)
+- [GitHub Planning Verification](../verification/github-planning.md)
 - [Template Pack Releases](../release/template-pack-releases.md)

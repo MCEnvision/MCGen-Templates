@@ -2,7 +2,7 @@
 
 MCGen Templates is the canonical public source for the versioned template pack and compatibility catalog used by MCGen.
 
-The GitHub foundation is complete. Phase 0 implementation now provides versioned template-pack contracts, locked Node.js validation tooling, authoritative Mojang and Forge source adapters, and the first normalized Forge metadata snapshot. No template family, compatibility catalog, generated project, or pack release has been published yet.
+The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. Product Phase 0 implementation provides versioned template-pack contracts, locked Node.js validation tooling, authoritative Mojang and Forge source adapters, and the first normalized Forge metadata snapshot. No template family, compatibility catalog, generated project, or pack release has been published yet.
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
@@ -66,6 +66,8 @@ The snapshot writer refuses to overwrite an existing file.
 
 ## Documentation
 
+The [complete project plan](docs/general/plan.md) defines product phases and implementation ownership. The [GitHub completion plan](docs/general/github_plan.md) defines seven sequential repository integration and evidence phases. These phase systems are related but are not interchangeable.
+
 - [Documentation index](docs/README.md)
 - [Technical overview](docs/general/documentation.md)
 - [Active plan](docs/general/plan.md)
@@ -74,6 +76,7 @@ The snapshot writer refuses to overwrite an existing file.
 - [Source snapshots](docs/data/source-snapshots.md)
 - [Template pack contract verification](docs/verification/template-pack-contracts.md)
 - [GitHub governance verification](docs/verification/github-foundation.md)
+- [GitHub planning verification](docs/verification/github-planning.md)
 - [Security policy](.github/SECURITY.md)
 - [Issue tracker](https://github.com/MCEnvision/MCGen-Templates/issues)
 - [Wiki](https://github.com/MCEnvision/MCGen-Templates/wiki)

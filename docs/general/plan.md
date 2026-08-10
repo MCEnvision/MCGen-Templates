@@ -3824,75 +3824,43 @@ Nix flake
 
 # 112. Suggested Issue Breakdown
 
-Initial GitHub issues:
+Issue and pull request numbers share one repository sequence, so this plan does not reserve fictional fixed numbers. Each work item below receives its actual GitHub link only after duplicate search, ownership review, milestone assignment, dependency recording, and Project synchronization.
 
-```text
-#1 Build the descriptor-driven template pack and complete version resolver
-#2 Implement authoritative metadata snapshot ingestion and evidence digests
-#3 Implement Forge, NeoForge, Fabric, Paper, Spigot, Bukkit, Sponge, Velocity, BungeeCord, and Architectury source adapters
-#4 Define compatibility graph, exact component tuple, release channel, and coverage report schemas
-#5 Define template family, toolchain profile, and version-boundary rules
-#6 Implement descriptor loading, conditional files, pack building, and catalog selectors
-#7 Implement incremental exact-tuple verification and evidence reuse
-#8 Define versioned ProjectSpec schema and portable asset references
-#9 Define ProjectSpec migration and unknown-extension preservation rules
-#10 Define template descriptor, pack manifest, and capability schemas
-#11 Define field mappings, visibility conditions, defaults, bounds, and render targets
-#12 Implement immutable layered configuration resolution and provenance
-#13 Implement stable validation diagnostics and verification statuses
-#14 Implement structured JSON, TOML, YAML, properties, Gradle, Java, and Kotlin renderers
-#15 Implement deterministic virtual file tree and binary-safe output model
-#16 Implement raw file add, replace, rename, delete, reset, and diff operations
-#17 Implement PNG asset validation, transformation, digesting, and adapter pipeline
-#18 Implement project version composer and artifact naming resolver
-#19 Implement complete version-specific metadata domain models
-#20 Implement Gradle settings, properties, toolchain, task, run, packaging, and publishing models
-#21 Implement repository and dependency models with cross-linking to runtime metadata
-#22 Implement source sets, entrypoints, split sources, mixins, access files, and data generation models
-#23 Build generator-core package and adapter contracts
-#24 Add defaults, boundaries, invalid input, round-trip, migration, property, and snapshot tests
-#25 Build and verify every required template family and profile boundary
-#26 Resolve and verify every modern version-bound and API-bound catalog entry
-#27 Resolve and verify every historic version-bound and API-bound catalog entry
-#28 Add recommended and maximum structured-customization fixtures for every template family
-#29 Complete exact component tuple verification and publish the coverage report
-#30 Build CLI interactive wizard
-#31 Build CLI non-interactive mode
-#32 Implement local and ZIP adapters
-#33 Add CLI config, set, icon, bundle, raw override, migration, component selection, and preview support
-#34 Build web generator shell and section navigation
-#35 Implement schema-driven Simple and Advanced form engine with preserved overrides
-#36 Implement complete loader, plugin, and proxy metadata editors
-#37 Implement complete component version selectors and compatibility explanations
-#38 Implement project version and artifact preview editor
-#39 Implement PNG icon upload, preview, transformation, replacement, and removal
-#40 Implement Gradle and build-system editor
-#41 Implement repositories and dependencies editors
-#42 Implement source layout, entrypoint, run profile, and feature editors
-#43 Implement publishing editor
-#44 Implement generated file tree and syntax-aware raw editor
-#45 Implement ProjectSpec import, export, bundle, migration, and local drafts
-#46 Add field search, provenance, linking, unlock, reset, undo, and redo
-#47 Add compatibility, validation, artifact, coverage, and affected-file summary panels
-#48 Add browser parity, performance, accessibility, upload, and no-execution tests
-#49 Build production Nginx configuration
-#50 Build private API service and health checks
-#51 Add atomic deployment and rollback
-#52 Create dedicated Cloudflare Tunnel and DNS route
-#53 Add hostname-scoped Cloudflare cache and security rules
-#54 Decide GitHub App Administration permission model
-#55 Register and configure GitHub App
-#56 Implement GitHub authorization, state, PKCE, sessions, webhook verification, and deduplication
-#57 Implement GitHub tree, commit, branch, and pull-request adapter
-#58 Implement new repository creation if approved
-#59 Implement porting, conflict detection, optimistic concurrency, preview, and idempotency
-#60 Add public API, multipart assets, resolved specs, validation reports, and OpenAPI docs
-#61 Add template CI sharding and maximum-customization build verification
-#62 Add automated source monitoring, catalog reconciliation, profile proposals, and tuple updates
-#63 Add production smoke tests and origin-isolation checks
-#64 Add customization security and public-service no-execution tests
-#65 Add disaster recovery and secret rotation runbooks
-```
+## 112.1 Template Repository Work Items
+
+The `MCGen-Templates` repository owns these logical work items:
+
+| Logical work item                                                                                          | Product milestone                        | Depends on                                    | GitHub issue                   |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------- | ------------------------------ |
+| Descriptor driven template pack and complete version resolver                                              | Phase 0. Repository foundation           | GitHub planning control                       | [Issue 1](https://github.com/MCEnvision/MCGen-Templates/issues/1)   |
+| Authoritative metadata snapshot ingestion and evidence digests                                             | Phase 0. Repository foundation           | Source contract foundation                    | [Issue 17](https://github.com/MCEnvision/MCGen-Templates/issues/17) |
+| Complete platform and component source adapters                                                            | Phase 10. Complete catalog conformance   | Metadata snapshot ingestion                   | [Issue 17](https://github.com/MCEnvision/MCGen-Templates/issues/17) |
+| Compatibility graph, catalog generation, recommendation policy, and coverage reporting                     | Phase 10. Complete catalog conformance   | Complete source adapters                      | [Issue 18](https://github.com/MCEnvision/MCGen-Templates/issues/18) |
+| Toolchain profiles and compatibility boundary rules                                                        | Phase 2. Reference template families     | Compatibility graph inputs                    | [Issue 19](https://github.com/MCEnvision/MCGen-Templates/issues/19) |
+| Reusable template families and descriptors                                                                 | Phase 2. Reference template families     | Toolchain profiles                            | [Issue 20](https://github.com/MCEnvision/MCGen-Templates/issues/20) |
+| Simple and Advanced customization contracts, metadata mappings, project versions, and PNG icon slots       | Phase 2. Reference template families     | Template descriptors and profile capabilities | [Issue 21](https://github.com/MCEnvision/MCGen-Templates/issues/21) |
+| Minimal and maximum structured customization fixtures                                                      | Phase 2. Reference template families     | Template families and customization contracts | [Issue 22](https://github.com/MCEnvision/MCGen-Templates/issues/22) |
+| Historic toolchain profiles and family boundaries                                                          | Phase 9. Historic toolchain coverage     | Reference family verification                 | [Issue 19](https://github.com/MCEnvision/MCGen-Templates/issues/19) |
+| Exact tuple generation, build, packaging, artifact inspection, and coverage evidence                       | Phase 10. Complete catalog conformance   | Catalog, profiles, templates, and fixtures    | [Issue 23](https://github.com/MCEnvision/MCGen-Templates/issues/23) |
+| Deterministic template pack construction and immutable release publication                                 | Phase 10. Complete catalog conformance   | Exact tuple verification                      | [Issue 24](https://github.com/MCEnvision/MCGen-Templates/issues/24) |
+| Automated source monitoring, additive reconciliation, evidence invalidation, and maintenance pull requests | Phase 11. Automated template maintenance | First verified pack release                   | [Issue 25](https://github.com/MCEnvision/MCGen-Templates/issues/25) |
+
+Repository issues should split a row only when each child has independent acceptance criteria and useful dependency state. Issue `1` remains the active parent while its descriptor driven template pack acceptance criteria remain open.
+
+## 112.2 Future Application Repository Work Items
+
+The future `MCEnvision/MCGen` repository owns generator core, CLI, website, API, GitHub App, destination repository writes, Nginx, Cloudflare, and production operations. Those work items remain in this product plan but must not be created as active `MCGen-Templates` issues or milestones.
+
+When the application repository exists, its issue breakdown should cover:
+
+1. Versioned ProjectSpec, migrations, provenance, validation diagnostics, structured renderers, binary safe virtual files, raw file operations, PNG assets, project versions, metadata, build models, dependencies, source layouts, and adapter contracts.
+2. CLI interactive and noninteractive generation, configuration import and export, local and ZIP output, icon inputs, overrides, component selection, migration, validation, and previews.
+3. Web Simple and Advanced editors, metadata and build editors, version selectors, icon workflow, generated tree, raw editor, local drafts, accessibility, performance, and browser parity.
+4. Private API, Nginx, atomic deployment and rollback, dedicated Cloudflare Tunnel, DNS, cache rules, security rules, public API, OpenAPI, and production smoke tests.
+5. GitHub App permission decision, registration, authorization, sessions, webhook security, repository tree writes, branches, pull requests, optional repository creation, porting, conflict detection, concurrency, and idempotency.
+6. Customization security, no execution guarantees, secret rotation, incident response, and disaster recovery.
+
+Actual application issue links are added in that repository after ownership transfer. This template repository may reference those links for dependencies, but it does not duplicate or close application work.
 
 ---
 
