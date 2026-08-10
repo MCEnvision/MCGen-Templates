@@ -1,0 +1,138 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "spigot-modern",
+  "revision": 1,
+  "status": "reviewed",
+  "family": "spigot-modern",
+  "category": "plugin",
+  "platform": "spigot",
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/spigot/index.json",
+    "indexSha256": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+    "selectors": [
+      {
+        "platform": "spigot",
+        "keyKind": "minecraft",
+        "keys": { "mode": "explicit", "values": ["1.21.1"] },
+        "components": [
+          {
+            "component": "spigot",
+            "coordinatePrefix": "org.spigotmc:spigot-api:",
+            "mode": "explicit",
+            "versions": ["org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"]
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+            "path": "sources/snapshots/spigot/2026-08-10-r2.json",
+            "sha256": "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
+            "selectors": [
+              "entries[?catalogKey==1.21.1]",
+              "entries[?coordinate==org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT]"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api",
+      "version": "1.21.1-R0.1-SNAPSHOT",
+      "range": "1.21.1",
+      "required": true,
+      "catalogComponent": "spigot"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 21,
+    "language": 21,
+    "bytecode": 21,
+    "vendor": "eclipse-temurin"
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "8.8",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+    "wrapperKind": "launcher-script",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "dsl": "groovy",
+    "plugins": [
+      { "id": "java", "version": "8.8", "repositoryIds": ["central", "spigot"] }
+    ],
+    "properties": [],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" },
+    {
+      "id": "spigot",
+      "url": "https://hub.spigotmc.org/nexus/content/groups/public/",
+      "contentFilters": ["org.spigotmc"]
+    }
+  ],
+  "mappings": { "strategy": "none", "components": [] },
+  "metadata": {
+    "format": "plugin-yml",
+    "files": ["src/main/resources/plugin.yml"],
+    "fieldMappings": [
+      { "field": "project.name", "path": "name", "required": true },
+      { "field": "project.mainClass", "path": "main", "required": true },
+      { "field": "project.version", "path": "version", "required": true }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
+    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
+    "testRoots": [{ "name": "test", "path": "src/test/java" }]
+  },
+  "languages": ["java"],
+  "features": [
+    { "id": "commands", "support": "supported" },
+    { "id": "permissions", "support": "supported" },
+    { "id": "libraries", "support": "conditional" }
+  ],
+  "incompatibilities": [],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["build/libs/*.jar"],
+    "inspection": ["plugin.yml", "org.example.tuple.TupleProbe.class"]
+  },
+  "artifact": {
+    "patterns": ["build/libs/tuple-probe-1.0.0.jar"],
+    "metadataPaths": ["plugin.yml"],
+    "requiredEntries": ["plugin.yml", "org/example/tuple/TupleProbe.class"],
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "resourceNamespaces": [],
+    "iconPaths": [],
+    "expectedExtension": ".jar",
+    "projectIdentity": {
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "metadataFields": {
+      "name": "Tuple Probe",
+      "id": "tuple-probe",
+      "main": "org.example.tuple.TupleProbe",
+      "version": "1.0.0"
+    },
+    "maxEntries": 128
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "select an exact catalog backed Spigot tuple"
+  }
+}

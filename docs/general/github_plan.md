@@ -533,7 +533,7 @@ Prove that every tuple advertised as verified generates, compiles, packages, and
 
 ## Status
 
-Active on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. Issue [23](https://github.com/MCEnvision/MCGen-Templates/issues/23) is in progress. The branch adds deterministic fixture, matrix, bounded build, artifact, reproducibility, evidence, coverage, queue, reviewed batch execution, and audit contracts. The audit currently reports twelve blocked profiles, twelve blocked descriptors, and zero reviewed tuple evidence. No Phase 5 tuple is advertised as verified until a complete generated project build, artifact inspection, and reproducibility record exists for its exact identity.
+In review on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. Issue [23](https://github.com/MCEnvision/MCGen-Templates/issues/23) is in progress. The branch adds deterministic fixture, matrix, bounded build, artifact, reproducibility, evidence, coverage, queue, reviewed batch execution, and audit contracts. The reviewed Spigot modern profile and descriptor verify Minecraft 1.21.1 with Temurin 21 and Gradle 8.8. The reviewed Spigot legacy profile and descriptor verify Minecraft 1.8.8 with Temurin 8 and Gradle 7.6.4. Both exact tuples have current generated build, artifact inspection, and reproducibility evidence. The remaining twelve profiles and twelve descriptors retain explicit blockers and are not advertised as verified.
 
 ## Verification levels
 

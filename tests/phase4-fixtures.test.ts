@@ -28,6 +28,8 @@ const expectedDescriptorIds = new Set([
   "paper-modern",
   "paper-traditional",
   "spigot",
+  "spigot-legacy",
+  "spigot-modern",
   "sponge",
   "velocity",
 ]);

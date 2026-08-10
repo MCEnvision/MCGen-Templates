@@ -90,9 +90,13 @@ jobs:
           node dist/cli.js phase5 queue --queue "$QUEUE" --subject "$SUBJECT" --output verification/phase5/queue-plan.json --shard-count "$SHARD_COUNT" --shard-index "$SHARD_INDEX"
           node dist/cli.js validate verification/phase5/queue-plan.json
           if [ -d verification/phase5/executions ]; then
+            mkdir -p /tmp/mcgen-phase5-existing-evidence
+            if [ -d verification/phase5/evidence ]; then
+              find verification/phase5/evidence -type f -name '*.json' -exec mv {} /tmp/mcgen-phase5-existing-evidence/ \;
+            fi
             npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions/ --output-dir verification/phase5/evidence/
           fi
           node dist/cli.js phase5 audit --generated-at 2000-01-01T00:00:00.000Z --output verification/phase5/ci-audit.json
-          node -e "const a=require('./verification/phase5/ci-audit.json'); if(!['blocked','verified'].includes(a.status)) process.exit(1)"
+          node -e "const a=require('./verification/phase5/ci-audit.json'); if(a.status !== 'verified') process.exit(1)"
           rm -f verification/phase5/queue-plan.json
           rm -f verification/phase5/ci-audit.json

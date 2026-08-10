@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, relative, resolve } from "node:path";
+import { delimiter, dirname, relative, resolve } from "node:path";
 import { canonicalJson } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
 import { buildCatalog } from "./catalog/build.js";
@@ -199,6 +199,16 @@ function requireRecord(value: unknown, label: string): Record<string, unknown> {
   if (value === null || typeof value !== "object" || Array.isArray(value))
     throw new Error(`${label} must be an object`);
   return value as Record<string, unknown>;
+}
+
+function javaEnvironment(runtime: number): NodeJS.ProcessEnv | undefined {
+  const home =
+    process.env[`JAVA_HOME_${runtime}_X64`] ?? process.env["JAVA_HOME"];
+  if (!home) return undefined;
+  return {
+    JAVA_HOME: home,
+    PATH: `${resolve(home, "bin")}${delimiter}${process.env["PATH"] ?? ""}`,
+  };
 }
 
 async function writePhase5Document(
@@ -445,7 +455,11 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
     buildJava["runtime"] !== profileJava["runtime"] ||
     buildJava["distribution"] !== profileJava["distribution"] ||
     requireRecord(buildRecord["wrapper"], "phase5 build wrapper")["sha256"] !==
-      profileBuild["wrapperSha256"]
+      profileBuild["wrapperSha256"] ||
+    (profileBuild["wrapperDistributionSha256"] !== undefined &&
+      requireRecord(buildRecord["wrapper"], "phase5 build wrapper")[
+        "distributionSha256"
+      ] !== profileBuild["wrapperDistributionSha256"])
   )
     throw new Error("phase5 build toolchain does not match reviewed profile");
   const verification = requireRecord(
@@ -486,6 +500,7 @@ async function phase5Execute(args: readonly string[]): Promise<void> {
       artifactDigest: sha256(canonicalJson(profileArtifact)),
     },
     generatedAt,
+    environment: javaEnvironment(Number(profileJava["runtime"])),
     ...(typeof wrapperSource === "string"
       ? {
           wrapperPath:
@@ -526,9 +541,9 @@ async function phase5ExecuteReviewed(args: readonly string[]): Promise<void> {
   for (const name of inputs) {
     await phase5Execute([
       "--input",
-      `${inputRelative}${name}`,
+      `${inputRelative}/${name}`,
       "--output",
-      `${outputRelative}${name}`,
+      `${outputRelative}/${name}`,
     ]);
   }
   process.stdout.write(`executed ${inputs.length} reviewed phase 5 tuples\n`);

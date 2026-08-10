@@ -37,6 +37,7 @@ export type CommandExecutor = (
   workDirectory: string,
   timeoutMs: number,
   maxOutputBytes: number,
+  environment?: NodeJS.ProcessEnv,
 ) => Promise<CommandExecution>;
 
 export const nodeCommandExecutor: CommandExecutor = async (
@@ -44,6 +45,7 @@ export const nodeCommandExecutor: CommandExecutor = async (
   workDirectory,
   timeoutMs,
   maxOutputBytes,
+  environment,
 ) => {
   const started = Date.now();
   try {
@@ -53,6 +55,7 @@ export const nodeCommandExecutor: CommandExecutor = async (
       maxBuffer: maxOutputBytes,
       shell: false,
       windowsHide: true,
+      env: environment ? { ...process.env, ...environment } : process.env,
     });
     return {
       exitCode: 0,
@@ -93,6 +96,7 @@ export type BuildRunRequest = {
   wrapperPath?: string;
   verifyJava?: () => Promise<void>;
   requireExactToolchain?: boolean;
+  environment?: NodeJS.ProcessEnv;
 };
 
 export type IsolatedWorkspace = {
@@ -144,6 +148,7 @@ export async function verifyJavaInstallation(input: {
   executable?: string;
   runtime: number;
   distribution?: string;
+  environment?: NodeJS.ProcessEnv;
 }): Promise<void> {
   const executable = input.executable ?? "java";
   const result = await nodeCommandExecutor(
@@ -155,6 +160,7 @@ export async function verifyJavaInstallation(input: {
     process.cwd(),
     10_000,
     32 * 1024,
+    input.environment,
   );
   if (result.exitCode !== 0)
     throw new Error(`java executable could not be inspected ${executable}`);
@@ -249,6 +255,7 @@ export async function runBuild(
           workDirectory,
           request.contract.limits.timeoutMs,
           request.contract.limits.maxOutputBytes,
+          request.environment,
         );
       } catch (error) {
         lastError = error;

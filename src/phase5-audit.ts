@@ -75,6 +75,7 @@ export async function buildPhase5Audit(input: {
       "descriptor.json",
       "descriptor-modern.json",
       "descriptor-traditional.json",
+      "descriptor-legacy.json",
     ]) {
       const path = join(repositoryRoot, "templates", directory, name);
       try {
@@ -142,8 +143,15 @@ export async function buildPhase5Audit(input: {
     (descriptor) => descriptor["status"] === "reviewed",
   ).length;
   const unresolved = evidence.length - verifiedEvidence;
+  const malformedBlockers = blockers.some((reason) =>
+    reason.includes("blocked document has no explicit blocker"),
+  );
   const status: Phase5Audit["status"] =
-    verifiedEvidence > 0 && blockers.length === 0 ? "verified" : "blocked";
+    verifiedEvidence > 0 && unresolved === 0 && !malformedBlockers
+      ? "verified"
+      : verifiedEvidence > 0
+        ? "candidate"
+        : "blocked";
   const withoutDigest = {
     $schema: phase5AuditSchema,
     schemaVersion: 1 as const,

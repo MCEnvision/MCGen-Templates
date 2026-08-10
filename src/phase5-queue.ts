@@ -49,6 +49,8 @@ export function buildQueuePlan(input: {
   shardCount: number;
   shardIndex: number;
 }): QueuePlan {
+  if (!(input.event.queue in limits))
+    throw new Error(`queue type is unsupported ${input.event.queue}`);
   if (!Number.isInteger(input.shardCount) || input.shardCount < 1)
     throw new Error("queue shard count must be positive");
   if (
@@ -59,7 +61,11 @@ export function buildQueuePlan(input: {
     throw new Error("queue shard index is invalid");
   if (!input.event.subject || /[\s/\\]/u.test(input.event.subject))
     throw new Error("queue subject must be a stable identifier");
+  if (input.event.changedPaths.some((path) => typeof path !== "string"))
+    throw new Error("queue changed paths must be strings");
   const tupleIds = [...new Set(input.event.tupleIds)].sort(compareText);
+  if (tupleIds.some((tupleId) => !/^[a-f0-9]{64}$/u.test(tupleId)))
+    throw new Error("queue tuple ids must be lowercase sha256 digests");
   if (tupleIds.length > 100_000)
     throw new Error("queue contains too many tuple ids");
   const event = {

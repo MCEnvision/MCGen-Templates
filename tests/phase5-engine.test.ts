@@ -433,6 +433,30 @@ describe("phase 5 build and artifact contracts", () => {
     expect(plan.cancelKey).toContain("phase5-changed-boundaries");
   });
 
+  it("rejects malformed queue types and tuple identities before sharding", () => {
+    const event = {
+      queue: "unknown" as never,
+      subject: "phase5",
+      changedPaths: [],
+      tupleIds: [],
+      createdAt: "2026-08-10T00:00:00.000Z",
+    };
+    expect(() =>
+      buildQueuePlan({ event, shardCount: 1, shardIndex: 0 }),
+    ).toThrow("queue type is unsupported");
+    expect(() =>
+      buildQueuePlan({
+        event: {
+          ...event,
+          queue: "changed-boundaries",
+          tupleIds: ["not-a-digest"],
+        },
+        shardCount: 1,
+        shardIndex: 0,
+      }),
+    ).toThrow("queue tuple ids must be lowercase sha256 digests");
+  });
+
   it("rejects malformed zip artifacts before metadata inspection", () => {
     const report = inspectArtifact(
       "build/libs/example.jar",

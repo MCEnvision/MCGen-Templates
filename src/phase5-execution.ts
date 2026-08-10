@@ -1,4 +1,5 @@
 import {
+  chmod,
   mkdir,
   mkdtemp,
   readdir,
@@ -59,6 +60,7 @@ export type Phase5ExecutionRequest = {
   reviewedProfile: { id: string; digest: string; artifactDigest: string };
   wrapperPath?: string;
   wrapperContent?: Uint8Array;
+  environment?: NodeJS.ProcessEnv;
   execute?: CommandExecutor;
   verifyJava?: () => Promise<void>;
   generatedAt: string;
@@ -80,6 +82,8 @@ async function outputTreeFiles(
 ): Promise<ReproducibilityFile[]> {
   const files: ReproducibilityFile[] = [];
   for (const entry of await readdir(current, { withFileTypes: true })) {
+    if (entry.isDirectory() && [".gradle", ".git", "logs"].includes(entry.name))
+      continue;
     const path = join(current, entry.name);
     if (entry.isSymbolicLink())
       throw new Error(`build output contains a symbolic link ${path}`);
@@ -143,6 +147,8 @@ async function writeFixture(
     const output = join(root, path);
     await mkdir(dirname(output), { recursive: true });
     await writeFile(output, content, { flag: "wx" });
+    if (path === "gradlew" || path.endsWith("/gradlew"))
+      await chmod(output, 0o755);
   }
 }
 
@@ -187,11 +193,19 @@ async function executeOnce(input: {
         : {}),
       verifyJava:
         input.request.verifyJava ??
-        (() =>
-          verifyJavaInstallation({
+        (() => {
+          const javaInput = {
             runtime: input.request.build.java.runtime,
             distribution: input.request.build.java.distribution,
-          })),
+            ...(input.request.environment
+              ? { environment: input.request.environment }
+              : {}),
+          };
+          return verifyJavaInstallation(javaInput);
+        }),
+      ...(input.request.environment
+        ? { environment: input.request.environment }
+        : {}),
     };
     const build = await runBuild(buildRequest);
     if (build.status !== "passed") {

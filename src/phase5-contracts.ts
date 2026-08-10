@@ -42,6 +42,9 @@ export type TupleIdentity = {
   wrapper: {
     version: string;
     sha256: string;
+    kind?: "launcher-script" | "wrapper-jar" | "distribution";
+    distributionUrl?: string;
+    distributionSha256?: string;
   };
   mappingDigest: string;
   sourceDigests: readonly string[];

@@ -28,7 +28,13 @@ export type MatrixProfile = {
   catalogSnapshotId: string;
   selectors: readonly MatrixSelector[];
   java: { distribution: string; runtime: number; checksum?: string };
-  wrapper: { version: string; sha256: string };
+  wrapper: {
+    version: string;
+    sha256: string;
+    kind?: "launcher-script" | "wrapper-jar" | "distribution";
+    distributionUrl?: string;
+    distributionSha256?: string;
+  };
   mappingDigest: string;
   sourceDigests: readonly string[];
   contentDigests: {

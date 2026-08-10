@@ -249,6 +249,17 @@
         "system": { "enum": ["gradle", "maven"] },
         "wrapper": { "$ref": "#/$defs/boundedString" },
         "wrapperSha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "wrapperKind": {
+          "enum": ["launcher-script", "wrapper-jar", "distribution"]
+        },
+        "wrapperDistributionUrl": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://services\\.gradle\\.org/distributions/gradle-[^/]+-bin\\.zip$"
+        },
+        "wrapperDistributionSha256": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        },
         "dsl": { "enum": ["groovy", "kotlin", "xml"] },
         "plugins": {
           "type": "array",
@@ -459,7 +470,66 @@
         "requiredEntries": {
           "type": "array",
           "items": { "type": "string", "minLength": 1, "maxLength": 512 }
-        }
+        },
+        "entrypointClasses": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        },
+        "resourceNamespaces": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 256 }
+        },
+        "iconPaths": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        },
+        "expectedExtension": { "enum": [".jar", ".zip"] },
+        "expectedClassifier": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "publicationCoordinates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["group", "artifact", "version"],
+          "properties": {
+            "group": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "artifact": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "version": { "type": "string", "minLength": 1, "maxLength": 512 }
+          }
+        },
+        "projectIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version"],
+          "properties": {
+            "id": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "name": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "version": { "type": "string", "minLength": 1, "maxLength": 512 }
+          }
+        },
+        "metadataFields": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "iconReferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["metadataPath", "iconPath"],
+            "properties": {
+              "metadataPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "iconPath": { "type": "string", "minLength": 1, "maxLength": 512 }
+            }
+          }
+        },
+        "maxEntries": { "type": "integer", "minimum": 1 }
       }
     },
     "fallback": {

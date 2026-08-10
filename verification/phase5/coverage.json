@@ -1,0 +1,40 @@
+{
+  "$schema": "urn:mcgen:schema:coverage-summary:1",
+  "blockers": [],
+  "byFamily": [
+    {
+      "family": "spigot-legacy",
+      "legacyVerified": 0,
+      "total": 1,
+      "unresolved": 0,
+      "verified": 1
+    },
+    {
+      "family": "spigot-modern",
+      "legacyVerified": 0,
+      "total": 1,
+      "unresolved": 0,
+      "verified": 1
+    }
+  ],
+  "catalogSnapshotId": "2026-08-10-r4",
+  "counts": {
+    "blocked": 0,
+    "discovered": 0,
+    "failed": 0,
+    "legacy-verified": 0,
+    "queued": 0,
+    "skipped": 0,
+    "verified": 2
+  },
+  "digest": "591ed826908b860d2c0ceaf361d8eb8442a6f2b69d78d43cc39cb102748b725a",
+  "evidenceDigests": [
+    "13dd25862532b1829c8d6a0ab07c45d79085f172d79fe130d2207b1d014e6909",
+    "2c2a62d9371d674bbdfeaa4d9c1481dd13fd0678177cd0ae440f5321b8e8b772"
+  ],
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "kind": "coverage-summary",
+  "matrixDigest": "26e40eb128ece4c74dab209454a9e4d2bd6e9b15fa2cb1b8b80ce605f5fdd99e",
+  "schemaVersion": 1,
+  "total": 2
+}
