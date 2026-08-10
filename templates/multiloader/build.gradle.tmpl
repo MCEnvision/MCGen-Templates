@@ -1,0 +1,35 @@
+plugins {
+    id 'dev.architectury.loom'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+base {
+    archivesName = '${project.archiveName}'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+loom {
+    silentMojangMappingsLicense()
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:${platform.components.minecraft}'
+    mappings loom.officialMojangMappings()
+    modImplementation 'net.fabricmc:fabric-loader:${platform.components.fabric-loader}'
+    modImplementation 'dev.architectury:architectury-fabric:${platform.components.architectury}'
+}
+
+repositories {
+    maven { url = uri('https://maven.architectury.dev') }
+    maven { url = uri('https://maven.fabricmc.net') }
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

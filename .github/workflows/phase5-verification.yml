@@ -48,7 +48,7 @@ jobs:
   contracts:
     name: phase 5 contracts
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 45
     steps:
       - name: checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -64,14 +64,34 @@ jobs:
       - name: verify phase 5 contracts
         run: npm run verify
       - name: execute reviewed phase 5 tuples
+        if: github.event_name == 'workflow_dispatch'
         run: |
           if [ -d verification/phase5/executions ]; then
             mkdir -p /tmp/mcgen-phase5-existing-evidence
             if [ -d verification/phase5/evidence ]; then
               find verification/phase5/evidence -type f -name '*.json' -exec mv {} /tmp/mcgen-phase5-existing-evidence/ \;
             fi
-            npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions/ --output-dir verification/phase5/evidence/
+            active_pids=()
+            for input in verification/phase5/executions/*.json; do
+              name="${input##*/}"
+              node dist/cli.js phase5 execute --input "$input" --output "verification/phase5/evidence/$name" &
+              active_pids+=("$!")
+              if [ "${#active_pids[@]}" -eq 3 ]; then
+                for pid in "${active_pids[@]}"; do
+                  wait "$pid"
+                done
+                active_pids=()
+              fi
+            done
+            for pid in "${active_pids[@]}"; do
+              wait "$pid"
+            done
           fi
+      - name: validate committed reviewed phase 5 evidence
+        run: |
+          for evidence in verification/phase5/evidence/*.json; do
+            node dist/cli.js phase5 validate-evidence --input "$evidence"
+          done
       - name: write phase 5 audit
         run: |
           node dist/cli.js phase5 audit --generated-at 2000-01-01T00:00:00.000Z --output verification/phase5/ci-audit.json

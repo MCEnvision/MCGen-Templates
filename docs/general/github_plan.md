@@ -732,7 +732,7 @@ Keep the repository complete after initial publication and prove that every requ
 
 ## Status
 
-In progress. The first immutable beta release is published and verified. The Phase 7 implementation is merged on main through [pull request 40](https://github.com/MCEnvision/MCGen-Templates/pull/40), and the current completion branch extends it with reconciled catalog, profile, tuple, and blocker evidence. Issue [25](https://github.com/MCEnvision/MCGen-Templates/issues/25) remains active in the phase 11 milestone and roadmap because four profile boundaries and four descriptor boundaries still require exact Forge, NeoForge, or Architectury build and intersection evidence. The current evidence and blocker checklist is recorded in the [repository completion report](../verification/phase7-completion-report.md). It does not implement the deferred application, website, GitHub App, Nginx, or Cloudflare work.
+In final review. The first immutable beta release is published and verified. The Phase 7 implementation is merged on main through [pull request 40](https://github.com/MCEnvision/MCGen-Templates/pull/40), and the current completion branch extends it with the immutable `2026-08-10-phase7` catalog, fifteen verified exact tuples, and zero blocked profile or descriptor boundaries. Issue [25](https://github.com/MCEnvision/MCGen-Templates/issues/25) remains active in the phase 11 milestone and roadmap until the reconciliation pull request, signed Phase 7 tag, post merge audit, and wiki publication complete. The current evidence and checklist are recorded in the [repository completion report](../verification/phase7-completion-report.md). It does not implement the deferred application, website, GitHub App, Nginx, or Cloudflare work.
 
 ## Upstream monitoring
 

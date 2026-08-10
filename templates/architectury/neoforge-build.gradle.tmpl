@@ -1,0 +1,24 @@
+plugins {
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    version = rootProject.neoforge_version
+    mods {
+        '${project.id}' {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation 'dev.architectury:architectury-neoforge:' + rootProject.architectury_version
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand version: project.version
+    }
+}

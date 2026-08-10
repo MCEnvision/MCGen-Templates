@@ -37,10 +37,10 @@
           "build"
         ],
         "diskBytes": 102096,
-        "durationMs": 696,
+        "durationMs": 711,
         "exitCode": 0,
         "outputBytes": 645,
-        "outputDigest": "50f1ec3cc7d3c671aa0bf0410ec4a4d42f74a07fb5a189c334606cfca6bdf342"
+        "outputDigest": "d3364372dac3143a2721f0d81a776a8a5a2e4049ba8412248675abb980f0b6ab"
       },
       {
         "command": [
@@ -48,29 +48,29 @@
           "test"
         ],
         "diskBytes": 102096,
-        "durationMs": 609,
+        "durationMs": 599,
         "exitCode": 0,
         "outputBytes": 612,
-        "outputDigest": "c779af75c13eba0e7b934b7beda44d90dcca20592cc6fcfa26f8d8312e3b7dc3"
+        "outputDigest": "5589ab43912b7cdd928ba8b3410a7e6076a680e4a7b765e63d4bf33b04a732b3"
       }
     ],
-    "finishedAt": "2026-08-10T18:39:39.108Z",
+    "finishedAt": "2026-08-10T21:28:20.099Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
+  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
       "catalog": "ee8b9e9ceffd6f9aa0b7382b994b3390e3d3fd676428e6fcdd9980d43af4e2b0",
       "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
       "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-      "profile": "6aa2d17e629983ac53bd2ed908ad2abc01bcd9a8c0d8e6f79ea67f3201532d29",
-      "template": "22e713507fb3b42cf5910dd0320218e4d115e7d3f279d374fa0ae7cc8407a546"
+      "profile": "30c772943ec02a0cc09d0925d53ba494ef9b4d872470a83746356512750d0f86",
+      "template": "e47e9bfba87bd01dfa255e4513ff54eb13f3c1ca3feb4affd6e7e88fc5f96953"
     },
     "descriptorRevision": 2,
     "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-    "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+    "procedureDigest": "71fafbbf01a3d61c716ea738e6eab0d96e60bf5a566838d0099ec95aef94765f",
     "profileRevision": 2,
     "sourceDigests": [
       "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
@@ -78,10 +78,10 @@
     "wrapperSha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583"
   },
   "key": {
-    "digest": "19496ede72ee40b625f2aa9c5498ea055d806ee427f7dcc59303e45100e189be",
+    "digest": "b00fbebc99e07c3683de631d078376de06b430263074361564c8780a869f63fe",
     "identity": {
       "catalogKey": "1.21",
-      "catalogSnapshotId": "2026-08-10-final",
+      "catalogSnapshotId": "2026-08-10-phase7",
       "components": {
         "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
       },
@@ -89,8 +89,8 @@
         "catalog": "ee8b9e9ceffd6f9aa0b7382b994b3390e3d3fd676428e6fcdd9980d43af4e2b0",
         "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
         "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-        "profile": "6aa2d17e629983ac53bd2ed908ad2abc01bcd9a8c0d8e6f79ea67f3201532d29",
-        "template": "22e713507fb3b42cf5910dd0320218e4d115e7d3f279d374fa0ae7cc8407a546"
+        "profile": "30c772943ec02a0cc09d0925d53ba494ef9b4d872470a83746356512750d0f86",
+        "template": "e47e9bfba87bd01dfa255e4513ff54eb13f3c1ca3feb4affd6e7e88fc5f96953"
       },
       "descriptorId": "bungeecord",
       "descriptorRevision": 2,
@@ -101,7 +101,7 @@
         "runtime": 8
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+      "procedureDigest": "71fafbbf01a3d61c716ea738e6eab0d96e60bf5a566838d0099ec95aef94765f",
       "profileId": "bungeecord",
       "profileRevision": 2,
       "sourceDigests": [

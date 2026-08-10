@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '${platform.components.moddevgradle}'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+neoForge {
+    version = '${platform.components.neoforge}'
+    mods {
+        '${project.id}' {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    archiveBaseName = '${project.archiveName}'
+}
+
+tasks.withType(Jar).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

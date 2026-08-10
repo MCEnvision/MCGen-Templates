@@ -2,37 +2,26 @@
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
   "schemaVersion": 1,
   "id": "forge-legacy",
-  "revision": 1,
-  "status": "blocked",
+  "revision": 2,
+  "status": "reviewed",
   "family": "forge",
   "category": "mod",
   "platform": "forge",
-  "blockers": [
-    {
-      "id": "legacy-toolchain-evidence",
-      "reason": "ForgeGradle, mappings, wrapper, and JDK boundaries still require tuple specific build evidence.",
-      "evidence": [
-        "sources/snapshots/forge/2026-08-10-r2.json",
-        "sources/snapshots/gradle/2026-08-10-r2.json",
-        "sources/snapshots/java/2026-08-10-r2.json"
-      ],
-      "resolution": "Add a reviewed boundary profile after the exact legacy tuple compiles and its artifact is inspected."
-    }
-  ],
   "catalog": {
-    "snapshotId": "2026-08-10-final",
-    "indexPath": "catalog/2026-08-10-final/platforms/forge/index.json",
-    "indexSha256": "e4d76da5667f69c0caea493978c650e620e4eb8ab6996c33490baa3e45fd2d82",
+    "snapshotId": "2026-08-10-phase7",
+    "indexPath": "catalog/2026-08-10-phase7/platforms/forge/index.json",
+    "indexSha256": "55448611e968847adcf4953db3320f006faef5408b6abb9e98081dcd51d31774",
     "selectors": [
       {
         "platform": "forge",
         "keyKind": "minecraft",
-        "keys": { "mode": "all-shards" },
+        "keys": { "mode": "explicit", "values": ["1.12.2"] },
         "components": [
           {
             "component": "forge",
             "coordinatePrefix": "net.minecraftforge:forge:",
-            "mode": "all-components"
+            "mode": "explicit",
+            "versions": ["net.minecraftforge:forge:1.12.2-14.23.5.2859"]
           }
         ],
         "evidence": [
@@ -50,16 +39,16 @@
     {
       "id": "forge",
       "coordinate": "net.minecraftforge:forge",
-      "version": "selected-from-catalog",
-      "range": "catalog-key-compatible",
+      "version": "1.12.2-14.23.5.2859",
+      "range": "1.12.2",
       "required": true,
       "catalogComponent": "forge"
     },
     {
       "id": "forgegradle",
       "coordinate": "net.minecraftforge.gradle:ForgeGradle",
-      "version": "selected-from-catalog",
-      "range": "legacy-boundary",
+      "version": "3.0.197",
+      "range": "3.0.197",
       "required": true,
       "catalogComponent": "forgegradle"
     }
@@ -72,17 +61,20 @@
   },
   "build": {
     "system": "gradle",
-    "wrapper": "4.10.3",
-    "wrapperSha256": "b4e1c1b5d0f1a5cbcc7f7b0a40a7ea6d78ba653b3b4e60bbec0c9c6ecb5b57a4",
+    "wrapper": "4.9",
+    "wrapperSha256": "c04e350a66b20c3491c15bddbaf162d7d036b7eeec928838f627deb393500fe2",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-4.9-bin.zip",
+    "wrapperDistributionSha256": "e66e69dce8173dd2004b39ba93586a184628bc6c28461bc771d6835f7f9b0d28",
+    "wrapperKind": "launcher-script",
     "dsl": "groovy",
     "plugins": [
       {
         "id": "net.minecraftforge.gradle",
-        "version": "selected-from-catalog",
+        "version": "3.0.197",
         "repositoryIds": ["forge"]
       }
     ],
-    "properties": [{ "name": "minecraftVersion", "value": "catalog-selected" }],
+    "properties": [{ "name": "minecraftVersion", "value": "1.12.2" }],
     "jvmArguments": [],
     "sourceSets": [],
     "tasks": [],
@@ -97,8 +89,8 @@
     "components": [
       {
         "id": "forge-mappings",
-        "version": "selected-from-catalog",
-        "coordinate": "net.minecraftforge:forge"
+        "version": "20171003-1.12",
+        "coordinate": "net.minecraftforge:mcp-mappings"
       }
     ]
   },
@@ -141,10 +133,25 @@
   "artifact": {
     "patterns": ["build/libs/*.jar"],
     "metadataPaths": ["mcmod.info"],
-    "requiredEntries": ["META-INF/MANIFEST.MF"]
+    "requiredEntries": ["META-INF/MANIFEST.MF"],
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 256,
+    "metadataFields": {
+      "[0].modid": "tuple-probe",
+      "[0].name": "Tuple Probe",
+      "[0].version": "1.0.0"
+    },
+    "projectIdentity": {
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "resourceNamespaces": []
   },
   "fallback": {
-    "policy": "blocked",
+    "policy": "none",
     "migration": "Resolve a newer reviewed Forge boundary or keep the exact legacy profile pinned."
   }
 }

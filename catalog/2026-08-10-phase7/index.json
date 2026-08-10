@@ -1,0 +1,157 @@
+{
+  "$schema": "urn:mcgen:schema:catalog-index:1",
+  "coverage": {
+    "path": "catalog/2026-08-10-phase7/coverage.json",
+    "sha256": "6160e31381a722bcd9d9d75fea0a799bcec98049b0c987d864baece364ddf63f"
+  },
+  "id": "catalog.008de6ad1b5a39d3d1751d8e",
+  "platforms": [
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/architectury/index.json",
+      "platform": "architectury",
+      "sha256": "9333a215c18acd4735b04cd009c298ecb3304fa7b89d091e1d5619f2bad4f47b"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/bukkit/index.json",
+      "platform": "bukkit",
+      "sha256": "8a1e7c0564aea62cbd59c2e4d2c3497b2b24663abad176b2b0a8f6bb4ca3a2ac"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/bungeecord/index.json",
+      "platform": "bungeecord",
+      "sha256": "985c717e1e57927c3184ee74343f153af343cd1eba642b714db24067133bde05"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/fabric/index.json",
+      "platform": "fabric",
+      "sha256": "5d50bfd66783d7ccc9ecb91b9252298f9c2ce104548e68d92a1e6066fb8fc378"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/forge/index.json",
+      "platform": "forge",
+      "sha256": "55448611e968847adcf4953db3320f006faef5408b6abb9e98081dcd51d31774"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/gradle/index.json",
+      "platform": "gradle",
+      "sha256": "f11622ea5dd07725fadb9f715f9d92c4b5c1c7ba81da9c1c02d4d8c741ca543e"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/java/index.json",
+      "platform": "java",
+      "sha256": "4f01166437a1c1705ae2ea3d43e1771bfdac7150e90c2482d6c1abdb46f788de"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/kotlin/index.json",
+      "platform": "kotlin",
+      "sha256": "20a998ede9477a86d9c2ae2fb31d664a4ad6649c64b6822d23a77f9198a5985d"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/minecraft/index.json",
+      "platform": "minecraft",
+      "sha256": "3ced1585870f96fc8e1878ed55c5cc8c88e0d56dda9a6807831357e51cd6d11b"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/neoforge/index.json",
+      "platform": "neoforge",
+      "sha256": "93fdbe2011bda976e8387d9882d3028fee3fa922d1fceb9796f433d32adcb128"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/paper/index.json",
+      "platform": "paper",
+      "sha256": "06ca0c6bf7f4e6d409e1467d91ca22dacc9645d622c9d52bba23c8c5a13d4409"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/spigot/index.json",
+      "platform": "spigot",
+      "sha256": "bb9c1f8dac1c23616ce7688da87ec80f8f6e27ce8aff485aabeed9b294208b9d"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/sponge/index.json",
+      "platform": "sponge",
+      "sha256": "0eee06d1ee6bec57fff4ac4ed9fb546dd431f84f918bcf9e736b9fbf838e0a28"
+    },
+    {
+      "path": "catalog/2026-08-10-phase7/platforms/velocity/index.json",
+      "platform": "velocity",
+      "sha256": "0ada85df43ef148fde9f3f2a544a9f42698d8ca0cb1ad86059271e43277da6e2"
+    }
+  ],
+  "recommendationPolicy": {
+    "path": "catalog/2026-08-10-phase7/recommendation-policy.json",
+    "sha256": "aa6ecd701008bf351dd97fe2b0556a4a9f327f00ef48996651578f693d339b1c"
+  },
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    {
+      "digest": "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
+      "id": "architectury.df9f4c866e0c6749913054ad",
+      "path": "sources/snapshots/architectury/2026-08-10-r2.json"
+    },
+    {
+      "digest": "57427a88f77c6214ac22572cca4cb8fb1d1bc42696c2bb9fe35eb90847184121",
+      "id": "bukkit.d6706b848d7d7899f7a09e7c",
+      "path": "sources/snapshots/bukkit/2026-08-10-r2.json"
+    },
+    {
+      "digest": "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c",
+      "id": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+      "path": "sources/snapshots/bungeecord/2026-08-10-r2.json"
+    },
+    {
+      "digest": "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e",
+      "id": "fabric.d5f0718a2c465a479a633101",
+      "path": "sources/snapshots/fabric/2026-08-10-r2.json"
+    },
+    {
+      "digest": "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
+      "id": "forge.7bb8d1fe2c4ab6007a79b73a",
+      "path": "sources/snapshots/forge/2026-08-10-r2.json"
+    },
+    {
+      "digest": "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4",
+      "id": "gradle.de13586552d90031cb212ed1",
+      "path": "sources/snapshots/gradle/2026-08-10-r2.json"
+    },
+    {
+      "digest": "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+      "id": "java.bcc3a227324932f44e420ef9",
+      "path": "sources/snapshots/java/2026-08-10-r2.json"
+    },
+    {
+      "digest": "d598159497f6a6ba4aa9b10da223f17dbe46508357c5c404ef6fa7e744877dca",
+      "id": "kotlin.576b1748d0cc1e310a956f71",
+      "path": "sources/snapshots/kotlin/2026-08-10-r2.json"
+    },
+    {
+      "digest": "669ad91f7dd00826e3b93478ebc723cd5a57093b69279e0f0715c7c3cdc2e6ab",
+      "id": "mojang.378f919a766c4184b3ce9210",
+      "path": "sources/snapshots/mojang/2026-08-10-r2.json"
+    },
+    {
+      "digest": "53ef3e26fd1b0c0483e53bf0bcad9f3830bf29a72096a37916991c63f79382fd",
+      "id": "neoforge.454d86de20b17a45eb60bd52",
+      "path": "sources/snapshots/neoforge/2026-08-10-r2.json"
+    },
+    {
+      "digest": "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1",
+      "id": "paper.d0430553c2aaa457429a549e",
+      "path": "sources/snapshots/paper/2026-08-10-r4.json"
+    },
+    {
+      "digest": "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
+      "id": "spigot.d3e7e6031437b0eb7447a6df",
+      "path": "sources/snapshots/spigot/2026-08-10-r2.json"
+    },
+    {
+      "digest": "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec",
+      "id": "sponge.b6e6a7dfbfec686a0e244c90",
+      "path": "sources/snapshots/sponge/2026-08-10-r2.json"
+    },
+    {
+      "digest": "c479700cb3461ad419add8657eafbc7bfe317c4a5c122e15b4ab8b7ee04879f3",
+      "id": "velocity.0dd1e06d8ce24cb894449c49",
+      "path": "sources/snapshots/velocity/2026-08-10-r2.json"
+    }
+  ]
+}

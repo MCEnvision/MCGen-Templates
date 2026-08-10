@@ -2,15 +2,8 @@
   "$schema": "urn:mcgen:schema:template-descriptor:1",
   "schemaVersion": 1,
   "id": "forge",
-  "revision": 1,
-  "status": "blocked",
-  "blockers": [
-    {
-      "code": "tuple-build-evidence",
-      "reason": "Forge tuples remain discovered until later compilation and artifact inspection gates pass.",
-      "evidence": ["catalog/2026-08-10-final/index.json"]
-    }
-  ],
+  "revision": 2,
+  "status": "reviewed",
   "category": "mod",
   "platforms": ["forge"],
   "profileRefs": ["forge-legacy", "forge-modern"],
@@ -91,15 +84,31 @@
       "rawOverride": "allowed"
     },
     {
-      "source": "templates/shared/build.gradle.tmpl",
+      "source": "templates/forge/build.gradle.tmpl",
       "destination": "build.gradle",
       "renderer": "gradle",
+      "includeWhen": "field(\"forgegradle\") != \"3.0.197\"",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/shared/settings.gradle.tmpl",
+      "source": "templates/forge/legacy-build.gradle.tmpl",
+      "destination": "build.gradle",
+      "renderer": "gradle",
+      "includeWhen": "field(\"forgegradle\") == \"3.0.197\"",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/forge/settings.gradle.tmpl",
       "destination": "settings.gradle",
       "renderer": "gradle",
+      "includeWhen": "field(\"forgegradle\") != \"3.0.197\"",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/forge/legacy-settings.gradle.tmpl",
+      "destination": "settings.gradle",
+      "renderer": "gradle",
+      "includeWhen": "field(\"forgegradle\") == \"3.0.197\"",
       "rawOverride": "advanced-only"
     },
     {
@@ -118,28 +127,18 @@
       "source": "templates/forge/mods.toml.tmpl",
       "destination": "src/main/resources/META-INF/mods.toml",
       "renderer": "toml",
+      "includeWhen": "field(\"forgegradle\") != \"3.0.197\"",
+      "rawOverride": "advanced-only"
+    },
+    {
+      "source": "templates/forge/mcmod.info.tmpl",
+      "destination": "src/main/resources/mcmod.info",
+      "renderer": "json",
+      "includeWhen": "field(\"forgegradle\") == \"3.0.197\"",
       "rawOverride": "advanced-only"
     }
   ],
   "renderTargets": [
-    {
-      "id": "forge-metadata",
-      "path": "src/main/resources/META-INF/mods.toml",
-      "format": "toml",
-      "fieldMappings": [
-        {
-          "fieldId": "project-id",
-          "path": "mods[0].modId",
-          "format": "literal"
-        },
-        {
-          "fieldId": "project-version",
-          "path": "mods[0].version",
-          "format": "version"
-        }
-      ],
-      "required": true
-    },
     {
       "id": "advanced-field-extension",
       "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",

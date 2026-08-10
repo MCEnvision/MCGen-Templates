@@ -405,7 +405,9 @@
             "required": ["path", "format", "valid", "values"],
             "properties": {
               "path": { "type": "string" },
-              "format": { "enum": ["json", "properties", "text", "unknown"] },
+              "format": {
+                "enum": ["json", "properties", "toml", "text", "unknown"]
+              },
               "valid": { "type": "boolean" },
               "values": {
                 "type": "object",

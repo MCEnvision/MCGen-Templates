@@ -1,0 +1,92 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:${platform.components.forgegradle}'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'java'
+
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
+import java.io.ByteArrayOutputStream
+
+version = '${project.version}'
+group = '${project.groupId}'
+archivesBaseName = '${project.archiveName}'
+sourceCompatibility = targetCompatibility = '1.8'
+
+minecraft {
+    mappings channel: 'snapshot', version: '${platform.components.mcpmappings}'
+    runs {
+        client { workingDirectory project.file('run') }
+        server { workingDirectory project.file('run') }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.minecraftforge.net/' }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:${platform.components.forge}'
+}
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title': '${project.id}',
+            'Specification-Version': '1',
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+task normalizeLegacyJar {
+    dependsOn 'reobfJar'
+    doLast {
+        def source = jar.archivePath
+        def temporary = new File(source.parentFile, source.name + '.normalized')
+        def entries = []
+        def input = new ZipInputStream(new FileInputStream(source))
+        try {
+            ZipEntry entry
+            while ((entry = input.nextEntry) != null) {
+                def bytes = new ByteArrayOutputStream()
+                if (!entry.isDirectory()) {
+                    def buffer = new byte[8192]
+                    int count
+                    while ((count = input.read(buffer)) >= 0) bytes.write(buffer, 0, count)
+                }
+                entries << [name: entry.name, directory: entry.isDirectory(), bytes: bytes.toByteArray()]
+            }
+        } finally {
+            input.close()
+        }
+        entries.sort { left, right -> left.name <=> right.name }
+        def output = new ZipOutputStream(new FileOutputStream(temporary))
+        try {
+            entries.each { item ->
+                def normalized = new ZipEntry(item.name)
+                normalized.time = 0L
+                output.putNextEntry(normalized)
+                if (!item.directory) output.write(item.bytes)
+                output.closeEntry()
+            }
+        } finally {
+            output.close()
+        }
+        source.delete()
+        temporary.renameTo(source)
+    }
+}
+build.finalizedBy(normalizeLegacyJar)

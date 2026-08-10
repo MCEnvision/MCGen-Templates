@@ -37,10 +37,10 @@
           "build"
         ],
         "diskBytes": 115698,
-        "durationMs": 668,
+        "durationMs": 785,
         "exitCode": 0,
         "outputBytes": 645,
-        "outputDigest": "92b7d4339aba7f5d0a90b41ceaa9ef7dbf30b7c49774fcc405ce1fde0e690a05"
+        "outputDigest": "729579a552ebecb3189790c1ec26cd630b1e6de8d80975575ff7825126a1b717"
       },
       {
         "command": [
@@ -48,25 +48,25 @@
           "test"
         ],
         "diskBytes": 115698,
-        "durationMs": 604,
+        "durationMs": 615,
         "exitCode": 0,
         "outputBytes": 612,
-        "outputDigest": "9f620905259ed711f868bc85aa187cdf1c5b2bfb6906f874311f7e4812816665"
+        "outputDigest": "a29e7b4112f54b7a00769422793a75ec86082c6ba5962790748547d72e2b3b53"
       }
     ],
-    "finishedAt": "2026-08-10T18:40:14.670Z",
+    "finishedAt": "2026-08-10T21:30:02.100Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
+  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
       "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
       "descriptor": "b887a9a8c1b44892a3df41b5ba739d20036a1b17a13cd6fd92eb762a19154b28",
       "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-      "profile": "bb8bb784051f30911adb51b86f83c1e7d152093f6b6f3b9bc5464e65ac3d5759",
-      "template": "c6ef694ce5e323081973cde551bbaf0d7ebc5ccd2effa23be69ed37d1adcdf8a"
+      "profile": "02fc1d843e558f117c2bfb223ba596718a8af4aa7c18d3d1e5b39b5415f4a2fc",
+      "template": "a0a0d0382526e73dc8d01ae7a32573acb3e53ccac6267d5f1cad1f9d7e9f075e"
     },
     "descriptorRevision": 1,
     "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
@@ -80,10 +80,10 @@
     "wrapperSha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583"
   },
   "key": {
-    "digest": "4c20902df4f15b33ad8fdcce1d369d4ec5141a67dad30359307d0a8963eedb04",
+    "digest": "6710c044b3c8e665b0d8459678ea1073acb4c2c11564ac25a2b37d50f5aefeef",
     "identity": {
       "catalogKey": "1.8.8",
-      "catalogSnapshotId": "2026-08-10-final",
+      "catalogSnapshotId": "2026-08-10-phase7",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
       },
@@ -91,8 +91,8 @@
         "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
         "descriptor": "b887a9a8c1b44892a3df41b5ba739d20036a1b17a13cd6fd92eb762a19154b28",
         "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-        "profile": "bb8bb784051f30911adb51b86f83c1e7d152093f6b6f3b9bc5464e65ac3d5759",
-        "template": "c6ef694ce5e323081973cde551bbaf0d7ebc5ccd2effa23be69ed37d1adcdf8a"
+        "profile": "02fc1d843e558f117c2bfb223ba596718a8af4aa7c18d3d1e5b39b5415f4a2fc",
+        "template": "a0a0d0382526e73dc8d01ae7a32573acb3e53ccac6267d5f1cad1f9d7e9f075e"
       },
       "descriptorId": "spigot-legacy",
       "descriptorRevision": 1,
