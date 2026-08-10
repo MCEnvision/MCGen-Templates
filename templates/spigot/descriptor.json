@@ -1,0 +1,116 @@
+{
+  "$schema": "urn:mcgen:schema:template-descriptor:1",
+  "schemaVersion": 1,
+  "id": "spigot",
+  "revision": 1,
+  "status": "blocked",
+  "blockers": [
+    {
+      "code": "plugin-build-evidence",
+      "reason": "Spigot API and server boundary compilation evidence is pending.",
+      "evidence": ["catalog/2026-08-10-r4/index.json"]
+    }
+  ],
+  "category": "plugin",
+  "platforms": ["spigot"],
+  "profileRefs": ["spigot"],
+  "capabilities": [
+    "commands",
+    "permissions",
+    "dependencies",
+    "advanced-overrides"
+  ],
+  "fieldGroups": [
+    {
+      "id": "identity",
+      "label": "Plugin identity",
+      "order": 0,
+      "fieldIds": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class"
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "id": "project-name",
+      "type": "string",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "Example Plugin"
+    },
+    {
+      "id": "project-id",
+      "type": "string",
+      "label": "Plugin id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "example-plugin"
+    },
+    {
+      "id": "project-version",
+      "type": "version",
+      "label": "Plugin version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "1.0.0"
+    },
+    {
+      "id": "main-class",
+      "type": "string",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "ExamplePlugin"
+    }
+  ],
+  "conditions": [],
+  "files": [
+    {
+      "source": "templates/shared/README.md.tmpl",
+      "destination": "README.md",
+      "renderer": "text",
+      "includeWhen": "true",
+      "rawOverride": "advanced-only"
+    }
+  ],
+  "renderTargets": [
+    {
+      "id": "spigot-plugin-yml",
+      "path": "src/main/resources/plugin.yml",
+      "format": "yaml",
+      "fieldMappings": [
+        { "fieldId": "project-name", "path": "name", "format": "literal" },
+        { "fieldId": "main-class", "path": "main", "format": "literal" },
+        { "fieldId": "project-version", "path": "version", "format": "version" }
+      ],
+      "required": true
+    }
+  ],
+  "assetSlots": [
+    {
+      "id": "icon",
+      "mediaTypes": ["image/png"],
+      "maxBytes": 1048576,
+      "maxWidth": 512,
+      "maxHeight": 512,
+      "destinations": ["src/main/resources/icon.png"]
+    }
+  ],
+  "rawOperations": {
+    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
+    "canonicalCi": "never-execute",
+    "pathPolicy": "relative-safe"
+  }
+}

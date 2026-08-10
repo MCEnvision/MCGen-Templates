@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:field-metadata:1",
+  "title": "MCGen customization field metadata",
+  "description": "The descriptor backed field contract shared by Simple and Advanced mode.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "label", "modes", "required"],
+  "properties": {
+    "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "type": {
+      "enum": [
+        "string",
+        "boolean",
+        "integer",
+        "number",
+        "enum",
+        "version",
+        "coordinate",
+        "path",
+        "list",
+        "map",
+        "object",
+        "file",
+        "asset",
+        "json",
+        "text"
+      ]
+    },
+    "label": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "description": { "type": "string", "maxLength": 2048 },
+    "help": { "type": "string", "maxLength": 2048 },
+    "modes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["simple", "advanced"] }
+    },
+    "required": { "type": "boolean" },
+    "editable": { "type": "boolean" },
+    "default": {},
+    "defaultPolicy": { "enum": ["literal", "catalog", "derived", "unset"] },
+    "validation": { "$ref": "#/$defs/validation" },
+    "visibleWhen": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "enabledWhen": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "derivedFrom": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "catalogResolver": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+    },
+    "allowCustomUnverified": { "type": "boolean" },
+    "fieldMappings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/mapping" }
+    },
+    "extensions": { "$ref": "urn:mcgen:schema:common:1#/$defs/extensions" }
+  },
+  "$defs": {
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pattern": { "type": "string", "maxLength": 1024 },
+        "minLength": { "type": "integer", "minimum": 0, "maximum": 1048576 },
+        "maxLength": { "type": "integer", "minimum": 1, "maximum": 1048576 },
+        "minimum": { "type": "number" },
+        "maximum": { "type": "number" },
+        "items": { "type": "object" },
+        "allowedValues": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "anyOf": [
+              { "type": "string" },
+              { "type": "number" },
+              { "type": "boolean" }
+            ]
+          }
+        }
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "path", "format"],
+      "properties": {
+        "target": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "path": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "format": {
+          "enum": [
+            "text",
+            "json",
+            "toml",
+            "yaml",
+            "properties",
+            "gradle",
+            "xml"
+          ]
+        },
+        "when": { "type": "string", "minLength": 1, "maxLength": 1024 }
+      }
+    }
+  }
+}

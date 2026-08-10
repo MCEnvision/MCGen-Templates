@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. `main` contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, fourteen authoritative source adapters, immutable snapshots, content-addressed catalog shards, coverage, and drift evidence. It does not yet contain a template family, toolchain profile instance, generated project fixture, published package, or release artifact.
+MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. GitHub completion Phase 4 is active on `envy/phase_4_profiles_templates`. The Phase 4 branch adds versioned profile, descriptor, project specification, PNG asset, safe file operation, and deterministic rendering contracts. `main` remains the last approved release source and does not advertise these unmerged Phase 4 contracts.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 

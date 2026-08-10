@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:toolchain-profile-index:1",
+  "title": "MCGen toolchain profile index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "catalogSnapshot", "profiles"],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:toolchain-profile-index:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "catalogSnapshot": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "sha256"],
+        "properties": {
+          "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "path": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" },
+          "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        }
+      }
+    }
+  }
+}

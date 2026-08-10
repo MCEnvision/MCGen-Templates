@@ -1,0 +1,123 @@
+{
+  "$schema": "urn:mcgen:schema:template-descriptor:1",
+  "schemaVersion": 1,
+  "id": "forge",
+  "revision": 1,
+  "status": "blocked",
+  "blockers": [
+    {
+      "code": "tuple-build-evidence",
+      "reason": "Forge tuples remain discovered until later compilation and artifact inspection gates pass.",
+      "evidence": ["catalog/2026-08-10-r4/index.json"]
+    }
+  ],
+  "category": "mod",
+  "platforms": ["forge"],
+  "profileRefs": ["forge-legacy", "forge-modern"],
+  "capabilities": [
+    "metadata",
+    "mixins",
+    "data-generation",
+    "advanced-overrides"
+  ],
+  "fieldGroups": [
+    {
+      "id": "identity",
+      "label": "Project identity",
+      "order": 0,
+      "fieldIds": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class"
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "id": "project-name",
+      "type": "string",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "Example Mod"
+    },
+    {
+      "id": "project-id",
+      "type": "string",
+      "label": "Project id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "example-mod"
+    },
+    {
+      "id": "project-version",
+      "type": "version",
+      "label": "Project version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "1.0.0"
+    },
+    {
+      "id": "main-class",
+      "type": "string",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "editable": true,
+      "defaultPolicy": "literal",
+      "default": "ExampleMod"
+    }
+  ],
+  "conditions": [],
+  "files": [
+    {
+      "source": "templates/shared/README.md.tmpl",
+      "destination": "README.md",
+      "renderer": "text",
+      "includeWhen": "true",
+      "rawOverride": "advanced-only"
+    }
+  ],
+  "renderTargets": [
+    {
+      "id": "forge-metadata",
+      "path": "src/main/resources/META-INF/mods.toml",
+      "format": "toml",
+      "fieldMappings": [
+        {
+          "fieldId": "project-id",
+          "path": "mods[0].modId",
+          "format": "literal"
+        },
+        {
+          "fieldId": "project-version",
+          "path": "mods[0].version",
+          "format": "version"
+        }
+      ],
+      "required": true
+    }
+  ],
+  "assetSlots": [
+    {
+      "id": "icon",
+      "mediaTypes": ["image/png"],
+      "maxBytes": 1048576,
+      "maxWidth": 512,
+      "maxHeight": 512,
+      "destinations": ["src/main/resources/icon.png"]
+    }
+  ],
+  "rawOperations": {
+    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
+    "canonicalCi": "never-execute",
+    "pathPolicy": "relative-safe"
+  }
+}

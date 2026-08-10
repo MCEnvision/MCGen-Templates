@@ -9,8 +9,8 @@
   "packageManager": "npm@10.9.7",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"schemas/**/*.json\" \"sources/**/*.json\" \"*.json\" \"*.js\"",
-    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"schemas/**/*.json\" \"sources/**/*.json\" \"*.json\" \"*.js\"",
+    "format": "prettier --no-error-on-unmatched-pattern --write \"src/**/*.ts\" \"tests/**/*.ts\" \"schemas/**/*.json\" \"sources/**/*.json\" \"profiles/**/*.json\" \"templates/**/*.json\" \"fixtures/**/*.json\" \"*.json\" \"*.js\"",
+    "format:check": "prettier --no-error-on-unmatched-pattern --check \"src/**/*.ts\" \"tests/**/*.ts\" \"schemas/**/*.json\" \"sources/**/*.json\" \"profiles/**/*.json\" \"templates/**/*.json\" \"fixtures/**/*.json\" \"*.json\" \"*.js\"",
     "lint": "eslint src tests",
     "snapshot:forge": "npm run build --silent && node dist/cli.js snapshot forge",
     "test": "vitest run",

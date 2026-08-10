@@ -1,0 +1,168 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "fabric",
+  "revision": 1,
+  "status": "blocked",
+  "family": "fabric",
+  "category": "mod",
+  "platform": "fabric",
+  "blockers": [
+    {
+      "id": "fabric-intersection-evidence",
+      "reason": "Fabric Loader, Loom, mappings, Fabric API, language adapters, Java, and wrapper intersections are not yet build verified.",
+      "evidence": [
+        "sources/snapshots/fabric/2026-08-10-r2.json",
+        "sources/snapshots/gradle/2026-08-10-r2.json"
+      ],
+      "resolution": "Verify representative old, current, and snapshot intersections, then split structural boundaries."
+    }
+  ],
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/fabric/index.json",
+    "indexSha256": "a4d6e6fca32bdda24de822aef37eac78f197f951399078d5ef9db1adea861d12",
+    "selectors": [
+      {
+        "platform": "fabric",
+        "keyKind": "minecraft",
+        "keys": { "mode": "all-shards" },
+        "components": [
+          {
+            "component": "fabric",
+            "coordinatePrefix": "net.fabricmc:fabric-loader:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "fabric.d5f0718a2c465a479a633101",
+            "path": "sources/snapshots/fabric/2026-08-10-r2.json",
+            "sha256": "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "fabric-loader",
+      "coordinate": "net.fabricmc:fabric-loader",
+      "version": "selected-from-catalog",
+      "range": "catalog-key-compatible",
+      "required": true,
+      "catalogComponent": "fabric-loader"
+    },
+    {
+      "id": "fabric-loom",
+      "coordinate": "net.fabricmc:fabric-loom",
+      "version": "selected-from-catalog",
+      "range": "boundary-selected",
+      "required": true,
+      "catalogComponent": "fabric-loom"
+    },
+    {
+      "id": "fabric-api",
+      "coordinate": "net.fabricmc.fabric-api:fabric-api",
+      "version": "selected-from-catalog",
+      "range": "catalog-key-compatible",
+      "required": false,
+      "catalogComponent": "fabric-api"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 17,
+    "language": 17,
+    "bytecode": 17
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "8.8",
+    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "dsl": "kotlin",
+    "plugins": [
+      {
+        "id": "fabric-loom",
+        "version": "selected-from-catalog",
+        "repositoryIds": ["fabric"]
+      }
+    ],
+    "properties": [{ "name": "minecraftVersion", "value": "catalog-selected" }],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    { "id": "fabric", "url": "https://maven.fabricmc.net/" },
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
+  ],
+  "mappings": {
+    "strategy": "named",
+    "components": [
+      {
+        "id": "yarn",
+        "version": "selected-from-catalog",
+        "coordinate": "net.fabricmc:yarn"
+      },
+      {
+        "id": "official-mappings",
+        "version": "selected-from-catalog",
+        "coordinate": "net.minecraft:mappings"
+      }
+    ]
+  },
+  "metadata": {
+    "format": "fabric-mod-json",
+    "files": ["src/main/resources/fabric.mod.json"],
+    "fieldMappings": [
+      { "field": "project.id", "path": "id", "required": true },
+      { "field": "project.name", "path": "name", "required": true },
+      { "field": "project.version", "path": "version", "required": true },
+      {
+        "field": "project.mainClass",
+        "path": "entrypoints.main[0]",
+        "required": true
+      }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
+    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
+    "testRoots": [{ "name": "test", "path": "src/test/java" }]
+  },
+  "languages": ["java", "kotlin"],
+  "features": [
+    { "id": "mixins", "support": "conditional" },
+    { "id": "access-wideners", "support": "conditional" },
+    { "id": "data-generation", "support": "conditional" },
+    { "id": "fabric-language-kotlin", "support": "conditional" }
+  ],
+  "incompatibilities": [
+    {
+      "id": "snapshot-mappings",
+      "condition": "selected catalog key is a snapshot without a resolved mapping",
+      "reason": "Fabric mappings and Loom support are independent catalog dimensions.",
+      "resolution": "Keep the selection custom-unverified until the exact mapping is resolved."
+    }
+  ],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["build/libs/*.jar"],
+    "inspection": ["fabric.mod.json", "META-INF/MANIFEST.MF"]
+  },
+  "artifact": {
+    "patterns": ["build/libs/*.jar"],
+    "metadataPaths": ["fabric.mod.json"],
+    "requiredEntries": ["META-INF/MANIFEST.MF"]
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "Split a new profile when Loom or metadata structure changes."
+  }
+}

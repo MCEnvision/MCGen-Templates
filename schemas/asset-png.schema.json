@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:asset-png:1",
+  "title": "MCGen PNG asset reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "id",
+    "mediaType",
+    "sha256",
+    "bytes",
+    "width",
+    "height",
+    "path",
+    "alpha"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:asset-png:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "mediaType": { "const": "image/png" },
+    "sha256": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "bytes": { "type": "integer", "minimum": 33, "maximum": 16777216 },
+    "width": { "type": "integer", "minimum": 1, "maximum": 8192 },
+    "height": { "type": "integer", "minimum": 1, "maximum": 8192 },
+    "path": { "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath" },
+    "alpha": { "type": "boolean" }
+  }
+}

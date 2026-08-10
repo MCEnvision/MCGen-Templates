@@ -1,0 +1,129 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "bungeecord",
+  "revision": 1,
+  "status": "blocked",
+  "family": "bungeecord",
+  "category": "proxy",
+  "platform": "bungeecord",
+  "blockers": [
+    {
+      "id": "bungeecord-api-evidence",
+      "reason": "BungeeCord API and historical Java or metadata boundaries need compilation evidence.",
+      "evidence": ["sources/snapshots/bungeecord/2026-08-10-r2.json"],
+      "resolution": "Verify API lines and preserve metadata changes as separate profiles."
+    }
+  ],
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/bungeecord/index.json",
+    "indexSha256": "abaddac70549530e50e7137bf5f3d149c1dcd62243a541cfbe48e45cdba14d21",
+    "selectors": [
+      {
+        "platform": "bungeecord",
+        "keyKind": "api",
+        "keys": { "mode": "all-shards" },
+        "components": [
+          {
+            "component": "bungeecord-api",
+            "coordinatePrefix": "net.md-5:bungeecord-api:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "bungeecord.bd6cb074e1fb40ebddd0f0b6",
+            "path": "sources/snapshots/bungeecord/2026-08-10-r2.json",
+            "sha256": "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "bungeecord-api",
+      "coordinate": "net.md-5:bungeecord-api",
+      "version": "selected-from-catalog",
+      "range": "api-key-compatible",
+      "required": true,
+      "catalogComponent": "bungeecord-api"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 8,
+    "language": 8,
+    "bytecode": 8
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "7.6.4",
+    "wrapperSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+    "dsl": "groovy",
+    "plugins": [
+      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
+    ],
+    "properties": [],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    {
+      "id": "bungeecord",
+      "url": "https://oss.sonatype.org/content/repositories/snapshots/"
+    },
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
+  ],
+  "mappings": { "strategy": "none", "components": [] },
+  "metadata": {
+    "format": "bungeecord-plugin-yml",
+    "files": ["src/main/resources/plugin.yml"],
+    "fieldMappings": [
+      { "field": "project.name", "path": "name", "required": true },
+      { "field": "project.mainClass", "path": "main", "required": true },
+      { "field": "project.version", "path": "version", "required": true },
+      { "field": "project.author", "path": "author", "required": false }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
+    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
+    "testRoots": [{ "name": "test", "path": "src/test/java" }]
+  },
+  "languages": ["java", "kotlin"],
+  "features": [
+    { "id": "commands", "support": "supported" },
+    { "id": "event-listeners", "support": "supported" },
+    { "id": "permissions", "support": "conditional" }
+  ],
+  "incompatibilities": [
+    {
+      "id": "api-history",
+      "condition": "selected BungeeCord API line changes plugin metadata or Java requirements",
+      "reason": "Proxy API compatibility is independent from Minecraft patch versions.",
+      "resolution": "Split a profile at the documented API boundary."
+    }
+  ],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["build/libs/*.jar"],
+    "inspection": ["plugin.yml"]
+  },
+  "artifact": {
+    "patterns": ["build/libs/*.jar"],
+    "metadataPaths": ["plugin.yml"],
+    "requiredEntries": ["plugin.yml"]
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "Resolve the exact BungeeCord API and Java tuple before generation."
+  }
+}

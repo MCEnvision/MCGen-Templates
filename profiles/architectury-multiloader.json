@@ -1,0 +1,180 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "architectury-multiloader",
+  "revision": 1,
+  "status": "blocked",
+  "family": "architectury",
+  "category": "multiloader",
+  "platform": "architectury",
+  "blockers": [
+    {
+      "id": "multiloader-intersection-evidence",
+      "reason": "Architectury targets must prove a common Minecraft, mappings, Fabric, Forge, or NeoForge intersection before generation.",
+      "evidence": [
+        "sources/snapshots/architectury/2026-08-10-r2.json",
+        "catalog/2026-08-10-r4/index.json"
+      ],
+      "resolution": "Verify each selected target set and retain target specific overrides in the resolved ProjectSpec."
+    }
+  ],
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/architectury/index.json",
+    "indexSha256": "e7e50682e25aaac7a7c7a852050c9b39741ea27b1006c982f240587e5560dbcd",
+    "selectors": [
+      {
+        "platform": "architectury",
+        "keyKind": "minecraft",
+        "keys": { "mode": "all-shards" },
+        "components": [
+          {
+            "component": "architectury",
+            "coordinatePrefix": "dev.architectury:architectury:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "architectury.df9f4c866e0c6749913054ad",
+            "path": "sources/snapshots/architectury/2026-08-10-r2.json",
+            "sha256": "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "architectury-plugin",
+      "coordinate": "architectury-plugin",
+      "version": "selected-from-catalog",
+      "range": "catalog-key-compatible",
+      "required": true,
+      "catalogComponent": "architectury"
+    },
+    {
+      "id": "fabric-target",
+      "coordinate": "net.fabricmc:fabric-loader",
+      "version": "target-selected",
+      "range": "intersection-required",
+      "required": false,
+      "catalogComponent": "fabric"
+    },
+    {
+      "id": "forge-target",
+      "coordinate": "net.minecraftforge:forge",
+      "version": "target-selected",
+      "range": "intersection-required",
+      "required": false,
+      "catalogComponent": "forge"
+    },
+    {
+      "id": "neoforge-target",
+      "coordinate": "net.neoforged:neoforge",
+      "version": "target-selected",
+      "range": "intersection-required",
+      "required": false,
+      "catalogComponent": "neoforge"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 17,
+    "language": 17,
+    "bytecode": 17
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "8.8",
+    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "dsl": "groovy",
+    "plugins": [
+      {
+        "id": "architectury-plugin",
+        "version": "selected-from-catalog",
+        "repositoryIds": ["architectury"]
+      }
+    ],
+    "properties": [{ "name": "minecraftVersion", "value": "catalog-selected" }],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    { "id": "architectury", "url": "https://maven.architectury.dev/" },
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
+  ],
+  "mappings": {
+    "strategy": "platform-defined",
+    "components": [
+      {
+        "id": "target-mappings",
+        "version": "target-selected",
+        "coordinate": "target-specific"
+      }
+    ]
+  },
+  "metadata": {
+    "format": "custom",
+    "files": [
+      "common/src/main/resources/META-INF/mods.toml",
+      "fabric/src/main/resources/fabric.mod.json"
+    ],
+    "fieldMappings": [
+      { "field": "project.id", "path": "target.metadata.id", "required": true },
+      {
+        "field": "project.version",
+        "path": "target.metadata.version",
+        "required": true
+      }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [
+      { "name": "common", "path": "common/src/main/java" },
+      { "name": "fabric", "path": "fabric/src/main/java" },
+      { "name": "forge", "path": "forge/src/main/java" }
+    ],
+    "resourceRoots": [
+      { "name": "common", "path": "common/src/main/resources" },
+      { "name": "fabric", "path": "fabric/src/main/resources" },
+      { "name": "forge", "path": "forge/src/main/resources" }
+    ],
+    "testRoots": [{ "name": "common", "path": "common/src/test/java" }]
+  },
+  "languages": ["java", "kotlin"],
+  "features": [
+    { "id": "common-module", "support": "supported" },
+    { "id": "fabric-target", "support": "conditional" },
+    { "id": "forge-target", "support": "conditional" },
+    { "id": "neoforge-target", "support": "conditional" }
+  ],
+  "incompatibilities": [
+    {
+      "id": "cartesian-targets",
+      "condition": "targets have no catalog intersection",
+      "reason": "Independent target versions cannot be combined without evidence.",
+      "resolution": "Keep the target disabled and report the exact missing edge."
+    }
+  ],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["*/build/libs/*.jar"],
+    "inspection": ["common", "fabric", "forge", "neoforge"]
+  },
+  "artifact": {
+    "patterns": ["*/build/libs/*.jar"],
+    "metadataPaths": ["fabric/src/main/resources/fabric.mod.json"],
+    "requiredEntries": ["META-INF/MANIFEST.MF"]
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "Use a single loader family until target intersection evidence exists."
+  }
+}

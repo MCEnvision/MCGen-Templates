@@ -1,0 +1,124 @@
+{
+  "$schema": "urn:mcgen:schema:toolchain-profile:1",
+  "schemaVersion": 1,
+  "id": "spigot",
+  "revision": 1,
+  "status": "blocked",
+  "family": "spigot",
+  "category": "plugin",
+  "platform": "spigot",
+  "blockers": [
+    {
+      "id": "spigot-build-evidence",
+      "reason": "Spigot API and BuildTools provenance need representative compilation and metadata evidence.",
+      "evidence": ["sources/snapshots/spigot/2026-08-10-r2.json"],
+      "resolution": "Verify API, Java, and repository boundaries before enabling generation."
+    }
+  ],
+  "catalog": {
+    "snapshotId": "2026-08-10-r4",
+    "indexPath": "catalog/2026-08-10-r4/platforms/spigot/index.json",
+    "indexSha256": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+    "selectors": [
+      {
+        "platform": "spigot",
+        "keyKind": "minecraft",
+        "keys": { "mode": "all-shards" },
+        "components": [
+          {
+            "component": "spigot",
+            "coordinatePrefix": "org.spigot:spigot-api:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "snapshotId": "spigot.d3e7e6031437b0eb7447a6df",
+            "path": "sources/snapshots/spigot/2026-08-10-r2.json",
+            "sha256": "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+          }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "spigot-api",
+      "coordinate": "org.spigotmc:spigot-api",
+      "version": "selected-from-catalog",
+      "range": "catalog-key-compatible",
+      "required": true,
+      "catalogComponent": "spigot"
+    }
+  ],
+  "java": {
+    "distribution": "temurin",
+    "runtime": 8,
+    "language": 8,
+    "bytecode": 8
+  },
+  "build": {
+    "system": "gradle",
+    "wrapper": "7.6.4",
+    "wrapperSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+    "dsl": "groovy",
+    "plugins": [
+      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
+    ],
+    "properties": [],
+    "jvmArguments": [],
+    "sourceSets": [],
+    "tasks": [],
+    "publishing": false
+  },
+  "repositories": [
+    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
+  ],
+  "mappings": { "strategy": "none", "components": [] },
+  "metadata": {
+    "format": "plugin-yml",
+    "files": ["src/main/resources/plugin.yml"],
+    "fieldMappings": [
+      { "field": "project.name", "path": "name", "required": true },
+      { "field": "project.mainClass", "path": "main", "required": true },
+      { "field": "project.version", "path": "version", "required": true }
+    ]
+  },
+  "sourceLayout": {
+    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
+    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
+    "testRoots": [{ "name": "test", "path": "src/test/java" }]
+  },
+  "languages": ["java"],
+  "features": [
+    { "id": "commands", "support": "supported" },
+    { "id": "permissions", "support": "supported" },
+    { "id": "libraries", "support": "conditional" }
+  ],
+  "incompatibilities": [
+    {
+      "id": "buildtools",
+      "condition": "selected Spigot artifact is not a published API coordinate",
+      "reason": "BuildTools generated artifacts require a separately reviewed acquisition path.",
+      "resolution": "Use the published API coordinate or a verified BuildTools profile."
+    }
+  ],
+  "verification": {
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "artifactPatterns": ["build/libs/*.jar"],
+    "inspection": ["plugin.yml"]
+  },
+  "artifact": {
+    "patterns": ["build/libs/*.jar"],
+    "metadataPaths": ["plugin.yml"],
+    "requiredEntries": ["plugin.yml"]
+  },
+  "fallback": {
+    "policy": "blocked",
+    "migration": "Resolve the API or BuildTools profile with pinned evidence."
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "urn:mcgen:schema:template-index:1",
+  "schemaVersion": 1,
+  "profilesIndex": "profiles/index.json",
+  "descriptors": [
+    {
+      "id": "architectury",
+      "path": "templates/architectury/descriptor.json",
+      "sha256": "52678fa8ca0583a2a1f752309e49ec895885d092f0e447d1767819e36ccf129e"
+    },
+    {
+      "id": "bukkit",
+      "path": "templates/bukkit/descriptor.json",
+      "sha256": "c164f242b547772f6e56b79a425720262d95df2d7d614584b63d5ec713658af6"
+    },
+    {
+      "id": "bungeecord",
+      "path": "templates/bungeecord/descriptor.json",
+      "sha256": "088a4fa422abeb20f75f63a4fa20e1916fa285917d669645380d035650842665"
+    },
+    {
+      "id": "fabric",
+      "path": "templates/fabric/descriptor.json",
+      "sha256": "13594a4e48e7bcb1815cdfe417e32af50cc636384106aa9ab2b1e0ab0a412d8d"
+    },
+    {
+      "id": "forge",
+      "path": "templates/forge/descriptor.json",
+      "sha256": "5e503fae967bdb7d11fd8eb2ae0a6f6db66d675eb39518c49c24cd16a17a5897"
+    },
+    {
+      "id": "multiloader",
+      "path": "templates/multiloader/descriptor.json",
+      "sha256": "9e4bf52a5669ff8e318c1904c9ae036eb604fd3ddb547e8e99ec23359dd7e9b9"
+    },
+    {
+      "id": "neoforge",
+      "path": "templates/neoforge/descriptor.json",
+      "sha256": "241d559684b889530ccbe70532b0b9cf0e63a7df9d197f4e01f804ff84da0ce2"
+    },
+    {
+      "id": "paper-modern",
+      "path": "templates/paper/descriptor-modern.json",
+      "sha256": "c56f42be92a9831a89c0ce42714ce07145844a97e0244c7f97ae1067a45c2c98"
+    },
+    {
+      "id": "paper-traditional",
+      "path": "templates/paper/descriptor-traditional.json",
+      "sha256": "60a0bce26f9355d041584ac462c5ed6f8a32bcda4abb210d44585bbcf94930bd"
+    },
+    {
+      "id": "spigot",
+      "path": "templates/spigot/descriptor.json",
+      "sha256": "4ff51774a32e68b9643cbfc95758d36d19dea968fcbe260ea1044ce3318b7dbe"
+    },
+    {
+      "id": "sponge",
+      "path": "templates/sponge/descriptor.json",
+      "sha256": "47db96fc2e1367b4218e8ce86ba27e7297b2476958680921e90f9e44a84bbd71"
+    },
+    {
+      "id": "velocity",
+      "path": "templates/velocity/descriptor.json",
+      "sha256": "e3a1e0f9dc3136523f5f1aca1a1e4d2622a85a30b23549123df4ff43265d5539"
+    }
+  ]
+}
