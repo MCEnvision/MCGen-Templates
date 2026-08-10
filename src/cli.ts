@@ -15,6 +15,17 @@ import { fetchDerivedResource, fetchResource } from "./fetch-resource.js";
 import { createSchemaRegistry, repositoryRoot } from "./schema-registry.js";
 import { loadSourceDefinition } from "./source-definition.js";
 import {
+  buildFixtureManifest,
+  type FixtureManifestInput,
+} from "./fixture-generator.js";
+import {
+  buildMatrixPlan,
+  validateMatrixPlan,
+  type MatrixPlanInput,
+} from "./matrix-planner.js";
+import { validateEvidenceRecord } from "./evidence.js";
+import { buildQueuePlan, type QueueEvent } from "./phase5-queue.js";
+import {
   requireSourceAdapter,
   requireSourceAdapterByAdapterId,
 } from "./source-adapters.js";
@@ -149,6 +160,109 @@ function requireCatalogDocumentPath(path: string): string {
     throw new Error("catalog report output must be a json file under catalog");
   }
   return absolute;
+}
+
+function requirePhase5DocumentPath(path: string): string {
+  const absolute = requireRepositoryPath(path);
+  const repositoryRelative = relative(repositoryRoot, absolute);
+  if (
+    !repositoryRelative.startsWith("verification/phase5/") ||
+    !repositoryRelative.endsWith(".json")
+  )
+    throw new Error(
+      "phase 5 output must be a json file under verification/phase5",
+    );
+  return absolute;
+}
+
+async function readJson(path: string): Promise<unknown> {
+  return JSON.parse(
+    await readFile(requireRepositoryPath(path), "utf8"),
+  ) as unknown;
+}
+
+async function writePhase5Document(
+  path: string,
+  document: unknown,
+): Promise<void> {
+  const outputPath = requirePhase5DocumentPath(path);
+  await requireUnusedPath(outputPath);
+  const failures = documentFailures(
+    await createSchemaRegistry(),
+    outputPath,
+    document,
+  );
+  if (failures.length)
+    throw new Error(
+      `phase 5 document validation failed\n${failures.join("\n")}`,
+    );
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, canonicalJson(document), {
+    encoding: "utf8",
+    flag: "wx",
+  });
+}
+
+async function phase5FixtureManifest(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output)
+    throw new Error("phase5 fixture-manifest requires --input and --output");
+  const manifest = buildFixtureManifest(
+    (await readJson(input)) as FixtureManifestInput,
+  );
+  await writePhase5Document(output, manifest);
+  process.stdout.write(
+    `generated ${manifest.fixtures.length} phase 5 fixtures\n`,
+  );
+}
+
+async function phase5MatrixPlan(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  if (!input || !output)
+    throw new Error("phase5 matrix-plan requires --input and --output");
+  const plan = buildMatrixPlan((await readJson(input)) as MatrixPlanInput);
+  const failures = validateMatrixPlan(plan);
+  if (failures.length)
+    throw new Error(`matrix plan is invalid\n${failures.join("\n")}`);
+  await writePhase5Document(output, plan);
+  process.stdout.write(
+    `planned ${plan.tuples.length} phase 5 tuples in ${plan.shardCount} shards\n`,
+  );
+}
+
+async function phase5ValidateEvidence(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  if (!input) throw new Error("phase5 validate-evidence requires --input");
+  const document = (await readJson(input)) as Parameters<
+    typeof validateEvidenceRecord
+  >[0];
+  const failures = validateEvidenceRecord(document, {
+    requireBuildAndArtifact:
+      document.status === "verified" || document.status === "legacy-verified",
+  });
+  if (failures.length)
+    throw new Error(`evidence is invalid\n${failures.join("\n")}`);
+  process.stdout.write("validated phase 5 evidence\n");
+}
+
+async function phase5Queue(args: readonly string[]): Promise<void> {
+  const input = option(args, "--input");
+  const output = option(args, "--output");
+  const shardCount = Number(option(args, "--shard-count"));
+  const shardIndex = Number(option(args, "--shard-index"));
+  if (!input || !output)
+    throw new Error("phase5 queue requires --input and --output");
+  const plan = buildQueuePlan({
+    event: (await readJson(input)) as QueueEvent,
+    shardCount,
+    shardIndex,
+  });
+  await writePhase5Document(output, plan);
+  process.stdout.write(
+    `planned ${plan.tupleIds.length} phase 5 queue tuples\n`,
+  );
 }
 
 async function validate(args: readonly string[]): Promise<void> {
@@ -432,8 +546,24 @@ async function main(): Promise<void> {
     await generateCatalogDrift(args);
     return;
   }
+  if (command === "phase5" && subject === "fixture-manifest") {
+    await phase5FixtureManifest(args);
+    return;
+  }
+  if (command === "phase5" && subject === "matrix-plan") {
+    await phase5MatrixPlan(args);
+    return;
+  }
+  if (command === "phase5" && subject === "validate-evidence") {
+    await phase5ValidateEvidence(args);
+    return;
+  }
+  if (command === "phase5" && subject === "queue") {
+    await phase5Queue(args);
+    return;
+  }
   throw new Error(
-    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>",
+    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
   );
 }
 

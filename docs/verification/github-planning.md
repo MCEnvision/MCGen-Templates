@@ -122,6 +122,4 @@ After merge:
 
 ## Completion Gate
 
-Phase 2 is complete only when no active repository task exists solely in chat or an unlinked branch, no stale planning or wiki state remains, every later GitHub phase has explicit work and evidence gates, required checks pass on `main`, and `phase-2-github-planning` identifies the merged Phase 2 commit.
-
-Until those post merge conditions pass, this record describes the Phase 2 contract and verification procedure rather than a completion claim.
+Phase 2 is complete. No active repository task remains solely in chat or an unlinked branch, no stale planning or wiki state remains, every later GitHub phase has explicit work and evidence gates, required checks passed on `main`, and `phase-2-github-planning` identifies the merged Phase 2 commit. Later phases must retain these planning and documentation controls.

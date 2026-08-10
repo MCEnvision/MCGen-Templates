@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:matrix-plan:1",
+  "title": "MCGen sharded tuple matrix plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "shardCount",
+    "tuples",
+    "shards",
+    "digest"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:matrix-plan:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "matrix-plan" },
+    "shardCount": { "type": "integer", "minimum": 1 },
+    "tuples": { "type": "array", "items": { "$ref": "#/$defs/tuple" } },
+    "shards": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/shard" }
+    },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+  },
+  "$defs": {
+    "tuple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "status",
+        "blockers",
+        "identity",
+        "profileRevision",
+        "descriptorRevision"
+      ],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "status": {
+          "enum": [
+            "verified",
+            "legacy-verified",
+            "discovered",
+            "blocked",
+            "failed",
+            "skipped",
+            "queued"
+          ]
+        },
+        "blockers": { "type": "array", "items": { "type": "string" } },
+        "identity": {
+          "$ref": "urn:mcgen:schema:phase5-common:1#/$defs/tupleIdentity"
+        },
+        "profileRevision": { "type": "integer", "minimum": 1 },
+        "descriptorRevision": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "shard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "tuples", "digest"],
+      "properties": {
+        "index": { "type": "integer", "minimum": 0 },
+        "tuples": { "type": "array", "items": { "$ref": "#/$defs/tuple" } },
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    }
+  }
+}

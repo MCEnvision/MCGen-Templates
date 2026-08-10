@@ -2,7 +2,7 @@
 
 MCGen Templates is the canonical public source for the versioned template pack and compatibility catalog used by MCGen.
 
-The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is complete. The verified signed tag `phase-3-authoritative-sources-catalog` identifies the merged source coverage, immutable snapshots, and deterministic catalog evidence on `main`. GitHub completion Phase 4 is complete and identified by the signed tag `phase-4-profiles-templates-customization`. It adds reviewed profile, descriptor, customization, asset, and deterministic rendering contracts. Phase 5 is the next gate for generated project compilation and artifact evidence.
+The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is complete. The verified signed tag `phase-3-authoritative-sources-catalog` identifies the merged source coverage, immutable snapshots, and deterministic catalog evidence on `main`. GitHub completion Phase 4 is complete and identified by the signed tag `phase-4-profiles-templates-customization`. It adds reviewed profile, descriptor, customization, asset, and deterministic rendering contracts. GitHub completion Phase 5 is active on `envy/phase_5_build_verification`, adding exact fixture, matrix, build, artifact, reproducibility, evidence, and queue contracts. No tuple is build verified until its exact evidence passes.
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
@@ -48,7 +48,7 @@ tests/        Unit, parser, schema, rendering, and repository-document verificat
 docs/         Architecture, data, security, contribution, verification, and release guidance.
 ```
 
-`catalog/` contains immutable discovered-source evidence. Phase 4 adds declarative profiles, descriptors, and contract fixtures without claiming that discovered catalog components are build-verified. Build and artifact execution remains the Phase 5 gate.
+`catalog/` contains immutable discovered-source evidence. Phase 4 adds declarative profiles, descriptors, and contract fixtures without claiming that discovered catalog components are build-verified. Phase 5 owns exact fixture, build, artifact, reproducibility, and evidence verification.
 
 ## Development
 
@@ -90,6 +90,7 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 - [Template families](docs/architecture/template-families.md)
 - [Template pack contract verification](docs/verification/template-pack-contracts.md)
 - [Phase 4 contract verification](docs/verification/phase4-contracts.md)
+- [Phase 5 build and artifact contracts](docs/verification/phase5-build-contracts.md)
 - [GitHub governance verification](docs/verification/github-foundation.md)
 - [GitHub planning verification](docs/verification/github-planning.md)
 - [Security policy](.github/SECURITY.md)

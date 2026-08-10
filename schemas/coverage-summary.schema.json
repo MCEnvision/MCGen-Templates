@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:coverage-summary:1",
+  "title": "MCGen public tuple coverage summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "catalogSnapshotId",
+    "generatedAt",
+    "matrixDigest",
+    "total",
+    "counts",
+    "byFamily",
+    "blockers",
+    "evidenceDigests",
+    "digest"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:coverage-summary:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "coverage-summary" },
+    "catalogSnapshotId": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "matrixDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "total": { "type": "integer", "minimum": 0 },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verified",
+        "legacy-verified",
+        "discovered",
+        "blocked",
+        "failed",
+        "skipped",
+        "queued"
+      ],
+      "properties": {
+        "verified": { "type": "integer", "minimum": 0 },
+        "legacy-verified": { "type": "integer", "minimum": 0 },
+        "discovered": { "type": "integer", "minimum": 0 },
+        "blocked": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 },
+        "queued": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "byFamily": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "family",
+          "total",
+          "verified",
+          "legacyVerified",
+          "unresolved"
+        ],
+        "properties": {
+          "family": { "type": "string" },
+          "total": { "type": "integer", "minimum": 0 },
+          "verified": { "type": "integer", "minimum": 0 },
+          "legacyVerified": { "type": "integer", "minimum": 0 },
+          "unresolved": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tupleId", "status", "reasons"],
+        "properties": {
+          "tupleId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+          "status": {
+            "enum": [
+              "verified",
+              "legacy-verified",
+              "discovered",
+              "blocked",
+              "failed",
+              "skipped",
+              "queued"
+            ]
+          },
+          "reasons": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "evidenceDigests": {
+      "type": "array",
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+    },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+  }
+}

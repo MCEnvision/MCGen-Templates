@@ -211,7 +211,7 @@ Make GitHub the synchronized execution and evidence surface for all repository o
 
 ## Status
 
-Phase 1 is merged and identified by the verified signed annotated tag `phase-1-github-governance-reconciliation`. Phase 2 is complete only when the planning controls and documentation in this section are merged, post merge checks pass, the Project and issue state are reconciled, the wiki is updated, and the verified signed annotated tag `phase-2-github-planning` identifies the approved `main` commit. Before that tag exists, Phase 2 remains the active GitHub completion gate.
+Phase 1 is merged and identified by the verified signed annotated tag `phase-1-github-governance-reconciliation`. Phase 2 is complete and identified by the verified signed annotated tag `phase-2-github-planning`. Its planning controls and documentation are merged, post merge checks passed, the Project and issue state were reconciled, and the wiki navigation was published. Later phases must preserve this planning contract.
 
 ## Workstreams
 
@@ -533,7 +533,7 @@ Prove that every tuple advertised as verified generates, compiles, packages, and
 
 ## Status
 
-Pending Phase 4 families and profiles.
+Active on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. Issue [23](https://github.com/MCEnvision/MCGen-Templates/issues/23) is in progress. The branch adds deterministic fixture, matrix, bounded build, artifact, reproducibility, evidence, coverage, and queue contracts. No Phase 5 tuple is advertised as verified until a complete generated project build, artifact inspection, and reproducibility record exists for its exact identity.
 
 ## Verification levels
 

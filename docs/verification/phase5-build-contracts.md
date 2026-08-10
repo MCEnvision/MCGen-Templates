@@ -1,0 +1,55 @@
+# Phase 5 Build and Artifact Contracts
+
+Phase 5 is active on `envy/phase_5_build_verification` from the verified Phase 4 completion commit. It proves exact generated project tuples. The branch provides deterministic fixture and matrix planning, isolated bounded command execution, real zip artifact parsing, reproducibility comparison, exact evidence invalidation, public coverage summaries, and queue plans. No tuple is marked Verified until a complete generated project build, artifact inspection, and reproducibility record is captured for its exact identity.
+
+## Exact tuple identity
+
+Every matrix tuple includes the family, descriptor revision, profile revision, catalog snapshot and key, exact component coordinates, fixture, Java distribution and runtime, wrapper version and checksum, mapping digest, source evidence digests, and verification procedure digest. The canonical JSON digest of that identity is the evidence key. A changed source snapshot, profile, descriptor, mapping, wrapper, Java checksum, generator, or procedure produces a new key or invalidates the previous record.
+
+## Fixture manifests
+
+`src/fixture-generator.ts` produces stable fixture manifests for each tuple. The matrix includes minimal Java, minimal Kotlin when supported, maximum structured customization, alpha, beta, release candidate, snapshot, build metadata, custom PNG, optional feature, raw override, and multiloader target cases where applicable. Raw override fixtures are preserved as input and are never executable.
+
+## Matrix planning
+
+`src/matrix-planner.ts` expands only explicit catalog keys and component versions supplied by the caller. All shard assignment is deterministic from the exact tuple digest. Blocked profiles and descriptors remain blocked with their reasons. The planner never promotes a discovered tuple to Verified and has a bounded tuple count and shard count.
+
+## Build runner
+
+`src/build-runner.ts` models the exact profile commands and limits. Commands are passed as executable and argument arrays, never as a shell string. Canonical builds require an isolated clean directory, a pinned wrapper checksum, bounded output, bounded disk and time limits, bounded retries, and the `never-execute` raw override policy. A runner receives an injected executor so the contract can be tested without executing repository content.
+
+## Artifact inspection
+
+`src/artifact-inspector.ts` checks artifact naming, required entries, metadata syntax and identity values, entrypoint classes, resource namespaces, PNG icons, duplicate and unsafe paths, local build output, logs, caches, and obvious credentials. The report stores only digests and bounded summaries suitable for public coverage output.
+
+## Evidence and coverage
+
+`src/evidence.ts` creates exact tuple evidence and checks reuse against every invalidation input. `src/coverage-summary.ts` creates a public summary with status counts, family coverage, blockers, matrix digest, and evidence digests without exposing local paths or secret material. Evidence records are reusable only when their complete content addressed key and generator digest match.
+
+## Verification commands
+
+Run the normal repository gate after changing these contracts.
+
+```text
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run validate
+```
+
+Profile and descriptor records that do not yet have exact catalog and toolchain evidence remain explicitly blocked or discovered. The Phase 5 implementation must never turn a discovered value or a synthetic test into Verified status.
+
+The available deterministic commands are:
+
+```bash
+npm run phase5:fixture -- --input verification/phase5/fixture-input.json --output verification/phase5/fixture-manifest.json
+npm run phase5:matrix -- --input verification/phase5/matrix-input.json --output verification/phase5/matrix-plan.json
+npm run phase5:evidence -- --input verification/phase5/tuple-evidence.json
+npm run phase5:queue -- --input verification/phase5/queue-event.json --output verification/phase5/queue-plan.json --shard-count 4 --shard-index 0
+```
+
+The input documents are reviewed repository data, not user supplied shell commands. Raw Advanced build overrides remain validate only and are never passed to the executor.
+
+The thin `phase 5 tuple verification` workflow runs the deterministic contract gate on boundary changes, main updates, and the weekly scheduled audit. `phase5-queue.ts` keeps changed boundaries, new tuples, invalidation, scheduled audits, and transient recovery as separate bounded queues with deterministic shard assignment and cancellation keys. Real tuple execution remains limited to profiles with reviewed exact commands and complete upstream evidence.
