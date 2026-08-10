@@ -2,7 +2,7 @@
 
 ## Current Status
 
-No template-pack release exists yet. Phase 6 implementation is merged and tagged as `phase-6-pack-publication`. The deterministic pack builder and release evidence contract are available. Publication remains gated until the first pack artifact is generated from approved `main`, all release assets and attestations verify, offline consumers resolve representative tuples, rollback is tested, and the owner approves publication.
+Phase 6 implementation is merged and tagged as `phase-6-pack-publication`. The deterministic pack builder, two clean checkout release workflow, release evidence contract, and offline verifier are available. The first semantic pack release remains gated until the release workflow completes, remote assets and attestations verify, offline consumers resolve representative tuples, rollback is tested, and the owner approves publication.
 
 ## Release Identity
 
@@ -46,11 +46,16 @@ Before publication:
 5. Inspect packaged metadata, entrypoints, resources, icons, mixins, access files, versions, and artifact names.
 6. Verify the signed tag targets the approved merged `main` commit.
 7. Generate checksums, source manifest, SBOM, and supported attestations.
-8. Publish the immutable release.
-9. Verify all assets, links, attestations, catalog references, and offline retrieval after publication.
+8. Publish the immutable release through the tag only release workflow.
+9. Download every remote asset and run `node scripts/verify-pack-offline.mjs` without network access.
+10. Verify all assets, links, attestations, catalog references, and offline retrieval after publication.
 
 ## Rollback and Revocation
 
 Do not rewrite or reuse a published tag. A defective release is marked unsafe in the catalog and release notes, then superseded by a new release. Clients retain explicit pins but must receive a clear warning or block when a security or supply-chain issue requires it.
 
 Artifact mutation or missing upstream content quarantines affected tuples without deleting historical evidence.
+
+## Release workflow
+
+Create and push a signed annotated semantic version tag only after the approved `main` commit contains the release workflow. The workflow accepts an existing tag, checks that GitHub reports its annotated tag signature as valid, builds from two clean checkouts, and compares every generated release document before publication. It creates a draft release, attests the archive, uploads the archive and evidence, downloads the remote assets, runs the offline verifier, and publishes the draft only after those checks pass. A failed publication leaves the draft and the existing release history unchanged.

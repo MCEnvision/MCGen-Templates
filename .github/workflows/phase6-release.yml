@@ -1,0 +1,300 @@
+name: phase 6 immutable release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: existing signed semantic version tag
+        required: true
+        type: string
+
+concurrency:
+  group: phase6-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build and verify release candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: validate tag input
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: '[[ "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]'
+
+      - name: checkout first clean copy
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+          fetch-depth: 0
+          path: checkout-a
+
+      - name: checkout second clean copy
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+          fetch-depth: 0
+          path: checkout-b
+
+      - name: setup node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.13.0
+          cache: npm
+          cache-dependency-path: checkout-a/package-lock.json
+
+      - name: install first copy
+        working-directory: checkout-a
+        run: npm ci
+
+      - name: install second copy
+        working-directory: checkout-b
+        run: npm ci
+
+      - name: verify first clean copy
+        working-directory: checkout-a
+        run: npm run verify
+
+      - name: verify second clean copy
+        working-directory: checkout-b
+        run: npm run verify
+
+      - name: verify reviewed phase 5 evidence in first copy
+        working-directory: checkout-a
+        run: |
+          backup=$(mktemp -d)
+          cp -a verification/phase5/evidence "${backup}/evidence"
+          find verification/phase5/evidence -type f -name '*.json' -delete
+          npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions --output-dir verification/phase5/evidence
+          node --input-type=module -e 'import { readdir, readFile } from "node:fs/promises"; for (const name of await readdir("verification/phase5/evidence")) { const value = JSON.parse(await readFile(`verification/phase5/evidence/${name}`, "utf8")); if (value.status !== "verified") throw new Error(`${name} is not verified`); }'
+          generated_at=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/audit.json", "utf8")); process.stdout.write(value.generatedAt);')
+          npm run phase5:audit -- --output verification/phase5/release-audit.json --generated-at "${generated_at}"
+          node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/release-audit.json", "utf8")); if (value.status !== "verified") throw new Error("phase 5 release audit is not verified");'
+          rm -rf verification/phase5/evidence
+          mv "${backup}/evidence" verification/phase5/evidence
+          rm -rf "${backup}" verification/phase5/release-audit.json
+
+      - name: verify reviewed phase 5 evidence in second copy
+        working-directory: checkout-b
+        run: |
+          backup=$(mktemp -d)
+          cp -a verification/phase5/evidence "${backup}/evidence"
+          find verification/phase5/evidence -type f -name '*.json' -delete
+          npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions --output-dir verification/phase5/evidence
+          node --input-type=module -e 'import { readdir, readFile } from "node:fs/promises"; for (const name of await readdir("verification/phase5/evidence")) { const value = JSON.parse(await readFile(`verification/phase5/evidence/${name}`, "utf8")); if (value.status !== "verified") throw new Error(`${name} is not verified`); }'
+          generated_at=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/audit.json", "utf8")); process.stdout.write(value.generatedAt);')
+          npm run phase5:audit -- --output verification/phase5/release-audit.json --generated-at "${generated_at}"
+          node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/release-audit.json", "utf8")); if (value.status !== "verified") throw new Error("phase 5 release audit is not verified");'
+          rm -rf verification/phase5/evidence
+          mv "${backup}/evidence" verification/phase5/evidence
+          rm -rf "${backup}" verification/phase5/release-audit.json
+
+      - name: build first candidate
+        working-directory: checkout-a
+        env:
+          PACK_VERSION: ${{ inputs.tag || github.ref_name }}
+        run: |
+          node scripts/create-pack-input.mjs --pack-version "${PACK_VERSION#v}"
+          npm run phase6:pack -- --input verification/phase6/release-input.json --output-dir verification/phase6/release-output
+          node scripts/bind-release-evidence.mjs --dir verification/phase6/release-output --coverage verification/phase5/coverage.json
+          node scripts/test-release-rollback.mjs --dir verification/phase6/release-output > verification/phase6/release-output/rollback-test.json
+          cat > verification/phase6/release-output/release-notes.md <<'EOF'
+          this release contains deterministic template pack content, source provenance, checksums, sbom, coverage, and offline verification evidence.
+
+          supported and verified boundaries are listed in the bundled coverage and verification records. discovered and blocked values remain explicit.
+          EOF
+          node scripts/verify-pack-offline.mjs --dir verification/phase6/release-output --require-release-evidence
+
+      - name: build second candidate
+        working-directory: checkout-b
+        env:
+          PACK_VERSION: ${{ inputs.tag || github.ref_name }}
+        run: |
+          node scripts/create-pack-input.mjs --pack-version "${PACK_VERSION#v}"
+          npm run phase6:pack -- --input verification/phase6/release-input.json --output-dir verification/phase6/release-output
+          node scripts/bind-release-evidence.mjs --dir verification/phase6/release-output --coverage verification/phase5/coverage.json
+          node scripts/test-release-rollback.mjs --dir verification/phase6/release-output > verification/phase6/release-output/rollback-test.json
+          cat > verification/phase6/release-output/release-notes.md <<'EOF'
+          this release contains deterministic template pack content, source provenance, checksums, sbom, coverage, and offline verification evidence.
+
+          supported and verified boundaries are listed in the bundled coverage and verification records. discovered and blocked values remain explicit.
+          EOF
+          node scripts/verify-pack-offline.mjs --dir verification/phase6/release-output --require-release-evidence
+
+      - name: compare clean checkout outputs
+        run: |
+          cmp checkout-a/verification/phase6/release-output/mcgen-template-pack.zip checkout-b/verification/phase6/release-output/mcgen-template-pack.zip
+          cmp checkout-a/verification/phase6/release-output/mcgen-template-pack.zip.sha256 checkout-b/verification/phase6/release-output/mcgen-template-pack.zip.sha256
+          cmp checkout-a/verification/phase6/release-output/mcgen-template-pack.zip.sha512 checkout-b/verification/phase6/release-output/mcgen-template-pack.zip.sha512
+          cmp checkout-a/verification/phase6/release-output/pack-manifest.json checkout-b/verification/phase6/release-output/pack-manifest.json
+          cmp checkout-a/verification/phase6/release-output/source-commit-manifest.json checkout-b/verification/phase6/release-output/source-commit-manifest.json
+          cmp checkout-a/verification/phase6/release-output/spdx-sbom.json checkout-b/verification/phase6/release-output/spdx-sbom.json
+          cmp checkout-a/verification/phase6/release-output/verification-summary.json checkout-b/verification/phase6/release-output/verification-summary.json
+          cmp checkout-a/verification/phase6/release-output/coverage.json checkout-b/verification/phase6/release-output/coverage.json
+          cmp checkout-a/verification/phase6/release-output/rollback-test.json checkout-b/verification/phase6/release-output/rollback-test.json
+          cmp checkout-a/verification/phase6/release-output/release-notes.md checkout-b/verification/phase6/release-output/release-notes.md
+
+      - name: stage release assets
+        run: |
+          mkdir release-assets
+          cp checkout-a/verification/phase6/release-output/mcgen-template-pack.zip release-assets/
+          cp checkout-a/verification/phase6/release-output/mcgen-template-pack.zip.sha256 release-assets/
+          cp checkout-a/verification/phase6/release-output/mcgen-template-pack.zip.sha512 release-assets/
+          cp checkout-a/verification/phase6/release-output/pack-manifest.json release-assets/
+          cp checkout-a/verification/phase6/release-output/source-commit-manifest.json release-assets/
+          cp checkout-a/verification/phase6/release-output/spdx-sbom.json release-assets/
+          cp checkout-a/verification/phase6/release-output/verification-summary.json release-assets/
+          cp checkout-a/verification/phase6/release-output/rollback-test.json release-assets/
+          cp checkout-a/verification/phase6/release-output/coverage.json release-assets/
+          cp checkout-a/verification/phase6/release-output/release-notes.md release-assets/
+          cat > release-assets/release-notes.md <<'EOF'
+          this release contains deterministic template pack content, source provenance, checksums, sbom, coverage, and offline verification evidence.
+
+          supported and verified boundaries are listed in the bundled coverage and verification records. discovered and blocked values remain explicit.
+          EOF
+
+      - name: upload release candidate
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase6-release-candidate-${{ github.run_id }}
+          path: release-assets
+          if-no-files-found: error
+          retention-days: 3
+
+  publish:
+    name: publish and verify immutable release
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    environment: production
+    steps:
+      - name: validate tag input
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: '[[ "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]'
+
+      - name: checkout exact tagged commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+          fetch-depth: 0
+
+      - name: setup node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22.13.0
+
+      - name: download release candidate
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: phase6-release-candidate-${{ github.run_id }}
+          path: release-assets
+
+      - name: validate signed annotated tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          test "$(git cat-file -t "refs/tags/${RELEASE_TAG}")" = tag
+          tag_object=$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${RELEASE_TAG}" --jq .object.sha)
+          tag_data=$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object}")
+          tag_type=$(jq -r .object.type <<<"${tag_data}")
+          tag_commit=$(jq -r .object.sha <<<"${tag_data}")
+          verified=$(jq -r .verification.verified <<<"${tag_data}")
+          tagger_name=$(jq -r .tagger.name <<<"${tag_data}")
+          tagger_email=$(jq -r .tagger.email <<<"${tag_data}")
+          main_commit=$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq .object.sha)
+          test "${tag_type}" = commit
+          test "${tag_commit}" = "${main_commit}"
+          test "${verified}" = true
+          test "${tagger_name}" = EnVy
+          test "${tagger_email}" = contact.enviouse@gmail.com
+
+      - name: attest pack archive
+        uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2.2.3
+        with:
+          subject-path: release-assets/mcgen-template-pack.zip
+
+      - name: attest sbom
+        uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2.2.3
+        with:
+          subject-path: release-assets/spdx-sbom.json
+
+      - name: create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if release=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RELEASE_TAG}" 2>/dev/null); then
+            test "$(jq -r .draft <<<"${release}")" = true
+          else
+            prerelease_flag=""
+            [[ "${RELEASE_TAG}" == *-* ]] && prerelease_flag="--prerelease"
+            gh release create "${RELEASE_TAG}" --draft ${prerelease_flag} --title "mcgen template pack ${RELEASE_TAG#v}" --notes-file release-assets/release-notes.md --verify-tag
+          fi
+
+      - name: upload validated assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: gh release upload "${RELEASE_TAG}" release-assets/* --clobber
+
+      - name: verify draft asset set
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          expected=$(printf '%s\n' coverage.json mcgen-template-pack.zip mcgen-template-pack.zip.sha256 mcgen-template-pack.zip.sha512 pack-manifest.json release-notes.md rollback-test.json source-commit-manifest.json spdx-sbom.json verification-summary.json | sort)
+          actual=$(gh release view "${RELEASE_TAG}" --json assets --jq '.assets[].name' | sort)
+          test "${actual}" = "${expected}"
+
+      - name: verify downloaded assets offline
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          rm -rf remote-release
+          mkdir remote-release
+          gh release download "${RELEASE_TAG}" --dir remote-release --pattern 'mcgen-template-pack.zip' --pattern 'mcgen-template-pack.zip.sha256' --pattern 'mcgen-template-pack.zip.sha512' --pattern 'pack-manifest.json' --pattern 'source-commit-manifest.json' --pattern 'spdx-sbom.json' --pattern 'verification-summary.json' --pattern 'coverage.json' --pattern 'rollback-test.json' --pattern 'release-notes.md'
+          npm ci
+          npm run build --silent
+          node scripts/verify-pack-offline.mjs --dir remote-release --require-release-evidence
+          gh attestation verify remote-release/mcgen-template-pack.zip --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify remote-release/spdx-sbom.json --repo "${GITHUB_REPOSITORY}"
+
+      - name: publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          prerelease_flag=""
+          [[ "${RELEASE_TAG}" == *-* ]] && prerelease_flag="--prerelease"
+          gh release edit "${RELEASE_TAG}" --draft=false ${prerelease_flag}
+
+      - name: verify published immutable release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          release=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RELEASE_TAG}")
+          test "$(jq -r .draft <<<"${release}")" = false
+          test "$(jq -r .immutable <<<"${release}")" = true
+          expected=$(printf '%s\n' coverage.json mcgen-template-pack.zip mcgen-template-pack.zip.sha256 mcgen-template-pack.zip.sha512 pack-manifest.json release-notes.md rollback-test.json source-commit-manifest.json spdx-sbom.json verification-summary.json | sort)
+          actual=$(jq -r '.assets[].name' <<<"${release}" | sort)
+          test "${actual}" = "${expected}"
+          rm -rf remote-release-published
+          mkdir remote-release-published
+          gh release download "${RELEASE_TAG}" --dir remote-release-published
+          node scripts/verify-pack-offline.mjs --dir remote-release-published --require-release-evidence
+          gh attestation verify remote-release-published/mcgen-template-pack.zip --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify remote-release-published/spdx-sbom.json --repo "${GITHUB_REPOSITORY}"

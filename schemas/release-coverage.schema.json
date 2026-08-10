@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:verification:release-coverage:1",
+  "title": "MCGen release coverage binding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "packVersion",
+    "sourceCommit",
+    "coverageDigest",
+    "packCoveragePath",
+    "packCoverageSha256",
+    "coverage"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:verification:release-coverage:1" },
+    "schemaVersion": { "const": 1 },
+    "packVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "coverageDigest": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+    },
+    "packCoveragePath": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/relativePath"
+    },
+    "packCoverageSha256": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+    },
+    "coverage": {
+      "$ref": "urn:mcgen:schema:coverage-summary:1"
+    }
+  }
+}
