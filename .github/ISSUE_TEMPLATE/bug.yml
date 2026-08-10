@@ -1,0 +1,80 @@
+name: bug report
+description: report a reproducible defect
+title: "[bug] "
+labels: ["type defect", "status backlog"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        thank you for reporting the issue. remove credentials and private data from every field and attachment.
+  - type: input
+    id: source
+    attributes:
+      label: affected source
+      description: provide the pack version, catalog snapshot, or source commit
+      placeholder: source commit or pack version
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: affected area
+      options:
+        - descriptor or schema
+        - compatibility catalog
+        - source adapter
+        - toolchain profile
+        - template rendering
+        - generated build
+        - metadata or assets
+        - github repository operation
+        - documentation
+        - other
+    validations:
+      required: true
+  - type: input
+    id: tuple
+    attributes:
+      label: compatibility tuple
+      description: include category, platform, minecraft or api version, loader or server api version, mappings, build tool, language, and java version when applicable
+  - type: input
+    id: environment
+    attributes:
+      label: environment
+      description: include operating system, browser or cli, runtime, and relevant dependency versions
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: reproduction steps
+      description: provide the smallest reliable sequence that reproduces the problem
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: logs and evidence
+      description: attach sanitized logs, generated metadata, catalog entries, screenshots, configuration, or a minimal reproduction
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: checks
+      options:
+        - label: i searched for an existing issue
+          required: true
+        - label: i removed credentials, tokens, addresses, and private data
+          required: true

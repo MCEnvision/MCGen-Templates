@@ -3434,6 +3434,12 @@ Tasks:
 - Add license.
 - Add contributing guide.
 - Add security policy.
+- Complete the GitHub repository foundation before adding template-pack implementation files.
+- Configure plan-derived milestones, labels, issue forms, pull-request templates, CODEOWNERS, release-note categories, and the linked `MCGen-Templates roadmap` Project.
+- Configure the default-branch ruleset, merge settings, protected environments, repository topics, wiki navigation, immutable releases, native security features, and dependency security features supported by the public repository.
+- Add SHA-pinned thin callers for the central `MCEnvision/.github` quality workflows and ecosystem-complete Dependabot configuration.
+- Observe stable workflow check names before adding them as required ruleset checks.
+- Verify organization hard-stop budgets before enabling scheduled or metered automation.
 - Supersede the platform/version branch design with one descriptor-driven template pack on `main`.
 - Inspect the installed Minecraft Development plugin as a behavioral reference and record its descriptor and version-resolver architecture without copying its licensed template content blindly.
 - Define authoritative source adapters for every supported platform and component.
@@ -3451,6 +3457,7 @@ Tasks:
 - Approve the GitHub App ownership and permission model.
 - Reserve `mcgen.enviouse.com` without routing traffic until the origin is healthy.
 - Define secret names, rotation owners, and recovery procedures without creating secrets in source control.
+- Merge and tag the verified GitHub foundation before starting product implementation on the next sequential phase branch.
 
 Deliverable:
 
@@ -5618,3 +5625,121 @@ This architecture is accepted only when:
 8. Offline CLI generation works from a verified cached or explicitly supplied pack without contacting loader sites.
 9. No descriptor, raw override, remote pack, or uploaded binary is executed by the public generation service.
 10. Third-party source or template reuse passes a recorded license review before publication.
+
+---
+
+# 147. GitHub Foundation Gate
+
+## 147.1 Ordering Decision
+
+The GitHub repository foundation is the first implementation gate. No template descriptors, source adapters, catalog data, profiles, fixtures, generator code, or website code may start until this gate is merged into `main`, its required checks pass, and the merged commit has a signed annotated phase tag.
+
+This gate is repository infrastructure, not a substitute for product verification. It establishes the collaboration, security, planning, and release controls that every later phase relies on.
+
+## 147.2 Tracked Repository Baseline
+
+The GitHub foundation pull request adds and verifies:
+
+```text
+.gitignore for local instructions and CodeGraph state
+documentation index and technical overview
+contribution and security documentation
+pull-request template
+structured bug and feature issue forms
+CODEOWNERS
+release-note categories
+path-based pull-request labels
+repository-specific GitHub Copilot instructions
+weekly Dependabot coverage for every detected ecosystem
+SHA-pinned thin callers for central quality workflows
+```
+
+Until an implementation manifest exists, Dependabot covers GitHub Actions only. Adding Node.js, Gradle, Maven, Docker, or another supported manifest requires adding its exact directory during the same phase that introduces it.
+
+The quality caller initially runs documentation validation and credential scanning. Node.js, Gradle, CodeQL language matrices, dependency submission, dependency review, template generation, and release validation are enabled only when the required manifests, scripts, permissions, and stable central workflow inputs exist.
+
+## 147.3 Remote Repository Baseline
+
+The repository must have:
+
+```text
+issues and wiki enabled
+discussions disabled until a maintained community purpose exists
+merge commits enabled
+squash and rebase merges disabled
+auto merge enabled
+automatic branch deletion disabled so approved phase branches remain historical
+default workflow token permissions set to read only
+workflow pull-request approval disabled
+SHA pinning required for Actions
+default-branch ruleset blocking direct updates, deletion, and force pushes
+pull requests and resolved conversations required with zero mandatory human approvals
+testing and production environments without required reviewers
+native secret scanning and push protection enabled
+dependency graph, Dependabot alerts, and security updates enabled
+private vulnerability reporting enabled
+immutable releases enabled
+evidence-based repository topics and labels
+```
+
+Add required status checks only after GitHub has observed their exact stable names on this repository. Do not guess a check name or create an always-failing protection rule.
+
+## 147.4 Planning and Project Baseline
+
+Create one linked Project named `MCGen-Templates roadmap` with these fields when the authenticated token has the required Project scope:
+
+```text
+Status
+Phase
+Priority
+Type
+Target version
+Effort
+Risk
+```
+
+Useful views include Current phase, Roadmap, Board, Bugs, and Releases. Native workflows should add repository issues and pull requests, assign an initial status, move closed issues and merged pull requests to Done, move reopened items out of Done, and archive completed items only after the chosen retention period.
+
+This repository tracks only work owned by the template-pack repository. Website, API, CLI, generator-core, GitHub App, and production-platform issues move to the future `MCEnvision/MCGen` repository when it is created. Project-wide plan sections remain here until that transfer, but repository issues and milestones must not imply that application code belongs in `MCGen-Templates`.
+
+Template-repository milestones are:
+
+```text
+phase 0. repository foundation
+phase 2. reference template families
+phase 9. historic toolchain coverage
+phase 10. complete catalog conformance
+phase 11. automated template maintenance
+```
+
+Other project-wide phases are not duplicated as active implementation milestones in this repository.
+
+## 147.5 Release and Wiki Baseline
+
+Tracked documentation is canonical. The wiki Home page links to the README, documentation index, technical overview, active plan, Issues, roadmap Project, milestones, releases, security reporting, and support path. Wiki text must not describe unmerged product behavior as implemented.
+
+Template-pack releases use immutable GitHub Releases created from signed annotated tags. Each release contains the verified pack archive, SHA-256 and SHA-512 checksums, source-commit manifest, SPDX SBOM, and supported attestations. Release workflows remain disabled until a real pack artifact and deterministic pack builder exist.
+
+The repository license remains an explicit owner decision. Do not publish a guessed license or copy the Minecraft Development plugin's LGPL license merely because its architecture was studied.
+
+## 147.6 Capability and Cost Handling
+
+Remote features are configured only after verifying their API capability and resulting state. Project synchronization requires the `project` token scope. Organization budget inspection requires organization administration or billing-manager access. Immutable release settings require repository administration. A missing optional capability is recorded as unavailable or blocked and does not justify a workaround that weakens security.
+
+Organization budgets for Actions, Codespaces, Packages, and Git LFS must remain at zero with further usage blocked before scheduled automation is enabled. Public GitHub-hosted runner usage is preferred. No paid runner, seat, collaborator, security product, Copilot overage, or other metered capability may be enabled without explicit cost approval.
+
+## 147.7 Acceptance Criteria
+
+The GitHub foundation gate passes only when:
+
+1. The tracked baseline is repository-specific, documented, secret-free, and merged through a pull request.
+2. Quality and label workflows use full action commit SHAs and least-privilege permissions.
+3. Dependabot covers every detected package ecosystem and directory without auto-merging major or pinned platform upgrades.
+4. The first quality run succeeds on the pull request and `main`.
+5. The exact stable quality checks are added to the default-branch ruleset only after observation.
+6. Merge methods, workflow permissions, Actions policy, environments, security features, immutable releases, topics, labels, issue forms, milestones, and wiki state match this contract.
+7. The roadmap Project is linked and synchronized, or its missing `project` scope is the only explicitly recorded blocker.
+8. Template-repository milestones and issues contain only repository-owned work.
+9. Organization hard-stop budgets are verified before scheduled workflows are enabled.
+10. The merged GitHub foundation commit has a verified signed annotated tag.
+11. No product implementation branch is created before criteria 1 through 10 pass, except that criterion 7 may remain blocked solely on owner authorization for the required token scope.

@@ -1,0 +1,26 @@
+changelog:
+  exclude:
+    labels:
+      - "skip changelog"
+  categories:
+    - title: "breaking changes"
+      labels:
+        - "breaking change"
+    - title: "features"
+      labels:
+        - "type feature"
+    - title: "fixes"
+      labels:
+        - "type defect"
+    - title: "security"
+      labels:
+        - "type security"
+    - title: "dependencies"
+      labels:
+        - "type dependency"
+    - title: "documentation"
+      labels:
+        - "documentation"
+    - title: "other changes"
+      labels:
+        - "*"
