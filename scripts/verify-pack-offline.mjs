@@ -370,6 +370,16 @@ if (requireReleaseEvidence) {
     coverage.coverage?.$schema !== "urn:mcgen:schema:coverage-summary:1"
   )
     fail("coverage evidence identity mismatch");
+  const archivedCoverage = entries.get(coverage.packCoveragePath);
+  if (!archivedCoverage) fail("archived coverage evidence is missing");
+  if (digest(archivedCoverage, "sha256") !== coverage.packCoverageSha256)
+    fail("archived coverage digest mismatch");
+  if (
+    coverage.coverageDigest !== digest(archivedCoverage, "sha256") ||
+    canonical(JSON.parse(archivedCoverage.toString("utf8"))) !==
+      canonical(coverage.coverage)
+  )
+    fail("release coverage does not match archived coverage");
   if (
     rollback.status !== "passed" ||
     rollback.packVersion !== manifest.packVersion ||

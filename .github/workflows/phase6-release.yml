@@ -72,7 +72,7 @@ jobs:
           cp -a verification/phase5/evidence "${backup}/evidence"
           find verification/phase5/evidence -type f -name '*.json' -delete
           npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions --output-dir verification/phase5/evidence
-          node --input-type=module -e 'import { readdir, readFile } from "node:fs/promises"; for (const name of await readdir("verification/phase5/evidence")) { const value = JSON.parse(await readFile(`verification/phase5/evidence/${name}`, "utf8")); if (value.status !== "verified") throw new Error(`${name} is not verified`); }'
+          node scripts/verify-phase5-review-set.mjs --expected "${backup}/evidence" --actual verification/phase5/evidence
           generated_at=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/audit.json", "utf8")); process.stdout.write(value.generatedAt);')
           npm run phase5:audit -- --output verification/phase5/release-audit.json --generated-at "${generated_at}"
           node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/release-audit.json", "utf8")); if (value.status !== "verified") throw new Error("phase 5 release audit is not verified");'
@@ -87,7 +87,7 @@ jobs:
           cp -a verification/phase5/evidence "${backup}/evidence"
           find verification/phase5/evidence -type f -name '*.json' -delete
           npm run phase5:execute-reviewed -- --input-dir verification/phase5/executions --output-dir verification/phase5/evidence
-          node --input-type=module -e 'import { readdir, readFile } from "node:fs/promises"; for (const name of await readdir("verification/phase5/evidence")) { const value = JSON.parse(await readFile(`verification/phase5/evidence/${name}`, "utf8")); if (value.status !== "verified") throw new Error(`${name} is not verified`); }'
+          node scripts/verify-phase5-review-set.mjs --expected "${backup}/evidence" --actual verification/phase5/evidence
           generated_at=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/audit.json", "utf8")); process.stdout.write(value.generatedAt);')
           npm run phase5:audit -- --output verification/phase5/release-audit.json --generated-at "${generated_at}"
           node --input-type=module -e 'import { readFile } from "node:fs/promises"; const value = JSON.parse(await readFile("verification/phase5/release-audit.json", "utf8")); if (value.status !== "verified") throw new Error("phase 5 release audit is not verified");'
