@@ -87,7 +87,11 @@
       "required": ["id", "digest"],
       "properties": {
         "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "path": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9._/-]+\\.json$"
+        }
       }
     }
   }

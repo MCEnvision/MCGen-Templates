@@ -27,7 +27,7 @@ export type MonitorOutcome =
 export type MonitorClassification =
   "no-change" | "additive" | "boundary" | "review" | "retry" | "quarantine";
 
-export type SnapshotReference = { id: string; digest: string };
+export type SnapshotReference = { id: string; digest: string; path?: string };
 
 export type MonitorSourceChange = {
   sourceId: string;
@@ -201,6 +201,12 @@ function requireSnapshot(value: SnapshotReference, label: string): void {
     throw new Error(`${label} snapshot digest is invalid`);
   }
   requireDigest(value.digest, `${label} snapshot digest`);
+  if (
+    value.path !== undefined &&
+    !/^[a-zA-Z0-9._/-]+\.json$/u.test(value.path)
+  ) {
+    throw new Error(`${label} snapshot path is invalid`);
+  }
 }
 
 function uniqueSorted(values: readonly string[]): string[] {
@@ -245,12 +251,6 @@ function normalizedChanges(
 }
 
 function inferredOutcome(input: MonitorObservation): MonitorOutcome {
-  if (input.outcome) {
-    if (!allOutcomes.has(input.outcome)) {
-      throw new Error(`unknown monitor outcome ${input.outcome}`);
-    }
-    return input.outcome;
-  }
   const additions = Math.max(
     input.addedCoordinates?.length ?? 0,
     input.reconciliation?.addedCoordinates.length ?? 0,
@@ -263,9 +263,37 @@ function inferredOutcome(input: MonitorObservation): MonitorOutcome {
     input.changedSources?.length ?? 0,
     input.reconciliation?.changedSources.length ?? 0,
   );
+  const candidateChanged =
+    input.candidate !== null &&
+    input.candidate.digest !== input.baseline.digest;
+  if (input.outcome) {
+    if (!allOutcomes.has(input.outcome)) {
+      throw new Error(`unknown monitor outcome ${input.outcome}`);
+    }
+    if (
+      input.outcome === "unchanged" &&
+      (additions > 0 || removals > 0 || changes > 0 || candidateChanged)
+    ) {
+      throw new Error("unchanged monitor outcome contradicts observed deltas");
+    }
+    if (
+      input.outcome === "additions" &&
+      (additions === 0 || removals > 0 || changes > 0)
+    ) {
+      throw new Error("additions monitor outcome contradicts observed deltas");
+    }
+    if (input.outcome === "source-mutation" && changes === 0) {
+      throw new Error("source mutation monitor outcome has no changed source");
+    }
+    if (input.outcome === "bulk-removal" && removals === 0) {
+      throw new Error("bulk removal monitor outcome has no removed coordinate");
+    }
+    return input.outcome;
+  }
   if (removals > 0) return "bulk-removal";
   if (changes > 0) return "source-mutation";
   if (additions > 0) return "additions";
+  if (candidateChanged) return "source-mutation";
   return "unchanged";
 }
 

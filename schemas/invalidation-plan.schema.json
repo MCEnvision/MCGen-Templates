@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:invalidation-plan:1",
+  "title": "MCGen source evidence invalidation and rebuild plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "planId",
+    "digest",
+    "monitorRunId",
+    "generatedAt",
+    "sourceFamily",
+    "status",
+    "changedSources",
+    "evidence",
+    "tupleIds",
+    "queuePlans",
+    "summary"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:invalidation-plan:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "invalidation-plan" },
+    "planId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "monitorRunId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sourceFamily": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+    },
+    "status": {
+      "enum": ["no-change", "invalidated", "changed-no-evidence"]
+    },
+    "changedSources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/changedSource" }
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "tupleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+    },
+    "queuePlans": {
+      "type": "array",
+      "items": { "$ref": "urn:mcgen:schema:queue-plan:1" }
+    },
+    "summary": { "$ref": "#/$defs/summary" }
+  },
+  "$defs": {
+    "changedSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "previousDigest",
+        "candidateDigest",
+        "evidenceCount"
+      ],
+      "properties": {
+        "sourceId": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+        },
+        "previousDigest": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        },
+        "candidateDigest": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        },
+        "evidenceCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "status",
+        "matchedSourceIds",
+        "matchedDigests",
+        "reasons"
+      ],
+      "properties": {
+        "evidenceId": {
+          "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "legacy-verified",
+            "discovered",
+            "blocked",
+            "failed",
+            "skipped",
+            "queued"
+          ]
+        },
+        "matchedSourceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+          }
+        },
+        "matchedDigests": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+        },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1, "maxLength": 1024 }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changedSourceCount",
+        "invalidatedEvidenceCount",
+        "invalidatedTupleCount",
+        "queueShardCount"
+      ],
+      "properties": {
+        "changedSourceCount": { "type": "integer", "minimum": 0 },
+        "invalidatedEvidenceCount": { "type": "integer", "minimum": 0 },
+        "invalidatedTupleCount": { "type": "integer", "minimum": 0 },
+        "queueShardCount": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

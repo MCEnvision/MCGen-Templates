@@ -184,4 +184,23 @@ describe("phase 7 upstream monitor contracts", () => {
       ),
     ).toThrow("requires a candidate snapshot");
   });
+
+  it("rejects contradictory explicit outcomes and detects digest-only changes", () => {
+    expect(() =>
+      buildMonitorRun(
+        observation({
+          outcome: "unchanged",
+          addedCoordinates: ["net.minecraftforge:forge:1.20.1-47.2.0"],
+        }),
+      ),
+    ).toThrow("contradicts observed deltas");
+    const run = buildMonitorRun(
+      observation({
+        addedCoordinates: [],
+        removedCoordinates: [],
+      }),
+    );
+    expect(run.outcome).toBe("source-mutation");
+    expect(run.classification).toBe("review");
+  });
 });

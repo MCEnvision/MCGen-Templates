@@ -92,4 +92,144 @@ describe("snapshot reconciliation", () => {
       requiresReview: true,
     });
   });
+
+  it("allows distinct records that share a Java coordinate identity", () => {
+    const previous = snapshot("java.previous", ["com.mojang:jre:java-8"]);
+    const entry = previous.entries[0];
+    if (!entry) throw new Error("expected a Java entry");
+    const repeated = {
+      ...previous,
+      entries: [
+        entry,
+        {
+          ...entry,
+          catalogKey: "1.21.1",
+          details: {
+            minecraftVersion: "1.21.1",
+            runtimeComponent: "jre",
+            majorVersion: "8",
+          },
+        },
+      ],
+    };
+    const second = repeated.entries[1];
+    if (!second) throw new Error("expected the repeated Java entry");
+    const candidate = {
+      ...repeated,
+      snapshotId: "java.candidate",
+      entries: [
+        entry,
+        {
+          ...second,
+          details: {
+            minecraftVersion: "1.21.1",
+            runtimeComponent: "jre-updated",
+            majorVersion: "8",
+          },
+        },
+      ],
+    };
+
+    expect(reconcileSnapshots(repeated, repeated)).toMatchObject({
+      addedCoordinates: [],
+      removedCoordinates: [],
+      changedSources: [],
+      requiresReview: false,
+    });
+    expect(reconcileSnapshots(repeated, candidate)).toMatchObject({
+      addedCoordinates: [],
+      removedCoordinates: [],
+      changedSources: [],
+      requiresReview: false,
+    });
+  });
+
+  it("allows distinct source records that share a Paper source id", () => {
+    const previous = snapshot("paper.previous", ["paper:1"]);
+    const source = previous.sources[0];
+    if (!source) throw new Error("expected a Paper source");
+    const repeated = {
+      ...previous,
+      sources: [
+        source,
+        {
+          ...source,
+          sha256: "b",
+          bytes: 2,
+          retrievedAt: "2026-08-10T00:00:01.000Z",
+        },
+      ],
+    };
+
+    expect(reconcileSnapshots(repeated, repeated)).toMatchObject({
+      addedCoordinates: [],
+      removedCoordinates: [],
+      changedSources: [],
+      requiresReview: false,
+    });
+  });
+
+  it("rejects exact duplicate entry records", () => {
+    const base = snapshot("duplicate-entry", ["paper:1"]);
+    const entry = base.entries[0];
+    if (!entry) throw new Error("expected an entry");
+    const duplicate = { ...base, entries: [entry, { ...entry }] };
+
+    expect(() => reconcileSnapshots(duplicate, duplicate)).toThrow(
+      "repeats exact entry record paper:1",
+    );
+  });
+
+  it("rejects exact duplicate source records", () => {
+    const base = snapshot("duplicate-source", ["paper:1"]);
+    const source = base.sources[0];
+    if (!source) throw new Error("expected a source");
+    const duplicate = { ...base, sources: [source, { ...source }] };
+
+    expect(() => reconcileSnapshots(duplicate, duplicate)).toThrow(
+      "repeats exact source record forge-maven-metadata",
+    );
+  });
+
+  it("reports a repeated source id as one grouped source mutation", () => {
+    const previous = snapshot("paper.previous", ["paper:1"]);
+    const source = previous.sources[0];
+    if (!source) throw new Error("expected a Paper source");
+    const previousWithRepeatedSource = {
+      ...previous,
+      sources: [
+        source,
+        {
+          ...source,
+          sha256: "b",
+          bytes: 2,
+          retrievedAt: "2026-08-10T00:00:01.000Z",
+        },
+      ],
+    };
+    const candidateWithRepeatedSource = {
+      ...previousWithRepeatedSource,
+      snapshotId: "paper.candidate",
+      sources: [
+        source,
+        {
+          ...source,
+          sha256: "c",
+          bytes: 3,
+          retrievedAt: "2026-08-10T00:00:02.000Z",
+        },
+      ],
+    };
+
+    expect(
+      reconcileSnapshots(
+        previousWithRepeatedSource,
+        candidateWithRepeatedSource,
+      ).changedSources,
+    ).toMatchObject([
+      {
+        sourceId: "forge-maven-metadata",
+      },
+    ]);
+  });
 });
