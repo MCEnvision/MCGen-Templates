@@ -513,8 +513,8 @@ async function phase5ExecuteReviewed(args: readonly string[]): Promise<void> {
   const inputRelative = relative(repositoryRoot, inputAbsolute);
   const outputRelative = relative(repositoryRoot, outputAbsolute);
   if (
-    !inputRelative.startsWith("verification/phase5/executions/") ||
-    !outputRelative.startsWith("verification/phase5/evidence/")
+    inputRelative !== "verification/phase5/executions" ||
+    outputRelative !== "verification/phase5/evidence"
   )
     throw new Error(
       "phase5 execute-reviewed directories must be under verification/phase5",
