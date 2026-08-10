@@ -380,6 +380,12 @@ if (requireReleaseEvidence) {
       canonical(coverage.coverage)
   )
     fail("release coverage does not match archived coverage");
+  const { digest: summaryDigest, ...summaryWithoutDigest } = coverage.coverage;
+  if (
+    summaryDigest !==
+    digest(Buffer.from(canonical(summaryWithoutDigest)), "sha256")
+  )
+    fail("coverage summary digest is invalid");
   if (
     rollback.status !== "passed" ||
     rollback.packVersion !== manifest.packVersion ||
