@@ -223,6 +223,7 @@ export function inspectArtifactEntries(
   if (
     !artifactPath ||
     artifactPath.startsWith("/") ||
+    /^[A-Za-z]:[\\/]/u.test(artifactPath) ||
     artifactPath.includes("\\") ||
     artifactPath.split("/").some((part) => part === ".." || part === "")
   )
