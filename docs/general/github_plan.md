@@ -417,7 +417,7 @@ Create reusable template families and boundary profiles that generate minimal pr
 
 ## Status
 
-Active on `envy/phase_4_profiles_templates` from the verified Phase 3 `main` commit. Issue [19](https://github.com/MCEnvision/MCGen-Templates/issues/19) is in progress. This branch establishes the reviewed profile, descriptor, Simple and Advanced customization, PNG asset, safe file operation, and deterministic rendering contracts. No Phase 4 behavior is complete until its pull request merges, post merge checks pass, and the signed `phase-4-profiles-templates-customization` tag identifies the merged `main` commit.
+Complete. Pull request [29](https://github.com/MCEnvision/MCGen-Templates/pull/29) merged into `main` at `7f9853e6b8277aea0518d9f446c9b4d70e0acd22`, all required pull request and post merge checks passed, and issue [19](https://github.com/MCEnvision/MCGen-Templates/issues/19) is closed. The signed annotated tag `phase-4-profiles-templates-customization` identifies the approved completion commit. Exact tuple compilation and artifact evidence remain Phase 5 gates. Profile records that are not yet backed by a complete catalog boundary remain explicit blockers rather than invented support.
 
 ## Toolchain profiles
 
