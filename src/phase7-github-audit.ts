@@ -124,11 +124,23 @@ function hasNoOpenAlerts(value: unknown): boolean {
 
 function hasHealthyRuns(value: unknown): boolean {
   const runs = array(isRecord(value) ? value["workflow_runs"] : undefined);
+  const latestByWorkflow = new Map<string, Record<string, unknown>>();
+  runs.forEach((value, index) => {
+    if (!isRecord(value)) return;
+    const workflow =
+      typeof value["workflow_id"] === "string" ||
+      typeof value["workflow_id"] === "number"
+        ? value["workflow_id"]
+        : typeof value["name"] === "string"
+          ? value["name"]
+          : `observation-${index}`;
+    const key = String(workflow);
+    if (!latestByWorkflow.has(key)) latestByWorkflow.set(key, value);
+  });
   return (
-    runs.length > 0 &&
-    runs.every(
+    latestByWorkflow.size > 0 &&
+    [...latestByWorkflow.values()].every(
       (run) =>
-        isRecord(run) &&
         run["status"] === "completed" &&
         ["success", "skipped", "neutral", "cancelled"].includes(
           String(run["conclusion"]),

@@ -8,7 +8,12 @@ import {
 } from "../src/schema-registry.js";
 import { runGitHubAudit, type GitHubApi } from "../src/phase7-github-audit.js";
 
-function apiStub(failures: ReadonlySet<string> = new Set()): {
+function apiStub(
+  failures: ReadonlySet<string> = new Set(),
+  runs: readonly Record<string, unknown>[] = [
+    { status: "completed", conclusion: "success" },
+  ],
+): {
   api: GitHubApi;
   paths: string[];
 } {
@@ -37,9 +42,7 @@ function apiStub(failures: ReadonlySet<string> = new Set()): {
     if (path.startsWith("/repos/MCEnvision/MCGen-Templates/actions/workflows"))
       return { workflows: [{ name: "quality" }] };
     if (path.startsWith("/repos/MCEnvision/MCGen-Templates/actions/runs"))
-      return {
-        workflow_runs: [{ status: "completed", conclusion: "success" }],
-      };
+      return { workflow_runs: runs };
     if (path.startsWith("/repos/MCEnvision/MCGen-Templates/milestones"))
       return [];
     if (path.startsWith("/repos/MCEnvision/MCGen-Templates/issues"))
@@ -115,6 +118,30 @@ describe("phase 7 GitHub audit", () => {
     expect(governance?.evidence.some((item) => item.path === rulesets)).toBe(
       true,
     );
+  });
+
+  it("ignores superseded failed runs when the latest run for each workflow passes", async () => {
+    const audit = await runGitHubAudit({
+      owner: "MCEnvision",
+      name: "MCGen-Templates",
+      generatedAt: "2026-08-10T00:00:00.000Z",
+      api: apiStub(new Set(), [
+        {
+          workflow_id: 42,
+          status: "completed",
+          conclusion: "success",
+        },
+        {
+          workflow_id: 42,
+          status: "completed",
+          conclusion: "failure",
+        },
+      ]).api,
+      root: repositoryRoot,
+    });
+    expect(
+      audit.capabilities.find((item) => item.id === "required-checks")?.state,
+    ).toBe("passed");
   });
 
   it("does not pass a loader capability when indexed files only exist but statuses are invalid", async () => {

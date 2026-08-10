@@ -1,9 +1,8 @@
 {
   "$schema": "urn:mcgen:schema:github-audit:1",
-  "auditId": "3101869b0655d140bc2e8477ed397e403bc76bbca4bd2000768e76384acd32a7",
+  "auditId": "9e717f417bd71225a6b390fe38496da6d00ff95b9f2c3b89ae308b5038057fa9",
   "blockers": [
-    "maintenance-automation: maintenance workflow exists but phase seven completion issue remains open or unavailable",
-    "required-checks: workflow inventory or recent runs are unavailable or failing"
+    "maintenance-automation: maintenance workflow exists but phase seven completion issue remains open or unavailable"
   ],
   "capabilities": [
     {
@@ -32,7 +31,7 @@
       "state": "passed"
     },
     {
-      "detail": "workflow inventory or recent runs are unavailable or failing",
+      "detail": "workflow inventory and recent runs are healthy",
       "evidence": [
         {
           "detail": "read completed successfully",
@@ -48,7 +47,7 @@
         }
       ],
       "id": "required-checks",
-      "state": "blocked"
+      "state": "passed"
     },
     {
       "detail": "protected environments and security alert controls are healthy",
@@ -23757,7 +23756,7 @@
       "state": "passed"
     }
   ],
-  "generatedAt": "2026-08-10T22:02:48.127Z",
+  "generatedAt": "2000-01-01T00:00:00.000Z",
   "kind": "github-audit",
   "mutationsAttempted": 0,
   "readOnly": true,
