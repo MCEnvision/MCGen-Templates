@@ -53,6 +53,16 @@ const matrixFailures = validateMatrixPlan(matrix);
 if (matrixFailures.length)
   throw new Error(`phase 5 matrix is invalid ${matrixFailures.join("; ")}`);
 const matrixById = new Map(matrix.tuples.map((tuple) => [tuple.id, tuple]));
+const matrixSnapshots = new Set(
+  matrix.tuples.map((tuple) => tuple.identity.catalogSnapshotId),
+);
+if (
+  matrixSnapshots.size !== 1 ||
+  !matrixSnapshots.has(coverage.catalogSnapshotId)
+)
+  throw new Error(
+    "phase 5 coverage catalog snapshot does not match the matrix",
+  );
 const executionNames = jsonNames(await files(executionRoot));
 const executionIds = [];
 for (const name of executionNames) {
