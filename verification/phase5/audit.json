@@ -1,5 +1,24 @@
 {
   "$schema": "urn:mcgen:schema:phase5-audit:1",
+  "schemaVersion": 1,
+  "kind": "phase5-audit",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "status": "verified",
+  "profiles": {
+    "total": 14,
+    "reviewed": 10,
+    "blocked": 4
+  },
+  "descriptors": {
+    "total": 14,
+    "reviewed": 10,
+    "blocked": 4
+  },
+  "evidence": {
+    "total": 10,
+    "verified": 10,
+    "unresolved": 0
+  },
   "blockers": [
     "descriptor architectury: Architectury generation requires an evidenced intersection for every selected target loader.",
     "descriptor forge: Forge tuples remain discovered until later compilation and artifact inspection gates pass.",
@@ -10,24 +29,5 @@
     "profile forge-modern: Modern ForgeGradle and metadata boundaries need tuple specific build evidence.",
     "profile neoforge-modern: NeoGradle and ModDevGradle require separate, tuple specific verification before selection is enabled."
   ],
-  "descriptors": {
-    "blocked": 4,
-    "reviewed": 10,
-    "total": 14
-  },
-  "digest": "c51535d7643f05d3c469c6a20c67c4659b42978d0506a6b96d9c76160ba9e19c",
-  "evidence": {
-    "total": 10,
-    "unresolved": 0,
-    "verified": 10
-  },
-  "generatedAt": "2026-08-10T00:00:00.000Z",
-  "kind": "phase5-audit",
-  "profiles": {
-    "blocked": 4,
-    "reviewed": 10,
-    "total": 14
-  },
-  "schemaVersion": 1,
-  "status": "verified"
+  "digest": "c51535d7643f05d3c469c6a20c67c4659b42978d0506a6b96d9c76160ba9e19c"
 }

@@ -1,97 +1,97 @@
 {
   "$schema": "urn:mcgen:schema:coverage-summary:1",
-  "blockers": [],
+  "schemaVersion": 1,
+  "kind": "coverage-summary",
+  "catalogSnapshotId": "2026-08-10-final",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "matrixDigest": "ceb58e6659e19b062f2861eea3950b4739e067a0bbeda422cb0e6d20bdca25f6",
+  "total": 10,
+  "counts": {
+    "verified": 10,
+    "legacy-verified": 0,
+    "discovered": 0,
+    "blocked": 0,
+    "failed": 0,
+    "skipped": 0,
+    "queued": 0
+  },
   "byFamily": [
     {
       "family": "bukkit",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "bungeecord",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "fabric",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "paper",
-      "legacyVerified": 0,
       "total": 2,
-      "unresolved": 0,
-      "verified": 2
+      "verified": 2,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "spigot",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "spigot-legacy",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "spigot-modern",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "sponge",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     },
     {
       "family": "velocity",
-      "legacyVerified": 0,
       "total": 1,
-      "unresolved": 0,
-      "verified": 1
+      "verified": 1,
+      "legacyVerified": 0,
+      "unresolved": 0
     }
   ],
-  "catalogSnapshotId": "2026-08-10-final",
-  "counts": {
-    "blocked": 0,
-    "discovered": 0,
-    "failed": 0,
-    "legacy-verified": 0,
-    "queued": 0,
-    "skipped": 0,
-    "verified": 10
-  },
-  "digest": "6e7e7cd923d47b79b2ac51db65b2bd6ab08cd81e6fd9e6292ecc9f3aacf7a3c3",
+  "blockers": [],
   "evidenceDigests": [
     "05ff686f4103d1e35a68b72f9541b5eceb4b55a193b6cd1684d477f195c38482",
     "103cabcb9a88eef7eb62e3134ca10360ae3ff8ea720dc02bd6ca0151affdd73e",
     "1fb0609a3ebec6b88709a3928884d4363b15b198109a82e6b0362ca20a52a4d0",
     "52559d46f311ec224353fd42227e4aa4ce2b8cca8889066c814a0d21ccfc53f8",
     "7678c48085ea3b06f5150505efec7b38a8aba0dc5688726b8ef60513c9e3c8a3",
-    "b2fc7fc77995827e5c9de52e585ad131e68a30f9d17416f8412cb724631d031f",
+    "828c5397413412b759f883b391879d897ea52f82a274b74a41897e1a9f13c500",
     "bc834fad796b4b6fc021b99e21b6c4ca607ed039d35c915753924040409caf8b",
     "ea89cef55569962b535ebadf2f04b25c46f9b6b5a8e9662f756a978ef40f0489",
     "f02f911579e7830d30bcbea1456f8b701923e0008d4cb031311fb99ef2d9521f",
     "f0a8c21773e0503e0256e48c60927f55231b271c93325c60aac21e09cd4d7429"
   ],
-  "generatedAt": "2026-08-10T00:00:00.000Z",
-  "kind": "coverage-summary",
-  "matrixDigest": "3932742c489b3054be5d1a538259bbf816bbc55604b1d0fa28d256e2ecad09ab",
-  "schemaVersion": 1,
-  "total": 10
+  "digest": "2c7436e9d8c42019493f3497dac90fb18ebc242fb4d2f837b47c9947ec345e43"
 }
