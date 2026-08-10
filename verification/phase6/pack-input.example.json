@@ -1,0 +1,18 @@
+{
+  "$schema": "urn:mcgen:schema:pack-build-input:1",
+  "schemaVersion": 1,
+  "packVersion": "1.0.0-beta.1",
+  "sourceCommit": "a7aaa2426b9d161b5387ea8f68e3f6861f5b70dc",
+  "createdAt": "2026-08-10T00:00:00.000Z",
+  "catalogSnapshot": "2026-08-10-r4",
+  "familyRevisions": [{ "id": "fabric", "revision": 1 }],
+  "profileRevisions": [{ "id": "fabric", "revision": 1 }],
+  "files": [
+    { "path": "README.md" },
+    { "path": "schemas/common.schema.json" },
+    { "path": "profiles/fabric.json" },
+    { "path": "templates/fabric/descriptor.json" },
+    { "path": "catalog/2026-08-10-r4/index.json" },
+    { "path": "verification/phase5/coverage.json" }
+  ]
+}

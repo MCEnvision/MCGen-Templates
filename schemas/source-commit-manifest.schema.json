@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:source-commit-manifest:1",
+  "title": "MCGen pack source commit manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "packVersion",
+    "sourceCommit",
+    "packManifestSha256",
+    "files"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:source-commit-manifest:1" },
+    "schemaVersion": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
+    },
+    "packVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "packManifestSha256": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+    },
+    "files": {
+      "$ref": "urn:mcgen:schema:pack-manifest:1#/$defs/digestedPaths"
+    }
+  }
+}

@@ -643,7 +643,7 @@ Publish a deterministic, signed, independently verifiable template pack from app
 
 ## Status
 
-Pending successful Phase 5 verification.
+In progress on `envy/phase_6_pack_publication` from the verified Phase 5 completion commit. Issue [24](https://github.com/MCEnvision/MCGen-Templates/issues/24) owns the deterministic pack, release evidence, offline consumer, and publication workflow work. No GitHub Release is published yet.
 
 ## Pack construction
 

@@ -33,3 +33,7 @@ work/
 # Generated verification projects and local source snapshots
 fixtures/generated/
 catalog/sources/local/
+
+# Ephemeral phase six pack outputs, while retaining the reviewed input example
+verification/phase6/*
+!verification/phase6/pack-input.example.json
