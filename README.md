@@ -2,7 +2,7 @@
 
 MCGen Templates is the canonical public source for the versioned template pack and compatibility catalog used by MCGen.
 
-The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is complete. The verified signed tag `phase-3-authoritative-sources-catalog` identifies the merged source coverage, immutable snapshots, and deterministic catalog evidence on `main`. GitHub completion Phase 4 is active on `envy/phase_4_profiles_templates`, adding reviewed profile, descriptor, customization, asset, and rendering contracts. No Phase 4 behavior is complete until its pull request merges and is tagged.
+The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is complete. The verified signed tag `phase-3-authoritative-sources-catalog` identifies the merged source coverage, immutable snapshots, and deterministic catalog evidence on `main`. GitHub completion Phase 4 is complete and identified by the signed tag `phase-4-profiles-templates-customization`. It adds reviewed profile, descriptor, customization, asset, and deterministic rendering contracts. Phase 5 is the next gate for generated project compilation and artifact evidence.
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 
@@ -48,7 +48,7 @@ tests/        Unit, parser, schema, rendering, and repository-document verificat
 docs/         Architecture, data, security, contribution, verification, and release guidance.
 ```
 
-`catalog/` contains immutable discovered-source evidence. Phase 4 adds declarative profiles, descriptors, and contract fixtures without claiming that discovered catalog components are build-verified. Build and artifact execution remains a later phase gate.
+`catalog/` contains immutable discovered-source evidence. Phase 4 adds declarative profiles, descriptors, and contract fixtures without claiming that discovered catalog components are build-verified. Build and artifact execution remains the Phase 5 gate.
 
 ## Development
 
@@ -98,6 +98,6 @@ The [complete project plan](docs/general/plan.md) defines product phases and imp
 
 ## Current Status
 
-The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contract work is active on its phase branch. No catalog component or generated fixture is a build verified project tuple until the later verification gate passes.
+The current Phase 3 evidence set contains thirty one immutable source snapshots, including seventeen retained historical captures and fourteen current captures. The current content addressed catalog has 2,540 shards. Every accepted current source entry is represented in a catalog shard, and all twenty rejected upstream values have exact structured coverage blockers. Phase 4 contracts are merged and tagged. No catalog component or generated fixture is a build verified project tuple until the Phase 5 verification gate passes.
 
 The repository license is not selected yet. No third-party source or template content may be imported until its license and redistribution obligations are reviewed. Snapshot discovery does not claim that any generated Forge project or exact tuple is verified.
