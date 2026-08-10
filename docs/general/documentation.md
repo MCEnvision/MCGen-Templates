@@ -114,6 +114,8 @@ Canonical descriptors and family files are trusted repository content reviewed t
 
 The public generation service may validate and package untrusted input, but it must never execute generated Gradle, Maven, Java, Kotlin, shell, Git, descriptor, or uploaded binary content. Conditions use a bounded expression language without network, process, filesystem, reflection, or arbitrary-code access.
 
+Canonical source capture is a separate maintainer-only network path. Repository source definitions cannot expand network authority by themselves. Each source ID resolves through a code-owned policy containing exact HTTPS URLs and a redirect limit, and every initial or redirect URL is checked before access. Invalid, credentialed, downgraded, undeclared, or excessive redirect targets fail before parsing or snapshot writes.
+
 See [Template Pack Trust Model](../security/trust-model.md) for security requirements.
 
 ## GitHub Workflow

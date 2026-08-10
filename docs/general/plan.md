@@ -2907,6 +2907,7 @@ Before public launch:
 - strict virtual-path normalization for uploaded assets and file overrides.
 - no absolute paths, parent traversal, control characters, duplicate normalized paths, case-folding collisions, device names, or symlinks in generated output.
 - no server-side fetching of user-provided asset, repository, dependency, or icon URLs during generation.
+- canonical metadata fetching must validate the initial URL and every redirect target against a reviewed HTTPS origin and path policy before network access.
 - no execution of user-supplied Gradle, Maven, shell, Java, Kotlin, plugin, or task code on the production service.
 - clear trust labels for canonical template content, structured customization, raw text overrides, and uploaded binary content.
 
@@ -5050,6 +5051,8 @@ https://maven.architectury.dev/
 
 Endpoints are configuration, not assumptions embedded across the generator. Each adapter has schema fixtures and contract tests. Endpoint changes require one adapter update.
 
+Source definitions select only repository-owned adapter inputs. They are never accepted from a web, CLI, API, generated-project, or uploaded-file value. Each adapter binds those inputs to a reviewed network policy containing exact HTTPS origins, permitted path prefixes, and a redirect limit. The fetch boundary validates the initial request and every redirect target before access, handles redirects manually, and rejects credentials, nonstandard ports, protocol changes, malformed locations, undeclared origins, paths outside the approved prefixes, and excessive redirects. A new upstream host or path is a reviewed supply-chain policy change rather than a runtime fallback.
+
 ## 141.4 Snapshot and Failure Rules
 
 Every fetch records:
@@ -5067,6 +5070,8 @@ warnings and rejected entries
 ```
 
 Store the normalized snapshot and its evidence, not transient access credentials. If a primary source is unavailable, retain the last-known-good snapshot, mark it stale, and stop destructive reconciliation. A timeout, empty response, parser failure, or sudden large removal must never delete catalog entries, profiles, or template families automatically.
+
+Network-policy rejection happens before response parsing or snapshot mutation. Tests must prove that approved initial and redirect URLs remain usable while private-network targets, loopback targets, credentialed URLs, protocol downgrades, unapproved ports, path escapes, and redirect loops fail closed. The committed snapshot remains unchanged when a fetch-policy change does not alter approved upstream response bytes.
 
 Require maintainer review for:
 

@@ -16,6 +16,8 @@ git diff --check
 
 `npm run verify` must pass formatting, ESLint, TypeScript type checking, unit tests, compilation, and canonical JSON Schema validation. The dependency audit must report no known vulnerabilities.
 
+Source-network contract tests must prove that approved canonical requests and redirects succeed, while undeclared, internal, credentialed, downgraded, path-changing, and excessive redirect targets fail before the rejected target is requested.
+
 ## Snapshot Gate
 
 For every source snapshot:
@@ -39,6 +41,7 @@ The phase pull request must pass:
 - `quality / node`.
 - `quality / dependency review` when the event and actor support it.
 - `label changed paths`.
+- CodeQL analysis for GitHub Actions and JavaScript or TypeScript.
 
 Only checks observed successfully on this repository may become required ruleset checks.
 

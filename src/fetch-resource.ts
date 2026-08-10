@@ -1,5 +1,10 @@
 import { sha256 } from "./digest.js";
 import type { FetchedResource, SourceRecord } from "./contracts.js";
+import {
+  resolveCanonicalSourceUrl,
+  sourceRedirectLimit,
+  type CanonicalSourceId,
+} from "./source-network-policy.js";
 
 export type FetchPolicy = {
   timeoutMs: number;
@@ -44,35 +49,59 @@ export async function readBoundedBody(
 }
 
 export async function fetchResource(
+  sourceId: CanonicalSourceId,
   url: string,
   policy: FetchPolicy,
 ): Promise<FetchedResource> {
-  const response = await fetch(url, {
-    headers: {
-      accept: "application/json, application/xml, text/xml;q=0.9, */*;q=0.1",
-      "user-agent": "mcgen-template-snapshot/1.0",
-    },
-    redirect: "follow",
-    signal: AbortSignal.timeout(policy.timeoutMs),
-  });
+  const signal = AbortSignal.timeout(policy.timeoutMs);
+  const maxRedirects = sourceRedirectLimit(sourceId);
+  let currentUrl = resolveCanonicalSourceUrl(sourceId, url);
+  let redirects = 0;
+  let response: Response;
+  for (;;) {
+    response = await fetch(currentUrl, {
+      headers: {
+        accept: "application/json, application/xml, text/xml;q=0.9, */*;q=0.1",
+        "user-agent": "mcgen-template-snapshot/1.0",
+      },
+      redirect: "manual",
+      signal,
+    });
+    if (![301, 302, 303, 307, 308].includes(response.status)) {
+      break;
+    }
+    if (redirects >= maxRedirects) {
+      throw new Error(`source exceeded the redirect limit for ${sourceId}`);
+    }
+    const location = response.headers.get("location");
+    if (!location) {
+      throw new Error(`source redirect omitted a location for ${sourceId}`);
+    }
+    await response.body?.cancel();
+    let redirectUrl: URL;
+    try {
+      redirectUrl = new URL(location, currentUrl);
+    } catch {
+      throw new Error(`source redirect location is invalid for ${sourceId}`);
+    }
+    currentUrl = resolveCanonicalSourceUrl(sourceId, redirectUrl.href);
+    redirects += 1;
+  }
   if (!response.ok) {
     throw new Error(
-      `source request failed with http ${response.status} for ${url}`,
+      `source request failed with http ${response.status} for ${sourceId}`,
     );
-  }
-  if (!response.url.startsWith("https://")) {
-    throw new Error(`source response resolved to an insecure url for ${url}`);
   }
   const bytes = await readBoundedBody(response, policy.maxBytes);
   if (bytes.byteLength === 0) {
-    throw new Error(`source returned an empty response for ${url}`);
+    throw new Error(`source returned an empty response for ${sourceId}`);
   }
   const contentType = response.headers.get("content-type")?.trim();
   if (!contentType) {
-    throw new Error(`source response omitted content type for ${url}`);
+    throw new Error(`source response omitted content type for ${sourceId}`);
   }
   const record: SourceRecord = {
-    url: response.url,
+    url: currentUrl.href,
     retrievedAt: new Date().toISOString(),
     contentType,
     sha256: sha256(bytes),

@@ -45,6 +45,12 @@ Each authoritative response and normalized snapshot receives a digest. Artifact 
 
 Pack clients verify release identity, source commit, schema versions, and content digests before use. Mutable branch heads and unverified aliases are not generation inputs.
 
+## Source Fetch Boundary
+
+Source capture is available only to repository maintenance tooling. Web, CLI, API, project specification, asset, raw override, and generated-project values cannot supply a source URL.
+
+Each canonical source ID has a code-owned network policy with exact HTTPS URLs and a redirect limit. The fetcher validates the initial URL and each redirect target before access and handles redirects manually. It rejects undeclared hosts and paths, embedded credentials, query strings, fragments, nonstandard ports, protocol changes, malformed locations, missing redirect locations, and excessive redirects. Upstream host or path changes require a reviewed code and documentation update.
+
 ## Secret Handling
 
 Project specifications and pack content must never contain credentials. Reject secret-looking portable values where practical and direct users to environment variables or GitHub secrets for publishing credentials.
