@@ -643,7 +643,7 @@ Publish a deterministic, signed, independently verifiable template pack from app
 
 ## Status
 
-In progress on `envy/phase_6_pack_publication` from the verified Phase 5 completion commit. Issue [24](https://github.com/MCEnvision/MCGen-Templates/issues/24) owns the deterministic pack, release evidence, offline consumer, and publication workflow work. No GitHub Release is published yet.
+The implementation is merged on `main` at [phase-6-pack-publication](https://github.com/MCEnvision/MCGen-Templates/releases/tag/phase-6-pack-publication). The deterministic candidate pack, checksums, source manifest, SPDX SBOM, archive readback, guarded input, and read only verification workflow are complete. Issue [24](https://github.com/MCEnvision/MCGen-Templates/issues/24) remains open for the owner gated first immutable release, offline consumer verification, supported artifact attestations, remote asset verification, and rollback testing. No GitHub Release is published yet.
 
 ## Pack construction
 

@@ -2,7 +2,7 @@
 
 ## Current Status
 
-No template-pack release exists yet. Phase 6 implements the deterministic pack builder and release evidence contract. Publication remains gated until a pack artifact is generated from approved `main`, all release assets verify, and the owner approves publication.
+No template-pack release exists yet. Phase 6 implementation is merged and tagged as `phase-6-pack-publication`. The deterministic pack builder and release evidence contract are available. Publication remains gated until the first pack artifact is generated from approved `main`, all release assets and attestations verify, offline consumers resolve representative tuples, rollback is tested, and the owner approves publication.
 
 ## Release Identity
 
