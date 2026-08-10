@@ -46,6 +46,7 @@ export type MonitorSourceChangeInput =
 export type MonitorReconciliationInput = {
   addedCoordinates: readonly string[];
   removedCoordinates: readonly string[];
+  changedCoordinates?: readonly string[];
   changedSources: readonly MonitorSourceChangeInput[];
 };
 
@@ -58,6 +59,7 @@ export type MonitorObservation = {
   outcome?: MonitorOutcome;
   addedCoordinates?: readonly string[];
   removedCoordinates?: readonly string[];
+  changedCoordinates?: readonly string[];
   changedSources?: readonly MonitorSourceChangeInput[];
   reconciliation?: MonitorReconciliationInput;
   affectedTuples?: readonly string[];
@@ -94,6 +96,7 @@ export type MonitorRun = {
   candidate: SnapshotReference | null;
   addedCoordinates: string[];
   removedCoordinates: string[];
+  changedCoordinates: string[];
   changedSources: MonitorSourceChange[];
   affectedTuples: string[];
   retry: MonitorRetry;
@@ -311,6 +314,7 @@ export function classifyMonitorEvent(input: {
   maxAttempts: number;
   addedCoordinates?: readonly string[];
   removedCoordinates?: readonly string[];
+  changedCoordinates?: readonly string[];
   changedSources?: readonly MonitorSourceChange[];
 }): MonitorClassification {
   if (!allOutcomes.has(input.outcome)) {
@@ -330,6 +334,7 @@ export function classifyMonitorEvent(input: {
   if (input.outcome === "unchanged") return "no-change";
   if (input.outcome === "additions") {
     if ((input.removedCoordinates?.length ?? 0) > 0) return "review";
+    if ((input.changedCoordinates?.length ?? 0) > 0) return "review";
     if ((input.changedSources?.length ?? 0) > 0) return "review";
     return "additive";
   }
@@ -365,6 +370,7 @@ function quarantineIdFor(input: {
   candidate: SnapshotReference | null;
   addedCoordinates: readonly string[];
   removedCoordinates: readonly string[];
+  changedCoordinates: readonly string[];
   changedSources: readonly MonitorSourceChange[];
   affectedTuples: readonly string[];
 }): string {
@@ -377,6 +383,7 @@ function quarantineIdFor(input: {
       candidate: input.candidate,
       addedCoordinates: input.addedCoordinates,
       removedCoordinates: input.removedCoordinates,
+      changedCoordinates: input.changedCoordinates,
       changedSources: input.changedSources,
       affectedTuples: input.affectedTuples,
     }),
@@ -398,6 +405,9 @@ export function buildMonitorRun(input: MonitorObservation): MonitorRun {
   const removedCoordinates = uniqueSorted(
     input.removedCoordinates ?? input.reconciliation?.removedCoordinates ?? [],
   );
+  const changedCoordinates = uniqueSorted(
+    input.changedCoordinates ?? input.reconciliation?.changedCoordinates ?? [],
+  );
   const changedSources = normalizedChanges(
     input.changedSources ?? input.reconciliation?.changedSources ?? [],
   );
@@ -408,6 +418,7 @@ export function buildMonitorRun(input: MonitorObservation): MonitorRun {
     maxAttempts,
     addedCoordinates,
     removedCoordinates,
+    changedCoordinates,
     changedSources,
   });
   if (
@@ -458,6 +469,7 @@ export function buildMonitorRun(input: MonitorObservation): MonitorRun {
     candidate: input.candidate,
     addedCoordinates,
     removedCoordinates,
+    changedCoordinates,
     changedSources,
     affectedTuples,
     retry,
@@ -473,6 +485,7 @@ export function buildMonitorRun(input: MonitorObservation): MonitorRun {
         candidate: input.candidate,
         addedCoordinates,
         removedCoordinates,
+        changedCoordinates,
         changedSources,
         affectedTuples,
       })
@@ -539,6 +552,7 @@ export function buildQuarantineRecord(run: MonitorRun): QuarantineRecord {
     candidate: run.candidate,
     addedCoordinates: run.addedCoordinates,
     removedCoordinates: run.removedCoordinates,
+    changedCoordinates: run.changedCoordinates,
     changedSources: run.changedSources,
     affectedTuples: run.affectedTuples,
   };
@@ -559,6 +573,7 @@ export function buildQuarantineRecord(run: MonitorRun): QuarantineRecord {
     affectedCoordinates: uniqueSorted([
       ...run.addedCoordinates,
       ...run.removedCoordinates,
+      ...run.changedCoordinates,
     ]),
     affectedTuples: uniqueSorted(run.affectedTuples),
     preserveLastKnownGood: true as const,

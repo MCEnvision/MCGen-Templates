@@ -31,6 +31,7 @@
     "phase7:recovery": "npm run build --silent && node dist/cli.js phase7 recovery",
     "phase7:invalidation": "npm run build --silent && node dist/cli.js phase7 invalidation",
     "phase7:proposal": "npm run build --silent && node dist/cli.js phase7 proposal",
+    "phase7:pull-request": "npm run build --silent && node dist/cli.js phase7 pull-request",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "validate": "npm run build --silent && node dist/cli.js validate",

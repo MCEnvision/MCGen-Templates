@@ -62,6 +62,7 @@ import {
 } from "./phase7-maintenance.js";
 import { buildInvalidationPlan } from "./phase7-invalidation.js";
 import { buildMaintenanceProposal } from "./phase7-proposal.js";
+import { buildMaintenancePullRequest } from "./phase7-pull-request.js";
 import { runSourceMonitoring } from "./phase7-runner.js";
 import { runGitHubAudit } from "./phase7-github-audit.js";
 import { readZipEntries } from "./artifact-inspector.js";
@@ -1099,6 +1100,83 @@ async function phase7Proposal(args: readonly string[]): Promise<void> {
   );
 }
 
+async function phase7PullRequest(args: readonly string[]): Promise<void> {
+  const planInput = option(args, "--plan") ?? option(args, "--input");
+  const output = option(args, "--output");
+  if (!planInput || !output) {
+    throw new Error("phase7 pull-request requires --plan and --output");
+  }
+  const registry = await createSchemaRegistry();
+  async function readTypedInput(
+    path: string,
+    schema: string,
+  ): Promise<unknown> {
+    const document = JSON.parse(
+      await readFile(await requireSafePhase7InputPath(path), "utf8"),
+    ) as unknown;
+    const validation = validateWithSchema(registry, document);
+    const documentSchema =
+      document !== null &&
+      typeof document === "object" &&
+      "$schema" in document &&
+      typeof document.$schema === "string"
+        ? document.$schema
+        : undefined;
+    if (!validation.valid || documentSchema !== schema) {
+      throw new Error(
+        `phase 7 pull request input is not a valid ${schema} document`,
+      );
+    }
+    return document;
+  }
+  const plan = requireRecord(
+    await readTypedInput(planInput, "urn:mcgen:schema:maintenance-plan:1"),
+    "phase 7 pull request maintenance plan input",
+  );
+  const monitorInput = option(args, "--monitor");
+  const invalidationInput = option(args, "--invalidation");
+  const coverageInput = option(args, "--coverage");
+  const monitor = monitorInput
+    ? ((await readTypedInput(
+        monitorInput,
+        "urn:mcgen:schema:monitor-run:1",
+      )) as Parameters<typeof buildMaintenancePullRequest>[0]["monitor"])
+    : undefined;
+  const invalidation = invalidationInput
+    ? ((await readTypedInput(
+        invalidationInput,
+        "urn:mcgen:schema:invalidation-plan:1",
+      )) as Parameters<typeof buildMaintenancePullRequest>[0]["invalidation"])
+    : undefined;
+  const coverage = coverageInput
+    ? ((await readTypedInput(
+        coverageInput,
+        "urn:mcgen:schema:coverage-change:1",
+      )) as Parameters<typeof buildMaintenancePullRequest>[0]["coverage"])
+    : undefined;
+  const releaseTag = option(args, "--release-tag");
+  const manifest = buildMaintenancePullRequest({
+    plan: plan as unknown as Parameters<
+      typeof buildMaintenancePullRequest
+    >[0]["plan"],
+    ...(monitor ? { monitor } : {}),
+    ...(invalidation ? { invalidation } : {}),
+    ...(coverage ? { coverage } : {}),
+    generatedAt: option(args, "--generated-at") ?? new Date().toISOString(),
+    familyIds: options(args, "--family"),
+    profileIds: options(args, "--profile"),
+    changedPaths: [
+      ...options(args, "--changed-path"),
+      ...options(args, "--candidate-path"),
+    ],
+    ...(releaseTag ? { releaseTag } : {}),
+  });
+  await writePhase7Document(output, manifest);
+  process.stdout.write(
+    `wrote phase 7 maintenance pull request manifest ${manifest.pullRequestId}\n`,
+  );
+}
+
 async function validate(args: readonly string[]): Promise<void> {
   const files = args.length
     ? args.map((path) => requireRepositoryPath(path))
@@ -1610,8 +1688,12 @@ async function main(): Promise<void> {
     await phase7Proposal(args);
     return;
   }
+  if (command === "phase7" && subject === "pull-request") {
+    await phase7PullRequest(args);
+    return;
+  }
   throw new Error(
-    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase7 monitor --input <path> --output <path> or phase7 monitor --catalog <catalog index> --candidate-dir <directory> --output <path>, or phase7 quarantine --input <monitor run> --output <path>, or phase7 plan --input <path> --output <path>, or phase7 audit --input <path> --output <path>, or phase7 audit-live --output <path>, or phase7 recovery --scenario <scenario> --output <path>, or phase7 invalidation --input <monitor run> --evidence-dir <directory> --output <path> --shard-count <n>, or phase7 proposal --input <maintenance plan> --output <path>, or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
+    "usage: mcgen-template-tool validate [paths...] or snapshot <adapter> --output <path>, or catalog generate --output <directory> [--snapshot <path>], or catalog drift --baseline <snapshot> --candidate <snapshot> --output <report>, or phase6 pack --input <path> --output-dir <directory>, or phase7 monitor --input <path> --output <path> or phase7 monitor --catalog <catalog index> --candidate-dir <directory> --output <path>, or phase7 quarantine --input <monitor run> --output <path>, or phase7 plan --input <path> --output <path>, or phase7 audit --input <path> --output <path>, or phase7 audit-live --output <path>, or phase7 recovery --scenario <scenario> --output <path>, or phase7 invalidation --input <monitor run> --evidence-dir <directory> --output <path> --shard-count <n>, or phase7 proposal --input <maintenance plan> --output <path>, or phase7 pull-request --plan <maintenance plan> --monitor <monitor run> --output <path> [--invalidation <plan>] [--coverage <coverage>], or phase5 fixture-manifest --input <path> --output <path>, or phase5 matrix-plan --input <path> --output <path>, or phase5 validate-evidence --input <path>, or phase5 queue --input <path> --output <path> --shard-count <n> --shard-index <n>",
   );
 }
 

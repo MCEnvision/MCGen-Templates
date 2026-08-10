@@ -50,6 +50,23 @@ describe("phase 7 upstream monitor contracts", () => {
     expect(run.quarantineId).toBeUndefined();
   });
 
+  it("retains changed catalog coordinates in schema valid monitor evidence", async () => {
+    const run = buildMonitorRun(
+      observation({
+        outcome: "additions",
+        addedCoordinates: ["net.minecraftforge:forge:1.20.1-47.2.0"],
+        changedCoordinates: ["net.minecraftforge:forge:1.20.1-47.2.0"],
+      }),
+    );
+    expect(run.changedCoordinates).toEqual([
+      "net.minecraftforge:forge:1.20.1-47.2.0",
+    ]);
+    expect(run.classification).toBe("review");
+    expect(validateWithSchema(await createSchemaRegistry(), run).valid).toBe(
+      true,
+    );
+  });
+
   it("turns an exhausted transient outage into review without deleting baseline", () => {
     const run = buildMonitorRun(
       observation({

@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:schema:maintenance-pull-request:1",
+  "title": "MCGen repository local maintenance pull request manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "kind",
+    "pullRequestId",
+    "digest",
+    "generatedAt",
+    "deduplicationKey",
+    "status",
+    "blockers",
+    "sourceFamily",
+    "baseline",
+    "candidate",
+    "branchName",
+    "title",
+    "body",
+    "sourceDelta",
+    "catalogDelta",
+    "blastRadius",
+    "evidence",
+    "coverage",
+    "changedFiles",
+    "verification",
+    "publication"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:schema:maintenance-pull-request:1" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "maintenance-pull-request" },
+    "pullRequestId": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "deduplicationKey": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+    "status": { "enum": ["no-change", "ready-for-review", "blocked"] },
+    "blockers": { "$ref": "#/$defs/strings" },
+    "sourceFamily": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "baseline": { "$ref": "#/$defs/snapshot" },
+    "candidate": {
+      "anyOf": [{ "$ref": "#/$defs/snapshot" }, { "type": "null" }]
+    },
+    "branchName": {
+      "type": "string",
+      "pattern": "^envy/maintenance/[a-f0-9]{16}$"
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "body": { "type": "string", "minLength": 1, "maxLength": 8192 },
+    "sourceDelta": { "$ref": "#/$defs/sourceDelta" },
+    "catalogDelta": { "$ref": "#/$defs/catalogDelta" },
+    "blastRadius": { "$ref": "#/$defs/blastRadius" },
+    "evidence": { "$ref": "#/$defs/evidence" },
+    "coverage": { "$ref": "#/$defs/coverage" },
+    "changedFiles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/changedFile" }
+    },
+    "verification": { "$ref": "#/$defs/verification" },
+    "publication": { "$ref": "#/$defs/publication" }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "digest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "digest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    },
+    "sourceChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "previousDigest", "candidateDigest"],
+      "properties": {
+        "sourceId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "previousDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+        "candidateDigest": { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" }
+      }
+    },
+    "sourceDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addedSourceIds", "removedSourceIds", "changedSources"],
+      "properties": {
+        "addedSourceIds": { "$ref": "#/$defs/identifiers" },
+        "removedSourceIds": { "$ref": "#/$defs/identifiers" },
+        "changedSources": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/sourceChange" }
+        }
+      }
+    },
+    "catalogDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addedCoordinates",
+        "removedCoordinates",
+        "changedCoordinates"
+      ],
+      "properties": {
+        "addedCoordinates": { "$ref": "#/$defs/strings" },
+        "removedCoordinates": { "$ref": "#/$defs/strings" },
+        "changedCoordinates": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "blastRadius": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["families", "profiles", "tuples"],
+      "properties": {
+        "families": { "$ref": "#/$defs/identifiers" },
+        "profiles": { "$ref": "#/$defs/identifiers" },
+        "tuples": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invalidationPlanId", "invalidatedTupleIds", "rebuildScope"],
+      "properties": {
+        "invalidationPlanId": {
+          "anyOf": [
+            { "$ref": "urn:mcgen:schema:common:1#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "invalidatedTupleIds": { "$ref": "#/$defs/strings" },
+        "rebuildScope": { "$ref": "#/$defs/identifiers" }
+      }
+    },
+    "coveragePoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "verified", "unresolved"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "verified": { "type": "integer", "minimum": 0 },
+        "unresolved": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseline", "candidate", "delta", "blockers"],
+      "properties": {
+        "baseline": {
+          "anyOf": [{ "$ref": "#/$defs/coveragePoint" }, { "type": "null" }]
+        },
+        "candidate": {
+          "anyOf": [{ "$ref": "#/$defs/coveragePoint" }, { "type": "null" }]
+        },
+        "delta": { "$ref": "#/$defs/coverageDelta" },
+        "blockers": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "coverageDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "verified", "unresolved"],
+      "properties": {
+        "total": { "type": ["integer", "null"] },
+        "verified": { "type": ["integer", "null"] },
+        "unresolved": { "type": ["integer", "null"] }
+      }
+    },
+    "changedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "area"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9._/-]+$"
+        },
+        "area": { "enum": ["source", "catalog", "other"] }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commands",
+        "exactTupleIds",
+        "deterministicRequired",
+        "artifactInspectionRequired"
+      ],
+      "properties": {
+        "commands": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        },
+        "exactTupleIds": { "$ref": "#/$defs/strings" },
+        "deterministicRequired": { "const": true },
+        "artifactInspectionRequired": { "const": true }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseBranch",
+        "createBranch",
+        "createPullRequest",
+        "remoteWrites",
+        "githubAppDeferred",
+        "preserveBaseline",
+        "requiresReview",
+        "autoMerge",
+        "majorBoundaryReviewRequired"
+      ],
+      "properties": {
+        "baseBranch": { "const": "main" },
+        "createBranch": { "type": "boolean" },
+        "createPullRequest": { "type": "boolean" },
+        "remoteWrites": { "const": false },
+        "githubAppDeferred": { "const": true },
+        "preserveBaseline": { "const": true },
+        "requiresReview": { "const": true },
+        "autoMerge": { "const": false },
+        "majorBoundaryReviewRequired": { "const": true }
+      }
+    },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "identifiers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+    }
+  }
+}
