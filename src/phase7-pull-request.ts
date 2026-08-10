@@ -183,7 +183,7 @@ function normalizedCoverage(
 function monitorDeltas(
   plan: MaintenancePlan,
   monitor:
-    | Pick<
+    | (Pick<
         MonitorRun,
         | "sourceFamily"
         | "baseline"
@@ -192,7 +192,7 @@ function monitorDeltas(
         | "removedCoordinates"
         | "changedSources"
         | "affectedTuples"
-      >
+      > & { changedCoordinates?: readonly string[] })
     | undefined,
 ) {
   if (!monitor) {
@@ -252,7 +252,7 @@ function monitorDeltas(
     changedSources,
     addedCoordinates: sorted(monitor.addedCoordinates),
     removedCoordinates: sorted(monitor.removedCoordinates),
-    changedCoordinates: [],
+    changedCoordinates: sorted(monitor.changedCoordinates ?? []),
     tuples: sorted([...plan.affectedTuples, ...monitor.affectedTuples]),
   };
 }
@@ -268,7 +268,7 @@ export function buildMaintenancePullRequest(input: {
     | "removedCoordinates"
     | "changedSources"
     | "affectedTuples"
-  >;
+  > & { changedCoordinates?: readonly string[] };
   invalidation?: Pick<
     InvalidationPlan,
     "planId" | "sourceFamily" | "tupleIds" | "summary"
@@ -336,14 +336,22 @@ export function buildMaintenancePullRequest(input: {
     );
   if (plan.action === "quarantine")
     blockers.push("candidate is quarantined and publication is blocked");
+  const coverage = normalizedCoverage(input.coverage, requiredReview);
+  const coverageBlockers = sorted(coverage.blockers);
+  if (coverageBlockers.length && plan.action !== "preserve")
+    blockers.push(
+      ...coverageBlockers.map((blocker) => `coverage blocker, ${blocker}`),
+    );
+  if (requiredReview && tuples.length === 0)
+    blockers.push(
+      "exact tuple verification ids are required for material maintenance changes",
+    );
   const status: MaintenancePullRequest["status"] =
     plan.action === "preserve"
       ? "no-change"
       : blockers.length
         ? "blocked"
         : "ready-for-review";
-  const coverage = normalizedCoverage(input.coverage, requiredReview);
-  const coverageBlockers = sorted(coverage.blockers);
   const affectedFamilies = families;
   const boundary =
     plan.action === "review" ||

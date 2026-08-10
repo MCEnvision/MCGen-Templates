@@ -161,4 +161,60 @@ describe("phase 7 maintenance pull request manifests", () => {
     ).toThrow(/baseline does not match/u);
     expect(sha256(canonicalJson([]))).toHaveLength(64);
   });
+
+  it("blocks publication when coverage or exact tuple evidence is incomplete", () => {
+    const coverageBlocked = buildMaintenancePullRequest({
+      plan: plan(),
+      monitor: monitor(),
+      coverage: {
+        baseline: { total: 1, verified: 1, unresolved: 0 },
+        candidate: { total: 2, verified: 1, unresolved: 1 },
+        blockers: ["tuple evidence is pending"],
+      },
+      generatedAt: "2026-08-10T00:00:00.000Z",
+    });
+    expect(coverageBlocked.status).toBe("blocked");
+    expect(coverageBlocked.blockers).toContain(
+      "coverage blocker, tuple evidence is pending",
+    );
+    expect(coverageBlocked.publication.createPullRequest).toBe(false);
+
+    const noTuples = buildMaintenancePullRequest({
+      plan: { ...plan(), affectedTuples: [] },
+      monitor: {
+        ...monitor(),
+        affectedTuples: [],
+      },
+      coverage: {
+        baseline: { total: 1, verified: 1, unresolved: 0 },
+        candidate: { total: 1, verified: 1, unresolved: 0 },
+        blockers: [],
+      },
+      generatedAt: "2026-08-10T00:00:00.000Z",
+    });
+    expect(noTuples.status).toBe("blocked");
+    expect(noTuples.blockers).toContain(
+      "exact tuple verification ids are required for material maintenance changes",
+    );
+    expect(noTuples.publication.createPullRequest).toBe(false);
+  });
+
+  it("preserves explicitly supplied changed catalog coordinates", () => {
+    const result = buildMaintenancePullRequest({
+      plan: plan(),
+      monitor: {
+        ...monitor(),
+        changedCoordinates: ["net.minecraftforge:forge:1.20.1-47.3.0"],
+      },
+      coverage: {
+        baseline: { total: 1, verified: 1, unresolved: 0 },
+        candidate: { total: 1, verified: 1, unresolved: 0 },
+        blockers: [],
+      },
+      generatedAt: "2026-08-10T00:00:00.000Z",
+    });
+    expect(result.catalogDelta.changedCoordinates).toEqual([
+      "net.minecraftforge:forge:1.20.1-47.3.0",
+    ]);
+  });
 });
