@@ -131,9 +131,9 @@ Complete only when this identity reconciliation is present on `main` and the ver
 
 ### Git identity and signing
 
-1. Configure every locally created source commit and annotated tag with `EnVy` and `contact.enviouse@gmail.com` as the sole author, committer, and tagger identity.
-2. Use the registered EnVisione SSH signing key for locally created commits and annotated tags.
-3. Verify signed source commits and annotated tags on GitHub after push.
+1. Configure every locally created repository commit with `EnVy` and `contact.enviouse@gmail.com` as both author and committer. Configure every annotated tag with that identity as tagger.
+2. Use the registered EnVisione SSH signing key for locally created repository commits and annotated tags.
+3. Verify signed repository commits and annotated tags on GitHub after push.
 4. Treat GitHub generated pull request merge commits as platform authored objects. GitHub is their committer and must provide valid GitHub signature verification.
 5. Require the merge author to be `EnVy`. Use the GraphQL `authorEmail` input with `contact.enviouse@gmail.com` for future merges when that merge interface is available.
 6. Preserve already published verified merge commits even when they used another approved EnVisione account email. Do not rewrite protected history to change merge metadata.

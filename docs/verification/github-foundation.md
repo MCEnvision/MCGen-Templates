@@ -23,9 +23,9 @@ The repository license remains an explicit owner decision. No template pack rele
 
 ## Git Identity and Signing
 
-1. Every locally created source commit and annotated tag uses `EnVy` with `contact.enviouse@gmail.com` as its author, committer, or tagger identity.
-2. Locally created commits and annotated tags use SSH signing key fingerprint `SHA256:5jmRCFzo+bZaW2BhCjheIiFmhSXZTs+m3gah/SANlhI`.
-3. Local signing is mandatory for source commits and annotated tags.
+1. Every locally created repository commit uses `EnVy` with `contact.enviouse@gmail.com` as both author and committer. Every annotated tag uses that identity as tagger.
+2. Locally created repository commits and annotated tags use SSH signing key fingerprint `SHA256:5jmRCFzo+bZaW2BhCjheIiFmhSXZTs+m3gah/SANlhI`.
+3. Local signing is mandatory for repository commits and annotated tags.
 4. GitHub generated pull request merge commits are platform authored objects. GitHub is necessarily their committer and must provide valid GitHub signature verification.
 5. Future GraphQL merges explicitly set `authorEmail` to `contact.enviouse@gmail.com`. The merge author remains `EnVy`.
 6. Pull request 14 predates that explicit merge input. Its verified GitHub merge commit uses `EnVy` with an approved EnVisione account email and GitHub as the signed committer. Protected published history is not rewritten solely to change merge metadata.
