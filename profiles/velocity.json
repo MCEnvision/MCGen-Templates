@@ -1,129 +1,197 @@
 {
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
-  "schemaVersion": 1,
-  "id": "velocity",
-  "revision": 1,
-  "status": "blocked",
-  "family": "velocity",
-  "category": "proxy",
-  "platform": "velocity",
-  "blockers": [
-    {
-      "id": "velocity-api-evidence",
-      "reason": "Velocity API lines, Java, metadata, and optional Kotlin or annotation processing boundaries need compilation evidence.",
-      "evidence": ["sources/snapshots/velocity/2026-08-10-r2.json"],
-      "resolution": "Verify one API line per structural metadata boundary before enabling the profile."
-    }
-  ],
+  "artifact": {
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 128,
+    "metadataFields": {
+      "id": "tuple-probe",
+      "main": "org.example.tuple.TupleProbe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "metadataPaths": ["velocity-plugin.json"],
+    "patterns": ["build/libs/tuple-probe-1.0.0.jar"],
+    "projectIdentity": {
+      "id": "tuple-probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "requiredEntries": [
+      "velocity-plugin.json",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "resourceNamespaces": []
+  },
+  "build": {
+    "dsl": "groovy",
+    "jvmArguments": [],
+    "plugins": [
+      {
+        "id": "java",
+        "repositoryIds": ["central"],
+        "version": "8.8"
+      }
+    ],
+    "properties": [],
+    "publishing": false,
+    "sourceSets": [],
+    "system": "gradle",
+    "tasks": [],
+    "wrapper": "8.8",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperKind": "launcher-script",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
+  },
   "catalog": {
-    "snapshotId": "2026-08-10-r4",
-    "indexPath": "catalog/2026-08-10-r4/platforms/velocity/index.json",
-    "indexSha256": "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064",
+    "indexPath": "catalog/2026-08-10-final/platforms/velocity/index.json",
+    "indexSha256": "ee334fa27b48045f5a68823abd36f9cefbce2e8ccbe6d1edb9fa3f67f6a00e91",
     "selectors": [
       {
-        "platform": "velocity",
-        "keyKind": "api",
-        "keys": { "mode": "all-shards" },
         "components": [
           {
             "component": "velocity-api",
             "coordinatePrefix": "com.velocitypowered:velocity-api:",
-            "mode": "all-components"
+            "mode": "explicit",
+            "versions": ["com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"]
           }
         ],
         "evidence": [
           {
-            "snapshotId": "velocity.0dd1e06d8ce24cb894449c49",
             "path": "sources/snapshots/velocity/2026-08-10-r2.json",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"],
             "sha256": "c479700cb3461ad419add8657eafbc7bfe317c4a5c122e15b4ab8b7ee04879f3",
-            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+            "snapshotId": "velocity.0dd1e06d8ce24cb894449c49"
           }
-        ]
+        ],
+        "keyKind": "api",
+        "keys": {
+          "mode": "explicit",
+          "values": ["3.3"]
+        },
+        "platform": "velocity"
       }
-    ]
+    ],
+    "snapshotId": "2026-08-10-final"
   },
+  "category": "proxy",
   "components": [
     {
-      "id": "velocity-api",
+      "catalogComponent": "velocity-api",
       "coordinate": "com.velocitypowered:velocity-api",
-      "version": "selected-from-catalog",
+      "id": "velocity-api",
       "range": "api-key-compatible",
       "required": true,
-      "catalogComponent": "velocity-api"
+      "version": "3.3.0-SNAPSHOT"
+    }
+  ],
+  "fallback": {
+    "migration": "Use the reviewed Velocity 3.3 API boundary or select a newer explicitly verified profile.",
+    "policy": "blocked"
+  },
+  "family": "velocity",
+  "features": [
+    {
+      "id": "commands",
+      "support": "supported"
+    },
+    {
+      "id": "event-listeners",
+      "support": "supported"
+    },
+    {
+      "id": "annotation-processing",
+      "support": "conditional"
+    }
+  ],
+  "id": "velocity",
+  "incompatibilities": [
+    {
+      "condition": "selected Velocity API line changes metadata or dependency semantics",
+      "id": "api-history",
+      "reason": "Proxy API compatibility is independent from Minecraft patch versions.",
+      "resolution": "Split a profile at the documented API boundary."
     }
   ],
   "java": {
+    "bytecode": 17,
     "distribution": "temurin",
-    "runtime": 17,
     "language": 17,
-    "bytecode": 17
+    "runtime": 17
   },
-  "build": {
-    "system": "gradle",
-    "wrapper": "8.8",
-    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
-    "dsl": "kotlin",
-    "plugins": [
-      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
+  "languages": ["java", "kotlin"],
+  "mappings": {
+    "components": [],
+    "strategy": "none"
+  },
+  "metadata": {
+    "fieldMappings": [
+      {
+        "field": "project.id",
+        "path": "id",
+        "required": true
+      },
+      {
+        "field": "project.name",
+        "path": "name",
+        "required": true
+      },
+      {
+        "field": "project.mainClass",
+        "path": "main",
+        "required": true
+      },
+      {
+        "field": "project.version",
+        "path": "version",
+        "required": true
+      }
     ],
-    "properties": [],
-    "jvmArguments": [],
-    "sourceSets": [],
-    "tasks": [],
-    "publishing": false
+    "files": ["src/main/resources/velocity-plugin.json"],
+    "format": "velocity-plugin-json"
   },
+  "platform": "velocity",
   "repositories": [
     {
       "id": "velocity",
       "url": "https://repo.papermc.io/repository/maven-public/"
     },
-    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
-  ],
-  "mappings": { "strategy": "none", "components": [] },
-  "metadata": {
-    "format": "velocity-plugin-json",
-    "files": ["src/main/resources/velocity-plugin.json"],
-    "fieldMappings": [
-      { "field": "project.id", "path": "id", "required": true },
-      { "field": "project.name", "path": "name", "required": true },
-      { "field": "project.mainClass", "path": "main", "required": true },
-      { "field": "project.version", "path": "version", "required": true }
-    ]
-  },
-  "sourceLayout": {
-    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
-    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
-    "testRoots": [{ "name": "test", "path": "src/test/java" }]
-  },
-  "languages": ["java", "kotlin"],
-  "features": [
-    { "id": "commands", "support": "supported" },
-    { "id": "event-listeners", "support": "supported" },
-    { "id": "annotation-processing", "support": "conditional" }
-  ],
-  "incompatibilities": [
     {
-      "id": "api-history",
-      "condition": "selected Velocity API line changes metadata or dependency semantics",
-      "reason": "Proxy API compatibility is independent from Minecraft patch versions.",
-      "resolution": "Split a profile at the documented API boundary."
+      "id": "central",
+      "url": "https://repo.maven.apache.org/maven2/"
     }
   ],
+  "revision": 2,
+  "schemaVersion": 1,
+  "sourceLayout": {
+    "resourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/resources"
+      }
+    ],
+    "sourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/java"
+      }
+    ],
+    "testRoots": [
+      {
+        "name": "test",
+        "path": "src/test/java"
+      }
+    ]
+  },
+  "status": "reviewed",
   "verification": {
+    "artifactPatterns": ["build/libs/tuple-probe-1.0.0.jar"],
     "commands": [
       ["./gradlew", "build"],
       ["./gradlew", "test"]
     ],
-    "artifactPatterns": ["build/libs/*.jar"],
     "inspection": ["velocity-plugin.json"]
-  },
-  "artifact": {
-    "patterns": ["build/libs/*.jar"],
-    "metadataPaths": ["velocity-plugin.json"],
-    "requiredEntries": ["velocity-plugin.json"]
-  },
-  "fallback": {
-    "policy": "blocked",
-    "migration": "Resolve the exact Velocity API and Java tuple before generation."
   }
 }

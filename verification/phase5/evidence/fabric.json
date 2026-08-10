@@ -1,0 +1,135 @@
+{
+  "$schema": "urn:mcgen:schema:tuple-evidence:1",
+  "artifact": {
+    "bytes": 1926,
+    "entries": [
+      "fabric.mod.json",
+      "META-INF/MANIFEST.MF",
+      "META-INF/mcgen-advanced-fields.json",
+      "org/example/tuple/TupleProbe.class"
+    ],
+    "failures": [],
+    "metadata": [
+      {
+        "format": "json",
+        "path": "fabric.mod.json",
+        "valid": true,
+        "values": {
+          "authors[0]": "EnVy",
+          "description": "tuple probe",
+          "entrypoints.main[0]": "org.example.tuple.TupleProbe",
+          "environment": "*",
+          "id": "tuple-probe",
+          "license": "MIT",
+          "name": "Tuple Probe",
+          "schemaVersion": "1",
+          "version": "1.0.0"
+        }
+      }
+    ],
+    "path": "build/libs/tuple-probe-1.0.0.jar",
+    "sha256": "d4680c799f5edd6819e3507eb0e21f2bc22ec37a9efb19349c84fb9359417f41",
+    "status": "passed",
+    "warnings": []
+  },
+  "blockers": [],
+  "build": {
+    "commands": [
+      {
+        "command": [
+          "./gradlew",
+          "build"
+        ],
+        "diskBytes": 38473373,
+        "durationMs": 9944,
+        "exitCode": 0,
+        "outputBytes": 986,
+        "outputDigest": "5956ec42d9cf62cf73561087e26b742f09ca941e05a5825dfade5ba3678fdaf3"
+      },
+      {
+        "command": [
+          "./gradlew",
+          "test"
+        ],
+        "diskBytes": 38473373,
+        "durationMs": 742,
+        "exitCode": 0,
+        "outputBytes": 795,
+        "outputDigest": "b237834ebbfedadfb124f961a99bf1f8a683910bafedf080cc8355b739f14d35"
+      }
+    ],
+    "finishedAt": "2026-08-10T19:22:07.109Z",
+    "startedAt": "2026-08-10T00:00:00.000Z",
+    "status": "passed"
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
+  "invalidation": {
+    "contentDigests": {
+      "catalog": "efb9845ee8609aca9f6c3266b5ebed45e216d120297b55a2d0daf6062609f7ce",
+      "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
+      "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+      "profile": "b8b4c8072bcb7d9be8d310362e1c8b7df200453614858f38eba486297819d11a",
+      "template": "43496aeafdf735678094bf9e6e66b4f92133a327efe03ea5a445b524bedc3082"
+    },
+    "descriptorRevision": 3,
+    "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+    "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
+    "profileRevision": 2,
+    "sourceDigests": [
+      "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
+    ],
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
+  },
+  "key": {
+    "digest": "2b7cb4c87b0ac11f5f09c90c394ad3649f7d8d384f2366fd57dd2e94bf226b68",
+    "identity": {
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "fabricApi": "0.92.2+1.20.1",
+        "loader": "0.15.11",
+        "minecraft": "1.20.1",
+        "yarn": "1.20.1+build.10"
+      },
+      "contentDigests": {
+        "catalog": "efb9845ee8609aca9f6c3266b5ebed45e216d120297b55a2d0daf6062609f7ce",
+        "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
+        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+        "profile": "b8b4c8072bcb7d9be8d310362e1c8b7df200453614858f38eba486297819d11a",
+        "template": "43496aeafdf735678094bf9e6e66b4f92133a327efe03ea5a445b524bedc3082"
+      },
+      "descriptorId": "fabric",
+      "descriptorRevision": 3,
+      "family": "fabric",
+      "fixtureId": "fabric.fabric.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
+      "profileId": "fabric",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
+      ],
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    }
+  },
+  "outputTreeDigest": "c711f9e47c148598e90e39078c4cb98ae379153bb84da7bd01d051d52395665f",
+  "reproducibility": {
+    "differences": [],
+    "firstDigest": "c711f9e47c148598e90e39078c4cb98ae379153bb84da7bd01d051d52395665f",
+    "reproducible": true,
+    "secondDigest": "c711f9e47c148598e90e39078c4cb98ae379153bb84da7bd01d051d52395665f"
+  },
+  "schemaVersion": 1,
+  "status": "verified"
+}

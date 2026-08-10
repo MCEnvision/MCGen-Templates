@@ -509,7 +509,7 @@ After the catalog phase begins, `MCEnvision/MCGen-Templates` should maintain a m
 Example:
 
 ```text
-catalog/index.json
+catalog/<snapshot>/index.json
 ```
 
 Concept:
@@ -5156,14 +5156,14 @@ Changing recommendation policy creates a catalog revision and does not mutate ex
 Use a small root index and content-addressed platform shards:
 
 ```text
-catalog/index.json
-catalog/sources/<snapshot-digest>.json
-catalog/platforms/forge/index.json
-catalog/platforms/forge/1.20.1.json
-catalog/platforms/fabric/1.21.1.json
-catalog/profiles/<profile-id>.json
-catalog/evidence/<tuple-digest>.json
-catalog/coverage.json
+catalog/<snapshot>/index.json
+catalog/<snapshot>/sources/<snapshot-digest>.json
+catalog/<snapshot>/platforms/forge/index.json
+catalog/<snapshot>/platforms/forge/1.20.1.<digest>.json
+catalog/<snapshot>/platforms/fabric/1.21.1.<digest>.json
+catalog/<snapshot>/profiles/<profile-id>.json
+catalog/<snapshot>/evidence/<tuple-digest>.json
+catalog/<snapshot>/coverage.json
 ```
 
 The root index maps platform and catalog keys to shard digests. Every client verifies the digest before parsing. Shards permit thousands of exact builds without making first page load proportional to the entire ecosystem history.

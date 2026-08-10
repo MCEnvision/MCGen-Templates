@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+repositories {
+    maven {
+        url = uri('https://repo.papermc.io/repository/maven-public/')
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly '${platform.components.paper}'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Jar).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

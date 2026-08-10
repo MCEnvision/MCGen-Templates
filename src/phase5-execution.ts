@@ -82,9 +82,15 @@ async function outputTreeFiles(
 ): Promise<ReproducibilityFile[]> {
   const files: ReproducibilityFile[] = [];
   for (const entry of await readdir(current, { withFileTypes: true })) {
-    if (entry.isDirectory() && [".gradle", ".git", "logs"].includes(entry.name))
-      continue;
     const path = join(current, entry.name);
+    const relativePath = relative(root, path).replaceAll("\\", "/");
+    if (
+      entry.isDirectory() &&
+      ([".gradle", ".git", "logs"].includes(entry.name) ||
+        relativePath === "build/loom-cache" ||
+        relativePath.startsWith("build/loom-cache/"))
+    )
+      continue;
     if (entry.isSymbolicLink())
       throw new Error(`build output contains a symbolic link ${path}`);
     if (entry.isDirectory()) {
@@ -95,7 +101,7 @@ async function outputTreeFiles(
       throw new Error(`build output contains a special file ${path}`);
     const content = await readFile(path);
     files.push({
-      path: relative(root, path).replaceAll("\\", "/"),
+      path: relativePath,
       sha256: sha256(content),
       bytes: content.byteLength,
     });

@@ -93,6 +93,7 @@ export function buildCatalog(input: CatalogBuildInput): CatalogBuildResult {
       categoryByPlatform: input.categoryByPlatform,
       keyKindByPlatform: input.keyKindByPlatform,
       recommendationPolicy,
+      coverageMappingVersion: 1,
     }),
   ).slice(0, 24)}`;
 
@@ -258,6 +259,7 @@ export function buildCatalog(input: CatalogBuildInput): CatalogBuildResult {
     catalogId,
     sourceDocuments,
     shards.map(({ document }) => document),
+    input.coverageEvidence,
   );
   const coveragePath = catalogPath(outputRoot, "coverage.json");
   const policyPath = catalogPath(outputRoot, "recommendation-policy.json");

@@ -1,129 +1,199 @@
 {
   "$schema": "urn:mcgen:schema:matrix-plan:1",
-  "digest": "26e40eb128ece4c74dab209454a9e4d2bd6e9b15fa2cb1b8b80ce605f5fdd99e",
-  "kind": "matrix-plan",
   "schemaVersion": 1,
-  "shardCount": 2,
-  "shards": [
-    {
-      "digest": "ad34c8749cf6c4f9e8eed6134a6a0335049b43ac106428c00a4f1cd9ad2b74d0",
-      "index": 0,
-      "tuples": [
-        {
-          "blockers": [],
-          "descriptorRevision": 1,
-          "id": "80265f380f7e2feb3c1ea14b9216f795ec9836db3da37422f44d5d260a9f20b4",
-          "identity": {
-            "catalogKey": "1.21.1",
-            "catalogSnapshotId": "2026-08-10-r4",
-            "components": {
-              "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
-            },
-            "contentDigests": {
-              "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
-              "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
-              "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-              "profile": "0cffc1bd8444d4a459fbec0e19d69f91334245155503bd0964fcbca4ca6a3338",
-              "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
-            },
-            "descriptorId": "spigot-modern",
-            "descriptorRevision": 1,
-            "family": "spigot-modern",
-            "fixtureId": "spigot-modern.spigot-modern.minimal-java.java",
-            "java": {
-              "distribution": "temurin",
-              "runtime": 21
-            },
-            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-            "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
-            "profileId": "spigot-modern",
-            "profileRevision": 1,
-            "sourceDigests": [
-              "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
-              "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
-              "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
-            ],
-            "wrapper": {
-              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
-              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
-              "kind": "launcher-script",
-              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
-              "version": "8.8"
-            }
-          },
-          "profileRevision": 1,
-          "status": "discovered"
-        }
-      ]
-    },
-    {
-      "digest": "ab1032018c6a88ed280332b26168cc9b5c5e4a87d9ed873327413b945d35238f",
-      "index": 1,
-      "tuples": [
-        {
-          "blockers": [],
-          "descriptorRevision": 1,
-          "id": "4543b3f9ccae9f1843fb218c7cf9b08eb8aec566b20e5221e519fe24039ffd64",
-          "identity": {
-            "catalogKey": "1.8.8",
-            "catalogSnapshotId": "2026-08-10-r4",
-            "components": {
-              "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
-            },
-            "contentDigests": {
-              "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
-              "descriptor": "b887a9a8c1b44892a3df41b5ba739d20036a1b17a13cd6fd92eb762a19154b28",
-              "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-              "profile": "ed67db1e57580a0c143e2b5da2ccf9981d65cff3b58c21a7e166c77a4efe7684",
-              "template": "c6ef694ce5e323081973cde551bbaf0d7ebc5ccd2effa23be69ed37d1adcdf8a"
-            },
-            "descriptorId": "spigot-legacy",
-            "descriptorRevision": 1,
-            "family": "spigot-legacy",
-            "fixtureId": "spigot-legacy.spigot-legacy.minimal-java.java",
-            "java": {
-              "distribution": "temurin",
-              "runtime": 8
-            },
-            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-            "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
-            "profileId": "spigot-legacy",
-            "profileRevision": 1,
-            "sourceDigests": [
-              "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
-              "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
-              "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
-            ],
-            "wrapper": {
-              "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
-              "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
-              "kind": "launcher-script",
-              "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
-              "version": "7.6.4"
-            }
-          },
-          "profileRevision": 1,
-          "status": "discovered"
-        }
-      ]
-    }
-  ],
+  "kind": "matrix-plan",
+  "shardCount": 4,
   "tuples": [
     {
       "blockers": [],
+      "descriptorRevision": 2,
+      "id": "09caf147ef5e6c53777366c0bdf9e2149e7692d64687ca0f5e32bd0af638155e",
+      "identity": {
+        "catalogKey": "10.0",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "spongeapi": "org.spongepowered:spongeapi:10.0.0"
+        },
+        "contentDigests": {
+          "catalog": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
+          "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
+          "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+          "profile": "6f5601935bac9a11bcc08dcfd973ebd244458a37c42fa8bd9d64cd80f0564ca4",
+          "template": "b2b29ac7914e56c89a34127716f31cdc77a54557c08a47270864fcdd028adb7b"
+        },
+        "descriptorId": "sponge",
+        "descriptorRevision": 2,
+        "family": "sponge",
+        "fixtureId": "sponge.sponge.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 17
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+        "profileId": "sponge",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
+        ],
+        "wrapper": {
+          "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+          "version": "8.8"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 2,
+      "id": "17c4001889089e0d3322614bede681f2228d8142dd3954886298f80ae1adec36",
+      "identity": {
+        "catalogKey": "3.3",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "velocity": "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
+        },
+        "contentDigests": {
+          "catalog": "ee334fa27b48045f5a68823abd36f9cefbce2e8ccbe6d1edb9fa3f67f6a00e91",
+          "descriptor": "3d7eb28d76c3c0a9ef65cc3b9ebab2f640214d2a47eb7f6062cd2991ca0e0d12",
+          "fixture": "d2b6a9c1246e201b693a90aa21ec9cc7d1cf9d519b1f0d75edbd367b6298f291",
+          "profile": "7e9c94aabe9c9406520e36a8b1bea428fd21a6c049ffdf2dee4985bde5c6930d",
+          "template": "1cbb6458fd935d35a33d82f09d062b797c736d6edcd8510efa7996ab16fd98d0"
+        },
+        "descriptorId": "velocity",
+        "descriptorRevision": 2,
+        "family": "velocity",
+        "fixtureId": "velocity.velocity.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 17
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "68d5f6ff884fbe616437dda2480cd37380126a529054b256a3bf5e262a2f3954",
+        "profileId": "velocity",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064"
+        ],
+        "wrapper": {
+          "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+          "version": "8.8"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 2,
+      "id": "19496ede72ee40b625f2aa9c5498ea055d806ee427f7dcc59303e45100e189be",
+      "identity": {
+        "catalogKey": "1.21",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
+        },
+        "contentDigests": {
+          "catalog": "ee8b9e9ceffd6f9aa0b7382b994b3390e3d3fd676428e6fcdd9980d43af4e2b0",
+          "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
+          "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+          "profile": "6aa2d17e629983ac53bd2ed908ad2abc01bcd9a8c0d8e6f79ea67f3201532d29",
+          "template": "22e713507fb3b42cf5910dd0320218e4d115e7d3f279d374fa0ae7cc8407a546"
+        },
+        "descriptorId": "bungeecord",
+        "descriptorRevision": 2,
+        "family": "bungeecord",
+        "fixtureId": "bungeecord.bungeecord.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 8
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+        "profileId": "bungeecord",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
+        ],
+        "wrapper": {
+          "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+          "version": "7.6.4"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 3,
+      "id": "2b7cb4c87b0ac11f5f09c90c394ad3649f7d8d384f2366fd57dd2e94bf226b68",
+      "identity": {
+        "catalogKey": "1.20.1",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "fabricApi": "0.92.2+1.20.1",
+          "loader": "0.15.11",
+          "minecraft": "1.20.1",
+          "yarn": "1.20.1+build.10"
+        },
+        "contentDigests": {
+          "catalog": "efb9845ee8609aca9f6c3266b5ebed45e216d120297b55a2d0daf6062609f7ce",
+          "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
+          "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+          "profile": "b8b4c8072bcb7d9be8d310362e1c8b7df200453614858f38eba486297819d11a",
+          "template": "43496aeafdf735678094bf9e6e66b4f92133a327efe03ea5a445b524bedc3082"
+        },
+        "descriptorId": "fabric",
+        "descriptorRevision": 3,
+        "family": "fabric",
+        "fixtureId": "fabric.fabric.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 17
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
+        "profileId": "fabric",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
+        ],
+        "wrapper": {
+          "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+          "version": "8.8"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
+    },
+    {
+      "blockers": [],
       "descriptorRevision": 1,
-      "id": "4543b3f9ccae9f1843fb218c7cf9b08eb8aec566b20e5221e519fe24039ffd64",
+      "id": "4c20902df4f15b33ad8fdcce1d369d4ec5141a67dad30359307d0a8963eedb04",
       "identity": {
         "catalogKey": "1.8.8",
-        "catalogSnapshotId": "2026-08-10-r4",
+        "catalogSnapshotId": "2026-08-10-final",
         "components": {
           "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
         },
         "contentDigests": {
-          "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+          "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
           "descriptor": "b887a9a8c1b44892a3df41b5ba739d20036a1b17a13cd6fd92eb762a19154b28",
           "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-          "profile": "ed67db1e57580a0c143e2b5da2ccf9981d65cff3b58c21a7e166c77a4efe7684",
+          "profile": "bb8bb784051f30911adb51b86f83c1e7d152093f6b6f3b9bc5464e65ac3d5759",
           "template": "c6ef694ce5e323081973cde551bbaf0d7ebc5ccd2effa23be69ed37d1adcdf8a"
         },
         "descriptorId": "spigot-legacy",
@@ -152,23 +222,66 @@
         }
       },
       "profileRevision": 1,
-      "status": "discovered"
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 2,
+      "id": "720d1f166ccf26ff26bb15304cc20ea49484c3f263d82d56ef3faff3ec5c38f3",
+      "identity": {
+        "catalogKey": "1.8.8",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
+        },
+        "contentDigests": {
+          "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+          "descriptor": "d363cef61cf4c23f250418c8d14488681a6aec06895108fec0c60bced0cd3168",
+          "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+          "profile": "7abf5bada6179ce1d16b961301c5dc708a025182bb95b574ae61aeede2b8267a",
+          "template": "fbfa99d76ebb3591e2497cbd1e48243565be49c3b3f3b223c85243e05ffa4a45"
+        },
+        "descriptorId": "spigot",
+        "descriptorRevision": 2,
+        "family": "spigot",
+        "fixtureId": "spigot.spigot.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 8
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+        "profileId": "spigot",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003"
+        ],
+        "wrapper": {
+          "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+          "version": "7.6.4"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
     },
     {
       "blockers": [],
       "descriptorRevision": 1,
-      "id": "80265f380f7e2feb3c1ea14b9216f795ec9836db3da37422f44d5d260a9f20b4",
+      "id": "93920883baeefed5a8f972a90d60cc07b112e14d1a9168b07a8bdde908693720",
       "identity": {
         "catalogKey": "1.21.1",
-        "catalogSnapshotId": "2026-08-10-r4",
+        "catalogSnapshotId": "2026-08-10-final",
         "components": {
           "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
         },
         "contentDigests": {
-          "catalog": "1cec139a1510b5275611ab8c39b67898c925d8381333cbc4ee28151a1f2a791e",
+          "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
           "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
           "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-          "profile": "0cffc1bd8444d4a459fbec0e19d69f91334245155503bd0964fcbca4ca6a3338",
+          "profile": "e9079c6b8b6375c5d1c66746337c914f992c5e93f949bdf0430a1b71feb36aeb",
           "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
         },
         "descriptorId": "spigot-modern",
@@ -197,7 +310,600 @@
         }
       },
       "profileRevision": 1,
-      "status": "discovered"
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 2,
+      "id": "a81434dc04794c9e68c78d38f839394bc9b88bf0e8e5b5e652e0061a2fa0bb56",
+      "identity": {
+        "catalogKey": "1.20.1",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+        },
+        "contentDigests": {
+          "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+          "descriptor": "1e38af219787b3bae6108832aac327803052415b90829c23fa6f18eaf3ca1650",
+          "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+          "profile": "5c4ccd1e0db66eb26d701dc97d279b20de720c01dfefec342388a40540f69633",
+          "template": "4c0d6fa951b40ca6210f4f419c3675da8000ff4b99429d4c7086661ebcf02f45"
+        },
+        "descriptorId": "paper-traditional",
+        "descriptorRevision": 2,
+        "family": "paper",
+        "fixtureId": "paper-traditional.paper-traditional.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 17
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+        "profileId": "paper-traditional",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+        ],
+        "wrapper": {
+          "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+          "version": "8.8"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 2,
+      "id": "b9ea9b974e8dad7892d6260adf4b6aeb4b751c190076b967b430ff5a7f868a7f",
+      "identity": {
+        "catalogKey": "1.8.8",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "bukkit": "org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT"
+        },
+        "contentDigests": {
+          "catalog": "51d0d38c2858f40b7b3c25b06f8938c621069df0dec0ef4bbd58c8eba7741fa2",
+          "descriptor": "95f19ec4a46bb143a44fb254fc13f9c2c82c4468cdfbde9d870a30cba6c6892a",
+          "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+          "profile": "6b45d092f363beafc317360057deab016fb834fb9e325227b679260c069722d0",
+          "template": "4c3b95ba675919e1d11a5f0569136692d77ed5e8cd5d618ca7098158292ac863"
+        },
+        "descriptorId": "bukkit",
+        "descriptorRevision": 2,
+        "family": "bukkit",
+        "fixtureId": "bukkit.bukkit.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 8
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+        "profileId": "bukkit",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "57427a88f77c6214ac22572cca4cb8fb1d1bc42696c2bb9fe35eb90847184121"
+        ],
+        "wrapper": {
+          "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+          "version": "7.6.4"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
+    },
+    {
+      "blockers": [],
+      "descriptorRevision": 2,
+      "id": "c76215a84efb4deb0e296416d2eab1d85e69bca35423507a9bf7797e962e1669",
+      "identity": {
+        "catalogKey": "1.20.1",
+        "catalogSnapshotId": "2026-08-10-final",
+        "components": {
+          "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+        },
+        "contentDigests": {
+          "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+          "descriptor": "1d280f3275ed806fc56cce165b4b0e73703bb7b3a177cbe6d29879e7f1ea1cfa",
+          "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+          "profile": "06dc37876cb0b6fc55a51a1f2fa73c0784f4449a1251d7ff4731ac5eec5ebdb4",
+          "template": "0b37337dd7d471c8873aa38a4beb7ba82e68ece8b187ead22186a173d84cea70"
+        },
+        "descriptorId": "paper-modern",
+        "descriptorRevision": 2,
+        "family": "paper",
+        "fixtureId": "paper-modern.paper-modern.minimal-java.java",
+        "java": {
+          "distribution": "temurin",
+          "runtime": 21
+        },
+        "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+        "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+        "profileId": "paper-modern",
+        "profileRevision": 2,
+        "sourceDigests": [
+          "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+        ],
+        "wrapper": {
+          "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+          "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+          "kind": "launcher-script",
+          "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+          "version": "8.8"
+        }
+      },
+      "profileRevision": 2,
+      "status": "verified"
     }
-  ]
+  ],
+  "shards": [
+    {
+      "index": 0,
+      "tuples": [
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "17c4001889089e0d3322614bede681f2228d8142dd3954886298f80ae1adec36",
+          "identity": {
+            "catalogKey": "3.3",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "velocity": "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "ee334fa27b48045f5a68823abd36f9cefbce2e8ccbe6d1edb9fa3f67f6a00e91",
+              "descriptor": "3d7eb28d76c3c0a9ef65cc3b9ebab2f640214d2a47eb7f6062cd2991ca0e0d12",
+              "fixture": "d2b6a9c1246e201b693a90aa21ec9cc7d1cf9d519b1f0d75edbd367b6298f291",
+              "profile": "7e9c94aabe9c9406520e36a8b1bea428fd21a6c049ffdf2dee4985bde5c6930d",
+              "template": "1cbb6458fd935d35a33d82f09d062b797c736d6edcd8510efa7996ab16fd98d0"
+            },
+            "descriptorId": "velocity",
+            "descriptorRevision": 2,
+            "family": "velocity",
+            "fixtureId": "velocity.velocity.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 17
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "68d5f6ff884fbe616437dda2480cd37380126a529054b256a3bf5e262a2f3954",
+            "profileId": "velocity",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064"
+            ],
+            "wrapper": {
+              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+              "version": "8.8"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        },
+        {
+          "blockers": [],
+          "descriptorRevision": 3,
+          "id": "2b7cb4c87b0ac11f5f09c90c394ad3649f7d8d384f2366fd57dd2e94bf226b68",
+          "identity": {
+            "catalogKey": "1.20.1",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "fabricApi": "0.92.2+1.20.1",
+              "loader": "0.15.11",
+              "minecraft": "1.20.1",
+              "yarn": "1.20.1+build.10"
+            },
+            "contentDigests": {
+              "catalog": "efb9845ee8609aca9f6c3266b5ebed45e216d120297b55a2d0daf6062609f7ce",
+              "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
+              "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+              "profile": "b8b4c8072bcb7d9be8d310362e1c8b7df200453614858f38eba486297819d11a",
+              "template": "43496aeafdf735678094bf9e6e66b4f92133a327efe03ea5a445b524bedc3082"
+            },
+            "descriptorId": "fabric",
+            "descriptorRevision": 3,
+            "family": "fabric",
+            "fixtureId": "fabric.fabric.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 17
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
+            "profileId": "fabric",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
+            ],
+            "wrapper": {
+              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+              "version": "8.8"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        },
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "a81434dc04794c9e68c78d38f839394bc9b88bf0e8e5b5e652e0061a2fa0bb56",
+          "identity": {
+            "catalogKey": "1.20.1",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+              "descriptor": "1e38af219787b3bae6108832aac327803052415b90829c23fa6f18eaf3ca1650",
+              "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+              "profile": "5c4ccd1e0db66eb26d701dc97d279b20de720c01dfefec342388a40540f69633",
+              "template": "4c0d6fa951b40ca6210f4f419c3675da8000ff4b99429d4c7086661ebcf02f45"
+            },
+            "descriptorId": "paper-traditional",
+            "descriptorRevision": 2,
+            "family": "paper",
+            "fixtureId": "paper-traditional.paper-traditional.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 17
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+            "profileId": "paper-traditional",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+            ],
+            "wrapper": {
+              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+              "version": "8.8"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        },
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "c76215a84efb4deb0e296416d2eab1d85e69bca35423507a9bf7797e962e1669",
+          "identity": {
+            "catalogKey": "1.20.1",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+              "descriptor": "1d280f3275ed806fc56cce165b4b0e73703bb7b3a177cbe6d29879e7f1ea1cfa",
+              "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+              "profile": "06dc37876cb0b6fc55a51a1f2fa73c0784f4449a1251d7ff4731ac5eec5ebdb4",
+              "template": "0b37337dd7d471c8873aa38a4beb7ba82e68ece8b187ead22186a173d84cea70"
+            },
+            "descriptorId": "paper-modern",
+            "descriptorRevision": 2,
+            "family": "paper",
+            "fixtureId": "paper-modern.paper-modern.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 21
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+            "profileId": "paper-modern",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+            ],
+            "wrapper": {
+              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+              "version": "8.8"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        }
+      ],
+      "digest": "5f1083301df775b4c1787632f37f068555afcd9909c92a04e8daf951c294d45c"
+    },
+    {
+      "index": 1,
+      "tuples": [
+        {
+          "blockers": [],
+          "descriptorRevision": 1,
+          "id": "4c20902df4f15b33ad8fdcce1d369d4ec5141a67dad30359307d0a8963eedb04",
+          "identity": {
+            "catalogKey": "1.8.8",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+              "descriptor": "b887a9a8c1b44892a3df41b5ba739d20036a1b17a13cd6fd92eb762a19154b28",
+              "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+              "profile": "bb8bb784051f30911adb51b86f83c1e7d152093f6b6f3b9bc5464e65ac3d5759",
+              "template": "c6ef694ce5e323081973cde551bbaf0d7ebc5ccd2effa23be69ed37d1adcdf8a"
+            },
+            "descriptorId": "spigot-legacy",
+            "descriptorRevision": 1,
+            "family": "spigot-legacy",
+            "fixtureId": "spigot-legacy.spigot-legacy.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 8
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+            "profileId": "spigot-legacy",
+            "profileRevision": 1,
+            "sourceDigests": [
+              "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
+              "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+              "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+            ],
+            "wrapper": {
+              "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+              "version": "7.6.4"
+            }
+          },
+          "profileRevision": 1,
+          "status": "verified"
+        }
+      ],
+      "digest": "b2c90896d0710a155d673b60e56ae5819082838f409bd05626b51726094986b5"
+    },
+    {
+      "index": 2,
+      "tuples": [
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "19496ede72ee40b625f2aa9c5498ea055d806ee427f7dcc59303e45100e189be",
+          "identity": {
+            "catalogKey": "1.21",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "ee8b9e9ceffd6f9aa0b7382b994b3390e3d3fd676428e6fcdd9980d43af4e2b0",
+              "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
+              "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+              "profile": "6aa2d17e629983ac53bd2ed908ad2abc01bcd9a8c0d8e6f79ea67f3201532d29",
+              "template": "22e713507fb3b42cf5910dd0320218e4d115e7d3f279d374fa0ae7cc8407a546"
+            },
+            "descriptorId": "bungeecord",
+            "descriptorRevision": 2,
+            "family": "bungeecord",
+            "fixtureId": "bungeecord.bungeecord.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 8
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+            "profileId": "bungeecord",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
+            ],
+            "wrapper": {
+              "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+              "version": "7.6.4"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        },
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "720d1f166ccf26ff26bb15304cc20ea49484c3f263d82d56ef3faff3ec5c38f3",
+          "identity": {
+            "catalogKey": "1.8.8",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+              "descriptor": "d363cef61cf4c23f250418c8d14488681a6aec06895108fec0c60bced0cd3168",
+              "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+              "profile": "7abf5bada6179ce1d16b961301c5dc708a025182bb95b574ae61aeede2b8267a",
+              "template": "fbfa99d76ebb3591e2497cbd1e48243565be49c3b3f3b223c85243e05ffa4a45"
+            },
+            "descriptorId": "spigot",
+            "descriptorRevision": 2,
+            "family": "spigot",
+            "fixtureId": "spigot.spigot.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 8
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+            "profileId": "spigot",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003"
+            ],
+            "wrapper": {
+              "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+              "version": "7.6.4"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        }
+      ],
+      "digest": "4521c545408d5074c4267e245f2612ba5d54cefd8abdcb49105cbb627b232158"
+    },
+    {
+      "index": 3,
+      "tuples": [
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "09caf147ef5e6c53777366c0bdf9e2149e7692d64687ca0f5e32bd0af638155e",
+          "identity": {
+            "catalogKey": "10.0",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "spongeapi": "org.spongepowered:spongeapi:10.0.0"
+            },
+            "contentDigests": {
+              "catalog": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
+              "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
+              "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+              "profile": "6f5601935bac9a11bcc08dcfd973ebd244458a37c42fa8bd9d64cd80f0564ca4",
+              "template": "b2b29ac7914e56c89a34127716f31cdc77a54557c08a47270864fcdd028adb7b"
+            },
+            "descriptorId": "sponge",
+            "descriptorRevision": 2,
+            "family": "sponge",
+            "fixtureId": "sponge.sponge.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 17
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+            "profileId": "sponge",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
+            ],
+            "wrapper": {
+              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+              "version": "8.8"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        },
+        {
+          "blockers": [],
+          "descriptorRevision": 1,
+          "id": "93920883baeefed5a8f972a90d60cc07b112e14d1a9168b07a8bdde908693720",
+          "identity": {
+            "catalogKey": "1.21.1",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+              "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
+              "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
+              "profile": "e9079c6b8b6375c5d1c66746337c914f992c5e93f949bdf0430a1b71feb36aeb",
+              "template": "5e48371f4d89dad755f5c8a991f754853665e5f72c31b93ec2fb75af3c2c6863"
+            },
+            "descriptorId": "spigot-modern",
+            "descriptorRevision": 1,
+            "family": "spigot-modern",
+            "fixtureId": "spigot-modern.spigot-modern.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 21
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
+            "profileId": "spigot-modern",
+            "profileRevision": 1,
+            "sourceDigests": [
+              "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
+              "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
+              "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
+            ],
+            "wrapper": {
+              "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+              "version": "8.8"
+            }
+          },
+          "profileRevision": 1,
+          "status": "verified"
+        },
+        {
+          "blockers": [],
+          "descriptorRevision": 2,
+          "id": "b9ea9b974e8dad7892d6260adf4b6aeb4b751c190076b967b430ff5a7f868a7f",
+          "identity": {
+            "catalogKey": "1.8.8",
+            "catalogSnapshotId": "2026-08-10-final",
+            "components": {
+              "bukkit": "org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT"
+            },
+            "contentDigests": {
+              "catalog": "51d0d38c2858f40b7b3c25b06f8938c621069df0dec0ef4bbd58c8eba7741fa2",
+              "descriptor": "95f19ec4a46bb143a44fb254fc13f9c2c82c4468cdfbde9d870a30cba6c6892a",
+              "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+              "profile": "6b45d092f363beafc317360057deab016fb834fb9e325227b679260c069722d0",
+              "template": "4c3b95ba675919e1d11a5f0569136692d77ed5e8cd5d618ca7098158292ac863"
+            },
+            "descriptorId": "bukkit",
+            "descriptorRevision": 2,
+            "family": "bukkit",
+            "fixtureId": "bukkit.bukkit.minimal-java.java",
+            "java": {
+              "distribution": "temurin",
+              "runtime": 8
+            },
+            "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+            "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+            "profileId": "bukkit",
+            "profileRevision": 2,
+            "sourceDigests": [
+              "57427a88f77c6214ac22572cca4cb8fb1d1bc42696c2bb9fe35eb90847184121"
+            ],
+            "wrapper": {
+              "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+              "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+              "kind": "launcher-script",
+              "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+              "version": "7.6.4"
+            }
+          },
+          "profileRevision": 2,
+          "status": "verified"
+        }
+      ],
+      "digest": "353275111bfa2ee2b3b1e1ea1e95f00cda2594d0c6ee2d165006d2d2d2f47992"
+    }
+  ],
+  "digest": "ceb58e6659e19b062f2861eea3950b4739e067a0bbeda422cb0e6d20bdca25f6"
 }

@@ -1,3 +1,5 @@
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   createSchemaRegistry,
@@ -78,7 +80,20 @@ describe("phase 7 GitHub audit", () => {
     expect(audit.capabilities.every((item) => item.evidence.length > 0)).toBe(
       true,
     );
-    expect(audit.status).toBe("passed");
+    expect(audit.status).toBe("blocked");
+    expect(
+      audit.capabilities.find((item) => item.id === "catalog-coverage")?.state,
+    ).toBe("passed");
+    expect(
+      audit.capabilities.find((item) => item.id === "customization-contracts")
+        ?.state,
+    ).toBe("passed");
+    expect(
+      audit.capabilities.find((item) => item.id === "forge-toolchain")?.state,
+    ).toBe("blocked");
+    expect(
+      audit.capabilities.find((item) => item.id === "tuple-evidence")?.state,
+    ).toBe("passed");
     const registry = await createSchemaRegistry();
     expect(validateWithSchema(registry, audit).valid).toBe(true);
   });
@@ -100,5 +115,60 @@ describe("phase 7 GitHub audit", () => {
     expect(governance?.evidence.some((item) => item.path === rulesets)).toBe(
       true,
     );
+  });
+
+  it("does not pass a loader capability when indexed files only exist but statuses are invalid", async () => {
+    const root = await mkdtemp(join(repositoryRoot, "phase7-github-audit-"));
+    try {
+      await mkdir(join(root, "profiles"), { recursive: true });
+      await mkdir(join(root, "templates"), { recursive: true });
+      await writeFile(
+        join(root, "profiles/index.json"),
+        JSON.stringify({
+          profiles: [
+            { id: "forge-legacy", path: "profiles/forge-legacy.json" },
+            { id: "forge-modern", path: "profiles/forge-modern.json" },
+          ],
+        }),
+      );
+      await writeFile(
+        join(root, "templates/index.json"),
+        JSON.stringify({
+          descriptors: [
+            { id: "forge", path: "templates/forge/descriptor.json" },
+          ],
+        }),
+      );
+      await mkdir(join(root, "templates/forge"), { recursive: true });
+      for (const id of ["forge-legacy", "forge-modern"]) {
+        await writeFile(
+          join(root, `profiles/${id}.json`),
+          JSON.stringify({
+            id,
+            schemaVersion: 1,
+            status: "unsupported",
+          }),
+        );
+      }
+      await writeFile(
+        join(root, "templates/forge/descriptor.json"),
+        JSON.stringify({ id: "forge", schemaVersion: 1, status: "reviewed" }),
+      );
+      const audit = await runGitHubAudit({
+        owner: "MCEnvision",
+        name: "MCGen-Templates",
+        generatedAt: "2026-08-10T00:00:00.000Z",
+        api: apiStub().api,
+        root,
+      });
+      const forge = audit.capabilities.find(
+        (item) => item.id === "forge-toolchain",
+      );
+      expect(forge?.state).toBe("blocked");
+      expect(forge?.detail).toContain("status is not fully reviewed");
+      expect(audit.status).toBe("blocked");
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
   });
 });

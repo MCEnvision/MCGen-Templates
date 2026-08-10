@@ -9,14 +9,14 @@ The catalog owns discovered components, source evidence, release channels, catal
 ## Layout
 
 ```text
-catalog/index.json
-catalog/recommendation-policy.json
-catalog/coverage.json
-catalog/platforms/<platform>/index.json
-catalog/platforms/<platform>/<key>.<sha256>.json
+catalog/<snapshot>/index.json
+catalog/<snapshot>/recommendation-policy.json
+catalog/<snapshot>/coverage.json
+catalog/<snapshot>/platforms/<platform>/index.json
+catalog/<snapshot>/platforms/<platform>/<key>.<sha256>.json
 ```
 
-The current catalog is [`catalog/2026-08-10-r4/index.json`](../../catalog/2026-08-10-r4/index.json). It contains 2,540 immutable shards from fourteen current source snapshots. Its coverage report represents 27,706 accepted entries and records 20 rejected records as exact structured blockers.
+The current catalog is [`catalog/2026-08-10-final/index.json`](../../catalog/2026-08-10-final/index.json). It contains 2,540 immutable component shards from fourteen current source snapshots. Its coverage report represents 27,706 accepted entries, assigns an exact blocker to every nonverified component, and records 20 rejected records as exact structured blockers.
 
 The root index names every immutable source snapshot by repository path and canonical document digest. It maps each platform to a small platform index. A platform index maps each Minecraft or API key to a shard path, exact digest, byte length, and source snapshot set. Shard filenames include their digest so a changed catalog can add a new shard without rewriting historical evidence.
 
@@ -24,7 +24,7 @@ Each shard contains only observed exact components and directly evidenced edges.
 
 ## Source Evidence and Coverage
 
-Each catalog component retains one or more source entry references. A reference identifies the immutable source snapshot, normalized entry index, and contributing source-record indexes. `catalog/coverage.json` lists every accepted source entry with one of two dispositions:
+Each catalog component retains one or more source entry references. A reference identifies the immutable source snapshot, normalized entry index, and contributing source-record indexes. `catalog/2026-08-10-final/coverage.json` lists every accepted source entry with one of two dispositions:
 
 - `represented`, with the exact shard identifier.
 - `blocked`, with a structured blocker identifier, reason, and evidence.

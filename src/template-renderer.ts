@@ -260,10 +260,12 @@ function fieldValue(spec: ProjectSpec, fieldId: string): unknown {
   const build = spec.build;
   const components = spec.platform.components;
   const common: Record<string, unknown> = {
+    "schema-version": 1,
     "project-name": project.name,
     "project-id": project.id,
     "project-version": project.version,
     "main-class": project.mainClass,
+    entrypoint: `${project.package}.${project.mainClass}`,
     description: project.description ?? "",
     authors: project.authors ?? [],
     website: project.website ?? "",

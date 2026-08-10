@@ -2,15 +2,8 @@
   "$schema": "urn:mcgen:schema:template-descriptor:1",
   "schemaVersion": 1,
   "id": "fabric",
-  "revision": 1,
-  "status": "blocked",
-  "blockers": [
-    {
-      "code": "tuple-build-evidence",
-      "reason": "Fabric Loom and mapping intersections remain discovered until later compilation and artifact inspection gates pass.",
-      "evidence": ["catalog/2026-08-10-r4/index.json"]
-    }
-  ],
+  "revision": 3,
+  "status": "reviewed",
   "category": "mod",
   "platforms": ["fabric"],
   "profileRefs": ["fabric"],
@@ -92,13 +85,13 @@
       "rawOverride": "allowed"
     },
     {
-      "source": "templates/shared/build.gradle.tmpl",
+      "source": "templates/fabric/build.gradle.tmpl",
       "destination": "build.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
     },
     {
-      "source": "templates/shared/settings.gradle.tmpl",
+      "source": "templates/fabric/settings.gradle.tmpl",
       "destination": "settings.gradle",
       "renderer": "gradle",
       "rawOverride": "advanced-only"
@@ -128,8 +121,27 @@
       "path": "src/main/resources/fabric.mod.json",
       "format": "json",
       "fieldMappings": [
+        {
+          "fieldId": "schema-version",
+          "path": "schemaVersion",
+          "format": "literal"
+        },
         { "fieldId": "project-id", "path": "id", "format": "literal" },
-        { "fieldId": "project-version", "path": "version", "format": "version" }
+        {
+          "fieldId": "project-version",
+          "path": "version",
+          "format": "version"
+        },
+        { "fieldId": "project-name", "path": "name", "format": "text" },
+        { "fieldId": "description", "path": "description", "format": "text" },
+        { "fieldId": "authors", "path": "authors", "format": "json" },
+        { "fieldId": "license", "path": "license", "format": "text" },
+        { "fieldId": "environment", "path": "environment", "format": "text" },
+        {
+          "fieldId": "entrypoint",
+          "path": "entrypoints.main[0]",
+          "format": "text"
+        }
       ],
       "required": true
     },

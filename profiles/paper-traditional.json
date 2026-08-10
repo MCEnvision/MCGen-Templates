@@ -1,134 +1,194 @@
 {
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
-  "schemaVersion": 1,
-  "id": "paper-traditional",
-  "revision": 1,
-  "status": "blocked",
-  "family": "paper",
-  "category": "plugin",
-  "platform": "paper",
-  "blockers": [
-    {
-      "id": "paper-traditional-evidence",
-      "reason": "Traditional Paper plugin.yml boundaries need exact API and Java tuple verification.",
-      "evidence": ["sources/snapshots/paper/2026-08-10-r4.json"],
-      "resolution": "Verify a historical and current traditional Paper tuple before promotion."
-    }
-  ],
+  "artifact": {
+    "entrypointClasses": ["org.example.tuple.TupleProbe"],
+    "expectedExtension": ".jar",
+    "iconPaths": [],
+    "maxEntries": 128,
+    "metadataFields": {
+      "main": "org.example.tuple.TupleProbe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "metadataPaths": ["plugin.yml"],
+    "patterns": ["build/libs/tuple-probe-1.0.0.jar"],
+    "projectIdentity": {
+      "id": "Tuple Probe",
+      "name": "Tuple Probe",
+      "version": "1.0.0"
+    },
+    "requiredEntries": ["plugin.yml", "org/example/tuple/TupleProbe.class"],
+    "resourceNamespaces": []
+  },
+  "build": {
+    "dsl": "groovy",
+    "jvmArguments": [],
+    "plugins": [
+      {
+        "id": "java-library",
+        "repositoryIds": ["central"],
+        "version": "8.8"
+      }
+    ],
+    "properties": [],
+    "publishing": false,
+    "sourceSets": [],
+    "system": "gradle",
+    "tasks": [],
+    "wrapper": "8.8",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperKind": "launcher-script",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
+  },
   "catalog": {
-    "snapshotId": "2026-08-10-r4",
-    "indexPath": "catalog/2026-08-10-r4/platforms/paper/index.json",
-    "indexSha256": "50b9d0c72eefbd535a1acad7fc139f4f0df8335c2e218d2c7e02ed1f6d50bd4c",
+    "indexPath": "catalog/2026-08-10-final/platforms/paper/index.json",
+    "indexSha256": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
     "selectors": [
       {
-        "platform": "paper",
-        "keyKind": "minecraft",
-        "keys": { "mode": "all-shards" },
         "components": [
           {
             "component": "paper",
             "coordinatePrefix": "io.papermc.paper:paper-api:",
-            "mode": "all-components"
+            "mode": "explicit",
+            "versions": ["io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"]
           }
         ],
         "evidence": [
           {
-            "snapshotId": "paper.d0430553c2aaa457429a549e",
             "path": "sources/snapshots/paper/2026-08-10-r4.json",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"],
             "sha256": "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1",
-            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
+            "snapshotId": "paper.d0430553c2aaa457429a549e"
           }
-        ]
+        ],
+        "keyKind": "minecraft",
+        "keys": {
+          "mode": "explicit",
+          "values": ["1.20.1"]
+        },
+        "platform": "paper"
       }
-    ]
+    ],
+    "snapshotId": "2026-08-10-final"
   },
+  "category": "plugin",
   "components": [
     {
-      "id": "paper-api",
+      "catalogComponent": "paper",
       "coordinate": "io.papermc.paper:paper-api",
-      "version": "selected-from-catalog",
+      "id": "paper-api",
       "range": "traditional-metadata",
       "required": true,
-      "catalogComponent": "paper"
+      "version": "selected-from-catalog"
+    }
+  ],
+  "fallback": {
+    "migration": "Switch to the modern profile when Paper metadata requires a bootstrapper or loader.",
+    "policy": "profile",
+    "profile": "paper-modern"
+  },
+  "family": "paper",
+  "features": [
+    {
+      "id": "commands",
+      "support": "supported"
+    },
+    {
+      "id": "permissions",
+      "support": "supported"
+    },
+    {
+      "id": "paper-libraries",
+      "support": "conditional"
+    }
+  ],
+  "id": "paper-traditional",
+  "incompatibilities": [
+    {
+      "condition": "selected Paper line supports paper-plugin.yml or paper-plugin.json",
+      "id": "paper-modern-metadata",
+      "reason": "The modern Paper model has different bootstrap and loader fields.",
+      "resolution": "Resolve paper-modern instead."
     }
   ],
   "java": {
+    "bytecode": 17,
     "distribution": "temurin",
-    "runtime": 17,
     "language": 17,
-    "bytecode": 17
+    "runtime": 17
   },
-  "build": {
-    "system": "gradle",
-    "wrapper": "8.8",
-    "wrapperSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
-    "dsl": "kotlin",
-    "plugins": [
-      { "id": "java-library", "version": "8.8", "repositoryIds": ["central"] }
-    ],
-    "properties": [],
-    "jvmArguments": [],
-    "sourceSets": [],
-    "tasks": [],
-    "publishing": false
+  "languages": ["java", "kotlin"],
+  "mappings": {
+    "components": [],
+    "strategy": "none"
   },
-  "repositories": [
-    {
-      "id": "papermc",
-      "url": "https://repo.papermc.io/repository/maven-public/"
-    },
-    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
-  ],
-  "mappings": { "strategy": "none", "components": [] },
   "metadata": {
-    "format": "plugin-yml",
-    "files": ["src/main/resources/plugin.yml"],
     "fieldMappings": [
-      { "field": "project.name", "path": "name", "required": true },
-      { "field": "project.mainClass", "path": "main", "required": true },
-      { "field": "project.version", "path": "version", "required": true },
+      {
+        "field": "project.name",
+        "path": "name",
+        "required": true
+      },
+      {
+        "field": "project.mainClass",
+        "path": "main",
+        "required": true
+      },
+      {
+        "field": "project.version",
+        "path": "version",
+        "required": true
+      },
       {
         "field": "platform.apiVersion",
         "path": "api-version",
         "required": false
       }
-    ]
+    ],
+    "files": ["src/main/resources/plugin.yml"],
+    "format": "plugin-yml"
   },
-  "sourceLayout": {
-    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
-    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
-    "testRoots": [{ "name": "test", "path": "src/test/java" }]
-  },
-  "languages": ["java", "kotlin"],
-  "features": [
-    { "id": "commands", "support": "supported" },
-    { "id": "permissions", "support": "supported" },
-    { "id": "paper-libraries", "support": "conditional" }
-  ],
-  "incompatibilities": [
+  "platform": "paper",
+  "repositories": [
     {
-      "id": "paper-modern-metadata",
-      "condition": "selected Paper line supports paper-plugin.yml or paper-plugin.json",
-      "reason": "The modern Paper model has different bootstrap and loader fields.",
-      "resolution": "Resolve paper-modern instead."
+      "id": "papermc",
+      "url": "https://repo.papermc.io/repository/maven-public/"
+    },
+    {
+      "id": "central",
+      "url": "https://repo.maven.apache.org/maven2/"
     }
   ],
+  "revision": 2,
+  "schemaVersion": 1,
+  "sourceLayout": {
+    "resourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/resources"
+      }
+    ],
+    "sourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/java"
+      }
+    ],
+    "testRoots": [
+      {
+        "name": "test",
+        "path": "src/test/java"
+      }
+    ]
+  },
+  "status": "reviewed",
   "verification": {
+    "artifactPatterns": ["build/libs/*.jar"],
     "commands": [
       ["./gradlew", "build"],
       ["./gradlew", "test"]
     ],
-    "artifactPatterns": ["build/libs/*.jar"],
     "inspection": ["plugin.yml"]
-  },
-  "artifact": {
-    "patterns": ["build/libs/*.jar"],
-    "metadataPaths": ["plugin.yml"],
-    "requiredEntries": ["plugin.yml"]
-  },
-  "fallback": {
-    "policy": "profile",
-    "profile": "paper-modern",
-    "migration": "Switch to the modern profile when Paper metadata requires a bootstrapper or loader."
   }
 }

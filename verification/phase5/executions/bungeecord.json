@@ -1,0 +1,208 @@
+{
+  "$schema": "urn:mcgen:schema:phase5-execution:1",
+  "artifact": {
+    "expectation": {
+      "entrypointClasses": [
+        "org.example.tuple.TupleProbe"
+      ],
+      "expectedExtension": ".jar",
+      "iconPaths": [],
+      "maxEntries": 128,
+      "metadataFields": {
+        "main": "org.example.tuple.TupleProbe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "metadataPaths": [
+        "plugin.yml"
+      ],
+      "patterns": [
+        "build/libs/tuple-probe-1.0.0.jar"
+      ],
+      "projectIdentity": {
+        "id": "Tuple Probe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "requiredEntries": [
+        "plugin.yml",
+        "org/example/tuple/TupleProbe.class"
+      ],
+      "resourceNamespaces": []
+    },
+    "path": "build/libs/tuple-probe-1.0.0.jar"
+  },
+  "build": {
+    "commands": [
+      {
+        "args": [
+          "build"
+        ],
+        "executable": "./gradlew",
+        "purpose": "build"
+      },
+      {
+        "args": [
+          "test"
+        ],
+        "executable": "./gradlew",
+        "purpose": "unit-tests"
+      }
+    ],
+    "java": {
+      "distribution": "temurin",
+      "runtime": 8
+    },
+    "limits": {
+      "artifactRetentionDays": 30,
+      "maxDiskBytes": 4294967296,
+      "maxOutputBytes": 67108864,
+      "retries": 1,
+      "timeoutMs": 900000
+    },
+    "rawOverridePolicy": "never-execute",
+    "workDirectoryPolicy": "isolated-clean",
+    "wrapper": {
+      "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+      "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+      "kind": "launcher-script",
+      "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+      "version": "7.6.4"
+    }
+  },
+  "fixture": {
+    "descriptorPath": "templates/bungeecord/descriptor.json",
+    "fixture": {
+      "id": "bungeecord.bungeecord.minimal-java.java",
+      "kind": "minimal-java",
+      "language": "java",
+      "rawOverride": false,
+      "version": "1.0.0"
+    },
+    "spec": {
+      "$schema": "urn:mcgen:schema:project-spec:1",
+      "assets": [],
+      "build": {
+        "dsl": "groovy",
+        "javaLanguage": 8,
+        "system": "gradle"
+      },
+      "dependencies": [],
+      "extensions": {},
+      "features": [],
+      "fileOperations": [],
+      "metadata": {},
+      "mode": "simple",
+      "platform": {
+        "catalogKey": "1.21",
+        "components": {
+          "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
+        },
+        "id": "bungeecord",
+        "java": 8,
+        "javaLanguage": 8
+      },
+      "project": {
+        "authors": [
+          "EnVy"
+        ],
+        "description": "tuple probe",
+        "id": "tuple-probe",
+        "license": "MIT",
+        "mainClass": "TupleProbe",
+        "name": "Tuple Probe",
+        "package": "org.example.tuple",
+        "version": "1.0.0"
+      },
+      "publishing": {},
+      "repositories": [],
+      "repository": {},
+      "schemaVersion": 1,
+      "sourceLayout": {},
+      "targetOverrides": [],
+      "template": "bungeecord"
+    },
+    "tuple": {
+      "catalogKey": "1.21",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "ee8b9e9ceffd6f9aa0b7382b994b3390e3d3fd676428e6fcdd9980d43af4e2b0",
+        "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
+        "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+        "profile": "6aa2d17e629983ac53bd2ed908ad2abc01bcd9a8c0d8e6f79ea67f3201532d29",
+        "template": "22e713507fb3b42cf5910dd0320218e4d115e7d3f279d374fa0ae7cc8407a546"
+      },
+      "descriptorId": "bungeecord",
+      "descriptorRevision": 2,
+      "family": "bungeecord",
+      "fixtureId": "bungeecord.bungeecord.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 8
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+      "profileId": "bungeecord",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
+      ],
+      "wrapper": {
+        "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+        "version": "7.6.4"
+      }
+    }
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "e936a5c3351894805d73ba9956f1df65a5d8a764caf9db5dee75764542c0441f",
+  "profilePath": "profiles/bungeecord.json",
+  "tuple": {
+    "blockers": [],
+    "id": "19496ede72ee40b625f2aa9c5498ea055d806ee427f7dcc59303e45100e189be",
+    "identity": {
+      "catalogKey": "1.21",
+      "catalogSnapshotId": "2026-08-10-final",
+      "components": {
+        "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "ee8b9e9ceffd6f9aa0b7382b994b3390e3d3fd676428e6fcdd9980d43af4e2b0",
+        "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
+        "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
+        "profile": "6aa2d17e629983ac53bd2ed908ad2abc01bcd9a8c0d8e6f79ea67f3201532d29",
+        "template": "22e713507fb3b42cf5910dd0320218e4d115e7d3f279d374fa0ae7cc8407a546"
+      },
+      "descriptorId": "bungeecord",
+      "descriptorRevision": 2,
+      "family": "bungeecord",
+      "fixtureId": "bungeecord.bungeecord.minimal-java.java",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 8
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "6d3ba795458f48134e1d52ae852f781d66099e7542628473fa9a2178180558cf",
+      "profileId": "bungeecord",
+      "profileRevision": 2,
+      "sourceDigests": [
+        "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
+      ],
+      "wrapper": {
+        "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+        "version": "7.6.4"
+      }
+    },
+    "status": "discovered"
+  },
+  "wrapperPath": "gradlew",
+  "wrapperSource": "templates/spigot/gradlew-legacy.tmpl"
+}

@@ -21,6 +21,7 @@ import { buildCatalogDriftReport } from "./catalog/drift.js";
 import { requireCatalogKeyKind } from "./catalog/platforms.js";
 import type {
   CatalogCategory,
+  CoverageEvidenceInput,
   CatalogKeyKind,
   SnapshotInput,
 } from "./catalog/contracts.js";
@@ -1292,6 +1293,60 @@ async function catalogSourceSnapshot(path: string): Promise<SnapshotInput> {
   };
 }
 
+async function catalogCoverageEvidence(): Promise<CoverageEvidenceInput[]> {
+  const directory = resolve(repositoryRoot, "verification/phase5/evidence");
+  let names: string[];
+  try {
+    names = (await readdir(directory))
+      .filter((name) => name.endsWith(".json"))
+      .sort((left, right) => left.localeCompare(right));
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      "code" in error &&
+      (error as NodeJS.ErrnoException).code === "ENOENT"
+    ) {
+      return [];
+    }
+    throw error;
+  }
+  const registry = await createSchemaRegistry();
+  const evidence: CoverageEvidenceInput[] = [];
+  for (const name of names) {
+    const absolute = resolve(directory, name);
+    const document = JSON.parse(await readFile(absolute, "utf8")) as unknown;
+    const failures = documentFailures(registry, absolute, document);
+    if (failures.length) {
+      throw new Error(
+        `phase 5 evidence validation failed\n${failures.join("\n")}`,
+      );
+    }
+    const record = document as TupleEvidenceRecord;
+    if (record.status !== "verified" && record.status !== "legacy-verified") {
+      continue;
+    }
+    const evidenceFailures = validateEvidenceRecord(record, {
+      requireBuildAndArtifact: true,
+      requireReproducible: true,
+    });
+    if (evidenceFailures.length) {
+      throw new Error(
+        `phase 5 exact evidence is invalid ${relative(repositoryRoot, absolute)}\n${evidenceFailures.join("\n")}`,
+      );
+    }
+    evidence.push({
+      tupleId: record.key.digest,
+      evidencePath: relative(repositoryRoot, absolute),
+      evidenceDigest: sha256(canonicalJson(record)),
+      status: record.status,
+      family: record.key.identity.family,
+      catalogKey: record.key.identity.catalogKey,
+      components: structuredClone(record.key.identity.components),
+    });
+  }
+  return evidence;
+}
+
 async function generateCatalogDrift(args: readonly string[]): Promise<void> {
   const baselinePath = option(args, "--baseline");
   const candidatePath = option(args, "--candidate");
@@ -1353,10 +1408,12 @@ async function generateCatalog(args: readonly string[]): Promise<void> {
       );
     }
   }
+  const coverageEvidence = await catalogCoverageEvidence();
   const catalog = buildCatalog({
     snapshots,
     categoryByPlatform,
     keyKindByPlatform,
+    coverageEvidence,
     outputRoot: destination.relative,
   });
   const documents: { path: string; document: unknown }[] = [
