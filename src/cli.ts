@@ -288,6 +288,17 @@ function phase6InputPath(path: string): string {
   if (!approved) {
     throw new Error(`phase 6 path is outside the pack allowlist: ${path}`);
   }
+  const protectedComponents = new Set([
+    ".git",
+    ".gradle",
+    "build",
+    "dist",
+    "logs",
+    "node_modules",
+    "tmp",
+    "cache",
+  ]);
+  const components = normalized.split("/");
   if (
     normalized.startsWith("verification/phase6/") ||
     normalized.includes("/.git/") ||
@@ -298,7 +309,10 @@ function phase6InputPath(path: string): string {
     normalized.startsWith(".gradle/") ||
     normalized.startsWith("dist/") ||
     normalized.startsWith("logs/") ||
-    /(?:^|\/)(?:\.env|.*\.pem|.*\.key)$/u.test(normalized)
+    /(?:^|\/)(?:\.env|.*\.pem|.*\.key)$/u.test(normalized) ||
+    components.some((component) =>
+      protectedComponents.has(component.toLocaleLowerCase("en-US")),
+    )
   ) {
     throw new Error(`phase 6 path is outside the pack allowlist: ${path}`);
   }
@@ -327,12 +341,19 @@ async function readPackInputFile(path: string): Promise<Uint8Array> {
     if (index === parts.length - 1 && !metadata.isFile()) {
       throw new Error(`phase 6 pack input is not a regular file: ${path}`);
     }
+    if (index === parts.length - 1 && metadata.size > 32 * 1024 * 1024) {
+      throw new Error(`phase 6 pack input file is too large: ${path}`);
+    }
   }
   const content = await readFile(current);
   const text = content.toString("utf8");
   if (
-    /-----BEGIN [^-\n]*PRIVATE KEY-----/u.test(text) ||
-    /(?:ghp|gho|github_pat|npm_)[A-Za-z0-9_]{20,}/u.test(text)
+    /-----BEGIN [A-Z ]*PRIVATE KEY-----/iu.test(text) ||
+    /(?:github_pat_|ghp_|gho_|ghs_|ghu_|ghr_|npm_)[A-Za-z0-9_]{20,}/u.test(
+      text,
+    ) ||
+    /(?:aws_access_key_id|aws_secret_access_key)\s*=\s*[^\s]+/iu.test(text) ||
+    /\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/u.test(text)
   ) {
     throw new Error(
       `phase 6 pack input appears to contain a credential: ${path}`,
