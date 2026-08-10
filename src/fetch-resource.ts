@@ -1,6 +1,12 @@
 import { sha256 } from "./digest.js";
-import type { FetchedResource, SourceRecord } from "./contracts.js";
+import type {
+  FetchedResource,
+  SourceRecord,
+  SourceResource,
+} from "./contracts.js";
 import {
+  expectedSourceContentTypes,
+  isCanonicalSourceId,
   resolveCanonicalSourceUrl,
   sourceRedirectLimit,
   type CanonicalSourceId,
@@ -49,13 +55,20 @@ export async function readBoundedBody(
 }
 
 export async function fetchResource(
-  sourceId: CanonicalSourceId,
-  url: string,
+  source: SourceResource,
   policy: FetchPolicy,
 ): Promise<FetchedResource> {
+  if (!isCanonicalSourceId(source.id)) {
+    throw new Error(
+      `source id is outside the approved policy for ${source.id}`,
+    );
+  }
+  const sourceId: CanonicalSourceId = source.id;
   const signal = AbortSignal.timeout(policy.timeoutMs);
   const maxRedirects = sourceRedirectLimit(sourceId);
-  let currentUrl = resolveCanonicalSourceUrl(sourceId, url);
+  let currentUrl = resolveCanonicalSourceUrl(sourceId, source.url);
+  const requestedUrl = currentUrl.href;
+  const redirectChain = [requestedUrl];
   let redirects = 0;
   let response: Response;
   for (;;) {
@@ -85,6 +98,7 @@ export async function fetchResource(
       throw new Error(`source redirect location is invalid for ${sourceId}`);
     }
     currentUrl = resolveCanonicalSourceUrl(sourceId, redirectUrl.href);
+    redirectChain.push(currentUrl.href);
     redirects += 1;
   }
   if (!response.ok) {
@@ -100,8 +114,22 @@ export async function fetchResource(
   if (!contentType) {
     throw new Error(`source response omitted content type for ${sourceId}`);
   }
+  const mediaType = contentType.split(";", 1)[0]?.trim().toLowerCase();
+  if (
+    !mediaType ||
+    !expectedSourceContentTypes(sourceId).includes(mediaType) ||
+    !source.expectedContentTypes.includes(mediaType)
+  ) {
+    throw new Error(
+      `source response content type is not approved for ${sourceId}`,
+    );
+  }
   const record: SourceRecord = {
+    sourceId,
+    role: source.role,
+    requestedUrl,
     url: currentUrl.href,
+    redirectChain,
     retrievedAt: new Date().toISOString(),
     contentType,
     sha256: sha256(bytes),

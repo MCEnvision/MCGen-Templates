@@ -78,23 +78,20 @@ async function snapshotForge(args: readonly string[]): Promise<void> {
   const outputPath = requireForgeSnapshotPath(output);
   await requireUnusedPath(outputPath);
   const definition = await loadSourceDefinition("forge");
-  const mojangUrl = definition.prerequisiteUrls[0];
-  if (!mojangUrl) {
-    throw new Error("forge source definition requires the mojang manifest url");
+  const fetched = await Promise.all(
+    definition.sources.map((source) =>
+      fetchResource(source, definition.requestPolicy),
+    ),
+  );
+  const resources = new Map<string, (typeof fetched)[number]>();
+  for (const resource of fetched) {
+    const sourceId = resource.record.sourceId;
+    if (!sourceId) {
+      throw new Error("fetched source omitted its policy id");
+    }
+    resources.set(sourceId, resource);
   }
-  const [mojang, forge] = await Promise.all([
-    fetchResource(
-      "mojang-version-manifest",
-      mojangUrl,
-      definition.requestPolicy,
-    ),
-    fetchResource(
-      "forge-maven-metadata",
-      definition.primaryUrl,
-      definition.requestPolicy,
-    ),
-  ]);
-  const snapshot = buildForgeSnapshot(mojang, forge, new Date().toISOString());
+  const snapshot = buildForgeSnapshot(resources, new Date().toISOString());
   const failures = documentFailures(
     await createSchemaRegistry(),
     outputPath,

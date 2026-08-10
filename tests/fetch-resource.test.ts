@@ -6,6 +6,26 @@ const requestPolicy = {
   maxBytes: 1_024,
 };
 
+function source(id: string, url: string, expectedContentTypes: string[]) {
+  return {
+    id,
+    role: "primary" as const,
+    url,
+    expectedContentTypes,
+  };
+}
+
+const mojangSource = source(
+  "mojang-version-manifest",
+  "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+  ["application/json"],
+);
+const forgeSource = source(
+  "forge-maven-metadata",
+  "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+  ["application/xml", "text/xml"],
+);
+
 afterEach(() => {
   vi.unstubAllGlobals();
 });
@@ -50,15 +70,20 @@ describe("fetchResource", () => {
     );
     vi.stubGlobal("fetch", fetchMock);
 
-    const resource = await fetchResource(
-      "mojang-version-manifest",
-      "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
-      requestPolicy,
-    );
+    const resource = await fetchResource(mojangSource, requestPolicy);
 
     expect(resource.record.url).toBe(
       "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
     );
+    expect(resource.record).toMatchObject({
+      sourceId: "mojang-version-manifest",
+      role: "primary",
+      requestedUrl:
+        "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+      redirectChain: [
+        "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+      ],
+    });
     expect(resource.text).toBe('{"versions":[]}');
     expect(fetchMock).toHaveBeenCalledOnce();
     expect(fetchMock.mock.calls[0]?.[0]).toEqual(
@@ -88,11 +113,7 @@ describe("fetchResource", () => {
       );
     vi.stubGlobal("fetch", fetchMock);
 
-    const resource = await fetchResource(
-      "forge-maven-metadata",
-      "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
-      requestPolicy,
-    );
+    const resource = await fetchResource(forgeSource, requestPolicy);
 
     expect(fetchMock).toHaveBeenCalledTimes(2);
     expect(fetchMock.mock.calls[1]?.[0]).toEqual(
@@ -117,7 +138,7 @@ describe("fetchResource", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     await expect(
-      fetchResource("mojang-version-manifest", url, requestPolicy),
+      fetchResource({ ...mojangSource, url }, requestPolicy),
     ).rejects.toThrow();
     expect(fetchMock).not.toHaveBeenCalled();
   });
@@ -137,13 +158,7 @@ describe("fetchResource", () => {
     );
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(
-      fetchResource(
-        "forge-maven-metadata",
-        "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
-        requestPolicy,
-      ),
-    ).rejects.toThrow();
+    await expect(fetchResource(forgeSource, requestPolicy)).rejects.toThrow();
     expect(fetchMock).toHaveBeenCalledOnce();
   });
 
@@ -153,13 +168,9 @@ describe("fetchResource", () => {
     );
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(
-      fetchResource(
-        "forge-maven-metadata",
-        "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
-        requestPolicy,
-      ),
-    ).rejects.toThrow("source redirect omitted a location");
+    await expect(fetchResource(forgeSource, requestPolicy)).rejects.toThrow(
+      "source redirect omitted a location",
+    );
   });
 
   it("rejects a redirect loop at the configured limit", async () => {
@@ -173,13 +184,43 @@ describe("fetchResource", () => {
     });
     vi.stubGlobal("fetch", fetchMock);
 
+    await expect(fetchResource(forgeSource, requestPolicy)).rejects.toThrow(
+      "source exceeded the redirect limit",
+    );
+    expect(fetchMock).toHaveBeenCalledTimes(4);
+  });
+
+  it("rejects a response with an unexpected content type", async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response("<html />", {
+        headers: { "content-type": "text/html" },
+      }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(fetchResource(mojangSource, requestPolicy)).rejects.toThrow(
+      "source response content type is not approved for mojang-version-manifest",
+    );
+  });
+
+  it("enforces the narrower media type declared by a source resource", async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response("<metadata />", {
+        headers: { "content-type": "application/xml" },
+      }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
     await expect(
       fetchResource(
-        "forge-maven-metadata",
-        "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+        {
+          ...forgeSource,
+          expectedContentTypes: ["text/xml"],
+        },
         requestPolicy,
       ),
-    ).rejects.toThrow("source exceeded the redirect limit");
-    expect(fetchMock).toHaveBeenCalledTimes(4);
+    ).rejects.toThrow(
+      "source response content type is not approved for forge-maven-metadata",
+    );
   });
 });

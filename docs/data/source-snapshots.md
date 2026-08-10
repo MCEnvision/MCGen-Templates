@@ -4,7 +4,7 @@
 
 Source snapshots preserve exactly what authoritative upstream systems published and exactly how MCGen normalized it. They are discovery evidence, not generated project templates and not proof that a compatibility tuple builds.
 
-Every snapshot records its schema version, adapter identity, retrieval time, final response URL, media type, cache validators when available, byte count, SHA-256 response digest, normalized entries, rejected values, and warnings. Snapshot identity is derived from the adapter identity and ordered source digests. A repeated capture of unchanged bytes with the same adapter therefore has the same identity even though retrieval timestamps differ.
+Every snapshot records its schema version, adapter identity, retrieval time, final response URL, media type, cache validators when available, byte count, SHA-256 response digest, normalized entries, rejected values, and warnings. New captures also retain the policy source ID, declared resource role, requested URL, and full approved redirect chain. Snapshot identity is derived from the adapter identity and ordered source digests. A repeated capture of unchanged bytes with the same adapter therefore has the same identity even though retrieval timestamps differ.
 
 ## Forge Capture
 
@@ -25,7 +25,7 @@ Use an unused repository-relative output path:
 npm run snapshot:forge -- --output sources/snapshots/forge/YYYY-MM-DD.json
 ```
 
-The command fetches both sources concurrently with one 30 second timeout per source and a 16 MiB response limit. Each canonical source ID has a code-owned exact HTTPS URL policy and redirect limit. The fetcher validates the initial URL and every redirect target before requesting it, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, and redirect loops. It also rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
+The command fetches both sources concurrently with one 30 second timeout per source and a 16 MiB response limit. Each source definition names its primary, prerequisite, and corroborating resources. Each canonical source ID has a code-owned exact HTTPS URL policy, approved media types, and redirect limit. The fetcher validates the initial URL and every redirect target before requesting it, follows redirects manually, and rejects undeclared hosts or paths, credentials, queries, fragments, nonstandard ports, protocol changes, malformed locations, redirect loops, and unexpected media types. It also rejects empty or unsuccessful responses, validates UTF-8, builds a deterministic normalized snapshot, validates it against the registered schema, and refuses to overwrite an existing file.
 
 ## Reconciliation Rules
 

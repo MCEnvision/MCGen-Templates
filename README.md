@@ -2,7 +2,7 @@
 
 MCGen Templates is the canonical public source for the versioned template pack and compatibility catalog used by MCGen.
 
-The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. Product Phase 0 implementation provides versioned template-pack contracts, locked Node.js validation tooling, authoritative Mojang and Forge source adapters, and the first normalized Forge metadata snapshot. No template family, compatibility catalog, generated project, or pack release has been published yet.
+The GitHub governance phase is complete. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag records when that gate is complete. GitHub completion Phase 3 is active on authoritative source coverage. Product Phase 0 implementation provides versioned template-pack contracts, locked Node.js validation tooling, authoritative Mojang and Forge source adapters, and the first normalized Forge metadata snapshot. No template family, compatibility catalog, generated project, or pack release has been published yet.
 
 MCGen will provide reusable Minecraft project generation for mods, plugins, proxies, and multiloaders without requiring an IDE. This repository owns only the first-party template pack, compatibility evidence, toolchain profiles, fixtures, and pack verification. The future `MCEnvision/MCGen` repository will own the website, API, CLI, generator library, GitHub App, and production deployment.
 

@@ -1,4 +1,3 @@
-import { XMLParser } from "fast-xml-parser";
 import { canonicalJson, compareText } from "../canonical-json.js";
 import { sha256 } from "../digest.js";
 import {
@@ -7,59 +6,47 @@ import {
   type RejectedEntry,
   type SnapshotEntry,
   type SourceSnapshot,
-  type StabilityChannel,
 } from "../contracts.js";
 import { parseMojangVersionIds } from "./mojang.js";
+import { classifyMavenVersion, parseMavenVersions } from "./maven.js";
 
 export const forgeAdapterVersion = "1.0.2";
 
-type MavenMetadata = {
-  metadata?: {
-    versioning?: {
-      versions?: {
-        version?: unknown;
-      };
-    };
-  };
-};
+const forgeSnapshotSourceIds = [
+  "mojang-version-manifest",
+  "forge-maven-metadata",
+  "forgegradle-maven-metadata",
+  "mcp-config-maven-metadata",
+  "mcp-snapshot-maven-metadata",
+  "mcp-stable-maven-metadata",
+  "forge-promotions",
+] as const;
 
-function extractVersions(metadata: MavenMetadata): string[] {
-  const value = metadata.metadata?.versioning?.versions?.version;
-  const versions = Array.isArray(value) ? value : [value];
-  const normalized = versions.filter(
-    (entry): entry is string => typeof entry === "string" && entry.length > 0,
-  );
-  if (normalized.length === 0) {
-    throw new Error("forge maven metadata contains no versions");
+function requireForgeResource(
+  resources: ReadonlyMap<string, FetchedResource>,
+  sourceId: (typeof forgeSnapshotSourceIds)[number],
+): FetchedResource {
+  const resource = resources.get(sourceId);
+  if (!resource) {
+    throw new Error(`forge adapter requires source ${sourceId}`);
   }
-  return [...new Set(normalized)].sort(compareText);
+  return resource;
 }
 
 export function parseForgeVersions(xml: string): string[] {
-  const parser = new XMLParser({
-    allowBooleanAttributes: false,
-    ignoreAttributes: false,
-    parseTagValue: false,
-    trimValues: true,
-  });
-  return extractVersions(parser.parse(xml) as MavenMetadata);
-}
-
-function classify(version: string): StabilityChannel {
-  const normalized = version.toLowerCase();
-  if (normalized.includes("snapshot")) return "snapshot";
-  if (normalized.includes("alpha")) return "alpha";
-  if (normalized.includes("beta")) return "beta";
-  if (
-    normalized.includes("prerelease") ||
-    /(?:^|[_-])pre[0-9]+/u.test(normalized)
-  ) {
-    return "release-candidate";
+  try {
+    return parseMavenVersions(xml);
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message === "maven metadata contains no versions"
+    ) {
+      throw new Error("forge maven metadata contains no versions", {
+        cause: error,
+      });
+    }
+    throw error;
   }
-  if (/(?:^|[-_.])rc(?:[-_.0-9]|$)/u.test(normalized)) {
-    return "release-candidate";
-  }
-  return "release";
 }
 
 export function normalizeForgeVersions(
@@ -96,7 +83,7 @@ export function normalizeForgeVersions(
       catalogKey,
       version,
       coordinate: `net.minecraftforge:forge:${version}`,
-      channel: classify(version),
+      channel: classifyMavenVersion(version),
       sourceIndexes: forgeOnlyKeys.has(catalogKey) ? [1] : [0, 1],
     });
   }
@@ -115,10 +102,16 @@ export function normalizeForgeVersions(
 }
 
 export function buildForgeSnapshot(
-  mojang: FetchedResource,
-  forge: FetchedResource,
+  resources: ReadonlyMap<string, FetchedResource>,
   createdAt: string,
 ): SourceSnapshot {
+  const orderedResources = forgeSnapshotSourceIds.map((sourceId) =>
+    requireForgeResource(resources, sourceId),
+  );
+  const [mojang, forge] = orderedResources;
+  if (!mojang || !forge) {
+    throw new Error("forge adapter source ordering is incomplete");
+  }
   const minecraftVersions = parseMojangVersionIds(mojang.text);
   const forgeVersions = parseForgeVersions(forge.text);
   const {
@@ -132,7 +125,7 @@ export function buildForgeSnapshot(
         id: "forge-maven",
         version: forgeAdapterVersion,
       },
-      sources: [mojang.record.sha256, forge.record.sha256],
+      sources: orderedResources.map((resource) => resource.record.sha256),
     }),
   ).slice(0, 24);
   const warnings = [...normalizationWarnings];
@@ -144,13 +137,14 @@ export function buildForgeSnapshot(
   return {
     $schema: sourceSnapshotSchema,
     schemaVersion: 1,
+    provenanceVersion: 1,
     snapshotId: `forge.${identity}`,
     adapter: {
       id: "forge-maven",
       version: forgeAdapterVersion,
     },
     createdAt,
-    sources: [mojang.record, forge.record],
+    sources: orderedResources.map((resource) => resource.record),
     entries,
     rejected,
     warnings,

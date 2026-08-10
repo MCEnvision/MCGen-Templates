@@ -5,7 +5,11 @@ export type StabilityChannel =
   "release" | "release-candidate" | "beta" | "alpha" | "snapshot" | "custom";
 
 export type SourceRecord = {
+  sourceId?: string;
+  role?: SourceResourceRole;
+  requestedUrl?: string;
   url: string;
+  redirectChain?: string[];
   retrievedAt: string;
   contentType: string;
   etag?: string;
@@ -33,6 +37,7 @@ export type RejectedEntry = {
 export type SourceSnapshot = {
   $schema: typeof sourceSnapshotSchema;
   schemaVersion: 1;
+  provenanceVersion?: 1;
   snapshotId: string;
   adapter: {
     id: string;
@@ -55,14 +60,21 @@ export type SourceDefinition = {
   schemaVersion: 1;
   id: string;
   platform: string;
-  category: "mod" | "plugin" | "proxy" | "multiloader";
+  category: "mod" | "plugin" | "proxy" | "multiloader" | "toolchain";
   adapter: string;
-  primaryUrl: string;
-  prerequisiteUrls: string[];
-  corroboratingUrls: string[];
+  sources: SourceResource[];
   removalPolicy: "additive-only";
   requestPolicy: {
     timeoutMs: number;
     maxBytes: number;
   };
+};
+
+export type SourceResourceRole = "primary" | "prerequisite" | "corroborating";
+
+export type SourceResource = {
+  id: string;
+  role: SourceResourceRole;
+  url: string;
+  expectedContentTypes: string[];
 };

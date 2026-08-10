@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. The repository now contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, Mojang and Forge source adapters, parser tests, and one immutable normalized Forge source snapshot. It does not yet contain a template family, compatibility catalog, toolchain profile instance, generated project fixture, published package, or release artifact.
+MCGen Templates is in product Phase 0, template-pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is active for authoritative source coverage. The repository now contains versioned JSON schemas, a locked Node.js 22 validation toolchain, deterministic digest and canonical JSON utilities, Mojang and Forge source adapters, parser tests, and one immutable normalized Forge source snapshot. It does not yet contain a template family, compatibility catalog, toolchain profile instance, generated project fixture, published package, or release artifact.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -114,7 +114,7 @@ Canonical descriptors and family files are trusted repository content reviewed t
 
 The public generation service may validate and package untrusted input, but it must never execute generated Gradle, Maven, Java, Kotlin, shell, Git, descriptor, or uploaded binary content. Conditions use a bounded expression language without network, process, filesystem, reflection, or arbitrary-code access.
 
-Canonical source capture is a separate maintainer-only network path. Repository source definitions cannot expand network authority by themselves. Each source ID resolves through a code-owned policy containing exact HTTPS URLs and a redirect limit, and every initial or redirect URL is checked before access. Invalid, credentialed, downgraded, undeclared, or excessive redirect targets fail before parsing or snapshot writes.
+Canonical source capture is a separate maintainer-only network path. Repository source definitions cannot expand network authority by themselves. A definition names every source resource, gives it a primary, prerequisite, or corroborating role, and declares its expected media types. Each resource ID resolves through a code-owned policy containing exact HTTPS URLs, approved media types, and a redirect limit. Every initial or redirect URL is checked before access. Invalid, credentialed, downgraded, undeclared, unexpected-media-type, or excessive-redirect targets fail before parsing or snapshot writes. Capture records retain the source ID, requested URL, final URL, redirect chain, cache validators, response digest, and byte count.
 
 See [Template Pack Trust Model](../security/trust-model.md) for security requirements.
 

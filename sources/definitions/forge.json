@@ -5,12 +5,49 @@
   "platform": "forge",
   "category": "mod",
   "adapter": "forge-maven",
-  "primaryUrl": "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
-  "prerequisiteUrls": [
-    "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
-  ],
-  "corroboratingUrls": [
-    "https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json"
+  "sources": [
+    {
+      "id": "forge-maven-metadata",
+      "role": "primary",
+      "url": "https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "mojang-version-manifest",
+      "role": "prerequisite",
+      "url": "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+      "expectedContentTypes": ["application/json"]
+    },
+    {
+      "id": "forgegradle-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.minecraftforge.net/net/minecraftforge/gradle/ForgeGradle/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "mcp-config-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "mcp-snapshot-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_snapshot/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "mcp-stable-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_stable/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "forge-promotions",
+      "role": "corroborating",
+      "url": "https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json",
+      "expectedContentTypes": ["application/json"]
+    }
   ],
   "removalPolicy": "additive-only",
   "requestPolicy": {

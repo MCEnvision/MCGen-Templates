@@ -20,6 +20,7 @@
     "schemaVersion": {
       "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
     },
+    "provenanceVersion": { "const": 1 },
     "snapshotId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
     "adapter": {
       "type": "object",
@@ -39,7 +40,22 @@
         "additionalProperties": false,
         "required": ["url", "retrievedAt", "contentType", "sha256", "bytes"],
         "properties": {
+          "sourceId": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+          "role": { "enum": ["primary", "prerequisite", "corroborating"] },
+          "requestedUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
           "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "redirectChain": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://"
+            }
+          },
           "retrievedAt": { "type": "string", "format": "date-time" },
           "contentType": { "type": "string", "minLength": 1 },
           "etag": { "type": "string", "minLength": 1 },
@@ -100,5 +116,45 @@
       "type": "array",
       "items": { "type": "string", "minLength": 1 }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "provenanceVersion": { "const": 1 } },
+        "required": ["provenanceVersion"]
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sourceId": true,
+                "role": true,
+                "requestedUrl": true,
+                "url": true,
+                "redirectChain": true,
+                "retrievedAt": true,
+                "contentType": true,
+                "sha256": true,
+                "bytes": true
+              },
+              "required": [
+                "sourceId",
+                "role",
+                "requestedUrl",
+                "url",
+                "redirectChain",
+                "retrievedAt",
+                "contentType",
+                "sha256",
+                "bytes"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
 }

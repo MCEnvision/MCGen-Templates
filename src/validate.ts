@@ -7,6 +7,13 @@ import {
   repositoryRoot,
   validateWithSchema,
 } from "./schema-registry.js";
+import {
+  expectedSourceContentTypes,
+  isCanonicalSourceId,
+  resolveCanonicalSourceUrl,
+  sourceDefinitionPolicyFailures,
+} from "./source-network-policy.js";
+import type { SourceDefinition } from "./contracts.js";
 
 const canonicalDirectories = [
   "catalog",
@@ -33,6 +40,58 @@ function snapshotFailures(path: string, document: unknown): string[] {
   const entries = Array.isArray(document["entries"]) ? document["entries"] : [];
   const failures: string[] = [];
   const coordinates = new Set<string>();
+  if (document["provenanceVersion"] === 1) {
+    sources.forEach((value, index) => {
+      if (!isObject(value)) return;
+      const sourceId = value["sourceId"];
+      const requestedUrl = value["requestedUrl"];
+      const finalUrl = value["url"];
+      const redirectChain = value["redirectChain"];
+      const contentType = value["contentType"];
+      if (
+        typeof sourceId !== "string" ||
+        !isCanonicalSourceId(sourceId) ||
+        typeof requestedUrl !== "string" ||
+        typeof finalUrl !== "string" ||
+        !Array.isArray(redirectChain)
+      ) {
+        return;
+      }
+      if (redirectChain[0] !== requestedUrl) {
+        failures.push(
+          `${path}/sources/${index} redirect chain omits request url`,
+        );
+      }
+      if (redirectChain.at(-1) !== finalUrl) {
+        failures.push(
+          `${path}/sources/${index} redirect chain omits final url`,
+        );
+      }
+      for (const value of redirectChain) {
+        if (typeof value !== "string") continue;
+        try {
+          resolveCanonicalSourceUrl(sourceId, value);
+        } catch {
+          failures.push(
+            `${path}/sources/${index} redirect chain is outside the approved policy`,
+          );
+          break;
+        }
+      }
+      const mediaType =
+        typeof contentType === "string"
+          ? contentType.split(";", 1)[0]?.trim().toLowerCase()
+          : undefined;
+      if (
+        !mediaType ||
+        !expectedSourceContentTypes(sourceId).includes(mediaType)
+      ) {
+        failures.push(
+          `${path}/sources/${index} content type is outside the approved policy`,
+        );
+      }
+    });
+  }
   let previousCatalogKey = "";
   let previousVersion = "";
   entries.forEach((value, index) => {
@@ -126,6 +185,17 @@ export function documentFailures(
     (error) =>
       `${path}${error.instancePath || "/"} ${error.message ?? "is invalid"}`,
   );
+  if (
+    isObject(document) &&
+    document["$schema"] === "urn:mcgen:schema:source-definition:1" &&
+    result.valid
+  ) {
+    failures.push(
+      ...sourceDefinitionPolicyFailures(document as SourceDefinition).map(
+        (failure) => `${path} ${failure}`,
+      ),
+    );
+  }
   failures.push(...snapshotFailures(path, document));
   return failures;
 }

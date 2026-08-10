@@ -1,11 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { SourceDefinition } from "./contracts.js";
+import type { SourceDefinition, SourceResource } from "./contracts.js";
 import {
   createSchemaRegistry,
   repositoryRoot,
   validateWithSchema,
 } from "./schema-registry.js";
+import { sourceDefinitionPolicyFailures } from "./source-network-policy.js";
 
 export async function loadSourceDefinition(
   id: string,
@@ -26,5 +27,27 @@ export async function loadSourceDefinition(
         .join("\n")}`,
     );
   }
-  return document as SourceDefinition;
+  const definition = document as SourceDefinition;
+  const policyFailures = sourceDefinitionPolicyFailures(definition);
+  if (policyFailures.length) {
+    throw new Error(
+      `source definition ${id} is outside the approved network policy\n${policyFailures.join("\n")}`,
+    );
+  }
+  return definition;
+}
+
+export function requireSourceResource(
+  definition: SourceDefinition,
+  sourceId: string,
+): SourceResource {
+  const source = definition.sources.find(
+    (candidate) => candidate.id === sourceId,
+  );
+  if (!source) {
+    throw new Error(
+      `source definition ${definition.id} requires source ${sourceId}`,
+    );
+  }
+  return source;
 }
