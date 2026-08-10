@@ -64,6 +64,7 @@ jobs:
       - name: verify phase 5 contracts
         run: npm run verify
       - name: execute reviewed phase 5 tuples
+        if: github.event_name == 'workflow_dispatch'
         run: |
           if [ -d verification/phase5/executions ]; then
             mkdir -p /tmp/mcgen-phase5-existing-evidence
@@ -86,6 +87,11 @@ jobs:
               wait "$pid"
             done
           fi
+      - name: validate committed reviewed phase 5 evidence
+        run: |
+          for evidence in verification/phase5/evidence/*.json; do
+            node dist/cli.js phase5 validate-evidence --input "$evidence"
+          done
       - name: write phase 5 audit
         run: |
           node dist/cli.js phase5 audit --generated-at 2000-01-01T00:00:00.000Z --output verification/phase5/ci-audit.json
