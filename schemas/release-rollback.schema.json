@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mcgen:verification:release-rollback:1",
+  "title": "MCGen release rollback evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "status",
+    "originalArchiveSha256",
+    "mutation",
+    "recovery"
+  ],
+  "properties": {
+    "$schema": { "const": "urn:mcgen:verification:release-rollback:1" },
+    "status": { "const": "passed" },
+    "originalArchiveSha256": {
+      "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
+    },
+    "mutation": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "recovery": { "type": "string", "minLength": 1, "maxLength": 1024 }
+  }
+}
