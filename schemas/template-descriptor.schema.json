@@ -283,7 +283,10 @@
             "required": ["fieldId", "path", "format"],
             "properties": {
               "fieldId": {
-                "$ref": "urn:mcgen:schema:common:1#/$defs/identifier"
+                "anyOf": [
+                  { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+                  { "const": "*" }
+                ]
               },
               "path": { "type": "string", "minLength": 1, "maxLength": 512 },
               "format": {

@@ -133,6 +133,15 @@
         { "fieldId": "project-version", "path": "version", "format": "version" }
       ],
       "required": true
+    },
+    {
+      "id": "advanced-field-extension",
+      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
+      "format": "json",
+      "fieldMappings": [
+        { "fieldId": "*", "path": "extensions", "format": "json" }
+      ],
+      "required": false
     }
   ],
   "assetSlots": [
