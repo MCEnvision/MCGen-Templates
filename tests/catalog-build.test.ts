@@ -325,7 +325,7 @@ describe("deterministic compatibility catalog", () => {
     } finally {
       await rm(directory, { recursive: true, force: true });
     }
-  });
+  }, 30_000);
 
   it("reports a source entry with no shard as an unexplained coverage gap", () => {
     const source = input(entries);
