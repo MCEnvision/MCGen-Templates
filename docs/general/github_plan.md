@@ -117,7 +117,7 @@ Establish and audit the GitHub controls required for safe sequential development
 
 ## Status
 
-Substantially complete. This phase remains subject to drift audits during every later phase.
+Complete when this document is read from a `main` commit carrying the verified signed annotated tag `phase-1-github-governance`. The August 9, 2026 audit found no unresolved governance drift. Before that merge and tag, this phase is in review. Every later phase must repeat the applicable drift checks.
 
 ## Workstreams
 
