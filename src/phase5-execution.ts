@@ -76,7 +76,7 @@ export type Phase5ExecutionResult = {
   secondArtifact?: ArtifactInspection;
 };
 
-async function outputTreeFiles(
+export async function outputTreeFiles(
   root: string,
   current = root,
 ): Promise<ReproducibilityFile[]> {
@@ -87,10 +87,7 @@ async function outputTreeFiles(
     if (
       entry.isDirectory() &&
       ([".gradle", ".git", "logs"].includes(entry.name) ||
-        /(?:^|\/)build\/(?:loom-cache|reobfJar|tmp\/createMinecraftArtifacts)(?:\/|$)/u.test(
-          relativePath,
-        ) ||
-        /^(?:common|forge)\/build(?:\/|$)/u.test(relativePath))
+        /(?:^|\/)build(?:\/|$)/u.test(relativePath))
     )
       continue;
     if (entry.isSymbolicLink())

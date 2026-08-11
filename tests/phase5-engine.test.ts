@@ -1,4 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 import {
   inspectArtifact,
   inspectArtifactEntries,
@@ -19,7 +22,7 @@ import {
 import { buildFixtureManifest } from "../src/fixture-generator.js";
 import { buildMatrixPlan, validateMatrixPlan } from "../src/matrix-planner.js";
 import { buildQueuePlan } from "../src/phase5-queue.js";
-import { executeTuple } from "../src/phase5-execution.js";
+import { executeTuple, outputTreeFiles } from "../src/phase5-execution.js";
 import { compareReproducibleTrees } from "../src/reproducibility.js";
 import { sha256 } from "../src/digest.js";
 import { canonicalJson } from "../src/canonical-json.js";
@@ -431,6 +434,23 @@ describe("phase 5 build and artifact contracts", () => {
     });
     expect(plan.$schema).toBe("urn:mcgen:schema:queue-plan:1");
     expect(plan.cancelKey).toContain("phase5-changed-boundaries");
+  });
+
+  it("keeps generated build internals out of the reproducibility tree", async () => {
+    const root = await mkdtemp(join(tmpdir(), "mcgen-reproducibility-"));
+    try {
+      await mkdir(join(root, "build", "classes"), { recursive: true });
+      await mkdir(join(root, "src"), { recursive: true });
+      await writeFile(
+        join(root, "build", "classes", "Example.class"),
+        new Uint8Array([1]),
+      );
+      await writeFile(join(root, "src", "main.java"), new Uint8Array([2]));
+      const files = await outputTreeFiles(root);
+      expect(files.map((file) => file.path)).toEqual(["src/main.java"]);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
   });
 
   it("rejects malformed queue types and tuple identities before sharding", () => {
