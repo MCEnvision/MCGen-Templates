@@ -32,7 +32,7 @@ describe("phase six release input", () => {
         encoding: "utf8",
       }).trim();
       expect(input.sourceCommit).toBe(head);
-      expect(input.catalogSnapshot).toBe("2026-08-10-r4");
+      expect(input.catalogSnapshot).toBe("2026-08-11-r1");
       expect(input.files.length).toBeGreaterThan(2000);
       expect(input.files.map((file) => file.path)).toEqual(
         [...input.files.map((file) => file.path)].sort((left, right) =>

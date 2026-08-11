@@ -40,25 +40,25 @@
           "./gradlew",
           "build"
         ],
-        "diskBytes": 68228364,
-        "durationMs": 18902,
+        "diskBytes": 68228356,
+        "durationMs": 17865,
         "exitCode": 0,
-        "outputBytes": 3066,
-        "outputDigest": "329b57ad6339c0da4bd17330a0a487a3a9ad14b9c970b6c68aec84d38a7318c2"
+        "outputBytes": 3068,
+        "outputDigest": "8df9c007de930c7bdd30b0e79391656433b0a017536e0d9d7b0a1b4695b4ebd9"
       },
       {
         "command": [
           "./gradlew",
           "test"
         ],
-        "diskBytes": 68228364,
-        "durationMs": 1135,
+        "diskBytes": 68228356,
+        "durationMs": 980,
         "exitCode": 0,
         "outputBytes": 1737,
-        "outputDigest": "68a9e93b589a0ee789f3eb6d23eb9861ca47fd13346bb954dbfc2aa76fa64b3e"
+        "outputDigest": "1ddcabc501c4725f9fc130e8a7451f2016e42a0869ee7e419be534d2c9fdb08c"
       }
     ],
-    "finishedAt": "2026-08-10T21:29:28.756Z",
+    "finishedAt": "2026-08-11T12:40:03.223Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
@@ -66,16 +66,16 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
-      "catalog": "5c5abd6e3962a8b7984a9d8970984100da40581b1c6ebdf1491b0096976c82b7",
+      "catalog": "ebb4fc060bd3086837104e4e5401badb16ced1f5075c9bf85c58fe495e80ff3c",
       "descriptor": "13bd7aa8f479ede751aca48196e9e01cd40228d220c11d7e8658ecbc315d1998",
       "fixture": "debbaf823c4affcc96b2489e58c8deb660573d8de30c0f5a361312c7238ec58b",
-      "profile": "1204b68e6a0fd0b1478c4bd9322a47550ab645ef60b81ff838e85ad72a08a4e7",
+      "profile": "7a9a217f9da1ad0619c0ce479dd4843dc61f8b27903f889199ef7a3c5a7e9c24",
       "template": "d6a3d939a8ab9dca2587c5dffb5623ddd1c3fdaad10cff8e06164cf42271e34a"
     },
     "descriptorRevision": 2,
     "mappingDigest": "26b9b183bff69a08cb527577c110ee95c194d19d1ba8c6e5adf8ea61a8986096",
     "procedureDigest": "81fddcf48a11dab74f2601d3b82ecff782b37beb8a30b874d08c9be8fdb1ffdc",
-    "profileRevision": 2,
+    "profileRevision": 4,
     "sourceDigests": [
       "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
       "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -84,10 +84,10 @@
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "8af22207054e6a12b0c91d027c302d0e881640703e8d4e57fc7be84bbda7c64e",
+    "digest": "9a43d7cc52022f2106ec2abd6f962fe3590a85d6c02ba0f24cddc1853770daee",
     "identity": {
       "catalogKey": "9.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "architectury": "9.1.12",
         "architectury-fabric": "9.1.12",
@@ -100,10 +100,10 @@
         "minecraft": "1.20.1"
       },
       "contentDigests": {
-        "catalog": "5c5abd6e3962a8b7984a9d8970984100da40581b1c6ebdf1491b0096976c82b7",
+        "catalog": "ebb4fc060bd3086837104e4e5401badb16ced1f5075c9bf85c58fe495e80ff3c",
         "descriptor": "13bd7aa8f479ede751aca48196e9e01cd40228d220c11d7e8658ecbc315d1998",
         "fixture": "debbaf823c4affcc96b2489e58c8deb660573d8de30c0f5a361312c7238ec58b",
-        "profile": "1204b68e6a0fd0b1478c4bd9322a47550ab645ef60b81ff838e85ad72a08a4e7",
+        "profile": "7a9a217f9da1ad0619c0ce479dd4843dc61f8b27903f889199ef7a3c5a7e9c24",
         "template": "d6a3d939a8ab9dca2587c5dffb5623ddd1c3fdaad10cff8e06164cf42271e34a"
       },
       "descriptorId": "multiloader",
@@ -117,7 +117,7 @@
       "mappingDigest": "26b9b183bff69a08cb527577c110ee95c194d19d1ba8c6e5adf8ea61a8986096",
       "procedureDigest": "81fddcf48a11dab74f2601d3b82ecff782b37beb8a30b874d08c9be8fdb1ffdc",
       "profileId": "architectury-multiloader",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",

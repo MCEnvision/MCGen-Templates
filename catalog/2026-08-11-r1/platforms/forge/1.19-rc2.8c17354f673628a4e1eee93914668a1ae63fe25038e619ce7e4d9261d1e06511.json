@@ -1,0 +1,84 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8345191360931e453e072d3b",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.19-rc2",
+      "id": "component.forge.39b62be09b48a85d28073f79",
+      "sourceEntries": [
+        {
+          "entryIndex": 4436,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19-rc2"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.19-rc2-20220606.112759",
+      "id": "component.forge.1088d3ed10a5bdc5f1826f86",
+      "sourceEntries": [
+        {
+          "entryIndex": 4437,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.19-rc2-20220606.112759"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.90ee4905823d8e9ac56feff8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4437,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.1088d3ed10a5bdc5f1826f86"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.90ee4905823d8e9ac56feff8",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 4436,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.39b62be09b48a85d28073f79"
+    }
+  ],
+  "id": "catalog.forge.c2c04ef3025b1622e7a28d78",
+  "key": "1.19-rc2",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

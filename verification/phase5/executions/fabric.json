@@ -129,7 +129,7 @@
     },
     "tuple": {
       "catalogKey": "1.20.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "fabricApi": "0.92.2+1.20.1",
         "loader": "0.15.11",
@@ -137,10 +137,10 @@
         "yarn": "1.20.1+build.10"
       },
       "contentDigests": {
-        "catalog": "efb9845ee8609aca9f6c3266b5ebed45e216d120297b55a2d0daf6062609f7ce",
+        "catalog": "63443809afdda3a84591d2486a3eab35873f8404d14d44c42bdd13cb84d75ff4",
         "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "3a0f9b7193020f084f1107cd0b132247c9eea06a08f8d9037d218b029fa9fe33",
+        "profile": "b2654534a39d47f01be1e404367e9e8f6a317ad5fee162abedb88e714ca04d63",
         "template": "6a7cc6a9c6717ba0948239cf9c48f77121b9b272e23e4bd80ee19b99ee2c0e84"
       },
       "descriptorId": "fabric",
@@ -154,7 +154,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
       "profileId": "fabric",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
       ],
@@ -171,11 +171,12 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "profilePath": "profiles/fabric.json",
   "tuple": {
+    "id": "141bde5cade2df7987ca145075d04f6c7eb4a425c679308abcdf30f74feac3d4",
+    "status": "discovered",
     "blockers": [],
-    "id": "bbaf850d2169a645c2cba20e20096a5d77da353f80b4b472674c9bed0c1d9cff",
     "identity": {
       "catalogKey": "1.20.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "fabricApi": "0.92.2+1.20.1",
         "loader": "0.15.11",
@@ -183,10 +184,10 @@
         "yarn": "1.20.1+build.10"
       },
       "contentDigests": {
-        "catalog": "efb9845ee8609aca9f6c3266b5ebed45e216d120297b55a2d0daf6062609f7ce",
+        "catalog": "63443809afdda3a84591d2486a3eab35873f8404d14d44c42bdd13cb84d75ff4",
         "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "3a0f9b7193020f084f1107cd0b132247c9eea06a08f8d9037d218b029fa9fe33",
+        "profile": "b2654534a39d47f01be1e404367e9e8f6a317ad5fee162abedb88e714ca04d63",
         "template": "6a7cc6a9c6717ba0948239cf9c48f77121b9b272e23e4bd80ee19b99ee2c0e84"
       },
       "descriptorId": "fabric",
@@ -200,7 +201,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
       "profileId": "fabric",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
       ],
@@ -211,8 +212,7 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    },
-    "status": "discovered"
+    }
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

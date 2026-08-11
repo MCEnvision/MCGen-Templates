@@ -49,6 +49,16 @@ jobs:
           cache: npm
           cache-dependency-path: checkout-a/package-lock.json
 
+      - name: setup reviewed java toolchains
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: |
+            8
+            17
+            21
+          architecture: x64
+
       - name: install first copy
         working-directory: checkout-a
         run: npm ci

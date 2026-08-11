@@ -130,7 +130,7 @@
     },
     "tuple": {
       "catalogKey": "1.12.2",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "forge": "1.12.2-14.23.5.2859",
         "forgegradle": "3.0.197",
@@ -138,10 +138,10 @@
         "minecraft": "1.12.2"
       },
       "contentDigests": {
-        "catalog": "9ae57ebaed21bf837569c4acc36dfdef41933fee1c666e60e08789be6ddfc21b",
+        "catalog": "1b146fc0886994cabc0dc7a8afb46b47fc5a5b3c2fda2233c3e553afc95c9737",
         "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
         "fixture": "cb1f4a76ae3887cc2798a5460e33265bf2a4ec40171fd193e2d0864e3ea6b635",
-        "profile": "7c34968a7f2baf3612b17677eea8412b2ec242fee950b6d855538ebf13b735b0",
+        "profile": "d0a4e0f970ab6c2c69b8a625f90cacf8d0380289a0581dc10879832bbfed2a29",
         "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
       },
       "descriptorId": "forge",
@@ -155,7 +155,7 @@
       "mappingDigest": "b5aaf696f98390375147ed3d872e73de5c42f919b7738c289088a48d3f02c930",
       "procedureDigest": "dcd328c6fad5cb37c0c7439df737849f9436c1de2b81aa05d9425a6d06cb6d18",
       "profileId": "forge-legacy",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -174,11 +174,12 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "profilePath": "profiles/forge-legacy.json",
   "tuple": {
+    "id": "e180fb15102cb727faa22ba39e2d18c7cb47ba426a959ab5803f8ea89b996e97",
+    "status": "discovered",
     "blockers": [],
-    "id": "f193863b84595aa5bee829180aee084468b98caf6acfcc7b74a3fa27e7ee5f88",
     "identity": {
       "catalogKey": "1.12.2",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "forge": "1.12.2-14.23.5.2859",
         "forgegradle": "3.0.197",
@@ -186,10 +187,10 @@
         "minecraft": "1.12.2"
       },
       "contentDigests": {
-        "catalog": "9ae57ebaed21bf837569c4acc36dfdef41933fee1c666e60e08789be6ddfc21b",
+        "catalog": "1b146fc0886994cabc0dc7a8afb46b47fc5a5b3c2fda2233c3e553afc95c9737",
         "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
         "fixture": "cb1f4a76ae3887cc2798a5460e33265bf2a4ec40171fd193e2d0864e3ea6b635",
-        "profile": "7c34968a7f2baf3612b17677eea8412b2ec242fee950b6d855538ebf13b735b0",
+        "profile": "d0a4e0f970ab6c2c69b8a625f90cacf8d0380289a0581dc10879832bbfed2a29",
         "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
       },
       "descriptorId": "forge",
@@ -203,7 +204,7 @@
       "mappingDigest": "b5aaf696f98390375147ed3d872e73de5c42f919b7738c289088a48d3f02c930",
       "procedureDigest": "dcd328c6fad5cb37c0c7439df737849f9436c1de2b81aa05d9425a6d06cb6d18",
       "profileId": "forge-legacy",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -216,8 +217,7 @@
         "sha256": "c04e350a66b20c3491c15bddbaf162d7d036b7eeec928838f627deb393500fe2",
         "version": "4.9"
       }
-    },
-    "status": "discovered"
+    }
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/forge/gradlew-legacy.tmpl"

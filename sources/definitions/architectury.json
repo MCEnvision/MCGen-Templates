@@ -25,9 +25,21 @@
       "expectedContentTypes": ["application/xml", "text/xml"]
     },
     {
+      "id": "architectury-forge-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.architectury.dev/dev/architectury/architectury-forge/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
       "id": "architectury-loom-maven-metadata",
       "role": "prerequisite",
       "url": "https://maven.architectury.dev/dev/architectury/architectury-loom/maven-metadata.xml",
+      "expectedContentTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "id": "architectury-plugin-maven-metadata",
+      "role": "prerequisite",
+      "url": "https://maven.architectury.dev/architectury-plugin/architectury-plugin.gradle.plugin/maven-metadata.xml",
       "expectedContentTypes": ["application/xml", "text/xml"]
     },
     {

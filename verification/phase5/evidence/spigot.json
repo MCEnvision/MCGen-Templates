@@ -35,10 +35,10 @@
           "build"
         ],
         "diskBytes": 91094,
-        "durationMs": 660,
+        "durationMs": 611,
         "exitCode": 0,
         "outputBytes": 645,
-        "outputDigest": "c5abd48c640a24b04b6d55d1e1e3b0ceb356fdf243a1f29b23fb5171ba967123"
+        "outputDigest": "6ea559aa9020f98bd2253a6822f6b15c496dbe2a9e44d3b9b83a66eb7baed8f6"
       },
       {
         "command": [
@@ -46,13 +46,13 @@
           "test"
         ],
         "diskBytes": 91094,
-        "durationMs": 627,
+        "durationMs": 596,
         "exitCode": 0,
         "outputBytes": 612,
-        "outputDigest": "811a11ad5e30dc53dbdc555a7313446faaefe3475b22103d831b285d4fdd2b29"
+        "outputDigest": "e04e3c8798dd96d13f266fda5557d7dc9dd59023a76569f1d979d63312797121"
       }
     ],
-    "finishedAt": "2026-08-10T21:30:08.247Z",
+    "finishedAt": "2026-08-11T12:40:41.377Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
@@ -60,34 +60,34 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
-      "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+      "catalog": "b2876807318d44abc5fb63f1000c0ac8ea980d4e678ca55d78a23f0e0370eb72",
       "descriptor": "d363cef61cf4c23f250418c8d14488681a6aec06895108fec0c60bced0cd3168",
       "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-      "profile": "6e8a9b3f676fd79a2b69aedeb06b29ffe348fbfd8c8db5b31461451eed832049",
+      "profile": "3f7cdf377c1de146fb9061f2531e4281b2ab5d4b5ed195992ba651687ca97e68",
       "template": "13549aee887ec962ca8d9f7cc0e8dcd8e5210a99f2dca05f6ebccadd9961ddb2"
     },
     "descriptorRevision": 2,
     "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
     "procedureDigest": "19dcf1a5c6b32ecd4ac914982a6e252b7a7f181625b1f7031106fd76115bfc09",
-    "profileRevision": 2,
+    "profileRevision": 4,
     "sourceDigests": [
       "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003"
     ],
     "wrapperSha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583"
   },
   "key": {
-    "digest": "325e1ec87f70f65b23556aceb3aa0b5e59c3042d57e10fdf75165561e4946e01",
+    "digest": "01070a818971e58ec91eb4489adaa43ca362a94870543cc9125464be548d94af",
     "identity": {
       "catalogKey": "1.8.8",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+        "catalog": "b2876807318d44abc5fb63f1000c0ac8ea980d4e678ca55d78a23f0e0370eb72",
         "descriptor": "d363cef61cf4c23f250418c8d14488681a6aec06895108fec0c60bced0cd3168",
         "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-        "profile": "6e8a9b3f676fd79a2b69aedeb06b29ffe348fbfd8c8db5b31461451eed832049",
+        "profile": "3f7cdf377c1de146fb9061f2531e4281b2ab5d4b5ed195992ba651687ca97e68",
         "template": "13549aee887ec962ca8d9f7cc0e8dcd8e5210a99f2dca05f6ebccadd9961ddb2"
       },
       "descriptorId": "spigot",
@@ -101,7 +101,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "19dcf1a5c6b32ecd4ac914982a6e252b7a7f181625b1f7031106fd76115bfc09",
       "profileId": "spigot",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003"
       ],

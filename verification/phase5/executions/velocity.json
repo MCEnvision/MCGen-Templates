@@ -125,15 +125,15 @@
     },
     "tuple": {
       "catalogKey": "3.3",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "velocity": "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "ee334fa27b48045f5a68823abd36f9cefbce2e8ccbe6d1edb9fa3f67f6a00e91",
+        "catalog": "c36c1d697cbc579a4d3f22b3be233768d056a1a359b6ad89448463c10c0fbe16",
         "descriptor": "3d7eb28d76c3c0a9ef65cc3b9ebab2f640214d2a47eb7f6062cd2991ca0e0d12",
         "fixture": "d2b6a9c1246e201b693a90aa21ec9cc7d1cf9d519b1f0d75edbd367b6298f291",
-        "profile": "2804dc5ddd9b8e45011993e709f053f9fc94049bb0cd8138ec1949a14917f01a",
+        "profile": "7f93f8efe3c37dfe7b4fff15c7c8467d3bf8c59ad2340bab4744da626859b045",
         "template": "d8ac004b7c3314ecdf69b9b483c1c097c47f5486c1ee21694b32831d0bd5418d"
       },
       "descriptorId": "velocity",
@@ -147,7 +147,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "68d5f6ff884fbe616437dda2480cd37380126a529054b256a3bf5e262a2f3954",
       "profileId": "velocity",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064"
       ],
@@ -164,19 +164,20 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "profilePath": "profiles/velocity.json",
   "tuple": {
+    "id": "0802f60b1fadb3041db783bb80844f023560ccea7363c8b590a272cd586b5675",
+    "status": "discovered",
     "blockers": [],
-    "id": "d4cbceda8c3d52b610daec3ff393456789550c956ef32170ed5c7484adf9a9fc",
     "identity": {
       "catalogKey": "3.3",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "velocity": "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "ee334fa27b48045f5a68823abd36f9cefbce2e8ccbe6d1edb9fa3f67f6a00e91",
+        "catalog": "c36c1d697cbc579a4d3f22b3be233768d056a1a359b6ad89448463c10c0fbe16",
         "descriptor": "3d7eb28d76c3c0a9ef65cc3b9ebab2f640214d2a47eb7f6062cd2991ca0e0d12",
         "fixture": "d2b6a9c1246e201b693a90aa21ec9cc7d1cf9d519b1f0d75edbd367b6298f291",
-        "profile": "2804dc5ddd9b8e45011993e709f053f9fc94049bb0cd8138ec1949a14917f01a",
+        "profile": "7f93f8efe3c37dfe7b4fff15c7c8467d3bf8c59ad2340bab4744da626859b045",
         "template": "d8ac004b7c3314ecdf69b9b483c1c097c47f5486c1ee21694b32831d0bd5418d"
       },
       "descriptorId": "velocity",
@@ -190,7 +191,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "68d5f6ff884fbe616437dda2480cd37380126a529054b256a3bf5e262a2f3954",
       "profileId": "velocity",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064"
       ],
@@ -201,8 +202,7 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    },
-    "status": "discovered"
+    }
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

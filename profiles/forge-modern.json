@@ -1,162 +1,17 @@
 {
   "$schema": "urn:mcgen:schema:toolchain-profile:1",
-  "schemaVersion": 1,
-  "id": "forge-modern",
-  "revision": 2,
-  "status": "reviewed",
-  "family": "forge",
-  "category": "mod",
-  "platform": "forge",
-  "catalog": {
-    "snapshotId": "2026-08-10-phase7",
-    "indexPath": "catalog/2026-08-10-phase7/platforms/forge/index.json",
-    "indexSha256": "55448611e968847adcf4953db3320f006faef5408b6abb9e98081dcd51d31774",
-    "selectors": [
-      {
-        "platform": "forge",
-        "keyKind": "minecraft",
-        "keys": { "mode": "all-shards" },
-        "components": [
-          {
-            "component": "forge",
-            "coordinatePrefix": "net.minecraftforge:forge:",
-            "mode": "all-components"
-          }
-        ],
-        "evidence": [
-          {
-            "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
-            "path": "sources/snapshots/forge/2026-08-10-r2.json",
-            "sha256": "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
-            "selectors": ["entries[].catalogKey", "entries[].coordinate"]
-          }
-        ]
-      }
-    ]
-  },
-  "components": [
-    {
-      "id": "forge",
-      "coordinate": "net.minecraftforge:forge",
-      "version": "1.20.1-47.1.0",
-      "range": "1.20.1-47.1.0",
-      "required": true,
-      "catalogComponent": "forge"
-    },
-    {
-      "id": "forgegradle",
-      "coordinate": "net.minecraftforge.gradle:ForgeGradle",
-      "version": "6.0.47",
-      "range": "catalog-backed-modern-boundary",
-      "required": true,
-      "catalogComponent": "forgegradle"
-    }
-  ],
-  "java": {
-    "distribution": "temurin",
-    "runtime": 17,
-    "language": 17,
-    "bytecode": 17
-  },
-  "build": {
-    "system": "gradle",
-    "wrapper": "8.8",
-    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
-    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
-    "wrapperKind": "launcher-script",
-    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
-    "dsl": "groovy",
-    "plugins": [
-      {
-        "id": "net.minecraftforge.gradle",
-        "version": "6.0.47",
-        "repositoryIds": ["forge"]
-      }
-    ],
-    "properties": [{ "name": "minecraftVersion", "value": "catalog-selected" }],
-    "jvmArguments": [],
-    "sourceSets": [],
-    "tasks": [],
-    "publishing": false
-  },
-  "repositories": [
-    { "id": "forge", "url": "https://maven.minecraftforge.net/" },
-    { "id": "central", "url": "https://repo.maven.apache.org/maven2/" }
-  ],
-  "mappings": {
-    "strategy": "official",
-    "components": [
-      {
-        "id": "official-mappings",
-        "version": "selected-from-catalog",
-        "coordinate": "net.minecraft:mappings"
-      }
-    ]
-  },
-  "metadata": {
-    "format": "forge-mods-toml",
-    "files": ["src/main/resources/META-INF/mods.toml"],
-    "fieldMappings": [
-      { "field": "project.id", "path": "mods[0].modId", "required": true },
-      {
-        "field": "project.name",
-        "path": "mods[0].displayName",
-        "required": true
-      },
-      {
-        "field": "project.version",
-        "path": "mods[0].version",
-        "required": true
-      }
-    ]
-  },
-  "sourceLayout": {
-    "sourceRoots": [{ "name": "main", "path": "src/main/java" }],
-    "resourceRoots": [{ "name": "main", "path": "src/main/resources" }],
-    "testRoots": [{ "name": "test", "path": "src/test/java" }]
-  },
-  "languages": ["java", "kotlin"],
-  "languageAdapters": [
-    {
-      "language": "kotlin",
-      "id": "fabric-language-kotlin",
-      "version": "selected-from-catalog",
-      "coordinate": "net.fabricmc:fabric-language-kotlin"
-    }
-  ],
-  "features": [
-    { "id": "mixins", "support": "conditional" },
-    { "id": "data-generation", "support": "conditional" },
-    { "id": "access-transformers", "support": "conditional" }
-  ],
-  "incompatibilities": [
-    {
-      "id": "legacy-metadata",
-      "condition": "selected Forge key uses mcmod.info",
-      "reason": "The legacy metadata renderer is structurally different.",
-      "resolution": "Resolve forge-legacy instead."
-    }
-  ],
-  "verification": {
-    "commands": [
-      ["./gradlew", "build"],
-      ["./gradlew", "test"]
-    ],
-    "artifactPatterns": ["build/libs/*.jar"],
-    "inspection": ["META-INF/mods.toml", "META-INF/MANIFEST.MF"]
-  },
   "artifact": {
     "entrypointClasses": ["org.example.tuple.TupleProbe"],
     "expectedExtension": ".jar",
     "iconPaths": [],
     "maxEntries": 128,
     "metadataFields": {
-      "mods[0].modId": "tuple-probe",
       "mods[0].displayName": "Tuple Probe",
+      "mods[0].modId": "tuple-probe",
       "mods[0].version": "1.0.0"
     },
-    "patterns": ["build/libs/*.jar"],
     "metadataPaths": ["META-INF/mods.toml"],
+    "patterns": ["build/libs/*.jar"],
     "projectIdentity": {
       "id": "tuple-probe",
       "name": "Tuple Probe",
@@ -168,9 +23,195 @@
     ],
     "resourceNamespaces": []
   },
+  "build": {
+    "dsl": "groovy",
+    "jvmArguments": [],
+    "plugins": [
+      {
+        "id": "net.minecraftforge.gradle",
+        "repositoryIds": ["forge"],
+        "version": "6.0.47"
+      }
+    ],
+    "properties": [
+      {
+        "name": "minecraftVersion",
+        "value": "catalog-selected"
+      }
+    ],
+    "publishing": false,
+    "sourceSets": [],
+    "system": "gradle",
+    "tasks": [],
+    "wrapper": "8.8",
+    "wrapperDistributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "wrapperDistributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+    "wrapperKind": "launcher-script",
+    "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
+  },
+  "catalog": {
+    "indexPath": "catalog/2026-08-11-r1/platforms/forge/index.json",
+    "indexSha256": "fa6316ffb881106dc6928d49a778c35d8e2f5b8d7d0ec2ae749bad18405f8bd2",
+    "selectors": [
+      {
+        "components": [
+          {
+            "component": "forge",
+            "coordinatePrefix": "net.minecraftforge:forge:",
+            "mode": "all-components"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "sources/snapshots/forge/2026-08-10-r2.json",
+            "selectors": ["entries[].catalogKey", "entries[].coordinate"],
+            "sha256": "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
+            "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a"
+          }
+        ],
+        "keyKind": "minecraft",
+        "keys": {
+          "mode": "all-shards"
+        },
+        "platform": "forge"
+      }
+    ],
+    "snapshotId": "2026-08-11-r1"
+  },
+  "category": "mod",
+  "components": [
+    {
+      "catalogComponent": "forge",
+      "coordinate": "net.minecraftforge:forge",
+      "id": "forge",
+      "range": "1.20.1-47.1.0",
+      "required": true,
+      "version": "1.20.1-47.1.0"
+    },
+    {
+      "catalogComponent": "forgegradle",
+      "coordinate": "net.minecraftforge.gradle:ForgeGradle",
+      "id": "forgegradle",
+      "range": "catalog-backed-modern-boundary",
+      "required": true,
+      "version": "6.0.47"
+    }
+  ],
   "fallback": {
+    "migration": "Use forge-legacy only when its historical boundary is selected and separately verified.",
     "policy": "profile",
-    "profile": "forge-legacy",
-    "migration": "Use forge-legacy only when its historical boundary is selected and separately verified."
+    "profile": "forge-legacy"
+  },
+  "family": "forge",
+  "features": [
+    {
+      "id": "mixins",
+      "support": "conditional"
+    },
+    {
+      "id": "data-generation",
+      "support": "conditional"
+    },
+    {
+      "id": "access-transformers",
+      "support": "conditional"
+    }
+  ],
+  "id": "forge-modern",
+  "incompatibilities": [
+    {
+      "condition": "selected Forge key uses mcmod.info",
+      "id": "legacy-metadata",
+      "reason": "The legacy metadata renderer is structurally different.",
+      "resolution": "Resolve forge-legacy instead."
+    }
+  ],
+  "java": {
+    "bytecode": 17,
+    "distribution": "temurin",
+    "language": 17,
+    "runtime": 17
+  },
+  "languageAdapters": [
+    {
+      "coordinate": "net.fabricmc:fabric-language-kotlin",
+      "id": "fabric-language-kotlin",
+      "language": "kotlin",
+      "version": "selected-from-catalog"
+    }
+  ],
+  "languages": ["java", "kotlin"],
+  "mappings": {
+    "components": [
+      {
+        "coordinate": "net.minecraft:mappings",
+        "id": "official-mappings",
+        "version": "selected-from-catalog"
+      }
+    ],
+    "strategy": "official"
+  },
+  "metadata": {
+    "fieldMappings": [
+      {
+        "field": "project.id",
+        "path": "mods[0].modId",
+        "required": true
+      },
+      {
+        "field": "project.name",
+        "path": "mods[0].displayName",
+        "required": true
+      },
+      {
+        "field": "project.version",
+        "path": "mods[0].version",
+        "required": true
+      }
+    ],
+    "files": ["src/main/resources/META-INF/mods.toml"],
+    "format": "forge-mods-toml"
+  },
+  "platform": "forge",
+  "repositories": [
+    {
+      "id": "forge",
+      "url": "https://maven.minecraftforge.net/"
+    },
+    {
+      "id": "central",
+      "url": "https://repo.maven.apache.org/maven2/"
+    }
+  ],
+  "revision": 4,
+  "schemaVersion": 1,
+  "sourceLayout": {
+    "resourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/resources"
+      }
+    ],
+    "sourceRoots": [
+      {
+        "name": "main",
+        "path": "src/main/java"
+      }
+    ],
+    "testRoots": [
+      {
+        "name": "test",
+        "path": "src/test/java"
+      }
+    ]
+  },
+  "status": "reviewed",
+  "verification": {
+    "artifactPatterns": ["build/libs/*.jar"],
+    "commands": [
+      ["./gradlew", "build"],
+      ["./gradlew", "test"]
+    ],
+    "inspection": ["META-INF/mods.toml", "META-INF/MANIFEST.MF"]
   }
 }
