@@ -111,7 +111,15 @@ for (const name of expectedNames) {
       canonicalJson(expected.key?.identity) ||
     actual.generatorDigest !== expected.generatorDigest
   )
-    throw new Error(`${name} tuple identity differs from committed evidence`);
+    throw new Error(
+      `${name} tuple identity differs from committed evidence\n` +
+        `expected identity: ${canonicalJson(expected.key?.identity)}\n` +
+        `actual identity: ${canonicalJson(actual.key?.identity)}\n` +
+        `expected digest: ${expected.key?.digest ?? "missing"}\n` +
+        `actual digest: ${actual.key?.digest ?? "missing"}\n` +
+        `expected generator: ${expected.generatorDigest}\n` +
+        `actual generator: ${actual.generatorDigest ?? "missing"}`,
+    );
   expectedEvidence.push(expected);
 }
 
