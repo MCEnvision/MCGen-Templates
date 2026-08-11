@@ -40,25 +40,25 @@
           "./gradlew",
           "build"
         ],
-        "diskBytes": 68228358,
-        "durationMs": 18395,
+        "diskBytes": 68228363,
+        "durationMs": 16181,
         "exitCode": 0,
-        "outputBytes": 3068,
-        "outputDigest": "c9890bc19cffe71bcea1c6d4fe386c172b37e56272c03bd03516e7170ff999d3"
+        "outputBytes": 3070,
+        "outputDigest": "ec1bd9a37eb32ff37d2dbdb9727725012c628b2da8dd635ffe91d2cb3d4d1771"
       },
       {
         "command": [
           "./gradlew",
           "test"
         ],
-        "diskBytes": 68228358,
-        "durationMs": 1142,
+        "diskBytes": 68228363,
+        "durationMs": 956,
         "exitCode": 0,
         "outputBytes": 1737,
-        "outputDigest": "d2b7bf989b5d6201b50844664fc65016b489c30251302ee28261bfe1dd1ddcf8"
+        "outputDigest": "50846bfb709fe576acd9320157d4d9bce2b14ea9cc0005036ed44690b169b722"
       }
     ],
-    "finishedAt": "2026-08-10T21:27:54.901Z",
+    "finishedAt": "2026-08-11T12:38:36.206Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
@@ -66,16 +66,16 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
-      "catalog": "5c5abd6e3962a8b7984a9d8970984100da40581b1c6ebdf1491b0096976c82b7",
+      "catalog": "ebb4fc060bd3086837104e4e5401badb16ced1f5075c9bf85c58fe495e80ff3c",
       "descriptor": "8898b0b970093e30e702ebdf43df09ae72cb010fc41386eeedee37df15add57b",
       "fixture": "1f4b2a2948cad2b519bbf78f80a8284902025278a922c58ede12e4b8ad5e52e0",
-      "profile": "1204b68e6a0fd0b1478c4bd9322a47550ab645ef60b81ff838e85ad72a08a4e7",
+      "profile": "7a9a217f9da1ad0619c0ce479dd4843dc61f8b27903f889199ef7a3c5a7e9c24",
       "template": "af497ed1f4539a8635ad0b4d79f5953b17e5c83b98813a28565e999f1657facb"
     },
     "descriptorRevision": 2,
     "mappingDigest": "26b9b183bff69a08cb527577c110ee95c194d19d1ba8c6e5adf8ea61a8986096",
     "procedureDigest": "c08b5b027d6bafe5324cd6c66bf60518f9caf97a009e5e6d31094ce38610ffaa",
-    "profileRevision": 2,
+    "profileRevision": 4,
     "sourceDigests": [
       "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
       "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -84,10 +84,10 @@
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "436f95d75d153f51216278abc016acbd5fe09809c1a00f49091ba9ac12b32590",
+    "digest": "105a1c2f0217282bac0e2dce98d7e402890c7a7ce3763d4916c1938641c8880d",
     "identity": {
       "catalogKey": "9.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "architectury": "9.1.12",
         "architectury-fabric": "9.1.12",
@@ -100,10 +100,10 @@
         "minecraft": "1.20.1"
       },
       "contentDigests": {
-        "catalog": "5c5abd6e3962a8b7984a9d8970984100da40581b1c6ebdf1491b0096976c82b7",
+        "catalog": "ebb4fc060bd3086837104e4e5401badb16ced1f5075c9bf85c58fe495e80ff3c",
         "descriptor": "8898b0b970093e30e702ebdf43df09ae72cb010fc41386eeedee37df15add57b",
         "fixture": "1f4b2a2948cad2b519bbf78f80a8284902025278a922c58ede12e4b8ad5e52e0",
-        "profile": "1204b68e6a0fd0b1478c4bd9322a47550ab645ef60b81ff838e85ad72a08a4e7",
+        "profile": "7a9a217f9da1ad0619c0ce479dd4843dc61f8b27903f889199ef7a3c5a7e9c24",
         "template": "af497ed1f4539a8635ad0b4d79f5953b17e5c83b98813a28565e999f1657facb"
       },
       "descriptorId": "architectury",
@@ -117,7 +117,7 @@
       "mappingDigest": "26b9b183bff69a08cb527577c110ee95c194d19d1ba8c6e5adf8ea61a8986096",
       "procedureDigest": "c08b5b027d6bafe5324cd6c66bf60518f9caf97a009e5e6d31094ce38610ffaa",
       "profileId": "architectury-multiloader",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",

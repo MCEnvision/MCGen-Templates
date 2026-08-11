@@ -1,0 +1,150 @@
+{
+  "$schema": "urn:mcgen:schema:catalog:1",
+  "blockers": [],
+  "catalogId": "catalog.8345191360931e453e072d3b",
+  "category": "mod",
+  "components": [
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.16.4-rc1",
+      "id": "component.forge.d015176a8e5afbf3d69c4aa6",
+      "sourceEntries": [
+        {
+          "entryIndex": 3804,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.16.4-rc1"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.16.4-rc1-20201028.103558",
+      "id": "component.forge.10c17cea64cf448203271799",
+      "sourceEntries": [
+        {
+          "entryIndex": 3805,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.16.4-rc1-20201028.103558"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.16.4-rc1-20201028.163616",
+      "id": "component.forge.e0b34245102a63469f67a78b",
+      "sourceEntries": [
+        {
+          "entryIndex": 3806,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.16.4-rc1-20201028.163616"
+    },
+    {
+      "channel": "release-candidate",
+      "compatibility": "declared",
+      "component": "mappings-config",
+      "coordinate": "de.oceanlabs.mcp:mcp_config:1.16.4-rc1-20210113.124109",
+      "id": "component.forge.358138e5275726c50f5f4575",
+      "sourceEntries": [
+        {
+          "entryIndex": 3807,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "status": "discovered",
+      "version": "1.16.4-rc1-20210113.124109"
+    }
+  ],
+  "edges": [
+    {
+      "confidence": "published",
+      "from": "target.forge.f135f14dc60597e822fb81a2",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 3805,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.10c17cea64cf448203271799"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.f135f14dc60597e822fb81a2",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 3807,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.358138e5275726c50f5f4575"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.f135f14dc60597e822fb81a2",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 3804,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.d015176a8e5afbf3d69c4aa6"
+    },
+    {
+      "confidence": "published",
+      "from": "target.forge.f135f14dc60597e822fb81a2",
+      "kind": "targets",
+      "sourceEntries": [
+        {
+          "entryIndex": 3806,
+          "snapshotId": "forge.7bb8d1fe2c4ab6007a79b73a",
+          "sourceIndexes": [
+            3
+          ]
+        }
+      ],
+      "to": "component.forge.e0b34245102a63469f67a78b"
+    }
+  ],
+  "id": "catalog.forge.0e6700db3695b2207a9ced23",
+  "key": "1.16.4-rc1",
+  "keyKind": "minecraft",
+  "platform": "forge",
+  "schemaVersion": 1,
+  "sourceSnapshots": [
+    "forge.7bb8d1fe2c4ab6007a79b73a"
+  ]
+}

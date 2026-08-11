@@ -59,6 +59,16 @@ jobs:
         with:
           node-version: "22.13.0"
           cache: npm
+
+      - name: setup reviewed java toolchains
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: |
+            8
+            17
+            21
+          architecture: x64
       - name: install
         run: npm ci
       - name: verify phase 5 contracts

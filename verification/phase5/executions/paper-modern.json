@@ -125,15 +125,15 @@
     },
     "tuple": {
       "catalogKey": "1.20.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+        "catalog": "0c825cb6fd2f51601935a2b694853ffb290c66333a88e1c68af7bde99aa7e658",
         "descriptor": "1d280f3275ed806fc56cce165b4b0e73703bb7b3a177cbe6d29879e7f1ea1cfa",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "8cc674e0c87a5037a1b1dae22260e1e54adbba8965378a97480d09f3f287bb7d",
+        "profile": "17e727a8213c7664b227b28e453e57a04b989249fbbab7ad7a5b2c833b750cf8",
         "template": "c4d82235d900b08c9b9890b95a81cb417c26755735236f42087bb7db52406f08"
       },
       "descriptorId": "paper-modern",
@@ -147,7 +147,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "b4e1dce68fc250bff8bbd363373fbc6143c5f8b210527f7e6f09bd26abd1ca5f",
       "profileId": "paper-modern",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
       ],
@@ -164,19 +164,20 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "profilePath": "profiles/paper-modern.json",
   "tuple": {
+    "id": "fd43abfbb7d6c9a9d6d0aee81fc340b37fc30583c5ea3205ca5e53c72aea7414",
+    "status": "discovered",
     "blockers": [],
-    "id": "3e81ed4b3d74afc1b84689f158fd0795f75ad9547043628ab9239f2803545ea1",
     "identity": {
       "catalogKey": "1.20.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "45d64f3820c381a12db4ddea3ab04dfe32cd94b789f6927caf62576200d35337",
+        "catalog": "0c825cb6fd2f51601935a2b694853ffb290c66333a88e1c68af7bde99aa7e658",
         "descriptor": "1d280f3275ed806fc56cce165b4b0e73703bb7b3a177cbe6d29879e7f1ea1cfa",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "8cc674e0c87a5037a1b1dae22260e1e54adbba8965378a97480d09f3f287bb7d",
+        "profile": "17e727a8213c7664b227b28e453e57a04b989249fbbab7ad7a5b2c833b750cf8",
         "template": "c4d82235d900b08c9b9890b95a81cb417c26755735236f42087bb7db52406f08"
       },
       "descriptorId": "paper-modern",
@@ -190,7 +191,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "b4e1dce68fc250bff8bbd363373fbc6143c5f8b210527f7e6f09bd26abd1ca5f",
       "profileId": "paper-modern",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
       ],
@@ -201,8 +202,7 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    },
-    "status": "discovered"
+    }
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

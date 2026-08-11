@@ -40,11 +40,13 @@ function allowedPath(path) {
   ) {
     return true;
   }
-  return [
-    "verification/phase5/audit.json",
-    "verification/phase5/coverage.json",
-    "verification/phase5/matrix.json",
-  ].includes(path);
+  return (
+    [
+      "verification/phase5/audit.json",
+      "verification/phase5/coverage.json",
+      "verification/phase5/matrix.json",
+    ].includes(path) || path.startsWith("verification/phase5/evidence/")
+  );
 }
 
 function latestCatalog(files) {

@@ -221,7 +221,9 @@ const sourceAdapters = [
       "architectury-api-maven-metadata",
       "architectury-fabric-maven-metadata",
       "architectury-neoforge-maven-metadata",
+      "architectury-forge-maven-metadata",
       "architectury-loom-maven-metadata",
+      "architectury-plugin-maven-metadata",
       "architectury-setup-documentation",
     ],
     components: [
@@ -244,9 +246,21 @@ const sourceAdapters = [
         catalogKey: apiLine,
       },
       {
+        sourceId: "architectury-forge-maven-metadata",
+        component: "architectury-forge",
+        coordinate: "dev.architectury:architectury-forge",
+        catalogKey: apiLine,
+      },
+      {
         sourceId: "architectury-loom-maven-metadata",
         component: "architectury-loom",
         coordinate: "dev.architectury:architectury-loom",
+        catalogKey: globalKey,
+      },
+      {
+        sourceId: "architectury-plugin-maven-metadata",
+        component: "architectury-plugin",
+        coordinate: "architectury-plugin:architectury-plugin.gradle.plugin",
         catalogKey: globalKey,
       },
     ],

@@ -263,10 +263,24 @@ const sourceNetworkPolicies = {
     ],
     expectedContentTypes: ["application/xml", "text/xml"],
   },
+  "architectury-forge-maven-metadata": {
+    maxRedirects: 2,
+    allowedUrls: [
+      "https://maven.architectury.dev/dev/architectury/architectury-forge/maven-metadata.xml",
+    ],
+    expectedContentTypes: ["application/xml", "text/xml"],
+  },
   "architectury-loom-maven-metadata": {
     maxRedirects: 2,
     allowedUrls: [
       "https://maven.architectury.dev/dev/architectury/architectury-loom/maven-metadata.xml",
+    ],
+    expectedContentTypes: ["application/xml", "text/xml"],
+  },
+  "architectury-plugin-maven-metadata": {
+    maxRedirects: 2,
+    allowedUrls: [
+      "https://maven.architectury.dev/architectury-plugin/architectury-plugin.gradle.plugin/maven-metadata.xml",
     ],
     expectedContentTypes: ["application/xml", "text/xml"],
   },

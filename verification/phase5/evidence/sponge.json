@@ -39,10 +39,10 @@
           "build"
         ],
         "diskBytes": 111270,
-        "durationMs": 691,
+        "durationMs": 677,
         "exitCode": 0,
         "outputBytes": 314,
-        "outputDigest": "926805ff1c0f3511170302e1c9f351aa74519c69ff811d8e8a3e289eaaddd3b8"
+        "outputDigest": "35d8cc72b7b1df565d5cd8609b16fae11a7d7d580c35ea4325dc66ca897b9c2d"
       },
       {
         "command": [
@@ -50,13 +50,13 @@
           "test"
         ],
         "diskBytes": 111270,
-        "durationMs": 610,
+        "durationMs": 607,
         "exitCode": 0,
         "outputBytes": 281,
-        "outputDigest": "63b443f7b8f4bccf5cfb6f58fd1a45a21b303e4436b17ce96e709d2112aa9088"
+        "outputDigest": "8ff5dee9be5f7be5d195340ecee0f80599e040e6e30e2b0ffda2e379f2f8fa29"
       }
     ],
-    "finishedAt": "2026-08-10T21:30:11.185Z",
+    "finishedAt": "2026-08-11T12:40:44.453Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
@@ -64,34 +64,34 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
-      "catalog": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
+      "catalog": "7817be085e603e590acc861099d3b02d03fca91ecf26461b98c9852b12667492",
       "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
       "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-      "profile": "fbfec17b31aed49418001a713e2760e9123c46ef7891d62b82d2966ee8e23992",
+      "profile": "476a82880bca95f37aff9efb85903466a5e602f61ac15a792028a544dce3bb69",
       "template": "bab0512f625361c3ade679a02ab29b7a05e8acd698ac08b7db9b458085123020"
     },
     "descriptorRevision": 2,
     "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
     "procedureDigest": "fb4ec23bc70cd29a4f894bb3da8833f9accb2f6c2f09ad06cfa45aae1f98013d",
-    "profileRevision": 2,
+    "profileRevision": 4,
     "sourceDigests": [
       "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
     ],
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "868ef31d3f89552b64501eb5bb2e5bd4dd5805bd9015cef2a9c70c7625d55b40",
+    "digest": "a9cf303e368c8a82cab2f54095c41b62bc23818f9aa0bf4bd2b240dc563de1a7",
     "identity": {
       "catalogKey": "10.0",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "spongeapi": "org.spongepowered:spongeapi:10.0.0"
       },
       "contentDigests": {
-        "catalog": "e6aa1378b19a0598b64241487086e4c52b9a28f32b3d96ba21df620388962039",
+        "catalog": "7817be085e603e590acc861099d3b02d03fca91ecf26461b98c9852b12667492",
         "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "fbfec17b31aed49418001a713e2760e9123c46ef7891d62b82d2966ee8e23992",
+        "profile": "476a82880bca95f37aff9efb85903466a5e602f61ac15a792028a544dce3bb69",
         "template": "bab0512f625361c3ade679a02ab29b7a05e8acd698ac08b7db9b458085123020"
       },
       "descriptorId": "sponge",
@@ -105,7 +105,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "fb4ec23bc70cd29a4f894bb3da8833f9accb2f6c2f09ad06cfa45aae1f98013d",
       "profileId": "sponge",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
       ],

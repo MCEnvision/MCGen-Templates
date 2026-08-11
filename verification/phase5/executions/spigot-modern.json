@@ -126,15 +126,15 @@
     },
     "tuple": {
       "catalogKey": "1.21.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+        "catalog": "1700ed0f94b46c1cea6450daca7ddcf6c95733c7e81e719fe817668d5dfd56a0",
         "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "c9218865595abb2c133cb85c3017294aa1b1c23a156986667fe84c3a06478153",
+        "profile": "267b51cb23e7bdc2b44ba9cd97c4cae2d9a7bf9b8a40522c988378b69ccfe38b",
         "template": "139e4f075c36d34d5cee228804df76aff20766d005aa48c1a0078017b852c3be"
       },
       "descriptorId": "spigot-modern",
@@ -148,7 +148,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
       "profileId": "spigot-modern",
-      "profileRevision": 1,
+      "profileRevision": 3,
       "sourceDigests": [
         "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -167,19 +167,20 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "profilePath": "profiles/spigot-modern.json",
   "tuple": {
+    "id": "baaeb6fe927d6db15485d03e6617dff09ee7d6ec9adce9fe1e2c5d06dba41a15",
+    "status": "discovered",
     "blockers": [],
-    "id": "0ad8cfd145fce1a51e7d4878d7883f030b0686226f440208a6560171ac4a3b65",
     "identity": {
       "catalogKey": "1.21.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "spigot": "org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT"
       },
       "contentDigests": {
-        "catalog": "b6705f9ff1bb0cbdd616aeb41b654f379c22e559e61c96809aa47dfe1f68c8a3",
+        "catalog": "1700ed0f94b46c1cea6450daca7ddcf6c95733c7e81e719fe817668d5dfd56a0",
         "descriptor": "4b6d6e3652acd2872525bedaa2be8d4bc8df94fe2654b79c14f92588578d8a76",
         "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "c9218865595abb2c133cb85c3017294aa1b1c23a156986667fe84c3a06478153",
+        "profile": "267b51cb23e7bdc2b44ba9cd97c4cae2d9a7bf9b8a40522c988378b69ccfe38b",
         "template": "139e4f075c36d34d5cee228804df76aff20766d005aa48c1a0078017b852c3be"
       },
       "descriptorId": "spigot-modern",
@@ -193,7 +194,7 @@
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "procedureDigest": "ce474389d0cefab15eb78164ce87e985cea539326ea726bb4c56bd38c610d7eb",
       "profileId": "spigot-modern",
-      "profileRevision": 1,
+      "profileRevision": 3,
       "sourceDigests": [
         "9dc8e09d3bca0925c65487d3cbc2abf49730a343de3198403ef7ec5f492f8003",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -206,8 +207,7 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    },
-    "status": "discovered"
+    }
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

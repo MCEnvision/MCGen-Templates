@@ -40,7 +40,7 @@
           "build"
         ],
         "diskBytes": 24865602,
-        "durationMs": 3795,
+        "durationMs": 3507,
         "exitCode": 0,
         "outputBytes": 568,
         "outputDigest": "6c8fa4db59e18720513d6d3a3c1ac426b8f50d078b40e9fef773ab72beff2f77"
@@ -51,13 +51,13 @@
           "test"
         ],
         "diskBytes": 24865602,
-        "durationMs": 823,
+        "durationMs": 966,
         "exitCode": 0,
         "outputBytes": 402,
-        "outputDigest": "a463775e726b9a5edccb21559ea9e551224000306aa4f78ec5237e15e27259d2"
+        "outputDigest": "8160c68c553018932e3915e22e4955fc25cd94f695d6ba585379035fd6a9d658"
       }
     ],
-    "finishedAt": "2026-08-10T21:29:04.557Z",
+    "finishedAt": "2026-08-11T12:39:40.300Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
@@ -65,16 +65,16 @@
   "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
   "invalidation": {
     "contentDigests": {
-      "catalog": "0921cd2648d66043a3b8c5a381181a37be17fbf55a261d29cbb94fc09ffe29e7",
+      "catalog": "658782210756429a4a8442556d091f8d23b99d9291bafa88dd40304de1a1ee0e",
       "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
       "fixture": "8256d470837092082c355e46a0ff6cec30744beed96293e3d8df8c5ec10ce931",
-      "profile": "a3b79010fe64644bb87fdc3f9bc8da07d7324f167f1bae60a6c7d2786d2a9086",
+      "profile": "b06a0d6a992202d04244472585148f67c25c6d78d05d9285998c1f4d43ec0662",
       "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
     },
     "descriptorRevision": 2,
     "mappingDigest": "23d3caf1c657abef0bc079d85a71c36af137ec5779a8c9c0f6b132509feba2b9",
     "procedureDigest": "1d52c5d453abfa9348bc9fe276235f023cedc36095c9e23545ae64439dc45a28",
-    "profileRevision": 2,
+    "profileRevision": 4,
     "sourceDigests": [
       "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
       "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -83,10 +83,10 @@
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "28d7aa77389e1c0ee2af7b1ae7228f632483180ea322131df04d288313cb476e",
+    "digest": "729dd7ee63f221cdd6154f1566ab8e8f466a755af0604f89bdd2ad55fc70f0c6",
     "identity": {
       "catalogKey": "1.20.1",
-      "catalogSnapshotId": "2026-08-10-phase7",
+      "catalogSnapshotId": "2026-08-11-r1",
       "components": {
         "forge": "1.20.1-47.1.0",
         "forgeVersion": "47.1.0",
@@ -94,10 +94,10 @@
         "minecraft": "1.20.1"
       },
       "contentDigests": {
-        "catalog": "0921cd2648d66043a3b8c5a381181a37be17fbf55a261d29cbb94fc09ffe29e7",
+        "catalog": "658782210756429a4a8442556d091f8d23b99d9291bafa88dd40304de1a1ee0e",
         "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
         "fixture": "8256d470837092082c355e46a0ff6cec30744beed96293e3d8df8c5ec10ce931",
-        "profile": "a3b79010fe64644bb87fdc3f9bc8da07d7324f167f1bae60a6c7d2786d2a9086",
+        "profile": "b06a0d6a992202d04244472585148f67c25c6d78d05d9285998c1f4d43ec0662",
         "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
       },
       "descriptorId": "forge",
@@ -111,7 +111,7 @@
       "mappingDigest": "23d3caf1c657abef0bc079d85a71c36af137ec5779a8c9c0f6b132509feba2b9",
       "procedureDigest": "1d52c5d453abfa9348bc9fe276235f023cedc36095c9e23545ae64439dc45a28",
       "profileId": "forge-modern",
-      "profileRevision": 2,
+      "profileRevision": 4,
       "sourceDigests": [
         "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
