@@ -11,7 +11,7 @@ The GitHub foundation gate completed on August 9, 2026. Pull request `6` merged 
 
 The template-pack contract and source-evidence slice completed on August 9, 2026. Pull request `9` merged at commit `2a8ff64d2bbe818b314ba034c5d744ec9d4d331b`, all applicable pull-request and post-merge checks passed, and the merged commit received the verified signed annotated tag `phase-0-template-pack-contracts`. This slice added versioned serialized contracts, deterministic validation tooling, the authoritative source-adapter boundary, and the first reproducible Mojang and Forge metadata snapshot.
 
-The remaining active repository-owned Phase 0 work is the normalized compatibility graph, complete source-adapter coverage, toolchain profiles, template-family descriptors, deterministic pack construction, and verification foundation. No template family, generated project, compatibility recommendation, or exact compatibility tuple is verified yet.
+The seven-phase GitHub and template-repository program is complete. Pull request `44` merged the final completion evidence on August 10, 2026 at commit `3ae74d5159901b732a62a7b30170702154094a17`. The repository now contains the normalized compatibility graph, complete source-adapter coverage, toolchain profiles, template-family descriptors, deterministic pack construction, signed prerelease evidence, automated maintenance, and exact verification evidence for the currently selected verification set. Remaining product work belongs to the future `MCEnvision/MCGen` application repository, while additional historic and catalog-wide tuple verification remains a stable-release gate.
 
 Repository tooling uses Node.js 22, npm lockfiles, TypeScript 5.9, JSON Schema Draft 2020-12, and repository-defined formatting, linting, type-checking, tests, builds, schema validation, and snapshot verification. GitHub CodeQL default setup analyzes GitHub Actions and JavaScript or TypeScript sources. Application code remains owned by the future `MCEnvision/MCGen` repository.
 
@@ -1286,13 +1286,7 @@ Pull Requests: Read & Write
 Workflows: Read & Write only when generated output can write .github/workflows files
 ```
 
-The new-repository feature creates a separate permission decision. GitHub currently requires `Administration: Read & Write` for a GitHub App user access token to create a repository for the authenticated user. That permission is broad and is shown during app installation. Before the public GitHub App is registered, choose one of these product policies:
-
-1. Keep new-repository creation in the primary app and clearly explain the Administration permission.
-2. Keep the primary app minimal and move new-repository creation to a separately installed repository-creator app.
-3. Defer new-repository creation from the web MVP while retaining it in the CLI through the user's existing `gh` authentication.
-
-Recommended policy: option 2. Existing-repository generation is the flagship feature and should not require Administration permission. A separate optional creator app gives users a smaller default trust grant.
+New-repository creation uses a separate optional GitHub App owned by `MCEnvision` and named `MCGen Repository Creator`. The primary `MCGen` app must not receive Administration permission merely to create repositories. Existing-repository selection, repository reads, clean and port branch generation, branch creation, and pull-request creation must remain available without installing the creator app. The additional authorization is shown only when the user explicitly selects Create New GitHub Repository. The service must never fall back silently to PAT authentication.
 
 GitHub App endpoints:
 
@@ -2622,7 +2616,7 @@ MCGen will not use GitHub Pages. Production is served from:
 https://mcgen.enviouse.com
 ```
 
-Recommended request path:
+Authoritative request path:
 
 ```text
 Browser
@@ -2634,10 +2628,13 @@ Browser
     reverse proxy for /auth/github/
     reverse proxy for /webhooks/github
   Private mcgen-api service
+  Private mcgen-postgres service
   GitHub API
 ```
 
-Cloudflare Tunnel is preferred over a proxied public A or AAAA record because the connector opens outbound connections and allows all inbound origin ports to remain closed. Do not reuse the existing `ezconfig-hermes` tunnel. MCGen needs a dedicated tunnel so its credentials, route changes, restarts, and incident response do not affect another application.
+Production runs on the existing personal server available through `ssh node-1`. The canonical application checkout is `/mnt/hermes/MCGen`. Runtime releases, activation state, data, backups, and logs use `/srv/mcgen`, while secrets use `/etc/mcgen/secrets`. These locations have distinct purposes and must not be collapsed into one tracked repository tree.
+
+The stack uses Docker Compose with dedicated `mcgen-nginx`, `mcgen-api`, `mcgen-postgres`, and `mcgen-cloudflared` services on private MCGen networks. Cloudflare Tunnel is the only MCGen ingress path. Do not reuse the existing `ezconfig-hermes` tunnel. MCGen needs a dedicated tunnel so its credentials, route changes, restarts, and incident response do not affect another application.
 
 Target tunnel configuration:
 
@@ -2648,7 +2645,7 @@ ingress:
   - service: http_status:404
 ```
 
-If services run directly on the host instead of a private container network, use `http://127.0.0.1:<port>`. Do not publish the Nginx port on the server's public interface.
+Do not publish Nginx, API, PostgreSQL, or internal health ports on the server's public interface. Bind services to private Docker networks, Unix sockets where appropriate, or `127.0.0.1` only where host exposure is genuinely required.
 
 Target DNS record after the tunnel connector is installed and healthy:
 
@@ -2689,6 +2686,8 @@ Keep the previous two known-good releases on the server. Deployment must automat
 
 The production server must never compile untrusted pull-request code and must not act as a general-purpose self-hosted GitHub Actions runner.
 
+Before the first server change, inventory the actual host, its existing containers, networks, volumes, services, reverse proxies, tunnels, firewall, listeners, mounts, and application directories. Treat the reported Intel high-end CPU, 96 GB RAM, 2 TB storage, and Ubuntu or Linux operating system as owner-provided expectations until verified through SSH. Preserve all unrelated workloads and use MCGen-specific resources throughout.
+
 ---
 
 # 69. Backend Requirements
@@ -2710,7 +2709,7 @@ It does **not** need to store generated projects.
 
 The browser should perform ordinary ZIP generation. The backend should generate a file tree only when a GitHub operation or third-party API request requires it. Temporary generated trees must have a strict lifetime and must be removed after the request or job completes.
 
-The MVP can run without a general database if sessions are short-lived and restart loss is acceptable. Before public API keys, refresh-token persistence, durable jobs, or multi-instance API service are enabled, add a persistent store with documented encryption, backup, migration, and retention behavior.
+PostgreSQL is required for production durable state. It stores encrypted server-side session records, GitHub write idempotency records, webhook delivery deduplication, operation locks, GitHub write audit metadata, future API-key records, and schema migration state. It uses an MCGen-specific database and account, has no public host port, persists outside the ephemeral container filesystem, and has documented migrations, retention, backup, restore, and health-check procedures.
 
 ---
 
@@ -2825,7 +2824,7 @@ Avoid storing:
 - GitHub tokens in browser storage or cookies.
 - GitHub App private keys in source control, container images, logs, or deployment artifacts.
 
-For the MVP, use expiring GitHub user access tokens and end the MCGen session when the token can no longer be used. Mint one-hour installation access tokens on demand and keep them only in process memory.
+For the MVP, use expiring GitHub user access tokens and end the MCGen session when the token can no longer be used. Persistent server-side session records are encrypted at the application layer with authenticated encryption and an encryption key stored separately from PostgreSQL. Do not persist GitHub refresh tokens or installation access tokens. Mint installation access tokens on demand, keep them server-side, restrict them to the selected installation and repository where supported, narrow their permissions where supported, and allow them to expire naturally.
 
 The GitHub App private key and webhook secret are required server secrets. Mount them read-only at runtime with least-privilege file permissions. Rotate them with an overlap procedure that avoids downtime. If refresh tokens are later required, encrypt them at rest with a key stored separately from the database and document deletion, rotation, and breach recovery.
 
@@ -3433,20 +3432,20 @@ template CI verification
 
 The version source adapters, compatibility catalog, exact component selectors, profile resolver, descriptor loader, pack builder, and coverage report are part of the engineering MVP. A representative family may prove the renderer, but every officially discoverable supported platform and version must pass phases 9 and 10 before the first stable public release.
 
-New GitHub repository creation remains an MVP target only after the GitHub App Administration permission decision in section 27 is approved. It must not delay the safer existing-repository workflow if that decision remains open.
+New GitHub repository creation remains an MVP target through the separate optional `MCGen Repository Creator` GitHub App defined in sections 27 and 123. It must not delay or broaden the permissions of the primary existing-repository workflow.
 
 ---
 
 # 99. Phase 0 — Repository Foundation
 
-Status: the GitHub collaboration, security, planning, ruleset, environment, wiki, and release-control foundation is complete. The active Phase 0 work is now the repository-owned schema, source-adapter, catalog, profile, deterministic pack, and verification foundation. License selection and production or GitHub App decisions remain explicit owner decisions and do not permit importing third-party template content.
+Status: the GitHub collaboration, security, planning, ruleset, environment, wiki, release-control, schema, source-adapter, catalog, profile, deterministic pack, verification, publication, and automated-maintenance foundation is complete. The next Phase 0 work is creation and onboarding of the `MCEnvision/MCGen` application repository. The application license, production host, deployment model, GitHub App ownership and permission split, session durability, API-key launch boundary, Cloudflare tunnel, secret storage, and secret ownership decisions are approved in section 123. These decisions do not permit importing or relicensing third-party template content.
 
 Tasks:
 
-- Decide project name.
-- Create GitHub organization/repository.
+- Use the approved project name `MCGen`.
+- Create the `MCEnvision/MCGen` application repository and canonical `node-1` checkout at `/mnt/hermes/MCGen`.
 - Add README.
-- Add license.
+- Add Apache License 2.0 to `MCEnvision/MCGen` and set its package and repository metadata to SPDX identifier `Apache-2.0`.
 - Add contributing guide.
 - Add security policy.
 - Complete the GitHub repository foundation before adding template-pack implementation files.
@@ -3467,11 +3466,11 @@ Tasks:
 - Define pack release, signing, digest, and offline-cache contracts.
 - Create monorepo structure.
 - Configure formatting/linting/testing.
-- Confirm the production origin host and deployment account.
-- Confirm whether services run in containers or directly under systemd.
-- Approve the GitHub App ownership and permission model.
+- Use the existing personal server `node-1` as the production host after completing the required read-only inventory.
+- Use Docker Compose for the isolated MCGen production stack. Do not implement application services as independently maintained host-level systemd services.
+- Use the `MCEnvision`-owned primary `MCGen` GitHub App for least-privilege existing-repository workflows and the separate optional `MCGen Repository Creator` app for repository creation.
 - Reserve `mcgen.enviouse.com` without routing traffic until the origin is healthy.
-- Define secret names, rotation owners, and recovery procedures without creating secrets in source control.
+- Use the secret names, root-owned storage, rotation ownership, 90-day target cadence, immediate compromise response, and recovery procedures defined in section 123 without creating secrets in source control.
 - Merge and tag the verified GitHub foundation before starting product implementation on the next sequential phase branch.
 
 Deliverable:
@@ -3635,6 +3634,8 @@ The phase deliverable is a verified static bundle and Nginx configuration, not a
 
 Build the minimum private API and deployment stack before registering public callbacks.
 
+Deploy the production stack with Docker Compose on `node-1`. Keep the canonical application checkout at `/mnt/hermes/MCGen`, runtime releases and state under `/srv/mcgen`, and secrets under `/etc/mcgen/secrets`. Use dedicated MCGen containers, networks, volumes, database credentials, tunnel credentials, and operational resources so deployment and removal cannot disrupt unrelated services on the shared server.
+
 Implement:
 
 - TypeScript API service with `/healthz` and `/readyz`.
@@ -3650,7 +3651,7 @@ Implement:
 After local and server health checks pass:
 
 1. Create a dedicated `mcgen-prod` Cloudflare Tunnel.
-2. Install its connector credential on the production server.
+2. Install its connector credential at `/etc/mcgen/secrets/cloudflare-tunnel-token` on `node-1` with root ownership and mode `0600`.
 3. Route `mcgen.enviouse.com` to the private Nginx service.
 4. Create the proxied CNAME record.
 5. Apply hostname-scoped cache and security rules.
@@ -3666,7 +3667,7 @@ https://mcgen.enviouse.com serves the anonymous web generator through Cloudflare
 
 # 105. Phase 6 — GitHub App and GitHub Adapter
 
-Create the GitHub App only after the production callback and webhook URLs are live.
+Create the `MCEnvision`-owned primary `MCGen` GitHub App only after the production callback and webhook URLs are live. Keep it limited to Metadata read, Contents read and write, Pull Requests read and write, and the applicable workflow-file permission only when generated output includes `.github/workflows/*`.
 
 Implement:
 
@@ -3687,11 +3688,11 @@ Implement:
 - commits.
 - branch creation.
 - PR creation.
-- repository creation.
+- repository creation through the separately installed optional `MCGen Repository Creator` app.
 
 Test the adapter first with injected test credentials against a dedicated test repository, then run end-to-end tests through the installed development GitHub App. Do not use a developer PAT in the public web service.
 
-Repository creation is conditional on the approved Administration permission model. Existing repository operations use installation access tokens narrowed to the selected repository.
+The primary app does not receive Administration permission for repository creation. The optional creator app requests Administration and only the additional Contents or Workflows permissions required to initialize the selected repository. Existing repository operations use installation access tokens narrowed to the selected repository and remain available without installing the creator app.
 
 ---
 
@@ -3917,7 +3918,7 @@ MVP is ready when a user can:
 14. Use an existing branch as the port base.
 15. Preview generated changes.
 16. Open a Pull Request.
-17. Create a new GitHub repository if the Administration permission model is approved.
+17. Create a new GitHub repository after explicitly installing and authorizing the optional `MCGen Repository Creator` app.
 
 ### From CLI
 
@@ -4197,7 +4198,7 @@ mcgen.enviouse.com DNS record: absent
 
 The zone-wide minimum TLS version is currently TLS 1.0. Do not change it globally as part of MCGen without checking other subdomains. Prefer a hostname-scoped Cloudflare rule requiring TLS 1.2 or newer for `mcgen.enviouse.com` if the active plan and rules engine support it. Otherwise, record the compatibility tradeoff and schedule a zone-wide migration separately.
 
-One healthy locally managed tunnel named `ezconfig-hermes` already serves `ezconfig.enviouse.com` and `ezconfig-api.enviouse.com`. It is not an MCGen dependency and must remain unchanged. Create a dedicated `mcgen-prod` tunnel after the production server and Nginx service address are confirmed.
+One healthy locally managed tunnel named `ezconfig-hermes` already serves `ezconfig.enviouse.com` and `ezconfig-api.enviouse.com`. It is not an MCGen dependency and must remain unchanged. Create the dedicated `mcgen-prod` tunnel only after the `node-1` inventory, MCGen Compose deployment, private Nginx address, and internal health checks are verified.
 
 Cloudflare provisioning is complete only when all of these checks pass:
 
@@ -4300,18 +4301,249 @@ Each application release should include SHA-256 and SHA-512 checksums, a source 
 
 ---
 
-# 123. Decisions Required Before External Provisioning
+# 123. Resolved Owner Decisions and Production Authority
 
-These decisions cannot be inferred safely from the Cloudflare zone or this plan:
+The owner decisions in this section are approved architecture. They are no longer implementation blockers and must not be presented as unresolved choices. Implementation may proceed without asking for them again. External provisioning still follows the readiness gates, shared-server safeguards, and verification requirements below.
 
-1. **Production origin:** Identify the server that will run Nginx, the API, and `cloudflared`, plus whether the stack uses Docker Compose or host-level systemd services.
-2. **Tunnel credential creation:** Approve creation of a dedicated `mcgen-prod` tunnel credential and identify the secret store or root-owned server path where its connector token will be installed.
-3. **GitHub App ownership:** Choose EnVisione or a future MCGen organization as the app owner. Ownership affects app administration and transfer procedures.
-4. **Repository creation permission:** Approve a primary app with Administration permission, approve a separate optional creator app, or defer web-based repository creation. The recommended choice is a separate creator app.
-5. **Session durability:** Accept login loss during API restarts for the MVP, or approve a persistent encrypted session store before launch.
-6. **Public API launch boundary:** Decide whether third-party API keys are part of the first public release. If they are, persistent storage, key hashing, rotation, quotas, and abuse operations move into the production-platform phase.
+## 123.1 Application identity and license
 
-Until decisions 1 and 2 are answered, do not create `mcgen.enviouse.com` DNS, a tunnel credential, or public GitHub callback endpoints. This avoids creating a dead hostname or an unmanaged secret.
+The application repository is:
+
+```text
+Owner: MCEnvision
+Name: MCGen
+License: Apache License 2.0
+SPDX-License-Identifier: Apache-2.0
+```
+
+Create and maintain the corresponding `LICENSE`, package metadata, repository metadata, and documentation references in `MCEnvision/MCGen`. This decision applies to the MCGen application repository. It does not automatically relicense `MCGen-Templates`, third-party code, imported starter projects, canonical templates, or other content with separate provenance. Every imported or redistributed item remains governed by its actual source license and the provenance rules in this plan.
+
+## 123.2 Production host and canonical paths
+
+Production uses the owner's existing personal server:
+
+```text
+Host and SSH alias: node-1
+Access: ssh node-1
+Canonical application checkout: /mnt/hermes/MCGen
+Runtime root: /srv/mcgen
+Secret root: /etc/mcgen/secrets
+```
+
+The owner reports an Intel high-end CPU in the i9 or Ultra class, 96 GB RAM, 2 TB storage, and Ubuntu or Linux. These are expectations until verified on the host. Record only verified facts in operational documentation and avoid exposing unnecessary private machine information publicly.
+
+Before cloning, initializing, or modifying the canonical checkout, inspect:
+
+```bash
+ssh node-1
+ls -la /mnt/hermes
+ls -la /mnt/hermes/MCGen
+```
+
+If `/mnt/hermes/MCGen` exists, determine whether it is the intended repository without altering it:
+
+```bash
+cd /mnt/hermes/MCGen
+git status
+git remote -v
+git branch --show-current
+git rev-parse --show-toplevel
+```
+
+Preserve a valid checkout and all legitimate uncommitted work. If the directory exists but contains unrelated data, preserve it and stop before choosing a different target. Never delete, overwrite, reset, or clean an existing directory merely to simplify setup.
+
+If the path does not exist and the remote exists, clone `MCEnvision/MCGen` into `/mnt/hermes/MCGen`. If the remote does not exist and the authenticated account has sufficient organization permission, create `MCEnvision/MCGen` and clone it there. If remote creation is temporarily blocked, initialize the complete application repository locally at `/mnt/hermes/MCGen`, then attach and verify the remote when it becomes available. Do not create a competing temporary application root.
+
+The repository may contain `apps`, `packages`, `infrastructure`, `docs`, `scripts`, and `deployments`. Persistent runtime data and secrets must remain untracked. The authoritative path `/mnt/hermes/MCGen` replaces competing application roots such as `/srv/mcgen`, `/opt/mcgen`, home directories, or temporary directories. `/srv/mcgen` remains the separate runtime root:
+
+```text
+/srv/mcgen/
+├── releases/
+├── current/
+├── deployment/
+├── data/
+├── backups/
+└── logs/
+```
+
+Secrets remain separate:
+
+```text
+/etc/mcgen/
+└── secrets/
+```
+
+## 123.3 Mandatory host inventory and shared-server safety
+
+Before any production change, inventory the actual host with read-only commands:
+
+```bash
+hostnamectl
+cat /etc/os-release
+uname -a
+lscpu
+free -h
+lsblk
+df -h
+ip addr
+ip route
+docker --version
+docker compose version
+systemctl --failed
+ss -lntup
+```
+
+Also inspect existing Docker containers, networks, volumes, systemd services, reverse proxies, Cloudflare connectors, firewall rules, listening ports, disk mounts, and application directories. Record relevant verified facts in private or appropriately sanitized operational documentation.
+
+`node-1` is a shared personal server. MCGen deployment must not delete, replace, reconfigure, or reuse unrelated containers, networks, volumes, packages, Nginx configuration, tunnels, DNS records, databases, credentials, firewall rules, systemd services, or application directories. Determine resource ownership and dependency impact before changing a shared resource.
+
+Use clearly namespaced resources such as:
+
+```text
+mcgen-prod
+mcgen-api
+mcgen-nginx
+mcgen-postgres
+mcgen-cloudflared
+mcgen-internal
+mcgen-data
+```
+
+MCGen must be removable, recoverable, and redeployable without disrupting unrelated software on `node-1`.
+
+## 123.4 Deployment architecture
+
+Use Docker Compose. Do not maintain MCGen application services as separate host-level systemd units, although the host may manage Docker itself.
+
+```text
+Internet
+  Cloudflare
+  Dedicated mcgen-prod Cloudflare Tunnel
+  mcgen-cloudflared
+  private Docker network
+  mcgen-nginx
+    static MCGen web application
+    mcgen-api
+      mcgen-postgres
+```
+
+MCGen must not expose ports `80`, `443`, the API port, PostgreSQL `5432`, or internal health ports on a public interface merely to serve MCGen. Cloudflare Tunnel is the ingress path. Use private Docker networks, Unix sockets where appropriate, or `127.0.0.1` only where host exposure is genuinely necessary. Do not enforce this by breaking unrelated services already using public ports.
+
+Production Compose services must use applicable health checks, dependency health conditions, restart policies, resource limits, read-only filesystems, temporary filesystems for ephemeral writes, non-root users, dropped capabilities, `no-new-privileges`, private networks, persistent data mounts, explicit image versions or digests, bounded log rotation, and graceful shutdown. Do not use privileged containers, host networking, Docker socket mounts, or unrestricted host filesystem mounts without a requirement and explicit security review.
+
+Apply sensible per-service CPU, memory, disk, concurrency, and generation limits. The server's capacity does not authorize unbounded workload consumption.
+
+## 123.5 PostgreSQL and persistent sessions
+
+Use an MCGen-specific PostgreSQL database and database account with no public port. Persist its data outside the ephemeral container filesystem. PostgreSQL initially owns:
+
+```text
+persistent encrypted session records
+GitHub write idempotency records
+webhook delivery deduplication
+operation locks
+GitHub write audit metadata
+future API-key records
+schema migration state
+```
+
+Implement schema migrations, health checks, retention, backup, restore, and recovery procedures. Before production readiness, create a real backup, validate its integrity, restore it into an isolated test instance, and verify that the application can read the restored state.
+
+Production sessions are persistent, encrypted, and server-side. The browser receives only an opaque identifier in a host-only cookie with `Secure`, `HttpOnly`, `SameSite=Lax`, and `Path=/`. Rotate the session identifier after authentication, authorization or privilege changes, and other security-sensitive transitions.
+
+Encrypt persistent GitHub user credentials with authenticated encryption at the application layer. Store the encryption key separately from PostgreSQL and never place it in Git, the database, container image layers, logs, `ProjectSpec`, generated projects, or release artifacts.
+
+For the initial release:
+
+```text
+do not persist GitHub refresh tokens
+do not persist installation access tokens
+mint installation tokens on demand
+keep installation tokens server-side
+allow installation tokens to expire naturally
+delete session credentials on logout
+expire stale sessions automatically
+```
+
+MCGen must not report valid GitHub authorization after the usable upstream authorization has expired.
+
+## 123.6 GitHub App ownership and permissions
+
+The primary GitHub App is owned by `MCEnvision` and named `MCGen`. It handles the flagship existing-repository workflow with these baseline repository permissions:
+
+```text
+Metadata: Read
+Contents: Read & Write
+Pull Requests: Read & Write
+```
+
+Request the applicable workflow-file permission only because MCGen intentionally supports generation under `.github/workflows/*`. Do not grant the primary app Administration, repository deletion, organization administration, unrelated issue permissions, or unrelated secret permissions without a new reviewed requirement.
+
+Initial webhook subscriptions are limited to `installation` and `installation_repositories` unless implemented behavior proves another event is required. Webhook processing requires raw-body HMAC-SHA256 verification, constant-time signature comparison, delivery-ID deduplication, event and action allowlists, body-size limits, a bounded queue, and safe retries.
+
+Installation tokens are minted on demand, server-side only, short-lived, restricted to the selected installation and repository where supported, and permission-narrowed where supported. They are never returned to the browser or persistently stored. A developer PAT must never be used by the production web service.
+
+## 123.7 Optional repository creator app
+
+New repository creation uses a separate optional GitHub App:
+
+```text
+Owner: MCEnvision
+Name: MCGen Repository Creator
+Purpose: Create New GitHub Repository
+```
+
+The creator app may request the Administration permission required for repository creation and only the additional Contents or Workflows permissions needed to initialize the generated repository. Present this authorization only after the user explicitly selects Create New GitHub Repository.
+
+The primary app remains sufficient for existing repository selection, repository reading, clean branch generation, port generation, branch creation, and pull-request creation. Do not silently fall back to PAT authentication.
+
+## 123.8 Public API launch boundary
+
+Public API-key issuance is disabled for the initial launch:
+
+```text
+PUBLIC_API_KEYS_ENABLED=false
+```
+
+Phase 8 still implements secure key generation, hashed storage, identifiers or prefixes, scopes, expiration, per-key quotas, rotation, revocation, audit metadata, last-used timestamps, authorization middleware, database schema, and operator controls. Anonymous catalog reads and permitted generation endpoints may operate under rate limits. GitHub mutations use authenticated GitHub App sessions. Enabling third-party key issuance later requires a separate explicit release decision, not an architectural redesign.
+
+## 123.9 Cloudflare Tunnel and secret storage
+
+Use a dedicated remotely managed tunnel named `mcgen-prod`. Do not reuse `ezconfig-hermes` or another application's tunnel. Run the connector on `node-1` inside the MCGen Compose deployment and route only `mcgen.enviouse.com` to the private MCGen Nginx service. Include an explicit catch-all rejection route where the selected tunnel model supports it.
+
+Store the connector token at:
+
+```text
+/etc/mcgen/secrets/cloudflare-tunnel-token
+owner: root
+mode: 0600
+```
+
+Never place the token in Git, committed environment files, Compose YAML, images, logs, CI output, deployment artifacts, `ProjectSpec`, generated projects, or documentation. Expose it to `mcgen-cloudflared` through a read-only Docker secret or equivalent read-only mount. If the process requires an environment variable, use a minimal wrapper that reads the mounted secret, never prints it, clears unnecessary shell state, and executes `cloudflared`.
+
+Run at least two connector replicas when practical. Two replicas on one physical host provide connector and process maintenance resilience, not host-level high availability. Do not describe them as multi-host availability.
+
+Do not activate the public DNS route until host inventory, Compose validation, Nginx validation, API health and readiness, connector health, and internal routing all pass. After activation verify HTTPS, HTTP-to-HTTPS behavior, the Cloudflare certificate, browser and asset routes, API, auth, webhook, health, and readiness routes, cache rules, security headers, callback and webhook delivery, and direct-origin isolation.
+
+## 123.10 Secret ownership and rotation
+
+The accountable secret owner is the `MCEnvision` production infrastructure owner responsible for `node-1`. This role owns the Cloudflare Tunnel token, GitHub App private key, GitHub webhook secret, session-encryption key, PostgreSQL credentials, deployment credentials, and future API-key server secrets.
+
+Use a normal target rotation cadence of 90 days unless the credential has a shorter provider lifetime. Rotate immediately after suspected compromise, accidental disclosure, appearance in Git or logs, unauthorized host access, host compromise, loss of trust, or removal of an operator who retained secret access.
+
+Use rolling rotation where possible. Install the new credential securely, restart and verify one connector, restart and verify the second connector, confirm public health, invalidate the old credential or connectors, and record completion without recording secret values.
+
+## 123.11 Backups, host security, and recovery
+
+Because `node-1` is one physical host, production data must not rely only on its internal disk. Back up PostgreSQL, production configuration, migration state, and important audit or idempotency state. Generated projects are ephemeral and do not require routine durable backup. Encrypt sensitive backups and support eventual off-host storage.
+
+Before launch, verify the supported Linux release, security updates, SSH configuration, Docker security, firewall, public listeners, disk capacity, time synchronization, filesystem permissions, reboot startup, log rotation, and backup health. Prefer SSH key authentication. Do not weaken host security, expose the Docker socket or remote API, or make unrelated global operating-system changes for deployment convenience.
+
+## 123.12 Deployment, rollback, and activation gate
+
+Production deployment requires a verified release artifact, checksums, source commit manifest, SBOM, configuration validation, database migration, container startup, readiness checks, internal smoke tests, external Cloudflare smoke tests, atomic activation, and automatic rollback. Retain at least the previous two known-good releases where practical. A failed deployment must not require rebuilding the prior version. Never compile arbitrary pull-request code on `node-1`.
+
+The approved decisions in this section remove the previous owner-selection blockers. They do not bypass implementation, security review, host inventory, readiness, rollback, backup, or public-route verification gates.
 
 ---
 
@@ -5707,7 +5939,7 @@ Tracked documentation is canonical. The wiki Home page links to the README, docu
 
 Template-pack releases use immutable GitHub Releases created from signed annotated tags. Each release contains the verified pack archive, SHA-256 and SHA-512 checksums, source-commit manifest, SPDX SBOM, and supported attestations. Release workflows remain disabled until a real pack artifact and deterministic pack builder exist.
 
-The repository license remains an explicit owner decision. Do not publish a guessed license or copy the Minecraft Development plugin's LGPL license merely because its architecture was studied.
+The `MCEnvision/MCGen` application repository uses Apache License 2.0 with SPDX identifier `Apache-2.0`. This decision does not relicense `MCGen-Templates`, the Minecraft Development plugin, imported starters, canonical template inputs, or other third-party content. Preserve every item's actual license and provenance, and do not copy the Minecraft Development plugin's LGPL-licensed implementation merely because its architecture was studied.
 
 ## 147.6 Capability and Cost Handling
 
