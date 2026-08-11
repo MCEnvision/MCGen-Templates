@@ -113,6 +113,12 @@ for (const name of expectedNames) {
   )
     throw new Error(
       `${name} tuple identity differs from committed evidence\n` +
+        `expected status: ${expected.status}\n` +
+        `actual status: ${actual.status ?? "missing"}\n` +
+        `actual build: ${canonicalJson(actual.build ?? null)}\n` +
+        `actual artifact: ${canonicalJson(actual.artifact ?? null)}\n` +
+        `actual reproducibility: ${canonicalJson(actual.reproducibility ?? null)}\n` +
+        `actual blockers: ${canonicalJson(actual.blockers ?? [])}\n` +
         `expected identity: ${canonicalJson(expected.key?.identity)}\n` +
         `actual identity: ${canonicalJson(actual.key?.identity)}\n` +
         `expected digest: ${expected.key?.digest ?? "missing"}\n` +
