@@ -10,6 +10,8 @@ GitHub completion Phase 6 is complete. The implementation is merged and tagged a
 
 GitHub completion Phase 7 is complete and identified by the verified signed tag `phase-7-automated-maintenance` on main commit `2a26970d01c4597425a20cb62861b5bf7e869350`. It adds deterministic upstream monitoring, non destructive reconciliation, bounded retry and quarantine records, recovery simulations, and a twenty requirement repository completion audit. The active catalog and fifteen exact tuple evidence records have zero blocked profiles or descriptors. See the [phase 7 maintenance verification record](docs/verification/phase7-maintenance.md).
 
+Reproducibility evidence compares the user facing generated project tree. Generated Gradle internals under `build/` and other tool caches are excluded from that tree because they are recreated by the build, while the published artifact bytes, checksums, provenance, and build results are verified separately.
+
 ## Repository Model
 
 The `main` branch is the canonical release source. Its initial bootstrap commit contains only this README and the [active project plan](docs/general/plan.md).
