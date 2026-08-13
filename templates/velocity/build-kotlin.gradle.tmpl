@@ -1,0 +1,31 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.24'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+kotlin {
+    jvmToolchain(${build.javaLanguage})
+}
+
+repositories {
+    mavenCentral()
+    maven { url = uri('https://repo.papermc.io/repository/maven-public/') }
+}
+
+dependencies {
+    compileOnly '${platform.components.velocity}'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
+}
+
+tasks.withType(Jar).configureEach {
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

@@ -27,6 +27,9 @@ export type TupleIdentity = {
   catalogKey: string;
   components: Readonly<Record<string, string>>;
   fixtureId: string;
+  sourceLanguage: "java" | "kotlin";
+  buildSystem: "gradle" | "maven";
+  gradleDsl?: "groovy" | "kotlin";
   contentDigests: {
     descriptor: string;
     profile: string;

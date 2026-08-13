@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.24'
+}
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage})
+}
+
+kotlin {
+    jvmToolchain(${build.javaLanguage})
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'spigot'
+        url = uri('https://hub.spigotmc.org/nexus/content/groups/public/')
+        content { includeGroup 'org.bukkit' }
+    }
+}
+
+dependencies {
+    compileOnly '${platform.components.bukkit}'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
+}
+
+tasks.withType(Jar).configureEach {
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

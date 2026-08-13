@@ -763,16 +763,18 @@ function customizationFailures(audit: DocumentAudit): string[] {
         );
       }
     }
-    const rawOperations = isRecord(descriptor.value["rawOperations"])
-      ? descriptor.value["rawOperations"]
+    const rawOperationPolicy = isRecord(descriptor.value["rawOperationPolicy"])
+      ? descriptor.value["rawOperationPolicy"]
       : undefined;
     if (
-      !rawOperations ||
-      !Array.isArray(rawOperations["allowed"]) ||
-      rawOperations["allowed"].length === 0
+      !rawOperationPolicy ||
+      !Array.isArray(rawOperationPolicy["allowedOperations"]) ||
+      rawOperationPolicy["allowedOperations"].length === 0 ||
+      !Array.isArray(rawOperationPolicy["allowedPathPrefixes"]) ||
+      rawOperationPolicy["allowedPathPrefixes"].length === 0
     ) {
       failures.push(
-        `descriptor ${descriptor.id} does not define advanced raw operations`,
+        `descriptor ${descriptor.id} does not define a bounded raw operation policy`,
       );
     }
     const icon = array(descriptor.value["assetSlots"]).some((slot) => {

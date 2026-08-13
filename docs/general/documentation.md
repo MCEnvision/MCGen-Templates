@@ -2,7 +2,7 @@
 
 ## Status
 
-MCGen Templates is in product Phase 0, template pack contract foundation. GitHub completion Phase 1, governance and repository control, is merged and tagged. GitHub completion Phase 2 defines planning and documentation control, and its verified signed tag identifies completion. GitHub completion Phase 3 is complete and identified by the verified signed tag `phase-3-authoritative-sources-catalog`. GitHub completion Phase 4 is complete and identified by the verified signed tag `phase-4-profiles-templates-customization`. The merged Phase 4 contracts provide versioned profiles, descriptors, project specifications, PNG assets, safe file operations, and deterministic rendering. Phase 5 is complete and identified by the verified signed tag `phase-5-build-verification`. It owns exact fixture, matrix, build, artifact, reproducibility, evidence, queue, and audit verification. The current evidence set contains fifteen exact tuples with real reproducible evidence across all reviewed platform families. GitHub completion Phase 6 is complete and identified by the verified signed tag `phase-6-pack-publication`. The immutable prerelease `v1.0.0-beta.1` is published from main commit `99c6f8d5772bde176ac6358214933efbf8286199`, with remote asset verification, offline consumer verification, supported attestations, and rollback evidence. GitHub completion Phase 7 is complete and identified by the verified signed tag `phase-7-automated-maintenance` on main commit `2a26970d01c4597425a20cb62861b5bf7e869350`. It adds deterministic monitoring, quarantine, recovery, repository and planning audits, and exact boundary evidence. No unverified profile or catalog component is advertised as a build verified project tuple.
+MCGen Templates completed the original seven repository phases. Phase 14 is the active source language and Gradle DSL prerequisite. It introduces ProjectSpec version 3, independent source language and build selections, truthful descriptor and profile capabilities, and exact language and DSL evidence. Forty reference combinations across Bukkit, BungeeCord, Fabric, Paper, Spigot, Sponge, and Velocity pass two isolated builds, artifact inspection, byte reproducibility, and output tree reproducibility. Forge, NeoForge, Architectury, and multiloader remain Java with Groovy DSL because no unverified language or DSL combination is advertised.
 
 Planned behavior must not be described as available until its implementation is merged and verified. The [active plan](plan.md) is the source of truth for unfinished work.
 
@@ -71,7 +71,7 @@ docs/
 .github/
 ```
 
-`schemas/`, `sources/`, `catalog/`, `src/`, and `tests/` are implemented on `main` through the completed Phase 3 catalog gate. `templates/`, profile instances, and generated fixtures remain planned until their exact content and evidence are reviewed. `fixtures/` will contain deterministic generation cases, not generated build output.
+`schemas/`, `sources/`, `catalog/`, `src/`, `tests/`, `templates/`, reviewed profiles, and deterministic fixtures are implemented. Exact Phase 5 execution inputs and evidence live under `verification/phase5/`. Generated build directories and artifacts remain outside the repository.
 
 ## Data Ownership and Resolution
 
@@ -160,22 +160,19 @@ Future template changes additionally require descriptor and schema validation, d
 
 ## Release Policy
 
-The first template-pack release is published as immutable prerelease `v1.0.0-beta.1`. Future releases use immutable GitHub Releases created from signed annotated tags. Each release includes the pack archive, SHA-256 and SHA-512 checksums, source-commit manifest, SPDX SBOM, coverage, verification summary, rollback result, and supported attestations.
+Published template-pack prereleases from `v1.0.0-beta.1` through `v1.0.0-beta.7` are immutable. Phase 14 prepares `v1.0.0-beta.8` as the next immutable candidate without claiming publication before merge. Future releases use immutable GitHub Releases created from signed annotated tags. Each release includes the pack archive, SHA-256 and SHA-512 checksums, source-commit manifest, SPDX SBOM, coverage, verification summary, rollback result, and supported attestations.
 
 Phase 6 release validation is active through the tag-only [immutable release workflow](../../.github/workflows/phase6-release.yml). It requires a signed release tag, a clean main checkout, complete release assets, remote verification, and offline consumer checks. The [phase 6 release verification record](../verification/phase6-release.md) records the published beta evidence. See [Template Pack Releases](../release/template-pack-releases.md).
 
 Phase 7 maintenance validation is active through the scheduled and manually dispatched [maintenance workflow](../../.github/workflows/phase7-maintenance.yml). It runs repository verification, deterministic monitor and recovery simulations, and the twenty requirement repository audit without publishing from partial evidence. See [Phase 7 Maintenance Verification](../verification/phase7-maintenance.md) and the [repository audit procedure](../operations/repository-audit.md).
 
-## Known Limitations and Decisions Pending
+## Known Limitations
 
 - No repository license has been selected.
-- No template descriptor instance has been implemented.
-- No compatibility tuple has been generated or verified.
-- Source discovery does not yet establish toolchain profiles, template intersections, recommendations, generation, build, or artifact evidence.
-- Java requirements and Paper build numbers remain explicit blocked source values until their per-version authoritative metadata is captured.
-- Only the `v1.0.0-beta.1` prerelease is published. A stable release is not claimed.
-
-These limitations block claims of template availability, but they do not change the approved architecture or complete-coverage requirement.
+- Forge, NeoForge, Architectury, and multiloader advertise only Java source with Groovy Gradle DSL. Kotlin and Kotlin DSL require reviewed platform adapters, metadata, topology, and exact evidence before they can be exposed.
+- Maven is part of the portable ProjectSpec contract but is not advertised by this pack because it has no released Maven descriptor and exact evidence.
+- Catalog entries outside the reviewed reference tuples remain discovered with explicit blockers. Discovery is not a build verification claim.
+- `v1.0.0-beta.7` is the latest published prerelease. The `v1.0.0-beta.8` candidate and a stable release are not yet published.
 
 ## Documentation Map
 

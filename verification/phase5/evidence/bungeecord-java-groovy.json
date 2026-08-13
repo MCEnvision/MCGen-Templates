@@ -1,0 +1,131 @@
+{
+  "$schema": "urn:mcgen:schema:tuple-evidence:1",
+  "artifact": {
+    "bytes": 1534,
+    "entries": [
+      "META-INF/MANIFEST.MF",
+      "META-INF/mcgen-advanced-fields.json",
+      "org/example/tuple/TupleProbe.class",
+      "plugin.yml"
+    ],
+    "failures": [],
+    "metadata": [
+      {
+        "format": "properties",
+        "path": "plugin.yml",
+        "valid": true,
+        "values": {
+          "author": "EnVy",
+          "description": "tuple probe",
+          "main": "org.example.tuple.TupleProbe",
+          "name": "Tuple Probe",
+          "version": "1.0.0"
+        }
+      }
+    ],
+    "path": "build/libs/tuple-probe-1.0.0.jar",
+    "sha256": "fb2f9a9c27024d9febe86e7749fbb2ff582e4603f055bf686c8ca336ec53a2b2",
+    "status": "passed",
+    "warnings": []
+  },
+  "blockers": [],
+  "build": {
+    "commands": [
+      {
+        "command": [
+          "./gradlew",
+          "build"
+        ],
+        "diskBytes": 118192,
+        "durationMs": 666,
+        "exitCode": 0,
+        "outputBytes": 645,
+        "outputDigest": "50cfe3d817380c10426cd2aa2998d061d22f22afa0510bf37fa309546729d7b5"
+      },
+      {
+        "command": [
+          "./gradlew",
+          "test"
+        ],
+        "diskBytes": 118192,
+        "durationMs": 584,
+        "exitCode": 0,
+        "outputBytes": 612,
+        "outputDigest": "a8d586bbe5ff6c4cc86045e86b09c81b4307c74c25a45d82ffcd376b6a864d1e"
+      }
+    ],
+    "finishedAt": "2026-08-13T05:27:25.755Z",
+    "startedAt": "2026-08-10T00:00:00.000Z",
+    "status": "passed"
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
+  "invalidation": {
+    "contentDigests": {
+      "catalog": "b81ccd5e5e2fdcac6cbe86c2dcf19ff20c2e12a85ec3f62fc2cad7d8d20a4c99",
+      "descriptor": "f2950fc3937d15a488ae28de05ac1056043695701fed0440c0194650bc17849c",
+      "fixture": "d771ff85de19be57fa822e71943c62b5e6cead73ea0e3426078b5ff2b69b4a0d",
+      "profile": "2a167429872a2835077d54eec882df11e2c10986d7d9b05e11499a50a954bcf9",
+      "template": "db672f7d0b031792963297f25289016513bd90118dbe2439406ce9cdc0f05e1c"
+    },
+    "descriptorRevision": 4,
+    "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+    "procedureDigest": "bfaf7bfa9776cd2e0907b5373e04e72f64ae3aae29cae30ded652ba73d10ca1b",
+    "profileRevision": 5,
+    "sourceDigests": [
+      "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
+    ],
+    "wrapperSha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583"
+  },
+  "key": {
+    "digest": "02226702b04a825d5e4e50cd1c4090f73f8595e52c4d2e10674093f31ed14f4d",
+    "identity": {
+      "buildSystem": "gradle",
+      "catalogKey": "1.21",
+      "catalogSnapshotId": "2026-08-11-r1",
+      "components": {
+        "bungeecord": "net.md-5:bungeecord-api:1.21-R0.4-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "b81ccd5e5e2fdcac6cbe86c2dcf19ff20c2e12a85ec3f62fc2cad7d8d20a4c99",
+        "descriptor": "f2950fc3937d15a488ae28de05ac1056043695701fed0440c0194650bc17849c",
+        "fixture": "d771ff85de19be57fa822e71943c62b5e6cead73ea0e3426078b5ff2b69b4a0d",
+        "profile": "2a167429872a2835077d54eec882df11e2c10986d7d9b05e11499a50a954bcf9",
+        "template": "db672f7d0b031792963297f25289016513bd90118dbe2439406ce9cdc0f05e1c"
+      },
+      "descriptorId": "bungeecord",
+      "descriptorRevision": 4,
+      "family": "bungeecord",
+      "fixtureId": "bungeecord.bungeecord.minimal-java.java.gradle.groovy",
+      "gradleDsl": "groovy",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 8
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "bfaf7bfa9776cd2e0907b5373e04e72f64ae3aae29cae30ded652ba73d10ca1b",
+      "profileId": "bungeecord",
+      "profileRevision": 5,
+      "sourceDigests": [
+        "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
+      ],
+      "sourceLanguage": "java",
+      "wrapper": {
+        "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
+        "version": "7.6.4"
+      }
+    }
+  },
+  "outputTreeDigest": "2722dfc0d78175159d63b317423e781cb5c76c52f0e905049858c3160e4a24b3",
+  "reproducibility": {
+    "differences": [],
+    "firstDigest": "2722dfc0d78175159d63b317423e781cb5c76c52f0e905049858c3160e4a24b3",
+    "reproducible": true,
+    "secondDigest": "2722dfc0d78175159d63b317423e781cb5c76c52f0e905049858c3160e4a24b3"
+  },
+  "schemaVersion": 1,
+  "status": "verified"
+}

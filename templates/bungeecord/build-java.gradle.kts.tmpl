@@ -1,0 +1,19 @@
+plugins { java }
+
+group = "${project.groupId}"
+version = "${project.version}"
+java { toolchain.languageVersion.set(JavaLanguageVersion.of(${build.javaLanguage})) }
+
+repositories {
+    maven("https://hub.spigotmc.org/nexus/content/groups/public/")
+    maven("https://libraries.minecraft.net/")
+    mavenCentral()
+}
+
+dependencies { compileOnly("${platform.components.bungeecord}") }
+
+tasks.withType<JavaCompile>().configureEach { options.encoding = "UTF-8" }
+tasks.withType<Jar>().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}

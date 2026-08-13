@@ -7,7 +7,7 @@
       ],
       "expectedExtension": ".jar",
       "iconPaths": [],
-      "maxEntries": 128,
+      "maxEntries": 2048,
       "metadataFields": {
         "id": "tuple-probe",
         "main": "org.example.tuple.TupleProbe",
@@ -74,6 +74,8 @@
   "fixture": {
     "descriptorPath": "templates/velocity/descriptor.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "velocity.velocity.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -81,10 +83,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 17,
         "system": "gradle"
       },
@@ -118,12 +120,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "velocity"
+      "template": {
+        "id": "velocity",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "3.3",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -131,26 +137,28 @@
       },
       "contentDigests": {
         "catalog": "c36c1d697cbc579a4d3f22b3be233768d056a1a359b6ad89448463c10c0fbe16",
-        "descriptor": "3d7eb28d76c3c0a9ef65cc3b9ebab2f640214d2a47eb7f6062cd2991ca0e0d12",
-        "fixture": "d2b6a9c1246e201b693a90aa21ec9cc7d1cf9d519b1f0d75edbd367b6298f291",
-        "profile": "7f93f8efe3c37dfe7b4fff15c7c8467d3bf8c59ad2340bab4744da626859b045",
-        "template": "d8ac004b7c3314ecdf69b9b483c1c097c47f5486c1ee21694b32831d0bd5418d"
+        "descriptor": "eb25fe3d60d70e7596b6941da047b78da7478f877969d0276b51cbb6c1c18e22",
+        "fixture": "63f4f401d97b23ad912a7f8dc5d43f69d2694726541bfebea82db28b7fb3dcb0",
+        "profile": "751367eda32ea4d50c178c9f93f5d8b15382cd77926ca598e1d1d802e7d4724f",
+        "template": "3e6a5fed01cd3e2a0bd233318cf51d3d5dd334bb1b580a58509cb21030defa94"
       },
       "descriptorId": "velocity",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "velocity",
       "fixtureId": "velocity.velocity.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "68d5f6ff884fbe616437dda2480cd37380126a529054b256a3bf5e262a2f3954",
+      "procedureDigest": "742e033372b6ca3696667f750020074e7644a0a6a6a94f5d74a819606a0c2ad2",
       "profileId": "velocity",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -161,13 +169,13 @@
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/velocity.json",
   "tuple": {
-    "id": "0802f60b1fadb3041db783bb80844f023560ccea7363c8b590a272cd586b5675",
-    "status": "discovered",
     "blockers": [],
+    "id": "640647bba4c9238db9239d0dca1f3437c2c2a615d2d0cde1d3865897efe99d0e",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "3.3",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -175,26 +183,28 @@
       },
       "contentDigests": {
         "catalog": "c36c1d697cbc579a4d3f22b3be233768d056a1a359b6ad89448463c10c0fbe16",
-        "descriptor": "3d7eb28d76c3c0a9ef65cc3b9ebab2f640214d2a47eb7f6062cd2991ca0e0d12",
-        "fixture": "d2b6a9c1246e201b693a90aa21ec9cc7d1cf9d519b1f0d75edbd367b6298f291",
-        "profile": "7f93f8efe3c37dfe7b4fff15c7c8467d3bf8c59ad2340bab4744da626859b045",
-        "template": "d8ac004b7c3314ecdf69b9b483c1c097c47f5486c1ee21694b32831d0bd5418d"
+        "descriptor": "eb25fe3d60d70e7596b6941da047b78da7478f877969d0276b51cbb6c1c18e22",
+        "fixture": "63f4f401d97b23ad912a7f8dc5d43f69d2694726541bfebea82db28b7fb3dcb0",
+        "profile": "751367eda32ea4d50c178c9f93f5d8b15382cd77926ca598e1d1d802e7d4724f",
+        "template": "3e6a5fed01cd3e2a0bd233318cf51d3d5dd334bb1b580a58509cb21030defa94"
       },
       "descriptorId": "velocity",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "velocity",
       "fixtureId": "velocity.velocity.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "68d5f6ff884fbe616437dda2480cd37380126a529054b256a3bf5e262a2f3954",
+      "procedureDigest": "742e033372b6ca3696667f750020074e7644a0a6a6a94f5d74a819606a0c2ad2",
       "profileId": "velocity",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "2280e2f4df8c0b6bfef52a8df10aa117cd01a3b0103bcb874f6a0e42cc475064"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -202,7 +212,8 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

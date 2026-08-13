@@ -16,6 +16,8 @@
         "catalogKey",
         "components",
         "fixtureId",
+        "sourceLanguage",
+        "buildSystem",
         "contentDigests",
         "java",
         "wrapper",
@@ -46,6 +48,9 @@
           }
         },
         "fixtureId": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "sourceLanguage": { "enum": ["java", "kotlin"] },
+        "buildSystem": { "enum": ["gradle", "maven"] },
+        "gradleDsl": { "enum": ["groovy", "kotlin"] },
         "contentDigests": {
           "type": "object",
           "additionalProperties": false,
@@ -130,6 +135,8 @@
           ]
         },
         "language": { "enum": ["java", "kotlin"] },
+        "buildSystem": { "enum": ["gradle", "maven"] },
+        "gradleDsl": { "enum": ["groovy", "kotlin"] },
         "version": { "type": "string", "minLength": 1, "maxLength": 128 },
         "rawOverride": { "type": "boolean" }
       }

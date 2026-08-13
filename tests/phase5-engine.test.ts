@@ -19,7 +19,10 @@ import {
   invalidationReasons,
   validateEvidenceRecord,
 } from "../src/evidence.js";
-import { buildFixtureManifest } from "../src/fixture-generator.js";
+import {
+  buildFixtureManifest,
+  fixtureProjectSpec,
+} from "../src/fixture-generator.js";
 import { buildMatrixPlan, validateMatrixPlan } from "../src/matrix-planner.js";
 import { buildQueuePlan } from "../src/phase5-queue.js";
 import { executeTuple, outputTreeFiles } from "../src/phase5-execution.js";
@@ -52,6 +55,9 @@ const identity: TupleIdentity = {
   catalogKey: "1.21.1",
   components: { loader: "net.fabricmc:fabric-loader:0.16.14" },
   fixtureId: "fabric.fabric.minimal-java",
+  sourceLanguage: "java",
+  buildSystem: "gradle",
+  gradleDsl: "groovy",
   contentDigests: {
     descriptor: sha256("descriptor"),
     profile: sha256("profile"),
@@ -71,6 +77,8 @@ describe("phase 5 build and artifact contracts", () => {
     const input = {
       tuple: identity,
       languages: ["java", "kotlin"] as const,
+      buildSystems: ["gradle"] as const,
+      gradleDsls: ["groovy", "kotlin"] as const,
       optionalFeatures: ["mixins"],
       multiloader: false,
     };
@@ -90,6 +98,62 @@ describe("phase 5 build and artifact contracts", () => {
       ]),
     );
     expect(first.digest).toMatch(/^[a-f0-9]{64}$/u);
+    expect(
+      new Set(
+        first.fixtures.map(
+          (fixture) =>
+            `${fixture.language}.${fixture.buildSystem}.${fixture.gradleDsl}`,
+        ),
+      ),
+    ).toEqual(
+      new Set([
+        "java.gradle.groovy",
+        "java.gradle.kotlin",
+        "kotlin.gradle.groovy",
+        "kotlin.gradle.kotlin",
+      ]),
+    );
+  });
+
+  it("applies fixture source language to the canonical project spec", () => {
+    const spec = {
+      $schema: "urn:mcgen:schema:project-spec:3" as const,
+      schemaVersion: 3 as const,
+      template: { id: "fabric", sourceLanguage: "java" as const },
+      mode: "simple" as const,
+      project: {
+        name: "Example",
+        id: "example",
+        package: "org.example",
+        mainClass: "Example",
+        version: "1.0.0",
+      },
+      platform: {
+        id: "fabric",
+        catalogKey: "1.20.1",
+        components: { loader: "0.15.11" },
+      },
+      metadata: {},
+      build: { system: "gradle" as const, gradleDsl: "groovy" as const },
+      dependencies: [],
+      repositories: [],
+      sourceLayout: {},
+      features: [],
+      assets: [],
+      publishing: {},
+      repository: {},
+      targetOverrides: [],
+      fileOperations: [],
+      extensions: {},
+    };
+    const selected = fixtureProjectSpec(spec, {
+      id: "fabric.fabric.minimal-kotlin.kotlin",
+      kind: "minimal-kotlin",
+      language: "kotlin",
+      version: "1.0.0",
+      rawOverride: false,
+    });
+    expect(selected.template.sourceLanguage).toBe("kotlin");
   });
 
   it("plans exact tuples and deterministic shards without guessing blocked profiles", () => {
@@ -560,9 +624,9 @@ describe("phase 5 build and artifact contracts", () => {
       projectIdentity: { id: "Example Plugin", version: "1.0.0" },
     };
     const spec = {
-      $schema: "urn:mcgen:schema:project-spec:1" as const,
-      schemaVersion: 1 as const,
-      template: "plugin.bukkit",
+      $schema: "urn:mcgen:schema:project-spec:3" as const,
+      schemaVersion: 3 as const,
+      template: { id: "plugin.bukkit", sourceLanguage: "java" as const },
       mode: "simple" as const,
       project: {
         name: "Example Plugin",
@@ -578,7 +642,10 @@ describe("phase 5 build and artifact contracts", () => {
         java: 21,
       },
       metadata: {},
-      build: { system: "gradle", dsl: "groovy" },
+      build: {
+        system: "gradle" as const,
+        gradleDsl: "groovy" as const,
+      },
       dependencies: [],
       repositories: [],
       sourceLayout: {},
@@ -587,7 +654,15 @@ describe("phase 5 build and artifact contracts", () => {
       publishing: {},
       repository: {},
       targetOverrides: [],
-      fileOperations: [],
+      fileOperations: [
+        {
+          kind: "add" as const,
+          path: "src/test-stubs/org/bukkit/plugin/java/JavaPlugin.java",
+          content:
+            "package org.bukkit.plugin.java; public class JavaPlugin { public void onEnable() {} }\n",
+          trust: "canonical" as const,
+        },
+      ],
       extensions: {},
     };
     const build = {
@@ -602,8 +677,11 @@ describe("phase 5 build and artifact contracts", () => {
         {
           executable: "javac",
           args: [
+            "-cp",
+            "src/test-stubs",
             "-d",
             "build/classes",
+            "src/test-stubs/org/bukkit/plugin/java/JavaPlugin.java",
             "src/main/java/org/example/ExamplePlugin.java",
           ],
           purpose: "build" as const,

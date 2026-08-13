@@ -21,7 +21,6 @@
     "resourceNamespaces": []
   },
   "build": {
-    "dsl": "groovy",
     "jvmArguments": [],
     "plugins": [
       {
@@ -130,7 +129,6 @@
     "language": 8,
     "runtime": 8
   },
-  "languages": ["java"],
   "mappings": {
     "components": [
       {
@@ -173,7 +171,7 @@
       "url": "https://repo.maven.apache.org/maven2/"
     }
   ],
-  "revision": 4,
+  "revision": 5,
   "schemaVersion": 1,
   "sourceLayout": {
     "resourceRoots": [
@@ -203,5 +201,9 @@
       ["./gradlew", "test"]
     ],
     "inspection": ["mcmod.info", "META-INF/MANIFEST.MF"]
-  }
+  },
+  "sourceLanguages": ["java"],
+  "buildSystems": ["gradle"],
+  "gradleDsls": ["groovy"],
+  "languageAdapters": []
 }

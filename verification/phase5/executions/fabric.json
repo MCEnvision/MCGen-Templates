@@ -7,7 +7,7 @@
       ],
       "expectedExtension": ".jar",
       "iconPaths": [],
-      "maxEntries": 128,
+      "maxEntries": 2048,
       "metadataFields": {
         "entrypoints.main[0]": "org.example.tuple.TupleProbe",
         "id": "tuple-probe",
@@ -74,6 +74,8 @@
   "fixture": {
     "descriptorPath": "templates/fabric/descriptor.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "fabric.fabric.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -81,10 +83,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 17,
         "system": "gradle"
       },
@@ -122,12 +124,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "fabric"
+      "template": {
+        "id": "fabric",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "1.20.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -138,26 +144,28 @@
       },
       "contentDigests": {
         "catalog": "63443809afdda3a84591d2486a3eab35873f8404d14d44c42bdd13cb84d75ff4",
-        "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "b2654534a39d47f01be1e404367e9e8f6a317ad5fee162abedb88e714ca04d63",
-        "template": "6a7cc6a9c6717ba0948239cf9c48f77121b9b272e23e4bd80ee19b99ee2c0e84"
+        "descriptor": "24d3a3bf0f71e51f36b399c499439b17d07696a629e3bcc4a68d73055b726533",
+        "fixture": "650c872f8c353c2cd16470cb3581615e7566610cce8defc71adcda25f391aed7",
+        "profile": "cb14a2eb6d172a0a6d7eebe765dd734a3ca1cc25fac7fe0c8e2a1abe55ab12a5",
+        "template": "98e5c5f9757b7f4c0b2c7b4763ae4d063f5a6f0145f2733225a2b79a5c3b541d"
       },
       "descriptorId": "fabric",
-      "descriptorRevision": 3,
+      "descriptorRevision": 4,
       "family": "fabric",
       "fixtureId": "fabric.fabric.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
+      "procedureDigest": "990deeeeb229079fcd49c6454108d09175a4a04ca9dce2af67ae1937d26edbb9",
       "profileId": "fabric",
-      "profileRevision": 4,
+      "profileRevision": 6,
       "sourceDigests": [
         "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -168,13 +176,13 @@
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/fabric.json",
   "tuple": {
-    "id": "141bde5cade2df7987ca145075d04f6c7eb4a425c679308abcdf30f74feac3d4",
-    "status": "discovered",
     "blockers": [],
+    "id": "446c8e527877817ca5427ec0fda68429d083d30e14a05297c13dd093d1553c85",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "1.20.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -185,26 +193,28 @@
       },
       "contentDigests": {
         "catalog": "63443809afdda3a84591d2486a3eab35873f8404d14d44c42bdd13cb84d75ff4",
-        "descriptor": "a5d2e313f35eb2a54b9fef3a2904631eaa78a9636310a2b721a5e9489cf0081f",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "b2654534a39d47f01be1e404367e9e8f6a317ad5fee162abedb88e714ca04d63",
-        "template": "6a7cc6a9c6717ba0948239cf9c48f77121b9b272e23e4bd80ee19b99ee2c0e84"
+        "descriptor": "24d3a3bf0f71e51f36b399c499439b17d07696a629e3bcc4a68d73055b726533",
+        "fixture": "650c872f8c353c2cd16470cb3581615e7566610cce8defc71adcda25f391aed7",
+        "profile": "cb14a2eb6d172a0a6d7eebe765dd734a3ca1cc25fac7fe0c8e2a1abe55ab12a5",
+        "template": "98e5c5f9757b7f4c0b2c7b4763ae4d063f5a6f0145f2733225a2b79a5c3b541d"
       },
       "descriptorId": "fabric",
-      "descriptorRevision": 3,
+      "descriptorRevision": 4,
       "family": "fabric",
       "fixtureId": "fabric.fabric.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "1d56b3d52e136b73ab91c2c5957a3d41cc01df5ffb7340f7f2ebc6fbdbd35334",
+      "procedureDigest": "990deeeeb229079fcd49c6454108d09175a4a04ca9dce2af67ae1937d26edbb9",
       "profileId": "fabric",
-      "profileRevision": 4,
+      "profileRevision": 6,
       "sourceDigests": [
         "c4cb16a5eb6ad84c6610c9fb929edeb5ed288572265bab586e93e94076f3914e"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -212,7 +222,8 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

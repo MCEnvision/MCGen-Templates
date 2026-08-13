@@ -72,6 +72,8 @@
   "fixture": {
     "descriptorPath": "templates/forge/descriptor.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "forge.forge-legacy.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -79,10 +81,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 8,
         "system": "gradle"
       },
@@ -123,12 +125,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "forge"
+      "template": {
+        "id": "forge",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "1.12.2",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -139,28 +145,30 @@
       },
       "contentDigests": {
         "catalog": "1b146fc0886994cabc0dc7a8afb46b47fc5a5b3c2fda2233c3e553afc95c9737",
-        "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
-        "fixture": "cb1f4a76ae3887cc2798a5460e33265bf2a4ec40171fd193e2d0864e3ea6b635",
-        "profile": "d0a4e0f970ab6c2c69b8a625f90cacf8d0380289a0581dc10879832bbfed2a29",
-        "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+        "descriptor": "1bd1ece2e3ee05e877ee871341ef69292018c6099719295d0a23e9f64411f7bc",
+        "fixture": "2ddbdb9af0cc2f7e8fd5c16526b5fb5c3e5087914045c399e0804ef291c9ce0c",
+        "profile": "69d54383311b90fe35bbf3ac7197617eb968eff1e990b420a5a0bed8f6faf30c",
+        "template": "e6420fdfbc35cc6c8c1bc4858bc20f833a8a85f38ba9ce35bc6539417abf8c65"
       },
       "descriptorId": "forge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 3,
       "family": "forge",
       "fixtureId": "forge.forge-legacy.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 8
       },
       "mappingDigest": "b5aaf696f98390375147ed3d872e73de5c42f919b7738c289088a48d3f02c930",
-      "procedureDigest": "dcd328c6fad5cb37c0c7439df737849f9436c1de2b81aa05d9425a6d06cb6d18",
+      "procedureDigest": "442581233317a1a5b5267c8c3939956f77d27362382b3f2728339865f2c2e7d8",
       "profileId": "forge-legacy",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
         "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "e66e69dce8173dd2004b39ba93586a184628bc6c28461bc771d6835f7f9b0d28",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-4.9-bin.zip",
@@ -171,13 +179,13 @@
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/forge-legacy.json",
   "tuple": {
-    "id": "e180fb15102cb727faa22ba39e2d18c7cb47ba426a959ab5803f8ea89b996e97",
-    "status": "discovered",
     "blockers": [],
+    "id": "e097f6e69db2b8b5c51cd8bf064277dd477f19ceaf2c691a0316b9b15a3501dc",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "1.12.2",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -188,28 +196,30 @@
       },
       "contentDigests": {
         "catalog": "1b146fc0886994cabc0dc7a8afb46b47fc5a5b3c2fda2233c3e553afc95c9737",
-        "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
-        "fixture": "cb1f4a76ae3887cc2798a5460e33265bf2a4ec40171fd193e2d0864e3ea6b635",
-        "profile": "d0a4e0f970ab6c2c69b8a625f90cacf8d0380289a0581dc10879832bbfed2a29",
-        "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+        "descriptor": "1bd1ece2e3ee05e877ee871341ef69292018c6099719295d0a23e9f64411f7bc",
+        "fixture": "2ddbdb9af0cc2f7e8fd5c16526b5fb5c3e5087914045c399e0804ef291c9ce0c",
+        "profile": "69d54383311b90fe35bbf3ac7197617eb968eff1e990b420a5a0bed8f6faf30c",
+        "template": "e6420fdfbc35cc6c8c1bc4858bc20f833a8a85f38ba9ce35bc6539417abf8c65"
       },
       "descriptorId": "forge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 3,
       "family": "forge",
       "fixtureId": "forge.forge-legacy.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 8
       },
       "mappingDigest": "b5aaf696f98390375147ed3d872e73de5c42f919b7738c289088a48d3f02c930",
-      "procedureDigest": "dcd328c6fad5cb37c0c7439df737849f9436c1de2b81aa05d9425a6d06cb6d18",
+      "procedureDigest": "442581233317a1a5b5267c8c3939956f77d27362382b3f2728339865f2c2e7d8",
       "profileId": "forge-legacy",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
         "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "e66e69dce8173dd2004b39ba93586a184628bc6c28461bc771d6835f7f9b0d28",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-4.9-bin.zip",
@@ -217,7 +227,8 @@
         "sha256": "c04e350a66b20c3491c15bddbaf162d7d036b7eeec928838f627deb393500fe2",
         "version": "4.9"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/forge/gradlew-legacy.tmpl"

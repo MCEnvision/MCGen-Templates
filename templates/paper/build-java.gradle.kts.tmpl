@@ -1,0 +1,19 @@
+plugins { java }
+
+group = "${project.groupId}"
+version = "${project.version}"
+
+java { toolchain.languageVersion.set(JavaLanguageVersion.of(${build.javaLanguage})) }
+
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+}
+
+dependencies { compileOnly("${platform.components.paper}") }
+
+tasks.withType<JavaCompile>().configureEach { options.encoding = "UTF-8" }
+tasks.withType<Jar>().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}

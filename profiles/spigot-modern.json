@@ -4,7 +4,7 @@
     "entrypointClasses": ["org.example.tuple.TupleProbe"],
     "expectedExtension": ".jar",
     "iconPaths": [],
-    "maxEntries": 128,
+    "maxEntries": 2048,
     "metadataFields": {
       "id": "tuple-probe",
       "main": "org.example.tuple.TupleProbe",
@@ -22,7 +22,6 @@
     "resourceNamespaces": []
   },
   "build": {
-    "dsl": "groovy",
     "jvmArguments": [],
     "plugins": [
       {
@@ -115,7 +114,6 @@
     "runtime": 21,
     "vendor": "eclipse-temurin"
   },
-  "languages": ["java"],
   "mappings": {
     "components": [],
     "strategy": "none"
@@ -153,7 +151,7 @@
       "url": "https://hub.spigotmc.org/nexus/content/groups/public/"
     }
   ],
-  "revision": 3,
+  "revision": 4,
   "schemaVersion": 1,
   "sourceLayout": {
     "resourceRoots": [
@@ -164,14 +162,22 @@
     ],
     "sourceRoots": [
       {
-        "name": "main",
+        "name": "main-java",
         "path": "src/main/java"
+      },
+      {
+        "name": "main-kotlin",
+        "path": "src/main/kotlin"
       }
     ],
     "testRoots": [
       {
-        "name": "test",
+        "name": "test-java",
         "path": "src/test/java"
+      },
+      {
+        "name": "test-kotlin",
+        "path": "src/test/kotlin"
       }
     ]
   },
@@ -183,5 +189,16 @@
       ["./gradlew", "test"]
     ],
     "inspection": ["plugin.yml", "org.example.tuple.TupleProbe.class"]
-  }
+  },
+  "sourceLanguages": ["java", "kotlin"],
+  "buildSystems": ["gradle"],
+  "gradleDsls": ["groovy", "kotlin"],
+  "languageAdapters": [
+    {
+      "language": "kotlin",
+      "id": "kotlin-jvm",
+      "version": "1.9.24",
+      "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:1.9.24"
+    }
+  ]
 }

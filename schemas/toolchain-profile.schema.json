@@ -22,7 +22,9 @@
     "mappings",
     "metadata",
     "sourceLayout",
-    "languages",
+    "sourceLanguages",
+    "buildSystems",
+    "gradleDsls",
     "features",
     "incompatibilities",
     "verification",
@@ -61,11 +63,22 @@
     "mappings": { "$ref": "#/$defs/mappings" },
     "metadata": { "$ref": "#/$defs/metadata" },
     "sourceLayout": { "$ref": "#/$defs/sourceLayout" },
-    "languages": {
+    "sourceLanguages": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "enum": ["java", "kotlin", "groovy"] }
+      "items": { "enum": ["java", "kotlin"] }
+    },
+    "buildSystems": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["gradle", "maven"] }
+    },
+    "gradleDsls": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["groovy", "kotlin"] }
     },
     "languageAdapters": {
       "type": "array",
@@ -91,6 +104,12 @@
       "minLength": 1,
       "maxLength": 512,
       "pattern": "^(?!.*(?:latest|release|snapshot|\\+|\\*)).+$"
+    },
+    "componentVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^(?!.*(?:latest|release|snapshot|\\*)).+$"
     },
     "catalogConstraint": {
       "type": "object",
@@ -244,7 +263,7 @@
     "buildConstraint": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["system", "wrapper", "wrapperSha256", "dsl", "plugins"],
+      "required": ["system", "wrapper", "wrapperSha256", "plugins"],
       "properties": {
         "system": { "enum": ["gradle", "maven"] },
         "wrapper": { "$ref": "#/$defs/boundedString" },
@@ -260,7 +279,6 @@
         "wrapperDistributionSha256": {
           "$ref": "urn:mcgen:schema:common:1#/$defs/digest"
         },
-        "dsl": { "enum": ["groovy", "kotlin", "xml"] },
         "plugins": {
           "type": "array",
           "minItems": 1,
@@ -291,7 +309,7 @@
       "required": ["id", "version", "repositoryIds"],
       "properties": {
         "id": { "type": "string", "minLength": 1, "maxLength": 256 },
-        "version": { "$ref": "#/$defs/boundedString" },
+        "version": { "$ref": "#/$defs/componentVersion" },
         "repositoryIds": {
           "type": "array",
           "uniqueItems": true,
@@ -398,7 +416,7 @@
       "properties": {
         "language": { "enum": ["java", "kotlin", "groovy"] },
         "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
-        "version": { "$ref": "#/$defs/boundedString" },
+        "version": { "$ref": "#/$defs/componentVersion" },
         "coordinate": { "type": "string", "minLength": 1, "maxLength": 512 }
       }
     },

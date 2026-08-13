@@ -11,11 +11,17 @@ import {
   type ProfileDocument,
 } from "../src/profile-resolver.js";
 import {
+  migrateProjectSpec,
   resolveProjectSpec,
   switchProjectMode,
   type ProjectSpec,
 } from "../src/project-spec.js";
-import { renderDescriptor, renderTemplate } from "../src/template-renderer.js";
+import {
+  renderDescriptor,
+  renderTemplate,
+  validateRawOperationPolicy,
+} from "../src/template-renderer.js";
+import { readdirSync, readFileSync } from "node:fs";
 
 const png = new Uint8Array(
   Buffer.from(
@@ -24,10 +30,30 @@ const png = new Uint8Array(
   ),
 );
 
+const languageDslCases = readdirSync("verification/phase5/executions")
+  .filter(
+    (name) =>
+      name.endsWith(".json") &&
+      /-(?:java|kotlin)-(?:groovy|kotlin)\.json$/u.test(name),
+  )
+  .sort()
+  .map((name) => {
+    const document = JSON.parse(
+      readFileSync(`verification/phase5/executions/${name}`, "utf8"),
+    ) as {
+      fixture: { descriptorPath: string; spec: ProjectSpec };
+    };
+    return {
+      name,
+      descriptorPath: document.fixture.descriptorPath,
+      spec: document.fixture.spec,
+    };
+  });
+
 const spec: ProjectSpec = {
-  $schema: "urn:mcgen:schema:project-spec:1",
-  schemaVersion: 1,
-  template: "mod.fabric",
+  $schema: "urn:mcgen:schema:project-spec:3",
+  schemaVersion: 3,
+  template: { id: "mod.fabric", sourceLanguage: "java" },
   mode: "simple",
   project: {
     name: "Example Mod",
@@ -42,7 +68,7 @@ const spec: ProjectSpec = {
     components: { loader: "0.16.14" },
   },
   metadata: {},
-  build: { system: "gradle", dsl: "kotlin" },
+  build: { system: "gradle", gradleDsl: "groovy" },
   dependencies: [],
   repositories: [],
   sourceLayout: {},
@@ -56,6 +82,67 @@ const spec: ProjectSpec = {
 };
 
 describe("phase 4 engine contracts", () => {
+  it("keeps BungeeCord in plugin and Velocity in proxy", () => {
+    const bungeeDescriptor = JSON.parse(
+      readFileSync("templates/bungeecord/descriptor.json", "utf8"),
+    ) as { category: string };
+    const bungeeProfile = JSON.parse(
+      readFileSync("profiles/bungeecord.json", "utf8"),
+    ) as { category: string };
+    const velocityDescriptor = JSON.parse(
+      readFileSync("templates/velocity/descriptor.json", "utf8"),
+    ) as { category: string };
+    expect(bungeeDescriptor.category).toBe("plugin");
+    expect(bungeeProfile.category).toBe("plugin");
+    expect(velocityDescriptor.category).toBe("proxy");
+  });
+  it("migrates project spec version 1 without changing intent", () => {
+    const legacy = {
+      ...spec,
+      $schema: "urn:mcgen:schema:project-spec:1",
+      schemaVersion: 1,
+      template: spec.template.id,
+      build: { system: "gradle", dsl: "kotlin", javaLanguage: 21 },
+    };
+    const first = migrateProjectSpec(legacy);
+    const second = migrateProjectSpec(legacy);
+    expect(first).toEqual(second);
+    expect(first).toMatchObject({
+      $schema: "urn:mcgen:schema:project-spec:3",
+      schemaVersion: 3,
+      template: { id: "mod.fabric", sourceLanguage: "java" },
+      build: { system: "gradle", gradleDsl: "kotlin" },
+    });
+    expect(first.build["dsl"]).toBeUndefined();
+    expect(first.recommendationLocks).toEqual({});
+  });
+
+  it("preserves identity recommendation locks through round trips and modes", () => {
+    const locked: ProjectSpec = {
+      ...spec,
+      recommendationLocks: {
+        "project.artifactId": false,
+        "project.groupId": true,
+        "project.mainClass": true,
+        "project.package": false,
+      },
+    };
+    const imported = migrateProjectSpec(
+      JSON.parse(JSON.stringify(locked)) as unknown,
+    );
+    expect(imported.recommendationLocks).toEqual(locked.recommendationLocks);
+    expect(switchProjectMode(imported, "advanced").recommendationLocks).toEqual(
+      locked.recommendationLocks,
+    );
+    expect(
+      switchProjectMode(switchProjectMode(imported, "advanced"), "simple")
+        .recommendationLocks,
+    ).toEqual(locked.recommendationLocks);
+    expect(resolveProjectSpec(imported).spec.recommendationLocks).toEqual(
+      locked.recommendationLocks,
+    );
+  });
+
   it("validates png bytes and preserves their digest", () => {
     const info = validatePng(png);
     expect(info.width).toBe(1);
@@ -271,6 +358,172 @@ describe("phase 4 engine contracts", () => {
     expect(build).toContain("JavaLanguageVersion.of(21)");
     expect(build).not.toContain("undefined");
     expect(result.files.get("src/main/resources/assets/icon.png")).toEqual(png);
+  });
+
+  it.each([
+    ["java", "groovy", "build.gradle", "settings.gradle", ".java"],
+    ["java", "kotlin", "build.gradle.kts", "settings.gradle.kts", ".java"],
+    ["kotlin", "groovy", "build.gradle", "settings.gradle", ".kt"],
+    ["kotlin", "kotlin", "build.gradle.kts", "settings.gradle.kts", ".kt"],
+  ] as const)(
+    "renders fabric %s source with %s dsl deterministically",
+    (sourceLanguage, gradleDsl, buildPath, settingsPath, sourceExtension) => {
+      const selected: ProjectSpec = {
+        ...spec,
+        template: { ...spec.template, sourceLanguage },
+        build: { ...spec.build, gradleDsl },
+      };
+      const first = renderDescriptor(
+        "templates/fabric/descriptor.json",
+        selected,
+      );
+      const second = renderDescriptor(
+        "templates/fabric/descriptor.json",
+        selected,
+      );
+      expect(first.treeDigest).toBe(second.treeDigest);
+      expect(first.files.has(buildPath)).toBe(true);
+      expect(first.files.has(settingsPath)).toBe(true);
+      const sourcePath = `src/main/${sourceLanguage}/org/example/mod/ExampleMod${sourceExtension}`;
+      expect(first.files.has(sourcePath)).toBe(true);
+      expect(
+        [...first.files.keys()].filter((path) =>
+          /build\.gradle(?:\.kts)?$/.test(path),
+        ),
+      ).toEqual([buildPath]);
+      expect(
+        [...first.files.keys()].filter((path) =>
+          /settings\.gradle(?:\.kts)?$/.test(path),
+        ),
+      ).toEqual([settingsPath]);
+      expect(
+        [...first.files.keys()].filter((path) => /\.(?:java|kt)$/.test(path)),
+      ).toEqual([sourcePath]);
+      const buildText = new TextDecoder().decode(first.files.get(buildPath));
+      if (sourceLanguage === "kotlin") {
+        expect(buildText).toContain("fabric-language-kotlin");
+      } else {
+        expect(buildText).not.toContain("fabric-language-kotlin");
+      }
+    },
+  );
+
+  it.each(languageDslCases)(
+    "renders the exact advertised tree for $name",
+    ({ descriptorPath, spec: selected }) => {
+      const first = renderDescriptor(descriptorPath, selected);
+      const second = renderDescriptor(descriptorPath, selected);
+      const expectedSourceExtension =
+        selected.template.sourceLanguage === "kotlin" ? ".kt" : ".java";
+      const expectedBuild =
+        selected.build.gradleDsl === "kotlin"
+          ? "build.gradle.kts"
+          : "build.gradle";
+      const expectedSettings =
+        selected.build.gradleDsl === "kotlin"
+          ? "settings.gradle.kts"
+          : "settings.gradle";
+      expect(first.treeDigest).toBe(second.treeDigest);
+      expect(first.files.has(expectedBuild)).toBe(true);
+      expect(first.files.has(expectedSettings)).toBe(true);
+      expect(
+        [...first.files.keys()].filter((path) =>
+          /build\.gradle(?:\.kts)?$/u.test(path),
+        ),
+      ).toEqual([expectedBuild]);
+      expect(
+        [...first.files.keys()].filter((path) =>
+          /settings\.gradle(?:\.kts)?$/u.test(path),
+        ),
+      ).toEqual([expectedSettings]);
+      expect(
+        [...first.files.keys()].filter((path) => /\.(?:java|kt)$/u.test(path)),
+      ).toEqual([
+        expect.stringMatching(
+          new RegExp(
+            `^src/main/${selected.template.sourceLanguage}/.+${expectedSourceExtension.replace(".", "\\.")}$`,
+            "u",
+          ),
+        ),
+      ]);
+    },
+  );
+
+  it("rejects unadvertised source language and dsl selections", () => {
+    expect(() =>
+      renderDescriptor("templates/forge/descriptor.json", {
+        ...spec,
+        template: { id: "forge", sourceLanguage: "kotlin" },
+      }),
+    ).toThrow("does not support source language kotlin");
+    expect(() =>
+      renderDescriptor("templates/forge/descriptor.json", {
+        ...spec,
+        template: { id: "forge", sourceLanguage: "java" },
+        build: { ...spec.build, gradleDsl: "kotlin" },
+      }),
+    ).toThrow("does not support gradle dsl kotlin");
+  });
+
+  it("enforces descriptor raw operation boundaries before rendering", () => {
+    expect(() =>
+      renderDescriptor("templates/fabric/descriptor.json", {
+        ...spec,
+        fileOperations: [
+          {
+            kind: "add",
+            path: ".github/workflows/unreviewed.yml",
+            content: "name: unreviewed",
+            trust: "custom-unverified",
+          },
+        ],
+      }),
+    ).toThrow("raw operation path is not allowed");
+    expect(() =>
+      renderDescriptor("templates/fabric/descriptor.json", {
+        ...spec,
+        fileOperations: [
+          {
+            kind: "rename",
+            from: ".github/workflows/release.yml",
+            path: "src/release.yml",
+            trust: "custom-unverified",
+          },
+        ],
+      }),
+    ).toThrow("raw operation rename source is not allowed");
+    expect(() =>
+      renderDescriptor("templates/fabric/descriptor.json", {
+        ...spec,
+        fileOperations: Array.from({ length: 129 }, (_, index) => ({
+          kind: "add",
+          path: `src/generated-${index}.txt`,
+          content: "value",
+          trust: "custom-unverified",
+        })),
+      }),
+    ).toThrow("raw operation count exceeds descriptor policy");
+
+    expect(() =>
+      validateRawOperationPolicy(
+        [
+          {
+            kind: "add",
+            path: "src/utf8.txt",
+            content: "é",
+            trust: "custom-unverified",
+          },
+        ],
+        {
+          allowedOperations: ["add"],
+          allowedPathPrefixes: ["src/"],
+          canonicalCi: "never-execute",
+          maxContentBytes: 1,
+          maxOperations: 1,
+          pathPolicy: "allowed-prefixes",
+        },
+      ),
+    ).toThrow("raw operation content exceeds descriptor policy");
   });
 
   it("retains every mapped field in array table metadata", () => {

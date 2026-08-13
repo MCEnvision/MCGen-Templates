@@ -37,6 +37,9 @@ export type MatrixProfile = {
   };
   mappingDigest: string;
   sourceDigests: readonly string[];
+  sourceLanguages?: readonly ("java" | "kotlin")[];
+  buildSystems?: readonly ("gradle" | "maven")[];
+  gradleDsls?: readonly ("groovy" | "kotlin")[];
   contentDigests: {
     profile: string;
     catalog: string;
@@ -159,6 +162,20 @@ function tupleWithFixture(
   fixtureId: string,
   fixtureDigests: Readonly<Record<string, string>> | undefined,
 ): MatrixTuple {
+  const fixtureParts = fixtureId.split(".");
+  const sourceLanguage =
+    fixtureParts.includes("minimal-kotlin") || fixtureParts.includes("kotlin")
+      ? "kotlin"
+      : "java";
+  const buildSystem = fixtureParts.includes("maven")
+    ? "maven"
+    : (profile.buildSystems?.[0] ?? "gradle");
+  const gradleDsl =
+    buildSystem === "gradle"
+      ? fixtureId.endsWith(".kotlin") || fixtureId.endsWith(".kotlin-dsl")
+        ? "kotlin"
+        : (profile.gradleDsls?.[0] ?? "groovy")
+      : undefined;
   const identity: TupleIdentity = {
     family: descriptor.family,
     descriptorId: descriptor.id,
@@ -169,6 +186,9 @@ function tupleWithFixture(
     catalogKey,
     components,
     fixtureId,
+    sourceLanguage,
+    buildSystem,
+    ...(gradleDsl ? { gradleDsl } : {}),
     contentDigests: {
       descriptor: descriptor.contentDigests.descriptor,
       profile: profile.contentDigests.profile,

@@ -1,206 +1,28 @@
 {
   "$schema": "urn:mcgen:schema:template-descriptor:1",
-  "schemaVersion": 1,
-  "id": "neoforge",
-  "revision": 2,
-  "status": "reviewed",
-  "category": "mod",
-  "platforms": ["neoforge"],
-  "profileRefs": ["neoforge-modern"],
+  "assetSlots": [
+    {
+      "destinations": ["src/main/resources/icon.png"],
+      "id": "icon",
+      "maxBytes": 1048576,
+      "maxHeight": 512,
+      "maxWidth": 512,
+      "mediaTypes": ["image/png"]
+    }
+  ],
+  "buildSystems": ["gradle"],
   "capabilities": [
     "metadata",
     "mixins",
     "data-generation",
     "advanced-overrides"
   ],
-  "fieldGroups": [
-    {
-      "id": "identity",
-      "label": "Project identity",
-      "order": 0,
-      "fieldIds": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class"
-      ]
-    }
-  ],
-  "fields": [
-    {
-      "id": "project-name",
-      "type": "string",
-      "label": "Project name",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "Example Mod"
-    },
-    {
-      "id": "project-id",
-      "type": "string",
-      "label": "Project id",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "example-mod"
-    },
-    {
-      "id": "project-version",
-      "type": "version",
-      "label": "Project version",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "1.0.0"
-    },
-    {
-      "id": "main-class",
-      "type": "string",
-      "label": "Main class",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "ExampleMod"
-    }
-  ],
+  "category": "mod",
   "conditions": [],
-  "files": [
-    {
-      "source": "templates/shared/README.md.tmpl",
-      "destination": "README.md",
-      "renderer": "text",
-      "includeWhen": "true",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/LICENSE.tmpl",
-      "destination": "LICENSE",
-      "renderer": "text",
-      "rawOverride": "allowed"
-    },
-    {
-      "source": "templates/neoforge/build.gradle.tmpl",
-      "destination": "build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/neoforge/settings.gradle.tmpl",
-      "destination": "settings.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/gradle.properties.tmpl",
-      "destination": "gradle.properties",
-      "renderer": "properties",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/entrypoint.java.tmpl",
-      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
-      "renderer": "text",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/neoforge/neoforge.mods.toml.tmpl",
-      "destination": "src/main/resources/META-INF/neoforge.mods.toml",
-      "renderer": "toml",
-      "rawOverride": "advanced-only"
-    }
-  ],
-  "renderTargets": [
-    {
-      "id": "neoforge-metadata",
-      "path": "src/main/resources/META-INF/neoforge.mods.toml",
-      "format": "toml",
-      "fieldMappings": [
-        {
-          "fieldId": "project-id",
-          "path": "mods[0].modId",
-          "format": "literal"
-        },
-        {
-          "fieldId": "project-name",
-          "path": "mods[0].displayName",
-          "format": "literal"
-        },
-        {
-          "fieldId": "authors",
-          "path": "mods[0].authors",
-          "format": "literal"
-        },
-        {
-          "fieldId": "description",
-          "path": "mods[0].description",
-          "format": "literal"
-        },
-        {
-          "fieldId": "project-version",
-          "path": "mods[0].version",
-          "format": "version"
-        }
-      ],
-      "required": true
-    },
-    {
-      "id": "advanced-field-extension",
-      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
-      "format": "json",
-      "fieldMappings": [
-        { "fieldId": "*", "path": "extensions", "format": "json" }
-      ],
-      "required": false
-    }
-  ],
-  "assetSlots": [
-    {
-      "id": "icon",
-      "mediaTypes": ["image/png"],
-      "maxBytes": 1048576,
-      "maxWidth": 512,
-      "maxHeight": 512,
-      "destinations": ["src/main/resources/icon.png"]
-    }
-  ],
-  "rawOperations": {
-    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
-    "canonicalCi": "never-execute",
-    "pathPolicy": "relative-safe"
-  },
   "customization": {
     "$schema": "urn:mcgen:schema:customization-contract:1",
-    "schemaVersion": 1,
-    "fieldCatalogPaths": [
-      "templates/shared/field-catalog.json",
-      "templates/neoforge/field-catalog.json"
-    ],
-    "simple": {
-      "fields": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class",
-        "description",
-        "authors",
-        "website",
-        "license",
-        "package",
-        "java-runtime",
-        "build-dsl",
-        "icon",
-        "loader-version"
-      ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "visible"
-    },
     "advanced": {
+      "defaultPolicy": "descriptor-defaults",
       "fields": [
         "project-name",
         "project-id",
@@ -244,13 +66,16 @@
         "logical-sides",
         "custom-fields"
       ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "all"
+      "overrides": "all",
+      "warnings": true
     },
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/neoforge/field-catalog.json"
+    ],
     "modeSwitch": {
-      "preservesValues": true,
       "preservesDormantValues": true,
+      "preservesValues": true,
       "resolver": "shared"
     },
     "rawFiles": {
@@ -264,6 +89,205 @@
       ],
       "canonicalCiPolicy": "never-execute",
       "pathPolicy": "relative-safe"
+    },
+    "schemaVersion": 1,
+    "simple": {
+      "defaultPolicy": "descriptor-defaults",
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "loader-version"
+      ],
+      "overrides": "visible",
+      "warnings": true
     }
-  }
+  },
+  "fieldGroups": [
+    {
+      "fieldIds": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class"
+      ],
+      "id": "identity",
+      "label": "Project identity",
+      "order": 0
+    }
+  ],
+  "fields": [
+    {
+      "default": "Example Mod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-name",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "example-mod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-id",
+      "label": "Project id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "1.0.0",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-version",
+      "label": "Project version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "version"
+    },
+    {
+      "default": "ExampleMod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "main-class",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "files": [
+    {
+      "destination": "README.md",
+      "includeWhen": "true",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/shared/README.md.tmpl"
+    },
+    {
+      "destination": "LICENSE",
+      "rawOverride": "allowed",
+      "renderer": "text",
+      "source": "templates/shared/LICENSE.tmpl"
+    },
+    {
+      "destination": "build.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/neoforge/build.gradle.tmpl"
+    },
+    {
+      "destination": "settings.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/neoforge/settings.gradle.tmpl"
+    },
+    {
+      "destination": "gradle.properties",
+      "rawOverride": "advanced-only",
+      "renderer": "properties",
+      "source": "templates/shared/gradle.properties.tmpl"
+    },
+    {
+      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/shared/entrypoint.java.tmpl"
+    },
+    {
+      "destination": "src/main/resources/META-INF/neoforge.mods.toml",
+      "rawOverride": "advanced-only",
+      "renderer": "toml",
+      "source": "templates/neoforge/neoforge.mods.toml.tmpl"
+    }
+  ],
+  "gradleDsls": ["groovy"],
+  "id": "neoforge",
+  "platforms": ["neoforge"],
+  "profileRefs": ["neoforge-modern"],
+  "rawOperationPolicy": {
+    "allowedOperations": [
+      "add",
+      "replace",
+      "rename",
+      "delete",
+      "reset",
+      "diff"
+    ],
+    "allowedPathPrefixes": [
+      "LICENSE",
+      "README.md",
+      "build.gradle",
+      "gradle.properties",
+      "settings.gradle",
+      "src/"
+    ],
+    "canonicalCi": "never-execute",
+    "maxContentBytes": 1048576,
+    "maxOperations": 128,
+    "pathPolicy": "allowed-prefixes"
+  },
+  "renderTargets": [
+    {
+      "fieldMappings": [
+        {
+          "fieldId": "project-id",
+          "format": "literal",
+          "path": "mods[0].modId"
+        },
+        {
+          "fieldId": "project-name",
+          "format": "literal",
+          "path": "mods[0].displayName"
+        },
+        {
+          "fieldId": "authors",
+          "format": "literal",
+          "path": "mods[0].authors"
+        },
+        {
+          "fieldId": "description",
+          "format": "literal",
+          "path": "mods[0].description"
+        },
+        {
+          "fieldId": "project-version",
+          "format": "version",
+          "path": "mods[0].version"
+        }
+      ],
+      "format": "toml",
+      "id": "neoforge-metadata",
+      "path": "src/main/resources/META-INF/neoforge.mods.toml",
+      "required": true
+    },
+    {
+      "fieldMappings": [
+        {
+          "fieldId": "*",
+          "format": "json",
+          "path": "extensions"
+        }
+      ],
+      "format": "json",
+      "id": "advanced-field-extension",
+      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
+      "required": false
+    }
+  ],
+  "revision": 3,
+  "schemaVersion": 1,
+  "sourceLanguages": ["java"],
+  "status": "reviewed"
 }

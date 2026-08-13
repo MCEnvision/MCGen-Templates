@@ -14,12 +14,15 @@
     "category",
     "platforms",
     "profileRefs",
+    "sourceLanguages",
+    "buildSystems",
+    "gradleDsls",
     "capabilities",
     "fields",
     "files",
     "assetSlots",
     "renderTargets",
-    "rawOperations",
+    "rawOperationPolicy",
     "customization"
   ],
   "properties": {
@@ -48,6 +51,23 @@
       "minItems": 1,
       "uniqueItems": true,
       "items": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" }
+    },
+    "sourceLanguages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["java", "kotlin"] }
+    },
+    "buildSystems": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["gradle", "maven"] }
+    },
+    "gradleDsls": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["groovy", "kotlin"] }
     },
     "capabilities": {
       "type": "array",
@@ -110,7 +130,7 @@
       "minItems": 1,
       "items": { "$ref": "#/$defs/renderTarget" }
     },
-    "rawOperations": { "$ref": "#/$defs/rawOperations" },
+    "rawOperationPolicy": { "$ref": "#/$defs/rawOperationPolicy" },
     "extensions": { "$ref": "urn:mcgen:schema:common:1#/$defs/extensions" }
   },
   "$defs": {
@@ -297,12 +317,19 @@
         }
       }
     },
-    "rawOperations": {
+    "rawOperationPolicy": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["allowed", "canonicalCi", "pathPolicy"],
+      "required": [
+        "allowedOperations",
+        "allowedPathPrefixes",
+        "maxOperations",
+        "maxContentBytes",
+        "canonicalCi",
+        "pathPolicy"
+      ],
       "properties": {
-        "allowed": {
+        "allowedOperations": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
@@ -310,8 +337,30 @@
             "enum": ["add", "replace", "rename", "delete", "reset", "diff"]
           }
         },
+        "allowedPathPrefixes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^(?:[A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+/?$"
+          }
+        },
+        "maxOperations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "maxContentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        },
         "canonicalCi": { "enum": ["never-execute", "validate-only"] },
-        "pathPolicy": { "enum": ["relative-safe", "descriptor-only"] }
+        "pathPolicy": { "const": "allowed-prefixes" }
       }
     },
     "feature": {

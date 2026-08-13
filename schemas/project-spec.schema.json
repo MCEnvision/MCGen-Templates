@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:mcgen:schema:project-spec:1",
+  "$id": "urn:mcgen:schema:project-spec:3",
   "title": "MCGen portable project specification",
   "description": "The shared input contract for Simple and Advanced generation. It is portable and contains no secrets or executable instructions.",
   "type": "object",
@@ -26,11 +26,9 @@
     "extensions"
   ],
   "properties": {
-    "$schema": { "const": "urn:mcgen:schema:project-spec:1" },
-    "schemaVersion": {
-      "$ref": "urn:mcgen:schema:common:1#/$defs/schemaVersion"
-    },
-    "template": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+    "$schema": { "const": "urn:mcgen:schema:project-spec:3" },
+    "schemaVersion": { "const": 3 },
+    "template": { "$ref": "#/$defs/template" },
     "mode": { "enum": ["simple", "advanced"] },
     "project": { "$ref": "#/$defs/project" },
     "platform": { "$ref": "#/$defs/platform" },
@@ -64,11 +62,29 @@
       "type": "array",
       "items": { "$ref": "#/$defs/fileOperation" }
     },
+    "recommendationLocks": {
+      "type": "object",
+      "maxProperties": 256,
+      "propertyNames": {
+        "pattern": "^[a-z][A-Za-z0-9]*(?:[._-][A-Za-z0-9]+)*$",
+        "maxLength": 256
+      },
+      "additionalProperties": { "type": "boolean" }
+    },
     "extensions": { "$ref": "urn:mcgen:schema:common:1#/$defs/extensions" },
     "dormant": { "type": "object", "additionalProperties": true },
     "provenance": { "$ref": "#/$defs/provenance" }
   },
   "$defs": {
+    "template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sourceLanguage"],
+      "properties": {
+        "id": { "$ref": "urn:mcgen:schema:common:1#/$defs/identifier" },
+        "sourceLanguage": { "enum": ["java", "kotlin"] }
+      }
+    },
     "project": {
       "type": "object",
       "additionalProperties": false,
@@ -159,7 +175,7 @@
       "required": ["system"],
       "properties": {
         "system": { "enum": ["gradle", "maven"] },
-        "dsl": { "enum": ["groovy", "kotlin", "xml"] },
+        "gradleDsl": { "enum": ["groovy", "kotlin"] },
         "javaLanguage": {
           "type": "integer",
           "minimum": 6,
@@ -189,7 +205,25 @@
         },
         "publishing": { "type": "boolean" },
         "overrides": { "type": "object", "additionalProperties": true }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "system": { "const": "gradle" } } },
+          "then": {
+            "properties": { "gradleDsl": { "enum": ["groovy", "kotlin"] } },
+            "required": ["gradleDsl"]
+          }
+        },
+        {
+          "if": { "properties": { "system": { "const": "maven" } } },
+          "then": {
+            "not": {
+              "properties": { "gradleDsl": {} },
+              "required": ["gradleDsl"]
+            }
+          }
+        }
+      ]
     },
     "plugin": {
       "type": "object",

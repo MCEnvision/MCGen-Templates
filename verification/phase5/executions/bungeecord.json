@@ -7,7 +7,7 @@
       ],
       "expectedExtension": ".jar",
       "iconPaths": [],
-      "maxEntries": 128,
+      "maxEntries": 2048,
       "metadataFields": {
         "main": "org.example.tuple.TupleProbe",
         "name": "Tuple Probe",
@@ -73,6 +73,8 @@
   "fixture": {
     "descriptorPath": "templates/bungeecord/descriptor.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "bungeecord.bungeecord.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -80,10 +82,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 8,
         "system": "gradle"
       },
@@ -117,12 +119,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "bungeecord"
+      "template": {
+        "id": "bungeecord",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "1.21",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -130,26 +136,28 @@
       },
       "contentDigests": {
         "catalog": "b81ccd5e5e2fdcac6cbe86c2dcf19ff20c2e12a85ec3f62fc2cad7d8d20a4c99",
-        "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
-        "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-        "profile": "ffe9e3b7214cf189fbf3eb868bdd591c21049513c8bf32ffb982bc1c3c94e000",
-        "template": "e47e9bfba87bd01dfa255e4513ff54eb13f3c1ca3feb4affd6e7e88fc5f96953"
+        "descriptor": "f2950fc3937d15a488ae28de05ac1056043695701fed0440c0194650bc17849c",
+        "fixture": "9f6ffdc4c10cfa0528d7c2dcd4df30d4d389bd05be042b2ebbc78bf0aca5e362",
+        "profile": "2a167429872a2835077d54eec882df11e2c10986d7d9b05e11499a50a954bcf9",
+        "template": "db672f7d0b031792963297f25289016513bd90118dbe2439406ce9cdc0f05e1c"
       },
       "descriptorId": "bungeecord",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "bungeecord",
       "fixtureId": "bungeecord.bungeecord.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 8
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "71fafbbf01a3d61c716ea738e6eab0d96e60bf5a566838d0099ec95aef94765f",
+      "procedureDigest": "bfaf7bfa9776cd2e0907b5373e04e72f64ae3aae29cae30ded652ba73d10ca1b",
       "profileId": "bungeecord",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
@@ -160,13 +168,13 @@
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/bungeecord.json",
   "tuple": {
-    "id": "cc91e996aa019913c8c6ef36507fe3972a35e67737eaee0e10724ab273f2aebb",
-    "status": "discovered",
     "blockers": [],
+    "id": "bf05f394d39dbcdfb44a182273bbca0af385cda0ab82b6f4df903ab97f0ee28f",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "1.21",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -174,26 +182,28 @@
       },
       "contentDigests": {
         "catalog": "b81ccd5e5e2fdcac6cbe86c2dcf19ff20c2e12a85ec3f62fc2cad7d8d20a4c99",
-        "descriptor": "a1c0e3ae104cd656c25a481010e9817a79c1e9dcb82ba94141b4007372903af4",
-        "fixture": "d9d4c7dd1f368c4ef124cb6ebf2456fa1af16e31ebb404e4d046b44ed8ab3066",
-        "profile": "ffe9e3b7214cf189fbf3eb868bdd591c21049513c8bf32ffb982bc1c3c94e000",
-        "template": "e47e9bfba87bd01dfa255e4513ff54eb13f3c1ca3feb4affd6e7e88fc5f96953"
+        "descriptor": "f2950fc3937d15a488ae28de05ac1056043695701fed0440c0194650bc17849c",
+        "fixture": "9f6ffdc4c10cfa0528d7c2dcd4df30d4d389bd05be042b2ebbc78bf0aca5e362",
+        "profile": "2a167429872a2835077d54eec882df11e2c10986d7d9b05e11499a50a954bcf9",
+        "template": "db672f7d0b031792963297f25289016513bd90118dbe2439406ce9cdc0f05e1c"
       },
       "descriptorId": "bungeecord",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "bungeecord",
       "fixtureId": "bungeecord.bungeecord.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 8
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "71fafbbf01a3d61c716ea738e6eab0d96e60bf5a566838d0099ec95aef94765f",
+      "procedureDigest": "bfaf7bfa9776cd2e0907b5373e04e72f64ae3aae29cae30ded652ba73d10ca1b",
       "profileId": "bungeecord",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "d04ddd4e094e969db76b76c6c788a6b1c5434c3b78caa23231c21b1898fa084c"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "bed1da33cca0f557ab13691c77f38bb67388119e4794d113e051039b80af9bb1",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-7.6.4-bin.zip",
@@ -201,7 +211,8 @@
         "sha256": "d53fe394c0477ef381323beb74b9b3f33e4e20bd82128dc77a8e55ed9f640583",
         "version": "7.6.4"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-legacy.tmpl"

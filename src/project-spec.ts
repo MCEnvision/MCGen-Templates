@@ -2,11 +2,17 @@ import { canonicalJson } from "./canonical-json.js";
 import { sha256 } from "./digest.js";
 
 export type ProjectMode = "simple" | "advanced";
+export type SourceLanguage = "java" | "kotlin";
+export type BuildSystem = "gradle" | "maven";
+export type GradleDsl = "groovy" | "kotlin";
 
 export type ProjectSpec = {
-  $schema: "urn:mcgen:schema:project-spec:1";
-  schemaVersion: 1;
-  template: string;
+  $schema: "urn:mcgen:schema:project-spec:3";
+  schemaVersion: 3;
+  template: {
+    id: string;
+    sourceLanguage: SourceLanguage;
+  };
   mode: ProjectMode;
   project: {
     name: string;
@@ -38,7 +44,10 @@ export type ProjectSpec = {
     mappings?: string;
   };
   metadata: Record<string, unknown>;
-  build: Record<string, unknown>;
+  build: Record<string, unknown> & {
+    system: BuildSystem;
+    gradleDsl?: GradleDsl;
+  };
   dependencies: readonly Record<string, unknown>[];
   repositories: readonly Record<string, unknown>[];
   sourceLayout: Record<string, unknown>;
@@ -48,6 +57,7 @@ export type ProjectSpec = {
   repository: Record<string, unknown>;
   targetOverrides: readonly Record<string, unknown>[];
   fileOperations: readonly Record<string, unknown>[];
+  recommendationLocks?: Readonly<Record<string, boolean>>;
   extensions: Record<string, unknown>;
   dormant?: Record<string, unknown>;
   provenance?: {
@@ -62,6 +72,16 @@ export type ProjectSpec = {
     profileId?: string;
     descriptorId?: string;
   };
+};
+
+type LegacyProjectSpec = Omit<
+  ProjectSpec,
+  "$schema" | "schemaVersion" | "template" | "build"
+> & {
+  $schema: "urn:mcgen:schema:project-spec:1";
+  schemaVersion: 1;
+  template: string;
+  build: Record<string, unknown>;
 };
 
 export type ResolvedProjectSpec = {
@@ -96,10 +116,18 @@ export function validateProjectSpec(value: unknown): string[] {
   const failures: string[] = [];
   const spec = object(value);
   if (!spec) return ["project spec must be an object"];
-  if (spec["$schema"] !== "urn:mcgen:schema:project-spec:1")
+  if (spec["$schema"] !== "urn:mcgen:schema:project-spec:3")
     failures.push("project spec schema is invalid");
-  if (spec["schemaVersion"] !== 1)
+  if (spec["schemaVersion"] !== 3)
     failures.push("project spec version is unsupported");
+  const template = object(spec["template"]);
+  if (!template || !string(template["id"])?.trim())
+    failures.push("template selection is required");
+  if (
+    template?.["sourceLanguage"] !== "java" &&
+    template?.["sourceLanguage"] !== "kotlin"
+  )
+    failures.push("template source language is invalid");
   if (spec["mode"] !== "simple" && spec["mode"] !== "advanced")
     failures.push("project spec mode is invalid");
   const project = object(spec["project"]);
@@ -142,6 +170,15 @@ export function validateProjectSpec(value: unknown): string[] {
     failures.push("platform selection is required");
   const components = platform?.["components"];
   if (!object(components)) failures.push("platform components are required");
+  const build = object(spec["build"]);
+  if (!build || (build["system"] !== "gradle" && build["system"] !== "maven"))
+    failures.push("build system is invalid");
+  if (build?.["system"] === "gradle") {
+    if (build["gradleDsl"] !== "groovy" && build["gradleDsl"] !== "kotlin")
+      failures.push("gradle dsl is invalid");
+  } else if (build?.["gradleDsl"] !== undefined) {
+    failures.push("gradle dsl is only valid for gradle builds");
+  }
   const features = spec["features"];
   if (
     !Array.isArray(features) ||
@@ -165,6 +202,21 @@ export function validateProjectSpec(value: unknown): string[] {
   }
   const extensions = spec["extensions"];
   if (!object(extensions)) failures.push("extensions object is required");
+  const recommendationLocks = spec["recommendationLocks"];
+  if (recommendationLocks !== undefined) {
+    const locks = object(recommendationLocks);
+    if (
+      !locks ||
+      Object.keys(locks).length > 256 ||
+      Object.entries(locks).some(
+        ([field, locked]) =>
+          !/^[a-z][A-Za-z0-9]*(?:[._-][A-Za-z0-9]+)*$/u.test(field) ||
+          field.length > 256 ||
+          typeof locked !== "boolean",
+      )
+    )
+      failures.push("recommendation locks are invalid");
+  }
   const operations = Array.isArray(spec["fileOperations"])
     ? spec["fileOperations"]
     : [];
@@ -180,6 +232,48 @@ export function validateProjectSpec(value: unknown): string[] {
   if (repeated.length)
     failures.push(`file operation path is duplicated ${repeated[0]}`);
   return failures;
+}
+
+export function migrateProjectSpec(value: unknown): ProjectSpec {
+  const document = object(value);
+  if (!document) throw new Error("project spec must be an object");
+  if (
+    document["$schema"] === "urn:mcgen:schema:project-spec:3" &&
+    document["schemaVersion"] === 3
+  ) {
+    return structuredClone(document) as ProjectSpec;
+  }
+  if (
+    document["$schema"] !== "urn:mcgen:schema:project-spec:1" ||
+    document["schemaVersion"] !== 1
+  ) {
+    throw new Error("project spec version is unsupported");
+  }
+  const legacy = structuredClone(document) as LegacyProjectSpec;
+  const legacyBuild = object(legacy.build) ?? {};
+  const system = legacyBuild["system"] === "maven" ? "maven" : "gradle";
+  const legacyDsl = legacyBuild["dsl"];
+  const build: ProjectSpec["build"] = {
+    ...legacyBuild,
+    system,
+  };
+  delete build["dsl"];
+  if (system === "gradle") {
+    build.gradleDsl = legacyDsl === "kotlin" ? "kotlin" : "groovy";
+  } else {
+    delete build.gradleDsl;
+  }
+  return {
+    ...legacy,
+    $schema: "urn:mcgen:schema:project-spec:3",
+    schemaVersion: 3,
+    template: {
+      id: legacy.template,
+      sourceLanguage: "java",
+    },
+    build,
+    recommendationLocks: legacy.recommendationLocks ?? {},
+  };
 }
 
 export function switchProjectMode(
@@ -204,9 +298,10 @@ export function switchProjectMode(
 }
 
 export function resolveProjectSpec(
-  spec: ProjectSpec,
+  input: ProjectSpec | LegacyProjectSpec,
   warnings: readonly string[] = [],
 ): ResolvedProjectSpec {
+  const spec = migrateProjectSpec(input);
   const failures = validateProjectSpec(spec);
   if (failures.length)
     throw new Error(`project spec validation failed\n${failures.join("\n")}`);

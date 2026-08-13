@@ -1,0 +1,37 @@
+plugins {
+    id("fabric-loom") version "1.6.12"
+    kotlin("jvm") version "1.9.24"
+}
+
+group = "${project.groupId}"
+version = "${project.version}"
+
+repositories {
+    maven("https://maven.fabricmc.net/")
+    mavenCentral()
+}
+
+dependencies {
+    minecraft("com.mojang:minecraft:${platform.components.minecraft}")
+    mappings("net.fabricmc:yarn:${platform.components.yarn}:v2")
+    modImplementation("net.fabricmc:fabric-loader:${platform.components.loader}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${platform.components.fabricApi}")
+    modImplementation("net.fabricmc:fabric-language-kotlin:1.10.20+kotlin.1.9.24")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(${build.javaLanguage}))
+}
+
+kotlin {
+    jvmToolchain(${build.javaLanguage})
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<Jar>().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
