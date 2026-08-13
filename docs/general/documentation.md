@@ -160,7 +160,7 @@ Future template changes additionally require descriptor and schema validation, d
 
 ## Release Policy
 
-Published template-pack prereleases from `v1.0.0-beta.1` through `v1.0.0-beta.7` are immutable. Phase 14 prepares `v1.0.0-beta.8` as the next immutable candidate without claiming publication before merge. Future releases use immutable GitHub Releases created from signed annotated tags. Each release includes the pack archive, SHA-256 and SHA-512 checksums, source-commit manifest, SPDX SBOM, coverage, verification summary, rollback result, and supported attestations.
+Published template-pack prereleases from `v1.0.0-beta.1` through `v1.0.0-beta.7` are immutable. The signed `v1.0.0-beta.8` tag did not publish immutable assets because its release workflow was canceled. Phase 14 now prepares `v1.0.0-beta.9` as the next candidate from the current merged main revision. Future releases use immutable GitHub Releases created from signed annotated tags. Each release includes the pack archive, SHA-256 and SHA-512 checksums, source-commit manifest, SPDX SBOM, coverage, verification summary, rollback result, and supported attestations.
 
 Phase 6 release validation is active through the tag-only [immutable release workflow](../../.github/workflows/phase6-release.yml). It requires a signed release tag, a clean main checkout, complete release assets, remote verification, and offline consumer checks. The [phase 6 release verification record](../verification/phase6-release.md) records the published beta evidence. See [Template Pack Releases](../release/template-pack-releases.md).
 
@@ -172,7 +172,7 @@ Phase 7 maintenance validation is active through the scheduled and manually disp
 - Forge, NeoForge, Architectury, and multiloader advertise only Java source with Groovy Gradle DSL. Kotlin and Kotlin DSL require reviewed platform adapters, metadata, topology, and exact evidence before they can be exposed.
 - Maven is part of the portable ProjectSpec contract but is not advertised by this pack because it has no released Maven descriptor and exact evidence.
 - Catalog entries outside the reviewed reference tuples remain discovered with explicit blockers. Discovery is not a build verification claim.
-- `v1.0.0-beta.7` is the latest published prerelease. The `v1.0.0-beta.8` candidate and a stable release are not yet published.
+- `v1.0.0-beta.7` is the latest published prerelease. The signed `v1.0.0-beta.8` tag has no release assets. The `v1.0.0-beta.9` candidate and a stable release are not yet published.
 
 ## Documentation Map
 
