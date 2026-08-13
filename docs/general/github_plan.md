@@ -17,7 +17,7 @@ The completed repository will support:
 3. Fabric game versions, loader versions, mappings, Fabric API, Loom, installers, and language adapters.
 4. Architectury and configurable Fabric, Forge, and NeoForge multiloader intersections.
 5. Bukkit, Spigot, Paper, and Sponge plugin projects.
-6. Velocity and BungeeCord proxy projects.
+6. Velocity proxy projects and BungeeCord plugin projects.
 7. Java, Kotlin, Gradle, Maven where required, build plugins, mappings, wrappers, metadata formats, and platform specific toolchain boundaries.
 8. Simple mode defaults and complete Advanced mode customization contracts.
 9. Project versions including alpha, beta, release candidate, snapshot, build metadata, and valid free form versions.

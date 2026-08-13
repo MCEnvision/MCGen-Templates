@@ -31,6 +31,8 @@ export type FixtureDefinition = {
   id: string;
   kind: FixtureKind;
   language: "java" | "kotlin";
+  buildSystem?: "gradle" | "maven";
+  gradleDsl?: "groovy" | "kotlin";
   version: string;
   rawOverride: boolean;
 };
@@ -47,6 +49,8 @@ export type FixtureManifest = {
 export type FixtureManifestInput = {
   tuple: TupleIdentity;
   languages: readonly ("java" | "kotlin")[];
+  buildSystems?: readonly ("gradle" | "maven")[];
+  gradleDsls?: readonly ("groovy" | "kotlin")[];
   optionalFeatures: readonly string[];
   multiloader: boolean;
 };
@@ -79,8 +83,17 @@ function fixtureId(
   tuple: TupleIdentity,
   kind: FixtureKind,
   language: string,
+  buildSystem: "gradle" | "maven",
+  gradleDsl?: "groovy" | "kotlin",
 ): string {
-  return `${tuple.descriptorId}.${tuple.profileId}.${kind}.${language}`;
+  return [
+    tuple.descriptorId,
+    tuple.profileId,
+    kind,
+    language,
+    buildSystem,
+    ...(gradleDsl ? [gradleDsl] : []),
+  ].join(".");
 }
 
 export function fixtureKinds(
@@ -112,6 +125,16 @@ export function buildFixtureManifest(
   if (languageValues.some((language) => !["java", "kotlin"].includes(language)))
     throw new Error("fixture manifest language is unsupported");
   const languages: ("java" | "kotlin")[] = [...new Set(input.languages)].sort();
+  const buildSystems = [...new Set(input.buildSystems ?? ["gradle"])]
+    .sort()
+    .map((value) => value as "gradle" | "maven");
+  const gradleDsls = [...new Set(input.gradleDsls ?? ["groovy"])]
+    .sort()
+    .map((value) => value as "groovy" | "kotlin");
+  if (buildSystems.length === 0)
+    throw new Error("fixture manifest requires at least one build system");
+  if (buildSystems.includes("gradle") && gradleDsls.length === 0)
+    throw new Error("gradle fixture manifest requires at least one dsl");
   const fixtures = fixtureKinds(input).flatMap((kind) => {
     const supportedLanguages: readonly ("java" | "kotlin")[] =
       kind === "minimal-java" || kind === "minimal-kotlin"
@@ -119,13 +142,21 @@ export function buildFixtureManifest(
         : languages;
     return supportedLanguages
       .filter((language) => input.languages.includes(language))
-      .map((language) => ({
-        id: fixtureId(input.tuple, kind, language),
-        kind,
-        language,
-        version: versionFor(kind),
-        rawOverride: kind === "raw-override",
-      }));
+      .flatMap((language) =>
+        buildSystems.flatMap((buildSystem) => {
+          const dsls: readonly ("groovy" | "kotlin" | undefined)[] =
+            buildSystem === "gradle" ? gradleDsls : [undefined];
+          return dsls.map((gradleDsl) => ({
+            id: fixtureId(input.tuple, kind, language, buildSystem, gradleDsl),
+            kind,
+            language,
+            buildSystem,
+            ...(gradleDsl ? { gradleDsl } : {}),
+            version: versionFor(kind),
+            rawOverride: kind === "raw-override",
+          }));
+        }),
+      );
   });
   const normalizedFixtures = fixtures.sort((left, right) =>
     left.id.localeCompare(right.id),
@@ -174,6 +205,12 @@ export function fixtureProjectSpec(
 ): ProjectSpec {
   let result = structuredClone(spec);
   result.project.version = fixture.version;
+  result.template.sourceLanguage = fixture.language;
+  result.build.system = fixture.buildSystem ?? result.build.system;
+  if (result.build.system === "gradle")
+    result.build.gradleDsl =
+      fixture.gradleDsl ?? result.build.gradleDsl ?? "groovy";
+  else delete result.build.gradleDsl;
   if (fixture.kind === "maximum-structured") {
     result = switchProjectMode(result, "advanced");
     result.metadata = {

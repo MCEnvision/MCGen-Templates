@@ -7,7 +7,7 @@
       ],
       "expectedExtension": ".jar",
       "iconPaths": [],
-      "maxEntries": 128,
+      "maxEntries": 2048,
       "metadataFields": {
         "main": "org.example.tuple.TupleProbe",
         "name": "Tuple Probe",
@@ -73,6 +73,8 @@
   "fixture": {
     "descriptorPath": "templates/paper/descriptor-traditional.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "paper-traditional.paper-traditional.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -80,10 +82,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 17,
         "system": "gradle"
       },
@@ -118,12 +120,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "paper-traditional"
+      "template": {
+        "id": "paper-traditional",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "1.20.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -131,26 +137,28 @@
       },
       "contentDigests": {
         "catalog": "0c825cb6fd2f51601935a2b694853ffb290c66333a88e1c68af7bde99aa7e658",
-        "descriptor": "1e38af219787b3bae6108832aac327803052415b90829c23fa6f18eaf3ca1650",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "2eb54c327feb8921fc1ab5ea517f1e2e5e875581368675c479855601b2ad4d9f",
-        "template": "1635adb6d9e3528901abd697c2770c904648369d15dd7c2f789dbd1d51e61a54"
+        "descriptor": "bfd4f696e5b949f0d1db20b7517868dcc48482b1a1e4145913b61c2bee4b2ad2",
+        "fixture": "61cc056a574de42408e2145cc58672a325383775d03297dabee1fcf36712c0db",
+        "profile": "cc0bdad21427143d3d1222afa4d68a80a87a6d58e62b7b519959c9861ba7a242",
+        "template": "bd13ffab18674f296d7e2b036ff3f5081705ce773499d8331d4c02e5163944a7"
       },
       "descriptorId": "paper-traditional",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "paper",
       "fixtureId": "paper-traditional.paper-traditional.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "6ccc2592b7b4a24af94870fccaa84a8dd2d48809376f2e8436c8feb947551a24",
+      "procedureDigest": "f8912645583778f807d7cfb74c8c67b56062479dbc04d7660fc7edfb6c30ee6b",
       "profileId": "paper-traditional",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -161,13 +169,13 @@
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/paper-traditional.json",
   "tuple": {
-    "id": "159dd877adbc947396a41175de249116501a1a57adf63d637ce34ae1af53446e",
-    "status": "discovered",
     "blockers": [],
+    "id": "36528c7fc85f654048ab4a6e9ae6b95f0f1ac927876e98996fd75df6264bde2e",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "1.20.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -175,26 +183,28 @@
       },
       "contentDigests": {
         "catalog": "0c825cb6fd2f51601935a2b694853ffb290c66333a88e1c68af7bde99aa7e658",
-        "descriptor": "1e38af219787b3bae6108832aac327803052415b90829c23fa6f18eaf3ca1650",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "2eb54c327feb8921fc1ab5ea517f1e2e5e875581368675c479855601b2ad4d9f",
-        "template": "1635adb6d9e3528901abd697c2770c904648369d15dd7c2f789dbd1d51e61a54"
+        "descriptor": "bfd4f696e5b949f0d1db20b7517868dcc48482b1a1e4145913b61c2bee4b2ad2",
+        "fixture": "61cc056a574de42408e2145cc58672a325383775d03297dabee1fcf36712c0db",
+        "profile": "cc0bdad21427143d3d1222afa4d68a80a87a6d58e62b7b519959c9861ba7a242",
+        "template": "bd13ffab18674f296d7e2b036ff3f5081705ce773499d8331d4c02e5163944a7"
       },
       "descriptorId": "paper-traditional",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "paper",
       "fixtureId": "paper-traditional.paper-traditional.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "6ccc2592b7b4a24af94870fccaa84a8dd2d48809376f2e8436c8feb947551a24",
+      "procedureDigest": "f8912645583778f807d7cfb74c8c67b56062479dbc04d7660fc7edfb6c30ee6b",
       "profileId": "paper-traditional",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -202,7 +212,8 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

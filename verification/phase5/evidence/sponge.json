@@ -1,7 +1,7 @@
 {
   "$schema": "urn:mcgen:schema:tuple-evidence:1",
   "artifact": {
-    "bytes": 1578,
+    "bytes": 1650,
     "entries": [
       "META-INF/MANIFEST.MF",
       "META-INF/mcgen-advanced-fields.json",
@@ -26,7 +26,7 @@
       }
     ],
     "path": "build/libs/tuple-probe-1.0.0.jar",
-    "sha256": "fd60dc01b010146997cc72919433caed20271df961ff5eb118118aa5c9c3226d",
+    "sha256": "5321e6c00c29c7cfda17bd5366df8c4bdb58fd8de0dc24fc8b8647b5ef672dbb",
     "status": "passed",
     "warnings": []
   },
@@ -38,50 +38,51 @@
           "./gradlew",
           "build"
         ],
-        "diskBytes": 111270,
-        "durationMs": 677,
+        "diskBytes": 111569,
+        "durationMs": 615,
         "exitCode": 0,
         "outputBytes": 314,
-        "outputDigest": "35d8cc72b7b1df565d5cd8609b16fae11a7d7d580c35ea4325dc66ca897b9c2d"
+        "outputDigest": "336ede33e5fa387babd17f02bddf93823bddc4e7621e15b68beda921f79184ea"
       },
       {
         "command": [
           "./gradlew",
           "test"
         ],
-        "diskBytes": 111270,
-        "durationMs": 607,
+        "diskBytes": 111569,
+        "durationMs": 579,
         "exitCode": 0,
         "outputBytes": 281,
-        "outputDigest": "8ff5dee9be5f7be5d195340ecee0f80599e040e6e30e2b0ffda2e379f2f8fa29"
+        "outputDigest": "f5915f0026935098bfeb68f7bf86206be80a0ca6e3fb2400346be4a3f39b678e"
       }
     ],
-    "finishedAt": "2026-08-11T12:40:44.453Z",
+    "finishedAt": "2026-08-13T05:32:26.897Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "invalidation": {
     "contentDigests": {
       "catalog": "7817be085e603e590acc861099d3b02d03fca91ecf26461b98c9852b12667492",
-      "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
-      "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-      "profile": "476a82880bca95f37aff9efb85903466a5e602f61ac15a792028a544dce3bb69",
-      "template": "bab0512f625361c3ade679a02ab29b7a05e8acd698ac08b7db9b458085123020"
+      "descriptor": "99e78b3c39ceac72d1892a6342f23e36e5cc2ca2a98d8d7ad0a1fcbaf958c3f8",
+      "fixture": "81dfa8948a72359960d88d3f1b0d845714ca0ea52f2510237b9c28396eb0b929",
+      "profile": "7ad0139995e24859f39b9c0115093d530d99e24c55e016425c2a5a3156576794",
+      "template": "73c9c5d303f4fa5009d808bdcbe25e615511b961362ef7d201b629de321f397c"
     },
-    "descriptorRevision": 2,
+    "descriptorRevision": 4,
     "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-    "procedureDigest": "fb4ec23bc70cd29a4f894bb3da8833f9accb2f6c2f09ad06cfa45aae1f98013d",
-    "profileRevision": 4,
+    "procedureDigest": "516a1364d50197c9eefa9b6a28d025cbe21c65a56b82ad901138654acfed9760",
+    "profileRevision": 5,
     "sourceDigests": [
       "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
     ],
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "a9cf303e368c8a82cab2f54095c41b62bc23818f9aa0bf4bd2b240dc563de1a7",
+    "digest": "5103f98e083af315c0657fc3391d1ced38e13729687ec2d1ac1320d95ae4eb91",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "10.0",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -89,26 +90,28 @@
       },
       "contentDigests": {
         "catalog": "7817be085e603e590acc861099d3b02d03fca91ecf26461b98c9852b12667492",
-        "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "476a82880bca95f37aff9efb85903466a5e602f61ac15a792028a544dce3bb69",
-        "template": "bab0512f625361c3ade679a02ab29b7a05e8acd698ac08b7db9b458085123020"
+        "descriptor": "99e78b3c39ceac72d1892a6342f23e36e5cc2ca2a98d8d7ad0a1fcbaf958c3f8",
+        "fixture": "81dfa8948a72359960d88d3f1b0d845714ca0ea52f2510237b9c28396eb0b929",
+        "profile": "7ad0139995e24859f39b9c0115093d530d99e24c55e016425c2a5a3156576794",
+        "template": "73c9c5d303f4fa5009d808bdcbe25e615511b961362ef7d201b629de321f397c"
       },
       "descriptorId": "sponge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "sponge",
       "fixtureId": "sponge.sponge.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "fb4ec23bc70cd29a4f894bb3da8833f9accb2f6c2f09ad06cfa45aae1f98013d",
+      "procedureDigest": "516a1364d50197c9eefa9b6a28d025cbe21c65a56b82ad901138654acfed9760",
       "profileId": "sponge",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -118,12 +121,12 @@
       }
     }
   },
-  "outputTreeDigest": "bfbcf978f99436f65303e94d9ef11ca25db3e3ba4f4cc6a2f37aee7af3ee850a",
+  "outputTreeDigest": "9bf4c98808d0c7a8cdee09782646d296477bc52f49e5556fa964eddc308a1944",
   "reproducibility": {
     "differences": [],
-    "firstDigest": "bfbcf978f99436f65303e94d9ef11ca25db3e3ba4f4cc6a2f37aee7af3ee850a",
+    "firstDigest": "9bf4c98808d0c7a8cdee09782646d296477bc52f49e5556fa964eddc308a1944",
     "reproducible": true,
-    "secondDigest": "bfbcf978f99436f65303e94d9ef11ca25db3e3ba4f4cc6a2f37aee7af3ee850a"
+    "secondDigest": "9bf4c98808d0c7a8cdee09782646d296477bc52f49e5556fa964eddc308a1944"
   },
   "schemaVersion": 1,
   "status": "verified"

@@ -1,8 +1,12 @@
 {
-  "$schema": "urn:mcgen:schema:project-spec:1",
-  "schemaVersion": 1,
-  "template": "mod.fabric",
+  "$schema": "urn:mcgen:schema:project-spec:3",
+  "schemaVersion": 3,
+  "template": {
+    "id": "mod.fabric",
+    "sourceLanguage": "java"
+  },
   "mode": "advanced",
+  "recommendationLocks": {},
   "project": {
     "name": "Fixture Mod",
     "id": "fixture-mod",
@@ -13,14 +17,20 @@
   "platform": {
     "id": "fabric",
     "catalogKey": "1.21.1",
-    "components": { "loader": "0.16.14" }
+    "components": {
+      "loader": "0.16.14"
+    }
   },
-  "metadata": { "custom": { "channel": "snapshot" } },
+  "metadata": {
+    "custom": {
+      "channel": "snapshot"
+    }
+  },
   "build": {
     "system": "gradle",
-    "dsl": "groovy",
     "wrapper": "8.8",
-    "jvmArguments": ["-Dmcgen.fixture=true"]
+    "jvmArguments": ["-Dmcgen.fixture=true"],
+    "gradleDsl": "groovy"
   },
   "dependencies": [],
   "repositories": [],

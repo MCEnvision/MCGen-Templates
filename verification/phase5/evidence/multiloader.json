@@ -40,42 +40,42 @@
           "./gradlew",
           "build"
         ],
-        "diskBytes": 68228356,
-        "durationMs": 17865,
+        "diskBytes": 68228378,
+        "durationMs": 19507,
         "exitCode": 0,
-        "outputBytes": 3068,
-        "outputDigest": "8df9c007de930c7bdd30b0e79391656433b0a017536e0d9d7b0a1b4695b4ebd9"
+        "outputBytes": 3065,
+        "outputDigest": "0c9e5682e675196ab5c054ed8303c146785cde7472ea0cbc3e6294e9101f8098"
       },
       {
         "command": [
           "./gradlew",
           "test"
         ],
-        "diskBytes": 68228356,
-        "durationMs": 980,
+        "diskBytes": 68228378,
+        "durationMs": 1113,
         "exitCode": 0,
         "outputBytes": 1737,
-        "outputDigest": "1ddcabc501c4725f9fc130e8a7451f2016e42a0869ee7e419be534d2c9fdb08c"
+        "outputDigest": "4cdaf8fc08289c19fe4dc46f58b0bcaaca90510acff6cd408f66279bbd33966a"
       }
     ],
-    "finishedAt": "2026-08-11T12:40:03.223Z",
+    "finishedAt": "2026-08-13T05:30:11.102Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "invalidation": {
     "contentDigests": {
       "catalog": "ebb4fc060bd3086837104e4e5401badb16ced1f5075c9bf85c58fe495e80ff3c",
-      "descriptor": "13bd7aa8f479ede751aca48196e9e01cd40228d220c11d7e8658ecbc315d1998",
-      "fixture": "debbaf823c4affcc96b2489e58c8deb660573d8de30c0f5a361312c7238ec58b",
-      "profile": "7a9a217f9da1ad0619c0ce479dd4843dc61f8b27903f889199ef7a3c5a7e9c24",
-      "template": "d6a3d939a8ab9dca2587c5dffb5623ddd1c3fdaad10cff8e06164cf42271e34a"
+      "descriptor": "2d06ce7033c75196ab6353971c9e09a78fc0f6bfc031f023e80a0662d8346710",
+      "fixture": "7e451d7a617615e60102b4ba0ca86bdc4045f7e682c780488a4f38ca62c1a6b5",
+      "profile": "bc011778ff886fffcf34e2adba178c2e4ede4c33d913094c8d4827c76a813f50",
+      "template": "fa2a76e03f65f2de723a4e671ae4d180d277da66a0829d248029882787856205"
     },
-    "descriptorRevision": 2,
+    "descriptorRevision": 3,
     "mappingDigest": "26b9b183bff69a08cb527577c110ee95c194d19d1ba8c6e5adf8ea61a8986096",
-    "procedureDigest": "81fddcf48a11dab74f2601d3b82ecff782b37beb8a30b874d08c9be8fdb1ffdc",
-    "profileRevision": 4,
+    "procedureDigest": "a940eb6bfe8bcb9e18f87cbcb38e62af97fcbc9135c9868bfb409d7050b5f16f",
+    "profileRevision": 5,
     "sourceDigests": [
       "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
       "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -84,8 +84,9 @@
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "9a43d7cc52022f2106ec2abd6f962fe3590a85d6c02ba0f24cddc1853770daee",
+    "digest": "054cb55473855c421a95bc66b25f00bca12cc6a6159bb39370a78004a52e07dc",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "9.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -101,43 +102,44 @@
       },
       "contentDigests": {
         "catalog": "ebb4fc060bd3086837104e4e5401badb16ced1f5075c9bf85c58fe495e80ff3c",
-        "descriptor": "13bd7aa8f479ede751aca48196e9e01cd40228d220c11d7e8658ecbc315d1998",
-        "fixture": "debbaf823c4affcc96b2489e58c8deb660573d8de30c0f5a361312c7238ec58b",
-        "profile": "7a9a217f9da1ad0619c0ce479dd4843dc61f8b27903f889199ef7a3c5a7e9c24",
-        "template": "d6a3d939a8ab9dca2587c5dffb5623ddd1c3fdaad10cff8e06164cf42271e34a"
+        "descriptor": "2d06ce7033c75196ab6353971c9e09a78fc0f6bfc031f023e80a0662d8346710",
+        "fixture": "7e451d7a617615e60102b4ba0ca86bdc4045f7e682c780488a4f38ca62c1a6b5",
+        "profile": "bc011778ff886fffcf34e2adba178c2e4ede4c33d913094c8d4827c76a813f50",
+        "template": "fa2a76e03f65f2de723a4e671ae4d180d277da66a0829d248029882787856205"
       },
       "descriptorId": "multiloader",
-      "descriptorRevision": 2,
+      "descriptorRevision": 3,
       "family": "multiloader",
       "fixtureId": "multiloader.architectury-multiloader.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "26b9b183bff69a08cb527577c110ee95c194d19d1ba8c6e5adf8ea61a8986096",
-      "procedureDigest": "81fddcf48a11dab74f2601d3b82ecff782b37beb8a30b874d08c9be8fdb1ffdc",
+      "procedureDigest": "a940eb6bfe8bcb9e18f87cbcb38e62af97fcbc9135c9868bfb409d7050b5f16f",
       "profileId": "architectury-multiloader",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "4eb69859c0fc0bc432c349af60a1af77c28cfec1efa6d547bd5c29789f2815ef",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
         "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
-        "kind": "launcher-script",
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
     }
   },
-  "outputTreeDigest": "e9287ca0cd55d42f3d956aa7a7fccdc4037e82cbe4a53d88909963c6332fdbc2",
+  "outputTreeDigest": "5d3d63825b652dfda95ca679d8a74c392c0a859e6c4ff75fe0402d9c16c6d20f",
   "reproducibility": {
     "differences": [],
-    "firstDigest": "e9287ca0cd55d42f3d956aa7a7fccdc4037e82cbe4a53d88909963c6332fdbc2",
+    "firstDigest": "5d3d63825b652dfda95ca679d8a74c392c0a859e6c4ff75fe0402d9c16c6d20f",
     "reproducible": true,
-    "secondDigest": "e9287ca0cd55d42f3d956aa7a7fccdc4037e82cbe4a53d88909963c6332fdbc2"
+    "secondDigest": "5d3d63825b652dfda95ca679d8a74c392c0a859e6c4ff75fe0402d9c16c6d20f"
   },
   "schemaVersion": 1,
   "status": "verified"

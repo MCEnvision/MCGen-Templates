@@ -1,12 +1,16 @@
 {
   "$schema": "urn:mcgen:schema:template-descriptor:1",
-  "schemaVersion": 1,
-  "id": "fabric",
-  "revision": 3,
-  "status": "reviewed",
-  "category": "mod",
-  "platforms": ["fabric"],
-  "profileRefs": ["fabric"],
+  "assetSlots": [
+    {
+      "destinations": ["src/main/resources/assets/icon.png"],
+      "id": "icon",
+      "maxBytes": 1048576,
+      "maxHeight": 512,
+      "maxWidth": 512,
+      "mediaTypes": ["image/png"]
+    }
+  ],
+  "buildSystems": ["gradle"],
   "capabilities": [
     "metadata",
     "mixins",
@@ -14,190 +18,12 @@
     "data-generation",
     "advanced-overrides"
   ],
-  "fieldGroups": [
-    {
-      "id": "identity",
-      "label": "Project identity",
-      "order": 0,
-      "fieldIds": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class"
-      ]
-    }
-  ],
-  "fields": [
-    {
-      "id": "project-name",
-      "type": "string",
-      "label": "Project name",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "Example Mod"
-    },
-    {
-      "id": "project-id",
-      "type": "string",
-      "label": "Project id",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "example-mod"
-    },
-    {
-      "id": "project-version",
-      "type": "version",
-      "label": "Project version",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "1.0.0"
-    },
-    {
-      "id": "main-class",
-      "type": "string",
-      "label": "Main class",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "ExampleMod"
-    }
-  ],
+  "category": "mod",
   "conditions": [],
-  "files": [
-    {
-      "source": "templates/shared/README.md.tmpl",
-      "destination": "README.md",
-      "renderer": "text",
-      "includeWhen": "true",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/LICENSE.tmpl",
-      "destination": "LICENSE",
-      "renderer": "text",
-      "rawOverride": "allowed"
-    },
-    {
-      "source": "templates/fabric/build.gradle.tmpl",
-      "destination": "build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/fabric/settings.gradle.tmpl",
-      "destination": "settings.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/gradle.properties.tmpl",
-      "destination": "gradle.properties",
-      "renderer": "properties",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/entrypoint.java.tmpl",
-      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
-      "renderer": "text",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/fabric/fabric.mod.json.tmpl",
-      "destination": "src/main/resources/fabric.mod.json",
-      "renderer": "json",
-      "rawOverride": "advanced-only"
-    }
-  ],
-  "renderTargets": [
-    {
-      "id": "fabric-metadata",
-      "path": "src/main/resources/fabric.mod.json",
-      "format": "json",
-      "fieldMappings": [
-        {
-          "fieldId": "schema-version",
-          "path": "schemaVersion",
-          "format": "literal"
-        },
-        { "fieldId": "project-id", "path": "id", "format": "literal" },
-        {
-          "fieldId": "project-version",
-          "path": "version",
-          "format": "version"
-        },
-        { "fieldId": "project-name", "path": "name", "format": "text" },
-        { "fieldId": "description", "path": "description", "format": "text" },
-        { "fieldId": "authors", "path": "authors", "format": "json" },
-        { "fieldId": "license", "path": "license", "format": "text" },
-        { "fieldId": "environment", "path": "environment", "format": "text" },
-        {
-          "fieldId": "entrypoint",
-          "path": "entrypoints.main[0]",
-          "format": "text"
-        }
-      ],
-      "required": true
-    },
-    {
-      "id": "advanced-field-extension",
-      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
-      "format": "json",
-      "fieldMappings": [
-        { "fieldId": "*", "path": "extensions", "format": "json" }
-      ],
-      "required": false
-    }
-  ],
-  "assetSlots": [
-    {
-      "id": "icon",
-      "mediaTypes": ["image/png"],
-      "maxBytes": 1048576,
-      "maxWidth": 512,
-      "maxHeight": 512,
-      "destinations": ["src/main/resources/assets/icon.png"]
-    }
-  ],
-  "rawOperations": {
-    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
-    "canonicalCi": "never-execute",
-    "pathPolicy": "relative-safe"
-  },
   "customization": {
     "$schema": "urn:mcgen:schema:customization-contract:1",
-    "schemaVersion": 1,
-    "fieldCatalogPaths": [
-      "templates/shared/field-catalog.json",
-      "templates/fabric/field-catalog.json"
-    ],
-    "simple": {
-      "fields": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class",
-        "description",
-        "authors",
-        "website",
-        "license",
-        "package",
-        "java-runtime",
-        "build-dsl",
-        "icon",
-        "environment"
-      ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "visible"
-    },
     "advanced": {
+      "defaultPolicy": "descriptor-defaults",
       "fields": [
         "project-name",
         "project-id",
@@ -243,13 +69,16 @@
         "conflicts",
         "custom-fields"
       ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "all"
+      "overrides": "all",
+      "warnings": true
     },
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/fabric/field-catalog.json"
+    ],
     "modeSwitch": {
-      "preservesValues": true,
       "preservesDormantValues": true,
+      "preservesValues": true,
       "resolver": "shared"
     },
     "rawFiles": {
@@ -263,6 +92,265 @@
       ],
       "canonicalCiPolicy": "never-execute",
       "pathPolicy": "relative-safe"
+    },
+    "schemaVersion": 1,
+    "simple": {
+      "defaultPolicy": "descriptor-defaults",
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "environment"
+      ],
+      "overrides": "visible",
+      "warnings": true
     }
-  }
+  },
+  "fieldGroups": [
+    {
+      "fieldIds": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class"
+      ],
+      "id": "identity",
+      "label": "Project identity",
+      "order": 0
+    }
+  ],
+  "fields": [
+    {
+      "default": "Example Mod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-name",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "example-mod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-id",
+      "label": "Project id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "1.0.0",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-version",
+      "label": "Project version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "version"
+    },
+    {
+      "default": "ExampleMod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "main-class",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "files": [
+    {
+      "destination": "README.md",
+      "includeWhen": "true",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/shared/README.md.tmpl"
+    },
+    {
+      "destination": "LICENSE",
+      "rawOverride": "allowed",
+      "renderer": "text",
+      "source": "templates/shared/LICENSE.tmpl"
+    },
+    {
+      "destination": "build.gradle",
+      "includeWhen": "sourceLanguage.java && gradleDsl.groovy",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/fabric/build.gradle.tmpl"
+    },
+    {
+      "destination": "build.gradle",
+      "includeWhen": "sourceLanguage.kotlin && gradleDsl.groovy",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/fabric/build-kotlin.gradle.tmpl"
+    },
+    {
+      "destination": "build.gradle.kts",
+      "includeWhen": "sourceLanguage.java && gradleDsl.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/fabric/build-java.gradle.kts.tmpl"
+    },
+    {
+      "destination": "build.gradle.kts",
+      "includeWhen": "sourceLanguage.kotlin && gradleDsl.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/fabric/build.gradle.kts.tmpl"
+    },
+    {
+      "destination": "settings.gradle",
+      "includeWhen": "gradleDsl.groovy",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/fabric/settings.gradle.tmpl"
+    },
+    {
+      "destination": "settings.gradle.kts",
+      "includeWhen": "gradleDsl.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/fabric/settings.gradle.kts.tmpl"
+    },
+    {
+      "destination": "gradle.properties",
+      "rawOverride": "advanced-only",
+      "renderer": "properties",
+      "source": "templates/shared/gradle.properties.tmpl"
+    },
+    {
+      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "includeWhen": "sourceLanguage.java",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/fabric/entrypoint.java.tmpl"
+    },
+    {
+      "destination": "src/main/kotlin/${project.packagePath}/${project.mainClass}.kt",
+      "includeWhen": "sourceLanguage.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/fabric/entrypoint.kt.tmpl"
+    },
+    {
+      "destination": "src/main/resources/fabric.mod.json",
+      "rawOverride": "advanced-only",
+      "renderer": "json",
+      "source": "templates/fabric/fabric.mod.json.tmpl"
+    }
+  ],
+  "gradleDsls": ["groovy", "kotlin"],
+  "id": "fabric",
+  "platforms": ["fabric"],
+  "profileRefs": ["fabric"],
+  "rawOperationPolicy": {
+    "allowedOperations": [
+      "add",
+      "replace",
+      "rename",
+      "delete",
+      "reset",
+      "diff"
+    ],
+    "allowedPathPrefixes": [
+      "LICENSE",
+      "README.md",
+      "build.gradle",
+      "build.gradle.kts",
+      "gradle.properties",
+      "settings.gradle",
+      "settings.gradle.kts",
+      "src/"
+    ],
+    "canonicalCi": "never-execute",
+    "maxContentBytes": 1048576,
+    "maxOperations": 128,
+    "pathPolicy": "allowed-prefixes"
+  },
+  "renderTargets": [
+    {
+      "fieldMappings": [
+        {
+          "fieldId": "schema-version",
+          "format": "literal",
+          "path": "schemaVersion"
+        },
+        {
+          "fieldId": "project-id",
+          "format": "literal",
+          "path": "id"
+        },
+        {
+          "fieldId": "project-version",
+          "format": "version",
+          "path": "version"
+        },
+        {
+          "fieldId": "project-name",
+          "format": "text",
+          "path": "name"
+        },
+        {
+          "fieldId": "description",
+          "format": "text",
+          "path": "description"
+        },
+        {
+          "fieldId": "authors",
+          "format": "json",
+          "path": "authors"
+        },
+        {
+          "fieldId": "license",
+          "format": "text",
+          "path": "license"
+        },
+        {
+          "fieldId": "environment",
+          "format": "text",
+          "path": "environment"
+        },
+        {
+          "fieldId": "entrypoint",
+          "format": "text",
+          "path": "entrypoints.main[0]"
+        }
+      ],
+      "format": "json",
+      "id": "fabric-metadata",
+      "path": "src/main/resources/fabric.mod.json",
+      "required": true
+    },
+    {
+      "fieldMappings": [
+        {
+          "fieldId": "*",
+          "format": "json",
+          "path": "extensions"
+        }
+      ],
+      "format": "json",
+      "id": "advanced-field-extension",
+      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
+      "required": false
+    }
+  ],
+  "revision": 4,
+  "schemaVersion": 1,
+  "sourceLanguages": ["java", "kotlin"],
+  "status": "reviewed"
 }

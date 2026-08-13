@@ -1,7 +1,7 @@
 {
   "$schema": "urn:mcgen:schema:tuple-evidence:1",
   "artifact": {
-    "bytes": 1793,
+    "bytes": 1794,
     "entries": [
       "META-INF/MANIFEST.MF",
       "META-INF/mcgen-advanced-fields.json",
@@ -27,7 +27,7 @@
       }
     ],
     "path": "build/libs/tuple-probe-1.0.0.jar",
-    "sha256": "891c796c27cb15f9b92273ed104138d7a2bf5b921539502f2ebc958dca94d921",
+    "sha256": "3874485a001de31490d154dec5e3a00c360ea74c8343a409c0669273c270f0d8",
     "status": "passed",
     "warnings": []
   },
@@ -39,8 +39,8 @@
           "./gradlew",
           "build"
         ],
-        "diskBytes": 24865602,
-        "durationMs": 3507,
+        "diskBytes": 24865611,
+        "durationMs": 4037,
         "exitCode": 0,
         "outputBytes": 568,
         "outputDigest": "6c8fa4db59e18720513d6d3a3c1ac426b8f50d078b40e9fef773ab72beff2f77"
@@ -50,31 +50,31 @@
           "./gradlew",
           "test"
         ],
-        "diskBytes": 24865602,
-        "durationMs": 966,
+        "diskBytes": 24865611,
+        "durationMs": 940,
         "exitCode": 0,
         "outputBytes": 402,
-        "outputDigest": "8160c68c553018932e3915e22e4955fc25cd94f695d6ba585379035fd6a9d658"
+        "outputDigest": "f1244db357504b3ad270bbabf2c9c1081cd31eaad587e4160be9c9ec9cccce8a"
       }
     ],
-    "finishedAt": "2026-08-11T12:39:40.300Z",
+    "finishedAt": "2026-08-13T05:29:46.136Z",
     "startedAt": "2026-08-10T00:00:00.000Z",
     "status": "passed"
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "invalidation": {
     "contentDigests": {
       "catalog": "658782210756429a4a8442556d091f8d23b99d9291bafa88dd40304de1a1ee0e",
-      "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
-      "fixture": "8256d470837092082c355e46a0ff6cec30744beed96293e3d8df8c5ec10ce931",
-      "profile": "b06a0d6a992202d04244472585148f67c25c6d78d05d9285998c1f4d43ec0662",
-      "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+      "descriptor": "1bd1ece2e3ee05e877ee871341ef69292018c6099719295d0a23e9f64411f7bc",
+      "fixture": "c5925ca66cdfc0296f4bcd476b846935c397383a956a3dcb1ccc13f925cd0e1f",
+      "profile": "f7615eab73cc480fa7fb47d0a4ff43b70e9c57bbb458276b1dfdaba95b12057f",
+      "template": "e6420fdfbc35cc6c8c1bc4858bc20f833a8a85f38ba9ce35bc6539417abf8c65"
     },
-    "descriptorRevision": 2,
+    "descriptorRevision": 3,
     "mappingDigest": "23d3caf1c657abef0bc079d85a71c36af137ec5779a8c9c0f6b132509feba2b9",
-    "procedureDigest": "1d52c5d453abfa9348bc9fe276235f023cedc36095c9e23545ae64439dc45a28",
-    "profileRevision": 4,
+    "procedureDigest": "8752a7abffe58a58709197b6fce2ae57e630cbb4584862dc82273b160d1858e4",
+    "profileRevision": 5,
     "sourceDigests": [
       "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
       "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
@@ -83,8 +83,9 @@
     "wrapperSha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9"
   },
   "key": {
-    "digest": "729dd7ee63f221cdd6154f1566ab8e8f466a755af0604f89bdd2ad55fc70f0c6",
+    "digest": "748885d22e7948ac5cf96d20d6320725c38c9930fb666d6822169d4d39f4fcc4",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "1.20.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -95,28 +96,30 @@
       },
       "contentDigests": {
         "catalog": "658782210756429a4a8442556d091f8d23b99d9291bafa88dd40304de1a1ee0e",
-        "descriptor": "4235620dfe6bfd31b8fa46cea0841d4f29e1d73228179090e77e8ccb91894592",
-        "fixture": "8256d470837092082c355e46a0ff6cec30744beed96293e3d8df8c5ec10ce931",
-        "profile": "b06a0d6a992202d04244472585148f67c25c6d78d05d9285998c1f4d43ec0662",
-        "template": "30f3752890e7159896a6d330a8297737d4204ae8c2da2e1dac4305e442bec410"
+        "descriptor": "1bd1ece2e3ee05e877ee871341ef69292018c6099719295d0a23e9f64411f7bc",
+        "fixture": "c5925ca66cdfc0296f4bcd476b846935c397383a956a3dcb1ccc13f925cd0e1f",
+        "profile": "f7615eab73cc480fa7fb47d0a4ff43b70e9c57bbb458276b1dfdaba95b12057f",
+        "template": "e6420fdfbc35cc6c8c1bc4858bc20f833a8a85f38ba9ce35bc6539417abf8c65"
       },
       "descriptorId": "forge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 3,
       "family": "forge",
       "fixtureId": "forge.forge-modern.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "23d3caf1c657abef0bc079d85a71c36af137ec5779a8c9c0f6b132509feba2b9",
-      "procedureDigest": "1d52c5d453abfa9348bc9fe276235f023cedc36095c9e23545ae64439dc45a28",
+      "procedureDigest": "8752a7abffe58a58709197b6fce2ae57e630cbb4584862dc82273b160d1858e4",
       "profileId": "forge-modern",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "24464c4f38b0f4f630f851a09782713265d2236e50e6972f707f82b5fb1a440b",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
         "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -126,12 +129,12 @@
       }
     }
   },
-  "outputTreeDigest": "8eb1d98398f29139bc19cca27c718fb41964e4dc768ceb98979888c35fe1380b",
+  "outputTreeDigest": "8195b7d96c723185a14ca4cbcbe50d20fb75a5ab5ed1c1d136dd514f09180361",
   "reproducibility": {
     "differences": [],
-    "firstDigest": "8eb1d98398f29139bc19cca27c718fb41964e4dc768ceb98979888c35fe1380b",
+    "firstDigest": "8195b7d96c723185a14ca4cbcbe50d20fb75a5ab5ed1c1d136dd514f09180361",
     "reproducible": true,
-    "secondDigest": "8eb1d98398f29139bc19cca27c718fb41964e4dc768ceb98979888c35fe1380b"
+    "secondDigest": "8195b7d96c723185a14ca4cbcbe50d20fb75a5ab5ed1c1d136dd514f09180361"
   },
   "schemaVersion": 1,
   "status": "verified"

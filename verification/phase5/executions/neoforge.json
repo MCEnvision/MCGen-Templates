@@ -66,7 +66,6 @@
     "wrapper": {
       "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
       "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
-      "kind": "launcher-script",
       "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
       "version": "8.8"
     }
@@ -74,6 +73,8 @@
   "fixture": {
     "descriptorPath": "templates/neoforge/descriptor.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "neoforge.neoforge-modern.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -81,10 +82,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 21,
         "system": "gradle"
       },
@@ -124,12 +125,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "neoforge"
+      "template": {
+        "id": "neoforge",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "1.21.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -139,45 +144,46 @@
       },
       "contentDigests": {
         "catalog": "84b167b64f2814be2ef3501d8a95e070685f0053bdaa45913144607db8d8683c",
-        "descriptor": "c630e2da2f0d58414acba225de65598e8d7f824871d9af4cb17ae53a7f686520",
-        "fixture": "407b184a6a46be4b37b028e9b1f1e7c01f1c2579aa1504898e4b0d5de6e09203",
-        "profile": "2814e76f9f5ef97b0d99e70d26f47bbbf8b6d0a7241c4b52b2f87f89d93f7064",
-        "template": "6aad7af3b36206a512c494411fab354e837c9edd279f153b9456effecb798e4b"
+        "descriptor": "4a624fb1427bc698ea1041904851b4568628dbc593ac3b73dc7dd72a2e70a8e0",
+        "fixture": "a8c70bf098a7318bf767f0aee37796632f7514ff3a5a3da0c5d7b0dfcbd5158d",
+        "profile": "5f9dd54ea501aa20a2940b37db5c07a3b9c31272abd570095bedaced65487b8d",
+        "template": "12a9b52868b4178572f01390dd26f3e14f5592b54a41cfe848296e8ddbdfcf06"
       },
       "descriptorId": "neoforge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 3,
       "family": "neoforge",
       "fixtureId": "neoforge.neoforge-modern.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 21
       },
       "mappingDigest": "57e0e681b5de3b1fe45837182168e5b6bb3ed347fc5560c08275df7d89f8d669",
-      "procedureDigest": "6536112964a3da6318d16fcd1bfc95f3604239396e79249d48eb08de95b71850",
+      "procedureDigest": "fc8d52d3f5f05e8fb64e89c44767f24bdd367c80adfe4edba58f5f14cbceec14",
       "profileId": "neoforge-modern",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "53ef3e26fd1b0c0483e53bf0bcad9f3830bf29a72096a37916991c63f79382fd",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
         "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
-        "kind": "launcher-script",
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/neoforge-modern.json",
   "tuple": {
-    "id": "f8572d477c640e22c627d1ac354df2850533ffd0ad45440e54b97bc0f698f0d1",
-    "status": "discovered",
     "blockers": [],
+    "id": "ade3978f5269b5ef44308b51eddca75b4cfd1ab57607c0e91a96a4468644aa01",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "1.21.1",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -187,36 +193,38 @@
       },
       "contentDigests": {
         "catalog": "84b167b64f2814be2ef3501d8a95e070685f0053bdaa45913144607db8d8683c",
-        "descriptor": "c630e2da2f0d58414acba225de65598e8d7f824871d9af4cb17ae53a7f686520",
-        "fixture": "407b184a6a46be4b37b028e9b1f1e7c01f1c2579aa1504898e4b0d5de6e09203",
-        "profile": "2814e76f9f5ef97b0d99e70d26f47bbbf8b6d0a7241c4b52b2f87f89d93f7064",
-        "template": "6aad7af3b36206a512c494411fab354e837c9edd279f153b9456effecb798e4b"
+        "descriptor": "4a624fb1427bc698ea1041904851b4568628dbc593ac3b73dc7dd72a2e70a8e0",
+        "fixture": "a8c70bf098a7318bf767f0aee37796632f7514ff3a5a3da0c5d7b0dfcbd5158d",
+        "profile": "5f9dd54ea501aa20a2940b37db5c07a3b9c31272abd570095bedaced65487b8d",
+        "template": "12a9b52868b4178572f01390dd26f3e14f5592b54a41cfe848296e8ddbdfcf06"
       },
       "descriptorId": "neoforge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 3,
       "family": "neoforge",
       "fixtureId": "neoforge.neoforge-modern.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 21
       },
       "mappingDigest": "57e0e681b5de3b1fe45837182168e5b6bb3ed347fc5560c08275df7d89f8d669",
-      "procedureDigest": "6536112964a3da6318d16fcd1bfc95f3604239396e79249d48eb08de95b71850",
+      "procedureDigest": "fc8d52d3f5f05e8fb64e89c44767f24bdd367c80adfe4edba58f5f14cbceec14",
       "profileId": "neoforge-modern",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "53ef3e26fd1b0c0483e53bf0bcad9f3830bf29a72096a37916991c63f79382fd",
         "cb509d4fdda4bcd098357f377e20c2f22a1aa6b6c38bd48d72fb1611b83c0251",
         "feab21f48be5ae8e9cd31716f11528f7f6b3415767a75d767e26227b250b5ad4"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
-        "kind": "launcher-script",
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

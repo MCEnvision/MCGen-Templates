@@ -73,6 +73,10 @@ type DescriptorTarget = {
 
 type TemplateDescriptor = {
   id: string;
+  sourceLanguages: ("java" | "kotlin")[];
+  buildSystems: ("gradle" | "maven")[];
+  gradleDsls: ("groovy" | "kotlin")[];
+  rawOperationPolicy: RawOperationPolicy;
   files: DescriptorFile[];
   renderTargets: DescriptorTarget[];
   assetSlots?: {
@@ -82,6 +86,17 @@ type TemplateDescriptor = {
     maxHeight: number;
     destinations: string[];
   }[];
+};
+
+export type RawOperationPolicy = {
+  allowedOperations: (
+    "add" | "replace" | "rename" | "delete" | "reset" | "diff"
+  )[];
+  allowedPathPrefixes: string[];
+  maxOperations: number;
+  maxContentBytes: number;
+  canonicalCi: "never-execute" | "validate-only";
+  pathPolicy: "allowed-prefixes";
 };
 
 const encoder = new TextEncoder();
@@ -318,7 +333,7 @@ function fieldValue(spec: ProjectSpec, fieldId: string): unknown {
       platform.javaLanguage ??
       platform.java ??
       components["java"],
-    "build-dsl": build["dsl"] ?? "groovy",
+    "build-dsl": build.gradleDsl ?? "groovy",
     "wrapper-version": build["wrapper"] ?? "",
     "gradle-properties": build["properties"] ?? [],
     "jvm-arguments": build["jvmArguments"] ?? [],
@@ -427,7 +442,18 @@ function includeDescriptorFile(
   spec: ProjectSpec,
 ): boolean {
   if (!file.includeWhen || file.includeWhen === "true") return true;
-  return evaluateCondition(file.includeWhen, {
+  const selections: Readonly<Record<string, boolean>> = {
+    "sourceLanguage.java": spec.template.sourceLanguage === "java",
+    "sourceLanguage.kotlin": spec.template.sourceLanguage === "kotlin",
+    "gradleDsl.groovy": spec.build.gradleDsl === "groovy",
+    "gradleDsl.kotlin": spec.build.gradleDsl === "kotlin",
+  };
+  const condition = Object.entries(selections).reduce(
+    (expression, [selection, enabled]) =>
+      expression.replaceAll(selection, enabled ? "true" : "false"),
+    file.includeWhen,
+  );
+  return evaluateCondition(condition, {
     fields: spec.platform.components,
     features: new Set(spec.features),
   });
@@ -447,6 +473,62 @@ function descriptorFileContent(root: string, source: string): Uint8Array {
   return new Uint8Array(readFileSync(safeRepositoryPath(root, source)));
 }
 
+function policyAllowsPath(path: string, prefixes: readonly string[]): boolean {
+  const normalized = normalizeProjectPath(path);
+  return prefixes.some((prefix) => {
+    const normalizedPrefix = prefix.endsWith("/")
+      ? `${normalizeProjectPath(prefix.slice(0, -1))}/`
+      : normalizeProjectPath(prefix);
+    return normalizedPrefix.endsWith("/")
+      ? normalized.startsWith(normalizedPrefix)
+      : normalized === normalizedPrefix;
+  });
+}
+
+export function validateRawOperationPolicy(
+  operations: readonly Record<string, unknown>[],
+  policy: RawOperationPolicy,
+): void {
+  if (operations.length > policy.maxOperations)
+    throw new Error("raw operation count exceeds descriptor policy");
+  let contentBytes = 0;
+  for (const operation of operations) {
+    const kind = operation["kind"];
+    const path = operation["path"];
+    if (
+      typeof kind !== "string" ||
+      !policy.allowedOperations.includes(
+        kind as RawOperationPolicy["allowedOperations"][number],
+      )
+    )
+      throw new Error(`raw operation is not allowed ${String(kind)}`);
+    if (
+      typeof path !== "string" ||
+      !policyAllowsPath(path, policy.allowedPathPrefixes)
+    )
+      throw new Error(`raw operation path is not allowed ${String(path)}`);
+    if (kind === "rename") {
+      const from = operation["from"];
+      if (
+        typeof from !== "string" ||
+        !policyAllowsPath(from, policy.allowedPathPrefixes)
+      )
+        throw new Error(
+          `raw operation rename source is not allowed ${String(from)}`,
+        );
+    }
+    if (typeof operation["content"] === "string") {
+      const content = operation["content"];
+      contentBytes +=
+        operation["encoding"] === "base64"
+          ? new Uint8Array(Buffer.from(content, "base64")).byteLength
+          : encoder.encode(content).byteLength;
+    }
+  }
+  if (contentBytes > policy.maxContentBytes)
+    throw new Error("raw operation content exceeds descriptor policy");
+}
+
 export function renderDescriptor(
   descriptorPath: string,
   spec: ProjectSpec,
@@ -457,6 +539,29 @@ export function renderDescriptor(
     readFileSync(safeRepositoryPath(root, descriptorPath), "utf8"),
   ) as TemplateDescriptor;
   const resolved = resolveProjectSpec(spec).spec;
+  if (!descriptor.sourceLanguages.includes(resolved.template.sourceLanguage)) {
+    throw new Error(
+      `descriptor ${descriptor.id} does not support source language ${resolved.template.sourceLanguage}`,
+    );
+  }
+  if (!descriptor.buildSystems.includes(resolved.build.system)) {
+    throw new Error(
+      `descriptor ${descriptor.id} does not support build system ${resolved.build.system}`,
+    );
+  }
+  if (
+    resolved.build.system === "gradle" &&
+    (!resolved.build.gradleDsl ||
+      !descriptor.gradleDsls.includes(resolved.build.gradleDsl))
+  ) {
+    throw new Error(
+      `descriptor ${descriptor.id} does not support gradle dsl ${String(resolved.build.gradleDsl)}`,
+    );
+  }
+  validateRawOperationPolicy(
+    resolved.fileOperations,
+    descriptor.rawOperationPolicy,
+  );
   const targetPaths = new Set(
     descriptor.renderTargets.map((target) => target.path),
   );

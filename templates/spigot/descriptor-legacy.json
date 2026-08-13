@@ -1,146 +1,27 @@
 {
   "$schema": "urn:mcgen:schema:template-descriptor:1",
-  "schemaVersion": 1,
-  "id": "spigot-legacy",
-  "revision": 1,
-  "status": "reviewed",
-  "category": "plugin",
-  "platforms": ["spigot"],
-  "profileRefs": ["spigot-legacy"],
+  "assetSlots": [
+    {
+      "destinations": ["src/main/resources/icon.png"],
+      "id": "icon",
+      "maxBytes": 1048576,
+      "maxHeight": 512,
+      "maxWidth": 512,
+      "mediaTypes": ["image/png"]
+    }
+  ],
+  "buildSystems": ["gradle"],
   "capabilities": [
     "commands",
     "permissions",
     "dependencies",
     "advanced-overrides"
   ],
-  "fields": [
-    {
-      "id": "project-name",
-      "type": "string",
-      "label": "Project name",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "Tuple Probe"
-    },
-    {
-      "id": "project-id",
-      "type": "string",
-      "label": "Project id",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "tuple-probe"
-    },
-    {
-      "id": "project-version",
-      "type": "version",
-      "label": "Project version",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "1.0.0"
-    },
-    {
-      "id": "main-class",
-      "type": "string",
-      "label": "Main class",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "TupleProbe"
-    }
-  ],
-  "files": [
-    {
-      "source": "templates/shared/settings.gradle.tmpl",
-      "destination": "settings.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/spigot/build.gradle.tmpl",
-      "destination": "build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/gradle.properties.tmpl",
-      "destination": "gradle.properties",
-      "renderer": "properties",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/spigot/entrypoint.java.tmpl",
-      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
-      "renderer": "text",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/spigot/plugin-legacy.yml.tmpl",
-      "destination": "src/main/resources/plugin.yml",
-      "renderer": "yaml",
-      "rawOverride": "advanced-only"
-    }
-  ],
-  "assetSlots": [
-    {
-      "id": "icon",
-      "mediaTypes": ["image/png"],
-      "maxBytes": 1048576,
-      "maxWidth": 512,
-      "maxHeight": 512,
-      "destinations": ["src/main/resources/icon.png"]
-    }
-  ],
-  "renderTargets": [
-    {
-      "id": "advanced-field-extension",
-      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
-      "format": "json",
-      "fieldMappings": [
-        { "fieldId": "*", "path": "extensions", "format": "json" }
-      ],
-      "required": false
-    }
-  ],
-  "rawOperations": {
-    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
-    "canonicalCi": "never-execute",
-    "pathPolicy": "relative-safe"
-  },
+  "category": "plugin",
   "customization": {
     "$schema": "urn:mcgen:schema:customization-contract:1",
-    "schemaVersion": 1,
-    "fieldCatalogPaths": [
-      "templates/shared/field-catalog.json",
-      "templates/spigot/field-catalog.json"
-    ],
-    "simple": {
-      "fields": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class",
-        "description",
-        "authors",
-        "website",
-        "license",
-        "package",
-        "java-runtime",
-        "build-dsl",
-        "icon",
-        "api-version"
-      ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "visible"
-    },
     "advanced": {
+      "defaultPolicy": "descriptor-defaults",
       "fields": [
         "project-name",
         "project-id",
@@ -182,13 +63,16 @@
         "libraries",
         "custom-fields"
       ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "all"
+      "overrides": "all",
+      "warnings": true
     },
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/spigot/field-catalog.json"
+    ],
     "modeSwitch": {
-      "preservesValues": true,
       "preservesDormantValues": true,
+      "preservesValues": true,
       "resolver": "shared"
     },
     "rawFiles": {
@@ -202,6 +86,184 @@
       ],
       "canonicalCiPolicy": "never-execute",
       "pathPolicy": "relative-safe"
+    },
+    "schemaVersion": 1,
+    "simple": {
+      "defaultPolicy": "descriptor-defaults",
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "api-version"
+      ],
+      "overrides": "visible",
+      "warnings": true
     }
-  }
+  },
+  "fields": [
+    {
+      "default": "Tuple Probe",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-name",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "tuple-probe",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-id",
+      "label": "Project id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "1.0.0",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-version",
+      "label": "Project version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "version"
+    },
+    {
+      "default": "TupleProbe",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "main-class",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "files": [
+    {
+      "destination": "settings.gradle",
+      "includeWhen": "gradleDsl.groovy",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/shared/settings.gradle.tmpl"
+    },
+    {
+      "destination": "settings.gradle.kts",
+      "includeWhen": "gradleDsl.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/shared/settings.gradle.kts.tmpl"
+    },
+    {
+      "destination": "build.gradle",
+      "includeWhen": "sourceLanguage.java && gradleDsl.groovy",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/spigot/build.gradle.tmpl"
+    },
+    {
+      "destination": "build.gradle",
+      "includeWhen": "sourceLanguage.kotlin && gradleDsl.groovy",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/spigot/build-kotlin.gradle.tmpl"
+    },
+    {
+      "destination": "build.gradle.kts",
+      "includeWhen": "sourceLanguage.java && gradleDsl.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/spigot/build-java.gradle.kts.tmpl"
+    },
+    {
+      "destination": "build.gradle.kts",
+      "includeWhen": "sourceLanguage.kotlin && gradleDsl.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/spigot/build.gradle.kts.tmpl"
+    },
+    {
+      "destination": "gradle.properties",
+      "rawOverride": "advanced-only",
+      "renderer": "properties",
+      "source": "templates/shared/gradle.properties.tmpl"
+    },
+    {
+      "destination": "src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "includeWhen": "sourceLanguage.java",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/spigot/entrypoint.java.tmpl"
+    },
+    {
+      "destination": "src/main/kotlin/${project.packagePath}/${project.mainClass}.kt",
+      "includeWhen": "sourceLanguage.kotlin",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/spigot/entrypoint.kt.tmpl"
+    },
+    {
+      "destination": "src/main/resources/plugin.yml",
+      "rawOverride": "advanced-only",
+      "renderer": "yaml",
+      "source": "templates/spigot/plugin-legacy.yml.tmpl"
+    }
+  ],
+  "gradleDsls": ["groovy", "kotlin"],
+  "id": "spigot-legacy",
+  "platforms": ["spigot"],
+  "profileRefs": ["spigot-legacy"],
+  "rawOperationPolicy": {
+    "allowedOperations": [
+      "add",
+      "replace",
+      "rename",
+      "delete",
+      "reset",
+      "diff"
+    ],
+    "allowedPathPrefixes": [
+      "build.gradle",
+      "build.gradle.kts",
+      "gradle.properties",
+      "settings.gradle",
+      "settings.gradle.kts",
+      "src/"
+    ],
+    "canonicalCi": "never-execute",
+    "maxContentBytes": 1048576,
+    "maxOperations": 128,
+    "pathPolicy": "allowed-prefixes"
+  },
+  "renderTargets": [
+    {
+      "fieldMappings": [
+        {
+          "fieldId": "*",
+          "format": "json",
+          "path": "extensions"
+        }
+      ],
+      "format": "json",
+      "id": "advanced-field-extension",
+      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
+      "required": false
+    }
+  ],
+  "revision": 3,
+  "schemaVersion": 1,
+  "sourceLanguages": ["java", "kotlin"],
+  "status": "reviewed"
 }

@@ -2,9 +2,11 @@
 
 ## Current Status
 
-Phase 6 is complete. The implementation is merged and tagged as `phase-6-pack-publication`, and the first immutable semantic pack release [`v1.0.0-beta.1`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.1) is published as a prerelease from main commit `99c6f8d5772bde176ac6358214933efbf8286199`. The [phase 6 release verification record](../verification/phase6-release.md) contains the exact asset list, digests, coverage binding, offline verification, attestations, and rollback evidence.
+Phase 6 is complete. The implementation is merged and tagged as `phase-6-pack-publication`, and the first immutable semantic pack release [`v1.0.0-beta.1`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.1) is published as a prerelease from main commit `99c6f8d5772bde176ac6358214933efbf8286199`. The current published prerelease is [`v1.0.0-beta.7`](https://github.com/MCEnvision/MCGen-Templates/releases/tag/v1.0.0-beta.7) from main commit `1ee69be3bdaf002606900ba1f6621f7404bc5db7`. The [phase 6 release verification record](../verification/phase6-release.md) contains the exact first-release asset list, digests, coverage binding, offline verification, attestations, and rollback evidence.
 
 Phase 7 maintenance monitoring is in progress. Published releases remain immutable while monitor runs classify upstream additions, removals, mutations, and outages. The [phase 7 maintenance verification record](../verification/phase7-maintenance.md) defines the review and quarantine evidence required before a corrective release.
+
+Phase 14 changes ProjectSpec, descriptor, profile, template, and exact evidence contracts. It requires the `v1.0.0-beta.8` semantic pack release after merge because every earlier archive is immutable. The release candidate must include ProjectSpec version 3, the separate `sourceLanguages`, `buildSystems`, and `gradleDsls` capabilities, all selected Java and Kotlin sources and Groovy and Kotlin Gradle DSL files, and the fifty five exact tuple evidence records, including forty new language and DSL combinations. The repository package metadata and canonical pack input use `1.0.0-beta.8`; publication remains blocked until the Phase 14 pull request is merged and the release artifacts are built from that merged commit.
 
 ## Release Identity
 

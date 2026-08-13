@@ -25,7 +25,6 @@
     "resourceNamespaces": []
   },
   "build": {
-    "dsl": "groovy",
     "jvmArguments": [],
     "plugins": [
       {
@@ -132,7 +131,6 @@
     "language": 21,
     "runtime": 21
   },
-  "languages": ["java", "kotlin"],
   "mappings": {
     "components": [
       {
@@ -175,7 +173,7 @@
       "url": "https://repo.maven.apache.org/maven2/"
     }
   ],
-  "revision": 4,
+  "revision": 5,
   "schemaVersion": 1,
   "sourceLayout": {
     "generatedRoots": [
@@ -211,5 +209,9 @@
       ["./gradlew", "test"]
     ],
     "inspection": ["META-INF/neoforge.mods.toml", "META-INF/MANIFEST.MF"]
-  }
+  },
+  "sourceLanguages": ["java"],
+  "buildSystems": ["gradle"],
+  "gradleDsls": ["groovy"],
+  "languageAdapters": []
 }

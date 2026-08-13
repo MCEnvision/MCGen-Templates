@@ -1,0 +1,25 @@
+plugins { id 'org.jetbrains.kotlin.jvm' version '1.9.24' }
+
+group = '${project.groupId}'
+version = '${project.version}'
+
+java { toolchain.languageVersion = JavaLanguageVersion.of(${build.javaLanguage}) }
+kotlin { jvmToolchain(${build.javaLanguage}) }
+
+repositories {
+    maven { url = uri('https://hub.spigotmc.org/nexus/content/groups/public/') }
+    maven { url = uri('https://libraries.minecraft.net/') }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly '${platform.components.bungeecord}'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
+}
+
+tasks.withType(Jar).configureEach {
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

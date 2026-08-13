@@ -1,220 +1,27 @@
 {
   "$schema": "urn:mcgen:schema:template-descriptor:1",
-  "schemaVersion": 1,
-  "id": "architectury",
-  "revision": 2,
-  "status": "reviewed",
-  "category": "multiloader",
-  "platforms": ["architectury"],
-  "profileRefs": ["architectury-multiloader"],
-  "capabilities": ["common-module", "target-overrides", "advanced-overrides"],
-  "fieldGroups": [
-    {
-      "id": "identity",
-      "label": "Project identity",
-      "order": 0,
-      "fieldIds": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class"
-      ]
-    }
-  ],
-  "fields": [
-    {
-      "id": "project-name",
-      "type": "string",
-      "label": "Project name",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "Example Mod"
-    },
-    {
-      "id": "project-id",
-      "type": "string",
-      "label": "Project id",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "example-mod"
-    },
-    {
-      "id": "project-version",
-      "type": "version",
-      "label": "Project version",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "1.0.0"
-    },
-    {
-      "id": "main-class",
-      "type": "string",
-      "label": "Main class",
-      "modes": ["simple", "advanced"],
-      "required": true,
-      "editable": true,
-      "defaultPolicy": "literal",
-      "default": "ExampleMod"
-    }
-  ],
-  "conditions": [],
-  "files": [
-    {
-      "source": "templates/shared/README.md.tmpl",
-      "destination": "README.md",
-      "renderer": "text",
-      "includeWhen": "true",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/shared/LICENSE.tmpl",
-      "destination": "LICENSE",
-      "renderer": "text",
-      "rawOverride": "allowed"
-    },
-    {
-      "source": "templates/architectury/root-build.gradle.tmpl",
-      "destination": "build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/settings.gradle.tmpl",
-      "destination": "settings.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/gradle.properties.tmpl",
-      "destination": "gradle.properties",
-      "renderer": "properties",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/common-entrypoint.java.tmpl",
-      "destination": "common/src/main/java/${project.packagePath}/${project.mainClass}.java",
-      "renderer": "text",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/common-build.gradle.tmpl",
-      "destination": "common/build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/fabric-build.gradle.tmpl",
-      "destination": "fabric/build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/forge-build.gradle.tmpl",
-      "destination": "forge/build.gradle",
-      "renderer": "gradle",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/forge-gradle.properties.tmpl",
-      "destination": "forge/gradle.properties",
-      "renderer": "properties",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/fabric-entrypoint.java.tmpl",
-      "destination": "fabric/src/main/java/${project.packagePath}/${project.mainClass}Fabric.java",
-      "renderer": "text",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/forge-entrypoint.java.tmpl",
-      "destination": "forge/src/main/java/${project.packagePath}/${project.mainClass}Forge.java",
-      "renderer": "text",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/fabric.mod.json.tmpl",
-      "destination": "fabric/src/main/resources/fabric.mod.json",
-      "renderer": "json",
-      "rawOverride": "advanced-only"
-    },
-    {
-      "source": "templates/architectury/forge.mods.toml.tmpl",
-      "destination": "forge/src/main/resources/META-INF/mods.toml",
-      "renderer": "toml",
-      "rawOverride": "advanced-only"
-    }
-  ],
-  "renderTargets": [
-    {
-      "id": "advanced-field-extension",
-      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
-      "format": "json",
-      "fieldMappings": [
-        { "fieldId": "*", "path": "extensions", "format": "json" }
-      ],
-      "required": false
-    }
-  ],
   "assetSlots": [
     {
-      "id": "icon",
-      "mediaTypes": ["image/png"],
-      "maxBytes": 1048576,
-      "maxWidth": 512,
-      "maxHeight": 512,
       "destinations": [
         "common/src/main/resources/icon.png",
         "fabric/src/main/resources/assets/${project.id}/icon.png",
         "forge/src/main/resources/assets/${project.id}/icon.png"
-      ]
+      ],
+      "id": "icon",
+      "maxBytes": 1048576,
+      "maxHeight": 512,
+      "maxWidth": 512,
+      "mediaTypes": ["image/png"]
     }
   ],
-  "rawOperations": {
-    "allowed": ["add", "replace", "rename", "delete", "reset", "diff"],
-    "canonicalCi": "never-execute",
-    "pathPolicy": "relative-safe"
-  },
+  "buildSystems": ["gradle"],
+  "capabilities": ["common-module", "target-overrides", "advanced-overrides"],
+  "category": "multiloader",
+  "conditions": [],
   "customization": {
     "$schema": "urn:mcgen:schema:customization-contract:1",
-    "schemaVersion": 1,
-    "fieldCatalogPaths": [
-      "templates/shared/field-catalog.json",
-      "templates/architectury/field-catalog.json",
-      "templates/fabric/field-catalog.json",
-      "templates/forge/field-catalog.json",
-      "templates/neoforge/field-catalog.json"
-    ],
-    "simple": {
-      "fields": [
-        "project-name",
-        "project-id",
-        "project-version",
-        "main-class",
-        "description",
-        "authors",
-        "website",
-        "license",
-        "package",
-        "java-runtime",
-        "build-dsl",
-        "icon",
-        "loader-version",
-        "environment",
-        "targets",
-        "common-metadata"
-      ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "visible"
-    },
     "advanced": {
+      "defaultPolicy": "descriptor-defaults",
       "fields": [
         "project-name",
         "project-id",
@@ -276,13 +83,19 @@
         "target-source-layout",
         "target-artifacts"
       ],
-      "defaultPolicy": "descriptor-defaults",
-      "warnings": true,
-      "overrides": "all"
+      "overrides": "all",
+      "warnings": true
     },
+    "fieldCatalogPaths": [
+      "templates/shared/field-catalog.json",
+      "templates/architectury/field-catalog.json",
+      "templates/fabric/field-catalog.json",
+      "templates/forge/field-catalog.json",
+      "templates/neoforge/field-catalog.json"
+    ],
     "modeSwitch": {
-      "preservesValues": true,
       "preservesDormantValues": true,
+      "preservesValues": true,
       "resolver": "shared"
     },
     "rawFiles": {
@@ -296,6 +109,220 @@
       ],
       "canonicalCiPolicy": "never-execute",
       "pathPolicy": "relative-safe"
+    },
+    "schemaVersion": 1,
+    "simple": {
+      "defaultPolicy": "descriptor-defaults",
+      "fields": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class",
+        "description",
+        "authors",
+        "website",
+        "license",
+        "package",
+        "java-runtime",
+        "build-dsl",
+        "icon",
+        "loader-version",
+        "environment",
+        "targets",
+        "common-metadata"
+      ],
+      "overrides": "visible",
+      "warnings": true
     }
-  }
+  },
+  "fieldGroups": [
+    {
+      "fieldIds": [
+        "project-name",
+        "project-id",
+        "project-version",
+        "main-class"
+      ],
+      "id": "identity",
+      "label": "Project identity",
+      "order": 0
+    }
+  ],
+  "fields": [
+    {
+      "default": "Example Mod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-name",
+      "label": "Project name",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "example-mod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-id",
+      "label": "Project id",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    },
+    {
+      "default": "1.0.0",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "project-version",
+      "label": "Project version",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "version"
+    },
+    {
+      "default": "ExampleMod",
+      "defaultPolicy": "literal",
+      "editable": true,
+      "id": "main-class",
+      "label": "Main class",
+      "modes": ["simple", "advanced"],
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "files": [
+    {
+      "destination": "README.md",
+      "includeWhen": "true",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/shared/README.md.tmpl"
+    },
+    {
+      "destination": "LICENSE",
+      "rawOverride": "allowed",
+      "renderer": "text",
+      "source": "templates/shared/LICENSE.tmpl"
+    },
+    {
+      "destination": "build.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/architectury/root-build.gradle.tmpl"
+    },
+    {
+      "destination": "settings.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/architectury/settings.gradle.tmpl"
+    },
+    {
+      "destination": "gradle.properties",
+      "rawOverride": "advanced-only",
+      "renderer": "properties",
+      "source": "templates/architectury/gradle.properties.tmpl"
+    },
+    {
+      "destination": "common/src/main/java/${project.packagePath}/${project.mainClass}.java",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/architectury/common-entrypoint.java.tmpl"
+    },
+    {
+      "destination": "common/build.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/architectury/common-build.gradle.tmpl"
+    },
+    {
+      "destination": "fabric/build.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/architectury/fabric-build.gradle.tmpl"
+    },
+    {
+      "destination": "forge/build.gradle",
+      "rawOverride": "advanced-only",
+      "renderer": "gradle",
+      "source": "templates/architectury/forge-build.gradle.tmpl"
+    },
+    {
+      "destination": "forge/gradle.properties",
+      "rawOverride": "advanced-only",
+      "renderer": "properties",
+      "source": "templates/architectury/forge-gradle.properties.tmpl"
+    },
+    {
+      "destination": "fabric/src/main/java/${project.packagePath}/${project.mainClass}Fabric.java",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/architectury/fabric-entrypoint.java.tmpl"
+    },
+    {
+      "destination": "forge/src/main/java/${project.packagePath}/${project.mainClass}Forge.java",
+      "rawOverride": "advanced-only",
+      "renderer": "text",
+      "source": "templates/architectury/forge-entrypoint.java.tmpl"
+    },
+    {
+      "destination": "fabric/src/main/resources/fabric.mod.json",
+      "rawOverride": "advanced-only",
+      "renderer": "json",
+      "source": "templates/architectury/fabric.mod.json.tmpl"
+    },
+    {
+      "destination": "forge/src/main/resources/META-INF/mods.toml",
+      "rawOverride": "advanced-only",
+      "renderer": "toml",
+      "source": "templates/architectury/forge.mods.toml.tmpl"
+    }
+  ],
+  "gradleDsls": ["groovy"],
+  "id": "architectury",
+  "platforms": ["architectury"],
+  "profileRefs": ["architectury-multiloader"],
+  "rawOperationPolicy": {
+    "allowedOperations": [
+      "add",
+      "replace",
+      "rename",
+      "delete",
+      "reset",
+      "diff"
+    ],
+    "allowedPathPrefixes": [
+      "LICENSE",
+      "README.md",
+      "build.gradle",
+      "common/",
+      "fabric/",
+      "forge/",
+      "gradle.properties",
+      "settings.gradle",
+      "src/"
+    ],
+    "canonicalCi": "never-execute",
+    "maxContentBytes": 1048576,
+    "maxOperations": 128,
+    "pathPolicy": "allowed-prefixes"
+  },
+  "renderTargets": [
+    {
+      "fieldMappings": [
+        {
+          "fieldId": "*",
+          "format": "json",
+          "path": "extensions"
+        }
+      ],
+      "format": "json",
+      "id": "advanced-field-extension",
+      "path": "src/main/resources/META-INF/mcgen-advanced-fields.json",
+      "required": false
+    }
+  ],
+  "revision": 3,
+  "schemaVersion": 1,
+  "sourceLanguages": ["java"],
+  "status": "reviewed"
 }

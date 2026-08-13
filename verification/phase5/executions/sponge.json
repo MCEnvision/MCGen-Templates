@@ -7,7 +7,7 @@
       ],
       "expectedExtension": ".jar",
       "iconPaths": [],
-      "maxEntries": 128,
+      "maxEntries": 2048,
       "metadataFields": {
         "entrypoint": "org.example.tuple.TupleProbe",
         "id": "tuple-probe",
@@ -74,6 +74,8 @@
   "fixture": {
     "descriptorPath": "templates/sponge/descriptor.json",
     "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
       "id": "sponge.sponge.minimal-java.java",
       "kind": "minimal-java",
       "language": "java",
@@ -81,10 +83,10 @@
       "version": "1.0.0"
     },
     "spec": {
-      "$schema": "urn:mcgen:schema:project-spec:1",
+      "$schema": "urn:mcgen:schema:project-spec:3",
       "assets": [],
       "build": {
-        "dsl": "groovy",
+        "gradleDsl": "groovy",
         "javaLanguage": 17,
         "system": "gradle"
       },
@@ -119,12 +121,16 @@
       "publishing": {},
       "repositories": [],
       "repository": {},
-      "schemaVersion": 1,
+      "schemaVersion": 3,
       "sourceLayout": {},
       "targetOverrides": [],
-      "template": "sponge"
+      "template": {
+        "id": "sponge",
+        "sourceLanguage": "java"
+      }
     },
     "tuple": {
+      "buildSystem": "gradle",
       "catalogKey": "10.0",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -132,26 +138,28 @@
       },
       "contentDigests": {
         "catalog": "7817be085e603e590acc861099d3b02d03fca91ecf26461b98c9852b12667492",
-        "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "476a82880bca95f37aff9efb85903466a5e602f61ac15a792028a544dce3bb69",
-        "template": "bab0512f625361c3ade679a02ab29b7a05e8acd698ac08b7db9b458085123020"
+        "descriptor": "99e78b3c39ceac72d1892a6342f23e36e5cc2ca2a98d8d7ad0a1fcbaf958c3f8",
+        "fixture": "81dfa8948a72359960d88d3f1b0d845714ca0ea52f2510237b9c28396eb0b929",
+        "profile": "7ad0139995e24859f39b9c0115093d530d99e24c55e016425c2a5a3156576794",
+        "template": "73c9c5d303f4fa5009d808bdcbe25e615511b961362ef7d201b629de321f397c"
       },
       "descriptorId": "sponge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "sponge",
       "fixtureId": "sponge.sponge.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "fb4ec23bc70cd29a4f894bb3da8833f9accb2f6c2f09ad06cfa45aae1f98013d",
+      "procedureDigest": "516a1364d50197c9eefa9b6a28d025cbe21c65a56b82ad901138654acfed9760",
       "profileId": "sponge",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -162,13 +170,13 @@
     }
   },
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "generatorDigest": "db62695de8963b58145f4dcbbdf446ad020451a20226e7485e7888cb60f32f69",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
   "profilePath": "profiles/sponge.json",
   "tuple": {
-    "id": "a9cf303e368c8a82cab2f54095c41b62bc23818f9aa0bf4bd2b240dc563de1a7",
-    "status": "discovered",
     "blockers": [],
+    "id": "5103f98e083af315c0657fc3391d1ced38e13729687ec2d1ac1320d95ae4eb91",
     "identity": {
+      "buildSystem": "gradle",
       "catalogKey": "10.0",
       "catalogSnapshotId": "2026-08-11-r1",
       "components": {
@@ -176,26 +184,28 @@
       },
       "contentDigests": {
         "catalog": "7817be085e603e590acc861099d3b02d03fca91ecf26461b98c9852b12667492",
-        "descriptor": "9cba489a1ca16da7278b70132ff3bb732d4f8cf964412f82e37975ec9cc41553",
-        "fixture": "36d149c2b61fa930c4d453bfac274551f5b99e0b78d12cab254cfebe641b4e79",
-        "profile": "476a82880bca95f37aff9efb85903466a5e602f61ac15a792028a544dce3bb69",
-        "template": "bab0512f625361c3ade679a02ab29b7a05e8acd698ac08b7db9b458085123020"
+        "descriptor": "99e78b3c39ceac72d1892a6342f23e36e5cc2ca2a98d8d7ad0a1fcbaf958c3f8",
+        "fixture": "81dfa8948a72359960d88d3f1b0d845714ca0ea52f2510237b9c28396eb0b929",
+        "profile": "7ad0139995e24859f39b9c0115093d530d99e24c55e016425c2a5a3156576794",
+        "template": "73c9c5d303f4fa5009d808bdcbe25e615511b961362ef7d201b629de321f397c"
       },
       "descriptorId": "sponge",
-      "descriptorRevision": 2,
+      "descriptorRevision": 4,
       "family": "sponge",
       "fixtureId": "sponge.sponge.minimal-java.java",
+      "gradleDsl": "groovy",
       "java": {
         "distribution": "temurin",
         "runtime": 17
       },
       "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
-      "procedureDigest": "fb4ec23bc70cd29a4f894bb3da8833f9accb2f6c2f09ad06cfa45aae1f98013d",
+      "procedureDigest": "516a1364d50197c9eefa9b6a28d025cbe21c65a56b82ad901138654acfed9760",
       "profileId": "sponge",
-      "profileRevision": 4,
+      "profileRevision": 5,
       "sourceDigests": [
         "6cea5119c07add12a74132d893090326040df5fd4d929ee09d6e3717ce467cec"
       ],
+      "sourceLanguage": "java",
       "wrapper": {
         "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
         "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
@@ -203,7 +213,8 @@
         "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
         "version": "8.8"
       }
-    }
+    },
+    "status": "discovered"
   },
   "wrapperPath": "gradlew",
   "wrapperSource": "templates/spigot/gradlew-modern.tmpl"

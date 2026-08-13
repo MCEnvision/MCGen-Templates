@@ -1,0 +1,220 @@
+{
+  "$schema": "urn:mcgen:schema:phase5-execution:1",
+  "artifact": {
+    "expectation": {
+      "entrypointClasses": [
+        "org.example.tuple.TupleProbe"
+      ],
+      "expectedExtension": ".jar",
+      "iconPaths": [],
+      "maxEntries": 2048,
+      "metadataFields": {
+        "main": "org.example.tuple.TupleProbe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "metadataPaths": [
+        "plugin.yml"
+      ],
+      "patterns": [
+        "build/libs/tuple-probe-1.0.0.jar"
+      ],
+      "projectIdentity": {
+        "id": "Tuple Probe",
+        "name": "Tuple Probe",
+        "version": "1.0.0"
+      },
+      "requiredEntries": [
+        "plugin.yml",
+        "org/example/tuple/TupleProbe.class"
+      ],
+      "resourceNamespaces": []
+    },
+    "path": "build/libs/tuple-probe-1.0.0.jar"
+  },
+  "build": {
+    "commands": [
+      {
+        "args": [
+          "build"
+        ],
+        "executable": "./gradlew",
+        "purpose": "build"
+      },
+      {
+        "args": [
+          "test"
+        ],
+        "executable": "./gradlew",
+        "purpose": "unit-tests"
+      }
+    ],
+    "java": {
+      "distribution": "temurin",
+      "runtime": 17
+    },
+    "limits": {
+      "artifactRetentionDays": 30,
+      "maxDiskBytes": 4294967296,
+      "maxOutputBytes": 67108864,
+      "retries": 1,
+      "timeoutMs": 900000
+    },
+    "rawOverridePolicy": "never-execute",
+    "workDirectoryPolicy": "isolated-clean",
+    "wrapper": {
+      "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+      "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+      "kind": "launcher-script",
+      "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+      "version": "8.8"
+    }
+  },
+  "fixture": {
+    "descriptorPath": "templates/paper/descriptor-traditional.json",
+    "fixture": {
+      "buildSystem": "gradle",
+      "gradleDsl": "groovy",
+      "id": "paper-traditional.paper-traditional.minimal-kotlin.kotlin.gradle.groovy",
+      "kind": "minimal-kotlin",
+      "language": "kotlin",
+      "rawOverride": false,
+      "version": "1.0.0"
+    },
+    "spec": {
+      "$schema": "urn:mcgen:schema:project-spec:3",
+      "assets": [],
+      "build": {
+        "gradleDsl": "groovy",
+        "javaLanguage": 17,
+        "system": "gradle"
+      },
+      "dependencies": [],
+      "extensions": {},
+      "features": [],
+      "fileOperations": [],
+      "metadata": {},
+      "mode": "simple",
+      "platform": {
+        "apiVersion": "1.20",
+        "catalogKey": "1.20.1",
+        "components": {
+          "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+        },
+        "id": "paper",
+        "java": 17,
+        "javaLanguage": 17
+      },
+      "project": {
+        "authors": [
+          "EnVy"
+        ],
+        "description": "tuple probe",
+        "id": "tuple-probe",
+        "license": "MIT",
+        "mainClass": "TupleProbe",
+        "name": "Tuple Probe",
+        "package": "org.example.tuple",
+        "version": "1.0.0"
+      },
+      "publishing": {},
+      "repositories": [],
+      "repository": {},
+      "schemaVersion": 3,
+      "sourceLayout": {},
+      "targetOverrides": [],
+      "template": {
+        "id": "paper-traditional",
+        "sourceLanguage": "kotlin"
+      }
+    },
+    "tuple": {
+      "buildSystem": "gradle",
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-11-r1",
+      "components": {
+        "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "0c825cb6fd2f51601935a2b694853ffb290c66333a88e1c68af7bde99aa7e658",
+        "descriptor": "bfd4f696e5b949f0d1db20b7517868dcc48482b1a1e4145913b61c2bee4b2ad2",
+        "fixture": "958966d826fbfd0ff65a0c27d618d93290bcc17d8e2fcd0cb146b1751934ffb5",
+        "profile": "cc0bdad21427143d3d1222afa4d68a80a87a6d58e62b7b519959c9861ba7a242",
+        "template": "bd13ffab18674f296d7e2b036ff3f5081705ce773499d8331d4c02e5163944a7"
+      },
+      "descriptorId": "paper-traditional",
+      "descriptorRevision": 4,
+      "family": "paper",
+      "fixtureId": "paper-traditional.paper-traditional.minimal-kotlin.kotlin.gradle.groovy",
+      "gradleDsl": "groovy",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "f8912645583778f807d7cfb74c8c67b56062479dbc04d7660fc7edfb6c30ee6b",
+      "profileId": "paper-traditional",
+      "profileRevision": 5,
+      "sourceDigests": [
+        "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+      ],
+      "sourceLanguage": "kotlin",
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    }
+  },
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatorDigest": "8879f8877c750a514805276ca7bae91eb25e58766b2f64c5b8824de691c1d555",
+  "profilePath": "profiles/paper-traditional.json",
+  "tuple": {
+    "blockers": [],
+    "id": "d7407b7ad00194a8423a75555c13a6740af5b08cc2b87461059b92f45f44695e",
+    "identity": {
+      "buildSystem": "gradle",
+      "catalogKey": "1.20.1",
+      "catalogSnapshotId": "2026-08-11-r1",
+      "components": {
+        "paper": "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+      },
+      "contentDigests": {
+        "catalog": "0c825cb6fd2f51601935a2b694853ffb290c66333a88e1c68af7bde99aa7e658",
+        "descriptor": "bfd4f696e5b949f0d1db20b7517868dcc48482b1a1e4145913b61c2bee4b2ad2",
+        "fixture": "958966d826fbfd0ff65a0c27d618d93290bcc17d8e2fcd0cb146b1751934ffb5",
+        "profile": "cc0bdad21427143d3d1222afa4d68a80a87a6d58e62b7b519959c9861ba7a242",
+        "template": "bd13ffab18674f296d7e2b036ff3f5081705ce773499d8331d4c02e5163944a7"
+      },
+      "descriptorId": "paper-traditional",
+      "descriptorRevision": 4,
+      "family": "paper",
+      "fixtureId": "paper-traditional.paper-traditional.minimal-kotlin.kotlin.gradle.groovy",
+      "gradleDsl": "groovy",
+      "java": {
+        "distribution": "temurin",
+        "runtime": 17
+      },
+      "mappingDigest": "140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "procedureDigest": "f8912645583778f807d7cfb74c8c67b56062479dbc04d7660fc7edfb6c30ee6b",
+      "profileId": "paper-traditional",
+      "profileRevision": 5,
+      "sourceDigests": [
+        "abb02e33b2eff11f2bc36ba5082777836d13e8b2b00e1c65e991265d079595e1"
+      ],
+      "sourceLanguage": "kotlin",
+      "wrapper": {
+        "distributionSha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+        "distributionUrl": "https://services.gradle.org/distributions/gradle-8.8-bin.zip",
+        "kind": "launcher-script",
+        "sha256": "0a95e5cb38e474b14dfe4499674ea8f6ce52157ca890bd4f1efbbe3c59eaafd9",
+        "version": "8.8"
+      }
+    },
+    "status": "discovered"
+  },
+  "wrapperPath": "gradlew",
+  "wrapperSource": "templates/spigot/gradlew-modern.tmpl"
+}

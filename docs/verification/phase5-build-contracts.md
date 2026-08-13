@@ -4,7 +4,9 @@ Phase 5 is complete on `main` and identified by the verified signed tag `phase-5
 
 ## Exact tuple identity
 
-Every matrix tuple includes the family, descriptor revision, profile revision, catalog snapshot and key, exact component coordinates, fixture, Java distribution and runtime, wrapper version and checksum, mapping digest, source evidence digests, and verification procedure digest. The canonical JSON digest of that identity is the evidence key. A changed source snapshot, profile, descriptor, mapping, wrapper, Java checksum, generator, or procedure produces a new key or invalidates the previous record.
+Every matrix tuple includes the family, descriptor revision, profile revision, catalog snapshot and key, exact component coordinates, fixture, source language, build system, Gradle DSL when applicable, Java distribution and runtime, wrapper version and checksum, mapping digest, source evidence digests, and verification procedure digest. The canonical JSON digest of that identity is the evidence key. A changed source snapshot, profile, descriptor, language, DSL, mapping, wrapper, Java checksum, generator, or procedure produces a new key or invalidates the previous record.
+
+Phase 14 adds forty exact records to the canonical `verification/phase5/evidence/` set. Bukkit, BungeeCord, Fabric, Paper modern and traditional, Spigot default, legacy, and modern, Sponge, and Velocity each verify Java with Groovy DSL, Java with Kotlin DSL, Kotlin with Groovy DSL, and Kotlin with Kotlin DSL. Every record runs the pinned profile JDK and wrapper twice, passes `build` and `test`, passes artifact inspection, and produces reproducible trees and artifacts. Forge, NeoForge, Architectury, and multiloader do not advertise unverified language or DSL combinations.
 
 ## Fixture manifests
 

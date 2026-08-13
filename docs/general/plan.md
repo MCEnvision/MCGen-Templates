@@ -13,6 +13,10 @@ The template-pack contract and source-evidence slice completed on August 9, 2026
 
 The seven-phase GitHub and template-repository program is complete. Pull request `44` merged the final completion evidence on August 10, 2026 at commit `3ae74d5159901b732a62a7b30170702154094a17`. The repository now contains the normalized compatibility graph, complete source-adapter coverage, toolchain profiles, template-family descriptors, deterministic pack construction, signed prerelease evidence, automated maintenance, and exact verification evidence for the currently selected verification set. Remaining product work belongs to the future `MCEnvision/MCGen` application repository, while additional historic and catalog-wide tuple verification remains a stable-release gate.
 
+Phase 14 is the active template-pack prerequisite. An August 12, 2026 audit found that profiles advertised Kotlin even though every generated entrypoint was Java, every Gradle build used Groovy DSL, fixture language did not affect ProjectSpec, and the modern Forge profile incorrectly named Fabric Language Kotlin as its Kotlin adapter. Phase 14 therefore adds explicit source-language and build-system contracts, migrates the canonical ProjectSpec to version 3, implements real Java and Kotlin source templates plus Groovy and Kotlin Gradle DSL templates, corrects platform adapters, and removes any advertised combination that lacks exact generation, compilation, and artifact evidence. This work does not change the completed history above and is not complete until the acceptance gate in section 148 passes.
+
+Phase 14 is tracked by [issue 51](https://github.com/MCEnvision/MCGen-Templates/issues/51), milestone 14, and the repository roadmap Project 9. The target pack is `v1.0.0-beta.8`.
+
 Repository tooling uses Node.js 22, npm lockfiles, TypeScript 5.9, JSON Schema Draft 2020-12, and repository-defined formatting, linting, type-checking, tests, builds, schema validation, and snapshot verification. GitHub CodeQL default setup analyzes GitHub Actions and JavaScript or TypeScript sources. Application code remains owned by the future `MCEnvision/MCGen` repository.
 
 ---
@@ -191,6 +195,7 @@ Initial targets:
 - Spigot
 - Paper
 - Sponge
+- BungeeCord
 
 ---
 
@@ -199,7 +204,6 @@ Initial targets:
 Initial targets:
 
 - Velocity
-- BungeeCord
 
 ---
 
@@ -842,13 +846,13 @@ Bukkit
 Spigot
 Paper
 Sponge
+BungeeCord
 ```
 
 For Proxy:
 
 ```text
 Velocity
-BungeeCord
 ```
 
 ---
@@ -958,9 +962,13 @@ platform-specific custom fields
 
 The editor must prevent dependency cycles and duplicate command, permission, and dependency keys.
 
+## BungeeCord Plugin Metadata
+
+Expose all fields supported by BungeeCord plugins, including identity, main class, version, authors, description, URL, dependency declarations, optionality, and platform-specific extension fields. BungeeCord remains a plugin category even though it runs on a proxy server.
+
 ## Proxy Metadata
 
-Expose all fields supported by Velocity and BungeeCord templates, including identity, main class, version, authors, description, URL, dependency declarations, optionality, and platform-specific extension fields.
+Expose all fields supported by Velocity proxy templates, including identity, main class, version, authors, description, URL, dependency declarations, optionality, and platform-specific extension fields.
 
 ## Visibility and Availability
 
@@ -5514,7 +5522,7 @@ Catalog by SpongeAPI compatibility line when that is the real plugin-development
 
 ### Velocity and BungeeCord
 
-Catalog by API line. Do not create one template copy per Minecraft patch. Record protocol compatibility separately. Gradle and Maven, Java and Kotlin, annotation processing, metadata file generation, and optional run plugins remain profile capabilities.
+Catalog both by API line. Do not create one template copy per Minecraft patch. Record protocol compatibility separately. Velocity is categorized as a proxy. BungeeCord is categorized as a plugin per the owner decision, while retaining its proxy-server API compatibility data. Gradle and Maven, Java and Kotlin, annotation processing, metadata file generation, and optional run plugins remain profile capabilities.
 
 ### Architectury and Configurable Multiloaders
 
@@ -5964,3 +5972,134 @@ The GitHub foundation gate passes only when:
 11. No product implementation branch is created before criteria 1 through 10 pass, except that criterion 7 may remain blocked solely on owner authorization for the required token scope.
 
 The gate passed on August 9, 2026. Roadmap Project `9` is linked and synchronized, the exact wiki navigation is published, organization hard-stop budgets remain enabled, and the signed `phase-0-github-foundation` tag identifies the approved merge commit. Later work must preserve these controls and return to ordinary sequential phase pull requests.
+
+---
+
+# 148. Phase 14 — Source Language and Gradle DSL Verification
+
+## 148.1 Objective and Evidence
+
+Phase 14 makes source language and build-file language independent, deterministic choices. The canonical terms are:
+
+```text
+template.sourceLanguage
+  java
+  kotlin
+
+build.system
+  gradle
+  maven
+
+build.gradleDsl
+  groovy
+  kotlin
+```
+
+The existing pack cannot truthfully expose these choices. Its profile `languages` arrays mix source-language capability with no executable selection contract, descriptors contain only Java source files, Gradle descriptors select only `.gradle` files, and `fixtureProjectSpec` records fixture language only as diagnostic extension data. Modern Forge additionally identifies `net.fabricmc:fabric-language-kotlin` as its adapter even though that artifact is Fabric-specific.
+
+## 148.2 Scope and Non-Goals
+
+This phase owns the template-pack prerequisite only:
+
+1. ProjectSpec version 3 schema, TypeScript model, validation, resolution defaults, and deterministic migration from version 1.
+   ProjectSpec also persists per-field identity recommendation locks as a bounded string-to-boolean map so import, export, and mode changes cannot resume automatic mutation of a field the user locked.
+2. Descriptor and profile capability fields named `sourceLanguages`, `buildSystems`, and `gradleDsls`.
+3. Safe descriptor file conditions named `sourceLanguage.java`, `sourceLanguage.kotlin`, `gradleDsl.groovy`, and `gradleDsl.kotlin`.
+4. Java and Kotlin entrypoint templates with language-correct source roots and class names.
+5. Groovy and Kotlin DSL settings and build templates with equivalent pinned behavior.
+6. Platform-specific Kotlin compiler, runtime, and loader adapter configuration.
+7. Fixture generation that selects the requested source language and Gradle DSL rather than labeling Java output as Kotlin.
+8. Deterministic validation, compilation, artifact inspection, and reproducibility evidence for each advertised reference combination.
+9. Documentation of supported combinations, exclusions, migration behavior, and exact verification commands.
+10. A bounded descriptor raw-operation policy that declares permitted operations, path prefixes, operation count, content bytes, and non-execution behavior for downstream enforcement.
+
+This phase does not add Maven templates, rewrite gameplay code, change catalog discovery, publish a release, or enable a language or DSL for a profile whose pinned toolchain cannot pass the existing exact-build architecture. Maven remains a valid future `build.system` value in the portable application contract but is not advertised by this Gradle-only pack until real Maven templates and evidence exist.
+
+## 148.3 Architecture and Data Flow
+
+ProjectSpec version 3 uses `template.sourceLanguage` for generated source and `build.system` plus `build.gradleDsl` for build files. A version 1 document migrates deterministically to Java, its existing build system or Gradle, and its existing `build.dsl` or Groovy DSL. Migration removes the legacy `build.dsl` alias after copying it so one resolved document has one authoritative value per concern.
+
+Descriptors declare supported choices separately and choose files through the four safe condition names. The renderer maps those names to validated ProjectSpec values without exposing arbitrary expression evaluation. A descriptor may combine these conditions with its existing component and feature conditions. Selecting an unsupported language, system, or DSL fails before rendering.
+
+Each descriptor also declares `rawOperationPolicy`. It is the authoritative downstream allowlist for advanced `fileOperations`: `allowedOperations`, `allowedPathPrefixes`, `maxOperations`, and `maxContentBytes` are bounded, every `path` and rename `from` value must match a segment-aware prefix after normalization, and `canonicalCi` remains `never-execute`. The default reviewed policy permits project files only below `src`, `common`, `fabric`, or `forge`, plus exact root build and documentation files. A client must reject missing policies and unsupported operations or paths before rendering.
+
+Profiles declare only capabilities their reviewed template boundary implements. `sourceLanguages` replaces the ambiguous `languages` field. `buildSystems` declares executable build families. `gradleDsls` declares syntax choices only when Gradle is present. `languageAdapters` contains platform-correct adapters and versions, never an adapter from another loader.
+
+Fixture generation applies both axes to the ProjectSpec before rendering. Fixture IDs, tuple identity, evidence, and coverage distinguish source language from Gradle DSL so Java with Kotlin DSL cannot collide with Kotlin with Groovy DSL. Generated source roots, required class entries, metadata entrypoints, build commands, and artifact expectations remain equivalent across the four Gradle combinations where all four are advertised.
+
+## 148.4 Compatibility and Failure Behavior
+
+Java with Groovy DSL remains the compatibility default for migrated and newly resolved documents. Unsupported values and unsupported descriptor or profile combinations are validation errors, not silent fallback. Legacy Forge remains Java-only unless its pinned Gradle, ForgeGradle, and Kotlin toolchain can be compiled and inspected reproducibly. Platform Kotlin support must use its native integration:
+
+```text
+Fabric uses Fabric Language Kotlin.
+Forge uses Kotlin for Forge, never Fabric Language Kotlin.
+NeoForge uses the NeoForge-compatible Kotlin for Forge artifact.
+Plugin and proxy platforms use Kotlin JVM and the Kotlin runtime packaging strategy required by their host.
+Multiloader output configures each selected target independently.
+```
+
+If an adapter coordinate or version cannot be proven from authoritative evidence and compiled in the reference tuple, Kotlin is not advertised for that profile. If Kotlin DSL cannot express the pinned build without changing behavior, Kotlin DSL is not advertised for that profile. Failed exact builds create blockers and do not count as support.
+
+## 148.5 Ordered Implementation
+
+1. Add ProjectSpec version 3 and a deterministic version 1 migration, then update fixtures and schema registry tests.
+2. Extend descriptor and profile schemas with the separate capability fields and safe file-selection conditions.
+3. Update the renderer and fixture generator so source language and DSL affect the generated tree and digest.
+4. Add shared language templates and family-specific build templates, preserving platform metadata and artifact identity.
+5. Add platform-correct Kotlin plugins, runtimes, adapters, source sets, compiler targets, and packaging.
+6. Update every profile and descriptor truthfully. Remove unsupported claims rather than retaining aspirational metadata.
+7. Add contract, schema, rendering, migration, determinism, negative-selection, and tree-content tests.
+8. Run exact compilation and artifact inspection for every advertised reference combination supported by the verification architecture.
+9. Update technical documentation, coverage evidence, and release-facing support tables with verified results and explicit blockers.
+
+## 148.6 Verification Matrix
+
+For every reviewed Gradle profile, verification evaluates each advertised Cartesian product of:
+
+```text
+sourceLanguages × gradleDsls
+```
+
+Each case must prove:
+
+1. The generated tree contains exactly one selected entrypoint language and one selected Gradle DSL.
+2. Repeated generation produces byte-identical files and the same tree digest.
+3. The pinned wrapper and required JDK run the profile's canonical build command.
+4. The produced artifact contains the expected metadata, project identity, entrypoint class, and resources.
+5. No unselected `.java`, `.kt`, `.gradle`, or `.gradle.kts` counterpart leaks into output.
+6. Kotlin cases contain the correct platform adapter or runtime and no adapter from another platform.
+7. Coverage and pack manifests preserve the language and DSL dimensions without collisions.
+
+Schema validation, formatting, linting, type checking, unit tests, pack validation, and the complete existing repository verification suite remain mandatory. Network or upstream failures are recorded separately from deterministic template failures and never convert a failed combination into advertised support.
+
+## 148.7 Documentation and Release Obligations
+
+Update the documentation index, technical overview, template architecture, profile contract, generation fixtures, verification procedure, and support matrix. Document defaults, ProjectSpec migration, Kotlin adapter ownership, source-root behavior, and how downstream clients consume `sourceLanguages`, `buildSystems`, and `gradleDsls`.
+
+No release may be published from this phase until all advertised combinations have exact evidence, the pack is rebuilt deterministically, checksums and manifest evidence agree, and the phase pull request is merged through the normal sequential workflow. Previously published releases remain immutable.
+
+The Phase 14 release candidate is `v1.0.0-beta.8`. Repository package metadata and canonical pack input use `1.0.0-beta.8`, while publication remains blocked until the phase pull request is merged and all release assets are rebuilt from the merged commit.
+
+## 148.8 Acceptance Criteria
+
+Phase 14 is complete only when:
+
+1. ProjectSpec version 3 validates the three canonical fields and version 1 migration is deterministic and tested.
+   Identity recommendation locks survive schema migration, canonical round trips, and Simple or Advanced mode switching.
+2. Descriptor and profile schemas expose `sourceLanguages`, `buildSystems`, and `gradleDsls` with no ambiguous legacy `languages` or `build.dsl` capability contract.
+3. Generated Java and Kotlin projects contain real language-specific source, not renamed or relabeled Java.
+4. Generated Groovy and Kotlin DSL projects contain real syntax-specific settings and build files with equivalent pinned behavior.
+5. Modern Forge contains no Fabric Language Kotlin metadata, dependency, plugin, or generated file.
+6. Every Kotlin-capable profile has a platform-correct compiler, runtime, adapter, metadata, and packaging strategy.
+7. Unsupported combinations fail validation before rendering and are absent from advertised capability metadata.
+8. Every advertised reference combination passes deterministic generation, real compilation, artifact inspection, and reproducibility verification.
+9. All existing repository verification commands pass without weakening prior coverage.
+10. Documentation and machine-readable pack metadata report exactly the verified combinations and remaining blockers.
+11. Every descriptor exposes a bounded `rawOperationPolicy`, and contract tests prove unsafe, out-of-policy, and over-limit operations are rejected before rendering.
+
+## 148.9 Implemented Reference Matrix
+
+The Phase 14 reference matrix contains fifty five exact verified tuples. Forty new tuples cover Bukkit, BungeeCord, Fabric, Paper modern and traditional, Spigot default, legacy, and modern, Sponge, and Velocity with Java or Kotlin source and Groovy or Kotlin Gradle DSL. The remaining fifteen preserve the previously verified reference boundary. Each evidence record proves two isolated builds, artifact inspection, output tree reproducibility, and artifact byte reproducibility.
+
+Forge legacy and modern, NeoForge, Architectury, and multiloader remain Java with Groovy DSL. Their descriptors and profiles do not advertise Kotlin or Kotlin DSL because this phase does not contain a reviewed platform adapter, metadata strategy, multiloader topology, and exact evidence for those combinations. Maven remains unadvertised because this pack has no real Maven descriptor and exact evidence.

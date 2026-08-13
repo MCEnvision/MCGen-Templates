@@ -25,6 +25,9 @@ function evidence(sourceDigests: readonly string[]): TupleEvidenceRecord {
     catalogKey: "1.20.1",
     components: { forge: "47.3.0" },
     fixtureId: "fixture",
+    sourceLanguage: "java",
+    buildSystem: "gradle",
+    gradleDsl: "groovy",
     contentDigests: {
       descriptor: digest("d"),
       profile: digest("p"),

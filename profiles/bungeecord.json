@@ -4,7 +4,7 @@
     "entrypointClasses": ["org.example.tuple.TupleProbe"],
     "expectedExtension": ".jar",
     "iconPaths": [],
-    "maxEntries": 128,
+    "maxEntries": 2048,
     "metadataFields": {
       "main": "org.example.tuple.TupleProbe",
       "name": "Tuple Probe",
@@ -21,7 +21,6 @@
     "resourceNamespaces": []
   },
   "build": {
-    "dsl": "groovy",
     "jvmArguments": [],
     "plugins": [
       {
@@ -72,7 +71,7 @@
     ],
     "snapshotId": "2026-08-11-r1"
   },
-  "category": "proxy",
+  "category": "plugin",
   "components": [
     {
       "catalogComponent": "bungeecord-api",
@@ -117,7 +116,6 @@
     "language": 8,
     "runtime": 8
   },
-  "languages": ["java", "kotlin"],
   "mappings": {
     "components": [],
     "strategy": "none"
@@ -163,7 +161,7 @@
       "url": "https://repo.maven.apache.org/maven2/"
     }
   ],
-  "revision": 4,
+  "revision": 5,
   "schemaVersion": 1,
   "sourceLayout": {
     "resourceRoots": [
@@ -174,14 +172,22 @@
     ],
     "sourceRoots": [
       {
-        "name": "main",
+        "name": "main-java",
         "path": "src/main/java"
+      },
+      {
+        "name": "main-kotlin",
+        "path": "src/main/kotlin"
       }
     ],
     "testRoots": [
       {
-        "name": "test",
+        "name": "test-java",
         "path": "src/test/java"
+      },
+      {
+        "name": "test-kotlin",
+        "path": "src/test/kotlin"
       }
     ]
   },
@@ -193,5 +199,16 @@
       ["./gradlew", "test"]
     ],
     "inspection": ["plugin.yml"]
-  }
+  },
+  "sourceLanguages": ["java", "kotlin"],
+  "buildSystems": ["gradle"],
+  "gradleDsls": ["groovy", "kotlin"],
+  "languageAdapters": [
+    {
+      "language": "kotlin",
+      "id": "kotlin-jvm",
+      "version": "1.9.24",
+      "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:1.9.24"
+    }
+  ]
 }
