@@ -154,6 +154,79 @@ function tupleStatus(
   return { status: "discovered", blockers };
 }
 
+type FixtureAxes = {
+  sourceLanguage: "java" | "kotlin";
+  buildSystem: "gradle" | "maven";
+  gradleDsl?: "groovy" | "kotlin";
+};
+
+function fixtureAxes(fixtureId: string, profile: MatrixProfile): FixtureAxes {
+  const parts = fixtureId.split(".");
+  const last = parts.at(-1);
+  const penultimate = parts.at(-2);
+  const antepenultimate = parts.at(-3);
+  const isLanguage = (value: string | undefined): value is "java" | "kotlin" =>
+    value === "java" || value === "kotlin";
+  const isGradleDsl = (
+    value: string | undefined,
+  ): value is "groovy" | "kotlin" => value === "groovy" || value === "kotlin";
+
+  let sourceLanguage: "java" | "kotlin";
+  let buildSystem: "gradle" | "maven";
+  let gradleDsl: "groovy" | "kotlin" | undefined;
+  if (
+    isLanguage(antepenultimate) &&
+    penultimate === "gradle" &&
+    isGradleDsl(last)
+  ) {
+    sourceLanguage = antepenultimate;
+    buildSystem = "gradle";
+    gradleDsl = last;
+  } else if (isLanguage(penultimate) && last === "maven") {
+    sourceLanguage = penultimate;
+    buildSystem = "maven";
+  } else if (isLanguage(penultimate) && last === "gradle") {
+    sourceLanguage = penultimate;
+    buildSystem = "gradle";
+    gradleDsl = profile.gradleDsls?.[0] ?? "groovy";
+  } else if (isLanguage(last)) {
+    sourceLanguage = last;
+    buildSystem = profile.buildSystems?.[0] ?? "gradle";
+    gradleDsl =
+      buildSystem === "gradle"
+        ? (profile.gradleDsls?.[0] ?? "groovy")
+        : undefined;
+  } else {
+    sourceLanguage = parts.includes("minimal-kotlin") ? "kotlin" : "java";
+    buildSystem = profile.buildSystems?.[0] ?? "gradle";
+    gradleDsl =
+      buildSystem === "gradle"
+        ? (profile.gradleDsls?.[0] ?? "groovy")
+        : undefined;
+  }
+
+  if (!(profile.sourceLanguages ?? ["java"]).includes(sourceLanguage)) {
+    throw new Error(
+      `matrix fixture source language is not advertised by profile ${profile.id} ${fixtureId}`,
+    );
+  }
+  if (!(profile.buildSystems ?? ["gradle"]).includes(buildSystem)) {
+    throw new Error(
+      `matrix fixture build system is not advertised by profile ${profile.id} ${fixtureId}`,
+    );
+  }
+  if (gradleDsl && !(profile.gradleDsls ?? ["groovy"]).includes(gradleDsl)) {
+    throw new Error(
+      `matrix fixture gradle dsl is not advertised by profile ${profile.id} ${fixtureId}`,
+    );
+  }
+  return {
+    sourceLanguage,
+    buildSystem,
+    ...(gradleDsl ? { gradleDsl } : {}),
+  };
+}
+
 function tupleWithFixture(
   descriptor: MatrixDescriptor,
   profile: MatrixProfile,
@@ -162,20 +235,10 @@ function tupleWithFixture(
   fixtureId: string,
   fixtureDigests: Readonly<Record<string, string>> | undefined,
 ): MatrixTuple {
-  const fixtureParts = fixtureId.split(".");
-  const sourceLanguage =
-    fixtureParts.includes("minimal-kotlin") || fixtureParts.includes("kotlin")
-      ? "kotlin"
-      : "java";
-  const buildSystem = fixtureParts.includes("maven")
-    ? "maven"
-    : (profile.buildSystems?.[0] ?? "gradle");
-  const gradleDsl =
-    buildSystem === "gradle"
-      ? fixtureId.endsWith(".kotlin") || fixtureId.endsWith(".kotlin-dsl")
-        ? "kotlin"
-        : (profile.gradleDsls?.[0] ?? "groovy")
-      : undefined;
+  const { sourceLanguage, buildSystem, gradleDsl } = fixtureAxes(
+    fixtureId,
+    profile,
+  );
   const identity: TupleIdentity = {
     family: descriptor.family,
     descriptorId: descriptor.id,

@@ -258,6 +258,82 @@ describe("phase 5 build and artifact contracts", () => {
     ).toThrow("immutable digest");
   });
 
+  it("keeps source language and gradle dsl axes independent", () => {
+    const profile = {
+      id: "fabric",
+      revision: 1,
+      status: "blocked" as const,
+      family: "fabric",
+      platform: "fabric",
+      catalogSnapshotId: identity.catalogSnapshotId,
+      selectors: [
+        {
+          platform: "fabric",
+          keys: { mode: "explicit" as const, values: ["1.21.1"] },
+          components: [
+            {
+              component: "loader",
+              coordinatePrefix: "net.fabricmc:fabric-loader:",
+              mode: "explicit" as const,
+              versions: ["net.fabricmc:fabric-loader:0.16.14"],
+            },
+          ],
+        },
+      ],
+      java: identity.java,
+      wrapper: identity.wrapper,
+      mappingDigest: identity.mappingDigest,
+      sourceDigests: identity.sourceDigests,
+      sourceLanguages: ["java", "kotlin"] as const,
+      buildSystems: ["gradle"] as const,
+      gradleDsls: ["groovy", "kotlin"] as const,
+      contentDigests: {
+        profile: sha256("profile"),
+        catalog: sha256("catalog"),
+        template: sha256("template"),
+      },
+      blockers: ["tuple build evidence is pending"],
+    };
+    const descriptor = {
+      id: "fabric",
+      revision: 1,
+      status: "blocked" as const,
+      family: "fabric",
+      profileRefs: ["fabric"],
+      contentDigests: { descriptor: sha256("descriptor") },
+      blockers: ["descriptor evidence is pending"],
+    };
+    const fixtures = [
+      "fabric.fabric.minimal-java.java.gradle.kotlin",
+      "fabric.fabric.minimal-kotlin.kotlin.gradle.groovy",
+    ];
+    const plan = buildMatrixPlan({
+      catalogKeys: { fabric: ["1.21.1"] },
+      componentVersions: {},
+      fixtureIds: fixtures,
+      profiles: [profile],
+      descriptors: [descriptor],
+      shardCount: 2,
+      maxTuples: 2,
+    });
+    const javaKotlinDsl = plan.tuples.find(
+      (tuple) => tuple.identity.fixtureId === fixtures[0],
+    );
+    const kotlinGroovyDsl = plan.tuples.find(
+      (tuple) => tuple.identity.fixtureId === fixtures[1],
+    );
+    expect(javaKotlinDsl?.identity).toMatchObject({
+      sourceLanguage: "java",
+      buildSystem: "gradle",
+      gradleDsl: "kotlin",
+    });
+    expect(kotlinGroovyDsl?.identity).toMatchObject({
+      sourceLanguage: "kotlin",
+      buildSystem: "gradle",
+      gradleDsl: "groovy",
+    });
+  });
+
   it("runs only bounded profile commands and rejects raw overrides", async () => {
     const calls: string[] = [];
     const result = await runBuild({
