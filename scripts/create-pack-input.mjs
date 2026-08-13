@@ -78,7 +78,7 @@ async function revisions(files, prefix) {
   return result.sort((left, right) => left.id.localeCompare(right.id));
 }
 
-const packVersion = argument("--pack-version", "1.0.0-beta.8");
+const packVersion = argument("--pack-version", "1.0.0-beta.9");
 const output = argument("--output", "verification/phase6/release-input.json");
 if (!/^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$/u.test(packVersion)) {
   throw new Error(`invalid pack version ${packVersion}`);

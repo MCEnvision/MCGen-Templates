@@ -15,7 +15,7 @@ The seven-phase GitHub and template-repository program is complete. Pull request
 
 Phase 14 is the active template-pack prerequisite. An August 12, 2026 audit found that profiles advertised Kotlin even though every generated entrypoint was Java, every Gradle build used Groovy DSL, fixture language did not affect ProjectSpec, and the modern Forge profile incorrectly named Fabric Language Kotlin as its Kotlin adapter. Phase 14 therefore adds explicit source-language and build-system contracts, migrates the canonical ProjectSpec to version 3, implements real Java and Kotlin source templates plus Groovy and Kotlin Gradle DSL templates, corrects platform adapters, and removes any advertised combination that lacks exact generation, compilation, and artifact evidence. This work does not change the completed history above and is not complete until the acceptance gate in section 148 passes.
 
-Phase 14 is tracked by [issue 51](https://github.com/MCEnvision/MCGen-Templates/issues/51), milestone 14, and the repository roadmap Project 9. The target pack is `v1.0.0-beta.8`.
+Phase 14 is tracked by [issue 51](https://github.com/MCEnvision/MCGen-Templates/issues/51), milestone 14, and the repository roadmap Project 9. The signed `v1.0.0-beta.8` tag did not publish immutable assets because its release workflow was canceled after main advanced. Published tags and artifacts are never reused. The target pack is the new `v1.0.0-beta.9` candidate from current merged main.
 
 Repository tooling uses Node.js 22, npm lockfiles, TypeScript 5.9, JSON Schema Draft 2020-12, and repository-defined formatting, linting, type-checking, tests, builds, schema validation, and snapshot verification. GitHub CodeQL default setup analyzes GitHub Actions and JavaScript or TypeScript sources. Application code remains owned by the future `MCEnvision/MCGen` repository.
 
@@ -636,7 +636,7 @@ generateProject({
     description: "Future Shops",
     authors: ["EnVy"],
     website: "",
-    license: "MIT"
+    license: "MIT",
   },
 
   build: {
@@ -644,24 +644,24 @@ generateProject({
     artifactId: "futureshops",
     version: "1.0.0-beta.1",
     archivesBaseName: "futureshops",
-    dsl: "groovy"
+    dsl: "groovy",
   },
 
   assets: {
     projectIcon: {
       source: "upload:project-icon",
       outputPath: "src/main/resources/futureshops.png",
-      transform: "fit-square"
-    }
+      transform: "fit-square",
+    },
   },
 
   features: {
     mixins: true,
     parchment: true,
     dependabot: true,
-    githubActions: true
-  }
-})
+    githubActions: true,
+  },
+});
 ```
 
 The accepted configuration is a versioned `ProjectSpec`, not a fixed set of form fields. It must support nested metadata, build, dependencies, repositories, source layout, features, assets, publishing, GitHub, file overrides, and platform-specific extension blocks.
@@ -1654,8 +1654,8 @@ const result = await generateProject({
   assets: {
     async read(digest) {
       return assetBytesByDigest.get(digest);
-    }
-  }
+    },
+  },
 });
 ```
 
@@ -2177,7 +2177,7 @@ Show the resolved Gradle `version`, metadata version, Maven coordinate, and outp
 
 Optionally generate a simple project README:
 
-```markdown
+````markdown
 # FutureShops
 
 Minecraft 1.21.1 NeoForge mod.
@@ -2189,7 +2189,9 @@ Java 21
 ```bash
 ./gradlew build
 ```
-```
+````
+
+````
 
 README generation must be configurable. Users can select sections, edit badges and links, add installation and publishing details, disable the file, or replace it completely through the raw file workspace in Advanced mode. Generated version, platform, Java, artifact, build, and license information comes from the resolved ProjectSpec.
 
@@ -2207,7 +2209,7 @@ LGPL-3.0
 MPL-2.0
 All Rights Reserved
 Custom
-```
+````
 
 If the user chooses a standard license, generate the correct license file.
 
@@ -3839,8 +3841,8 @@ Issue and pull request numbers share one repository sequence, so this plan does 
 
 The `MCGen-Templates` repository owns these logical work items:
 
-| Logical work item                                                                                          | Product milestone                        | Depends on                                    | GitHub issue                   |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------- | ------------------------------ |
+| Logical work item                                                                                          | Product milestone                        | Depends on                                    | GitHub issue                                                        |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------- |
 | Descriptor driven template pack and complete version resolver                                              | Phase 0. Repository foundation           | GitHub planning control                       | [Issue 1](https://github.com/MCEnvision/MCGen-Templates/issues/1)   |
 | Authoritative metadata snapshot ingestion and evidence digests                                             | Phase 0. Repository foundation           | Source contract foundation                    | [Issue 17](https://github.com/MCEnvision/MCGen-Templates/issues/17) |
 | Complete platform and component source adapters                                                            | Phase 10. Complete catalog conformance   | Metadata snapshot ingestion                   | [Issue 17](https://github.com/MCEnvision/MCGen-Templates/issues/17) |
@@ -5220,26 +5222,26 @@ MCGen adopts the descriptor and resolver separation, not the plugin's current co
 
 Each adapter declares one primary source and optional corroborating sources. The primary source determines discovery. Corroborating sources may classify recommendations or prove compatibility but may not invent a version absent from the primary source without a reviewed exception.
 
-| Platform or component | Primary discovery source | Compatibility handling |
-| --- | --- | --- |
-| Minecraft releases | Mojang version manifest and platform-specific published artifacts | Platform artifacts decide whether that Minecraft version is supported by the platform. |
-| Forge | `net.minecraftforge:forge` Maven metadata | Parse the exact `<minecraft>-<forge>` coordinate. Use Forge promotions only to classify recommended and latest selections. |
-| ForgeGradle | Official Forge Maven and Gradle plugin metadata | Map Forge and Minecraft ranges to supported ForgeGradle, Gradle, Java, mappings, and metadata profiles. |
-| NeoForge | `net.neoforged:neoforge` Maven metadata and official versioning rules | Normalize both historic reduced Minecraft prefixes and current full Minecraft prefixes. |
-| NeoGradle and ModDevGradle | Official NeoForged Maven and Gradle plugin metadata | Profile compatibility is independent from the NeoForge loader artifact list. |
-| Fabric Minecraft, Loader, and Yarn | Fabric Meta API | Query game, loader, and mappings dimensions separately and retain Fabric's stable flags. |
-| Fabric Loom | Official Fabric Maven plugin metadata | Map Loom and Gradle compatibility through profiles. |
-| Fabric API | Official Fabric API publication metadata, with the official Modrinth project API as version-to-game evidence when needed | Match exact game-version declarations and never infer from a display name alone. |
-| Fabric Language Kotlin | Official Fabric Maven metadata | Preserve the loader and Kotlin version relationship encoded by the artifact. |
-| Paper | PaperMC Fill API and official Paper Maven metadata | Discover every published Minecraft version and build channel, then resolve the exact Paper API dependency. |
-| Spigot | Official Spigot Nexus `spigot-api` Maven metadata | Preserve every exact API coordinate and derive the Minecraft catalog key from the coordinate. |
-| Bukkit | Official Bukkit or Spigot-hosted `bukkit` artifact metadata | Expose only versions where the Bukkit artifact exists. Do not disguise a Spigot or Paper artifact as Bukkit. |
-| BungeeCord | Official Spigot-hosted `bungeecord-api` metadata, with Maven Central as corroboration | Catalog historic snapshots and releases, not only Maven Central releases. |
-| Velocity | Official PaperMC Maven metadata and Velocity documentation | Catalog by API line and record supported protocol or Minecraft ranges separately. |
-| Sponge | Official Sponge Maven metadata and Sponge version compatibility documentation | Map SpongeAPI lines to Minecraft and Java through official implementation or documentation evidence. |
-| Architectury | Official Architectury Maven, Gradle plugin metadata, documentation, and official generator output | Build a compatibility intersection across Minecraft, Architectury API, Loom or plugin, Fabric, and Forge or NeoForge. |
-| Gradle | Official Gradle release metadata and wrapper checksums | Profiles constrain wrappers to platform plugin support. |
-| Kotlin | Official Kotlin Maven metadata and platform language-adapter constraints | Do not treat the latest Kotlin release as universally compatible. |
+| Platform or component              | Primary discovery source                                                                                                 | Compatibility handling                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Minecraft releases                 | Mojang version manifest and platform-specific published artifacts                                                        | Platform artifacts decide whether that Minecraft version is supported by the platform.                                     |
+| Forge                              | `net.minecraftforge:forge` Maven metadata                                                                                | Parse the exact `<minecraft>-<forge>` coordinate. Use Forge promotions only to classify recommended and latest selections. |
+| ForgeGradle                        | Official Forge Maven and Gradle plugin metadata                                                                          | Map Forge and Minecraft ranges to supported ForgeGradle, Gradle, Java, mappings, and metadata profiles.                    |
+| NeoForge                           | `net.neoforged:neoforge` Maven metadata and official versioning rules                                                    | Normalize both historic reduced Minecraft prefixes and current full Minecraft prefixes.                                    |
+| NeoGradle and ModDevGradle         | Official NeoForged Maven and Gradle plugin metadata                                                                      | Profile compatibility is independent from the NeoForge loader artifact list.                                               |
+| Fabric Minecraft, Loader, and Yarn | Fabric Meta API                                                                                                          | Query game, loader, and mappings dimensions separately and retain Fabric's stable flags.                                   |
+| Fabric Loom                        | Official Fabric Maven plugin metadata                                                                                    | Map Loom and Gradle compatibility through profiles.                                                                        |
+| Fabric API                         | Official Fabric API publication metadata, with the official Modrinth project API as version-to-game evidence when needed | Match exact game-version declarations and never infer from a display name alone.                                           |
+| Fabric Language Kotlin             | Official Fabric Maven metadata                                                                                           | Preserve the loader and Kotlin version relationship encoded by the artifact.                                               |
+| Paper                              | PaperMC Fill API and official Paper Maven metadata                                                                       | Discover every published Minecraft version and build channel, then resolve the exact Paper API dependency.                 |
+| Spigot                             | Official Spigot Nexus `spigot-api` Maven metadata                                                                        | Preserve every exact API coordinate and derive the Minecraft catalog key from the coordinate.                              |
+| Bukkit                             | Official Bukkit or Spigot-hosted `bukkit` artifact metadata                                                              | Expose only versions where the Bukkit artifact exists. Do not disguise a Spigot or Paper artifact as Bukkit.               |
+| BungeeCord                         | Official Spigot-hosted `bungeecord-api` metadata, with Maven Central as corroboration                                    | Catalog historic snapshots and releases, not only Maven Central releases.                                                  |
+| Velocity                           | Official PaperMC Maven metadata and Velocity documentation                                                               | Catalog by API line and record supported protocol or Minecraft ranges separately.                                          |
+| Sponge                             | Official Sponge Maven metadata and Sponge version compatibility documentation                                            | Map SpongeAPI lines to Minecraft and Java through official implementation or documentation evidence.                       |
+| Architectury                       | Official Architectury Maven, Gradle plugin metadata, documentation, and official generator output                        | Build a compatibility intersection across Minecraft, Architectury API, Loom or plugin, Fabric, and Forge or NeoForge.      |
+| Gradle                             | Official Gradle release metadata and wrapper checksums                                                                   | Profiles constrain wrappers to platform plugin support.                                                                    |
+| Kotlin                             | Official Kotlin Maven metadata and platform language-adapter constraints                                                 | Do not treat the latest Kotlin release as universally compatible.                                                          |
 
 Current primary endpoints include:
 
@@ -6079,7 +6081,7 @@ Update the documentation index, technical overview, template architecture, profi
 
 No release may be published from this phase until all advertised combinations have exact evidence, the pack is rebuilt deterministically, checksums and manifest evidence agree, and the phase pull request is merged through the normal sequential workflow. Previously published releases remain immutable.
 
-The Phase 14 release candidate is `v1.0.0-beta.8`. Repository package metadata and canonical pack input use `1.0.0-beta.8`, while publication remains blocked until the phase pull request is merged and all release assets are rebuilt from the merged commit.
+The signed `v1.0.0-beta.8` tag did not publish immutable assets because its release workflow was canceled after main advanced. It remains historical evidence only and must not be moved or reused. The Phase 14 replacement release candidate is `v1.0.0-beta.9`. Repository package metadata and canonical pack input use `1.0.0-beta.9`, while publication remains blocked until the candidate pull request is merged and all release assets are rebuilt from that merged commit.
 
 ## 148.8 Acceptance Criteria
 
