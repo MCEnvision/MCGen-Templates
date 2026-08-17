@@ -62,7 +62,7 @@ jobs:
         run: npm run phase6:pack -- --input verification/phase6/ci-input-${GITHUB_RUN_ID}.json --output-dir verification/phase6/ci-output-${GITHUB_RUN_ID}
 
       - name: upload pack evidence
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: phase6-pack-${{ github.run_id }}
           path: verification/phase6/ci-output-${{ github.run_id }}
